@@ -1,0 +1,10 @@
+<sidebar class="menu">
+  <div class="playgrounds-list">
+    <div class="list-group">
+      <a href class="list-group-item" *ngFor="let playground of playgrounds">
+        <h4 class="list-group-item-heading">{{playground.name}}</h4>
+        <p class="list-group-item-text">{{playground.description}}</p>
+      </a>
+    </div>
+  </div>
+</sidebar>

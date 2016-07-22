@@ -36,18 +36,8 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
-  'app/menu',
-  'app/components',
-  'app/components/hello',
-  'app/components/ngif',
-  'app/components/interpolation',
-  'app/components/property',
-  'app/components/event',
-  'app/components/twoway',
-  'app/components/ngfor',
-  'app/components/inner',
-  'app/components/outer',
-  'app/io/directly',
+  'app/sidebar',
+  'app/shared/playground',
   /** @cli-barrel */
 ];
 

@@ -1,7 +1,7 @@
 import { provideRouter, RouterConfig }  from '@angular/router';
 
 import { MenuComponent } from './menu';
-import { HelloComponent, NgifComponent, NgforComponent, InterpolationComponent, PropertyComponent, EventComponent, TwowayComponent } from './components';
+import { HelloComponent, OuterComponent, NgifComponent, NgforComponent, InterpolationComponent, PropertyComponent, EventComponent, TwowayComponent } from './components';
 
 const routes: RouterConfig = [
     {
@@ -11,6 +11,10 @@ const routes: RouterConfig = [
     {
         path: 'components/hello',
         component: HelloComponent
+    },
+    {
+        path: 'components/outer',
+        component: OuterComponent
     },
     {
         path: 'components/interpolation',
