@@ -1,0 +1,8 @@
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <input type="text" #input (keyup.enter)="addInput(input.value)" autofocus>
+    <ul>
+      <li *ngFor="let item of items">{{item}}</li>
+    </ul>
+  </div>
+</div>

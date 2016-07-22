@@ -1,0 +1,11 @@
+<h1>[property]</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <ul>
+      <li><span [class.red]="showRed">My red</span></li>
+      <li><span [hidden]="show">My hidden</span> </li>
+    </ul>
+    <button class="btn btn-primary" (click)="toggleRed()">Toggle red</button>
+    <button class="btn btn-primary" (click)="toggleShow()">Toggle show</button>
+  </div>
+</div>
