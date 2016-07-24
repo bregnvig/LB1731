@@ -36,24 +36,9 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
-  'app/menu',
-  'app/components',
-  'app/io',
-  'app/components/hello',
-  'app/components/ngif',
-  'app/components/interpolation',
-  'app/components/property',
-  'app/components/event',
-  'app/components/twoway',
-  'app/components/ngfor',
-  'app/components/inner',
-  'app/components/outer',
-  'app/io/directly',
-  'app/io/intercept',
-  'app/io/event',
-  'app/io/stopwatch',
-  'app/io/local',
-  'app/io/viewchild',
+  'app/sidebar',
+  'app/shared/playground',
+  'app/footer',
   /** @cli-barrel */
 ];
 

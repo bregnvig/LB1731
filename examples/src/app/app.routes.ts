@@ -3,6 +3,8 @@ import { provideRouter, RouterConfig }  from '@angular/router';
 import { MenuComponent } from './menu';
 import { HelloComponent, OuterComponent, NgifComponent, NgforComponent, InterpolationComponent, PropertyComponent, EventComponent, TwowayComponent } from './components';
 
+import { DirectlyComponent, InterceptComponent, IOEventComponent, LocalComponent,ViewchildComponent } from './io';
+
 const routes: RouterConfig = [
     {
         path: 'menu',
@@ -39,6 +41,26 @@ const routes: RouterConfig = [
     {
         path: 'components/ng-for',
         component: NgforComponent
+    },
+    {
+        path: 'io/directly',
+        component: DirectlyComponent
+    },
+    {
+        path: 'io/intercept',
+        component: InterceptComponent
+    },
+    {
+        path: 'io/event',
+        component: IOEventComponent
+    },
+    {
+        path: 'io/local',
+        component: LocalComponent
+    },
+    {
+        path: 'io/viewchild',
+        component: ViewchildComponent
     },
     {
         path: '',

@@ -1,8 +1,8 @@
-<h1>Parent -> child directly</h1>
+<h1>Parent -> child intercept</h1>
 <div class="pane-container center-content">
   <div class="pane fixed-size">
     <p>
-      <app-directly-child [value]="'My value'" [renamed-value]="fromProperty"></app-directly-child>
+      <app-intercept-child [value]="fromProperty"></app-intercept-child>
     </p>
     <p>
       <input [(ngModel)]="fromProperty">

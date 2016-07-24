@@ -1,0 +1,11 @@
+<h1>Child -> parent</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <p>
+      <app-io-event-child (period)="updateNewsletterPeriod($event)"></app-io-event-child>
+    </p>
+    <p>
+      You choose {{newsletterPeriod}}
+    </p>
+  </div>
+</div>
