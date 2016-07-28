@@ -7,11 +7,6 @@ import { StopwatchService } from '../stopwatch.service';
   templateUrl: 'stopwatch-error.component.html',
   styleUrls: ['stopwatch-error.component.css']
 })
-export class StopwatchErrorComponent implements OnInit {
-
+export class StopwatchErrorComponent {
   constructor(public stopwatch: StopwatchService) { }
-
-  ngOnInit() {
-  }
-
 }

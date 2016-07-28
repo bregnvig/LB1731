@@ -16,11 +16,5 @@ import { StopwatchLoggerService } from '../stopwatch-logger.service';
     useClass: StopwatchLoggerService
   }]
 })
-export class StopwatchLoggerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class StopwatchLoggerComponent {
 }
