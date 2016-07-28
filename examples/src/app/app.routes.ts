@@ -5,6 +5,8 @@ import { HelloComponent, OuterComponent, NgifComponent, NgforComponent, Interpol
 
 import { DirectlyComponent, InterceptComponent, IOEventComponent, LocalComponent,ViewchildComponent } from './io';
 
+import { StopwatchErrorComponent, SingletonComponent, NonSingletonComponent, StopwatchLoggerComponent } from './services';
+
 const routes: RouterConfig = [
     {
         path: 'menu',
@@ -61,6 +63,22 @@ const routes: RouterConfig = [
     {
         path: 'io/viewchild',
         component: ViewchildComponent
+    },
+    {
+        path: 'services/no-provider',
+        component: StopwatchErrorComponent
+    },
+    {
+        path: 'services/singleton',
+        component: SingletonComponent
+    },
+    {
+        path: 'services/non-singleton',
+        component: NonSingletonComponent
+    },
+    {
+        path: 'services/service-with-service',
+        component: StopwatchLoggerComponent
     },
     {
         path: '',

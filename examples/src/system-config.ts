@@ -39,6 +39,7 @@ const barrels: string[] = [
   'app/menu',
   'app/components',
   'app/io',
+  'app/services',
   'app/components/hello',
   'app/components/ngif',
   'app/components/interpolation',
@@ -54,6 +55,10 @@ const barrels: string[] = [
   'app/io/stopwatch',
   'app/io/local',
   'app/io/viewchild',
+  'app/services/singleton',
+  'app/services/stopwatch-error',
+  'app/services/non-singleton',
+  'app/services/stopwatch-logger',
   /** @cli-barrel */
 ];
 
