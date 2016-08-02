@@ -1,0 +1,13 @@
+<h1>Better async service</h1>
+<div class="pane-container center-content">
+  <button class="btn btn-primary pane fixed-size" (click)="addSubscribtion()">Add subscribe</button>
+</div>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <ul>
+      <li *ngFor="let driver of drivers">
+        {{driver.givenName}} {{driver.familyName}}
+      </li>
+    </ul>
+  </div>
+</div>

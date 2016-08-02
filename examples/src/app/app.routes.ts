@@ -7,6 +7,8 @@ import { DirectlyComponent, InterceptComponent, IOEventComponent, LocalComponent
 
 import { StopwatchErrorComponent, SingletonComponent, NonSingletonComponent, StopwatchLoggerComponent } from './services';
 
+import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, BestAsyncServiceComponent } from './async';
+
 const routes: RouterConfig = [
     {
         path: 'menu',
@@ -79,6 +81,18 @@ const routes: RouterConfig = [
     {
         path: 'services/service-with-service',
         component: StopwatchLoggerComponent
+    },
+    {
+        path: 'async/simple',
+        component: SimpleHttpServiceComponent
+    },
+    {
+        path: 'async/better',
+        component: BetterAsyncServiceComponent
+    },
+    {
+        path: 'async/best',
+        component: BestAsyncServiceComponent
     },
     {
         path: '',

@@ -3,5 +3,5 @@
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { addProviders, async, inject } from '@angular/core/testing';
-import { StopwatchErrorComponent } from './stopwatch-error.component';
+import { SidebarComponent } from './sidebar.component';
 

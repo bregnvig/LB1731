@@ -1,0 +1,10 @@
+<sidebar class="menu">
+  <div class="playgrounds-list">
+    <div class="list-group">
+      <a class="list-group-item" [class.active]="playground === selectedPlayground" *ngFor="let playground of playgrounds" (click)="selectPlayground(playground)">
+        <h4 class="list-group-item-heading">{{playground.name}}</h4>
+        <p class="list-group-item-text">{{playground.description}}</p>
+      </a>
+    </div>
+  </div>
+</sidebar>
