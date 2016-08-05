@@ -63,7 +63,9 @@ const barrels: string[] = [
   'app/async/simple-http-service',
   'app/async/nicer-async-service',
   'app/async/better-async-service',
-  'app/async/best-async-service',
+  'app/async/cached-async-service',
+  'app/async/wrap-api',
+  'app/async/ref-count',
   /** @cli-barrel */
 ];
 

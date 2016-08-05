@@ -3,7 +3,6 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
-import 'rxjs/add/operator/publish';
 import 'rxjs/add/operator/publishLast';
 
 import { Driver } from './driver';
@@ -35,7 +34,7 @@ export class F1BetterService {
 }
 
 @Injectable()
-export class F1BestService {
+export class F1CachedService {
 
   private requestStream: Observable<Driver[]>
 

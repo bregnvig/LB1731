@@ -7,7 +7,8 @@ import { DirectlyComponent, InterceptComponent, IOEventComponent, LocalComponent
 
 import { StopwatchErrorComponent, SingletonComponent, NonSingletonComponent, StopwatchLoggerComponent } from './services';
 
-import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, BestAsyncServiceComponent } from './async';
+import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, WrapApiComponent, RefCountComponent } from './async';
+
 
 const routes: RouterConfig = [
     {
@@ -91,8 +92,16 @@ const routes: RouterConfig = [
         component: BetterAsyncServiceComponent
     },
     {
-        path: 'async/best',
-        component: BestAsyncServiceComponent
+        path: 'async/cached',
+        component: CachedAsyncServiceComponent
+    },
+    {
+        path: 'async/wrap',
+        component: WrapApiComponent
+    },
+    {
+        path: 'async/refCount',
+        component: RefCountComponent
     },
     {
         path: '',

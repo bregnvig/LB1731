@@ -1,0 +1,15 @@
+<h1>Ref count</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <div>
+      <span class="pane fixed-size">{{date1 | date:'HH:mm:ss'}}</span>
+      <button class="pane btn btn-default" (click)="start1()">Start timer</button>
+      <button class="pane btn btn-default" (click)="stop1()">Stop timer</button>
+    </div>
+    <div>
+      <span class="pane fixed-size">{{date2 | date:'HH:mm:ss'}}</span>
+      <button class="pane btn btn-default" (click)="start2()">Start timer</button>
+      <button class="pane btn btn-default" (click)="stop2()">Stop timer</button>
+    </div>
+  </div>
+</div>
