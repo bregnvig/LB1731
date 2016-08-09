@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-import { Playground, PlaygroundService, LocationService } from '../shared';
+import { Playground, PlaygroundService } from '../shared';
 
 @Component({
   moduleId: module.id,
@@ -15,13 +15,10 @@ export class SidebarComponent implements OnInit {
   @Output('playground-selected')
   public playgroundSelected = new EventEmitter<Playground>();
 
-  constructor(private playgroundService: PlaygroundService, private locationService: LocationService) { }
+  constructor(private playgroundService: PlaygroundService) { }
 
   public ngOnInit() {
     this.playgroundService.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
-    this.locationService.current.subscribe(location => {
-      console.log('Obtained location', location)
-    });
   }
 
   public selectedPlayground: Playground;
