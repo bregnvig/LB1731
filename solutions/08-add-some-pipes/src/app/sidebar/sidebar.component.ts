@@ -1,13 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { Playground, PlaygroundService } from '../shared';
-import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from '../shared/pipes';
+
 @Component({
   moduleId: module.id,
   selector: 'app-sidebar',
   templateUrl: 'sidebar.component.html',
-  styleUrls: ['sidebar.component.css'],
-  pipes: [DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe]
+  styleUrls: ['sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 

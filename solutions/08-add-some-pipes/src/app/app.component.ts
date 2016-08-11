@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HTTP_PROVIDERS } from '@angular/http';
 
-import { SidebarComponent } from './sidebar';
-import { FooterComponent } from './footer';
-import { Playground, PlaygroundService, LocationService } from './shared';
+import { Playground, LocationService  } from './shared';
 
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives: [SidebarComponent, FooterComponent],
-  providers: [HTTP_PROVIDERS, PlaygroundService, LocationService]
+  styleUrls: ['app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
