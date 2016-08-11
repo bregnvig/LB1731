@@ -9,6 +9,11 @@ import { StopwatchErrorComponent, SingletonComponent, NonSingletonComponent, Sto
 
 import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, WrapApiComponent, RefCountComponent } from './async';
 
+import { TodayComponent, BuildInComponent, ChainingComponent, PhoneComponent, PureComponent } from './pipes';
+
+import { SimpleAttributeComponent, UserEventAttributeComponent, BindingAttributeComponent, BindingsAttributeComponent } from './attributes';
+
+import { CaseStudyComponent, UnlessComponent } from './structural';
 
 const routes: RouterConfig = [
     {
@@ -102,6 +107,50 @@ const routes: RouterConfig = [
     {
         path: 'async/refCount',
         component: RefCountComponent
+    },
+    {
+        path: 'pipes/today',
+        component: TodayComponent
+    },
+    {
+        path: 'pipes/buildin',
+        component: BuildInComponent
+    },
+    {
+        path: 'pipes/chaining',
+        component: ChainingComponent
+    },
+    {
+        path: 'pipes/phone',
+        component: PhoneComponent
+    },
+    {
+        path: 'pipes/pure',
+        component: PureComponent
+    },
+    {
+        path: 'attributes/simple',
+        component: SimpleAttributeComponent
+    },
+    {
+        path: 'attributes/user-event',
+        component: UserEventAttributeComponent
+    },
+    {
+        path: 'attributes/binding',
+        component: BindingAttributeComponent
+    },
+    {
+        path: 'attributes/bindings',
+        component: BindingsAttributeComponent
+    },
+    {
+        path: 'structural/case-study',
+        component: CaseStudyComponent
+    },
+    {
+        path: 'structural/unless',
+        component: UnlessComponent
     },
     {
         path: '',

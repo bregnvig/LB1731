@@ -1,0 +1,28 @@
+<h1>Case study</h1>
+<div class="pane-container center-content">
+  <div class="pane">
+    <h2>ng-if</h2>
+    <button class="btn btn-default" (click)="toggle()">Toggle show</button>
+    <p>Value of show: <b>{{show}}</b></p>
+    <p *ngIf="show">
+      Show when truthy
+    </p>
+    <p *ngIf="!show">
+      Show when falsy
+    </p>
+  </div>
+  <div class="pane">
+    <h2>Using template</h2>
+    <p>
+      Hip!
+    </p>
+    <template>
+      <p>
+        Hip!
+      </p>
+    </template>
+    <p>
+      Hooray!
+    </p>
+  </div>
+</div>

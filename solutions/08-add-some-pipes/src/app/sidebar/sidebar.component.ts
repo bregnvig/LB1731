@@ -11,7 +11,6 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from '../s
 })
 export class SidebarComponent implements OnInit {
 
-  private aaaa: any;
   public playgrounds: Playground[];
   @Output('playground-selected')
   public playgroundSelected = new EventEmitter<Playground>();

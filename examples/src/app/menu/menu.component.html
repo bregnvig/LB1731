@@ -1,5 +1,5 @@
-<div class="pane-container wrap space-around">
-  <div class="pane fixed-size">
+<div class="pane-container wrap">
+  <div class="pane">
     <h4>Component</h4>
     <ul>
       <li><a [routerLink]="['/components/hello']">Hello world</a></li>
@@ -12,7 +12,7 @@
       <li><a [routerLink]="['/components/ng-for']">*ngFor</a></li>
     </ul>
   </div>
-  <div class="pane fixed-size">
+  <div class="pane">
     <h4>Input & output</h4>
     <ul>
       <li><a [routerLink]="['/io/directly']">Parent -> child directly</a></li>
@@ -22,7 +22,7 @@
       <li><a [routerLink]="['/io/viewchild']">@ViewChild</a></li>
     </ul>
   </div>
-  <div class="pane fixed-size">
+  <div class="pane">
     <h4>Services</h4>
     <ul>
       <li><a [routerLink]="['/services/no-provider']">No provider</a></li>
@@ -31,7 +31,7 @@
       <li><a [routerLink]="['/services/service-with-service']">Service with service</a></li>
     </ul>
   </div>
-  <div class="pane fixed-size">
+  <div class="pane">
     <h4>Async</h4>
     <ul>
       <li><a [routerLink]="['/async/simple']">Simple HTTP</a></li>
@@ -41,4 +41,30 @@
       <li><a [routerLink]="['/async/refCount']">Ref count (RxJS)</a></li>
     </ul>
   </div>
+  <div class="pane">
+    <h4>Filter</h4>
+    <ul>
+      <li><a [routerLink]="['/pipes/today']">Today</a></li>
+      <li><a [routerLink]="['/pipes/buildin']">Build-in</a></li>
+      <li><a [routerLink]="['/pipes/chaining']">Chaining</a></li>
+      <li><a [routerLink]="['/pipes/phone']">Phone pipe</a></li>
+      <li><a [routerLink]="['/pipes/pure']">Pure vs. impure</a></li>
+    </ul>
+  </div>
+   <div class="pane">
+    <h4>Attribute directives</h4>
+    <ul>
+      <li><a [routerLink]="['/attributes/simple']">Simple</a></li>
+      <li><a [routerLink]="['/attributes/user-event']">User event</a></li>
+      <li><a [routerLink]="['/attributes/binding']">Binding of data</a></li>
+      <li><a [routerLink]="['/attributes/bindings']">Bindings of data</a></li>
+    </ul>
+   </div>
+   <div class="pane">
+    <h4>Structural directives</h4>
+    <ul>
+      <li><a [routerLink]="['/structural/case-study']">Case study</a></li>
+      <li><a [routerLink]="['/structural/unless']">Unless</a></li>
+    </ul>
+   </div>
 </div>

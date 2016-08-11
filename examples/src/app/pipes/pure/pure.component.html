@@ -1,0 +1,12 @@
+<h1>Pure vs. impure</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <p>
+      {{'Pure pipe' | pure }}
+    </p>
+    <p>
+      {{'Impure pipe' | impure }}
+    </p>
+    <div style="background: orange" (mousemove)="noop()">Mouse over!</div>
+  </div>
+</div>
