@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PurePipe, ImpurePipe } from '../pure.pipe';
-
 @Component({
   moduleId: module.id,
   selector: 'app-pure',
   templateUrl: 'pure.component.html',
-  styleUrls: ['pure.component.css'],
-  pipes: [PurePipe, ImpurePipe]
+  styleUrls: ['pure.component.css']
 })
 export class PureComponent {
 

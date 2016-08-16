@@ -11,7 +11,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   `
 
 })
-class IOEventChildComponent {
+export class IOEventChildComponent {
   @Output() public period = new EventEmitter<string>();
 
   public update(value: string) {

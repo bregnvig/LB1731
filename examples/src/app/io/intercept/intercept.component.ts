@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'app-intercept-child',
   template: '<p>{{value}}</p>'
 })
-class InterceptChildComponent {
+export class InterceptChildComponent {
   public _value: string;
 
   @Input()
@@ -23,7 +23,6 @@ class InterceptChildComponent {
   selector: 'app-intercept',
   templateUrl: 'intercept.component.html',
   styleUrls: ['intercept.component.css'],
-  directives: [ InterceptChildComponent]
 })
 export class InterceptComponent implements OnInit {
 

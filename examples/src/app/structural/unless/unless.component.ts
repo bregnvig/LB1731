@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Unless } from '../unless.directive';
 
 @Component({
   moduleId: module.id,
   selector: 'app-unless',
   templateUrl: 'unless.component.html',
-  styleUrls: ['unless.component.css'],
-  directives: [Unless]
+  styleUrls: ['unless.component.css']
 })
 export class UnlessComponent {
 

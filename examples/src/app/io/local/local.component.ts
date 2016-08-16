@@ -7,7 +7,6 @@ import { StopwatchComponent } from '../stopwatch';
   selector: 'app-local',
   templateUrl: 'local.component.html',
   styleUrls: ['local.component.css'],
-  directives: [StopwatchComponent]
 })
 export class LocalComponent {
 }

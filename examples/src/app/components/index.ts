@@ -1,5 +1,6 @@
 export * from './hello';
 export * from './ngif';
+export * from './inner';
 export * from './interpolation';
 export * from './property';
 export * from './event';

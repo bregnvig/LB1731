@@ -6,8 +6,7 @@ import { StopwatchComponent } from '../stopwatch';
   moduleId: module.id,
   selector: 'app-viewchild',
   templateUrl: 'viewchild.component.html',
-  styleUrls: ['viewchild.component.css'],
-  directives: [StopwatchComponent]
+  styleUrls: ['viewchild.component.css']
 })
 export class ViewchildComponent implements OnInit {
 
