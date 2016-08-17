@@ -10,6 +10,10 @@ const routes: Routes = [
         path: '',
         redirectTo: '/menu',
         pathMatch: 'full'
+    },
+    {
+        path: 'route',
+        loadChildren: 'app/route/route.module#MyRouteModule'
     }
 ];
 

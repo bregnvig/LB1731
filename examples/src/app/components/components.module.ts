@@ -7,6 +7,5 @@ import { componentsRouting } from './components.routing';
 
 @NgModule({
     imports: [CommonModule, FormsModule, componentsRouting],
-    declarations: [EventComponent, HelloComponent, InnerComponent, InterpolationComponent, NgforComponent, NgifComponent, OuterComponent, PropertyComponent]
 })
 export class ComponentsModule {}

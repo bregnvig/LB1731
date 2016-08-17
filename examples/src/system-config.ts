@@ -42,6 +42,7 @@ const barrels: string[] = [
   'app/services',
   'app/async',
   'app/pipes',
+  'app/route',
   'app/attributes',
   'app/structural',
   'app/components/hello',
@@ -82,6 +83,10 @@ const barrels: string[] = [
   'app/attributes/bindings-attribute',
   'app/structural/case-study',
   'app/structural/unless',
+  'app/orders',
+  'app/route/orders',
+  'app/route/route',
+  'app/route/order',
   /** @cli-barrel */
 ];
 

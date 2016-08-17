@@ -1,0 +1,13 @@
+<h3>
+  order works! This is #{{orderNo}}
+</h3>
+<nav>
+  <a *ngFor="let orderId of [1,2,3]" [routerLink]="['/route/orders', orderId, {foo: 'bar'}]">Order {{orderId}}</a>
+  <a [routerLink]="['/route/orders', 23]">Order 23 - does not resolves!</a>
+</nav>
+
+<p>
+  <a routerLink="/route/orders" routerLinkActive="active" [routerLinkActiveOptions]="{exact: exact}">Back</a>
+<p>
+  <button (click)="toggle()" class="btn btn-default">Toggle exact</button>
+</p>

@@ -13,5 +13,8 @@ cp -R ../solutions/06-add-ajax-to-playground-service 07-create-location-service
 rm -Rf 08-add-some-pipes
 cp -R ../solutions/07-create-location-service 08-add-some-pipes  
 
+rm -Rf 09-add-some-routes
+cp -R ../solutions/08-add-some-pipes 09-add-some-routes  
+
 
 
