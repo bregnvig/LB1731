@@ -17,6 +17,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       'font-awesome/**/*.+(css|eot|svg|tff|woff*)',
+      'leaflet/dist/leaflet.js',
+      'leaflet/dist/leaflet.css',
       'bootstrap-css-only/**/*.+(css|eot|svg|tff|woff*)'
     ]
   });

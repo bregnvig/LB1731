@@ -11,10 +11,11 @@
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="vendor/bootstrap-css-only/css/bootstrap.min.css">
   <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="vendor/leaflet/dist/leaflet.css">
 </head>
 
 <body>
-  <app-root>Loading...</app-root>
+  <app-root class="pane-container">Loading...</app-root>
 
   {{#each scripts.polyfills}}
   <script src="{{.}}"></script> {{/each}}

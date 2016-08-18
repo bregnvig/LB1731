@@ -9,10 +9,14 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'leaflet': 'vendor/leaflet/dist/leaflet.js'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'leaflet':{
+    format: 'global'
+  }  
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
