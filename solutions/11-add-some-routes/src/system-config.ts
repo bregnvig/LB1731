@@ -19,7 +19,6 @@ const packages: any = {
   }  
 };
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
  * Everything underneath this line is managed by the CLI.
@@ -41,10 +40,12 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/leaflet',
   'app/shared/pipes',
   'app/sidebar',
   'app/shared/playground',
   'app/footer',
+  'app/map',
   /** @cli-barrel */
 ];
 
