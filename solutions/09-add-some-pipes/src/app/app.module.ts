@@ -3,6 +3,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 
+import { LeafletModule } from './leaflet/leaflet.module';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
 import { PlaygroundService, LocationService } from './shared';
@@ -10,7 +11,7 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './sh
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
-    imports: [BrowserModule, HttpModule],
+    imports: [BrowserModule, LeafletModule, HttpModule],
     providers: [PlaygroundService, LocationService],
     bootstrap: [AppComponent],
 })
