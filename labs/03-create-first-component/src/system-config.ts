@@ -9,10 +9,14 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'leaflet': 'vendor/leaflet/dist/leaflet.js'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'leaflet':{
+    format: 'global'
+  }  
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +40,7 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/leaflet'
   /** @cli-barrel */
 ];
 
@@ -52,6 +57,7 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
+    'angularleaflet': 'app/leaflet/leaflet.module.js',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages
