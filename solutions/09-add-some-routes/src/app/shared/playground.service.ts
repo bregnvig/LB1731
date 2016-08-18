@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import {Observable} from "rxjs/Rx";
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishLast';
 
 import { Playground } from './playground';
 
@@ -48,9 +49,15 @@ export class PlaygroundService {
           }
         })
       })
+      .publishLast()
+      .refCount();
   }
 
   public getPlaygrounds(): Observable<Playground[]> {
     return this.requestStream;
+  }
+
+  public find(id: string): Observable<Playground> {
+    return this.requestStream.map(playgrounds => playgrounds.find(playground => playground.id === id));
   }
 }

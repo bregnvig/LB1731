@@ -1,6 +1,12 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Playground, PlaygroundService } from '../shared';
+
+import { Subscription } from 'rxjs/Subscription';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
 
 @Component({
   moduleId: module.id,
@@ -8,23 +14,28 @@ import { Playground, PlaygroundService } from '../shared';
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
 
   public playgrounds: Playground[];
   @Output('playground-selected')
   public playgroundSelected = new EventEmitter<Playground>();
 
-  constructor(private playgroundService: PlaygroundService) { }
+  private subscription: Subscription;
+
+  constructor(private activatedRoute: ActivatedRoute, private playgroundService: PlaygroundService) { }
 
   public ngOnInit() {
+    console.log('SidebarComponent is being initialized');
+    
     this.playgroundService.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
+    this.subscription = this.activatedRoute.params
+      .map(params => params['id'])
+      .mergeMap(id => this.playgroundService.find(id))
+      .subscribe((playground: Playground) => this.playgroundSelected.emit(playground));
   }
 
-  public selectedPlayground: Playground;
-
-  public selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
-    this.playgroundSelected.emit(playground);
+  public ngOnDestroy() {
+    console.log('SidebarComponent is being destroyed');
+    this.subscription.unsubscribe();
   }
-
 }

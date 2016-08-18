@@ -14,6 +14,11 @@ const routes: Routes = [
     {
         path: 'route',
         loadChildren: 'app/route/route.module#MyRouteModule'
+    },
+    {
+        path: '**',
+        redirectTo: 'menu',
+        pathMatch: 'full'
     }
 ];
 

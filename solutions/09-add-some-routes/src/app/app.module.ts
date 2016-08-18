@@ -8,9 +8,11 @@ import { FooterComponent } from './footer';
 import { PlaygroundService, LocationService } from './shared';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './shared/pipes';
 
+import { routing } from './app.routing';
+
 @NgModule({
-    declarations: [AppComponent, SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
-    imports: [BrowserModule, HttpModule],
+    declarations: [SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
+    imports: [BrowserModule, HttpModule, routing],
     providers: [PlaygroundService, LocationService],
     bootstrap: [AppComponent],
 })
