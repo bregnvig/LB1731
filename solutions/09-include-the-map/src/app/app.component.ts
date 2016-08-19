@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Playground, LocationService  } from './shared';
-
 import { Marker, Center } from './leaflet';
 
 @Component({
@@ -13,7 +12,6 @@ import { Marker, Center } from './leaflet';
   styleUrls: ['app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
 
   public playground: Playground;
   public markers: Observable<Marker>;
@@ -29,8 +27,7 @@ export class AppComponent implements OnInit {
       this.center = new Center(location.lat, location.lng);
       console.log('Obtained location', location)
     });
-    this.markers = this.locationService.current.map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'));
-    
+    this.markers = this.locationService.current.map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'));    
   }
 
   public playgroundSelected(playground: Playground): void {
