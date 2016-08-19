@@ -99,8 +99,8 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
     if (marker.hasPosition) {
       const position = new LatLng(marker.latitude, marker.longitude);
       console.log('Adding marker', position);
-      this._namedMarkers[name] = MarkerFactory.newMarker(position, false, marker.message).addTo(this._map);
-      return this._namedMarkers[name];
+      this._namedMarkers[marker.name] = MarkerFactory.newMarker(position, false, marker.message).addTo(this._map);
+      return this._namedMarkers[marker.name];
     }
   }
 
