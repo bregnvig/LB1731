@@ -1,0 +1,34 @@
+<h1>Person form two way binding</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <div class="alert alert-info">
+      {{diagnostic}}
+    </div>
+    <div class="container">
+      <h1>Person form</h1>
+      <form #form="ngForm" (ngSubmit)="logValues(form.value)">
+        <fieldset ngModelGroup="name">
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" required minlength="2" ngModel name="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" required ngModel name="lastName"><br>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label for="color">Favorite color</label>
+          <select class="form-control" id="favoriteColor" ngModel name="favoriteColor">
+              <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input type="text" min=100 max=220 maxlength="2" class="form-control" id="height" ngModel name="height">
+        </div>
+        <button type="submit" class="btn btn-default ">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

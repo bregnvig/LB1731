@@ -43,6 +43,7 @@ const barrels: string[] = [
   'app/async',
   'app/pipes',
   'app/route',
+  'app/form',
   'app/attributes',
   'app/structural',
   'app/components/hello',
@@ -87,6 +88,14 @@ const barrels: string[] = [
   'app/route/orders',
   'app/route/route',
   'app/route/order',
+  'app/form/person-form-1',
+  'app/form/person-form-2',
+  'app/form/person-form-3',
+  'app/form/person-form-4',
+  'app/form/person-form-5',
+  'app/form/person-form-6',
+  'app/form/person-form-7',
+  'app/form/search-form',
   /** @cli-barrel */
 ];
 

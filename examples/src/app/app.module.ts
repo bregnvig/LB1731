@@ -8,12 +8,13 @@ import { ServicesModule } from './services/services.module';
 import { IOModule } from './io/io.module';
 import { AsyncModule } from './async/async.module';
 import { PipesModule } from './pipes/pipes.module';
+import { FormModule } from './form/form.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule],
+    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}
