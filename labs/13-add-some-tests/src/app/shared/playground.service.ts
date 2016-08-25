@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import {Observable} from "rxjs/Rx";
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/publishLast';
 
 import { Playground } from './playground';
@@ -33,7 +35,7 @@ export class PlaygroundService {
   private requestStream: Observable<Playground[]>;
 
   constructor(http: Http) {
-    this.requestStream = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
+    this.requestStream = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/prox')
       .map(response => {
         const opendata: IOpenData = response.json();
         return opendata.features.map(openPlayground => {
@@ -50,7 +52,11 @@ export class PlaygroundService {
         })
       })
       .publishLast()
-      .refCount();
+      .refCount()
+      .catch((error: Response) => {
+        console.error('Unable to fetch playgrounds', error.statusText);
+        return Observable.of([]);
+      });
   }
 
   public getPlaygrounds(): Observable<Playground[]> {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import {Observable} from "rxjs/Rx";
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 import { Playground } from './playground';
 
@@ -48,6 +50,10 @@ export class PlaygroundService {
           }
         })
       })
+      .catch((error: Response) => {
+        console.error('Unable to fetch playgrounds', error.statusText);
+        return Observable.of([]);
+      });      
   }
 
   public getPlaygrounds(): Observable<Playground[]> {
