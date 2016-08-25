@@ -6,6 +6,7 @@ import { EventComponent, HelloComponent, InnerComponent, InterpolationComponent,
 import { componentsRouting } from './components.routing';
 
 @NgModule({
+    declarations: [EventComponent, HelloComponent, InnerComponent, InterpolationComponent, NgforComponent, NgifComponent, OuterComponent, PropertyComponent, TwowayComponent],
     imports: [CommonModule, FormsModule, componentsRouting],
 })
 export class ComponentsModule {}

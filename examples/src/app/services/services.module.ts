@@ -7,7 +7,7 @@ import { StopwatchService } from './stopwatch.service';
 import { servicesRouting } from './services.routing';
 
 @NgModule({
-    declarations: [StopwatchSingletonComponent, StopwatchNonSingletonComponent],
+    declarations: [SingletonComponent, NonSingletonComponent, StopwatchErrorComponent, StopwatchLoggerComponent, StopwatchSingletonComponent, StopwatchNonSingletonComponent],
     imports: [CommonModule, FormsModule, servicesRouting],
     providers: [StopwatchService]
 })

@@ -4,8 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { routing } from './form.routing';
 
+import { PersonForm1Component, PersonForm2Component, PersonForm3Component, PersonForm4Component, PersonForm5Component, PersonForm6Component, PersonForm7Component, SearchFormComponent } from './index';
+
 @NgModule({
     imports: [CommonModule, FormsModule, ReactiveFormsModule, routing],
-    declarations: []
+    declarations: [PersonForm1Component, PersonForm2Component, PersonForm3Component, PersonForm4Component, PersonForm5Component, PersonForm6Component, PersonForm7Component, SearchFormComponent]
 })
 export class FormModule {}
