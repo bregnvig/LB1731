@@ -9,12 +9,13 @@ import { IOModule } from './io/io.module';
 import { AsyncModule } from './async/async.module';
 import { PipesModule } from './pipes/pipes.module';
 import { FormModule } from './form/form.module';
+import { UnittestModule } from './unittest/unittest.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule],
+    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

@@ -25,8 +25,7 @@ export class StopwatchSingletonComponent {
   selector: 'app-singleton',
   templateUrl: 'singleton.component.html',
   styleUrls: ['singleton.component.css'],
-  directives: [StopwatchSingletonComponent],
-  providers: [StopwatchService]
+  //providers: [StopwatchService]
 })
 export class SingletonComponent {
 }

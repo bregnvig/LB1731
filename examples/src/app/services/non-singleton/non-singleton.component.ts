@@ -15,7 +15,7 @@ import { StopwatchService } from '../stopwatch.service';
   `,
   providers: [StopwatchService]
 })
-class StopwatchNonSingletonComponent {
+export class StopwatchNonSingletonComponent {
   constructor(public stopwatch: StopwatchService) {
   }
 }
@@ -24,8 +24,7 @@ class StopwatchNonSingletonComponent {
   moduleId: module.id,
   selector: 'app-non-singleton',
   templateUrl: 'non-singleton.component.html',
-  styleUrls: ['non-singleton.component.css'],
-  directives: [StopwatchNonSingletonComponent]
+  styleUrls: ['non-singleton.component.css']
 })
 export class NonSingletonComponent {
 

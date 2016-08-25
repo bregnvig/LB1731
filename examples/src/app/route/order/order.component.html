@@ -2,7 +2,7 @@
   order works! This is #{{orderNo}}
 </h3>
 <nav>
-  <a *ngFor="let orderId of [1,2,3]" [routerLink]="['/route/orders', orderId, {foo: 'bar'}]">Order {{orderId}}</a>
+  <a *ngFor="let orderId of [1,2,3]" [routerLink]="['/route/orders', orderId, {foo: 'bar'}]" routerLinkActive="active">Order {{orderId}}</a>
   <a [routerLink]="['/route/orders', 23]">Order 23 - does not resolves!</a>
 </nav>
 

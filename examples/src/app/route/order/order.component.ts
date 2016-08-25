@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.data.forEach((data: {orderId: number}) => this.orderNo = data.orderId);
+    this.activatedRoute.data.subscribe((data: {orderId: number}) => this.orderNo = data.orderId);
   }
 
   public toggle() {

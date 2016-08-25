@@ -22,5 +22,11 @@ cp -R ../solutions/09-include-the-map 10-add-some-pipes
 rm -Rf 11-add-some-routes
 cp -R ../solutions/10-add-some-pipes 11-add-some-routes  
 
+rm -Rf 12-add-filter-to-sidebar
+cp -R ../solutions/11-add-some-routes 12-add-filter-to-sidebar  
+
+rm -Rf 13-add-some-tests
+cp -R ../solutions/12-add-filter-to-sidebar 13-add-some-tests  
+
 
 
