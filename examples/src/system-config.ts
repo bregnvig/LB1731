@@ -98,6 +98,7 @@ const barrels: string[] = [
   'app/form/person-form-7',
   'app/form/search-form',
   'app/unittest/hello-world',
+  'app/async/error',
   /** @cli-barrel */
 ];
 

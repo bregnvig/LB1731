@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, RefCountComponent, WrapApiComponent } from './index';
+import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, RefCountComponent, WrapApiComponent, ErrorComponent } from './index';
 
 const routes: Routes = [
     {
@@ -22,6 +22,10 @@ const routes: Routes = [
     {
         path: 'async/refCount',
         component: RefCountComponent
+    },
+    {
+        path: 'async/error',
+        component: ErrorComponent
     }
 ]
 

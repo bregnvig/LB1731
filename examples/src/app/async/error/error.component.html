@@ -1,0 +1,15 @@
+<h1>Errors</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <div>
+        <ul>
+          <li *ngFor="let postNummer of zipcodeStream | async | slice:1:10">
+            {{postNummer.nr}} - {{postNummer.navn}}
+          </li>
+        </ul>
+        <p>
+          It took {{elapsed}} ms
+        </p>
+    </div>
+  </div>
+</div>
