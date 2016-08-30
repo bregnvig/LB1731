@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, RefCountComponent, WrapApiComponent, ErrorComponent } from './index';
+import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent } from './index';
 
 const routes: Routes = [
     {
@@ -14,6 +14,10 @@ const routes: Routes = [
     {
         path: 'async/cached',
         component: CachedAsyncServiceComponent
+    },
+    {
+        path: 'async/autoRefresh',
+        component: AutoRefreshComponent
     },
     {
         path: 'async/wrap',

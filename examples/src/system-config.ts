@@ -99,6 +99,8 @@ const barrels: string[] = [
   'app/form/search-form',
   'app/unittest/hello-world',
   'app/async/error',
+  'app/io/view-children',
+  'app/async/auto-refresh',
   /** @cli-barrel */
 ];
 

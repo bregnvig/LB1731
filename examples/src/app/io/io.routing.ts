@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { DirectlyComponent, IOEventComponent, InterceptComponent, LocalComponent, StopwatchComponent, ViewchildComponent } from './index';
+import { DirectlyComponent, IOEventComponent, InterceptComponent, LocalComponent, StopwatchComponent, ViewchildComponent, ViewChildrenComponent } from './index';
 
 const routes: Routes = [
     {
@@ -22,6 +22,10 @@ const routes: Routes = [
     {
         path: 'io/viewchild',
         component: ViewchildComponent
+    },
+    {
+        path: 'io/viewchildren',
+        component: ViewChildrenComponent
     }
 ]
 

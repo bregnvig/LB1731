@@ -4,3 +4,4 @@ export * from './event';
 export * from './stopwatch';
 export * from './local';
 export * from './viewchild';
+export * from './view-children';

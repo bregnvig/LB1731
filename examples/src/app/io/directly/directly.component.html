@@ -2,7 +2,7 @@
 <div class="pane-container center-content">
   <div class="pane fixed-size">
     <p>
-      <app-directly-child [value]="'My value'" [renamed-value]="fromProperty"></app-directly-child>
+      <app-directly-child value="My value" [renamed-value]="fromProperty"></app-directly-child>
     </p>
     <p>
       <input [(ngModel)]="fromProperty">

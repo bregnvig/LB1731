@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/publishLast';
+import 'rxjs/add/operator/publishReplay';
 
 import { Driver } from './driver';
 
@@ -39,11 +42,29 @@ export class F1CachedService {
   private requestStream: Observable<Driver[]>
 
   constructor(http: Http) {
-    let streamNo = 1;
     this.requestStream = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
       .publishLast()
       .refCount();
+  }
+
+  public getDrivers(): Observable<Driver[]> {
+    return this.requestStream;
+  }
+}
+
+@Injectable()
+export class F1AutoRefreshService {
+
+  private requestStream: Observable<Driver[]>
+
+  constructor(http: Http) {
+    this.requestStream = Observable.interval(10000)
+    .startWith(null)
+    .mergeMap(() => http.get(`http://ergast.com/api/f1/2016/drivers.json`))
+    .map(response => response.json().MRData.DriverTable.Drivers)
+    .publishReplay(1)
+    .refCount();
   }
 
   public getDrivers(): Observable<Driver[]> {

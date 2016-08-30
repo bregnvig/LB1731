@@ -9,6 +9,6 @@ import { servicesRouting } from './services.routing';
 @NgModule({
     declarations: [SingletonComponent, NonSingletonComponent, StopwatchErrorComponent, StopwatchLoggerComponent, StopwatchSingletonComponent, StopwatchNonSingletonComponent],
     imports: [CommonModule, FormsModule, servicesRouting],
-    providers: [StopwatchService]
+    //providers: [StopwatchService]
 })
 export class ServicesModule {}

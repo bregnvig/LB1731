@@ -1,0 +1,26 @@
+<h1>@ViewChildren</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <p>
+      <app-stopwatch></app-stopwatch>
+      <app-stopwatch></app-stopwatch>
+      <app-stopwatch></app-stopwatch>
+    </p>
+    <p>
+      <button class="btn btn-success" (click)="start()">Start</button>
+      <button class="btn btn-default" (click)="stop()">Stop</button>
+      <button class="btn btn-danger" (click)="reset()">Reset</button>
+    </p>
+
+    <app-stopwatch #stop1></app-stopwatch>
+    <app-stopwatch #stop2></app-stopwatch>
+    <app-stopwatch #stop3></app-stopwatch>
+
+    <p>
+      <button class="btn btn-success" (click)="startString()">Start</button>
+      <button class="btn btn-default" (click)="stopString()">Stop</button>
+      <button class="btn btn-danger" (click)="resetString()">Reset</button>
+    </p>
+
+  </div>
+</div>
