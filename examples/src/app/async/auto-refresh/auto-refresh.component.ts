@@ -14,6 +14,7 @@ export class AutoRefreshComponent {
   public drivers: Driver[];
 
   constructor(private service: F1AutoRefreshService) {
+    // Should unsubscribe this, ellse we'll have a memory leak'
     const sub = service.getDrivers().subscribe(drivers => {
       console.log('Updating drivers array with new drivers');
       this.drivers = drivers

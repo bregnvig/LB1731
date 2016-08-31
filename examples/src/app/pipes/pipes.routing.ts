@@ -25,4 +25,4 @@ const routes: Routes = [
     }
 ]
 
-export const pipesRoutes = RouterModule.forChild(routes);
+export const routing = RouterModule.forChild(routes);

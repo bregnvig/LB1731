@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, TodayComponent, PurePipe, ImpurePipe, PhonePipe } from './index';
 
-import { pipesRoutes } from './pipes.routing';
+import { routing } from './pipes.routing';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, pipesRoutes],
+    imports: [CommonModule, FormsModule, routing],
     declarations: [BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, TodayComponent, PurePipe, ImpurePipe, PhonePipe]
 })
 export class PipesModule { }

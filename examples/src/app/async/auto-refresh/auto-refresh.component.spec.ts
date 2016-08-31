@@ -4,10 +4,3 @@ import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { addProviders, async, inject } from '@angular/core/testing';
 import { AutoRefreshComponent } from './auto-refresh.component';
-
-describe('Component: AutoRefresh', () => {
-  it('should create an instance', () => {
-    let component = new AutoRefreshComponent();
-    expect(component).toBeTruthy();
-  });
-});
