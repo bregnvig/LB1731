@@ -101,6 +101,7 @@ const barrels: string[] = [
   'app/async/error',
   'app/io/view-children',
   'app/async/auto-refresh',
+  'app/form/oneway',
   /** @cli-barrel */
 ];
 

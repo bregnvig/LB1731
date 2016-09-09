@@ -6,4 +6,5 @@ export * from './person-form-5';
 export * from './person-form-6';
 export * from './person-form-7';
 export * from './search-form';
+export * from './oneway';
 export * from './person'
