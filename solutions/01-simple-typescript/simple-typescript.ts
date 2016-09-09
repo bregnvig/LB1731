@@ -3,8 +3,7 @@ interface IVATCalculator {
     calculate(amount: number): number;
 }
 
-class VATCalculator implements VATCalculator {
-
+class VATCalculator implements IVATCalculator {
     public calculate(amount: number): number {
         return 1.25 * amount;
     }

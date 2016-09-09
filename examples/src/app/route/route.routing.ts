@@ -14,10 +14,10 @@ const routes: Routes = [
             {
                 path: 'orders/:id',
                 component: OrderComponent,
-                resolve: {
-                    orderId: OrderResolveService
-                },
-                canDeactivate: [ConfirmGuardService]
+                // resolve: {
+                //     orderId: OrderResolveService
+                // },
+                // canDeactivate: [ConfirmGuardService]
             }
         ]
     }

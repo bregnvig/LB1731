@@ -4,7 +4,7 @@ import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { LeafletModule } from './leaflet/leaflet.module';
+import { LeafletModule } from './leaflet';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
 import { PlaygroundService, LocationService } from './shared';

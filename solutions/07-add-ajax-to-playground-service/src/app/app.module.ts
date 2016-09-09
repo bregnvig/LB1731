@@ -3,7 +3,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 import { HttpModule } from '@angular/http';
 
-import { LeafletModule } from './leaflet/leaflet.module';
+import { LeafletModule } from './leaflet';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
 import { PlaygroundService } from './shared';

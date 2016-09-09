@@ -21,7 +21,9 @@ export class OrderComponent implements OnInit {
 
   public param2 = this;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute) { 
+    console.log('Order constructed');
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data: {orderId: number}) => this.orderNo = data.orderId);
