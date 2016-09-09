@@ -14,19 +14,26 @@ export class OrderComponent implements OnInit {
   public orderNo: number;
   public exact = false;
 
-  public param1 = {
-    foo: 'bar',
-    value: 17
-  };
+  public data = {
+    foo: 'bar'
+  }
 
-  public param2 = this;
+
 
   constructor(private activatedRoute: ActivatedRoute) { 
     console.log('Order constructed');
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((data: {orderId: number}) => this.orderNo = data.orderId);
+    this.activatedRoute.params.subscribe((data: {id: number}) => {
+      console.log(data);
+      this.orderNo = data.id
+    });
+    this.activatedRoute.queryParams.subscribe((data: any) => {
+      console.log('Query params', data);
+
+    });
+    // this.orderNo = this.activatedRoute.snapshot.params['id'];
   }
 
   public toggle() {

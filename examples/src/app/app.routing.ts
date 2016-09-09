@@ -6,15 +6,10 @@ const routes: Routes = [
         path: 'menu',
         component: MenuComponent
     },
-    {
-        path: '',
-        redirectTo: '/menu',
-        pathMatch: 'full'
-    },
-    {
-        path: 'route',
-        loadChildren: 'app/route/route.module#MyRouteModule'
-    },
+    // {
+    //     path: 'route',
+    //     loadChildren: 'app/route/route.module#MyRouteModule'
+    // },
     {
         path: '**',
         redirectTo: 'menu',

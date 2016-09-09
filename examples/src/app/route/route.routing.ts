@@ -4,28 +4,19 @@ import { OrdersComponent, OrderComponent, RouteComponent, ConfirmGuardService, O
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'route',
         component: RouteComponent,
         children: [
             {
                 path: 'orders',
-                component: OrdersComponent
+                component: OrdersComponent,
             },
             {
                 path: 'orders/:id',
-                component: OrderComponent,
-                // resolve: {
-                //     orderId: OrderResolveService
-                // },
-                // canDeactivate: [ConfirmGuardService]
+                component: OrderComponent
             }
         ]
     }
 ];
-
-export const routeProviders = [
-    ConfirmGuardService,
-    OrderResolveService
-]
 
 export const routeRouting = RouterModule.forChild(routes);

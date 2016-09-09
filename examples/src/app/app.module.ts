@@ -13,10 +13,11 @@ import { FormModule } from './form/form.module';
 import { UnittestModule } from './unittest/unittest.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
+import { MyRouteModule } from './route/route.module';
 
 @NgModule({
     declarations: [AppComponent, MenuComponent],
-    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule],
+    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule, MyRouteModule],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}

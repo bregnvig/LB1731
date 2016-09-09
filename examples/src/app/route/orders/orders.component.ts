@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     console.log('Current URL', this.router.routerState.snapshot.url);
   }
 
   public gotoOrder(orderId: number) {
-    this.router.navigate(['/route/orders', orderId]);
+    this.router.navigate([orderId], {relativeTo: this.route});
   }
 
 }

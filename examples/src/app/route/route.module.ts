@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { routeRouting, routeProviders } from './route.routing';
+import { routeRouting } from './route.routing';
+import { RouteComponent, OrderComponent, OrdersComponent } from './index';
+
 
 @NgModule({
-    imports: [CommonModule, routeRouting],
-    providers: [...routeProviders]
+    declarations: [RouteComponent, OrderComponent, OrdersComponent],
+    imports: [CommonModule, routeRouting]
 })
 export class MyRouteModule { }
