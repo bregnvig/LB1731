@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { DefaultDescriptionPipe } from './default-description.pipe';
 
 describe('Pipe: DefaultDescriptionPipe', () => {
@@ -8,7 +8,9 @@ describe('Pipe: DefaultDescriptionPipe', () => {
   let pipe: DefaultDescriptionPipe;
 
   beforeEach(() => {
-    addProviders([DefaultDescriptionPipe]);
+    TestBed.configureTestingModule({
+      providers: [DefaultDescriptionPipe]
+    });
   });
 
   beforeEach(inject([DefaultDescriptionPipe], (_pipe: DefaultDescriptionPipe) => {

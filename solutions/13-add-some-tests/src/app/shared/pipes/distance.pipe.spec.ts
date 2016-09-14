@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { provide } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { LocationService, Coordinate } from '../index';
 import { DistancePipe } from './distance.pipe';
 import { Observable } from 'rxjs/Observable';
@@ -26,12 +26,14 @@ describe('Pipe: DistancePipe', () => {
         lng: 12.528431156384602
     };
     beforeEach(() => {
-        addProviders([
-            DistancePipe,
-            provide(LocationService, {
-                useFactory: locationServiceFactory
-            })
-        ])
+        TestBed.configureTestingModule({
+            providers: [
+                DistancePipe,
+                provide(LocationService, {
+                    useFactory: locationServiceFactory
+                })
+            ]
+        });
     });
 
     beforeEach(inject([DistancePipe, LocationService], (_pipe: DistancePipe, _locationService: LocationService) => {
@@ -41,7 +43,7 @@ describe('Pipe: DistancePipe', () => {
 
     it(`should return a location service!`, () => {
         expect(locationService).not.toBeNull();
-    })
+    });
 
     it(`should return Ukendt, when the position is not defined`, () => {
         expect(pipe.transform(position)).toEqual('Ukendt');

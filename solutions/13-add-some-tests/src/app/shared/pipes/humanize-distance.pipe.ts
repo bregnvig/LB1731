@@ -13,8 +13,8 @@ export class HumanizeDistancePipe implements PipeTransform {
     if (distance <= 750) {
       return `${distance} m`;
     } else if (distance <= 1500) {
-      return 'Et stykke vej'
-    } 
+      return 'Et stykke vej';
+    }
     return 'Ikke til fods!';
   }
 }

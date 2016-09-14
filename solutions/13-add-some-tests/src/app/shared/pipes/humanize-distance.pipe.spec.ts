@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { HumanizeDistancePipe } from './humanize-distance.pipe';
 
 describe('Pipe: HumanizeDistancePipe', () => {
@@ -8,7 +8,9 @@ describe('Pipe: HumanizeDistancePipe', () => {
   let pipe: HumanizeDistancePipe;
 
   beforeEach(() => {
-    addProviders([HumanizeDistancePipe]);
+    TestBed.configureTestingModule({
+      providers: [HumanizeDistancePipe]
+    });
   });
 
   beforeEach(inject([HumanizeDistancePipe], (_pipe: HumanizeDistancePipe) => {

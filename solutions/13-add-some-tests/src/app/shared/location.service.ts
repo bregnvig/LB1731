@@ -16,7 +16,7 @@ export class LocationService {
     this.locationStream = Observable
       .create(observer => {
         const watchId = window.navigator.geolocation.watchPosition(position => {
-          observer.next(position)
+          observer.next(position);
         }, error => observer.error(error));
         return () => window.navigator.geolocation.clearWatch(watchId);
       })
@@ -24,7 +24,7 @@ export class LocationService {
         return {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        }
+        };
       })
       .publishReplay(1)
       .refCount();
