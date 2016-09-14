@@ -5,7 +5,6 @@ cp ./03-create-first-component/e2e/tsconfig.json $1/e2e/.
 cp ./03-create-first-component/e2e/tsconfig.json $1/e2e/.
 cp ./03-create-first-component/package.json $1/.
 cp ./03-create-first-component/src/app/app.component.spec.ts $1/src/app/.
-cp ./03-create-first-component/src/app/app.component.ts $1/src/app/.
 cp ./03-create-first-component/src/app/index.ts $1/src/app/.
 cp ./03-create-first-component/src/app/leaflet/leaflet.component.ts $1/src/app/leaflet/.
 cp ./03-create-first-component/src/index.html $1/src/.
