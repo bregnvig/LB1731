@@ -9,7 +9,6 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/filter';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sidebar',
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css']
