@@ -7,7 +7,6 @@ import { Marker, Center } from './leaflet';
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
