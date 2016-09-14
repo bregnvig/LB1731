@@ -10,7 +10,6 @@ import { Playground, LocationService  } from '../shared';
 import { Marker, Center } from '../leaflet';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-map.pane',
   templateUrl: 'map.component.html',
   styleUrls: ['map.component.css']

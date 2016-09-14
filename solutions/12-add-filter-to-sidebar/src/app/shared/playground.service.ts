@@ -35,7 +35,7 @@ export class PlaygroundService {
   private requestStream: Observable<Playground[]>;
 
   constructor(http: Http) {
-    this.requestStream = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/prox')
+    this.requestStream = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
       .map(response => {
         const opendata: IOpenData = response.json();
         return opendata.features.map(openPlayground => {
