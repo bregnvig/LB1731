@@ -10,7 +10,6 @@ import { Center } from './center';
 import { Marker } from './marker';
 
 @Component({
-  moduleId: module.id,
   selector: 'leaflet',
   templateUrl: 'leaflet.component.html',
   styleUrls: ['leaflet.component.css']

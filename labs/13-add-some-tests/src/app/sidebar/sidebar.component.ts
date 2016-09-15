@@ -14,7 +14,6 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/startWith';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sidebar',
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css']
@@ -37,7 +36,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .map(params => params['id'])
       .filter(id => id)
       .mergeMap(id => this.playgroundService.find(id))
-      .subscribe((playground: Playground) => this.playgroundSelected.emit(playground));
+      .subscribe((playground: Playground) => setTimeout(() => this.playgroundSelected.emit(playground)));
     this.filterControl
       .valueChanges
       .startWith('')

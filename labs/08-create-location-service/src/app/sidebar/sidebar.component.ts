@@ -3,7 +3,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Playground, PlaygroundService } from '../shared';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sidebar',
   templateUrl: 'sidebar.component.html',
   styleUrls: ['sidebar.component.css']
