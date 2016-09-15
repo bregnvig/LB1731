@@ -1,4 +1,4 @@
-export * from './coordinate';
-export * from './location.service';
-export * from './playground';
-export * from './playground.service';
+export { Coordinate } from './coordinate';
+export { Playground } from './playground';
+export { PlaygroundService } from './playground.service';
+export { LocationService } from './location.service';

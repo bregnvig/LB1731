@@ -1,7 +1,5 @@
-export * from './coordinate';
-export * from './location.service';
-export * from './pipes/default-description.pipe';
-export * from './pipes/distance.pipe';
-export * from './pipes/humanize-distance.pipe';
-export * from './playground';
-export * from './playground.service';
+export { Coordinate } from './coordinate';
+export { LocationService } from './location.service';
+export { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipes';
+export { Playground } from './playground';
+export { PlaygroundService } from './playground.service';
