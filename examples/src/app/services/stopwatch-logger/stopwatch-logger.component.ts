@@ -9,7 +9,6 @@ import { StopwatchLoggerService } from '../stopwatch-logger.service';
   selector: 'app-stopwatch-logger',
   templateUrl: 'stopwatch-logger.component.html',
   styleUrls: ['stopwatch-logger.component.css'],
-  directives: [StopwatchSingletonComponent],
   providers: [LoggerService, {
     provide: StopwatchService,
     useClass: StopwatchLoggerService

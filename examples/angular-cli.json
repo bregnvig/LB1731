@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.11-webpack.8",
+    "version": "1.0.0-beta.14",
     "name": "playgrounds"
   },
   "apps": [
@@ -19,12 +19,11 @@
         "../node_modules/bootstrap-css-only/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
-      "scripts": [
-      ],
+      "scripts": [ ],
       "environments": {
         "source": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts",
-        "dev": "environments/environment.dev.ts"
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
       }
     }
   ],
@@ -41,8 +40,5 @@
     }
   },
   "defaults": {
-    "styleExt": "less",
-    "prefixInterfaces": false,
-    "lazyRoutePrefix": "+"
   }
 }

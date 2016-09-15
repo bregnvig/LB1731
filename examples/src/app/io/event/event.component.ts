@@ -21,8 +21,7 @@ export class IOEventChildComponent {
 @Component({
   selector: 'app-io-event',
   templateUrl: 'event.component.html',
-  styleUrls: ['event.component.css'],
-  directives: [ IOEventChildComponent ]
+  styleUrls: ['event.component.css']
 })
 export class IOEventComponent implements OnInit {
 

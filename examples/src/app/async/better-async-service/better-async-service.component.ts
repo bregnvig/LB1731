@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HTTP_PROVIDERS } from '@angular/http';
 
 import { Driver } from '../driver';
 import { F1BetterService } from '../f1.service';
@@ -8,7 +7,7 @@ import { F1BetterService } from '../f1.service';
   selector: 'app-better-async-service',
   templateUrl: 'better-async-service.component.html',
   styleUrls: ['better-async-service.component.css'],
-  providers: [HTTP_PROVIDERS, F1BetterService]
+  providers: [F1BetterService]
 })
 export class BetterAsyncServiceComponent  {
 

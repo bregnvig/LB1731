@@ -6,7 +6,6 @@ import { RotateFlyover3 } from '../rotate.directive';
   selector: 'app-bindings-attribute',
   templateUrl: 'bindings-attribute.component.html',
   styleUrls: ['bindings-attribute.component.css'],
-  directives: [RotateFlyover3]
 })
 export class BindingsAttributeComponent {
 

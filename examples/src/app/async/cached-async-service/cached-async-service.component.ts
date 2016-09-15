@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HTTP_PROVIDERS } from '@angular/http';
 
 import { Driver } from '../driver';
 import { F1CachedService } from '../f1.service';
@@ -8,7 +7,7 @@ import { F1CachedService } from '../f1.service';
   selector: 'app-cached-async-service',
   templateUrl: 'cached-async-service.component.html',
   styleUrls: ['cached-async-service.component.css'],
-  providers: [HTTP_PROVIDERS, F1CachedService]
+  providers: [F1CachedService]
 })
 export class CachedAsyncServiceComponent {
 
