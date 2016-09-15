@@ -24,5 +24,5 @@ cp ./03-create-first-component/src/test.ts $1/src/.
 rm $1/angular-cli-build.js
 rm $1/config/environment*
 rm -Rf $1/src/css
-rm -Rf $1/src/system.config.ts
+rm -Rf $1/src/system-config.ts
 rm -Rf $1/typings.json
