@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { StopwatchComponent } from '../stopwatch';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-view-children',
   templateUrl: 'view-children.component.html',
   styleUrls: ['view-children.component.css']

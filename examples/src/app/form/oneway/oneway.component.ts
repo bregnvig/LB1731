@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../index';
 @Component({
-  moduleId: module.id,
   selector: 'app-oneway',
   templateUrl: 'oneway.component.html',
   styleUrls: ['oneway.component.css']

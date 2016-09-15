@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-order',
   templateUrl: 'order.component.html',
   styleUrls: ['order.component.css']

@@ -5,7 +5,6 @@ import { Driver } from '../driver';
 import { F1BetterService } from '../f1.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-better-async-service',
   templateUrl: 'better-async-service.component.html',
   styleUrls: ['better-async-service.component.css'],

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-chaining',
   templateUrl: 'chaining.component.html',
   styleUrls: ['chaining.component.css']

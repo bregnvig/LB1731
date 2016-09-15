@@ -1,9 +1,9 @@
-export * from './hello';
-export * from './ngif';
-export * from './inner';
-export * from './interpolation';
-export * from './property';
-export * from './event';
-export * from './twoway';
-export * from './ngfor';
-export * from './outer';
+export { HelloComponent } from './hello';
+export { NgifComponent } from './ngif';
+export { InnerComponent } from './inner';
+export { InterpolationComponent } from './interpolation';
+export { PropertyComponent } from './property';
+export { EventComponent } from './event';
+export { TwowayComponent } from './twoway';
+export { OuterComponent } from './outer';
+export { NgforComponent } from './ngfor';

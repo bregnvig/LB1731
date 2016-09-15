@@ -5,7 +5,6 @@ import { Driver } from '../driver';
 import { F1CachedService } from '../f1.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-cached-async-service',
   templateUrl: 'cached-async-service.component.html',
   styleUrls: ['cached-async-service.component.css'],

@@ -6,7 +6,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-search-form',
   templateUrl: 'search-form.component.html',
   styleUrls: ['search-form.component.css']

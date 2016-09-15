@@ -4,7 +4,6 @@ import { Person } from '../index';
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-person-form-1',
   templateUrl: 'person-form-1.component.html',
   styleUrls: ['person-form-1.component.css']

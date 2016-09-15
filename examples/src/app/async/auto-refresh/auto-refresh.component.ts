@@ -4,7 +4,6 @@ import { Driver } from '../driver';
 import { F1AutoRefreshService } from '../f1.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-auto-refresh',
   templateUrl: 'auto-refresh.component.html',
   styleUrls: ['auto-refresh.component.css']

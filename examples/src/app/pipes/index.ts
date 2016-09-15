@@ -1,7 +1,7 @@
-export * from './today';
-export * from './build-in';
-export * from './chaining';
-export * from './phone';
-export * from './pure';
-export * from './pure.pipe';
-export * from './phone.pipe';
+export { TodayComponent } from './today';
+export { BuildInComponent } from './build-in';
+export { ChainingComponent } from './chaining';
+export { PhoneComponent } from './phone';
+export { PureComponent } from './pure';
+export { ImpurePipe, PurePipe } from './pure.pipe';
+export { PhonePipe } from './phone.pipe';

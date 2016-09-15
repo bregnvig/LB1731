@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Person } from '../index';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-person-form-7',
   templateUrl: 'person-form-7.component.html',
   styleUrls: ['person-form-7.component.css']

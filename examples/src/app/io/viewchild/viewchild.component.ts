@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { StopwatchComponent } from '../stopwatch';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-viewchild',
   templateUrl: 'viewchild.component.html',
   styleUrls: ['viewchild.component.css']

@@ -1,5 +1,5 @@
-export * from './orders';
-export * from './order';
-export * from './route';
-export * from './confirm-guard.service';
-export * from './order-resolve.service';
+export { OrdersComponent } from './orders';
+export { OrderComponent } from './order';
+export { RouteComponent } from './route';
+export { ConfirmGuardService } from './confirm-guard.service';
+export { OrderResolveService } from './order-resolve.service';

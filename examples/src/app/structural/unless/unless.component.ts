@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-unless',
   templateUrl: 'unless.component.html',
   styleUrls: ['unless.component.css']

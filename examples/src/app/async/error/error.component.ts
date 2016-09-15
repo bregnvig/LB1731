@@ -7,7 +7,6 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-error',
   templateUrl: 'error.component.html',
   styleUrls: ['error.component.css']

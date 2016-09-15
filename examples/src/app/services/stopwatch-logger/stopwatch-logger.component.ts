@@ -6,7 +6,6 @@ import { StopwatchService } from '../stopwatch.service';
 import { StopwatchLoggerService } from '../stopwatch-logger.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-stopwatch-logger',
   templateUrl: 'stopwatch-logger.component.html',
   styleUrls: ['stopwatch-logger.component.css'],

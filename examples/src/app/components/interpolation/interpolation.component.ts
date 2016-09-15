@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-interpolation',
   templateUrl: 'interpolation.component.html',
   styleUrls: ['interpolation.component.css']

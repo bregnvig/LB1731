@@ -1,3 +1,3 @@
-export * from "./case-study";
-export * from "./unless";
-export * from "./unless.directive";
+export { CaseStudyComponent } from "./case-study";
+export { UnlessComponent } from "./unless";
+export { Unless } from "./unless.directive";

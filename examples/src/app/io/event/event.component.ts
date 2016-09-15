@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-io-event-child',
   template: `
     <p>
@@ -20,7 +19,6 @@ export class IOEventChildComponent {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'app-io-event',
   templateUrl: 'event.component.html',
   styleUrls: ['event.component.css'],

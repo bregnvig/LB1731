@@ -1,7 +1,7 @@
-export * from './directly';
-export * from './intercept';
-export * from './event';
-export * from './stopwatch';
-export * from './local';
-export * from './viewchild';
-export * from './view-children';
+export { DirectlyChildComponent, DirectlyComponent } from './directly';
+export { InterceptChildComponent, InterceptComponent } from './intercept';
+export { IOEventChildComponent, IOEventComponent } from './event';
+export { StopwatchComponent } from './stopwatch';
+export { LocalComponent } from './local';
+export { ViewchildComponent } from './viewchild';
+export { ViewChildrenComponent } from './view-children';

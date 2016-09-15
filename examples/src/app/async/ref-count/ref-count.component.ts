@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { SharedTimerService } from '../timer.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-ref-count',
   templateUrl: 'ref-count.component.html',
   styleUrls: ['ref-count.component.css'],

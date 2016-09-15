@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-directly-child',
   template: '<p>{{value}}</p> <p>{{value2}}</p>'
 })
@@ -13,7 +12,6 @@ export class DirectlyChildComponent {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'app-directly',
   templateUrl: 'directly.component.html',
   styleUrls: ['directly.component.css'],

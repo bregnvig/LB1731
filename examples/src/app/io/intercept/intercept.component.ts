@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-intercept-child',
   template: '<p>{{value}}</p>'
 })
@@ -19,7 +18,6 @@ export class InterceptChildComponent {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'app-intercept',
   templateUrl: 'intercept.component.html',
   styleUrls: ['intercept.component.css'],

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-hello',
   template: '<h1>{{title}}</h1>',
   // templateUrl: 'hello.component.html',

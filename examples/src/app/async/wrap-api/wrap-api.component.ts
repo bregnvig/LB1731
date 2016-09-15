@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { TimerService } from '../timer.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-wrap-api',
   templateUrl: 'wrap-api.component.html',
   styleUrls: ['wrap-api.component.css'],

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { RotateFlyover3 } from '../rotate.directive';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-bindings-attribute',
   templateUrl: 'bindings-attribute.component.html',
   styleUrls: ['bindings-attribute.component.css'],

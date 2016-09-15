@@ -1,4 +1,6 @@
-export class ExamplesPage {
+import { browser, element, by } from 'protractor/globals';
+
+export class PlaygroundsPage {
   navigateTo() {
     return browser.get('/');
   }

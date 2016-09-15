@@ -21,7 +21,6 @@ export class StopwatchSingletonComponent {
 }
 
 @Component({
-  moduleId: module.id,
   selector: 'app-singleton',
   templateUrl: 'singleton.component.html',
   styleUrls: ['singleton.component.css'],

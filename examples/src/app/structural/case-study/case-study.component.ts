@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-case-study',
   templateUrl: 'case-study.component.html',
   styleUrls: ['case-study.component.css']
