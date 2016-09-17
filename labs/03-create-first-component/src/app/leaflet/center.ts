@@ -1,5 +1,5 @@
 export class Center {
-    constructor(private _latitude: number, private _longitude: number, private _zoom?:number) {
+    constructor(private _latitude: number, private _longitude: number, private _zoom?: number) {
     }
 
     public get latitude() {

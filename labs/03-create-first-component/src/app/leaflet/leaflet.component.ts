@@ -1,14 +1,17 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, Input } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, Input } from '@angular/core';
+
+import { MarkerFactory } from './marker-factory';
+import { Center } from './center';
+import { Marker } from './marker';
 
 import { TileLayer, Map, LatLng, control, Marker as LeafletMarker } from 'leaflet';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { MarkerFactory } from './marker-factory';
-import { Center } from './center';
-import { Marker } from './marker';
 
+/* tslint:disable:component-selector-name */
+/* tslint:disable:component-selector-prefix */
 @Component({
   selector: 'leaflet',
   templateUrl: 'leaflet.component.html',
@@ -31,7 +34,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
 
   constructor() {
     this.baseMaps = {
-      OpenStreetMap: new TileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+      OpenStreetMap: new TileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       })
     };
@@ -39,7 +42,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
 
   public ngAfterViewInit() {
     console.group('Map configuration');
-    console.log('Id', this.mapId)
+    console.log('Id', this.mapId);
     console.log('Using zoom', this._zoom);
     console.log('Center', JSON.stringify(this._center));
     console.groupEnd();
@@ -57,7 +60,9 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this._markersSubscription.unsubscribe();
+    if (this._markersSubscription) {
+      this._markersSubscription.unsubscribe();
+    }
   }
 
   @Input()
