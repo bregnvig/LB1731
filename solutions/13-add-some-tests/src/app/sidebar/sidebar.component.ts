@@ -43,11 +43,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .debounceTime(200)
       .distinctUntilChanged()
       .combineLatest(this.playgroundService.getPlaygrounds(), (text, playgrounds) => {
-        return playgrounds.filter(playground => playground.name.toLowerCase().indexOf(text.toLowerCase()) !== -1)
+        return playgrounds.filter(playground => playground.name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
       })
       .combineLatest(this.locationService.current, (playgrounds, location) => {
         const l = this.locationService;
-        return playgrounds.sort((a, b) => l.getDistance(a.position, location) - l.getDistance(b.position, location))
+        return playgrounds.sort((a, b) => l.getDistance(a.position, location) - l.getDistance(b.position, location));
       })
       .subscribe(playgrounds => this.playgrounds = playgrounds);
   }

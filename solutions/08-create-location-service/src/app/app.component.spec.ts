@@ -2,13 +2,30 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { SidebarComponent } from './sidebar';
+import { FooterComponent } from './footer';
+import { PlaygroundService, LocationService } from './shared';
+import {Observable} from "rxjs/Observable";
+import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
+
+export const FakePlaygroundService = { 
+  provide: PlaygroundService, 
+  useValue: {
+    getPlaygrounds() {
+      return Observable.of(MOCK_PLAYGROUNDS)
+    }
+  }
+};
 
 describe('App: Playgrounds', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        SidebarComponent,
+        FooterComponent
       ],
+      providers: [FakePlaygroundService, LocationService],
     });
   });
 

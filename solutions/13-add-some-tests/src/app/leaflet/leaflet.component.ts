@@ -1,9 +1,6 @@
-/* tslint:disable:component-selector-prefix */
-/* tslint:disable:component-selector-name */
 
 import { Component, OnDestroy, AfterViewInit, Input } from '@angular/core';
 
-import { MarkerFactory } from './marker-factory';
 import { Center } from './center';
 import { Marker } from './marker';
 
@@ -12,6 +9,10 @@ import { TileLayer, Map, LatLng, control, Marker as LeafletMarker } from 'leafle
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import { MarkerFactory } from './marker-factory';
+
+/* tslint:disable:component-selector-name */
+/* tslint:disable:component-selector-prefix */
 @Component({
   selector: 'leaflet',
   templateUrl: 'leaflet.component.html',
@@ -60,7 +61,9 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this._markersSubscription.unsubscribe();
+    if (this._markersSubscription) {
+      this._markersSubscription.unsubscribe();
+    }
   }
 
   @Input()

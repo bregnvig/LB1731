@@ -1,6 +1,5 @@
 /* tslint:disable:no-unused-variable */
 
-import { provide } from '@angular/core';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { LocationService, Coordinate } from '../index';
 import { DistancePipe } from './distance.pipe';
@@ -29,9 +28,10 @@ describe('Pipe: DistancePipe', () => {
         TestBed.configureTestingModule({
             providers: [
                 DistancePipe,
-                provide(LocationService, {
+                {
+                    provide: LocationService,
                     useFactory: locationServiceFactory
-                })
+                }
             ]
         });
     });

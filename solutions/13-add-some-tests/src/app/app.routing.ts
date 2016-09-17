@@ -16,6 +16,6 @@ const routes: Routes = [
         redirectTo: '',
         pathMatch: 'full'
     }
-]
+];
 
 export const routing = RouterModule.forRoot(routes);

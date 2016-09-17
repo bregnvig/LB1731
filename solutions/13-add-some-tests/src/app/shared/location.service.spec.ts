@@ -1,11 +1,13 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { LocationService } from './location.service';
 
 describe('Service: Location', () => {
   beforeEach(() => {
-    addProviders([LocationService]);
+    TestBed.configureTestingModule({
+      providers: [LocationService]
+    });
   });
 
   it('should ...',

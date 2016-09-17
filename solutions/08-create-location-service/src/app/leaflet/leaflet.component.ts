@@ -57,7 +57,9 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this._markersSubscription.unsubscribe();
+    if (this._markersSubscription) {
+      this._markersSubscription.unsubscribe();
+    }
   }
 
   @Input()

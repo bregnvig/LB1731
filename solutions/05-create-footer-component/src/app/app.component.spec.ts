@@ -2,12 +2,16 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { SidebarComponent } from './sidebar';
+import { FooterComponent } from './footer';
 
 describe('App: Playgrounds', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        SidebarComponent,
+        FooterComponent
       ],
     });
   });

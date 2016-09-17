@@ -9,6 +9,7 @@ import { SidebarComponent } from '../sidebar';
 import { Playground, LocationService  } from '../shared';
 import { Marker, Center } from '../leaflet';
 
+/* tslint:disable:component-selector-name */
 @Component({
   selector: 'app-map.pane',
   templateUrl: 'map.component.html',
@@ -29,13 +30,12 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.current.subscribe(location => {
-      console.log('Obtained location', location)
+      console.log('Obtained location', location);
     });
     const playgroundSelected = this.sidebar.playgroundSelected.map(playground => new Marker('playground', playground.position.lat, playground.position.lng, playground.name));
     this.markers = this.locationService.current
       .map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'))
       .merge(playgroundSelected);
-    
   }
 
   public playgroundSelected(playground: Playground): void {

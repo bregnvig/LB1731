@@ -1,6 +1,6 @@
 export class Marker {
 
-    constructor(private _name: string, private _latitude: number, private _longitude: number, private _message: string = '') { }
+    constructor(private _name: string, private _latitude: number, private _longitude: number, private _message = '') { }
 
     public get name() {
         return this._name;
