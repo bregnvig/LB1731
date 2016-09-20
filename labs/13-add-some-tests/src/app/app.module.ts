@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LeafletModule } from './leaflet';
+import { MapComponent } from './map';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
 import { PlaygroundService, LocationService } from './shared';
@@ -13,7 +14,7 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './sh
 import { routing } from './app.routing';
 
 @NgModule({
-    declarations: [SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
+    declarations: [AppComponent, MapComponent, SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
     imports: [BrowserModule, ReactiveFormsModule, LeafletModule, HttpModule, routing],
     providers: [PlaygroundService, LocationService],
     bootstrap: [AppComponent],
