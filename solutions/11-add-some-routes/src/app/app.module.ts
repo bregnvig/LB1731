@@ -13,7 +13,7 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './sh
 import { routing } from './app.routing';
 
 @NgModule({
-    declarations: [MapComponent, SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
+    declarations: [AppComponent, MapComponent, SidebarComponent, FooterComponent, DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe],
     imports: [BrowserModule, LeafletModule, HttpModule, routing],
     providers: [PlaygroundService, LocationService],
     bootstrap: [AppComponent],
