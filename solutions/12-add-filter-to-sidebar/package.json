@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
-    "@types/leaflet": "^1.0.31",
-    "angular-cli": "1.0.0-beta.14",
+    "@types/leaflet": "1.0.31",
+    "angular-cli": "1.0.0-beta.15",
     "codelyzer": "~0.0.26",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
@@ -43,6 +43,7 @@
     "protractor": "4.0.5",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
-    "typescript": "2.0.2"
+    "typescript": "2.0.2",
+    "webpack": "^2.1.0-beta.22"
   }
 }
