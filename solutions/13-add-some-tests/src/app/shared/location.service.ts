@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/retry';
 
 import { Coordinate } from './coordinate';
 
@@ -26,6 +27,7 @@ export class LocationService {
           lng: position.coords.longitude
         };
       })
+      .retry(3)
       .publishReplay(1)
       .refCount();
   }
