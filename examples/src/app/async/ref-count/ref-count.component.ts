@@ -8,7 +8,6 @@ import { SharedTimerService } from '../timer.service';
   selector: 'app-ref-count',
   templateUrl: 'ref-count.component.html',
   styleUrls: ['ref-count.component.css'],
-  providers: [SharedTimerService]
 })
 export class RefCountComponent {
 

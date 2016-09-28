@@ -13,6 +13,6 @@ import { asyncRouting } from './async.routing';
 @NgModule({
     imports: [CommonModule, HttpModule, FormsModule, asyncRouting],
     declarations: [SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent],
-    providers: [F1SimpleService, F1BetterService, F1CachedService, F1AutoRefreshService]
+    providers: [F1SimpleService, F1BetterService, F1CachedService, F1AutoRefreshService, SharedTimerService]
 })
 export class AsyncModule { }
