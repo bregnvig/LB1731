@@ -1,3 +1,4 @@
+import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { EventComponent, HelloComponent, InnerComponent, InterpolationComponent, NgforComponent, NgifComponent, OuterComponent, PropertyComponent, TwowayComponent } from './index'

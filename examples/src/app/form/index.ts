@@ -1,4 +1,4 @@
-export { PersonForm1Component } from './person-form-1';
+export { PersonForm1Component } from './person-form-1/person-form-1.component';
 export { PersonForm2Component } from './person-form-2';
 export { PersonForm3Component } from './person-form-3';
 export { PersonForm4Component } from './person-form-4';

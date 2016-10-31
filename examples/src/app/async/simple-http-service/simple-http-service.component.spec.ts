@@ -2,5 +2,5 @@
 
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
+import { async, inject } from '@angular/core/testing';
 import { SimpleHttpServiceComponent } from './simple-http-service.component';

@@ -1,3 +1,4 @@
+import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BindingAttributeComponent, BindingsAttributeComponent, SimpleAttributeComponent, UserEventAttributeComponent } from './index';

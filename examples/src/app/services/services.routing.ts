@@ -1,3 +1,4 @@
+import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SingletonComponent, NonSingletonComponent, StopwatchErrorComponent, StopwatchLoggerComponent, StopwatchSingletonComponent } from './index';
