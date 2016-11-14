@@ -22,8 +22,8 @@ export class ErrorComponent implements OnInit {
     console.log('HERE?!');
     
     const start: number = Date.now(); 
-    this.zipcodeStream = this.http.get('404.json')
-      .catch(() => this.http.get('another.404'))
+    this.zipcodeStream = this.http.get('http://404.com/asd.json')
+      .catch(() => this.http.get('http://404.com/another.404'))
       .catch(() => this.http.get('https://dawa.aws.dk/postnumre'))
       .catch(() => Observable.throw('Fetch no data!!'))
       .map(response => response.json())

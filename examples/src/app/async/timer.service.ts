@@ -11,7 +11,9 @@ export class TimerService {
   constructor() {
     this.timerStream = Observable
       .create(observer => {
-        const intervalId = window.setInterval(() => observer.next(new Date()), 1000);
+        const intervalId = window.setInterval(() => {
+          observer.next(new Date())
+        } , 1000);
         return () => {
           console.log('Stopping timer!');
           window.clearInterval(intervalId);

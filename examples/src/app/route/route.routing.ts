@@ -5,7 +5,7 @@ import { OrdersComponent, OrderComponent, RouteComponent, ConfirmGuardService, O
 
 const routes: Routes = [
     {
-        path: 'route',
+        path: '',
         component: RouteComponent,
         children: [
             {

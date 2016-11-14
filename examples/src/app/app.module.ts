@@ -17,7 +17,7 @@ import { MyRouteModule } from './route/route.module';
 
 @NgModule({
     declarations: [AppComponent, MenuComponent],
-    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule, MyRouteModule],
+    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule],
     bootstrap:    [AppComponent],
 })
 export class AppModule {}
