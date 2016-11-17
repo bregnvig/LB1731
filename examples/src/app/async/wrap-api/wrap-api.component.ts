@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,13 +10,17 @@ import { TimerService } from '../timer.service';
   styleUrls: ['wrap-api.component.css'],
   providers: [TimerService]
 })
-export class WrapApiComponent {
+export class WrapApiComponent implements OnDestroy {
 
   public subscription:Subscription;
   public date: Date;
 
   constructor(service: TimerService) {
      this.subscription = service.timer.subscribe(date => this.date = date);
+  }
+
+  ngOnDestroy() {
+    // this.stop();
   }
 
   public stop() {

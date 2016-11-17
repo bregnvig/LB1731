@@ -12,6 +12,7 @@ export class TimerService {
     this.timerStream = Observable
       .create(observer => {
         const intervalId = window.setInterval(() => {
+          console.log(new Date());
           observer.next(new Date())
         } , 1000);
         return () => {
