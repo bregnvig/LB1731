@@ -25,42 +25,42 @@ export class F1SimpleService {
 @Injectable()
 export class F1BetterService {
 
-  private requestStream: Observable<Driver[]>
+  private request$: Observable<Driver[]>
 
   constructor(http: Http) {
-    this.requestStream = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
+    this.request$ = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
   }
 
   public getDrivers(): Observable<Driver[]> {
-    return this.requestStream;
+    return this.request$;
   }
 }
 
 @Injectable()
 export class F1CachedService {
 
-  private requestStream: Observable<Driver[]>
+  private request$: Observable<Driver[]>
 
   constructor(http: Http) {
-    this.requestStream = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
+    this.request$ = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
       .publishLast()
       .refCount();
   }
 
   public getDrivers(): Observable<Driver[]> {
-    return this.requestStream;
+    return this.request$;
   }
 }
 
 @Injectable()
 export class F1AutoRefreshService {
 
-  private requestStream: Observable<Driver[]>
+  private request$: Observable<Driver[]>
 
   constructor(http: Http) {
-    this.requestStream = Observable.interval(10000)
+    this.request$ = Observable.interval(10000)
     .startWith(null)
     .mergeMap(() => http.get(`http://ergast.com/api/f1/2016/drivers.json`))
     .map(response => response.json().MRData.DriverTable.Drivers)
@@ -69,6 +69,6 @@ export class F1AutoRefreshService {
   }
 
   public getDrivers(): Observable<Driver[]> {
-    return this.requestStream;
+    return this.request$;
   }
 }

@@ -9,10 +9,13 @@ import { F1SimpleService, F1BetterService, F1CachedService, F1AutoRefreshService
 import { TimerService, SharedTimerService } from './timer.service';
 
 import { asyncRouting } from './async.routing';
+import { IntervalComponent } from './interval/interval.component';
+import { RetryWhenComponent } from './retry-when/retry-when.component';
+import { RetryService } from './retry.service';
 
 @NgModule({
     imports: [CommonModule, HttpModule, FormsModule, asyncRouting],
-    declarations: [SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent],
-    providers: [F1SimpleService, F1BetterService, F1CachedService, F1AutoRefreshService, SharedTimerService]
+    declarations: [SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent, IntervalComponent, RetryWhenComponent],
+    providers: [F1SimpleService, F1BetterService, F1CachedService, F1AutoRefreshService, SharedTimerService, RetryService]
 })
 export class AsyncModule { }

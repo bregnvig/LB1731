@@ -1,7 +1,7 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent } from './index';
+import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent, IntervalComponent, RetryWhenComponent } from './index';
 
 const routes: Routes = [
     {
@@ -17,8 +17,16 @@ const routes: Routes = [
         component: CachedAsyncServiceComponent
     },
     {
+        path: 'async/retry',
+        component: RetryWhenComponent
+    },
+    {
         path: 'async/autoRefresh',
         component: AutoRefreshComponent
+    },
+    {
+        path: 'async/interval',
+        component: IntervalComponent
     },
     {
         path: 'async/wrap',
