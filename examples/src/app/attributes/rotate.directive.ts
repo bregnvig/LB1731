@@ -20,10 +20,10 @@ export class RotateFlyover {
   private rotateText(deg: number) {
     this.el.nativeElement.style=`transform: rotate(${deg || 0}deg)`;
   }
-  @HostListener('mouseover') public rotate() {
+  @HostListener('mouseover')  rotate() {
     this.rotateText(180);
   }
-  @HostListener('mouseout') public reset() {
+  @HostListener('mouseout')  reset() {
     this.rotateText(0);
   }
 }
@@ -35,15 +35,15 @@ export class RotateFlyover2 {
 
   constructor(private el: ElementRef) { }
 
-  @Input('rotateFlyover2') public angle:number
+  @Input('rotateFlyover2')  angle:number
 
   private rotateText(deg: number) {
     this.el.nativeElement.style=`transform: rotate(${deg || 0}deg)`;
   }
-  @HostListener('mouseover') public rotate() {
+  @HostListener('mouseover')  rotate() {
     this.rotateText(this.angle);
   }
-  @HostListener('mouseout') public reset() {
+  @HostListener('mouseout')  reset() {
     this.rotateText(0);
   }
 }
@@ -56,16 +56,16 @@ export class RotateFlyover3 {
 
   constructor(private el: ElementRef) { }
 
-  @Input('rotateFlyover3') public angle:number
-  @Input() public defaultAngle:number = 0
+  @Input('rotateFlyover3')  angle:number
+  @Input()  defaultAngle:number = 0
 
   private rotateText(deg: number) {
     this.el.nativeElement.style=`transform: rotate(${deg}deg)`;
   }
-  @HostListener('mouseover') public rotate() {
+  @HostListener('mouseover')  rotate() {
     this.rotateText(this.angle || this.defaultAngle);
   }
-  @HostListener('mouseout') public reset() {
+  @HostListener('mouseout')  reset() {
     this.rotateText(0);
   }
 }
