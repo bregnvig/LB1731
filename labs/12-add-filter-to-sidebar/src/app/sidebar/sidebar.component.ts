@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscription = this.activatedRoute.params
       .map(params => params['id'])
       .filter(id => id)
-      .mergeMap(id => this.playgroundService.find(id))
+      .flatMap(id => this.playgroundService.find(id))
       .subscribe((playground: Playground) => setTimeout(() => this.playgroundSelected.emit(playground)));
   }
 
