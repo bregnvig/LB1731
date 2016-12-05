@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/publish';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TimerService {
 
-  private timerStream: Observable<Date>;
+  private timer$: Observable<Date>;
 
   constructor() {
-    this.timerStream = Observable
+    this.timer$ = Observable
       .create(observer => {
         const intervalId = window.setInterval(() => {
           console.log(new Date());
           observer.next(new Date())
-        } , 1000);
+        }, 1000);
         return () => {
           console.log('Stopping timer!');
           window.clearInterval(intervalId);
@@ -23,32 +22,22 @@ export class TimerService {
   }
 
   public get timer(): Observable<Date> {
-    return this.timerStream;
+    return this.timer$;
   }
 }
 
 @Injectable()
 export class SharedTimerService {
 
-  private timerStream: Observable<Date>;
+  private timer$: Observable<Date>;
 
   constructor() {
-    this.timerStream = Observable
-      .create(observer => {
-        const intervalId = window.setInterval(() => {
-          console.log('SharedTimer', new Date());
-          observer.next(new Date())
-        }, 1000);
-        return () => {
-          console.log('Stopping timer!');
-          window.clearInterval(intervalId);
-        }
-      })
+    this.timer$ = new TimerService().timer
       .publish()
       .refCount();
   }
 
   public get timer(): Observable<Date> {
-    return this.timerStream;
+    return this.timer$;
   }
 }
