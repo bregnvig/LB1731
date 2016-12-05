@@ -38,7 +38,7 @@ export class PlaygroundService {
       .map(response => {
         const opendata: IOpenData = response.json();
         return opendata.features.map(openPlayground => {
-          return {
+          return <Playground> {
             'id': openPlayground.id,
             'name': openPlayground.properties.navn,
             'addressDescription': openPlayground.properties.adressebeskrivelse,

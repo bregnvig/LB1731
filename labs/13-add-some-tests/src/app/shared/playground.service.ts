@@ -1,3 +1,4 @@
+import { Playground } from './../../../../08-create-location-service/src/app/shared/playground';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
@@ -39,7 +40,7 @@ export class PlaygroundService {
       .map(response => {
         const opendata: IOpenData = response.json();
         return opendata.features.map(openPlayground => {
-          return {
+          return <Playground> {
             'id': openPlayground.id,
             'name': openPlayground.properties.navn,
             'addressDescription': openPlayground.properties.adressebeskrivelse,
