@@ -1,4 +1,3 @@
-import { Playground } from './../../../../07-add-ajax-to-playground-service/src/app/shared/playground';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
