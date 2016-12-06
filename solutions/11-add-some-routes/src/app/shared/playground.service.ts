@@ -1,4 +1,3 @@
-import { Playground } from './../../../../08-create-location-service/src/app/shared/playground';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 

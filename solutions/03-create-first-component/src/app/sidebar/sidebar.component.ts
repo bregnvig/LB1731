@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Playground } from '../shared';
 import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
 
 @Component({
@@ -9,7 +10,7 @@ import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
 })
 export class SidebarComponent implements OnInit {
 
-  public playgrounds = MOCK_PLAYGROUNDS;
+  public playgrounds: Playground[] = MOCK_PLAYGROUNDS;
 
   constructor() { 
   }
