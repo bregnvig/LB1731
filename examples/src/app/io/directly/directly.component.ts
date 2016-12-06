@@ -13,8 +13,8 @@ export class DirectlyChildComponent {
 
 @Component({
   selector: 'app-directly',
-  templateUrl: 'directly.component.html',
-  styleUrls: ['directly.component.css'],
+  templateUrl: './directly.component.html',
+  styleUrls: ['./directly.component.css'],
 })
 export class DirectlyComponent implements OnInit {
 

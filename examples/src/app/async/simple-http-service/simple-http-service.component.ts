@@ -5,8 +5,8 @@ import { F1SimpleService } from '../f1.service';
 
 @Component({
   selector: 'app-simple-http-service',
-  templateUrl: 'simple-http-service.component.html',
-  styleUrls: ['simple-http-service.component.css'],
+  templateUrl: './simple-http-service.component.html',
+  styleUrls: ['./simple-http-service.component.css'],
   providers: [F1SimpleService]
 })
 export class SimpleHttpServiceComponent {

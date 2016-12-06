@@ -11,8 +11,8 @@ import { Marker, Center } from '../leaflet';
 
 @Component({
   selector: 'app-map.pane',
-  templateUrl: 'map.component.html',
-  styleUrls: ['map.component.css']
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
 

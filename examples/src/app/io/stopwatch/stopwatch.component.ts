@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-stopwatch',
   template: '{{seconds}}',
-  styleUrls: ['stopwatch.component.css']
+  styleUrls: ['./stopwatch.component.css']
 })
 export class StopwatchComponent implements OnInit {
 

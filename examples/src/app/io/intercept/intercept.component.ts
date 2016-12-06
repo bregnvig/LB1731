@@ -19,8 +19,8 @@ export class InterceptChildComponent {
 
 @Component({
   selector: 'app-intercept',
-  templateUrl: 'intercept.component.html',
-  styleUrls: ['intercept.component.css'],
+  templateUrl: './intercept.component.html',
+  styleUrls: ['./intercept.component.css'],
 })
 export class InterceptComponent implements OnInit {
 

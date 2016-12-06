@@ -20,8 +20,8 @@ export class IOEventChildComponent {
 
 @Component({
   selector: 'app-io-event',
-  templateUrl: 'event.component.html',
-  styleUrls: ['event.component.css']
+  templateUrl: './event.component.html',
+  styleUrls: ['./event.component.css']
 })
 export class IOEventComponent implements OnInit {
 

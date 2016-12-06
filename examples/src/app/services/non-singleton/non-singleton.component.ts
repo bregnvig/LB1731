@@ -22,8 +22,8 @@ export class StopwatchNonSingletonComponent {
 
 @Component({
   selector: 'app-non-singleton',
-  templateUrl: 'non-singleton.component.html',
-  styleUrls: ['non-singleton.component.css'],
+  templateUrl: './non-singleton.component.html',
+  styleUrls: ['./non-singleton.component.css'],
   providers: [StopwatchService]  
 })
 export class NonSingletonComponent {

@@ -5,8 +5,8 @@ import { F1AutoRefreshService } from '../f1.service';
 
 @Component({
   selector: 'app-auto-refresh',
-  templateUrl: 'auto-refresh.component.html',
-  styleUrls: ['auto-refresh.component.css']
+  templateUrl: './auto-refresh.component.html',
+  styleUrls: ['./auto-refresh.component.css']
 })
 export class AutoRefreshComponent {
 

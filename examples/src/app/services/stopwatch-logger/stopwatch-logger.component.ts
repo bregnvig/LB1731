@@ -7,8 +7,8 @@ import { StopwatchLoggerService } from '../stopwatch-logger.service';
 
 @Component({
   selector: 'app-stopwatch-logger',
-  templateUrl: 'stopwatch-logger.component.html',
-  styleUrls: ['stopwatch-logger.component.css'],
+  templateUrl: './stopwatch-logger.component.html',
+  styleUrls: ['./stopwatch-logger.component.css'],
   providers: [LoggerService, {
     provide: StopwatchService,
     useClass: StopwatchLoggerService

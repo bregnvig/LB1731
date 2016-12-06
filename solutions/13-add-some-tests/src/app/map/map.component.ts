@@ -12,8 +12,8 @@ import { Marker, Center } from '../leaflet';
 /* tslint:disable:component-selector-name */
 @Component({
   selector: 'app-map.pane',
-  templateUrl: 'map.component.html',
-  styleUrls: ['map.component.css']
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
 

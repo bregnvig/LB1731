@@ -4,8 +4,8 @@ import { StopwatchComponent } from '../stopwatch';
 
 @Component({
   selector: 'app-viewchild',
-  templateUrl: 'viewchild.component.html',
-  styleUrls: ['viewchild.component.css']
+  templateUrl: './viewchild.component.html',
+  styleUrls: ['./viewchild.component.css']
 })
 export class ViewchildComponent implements OnInit {
 

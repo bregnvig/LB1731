@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-route',
-  templateUrl: 'route.component.html',
-  styleUrls: ['route.component.css']
+  templateUrl: './route.component.html',
+  styleUrls: ['./route.component.css']
 })
 export class RouteComponent implements OnInit {
 

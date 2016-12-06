@@ -4,8 +4,8 @@ import { StopwatchComponent } from '../stopwatch';
 
 @Component({
   selector: 'app-view-children',
-  templateUrl: 'view-children.component.html',
-  styleUrls: ['view-children.component.css']
+  templateUrl: './view-children.component.html',
+  styleUrls: ['./view-children.component.css']
 })
 export class ViewChildrenComponent implements OnInit {
   @ViewChildren(StopwatchComponent) stopwatches: QueryList<StopwatchComponent>;
