@@ -1,9 +1,9 @@
 import { Coordinate } from './coordinate';
 
 export interface Playground {
-  id: string;
-  name: string;
-  addressDescription?: string;
-  description?: string;
-  position: Coordinate;
+  readonly id: string;
+  readonly name: string;
+  readonly addressDescription?: string;
+  readonly description?: string;
+  readonly position: Coordinate;
 }
