@@ -12,6 +12,11 @@
       <button class="btn btn-danger" (click)="reset()">Reset</button>
     </p>
 
+    <p *ngFor="let i of [0,2,3]">
+      Loop {{i}}
+      <app-stopwatch></app-stopwatch>  
+    </p>
+
     <app-stopwatch #stop1></app-stopwatch>
     <app-stopwatch #stop2></app-stopwatch>
     <app-stopwatch #stop3></app-stopwatch>

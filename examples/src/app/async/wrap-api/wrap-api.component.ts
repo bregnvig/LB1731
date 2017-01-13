@@ -20,7 +20,7 @@ export class WrapApiComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.stop();
+    this.stop();
   }
 
   public stop() {
