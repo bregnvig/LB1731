@@ -3,7 +3,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent }   from './app.component';
 
 import { SidebarComponent } from './sidebar';
-import { LeafletModule } from './leaflet/leaflet.module';
+import { LeafletModule } from './leaflet';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent],

@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 
 import { Playground, PlaygroundService } from '../shared';
 
@@ -7,8 +8,9 @@ import { Playground, PlaygroundService } from '../shared';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
 
+  private subscriptions: Subscription[] = [];
   public playgrounds: Playground[];
   @Output('playground-selected')
   public playgroundSelected = new EventEmitter<Playground>();
@@ -16,7 +18,13 @@ export class SidebarComponent implements OnInit {
   constructor(private playgroundService: PlaygroundService) { }
 
   public ngOnInit() {
-    this.playgroundService.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
+    this.subscriptions.push(
+      this.playgroundService.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds)
+    );
+  }
+
+  public ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   public selectedPlayground: Playground;

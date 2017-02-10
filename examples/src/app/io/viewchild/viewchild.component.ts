@@ -18,10 +18,12 @@ export class ViewchildComponent implements OnInit {
   }
 
   public start() {
+    console.log('Started!');
     this.stopwatch.start();
   }
 
   public stop() {
+    console.log('Stopped!');
     this.stopwatch.stop();
   }
 
