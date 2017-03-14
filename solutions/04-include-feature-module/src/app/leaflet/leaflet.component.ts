@@ -98,7 +98,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private addMarker(marker: Marker): L.Marker {
+  private addMarker(marker: Marker): LeafletMarker {
 
     this.removeMarker(marker.name);
     if (marker.hasPosition) {
