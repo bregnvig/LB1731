@@ -1,4 +1,5 @@
 #cp ./$2/$1 ./03-create-first-component/$1
+cp ./$2/$1 ../labs/03-create-first-component/$1
 cp ./$2/$1 ./04-include-feature-module/$1
 cp ./$2/$1 ./04-include-feature-module/$1
 cp ./$2/$1 ./05-create-footer-component/$1

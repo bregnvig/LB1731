@@ -19,8 +19,6 @@ export class ErrorComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    console.log('HERE?!');
-    
     const start: number = Date.now(); 
     this.zipcodeStream = this.http.get('http://404.com/asd.json')
       .catch(() => this.http.get('http://404.com/another.404'))

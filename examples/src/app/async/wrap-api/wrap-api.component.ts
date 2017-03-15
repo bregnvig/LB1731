@@ -10,13 +10,16 @@ import { TimerService } from '../timer.service';
   styleUrls: ['./wrap-api.component.css'],
   providers: [TimerService]
 })
-export class WrapApiComponent implements OnDestroy {
+export class WrapApiComponent implements OnDestroy, OnInit {
 
   public subscription:Subscription;
   public date: Date;
 
-  constructor(service: TimerService) {
-     this.subscription = service.timer.subscribe(date => this.date = date);
+  constructor(private service: TimerService) {
+  }
+
+  ngOnInit() {
+     this.subscription = this.service.timer.subscribe(date => this.date = date);
   }
 
   ngOnDestroy() {
