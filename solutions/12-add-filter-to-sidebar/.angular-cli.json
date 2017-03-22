@@ -38,6 +38,14 @@
       "config": "./protractor.conf.js"
     }
   },
+  "lint": [
+    {
+      "project": "src/tsconfig.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    }
+  ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"

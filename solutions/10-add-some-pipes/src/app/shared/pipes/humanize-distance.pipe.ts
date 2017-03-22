@@ -9,10 +9,9 @@ export class HumanizeDistancePipe implements PipeTransform {
     if (typeof value !== 'number') {
       return value;
     }
-    const distance: number = <number>value;
-    if (distance <= 750) {
-      return `${distance} m`;
-    } else if (distance <= 1500) {
+    if (value <= 750) {
+      return `${value} m`;
+    } else if (value <= 1500) {
       return 'Et stykke vej'
     } 
     return 'Ikke til fods!';
