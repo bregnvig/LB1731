@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SidebarComponent } from './sidebar.component';
-import { FakePlaygroundService } from '../app.component.spec';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from '../shared/pipes';
 import { MapComponent } from '../map';
 import { LocationService } from '../shared';
@@ -31,7 +30,7 @@ describe('Component: Sidebar', () => {
         DistancePipe,
         HumanizeDistancePipe,
       ],
-      providers: [FakePlaygroundService, fake, LocationService],
+      providers: [fake, LocationService],
     });
   });
 
