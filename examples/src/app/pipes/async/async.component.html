@@ -1,0 +1,10 @@
+<h1>Async pipe</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <ul>
+      <li *ngFor="let driver of drivers$ | async">
+        {{driver.givenName}} {{driver.familyName}}
+      </li>
+    </ul>
+  </div>
+</div>

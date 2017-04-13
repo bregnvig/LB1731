@@ -11,10 +11,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 })
 export class IOEventChildComponent {
-  @Output() public period = new EventEmitter<string>();
+  @Output() public interval = new EventEmitter<string>();
 
   public update(value: string) {
-    this.period.emit(value);
+    this.interval.emit(value);
   }
 }
 
@@ -25,15 +25,15 @@ export class IOEventChildComponent {
 })
 export class IOEventComponent implements OnInit {
 
-  public newsletterPeriod: string;
+  public newsletterInterval: string;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public updateNewsletterPeriod(period: string) {
-    this.newsletterPeriod = period;
+  public updateNewsletterInterval(interval: string) {
+    this.newsletterInterval = interval;
   }
 
 }

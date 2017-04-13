@@ -1,3 +1,4 @@
+import { AsyncComponent } from './async/async.component';
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'pipes/buildin',
         component: BuildInComponent
+    },
+    {
+        path: 'pipes/async',
+        component: AsyncComponent
     },
     {
         path: 'pipes/chaining',
