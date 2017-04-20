@@ -23,17 +23,8 @@ export class IOEventChildComponent {
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
-export class IOEventComponent implements OnInit {
+export class IOEventComponent {
 
-  public newsletterInterval: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  public updateNewsletterInterval(interval: string) {
-    this.newsletterInterval = interval;
-  }
+  public interval: string;
 
 }

@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DirectlyChildComponent {
   @Input() public value: string;
-  @Input('renamed-value') public value2: string;
+  @Input() public value2: string;
 
 }
 
