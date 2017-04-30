@@ -13,14 +13,14 @@ import 'rxjs/add/operator/finally';
 })
 export class ErrorComponent implements OnInit {
 
-  private zipcodeStream: Observable<any>
+  private zipcode$: Observable<any>
   private elapsed: number;
 
   constructor(private http: Http) { }
 
   ngOnInit() {
     const start: number = Date.now(); 
-    this.zipcodeStream = this.http.get('http://404.com/asd.json')
+    this.zipcode$ = this.http.get('http://404.com/asd.json')
       .catch(() => this.http.get('http://404.com/another.404'))
       .catch(() => this.http.get('https://dawa.aws.dk/postnumre'))
       .catch(() => Observable.throw('Fetch no data!!'))

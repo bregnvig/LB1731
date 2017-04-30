@@ -3,7 +3,7 @@
   <div class="pane fixed-size">
     <div>
         <ul>
-          <li *ngFor="let postNummer of zipcodeStream | async | slice:1:10">
+          <li *ngFor="let postNummer of zipcode$ | async">
             {{postNummer.nr}} - {{postNummer.navn}}
           </li>
         </ul>

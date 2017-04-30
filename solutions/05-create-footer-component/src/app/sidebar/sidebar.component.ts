@@ -11,13 +11,13 @@ import { Playground } from '../shared';
 export class SidebarComponent {
 
   public playgrounds: Playground[] = MOCK_PLAYGROUNDS;
-  @Output('playground-selected') public playgroundSelected = new EventEmitter<Playground>();
+  @Output() public selected = new EventEmitter<Playground>();
 
   public selectedPlayground: Playground;
 
   public selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
-    this.playgroundSelected.emit(playground);
+    this.selected.emit(playground);
   }
 
 }

@@ -9,6 +9,5 @@ import { Playground } from '../shared';
 })
 export class FooterComponent {
 
-  @Input()
-  public playground: Playground;
+  @Input() public playground: Playground;
 }
