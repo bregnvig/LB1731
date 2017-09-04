@@ -36,10 +36,12 @@ export class PlaygroundService {
 
   constructor(private http: Http) {
     this._requestStream = this.http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
-      .map(response => {
-        const opendata: IOpenData = response.json();
-        return opendata.features.map(openPlayground => {
-          return {
+      .map(response => response.json())
+      .map((opendata: IOpenData) => opendata.features)
+      .map(openPlaygrounds => openPlaygrounds.filter(openPlayground => !!openPlayground.geometry))
+      .map(openPlaygrounds => {
+        return openPlaygrounds.map(openPlayground => {
+          return <Playground> {
             'id': openPlayground.id,
             'name': openPlayground.properties.navn,
             'addressDescription': openPlayground.properties.adressebeskrivelse,
@@ -48,8 +50,8 @@ export class PlaygroundService {
               'lat': openPlayground.geometry.coordinates[0][1],
               'lng': openPlayground.geometry.coordinates[0][0]
             }
-          };
-        });
+          }
+        })
       })
       .publishLast()
       .refCount()

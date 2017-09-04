@@ -31,13 +31,15 @@ interface IOpenData {
 @Injectable()
 export class PlaygroundService {
 
-  private requestStream: Observable<Playground[]>;
+  private request$: Observable<Playground[]>;
 
   constructor(http: Http) {
-    this.requestStream = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
-      .map((response: Response) => {
-        const opendata: IOpenData = response.json();
-        return opendata.features.map(openPlayground => {
+    this.request$ = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
+      .map(response => response.json())
+      .map((opendata: IOpenData) => opendata.features)
+      .map(openPlaygrounds => openPlaygrounds.filter(openPlayground => !!openPlayground.geometry))
+      .map(openPlaygrounds => {
+        return openPlaygrounds.map(openPlayground => {
           return <Playground> {
             'id': openPlayground.id,
             'name': openPlayground.properties.navn,
@@ -57,6 +59,6 @@ export class PlaygroundService {
   }
 
   public getPlaygrounds(): Observable<Playground[]> {
-    return this.requestStream;
+    return this.request$;
   }
 }

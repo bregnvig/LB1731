@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   public playground: Playground;
 
   constructor(private locationService: LocationService) {
-  
   }
 
   ngOnInit() {

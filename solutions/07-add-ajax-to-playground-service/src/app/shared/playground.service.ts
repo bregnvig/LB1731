@@ -35,9 +35,11 @@ export class PlaygroundService {
 
   constructor(http: Http) {
     this.request$ = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
-      .map((response: Response) => {
-        const opendata: IOpenData = response.json();
-        return opendata.features.map(openPlayground => {
+      .map(response => response.json())
+      .map((opendata: IOpenData) => opendata.features)
+      .map(openPlaygrounds => openPlaygrounds.filter(openPlayground => !!openPlayground.geometry))
+      .map(openPlaygrounds => {
+        return openPlaygrounds.map(openPlayground => {
           return <Playground> {
             'id': openPlayground.id,
             'name': openPlayground.properties.navn,
