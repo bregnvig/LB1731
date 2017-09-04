@@ -2,14 +2,14 @@
 <div class="pane-container center-content">
   <div class="pane fixed-size">
     <div>
+        <p>
+          It took {{elapsed}} ms
+        </p>
         <ul>
           <li *ngFor="let postNummer of zipcode$ | async">
             {{postNummer.nr}} - {{postNummer.navn}}
           </li>
         </ul>
-        <p>
-          It took {{elapsed}} ms
-        </p>
     </div>
   </div>
 </div>

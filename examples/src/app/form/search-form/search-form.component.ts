@@ -21,8 +21,9 @@ export class SearchFormComponent implements OnInit {
     this.searchControl = new FormControl();
     this.searchControl2 = new FormControl();
     this.searchControl
-      .valueChanges
+      .valueChanges    
       .debounceTime(200)
+      .filter(value => value.length > 2)
       .distinctUntilChanged()
       .subscribe(param => console.log('Do something with this', param));
     this.searchControl2.valueChanges.subscribe(param => console.log('Do something with this 2', param));

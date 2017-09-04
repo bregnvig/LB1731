@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -9,7 +9,7 @@ import { SharedTimerService } from '../timer.service';
   templateUrl: './ref-count.component.html',
   styleUrls: ['./ref-count.component.css'],
 })
-export class RefCountComponent {
+export class RefCountComponent implements OnDestroy {
 
   public subscription1:Subscription;
   public date1: Date;
@@ -33,6 +33,15 @@ export class RefCountComponent {
 
   stop2() {
     this.subscription2.unsubscribe();
+  }
+
+  public ngOnDestroy() {
+  // if (this.subscription2) {
+  //     this.subscription2.unsubscribe();
+  //   }
+  //   if (this.subscription1) {
+  //     this.subscription1.unsubscribe();
+  //   }
   }
 
 }

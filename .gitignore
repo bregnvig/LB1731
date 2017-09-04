@@ -1,2 +1,5 @@
 yarn.lock
 examples/.vscode
+.DS_Store
+.editorconfig
+*.sh~
