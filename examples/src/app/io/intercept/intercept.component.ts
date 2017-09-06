@@ -5,15 +5,15 @@ import { Component, OnInit, Input } from '@angular/core';
   template: '<p>{{value}}</p>'
 })
 export class InterceptChildComponent {
-  public _value: string;
+  private _value: string;
 
   @Input()
-  public get value() {
-    return this._value;
-  }
-
   public set value(value: string) {
     this._value = value.toUpperCase();
+  }
+
+  public get value() {
+    return this._value;
   }
 }
 

@@ -3,7 +3,7 @@
   <div class="pane fixed-size">
     <ul>
       <li><span (click)="count()">Clicked {{counter}} times</span></li>
-      <li><input (keydown.enter)="down()" (keyup)="up()"><br>{{isDown ? 'Key is down' : 'Key is up!'}}</li>
+      <li><input (keydown.shift.enter)="down()" (keyup)="up()"><br>{{isDown ? 'Key is down' : 'Key is up!'}}</li>
     </ul>
   </div>
 </div>

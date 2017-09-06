@@ -1,6 +1,6 @@
+import { Person } from './../person';
 import { Component, OnInit } from '@angular/core';
 
-import { Person } from '../index';
 
 
 @Component({
@@ -23,6 +23,5 @@ export class PersonForm1Component implements OnInit {
 
   logValue(value:any) {
     console.log('Value', value);
-    
   }
 }

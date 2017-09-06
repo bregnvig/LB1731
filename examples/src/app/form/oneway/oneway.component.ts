@@ -1,5 +1,5 @@
+import { Person } from './../person';
 import { Component, OnInit } from '@angular/core';
-import { Person } from '../index';
 @Component({
   selector: 'app-oneway',
   templateUrl: './oneway.component.html',

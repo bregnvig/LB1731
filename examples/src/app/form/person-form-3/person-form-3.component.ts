@@ -1,6 +1,5 @@
+import { Person } from './../person';
 import { Component, OnInit } from '@angular/core';
-
-import { Person } from '../index';
 
 @Component({
   selector: 'app-person-form-3',

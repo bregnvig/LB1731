@@ -1,8 +1,7 @@
+import { Person } from './../person';
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { Person } from '../index';
 
 @Component({
   selector: 'app-person-form-7',
