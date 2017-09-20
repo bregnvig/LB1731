@@ -13,8 +13,8 @@ import 'rxjs/add/operator/finally';
 })
 export class ErrorComponent implements OnInit {
 
-  private zipcode$: Observable<any>
-  private elapsed: number;
+  public zipcode$: Observable<any>
+  public elapsed: number;
 
   constructor(private http: Http) { }
 

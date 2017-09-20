@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 
@@ -31,7 +31,8 @@ export class MapComponent implements OnInit {
     this.locationService.current.subscribe(location => {
       console.log('Obtained location', location)
     });
-    const playgroundSelected = this.sidebar.playgroundSelected.map(playground => new Marker('playground', playground.position.lat, playground.position.lng, playground.name));
+    const playgroundSelected: Observable<Marker> = this.sidebar.playgroundSelected
+      .map(playground => new Marker('playground', playground.position.lat, playground.position.lng, playground.name));
     this.markers = this.locationService.current
       .map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'))
       .merge(playgroundSelected);

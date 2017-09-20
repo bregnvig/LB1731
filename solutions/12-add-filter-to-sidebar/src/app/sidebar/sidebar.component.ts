@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Playground, PlaygroundService, LocationService } from '../shared';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
@@ -20,11 +20,11 @@ import 'rxjs/add/operator/startWith';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
 
-  public playgrounds: Playground[];
+  public playgrounds$: Observable<Playground[]>;
   @Output('playground-selected')
   public playgroundSelected = new EventEmitter<Playground>();
 
-  private filterControl: FormControl = new FormControl();
+  public filterControl: FormControl = new FormControl();
   private subscription: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private playgroundService: PlaygroundService, private locationService: LocationService) { }
@@ -37,19 +37,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .filter(id => id)
       .mergeMap(id => this.playgroundService.find(id))
       .subscribe((playground: Playground) => setTimeout(() => this.playgroundSelected.emit(playground)));
-    this.filterControl
+    this.playgrounds$ = this.filterControl
       .valueChanges
       .startWith('')
       .debounceTime(200)
       .distinctUntilChanged()
       .combineLatest(this.playgroundService.getPlaygrounds(), (text, playgrounds) => {
-        return playgrounds.filter(playground => playground.name.toLowerCase().indexOf(text.toLowerCase()) !== -1)
+        return playgrounds.filter(playground => playground.name.toLowerCase().includes(text.toLowerCase()))
       })
       .combineLatest(this.locationService.current, (playgrounds, location) => {
         const l = this.locationService;
         return playgrounds.sort((a, b) => l.getDistance(a.position, location) - l.getDistance(b.position, location))
-      })
-      .subscribe(playgrounds => this.playgrounds = playgrounds);
+      });
+      // .subscribe(playgrounds => this.playgrounds = playgrounds);
   }
 
   public ngOnDestroy() {

@@ -18,14 +18,10 @@ export class AppComponent implements OnInit {
 
 
   constructor(private locationService: LocationService) {
-  
   }
 
   ngOnInit() {
-    this.locationService.current.subscribe(location => {
-      this.center = new Center(location.lat, location.lng);
-      console.log('Obtained location', location)
-    });
+    this.locationService.current.subscribe(location => this.center = new Center(location.lat, location.lng));
     this.markers = this.locationService.current.map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'));    
   }
 
