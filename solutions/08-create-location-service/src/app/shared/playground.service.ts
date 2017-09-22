@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
@@ -20,7 +20,7 @@ export class PlaygroundService {
       .map(openDataPlaygrounds => openDataPlaygrounds.filter(openDataPlayground => !!openDataPlayground.geometry))
       .map(openDataPlaygrounds => {
         return openDataPlaygrounds.map(openDataPlayground => {
-          return <Playground> {
+          return <Playground>{
             'id': openDataPlayground.id,
             'name': openDataPlayground.properties.navn,
             'addressDescription': openDataPlayground.properties.adressebeskrivelse,
@@ -36,6 +36,8 @@ export class PlaygroundService {
         console.error('Unable to fetch playgrounds', error.statusText);
         return Observable.of([]);
       })
+      .publishLast()
+      .refCount();
   }
 
   public getPlaygrounds(): Observable<Playground[]> {

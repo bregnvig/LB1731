@@ -11,12 +11,19 @@ import { Playground } from '../playground';
 export class DistancePipe implements PipeTransform {
 
   private currentLocation: Coordinate;
+  private distance: number;
 
   constructor(private locationService: LocationService) {
-    this.locationService.current.subscribe(location => this.currentLocation = location);
+    this.locationService.current.subscribe(location => {
+      this.currentLocation = location;
+      this.distance = null;
+    });
   }
 
-  transform(value: Coordinate, args?: any): any {
+  public transform(value: Coordinate, args?: any): any {
+    if (this.distance) {
+      return this.distance;
+    }
     if (this.currentLocation) {
       return this.locationService.getDistance(this.currentLocation, value);
     }

@@ -1,6 +1,5 @@
+import { MapComponent } from './map/map.component';
 import { Routes, RouterModule } from '@angular/router';
-
-import { MapComponent } from './map';
 
 const routes: Routes = [
     {
@@ -8,13 +7,10 @@ const routes: Routes = [
         component: MapComponent
     },
     {
-        path: 'playground/:id',
+        path: ':id',
         component: MapComponent
-    },
-    {
-        path: '**',
-        redirectTo: ''
     }
-]
+];
 
 export const routing = RouterModule.forRoot(routes);
+

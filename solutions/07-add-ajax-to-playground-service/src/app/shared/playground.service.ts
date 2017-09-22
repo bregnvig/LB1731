@@ -36,6 +36,8 @@ export class PlaygroundService {
         console.error('Unable to fetch playgrounds', error.statusText);
         return Observable.of([]);
       })
+      .publishLast()
+      .refCount();
   }
 
   public getPlaygrounds(): Observable<Playground[]> {
