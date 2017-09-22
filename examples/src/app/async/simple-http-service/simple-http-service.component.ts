@@ -6,14 +6,15 @@ import { F1SimpleService } from '../f1.service';
 @Component({
   selector: 'app-simple-http-service',
   templateUrl: './simple-http-service.component.html',
-  styleUrls: ['./simple-http-service.component.css'],
-  providers: [F1SimpleService]
 })
-export class SimpleHttpServiceComponent {
+export class SimpleHttpServiceComponent implements OnInit {
 
   public drivers: Driver[];
 
-  constructor(service: F1SimpleService) {
-    service.getDrivers().subscribe(response => this.drivers = response.json().MRData.DriverTable.Drivers);
+  constructor(private service: F1SimpleService) {
+  }
+
+  public ngOnInit() {
+    this.service.getDrivers().subscribe(response => this.drivers = response.json().MRData.DriverTable.Drivers);
   }
 }

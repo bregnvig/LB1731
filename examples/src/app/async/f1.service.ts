@@ -21,6 +21,7 @@ export class F1BetterService {
   private request$: Observable<Driver[]>
 
   constructor(http: Http) {
+    // Cold observable
     this.request$ = http.get(`http://ergast.com/api/f1/2017/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
   }

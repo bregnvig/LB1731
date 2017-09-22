@@ -9,12 +9,16 @@ import { F1BetterService } from '../f1.service';
   styleUrls: ['./better-async-service.component.css'],
   providers: [F1BetterService]
 })
-export class BetterAsyncServiceComponent  {
+export class BetterAsyncServiceComponent implements OnInit  {
 
   public drivers: Driver[];
 
   constructor(private service: F1BetterService) {
-    service.getDrivers().subscribe(drivers => this.drivers = drivers);
+  }
+
+  public ngOnInit() {
+    // The subscribe call makes the stream hot!
+    this.service.getDrivers().subscribe(drivers => this.drivers = drivers);
   }
 
   public addSubscribtion() {
