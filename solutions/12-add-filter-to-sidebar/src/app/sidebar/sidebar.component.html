@@ -6,8 +6,8 @@
   </div>
   <div class="playgrounds-list">
     <div class="list-group">
-      <a class="list-group-item" *ngFor="let playground of playgrounds$ | async" [routerLink]="['/playground', playground.id]" routerLinkActive="active">
-        <span class="badge">{{playground.position | distance}}</span>
+      <a class="list-group-item" [class.active]="playground === selectedPlayground" *ngFor="let playground of filteredPlaygrounds | async" (click)="selectPlayground(playground)">
+        <span class="badge">{{playground.position | distance | humanizeDistance}}</span>
         <h4 class="list-group-item-heading">{{playground.name}}</h4>
         <p class="list-group-item-text">{{playground.description | defaultDescription}}</p>
       </a>

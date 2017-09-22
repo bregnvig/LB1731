@@ -1,46 +1,57 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/merge';
-
-
-import { SidebarComponent } from '../sidebar';
-import { Playground, LocationService  } from '../shared';
-import { Marker, Center } from '../leaflet';
+import { LocationService } from './../shared/location.service';
+import { PlaygroundService } from './../shared/playground.service';
+import { Observable } from 'rxjs';
+import { Center, Marker } from './../leaflet';
+import { Playground } from './../shared/playground';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-map.pane',
+  selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
 
+  public playgrounds$: Observable<Playground[]>;
   public playground: Playground;
-  public markers: Observable<Marker>;
   public center: Center = new Center(56.360029, 10.746635);
+  public markers$: Observable<Marker>;
 
-  @ViewChild(SidebarComponent)
-  private sidebar: SidebarComponent;
-
-  constructor(private locationService: LocationService) {
-
+  public constructor(
+    private service: PlaygroundService,
+    private locationService: LocationService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
-  ngOnInit() {
-    this.locationService.current.subscribe(location => {
-      console.log('Obtained location', location)
+  public ngOnInit() {
+    this.playgrounds$ = this.service.getPlaygrounds()
+      .merge(this.locationService.current.startWith(null), (playgrounds, location) => {
+        const l = this.locationService;
+        if (location) {
+          return playgrounds.sort((a, b) => l.getDistance(a.position, location) - l.getDistance(b.position, location));
+        }
+        return playgrounds;
+      });
+    const playground$ = this.route.params
+      .pluck<Params, string>('id')
+      .filter(id => !!id)
+      .switchMap(id => this.service.find(id))
+      .filter(playground => !!playground);
+
+    playground$.subscribe(playground => {
+      this.playground = playground;
+      this.center = new Center(playground.position.lat, playground.position.lng, 17);
     });
-    const playgroundSelected = this.sidebar.playgroundSelected.map(playground => new Marker('playground', playground.position.lat, playground.position.lng, playground.name));
-    this.markers = this.locationService.current
-      .map(coordinate => new Marker('me', coordinate.lat, coordinate.lng, 'Her er jeg'))
-      .merge(playgroundSelected);
-    
+    this.markers$ = this.locationService.current
+      .map(location => new Marker('me', location.lat, location.lng))
+      .merge(playground$.map(playground => new Marker('playground', playground.position.lat, playground.position.lng)));
   }
 
   public playgroundSelected(playground: Playground): void {
     this.playground = playground;
-    this.center = new Center(playground.position.lat, playground.position.lng, 17);
+    this.router.navigate(['/', playground.id]);
     console.log('Playground selected', playground);
   }
 
