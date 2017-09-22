@@ -1,4 +1,4 @@
-import { ModuleWithProviders }  from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { OrdersComponent, OrderComponent, RouteComponent, ConfirmGuardService, OrderResolveService } from './index';
@@ -6,12 +6,8 @@ import { OrdersComponent, OrderComponent, RouteComponent, ConfirmGuardService, O
 const routes: Routes = [
     {
         path: '',
-        component: RouteComponent,
+        component: OrdersComponent,
         children: [
-            {
-                path: '',
-                component: OrdersComponent,
-            },
             {
                 path: ':id',
                 component: OrderComponent

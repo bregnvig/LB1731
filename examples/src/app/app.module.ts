@@ -1,8 +1,8 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
-import { routing } from './app.routing';
+import { routing } from './app-routing.module';
 import { MenuComponent } from './menu';
 import { ComponentsModule } from './components/components.module';
 import { ServicesModule } from './services/services.module';
@@ -13,11 +13,22 @@ import { FormModule } from './form/form.module';
 import { UnittestModule } from './unittest/unittest.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
-import { MyRouteModule } from './route/route.module';
 
 @NgModule({
     declarations: [AppComponent, MenuComponent],
-    imports:      [BrowserModule, routing, ComponentsModule, ServicesModule, IOModule, AsyncModule, PipesModule, AttributesModule, StructuralModule, FormModule, UnittestModule],
-    bootstrap:    [AppComponent],
+    imports: [
+        BrowserModule,
+        routing,
+        ComponentsModule,
+        ServicesModule,
+        IOModule,
+        AsyncModule,
+        PipesModule,
+        AttributesModule,
+        StructuralModule,
+        FormModule,
+        UnittestModule
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

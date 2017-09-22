@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { routeRouting } from './route-routing.module';
 
-
-import { routeRouting } from './route.routing';
 import { RouteComponent, OrderComponent, OrdersComponent } from './index';
 
 
@@ -10,4 +9,4 @@ import { RouteComponent, OrderComponent, OrdersComponent } from './index';
     declarations: [RouteComponent, OrderComponent, OrdersComponent],
     imports: [CommonModule, routeRouting]
 })
-export class MyRouteModule { }
+export class RouteModule { }

@@ -8,8 +8,8 @@ const routes: Routes = [
         component: MenuComponent
     },
     {
-        path: 'route',
-        loadChildren: 'app/route/route.module#MyRouteModule'
+        path: 'orders',
+        loadChildren: 'app/route/route.module#RouteModule'
     },
     {
         path: '**',

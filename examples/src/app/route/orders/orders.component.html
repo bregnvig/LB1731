@@ -1,5 +1,11 @@
-<h3>
-  orders works!
-</h3>
+<h1>Routes & navigation</h1>
+<div class="pane-container center-content">
+  <div class="pane fixed-size">
+    <nav>
+        <button class="btn btn-default" *ngFor="let orderId of [1,2,3]" (click)="gotoOrder(orderId)">Order {{orderId}}</button>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
-<button class="btn btn-default" *ngFor="let orderId of [1,2,3]" (click)="gotoOrder(orderId)">Order {{orderId}}</button>
+
