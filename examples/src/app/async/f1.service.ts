@@ -11,7 +11,7 @@ export class F1SimpleService {
   constructor(private http: Http) { }
 
   public getDrivers(): Observable<Response> {
-    return this.http.get(`http://ergast.com/api/f1/2016/drivers.json`);
+    return this.http.get(`http://ergast.com/api/f1/2017/drivers.json`);
   }
 }
 
@@ -21,7 +21,7 @@ export class F1BetterService {
   private request$: Observable<Driver[]>
 
   constructor(http: Http) {
-    this.request$ = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
+    this.request$ = http.get(`http://ergast.com/api/f1/2017/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
   }
 
@@ -36,7 +36,7 @@ export class F1CachedService {
   private request$: Observable<Driver[]>
 
   constructor(http: Http) {
-    this.request$ = http.get(`http://ergast.com/api/f1/2016/drivers.json`)
+    this.request$ = http.get(`http://ergast.com/api/f1/2017/drivers.json`)
       .map(response => response.json().MRData.DriverTable.Drivers)
       .publishLast()
       .refCount();
@@ -55,7 +55,7 @@ export class F1AutoRefreshService {
   constructor(http: Http) {
     this.request$ = Observable.interval(10000)
     .startWith(null)
-    .flatMap(() => http.get(`http://ergast.com/api/f1/2016/drivers.json`))
+    .flatMap(() => http.get(`http://ergast.com/api/f1/2017/drivers.json`))
     .map(response => response.json().MRData.DriverTable.Drivers)
     .publishReplay(1)
     .refCount();
