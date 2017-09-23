@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DefaultDescriptionPipe implements PipeTransform {
 
   transform(value: string, args?: any): any {
-    return value ||  'Ingen beskrivelse';
+    return value || 'Ingen beskrivelse';
   }
 
 }

@@ -1,71 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/publishLast';
 
 import { Playground } from './playground';
-
-interface IOpenDataGeometry {
-  coordinates: [number[]];
-}
-
-interface IOpenDataProperties {
-  navn: string;
-  adressebeskrivelse: string;
-  beskrivelse: string;
-}
-
-interface IOpenDataPlayground {
-  id: string;
-  properties: IOpenDataProperties;
-  geometry: IOpenDataGeometry;
-}
-
-interface IOpenData {
-  features: IOpenDataPlayground[];
-}
 
 @Injectable()
 export class PlaygroundService {
 
-  private _requestStream: Observable<Playground[]>;
+  private request$: Observable<Playground[]>;
 
-  constructor(private http: Http) {
-    this._requestStream = this.http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
+  constructor(http: Http) {
+    this.request$ = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
       .map(response => response.json())
-      .map((opendata: IOpenData) => opendata.features)
-      .map(openPlaygrounds => openPlaygrounds.filter(openPlayground => !!openPlayground.geometry))
-      .map(openPlaygrounds => {
-        return openPlaygrounds.map(openPlayground => {
-          return <Playground> {
-            'id': openPlayground.id,
-            'name': openPlayground.properties.navn,
-            'addressDescription': openPlayground.properties.adressebeskrivelse,
-            'description': openPlayground.properties.beskrivelse,
+      .map(openData => openData.features)
+      .map(openDataPlaygrounds => openDataPlaygrounds.filter(openDataPlayground => !!openDataPlayground.geometry))
+      .map(openDataPlaygrounds => {
+        return openDataPlaygrounds.map(openDataPlayground => {
+          return <Playground>{
+            'id': openDataPlayground.id,
+            'name': openDataPlayground.properties.navn,
+            'addressDescription': openDataPlayground.properties.adressebeskrivelse,
+            'description': openDataPlayground.properties.beskrivelse,
             'position': {
-              'lat': openPlayground.geometry.coordinates[0][1],
-              'lng': openPlayground.geometry.coordinates[0][0]
+              'lat': openDataPlayground.geometry.coordinates[0][1],
+              'lng': openDataPlayground.geometry.coordinates[0][0]
             }
           }
         })
       })
-      .publishLast()
-      .refCount()
       .catch((error: Response) => {
         console.error('Unable to fetch playgrounds', error.statusText);
         return Observable.of([]);
-      });
+      })
+      .publishLast()
+      .refCount();
   }
 
   public getPlaygrounds(): Observable<Playground[]> {
-    return this._requestStream;
+    return this.request$;
   }
 
   public find(id: string): Observable<Playground> {
-    return this._requestStream.map(playgrounds => playgrounds.find(playground => playground.id === id));
+    return this.request$
+      .map(playgrounds => playgrounds.find(p => p.id === id));
   }
 }

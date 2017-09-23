@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Playground } from '../shared';
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -8,6 +9,5 @@ import { Playground } from '../shared';
 })
 export class FooterComponent {
 
-  @Input()
-  public playground: Playground;
+  @Input() public playground: Playground;
 }
