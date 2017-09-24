@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { OrdersComponent, OrderComponent, RouteComponent, ConfirmGuardService, OrderResolveService } from './index';
+import { OrdersComponent, OrderComponent, ConfirmGuardService, OrderResolveService } from './index';
 
 const routes: Routes = [
     {

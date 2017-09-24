@@ -1,11 +1,10 @@
+import { HelloWorldComponent } from './../unit-test/hello-world/hello-world.component';
 import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HelloWorldComponent } from './index';
-
 const routes: Routes = [
     {
-        path: 'unittest/component',
+        path: 'unit-test/hello-world',
         component: HelloWorldComponent
     }
 ];

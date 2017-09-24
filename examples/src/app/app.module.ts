@@ -10,7 +10,7 @@ import { IOModule } from './io/io.module';
 import { AsyncModule } from './async/async.module';
 import { PipesModule } from './pipes/pipes.module';
 import { FormModule } from './form/form.module';
-import { UnittestModule } from './unittest/unittest.module';
+import { UnitTestModule } from './unit-test/unit-test.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
 
@@ -27,7 +27,7 @@ import { StructuralModule } from './structural/structural.module';
         AttributesModule,
         StructuralModule,
         FormModule,
-        UnittestModule
+        UnitTestModule
     ],
     bootstrap: [AppComponent],
 })
