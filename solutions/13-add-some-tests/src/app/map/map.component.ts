@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
 
   public ngOnInit() {
     this.playgrounds$ = this.service.getPlaygrounds()
-      .merge(this.locationService.current.startWith(null), (playgrounds, location) => {
+      .combineLatest(this.locationService.current.startWith(null), (playgrounds, location) => {
         const l = this.locationService;
         if (location) {
           return playgrounds.sort((a, b) => l.getDistance(a.position, location) - l.getDistance(b.position, location));
