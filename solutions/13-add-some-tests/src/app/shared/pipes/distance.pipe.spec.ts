@@ -1,3 +1,4 @@
+import { Coordinate } from './../coordinate';
 import { LocationService } from './../location.service';
 import { Subject } from 'rxjs';
 /* tslint:disable:no-unused-variable */
@@ -8,12 +9,12 @@ import { DistancePipe } from './distance.pipe';
 describe('Pipe: Distance', () => {
     let pipe: DistancePipe;
     let locationService: LocationService;
-    const subject = new Subject();
     const position = {
         lat: 55.72098055865299,
         lng: 12.528431156384602
     };
-
+    
+    const subject = new Subject<Coordinate>();
     const locationServiceFactory = () => {
         return {
             current: subject,
