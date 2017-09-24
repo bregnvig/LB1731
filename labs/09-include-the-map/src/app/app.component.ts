@@ -1,22 +1,26 @@
+import { LocationService } from './shared/location.service';
+import { PlaygroundService } from './shared/playground.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Playground, LocationService  } from './shared';
-
+import { Playground } from './shared';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
 
+  public title = 'app works!';
+  public playgrounds: Playground[];
   public playground: Playground;
 
-  constructor(private locationService: LocationService) {
+  public constructor(private service: PlaygroundService, private locationService: LocationService) {
+
   }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
     this.locationService.current.subscribe(location => {
       console.log('Obtained location', location)
     });
@@ -26,5 +30,4 @@ export class AppComponent implements OnInit {
     this.playground = playground;
     console.log('Playground selected', playground);
   }
-
 }

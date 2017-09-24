@@ -1,11 +1,11 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
+import { PlaygroundService } from './shared/playground.service';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
 import { LeafletModule } from './leaflet';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
-import { PlaygroundService } from './shared';
 
 @NgModule({
     declarations: [AppComponent, SidebarComponent, FooterComponent],
@@ -13,4 +13,6 @@ import { PlaygroundService } from './shared';
     providers: [PlaygroundService],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+
+}
