@@ -25,9 +25,8 @@ export class SidebarComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .map(searchTerm => searchTerm.toLowerCase())
-      .combineLatest(this.playgrounds$, (searchTerm, playgrounds) => {
-        return playgrounds.filter(playground => playground.name.toLowerCase().includes(searchTerm))
-      });
+      .combineLatest(this.playgrounds$, (searchTerm, playgrounds) =>
+        playgrounds.filter(playground => playground.name.toLowerCase().includes(searchTerm)));
   }
 
   public selectPlayground(playground: Playground): void {
