@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -22,7 +22,7 @@ import { RetryWhenComponent } from './retry-when/retry-when.component';
 import { RetryService } from './retry.service';
 
 @NgModule({
-    imports: [CommonModule, HttpModule, FormsModule, asyncRouting],
+    imports: [CommonModule, HttpClientModule, FormsModule, asyncRouting],
     declarations: [
         SimpleHttpServiceComponent,
         BetterAsyncServiceComponent,

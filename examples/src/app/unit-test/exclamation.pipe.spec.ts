@@ -5,9 +5,9 @@ describe('ExclamationPipe', () => {
   let pipe: ExclamationPipe;
 
   beforeEach(() => {
-    pipe = pipe = new ExclamationPipe();
+    pipe = new ExclamationPipe();
   })
-  it('create an instance', () => {
+  it('should create an instance', () => {
     expect(pipe).toBeTruthy();
   });
   it('should return a input + !', () => {

@@ -20,12 +20,12 @@ export class DistancePipe implements PipeTransform {
     });
   }
 
-  public transform(value: Coordinate, args?: any): any {
+  public transform(value: Coordinate): number | string {
     if (this.distance) {
       return this.distance;
     }
     if (this.currentLocation) {
-      return this.locationService.getDistance(this.currentLocation, value);
+      return this.distance = this.locationService.getDistance(this.currentLocation, value);
     }
     return 'Ukendt';
   }

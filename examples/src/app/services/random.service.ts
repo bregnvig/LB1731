@@ -3,6 +3,8 @@ import { Injectable, InjectionToken } from '@angular/core';
 
 export const RANDOM_FACTORY = new InjectionToken<RandomService>('RandomFactory');
 
+export const factoryMethod = () => () => new RandomService();
+
 @Injectable()
 export class RandomService {
 

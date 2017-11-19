@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+
 
 import { Driver } from './driver';
+import {HttpClient} from '@angular/common/http';
+
 
 
 @Injectable()
 export class F1SimpleService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  public getDrivers(): Observable<Response> {
+  public getDrivers(): Observable<any> {
     return this.http.get(`http://ergast.com/api/f1/2017/drivers.json`);
   }
 }
@@ -18,12 +20,12 @@ export class F1SimpleService {
 @Injectable()
 export class F1BetterService {
 
-  private request$: Observable<Driver[]>
+  private request$: Observable<Driver[]>;
 
-  constructor(http: Http) {
+  constructor(http: HttpClient) {
     // Cold observable
-    this.request$ = http.get(`http://ergast.com/api/f1/2017/drivers.json`)
-      .map(response => response.json().MRData.DriverTable.Drivers)
+    this.request$ = http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`)
+      .map(response => response.MRData.DriverTable.Drivers)
   }
 
   public getDrivers(): Observable<Driver[]> {
@@ -36,9 +38,8 @@ export class F1CachedService {
 
   private request$: Observable<Driver[]>
 
-  constructor(http: Http) {
-    this.request$ = http.get(`http://ergast.com/api/f1/2017/drivers.json`)
-      .map(response => response.json().MRData.DriverTable.Drivers)
+  constructor(service: F1BetterService) {
+    this.request$ = service.getDrivers()
       .publishLast()
       .refCount();
   }
@@ -51,13 +52,13 @@ export class F1CachedService {
 @Injectable()
 export class F1AutoRefreshService {
 
-  private request$: Observable<Driver[]>
+  private request$: Observable<Driver[]>;
 
-  constructor(http: Http) {
+  constructor(http: HttpClient) {
     this.request$ = Observable.interval(10000)
     .startWith(null)
-    .flatMap(() => http.get(`http://ergast.com/api/f1/2017/drivers.json`))
-    .map(response => response.json().MRData.DriverTable.Drivers)
+    .flatMap(() => http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`))
+    .map(response => response.MRData.DriverTable.Drivers)
     .publishReplay(1)
     .refCount();
   }

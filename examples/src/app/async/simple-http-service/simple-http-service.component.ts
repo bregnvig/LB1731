@@ -15,6 +15,6 @@ export class SimpleHttpServiceComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.service.getDrivers().subscribe(response => this.drivers = response.json().MRData.DriverTable.Drivers);
+    this.service.getDrivers().subscribe(response => this.drivers = response.MRData.DriverTable.Drivers);
   }
 }
