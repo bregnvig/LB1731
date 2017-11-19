@@ -8,6 +8,8 @@ import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
 import { HttpModule } from '@angular/http';
 
+import 'rxjs/Rx';
+
 @NgModule({
     declarations: [AppComponent, SidebarComponent, FooterComponent],
     imports: [BrowserModule, LeafletModule, HttpModule],

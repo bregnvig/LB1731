@@ -4,6 +4,8 @@ import { AppComponent }   from './app.component';
 
 import { SidebarComponent } from './sidebar';
 
+import 'rxjs/Rx';
+
 @NgModule({
     declarations: [AppComponent, SidebarComponent],
     imports:      [BrowserModule],

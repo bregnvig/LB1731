@@ -14,6 +14,8 @@ import { HttpModule } from '@angular/http';
 import { MapComponent } from './map/map.component';
 import { routing } from './app-routing.module';
 
+import 'rxjs/Rx';
+
 @NgModule({
     declarations: [
         AppComponent,
