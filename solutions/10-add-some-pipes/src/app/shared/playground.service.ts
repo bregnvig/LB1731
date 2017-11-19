@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,9 +13,8 @@ export class PlaygroundService {
 
   private request$: Observable<Playground[]>;
 
-  constructor(http: Http) {
-    this.request$ = http.get('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
-      .map(response => response.json())
+  constructor(http: HttpClient) {
+    this.request$ = http.get<any>('http://data.kk.dk/dataset/legepladser/resource/79d60521-5748-4287-a875-6d0e23fac31e/proxy')
       .map(openData => openData.features)
       .map(openDataPlaygrounds => openDataPlaygrounds.filter(openDataPlayground => !!openDataPlayground.geometry))
       .map(openDataPlaygrounds => {
