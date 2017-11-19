@@ -11,9 +11,11 @@ import { AppComponent } from './app.component';
 import { LeafletModule } from './leaflet';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
 import { routing } from './app-routing.module';
+
+import 'rxjs/Rx';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,7 @@ import { routing } from './app-routing.module';
     imports: [
         BrowserModule,
         LeafletModule,
-        HttpModule,
+        HttpClientModule,
         ReactiveFormsModule,
         routing,
     ],

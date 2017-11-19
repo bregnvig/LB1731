@@ -10,7 +10,9 @@ import { AppComponent } from './app.component';
 import { LeafletModule } from './leaflet';
 import { SidebarComponent } from './sidebar';
 import { FooterComponent } from './footer';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
+import 'rxjs/Rx';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,7 @@ import { HttpModule } from '@angular/http';
     imports: [
         BrowserModule,
         LeafletModule,
-        HttpModule
+        HttpClientModule
     ],
     providers: [
         PlaygroundService,

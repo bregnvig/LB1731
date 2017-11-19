@@ -97,6 +97,7 @@ footer {
     color: #FFF;
     padding-left: 8px;
     background-color:rgba(0, 0, 0, 0.5);
+    z-index: 10000;
 }
 
 
