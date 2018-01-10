@@ -38,8 +38,8 @@ export class MapComponent implements OnInit {
       this.center = new Center(playground.position.lat, playground.position.lng, 17);
     });
     this.markers$ = this.locationService.current
-    .map(location => new Marker('me', location.lat, location.lng))
-    .merge(playground$.map(p => new Marker('playground', p.position.lat, p.position.lng)));
+      .map(location => new Marker('me', location.lat, location.lng))
+      .merge(playground$.map(p => new Marker('playground', p.position.lat, p.position.lng)));
   }
 
   public playgroundSelected(playground: Playground): void {
