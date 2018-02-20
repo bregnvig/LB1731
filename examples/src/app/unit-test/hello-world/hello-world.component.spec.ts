@@ -63,6 +63,7 @@ describe('HelloWorldComponent', () => {
     service.user.name = 'Flemming Bregnvig';
     fixture.detectChanges();
     expect(element.textContent).toContain('Welcome Flemming Bregnvig');
+    expect(element.textContent).not.toContain('Welcome stranger');
   });
 
   it('should navigate to the register page when the user clicks register', () => {

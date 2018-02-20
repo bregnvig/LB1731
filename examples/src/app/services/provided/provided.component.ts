@@ -5,11 +5,7 @@ import { RandomService } from 'app/services/random.service';
   selector: 'app-provided',
   template: '{{service.random}}'
 })
-export class ProvidedComponent implements OnInit {
+export class ProvidedComponent {
 
   constructor(public service: RandomService) { }
-
-  public ngOnInit() {
-  }
-
 }
