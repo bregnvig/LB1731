@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
 
   public orderNo: number;
   public exact = false;
@@ -23,13 +23,17 @@ export class OrderComponent implements OnInit {
     console.log('Order constructed');
   }
 
+  public ngOnDestroy() {
+    console.log('Component destroyed', this.orderNo);
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((data: {id: number}) => {
       console.log(data);
       this.orderNo = data.id
     });
     this.activatedRoute.queryParams.subscribe((data: any) => {
-      console.log('Query params', data);
+      // console.log('Query params', data);
 
     });
     // this.orderNo = this.activatedRoute.snapshot.params['id'];

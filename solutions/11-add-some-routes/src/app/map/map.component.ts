@@ -31,8 +31,9 @@ export class MapComponent implements OnInit {
       .pluck<Params, string>('id')
       .filter(id => !!id)
       .switchMap(id => this.service.find(id))
-      .filter(playground => !!playground);
-
+      .filter(playground => !!playground)
+      .share();
+      
     playground$.subscribe(playground => {
       this.playground = playground;
       this.center = new Center(playground.position.lat, playground.position.lng, 17);
@@ -43,8 +44,8 @@ export class MapComponent implements OnInit {
   }
 
   public playgroundSelected(playground: Playground): void {
-    this.playground = playground;
-    this.router.navigate(['/', playground.id]);
+    // this.playground = playground;
+    this.router.navigate([playground.id]);
     console.log('Playground selected', playground);
   }
 
