@@ -1,5 +1,5 @@
 import { Driver } from './../../async/driver';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { F1BetterService } from './../../async/f1.service';
 import { Component, OnInit } from '@angular/core';
 

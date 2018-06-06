@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
+import { debounceTime, filter, distinctUntilChanged } from 'rxjs/operators';
 
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+
+
 
 @Component({
   selector: 'app-search-form',
@@ -21,10 +22,12 @@ export class SearchFormComponent implements OnInit {
     this.searchControl = new FormControl();
     this.searchControl2 = new FormControl();
     this.searchControl
-      .valueChanges    
-      .debounceTime(200)
-      .filter(value => value.length > 2)
-      .distinctUntilChanged()
+      .valueChanges.pipe(
+        debounceTime(200),
+        filter((value: string) => value.length > 2),
+        distinctUntilChanged()
+
+      )
       .subscribe(param => console.log('Do something with this', param));
     this.searchControl2.valueChanges.subscribe(param => console.log('Do something with this 2', param));
   }

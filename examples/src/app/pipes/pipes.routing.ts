@@ -6,27 +6,27 @@ import { BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, Tod
 
 const routes: Routes = [
     {
-        path: 'pipes/today',
+        path: 'today',
         component: TodayComponent
     },
     {
-        path: 'pipes/buildin',
+        path: 'buildin',
         component: BuildInComponent
     },
     {
-        path: 'pipes/async',
+        path: 'async',
         component: AsyncComponent
     },
     {
-        path: 'pipes/chaining',
+        path: 'chaining',
         component: ChainingComponent
     },
     {
-        path: 'pipes/phone',
+        path: 'phone',
         component: PhoneComponent
     },
     {
-        path: 'pipes/pure',
+        path: 'pure',
         component: PureComponent
     }
 ]

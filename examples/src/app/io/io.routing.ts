@@ -5,27 +5,27 @@ import { DirectlyComponent, IOEventComponent, InterceptComponent, LocalComponent
 
 const routes: Routes = [
     {
-        path: 'io/directly',
+        path: 'directly',
         component: DirectlyComponent
     },
     {
-        path: 'io/intercept',
+        path: 'intercept',
         component: InterceptComponent
     },
     {
-        path: 'io/event',
+        path: 'event',
         component: IOEventComponent
     },
     {
-        path: 'io/local',
+        path: 'local',
         component: LocalComponent
     },
     {
-        path: 'io/viewchild',
+        path: 'viewchild',
         component: ViewchildComponent
     },
     {
-        path: 'io/viewchildren',
+        path: 'viewchildren',
         component: ViewChildrenComponent
     }
 ]

@@ -4,12 +4,6 @@ import { AppComponent } from './app.component';
 
 import { routing } from './app-routing.module';
 import { MenuComponent } from './menu';
-import { ComponentsModule } from './components/components.module';
-import { ServicesModule } from './services/services.module';
-import { IOModule } from './io/io.module';
-import { AsyncModule } from './async/async.module';
-import { PipesModule } from './pipes/pipes.module';
-import { FormModule } from './form/form.module';
 import { UnitTestModule } from './unit-test/unit-test.module';
 import { AttributesModule } from './attributes/attributes.module';
 import { StructuralModule } from './structural/structural.module';
@@ -19,14 +13,8 @@ import { StructuralModule } from './structural/structural.module';
     imports: [
         BrowserModule,
         routing,
-        ComponentsModule,
-        ServicesModule,
-        IOModule,
-        AsyncModule,
-        PipesModule,
         AttributesModule,
         StructuralModule,
-        FormModule,
         UnitTestModule
     ],
     bootstrap: [AppComponent],

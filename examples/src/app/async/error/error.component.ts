@@ -1,10 +1,12 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {finalize, catchError} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
+
+
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -21,11 +23,12 @@ export class ErrorComponent implements OnInit {
 
   public ngOnInit() {
     const start: number = Date.now();
-    this.zipCodes$ = this.http.get<any>('http://404.com/asd.json')
-      .catch(() => this.http.get<any>('http://404.com/another.404'))
-      .catch(() => this.http.get<any>('https://dawa.aws.dk/postnumre'))
-      .catch(() => Observable.throw('No data!!'))
-      .finally(() => this.elapsed = Date.now() - start);
+    this.zipCodes$ = this.http.get<any>('http://404.com/asd.json').pipe(
+      catchError(() => this.http.get<any>('http://404.com/another.404')),
+      catchError(() => this.http.get<any>('https://dawa.aws.dk/postnumre')),
+      catchError(() => observableThrowError('No data!!')),
+      finalize(() => this.elapsed = Date.now() - start),
+    );
   }
 
 }

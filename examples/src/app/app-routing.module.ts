@@ -8,8 +8,32 @@ const routes: Routes = [
         component: MenuComponent
     },
     {
+        path: 'components',
+        loadChildren: 'app/components/components.module#ComponentsModule'
+    },
+    {
+        path: 'io',
+        loadChildren: 'app/io/io.module#IOModule'
+    },
+    {
+        path: 'services',
+        loadChildren: 'app/services/services.module#ServicesModule'
+    },
+    {
+        path: 'async',
+        loadChildren: 'app/async/async.module#AsyncModule'
+    },
+    {
+        path: 'pipes',
+        loadChildren: 'app/pipes/pipes.module#PipesModule'
+    },
+    {
         path: 'orders',
         loadChildren: 'app/route/route.module#RouteModule'
+    },
+    {
+        path: 'form',
+        loadChildren: 'app/form/form.module#FormModule'
     },
     {
         path: '**',

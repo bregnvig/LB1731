@@ -10,15 +10,15 @@ import { FactoryProvidedParentComponent } from 'app/services/factory-provided-pa
 
 const routes: Routes = [
     {
-        path: 'services/no-provider',
+        path: 'no-provider',
         component: NonProvidedComponent
     },
     {
-        path: 'services/provided',
+        path: 'provided',
         component: ProvidedParentComponent
     },
     {
-        path: 'services/factory',
+        path: 'factory',
         component: FactoryProvidedParentComponent
     }
 ]
