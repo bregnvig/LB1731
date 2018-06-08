@@ -3,7 +3,8 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
 import { Playground } from '../shared';
 import { FormControl } from '@angular/forms';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { startWith, debounceTime, distinctUntilChanged, map, combineLatest } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,13 +21,14 @@ export class SidebarComponent implements OnInit {
   public filterControl: FormControl = new FormControl();
 
   public ngOnInit() {
-    this.filteredPlaygrounds$ = this.filterControl.valueChanges
-      .startWith('')
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .map(searchTerm => searchTerm.toLowerCase())
-      .combineLatest(this.playgrounds$, (searchTerm, playgrounds) =>
-        playgrounds.filter(playground => playground.name.toLowerCase().includes(searchTerm)));
+    this.filteredPlaygrounds$ = this.filterControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(searchTerm => searchTerm.toLowerCase()),
+      combineLatest(this.playgrounds$, (searchTerm, playgrounds) =>
+        playgrounds.filter(playground => playground.name.toLowerCase().includes(searchTerm)))
+    );
   }
 
   public selectPlayground(playground: Playground): void {

@@ -5,6 +5,7 @@ import { PlaygroundService } from './shared/playground.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Playground } from './shared';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +28,9 @@ export class AppComponent implements OnInit {
     this.locationService.current.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
-    this.markers$ = this.locationService.current
-      .map(location => new Marker('me', location.lat, location.lng));
+    this.markers$ = this.locationService.current.pipe(
+      map(location => new Marker('me', location.lat, location.lng))
+    );
   }
 
   public playgroundSelected(playground: Playground): void {

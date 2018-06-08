@@ -73,7 +73,7 @@ undefined {
     top: 20px;
     max-height: calc(100vh - 40px);
     background-color: #ffffff;
-    width: 250px;
+    width: 350px;
     border-radius: 6px;
     box-shadow: 2px 2px 2px #808080;
     overflow: auto;
