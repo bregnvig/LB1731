@@ -1,5 +1,8 @@
+
+import {interval as observableInterval,  Observable } from 'rxjs';
+
+import {publishReplay, mergeMap, startWith, map, publishLast, refCount} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 
 import { Driver } from './driver';
@@ -24,8 +27,9 @@ export class F1BetterService {
 
   constructor(http: HttpClient) {
     // Cold observable
-    this.request$ = http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`)
-      .map(response => response.MRData.DriverTable.Drivers)
+    this.request$ = http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`).pipe(
+      map(response => response.MRData.DriverTable.Drivers)
+    )
   }
 
   public getDrivers(): Observable<Driver[]> {
@@ -39,9 +43,10 @@ export class F1CachedService {
   private request$: Observable<Driver[]>
 
   constructor(service: F1BetterService) {
-    this.request$ = service.getDrivers()
-      .publishLast()
-      .refCount();
+    this.request$ = service.getDrivers().pipe(
+      publishLast(),
+      refCount(),
+    );
   }
 
   public getDrivers(): Observable<Driver[]> {
@@ -55,12 +60,13 @@ export class F1AutoRefreshService {
   private request$: Observable<Driver[]>;
 
   constructor(http: HttpClient) {
-    this.request$ = Observable.interval(10000)
-    .startWith(null)
-    .flatMap(() => http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`))
-    .map(response => response.MRData.DriverTable.Drivers)
-    .publishReplay(1)
-    .refCount();
+    this.request$ = observableInterval(10000).pipe(
+      startWith(null),
+      mergeMap(() => http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`)),
+      map(response => response.MRData.DriverTable.Drivers),
+      publishReplay(1),
+      refCount(),
+    );
   }
 
   public getDrivers(): Observable<Driver[]> {

@@ -5,39 +5,39 @@ import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncSer
 
 const routes: Routes = [
     {
-        path: 'async/simple',
+        path: 'simple',
         component: SimpleHttpServiceComponent
     },
     {
-        path: 'async/better',
+        path: 'better',
         component: BetterAsyncServiceComponent
     },
     {
-        path: 'async/cached',
+        path: 'cached',
         component: CachedAsyncServiceComponent
     },
     {
-        path: 'async/retry',
+        path: 'retry',
         component: RetryWhenComponent
     },
     {
-        path: 'async/autoRefresh',
+        path: 'autoRefresh',
         component: AutoRefreshComponent
     },
     {
-        path: 'async/interval',
+        path: 'interval',
         component: IntervalComponent
     },
     {
-        path: 'async/wrap',
+        path: 'wrap',
         component: WrapApiComponent
     },
     {
-        path: 'async/refCount',
+        path: 'refCount',
         component: RefCountComponent
     },
     {
-        path: 'async/error',
+        path: 'error',
         component: ErrorComponent
     }
 ]

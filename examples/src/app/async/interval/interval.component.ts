@@ -1,5 +1,8 @@
+
+import {interval as observableInterval,  Observable } from 'rxjs';
+
+import {take} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-interval',
   templateUrl: './interval.component.html',
@@ -12,7 +15,7 @@ export class IntervalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.number$ = Observable.interval(1000).take(10);
+    this.number$ = observableInterval(1000).pipe(take(10));
   }
 
 }

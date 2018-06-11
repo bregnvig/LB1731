@@ -1,7 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {Driver} from "./driver";
-import {F1BetterService} from "./f1.service";
+
+import {throwError as observableThrowError, fromEvent as observableFromEvent, Observable} from 'rxjs';
+
+import {retryWhen} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Driver} from './driver';
+import {F1BetterService} from './f1.service';
 
 @Injectable()
 export class RetryService {
@@ -9,12 +12,13 @@ export class RetryService {
   public readonly drivers$: Observable<Driver[]>;
 
   constructor(service: F1BetterService) {
-    this.drivers$ = service.getDrivers()
-      .retryWhen(err => {
+    this.drivers$ = service.getDrivers().pipe(
+      retryWhen(err => {
         if (!window.navigator.onLine) {
-          return Observable.fromEvent(window, 'online');
+          return observableFromEvent(window, 'online');
         }
-        return Observable.throw('Could not fetch drivers');
+        return observableThrowError('Could not fetch drivers');
       })
+    )
   }
 }

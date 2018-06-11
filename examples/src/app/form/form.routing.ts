@@ -5,39 +5,39 @@ import { PersonForm1Component, PersonForm2Component, PersonForm3Component, Perso
 
 const routes: Routes = [
     {
-        path: 'form/person1',
+        path: 'person1',
         component: PersonForm1Component
     },
     {
-        path: 'form/oneway',
+        path: 'oneway',
         component: OnewayComponent
     },
     {
-        path: 'form/person2',
+        path: 'person2',
         component: PersonForm2Component
     },
     {
-        path: 'form/person3',
+        path: 'person3',
         component: PersonForm3Component
     },
     {
-        path: 'form/person4',
+        path: 'person4',
         component: PersonForm4Component
     },
     {
-        path: 'form/person5',
+        path: 'person5',
         component: PersonForm5Component
     },
     {
-        path: 'form/person6',
+        path: 'person6',
         component: PersonForm6Component
     },
     {
-        path: 'form/person7',
+        path: 'person7',
         component: PersonForm7Component
     },
     {
-        path: 'form/search',
+        path: 'search',
         component: SearchFormComponent
     }
 ]

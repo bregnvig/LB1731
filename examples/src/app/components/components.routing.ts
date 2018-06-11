@@ -5,35 +5,35 @@ import { EventComponent, HelloComponent, InnerComponent, InterpolationComponent,
 
 const routes: Routes = [
     {
-        path: 'components/hello',
+        path: 'hello',
         component: HelloComponent
     },
     {
-        path: 'components/outer',
+        path: 'outer',
         component: OuterComponent
     },
     {
-        path: 'components/interpolation',
+        path: 'interpolation',
         component: InterpolationComponent
     },
     {
-        path: 'components/property',
+        path: 'property',
         component: PropertyComponent
     },
     {
-        path: 'components/event',
+        path: 'event',
         component: EventComponent
     },
     {
-        path: 'components/twoway',
+        path: 'twoway',
         component: TwowayComponent
     },
     {
-        path: 'components/ng-if',
+        path: 'ng-if',
         component: NgifComponent
     },
     {
-        path: 'components/ng-for',
+        path: 'ng-for',
         component: NgforComponent
     }
 ];

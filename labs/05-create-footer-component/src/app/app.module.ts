@@ -5,8 +5,6 @@ import { AppComponent }   from './app.component';
 import { SidebarComponent } from './sidebar';
 import { LeafletModule } from './leaflet';
 
-import 'rxjs/Rx';
-
 @NgModule({
     declarations: [AppComponent, SidebarComponent],
     imports:      [BrowserModule, LeafletModule],
