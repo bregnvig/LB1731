@@ -68,18 +68,18 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
+            "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/css/app.less",
               "node_modules/bootstrap-css-only/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
+            "scripts": [],
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/assets"
             ]
           }
         },

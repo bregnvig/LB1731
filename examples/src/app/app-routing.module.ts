@@ -2,10 +2,15 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule }  from '@angular/router';
 
 import { MenuComponent } from './menu';
+import { CounterComponent } from './shared/counter/counter.component';
 const routes: Routes = [
     {
         path: 'menu',
         component: MenuComponent
+    },
+    {
+        path: 'counter',
+        component: CounterComponent
     },
     {
         path: 'components',

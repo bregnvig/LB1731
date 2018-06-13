@@ -14,7 +14,9 @@ export class StopwatchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
+
   ngOnDestroy() {
+    console.log('Destroyed');
     this.stop();
   }
 
