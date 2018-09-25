@@ -7,7 +7,6 @@ cp ./03-create-first-component/$1 ./09-include-the-map/$1
 cp ./03-create-first-component/$1 ./10-add-some-pipes/$1
 cp ./03-create-first-component/$1 ./11-add-some-routes/$1
 cp ./03-create-first-component/$1 ./12-add-filter-to-sidebar/$1
-cp ./03-create-first-component/$1 ./13-add-some-tests/$1
 
 cp ./03-create-first-component/$1 ../solutions/03-create-first-component/$1
 cp ./03-create-first-component/$1 ../solutions/04-include-feature-module/$1
@@ -19,4 +18,3 @@ cp ./03-create-first-component/$1 ../solutions/09-include-the-map/$1
 cp ./03-create-first-component/$1 ../solutions/10-add-some-pipes/$1
 cp ./03-create-first-component/$1 ../solutions/11-add-some-routes/$1
 cp ./03-create-first-component/$1 ../solutions/12-add-filter-to-sidebar/$1
-cp ./03-create-first-component/$1 ../solutions/13-add-some-tests/$1
