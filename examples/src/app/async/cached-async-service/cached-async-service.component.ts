@@ -9,12 +9,15 @@ import { F1CachedService } from '../f1.service';
   styleUrls: ['./cached-async-service.component.css'],
   providers: [F1CachedService]
 })
-export class CachedAsyncServiceComponent {
+export class CachedAsyncServiceComponent implements OnInit {
 
   public drivers: Driver[];
 
   constructor(private service: F1CachedService) {
-    const sub = service.getDrivers().subscribe(drivers => {
+  }
+
+  public ngOnInit() {
+    this.service.getDrivers().subscribe(drivers => {
       this.drivers = drivers
     });
   }

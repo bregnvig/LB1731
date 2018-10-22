@@ -64,6 +64,8 @@ describe('HelloWorldComponent', () => {
     fixture.detectChanges();
     expect(element.textContent).toContain('Welcome Flemming Bregnvig');
     expect(element.textContent).not.toContain('Welcome stranger');
+    const button = debug.query(By.css('button'));
+    expect(button).toBeFalsy();
   });
 
   it('should navigate to the register page when the user clicks register', () => {

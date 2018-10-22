@@ -13,7 +13,7 @@ import {
   HumanizeDistancePipe,
   DefaultDescriptionPipe
 } from './shared/pipes';
-import { routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
@@ -26,7 +26,12 @@ import { MapComponent } from './map/map.component';
     HumanizeDistancePipe,
     MapComponent
   ],
-  imports: [BrowserModule, LeafletModule, HttpClientModule, routing],
+  imports: [
+    BrowserModule, 
+    LeafletModule, 
+    HttpClientModule, 
+    AppRoutingModule
+  ],
   bootstrap: [AppComponent],
   providers: [PlaygroundService, LocationService]
 })

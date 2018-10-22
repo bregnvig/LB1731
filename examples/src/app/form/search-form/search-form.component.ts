@@ -23,7 +23,7 @@ export class SearchFormComponent implements OnInit {
     this.searchControl2 = new FormControl();
     this.searchControl
       .valueChanges.pipe(
-        debounceTime(200),
+        debounceTime(400),
         filter((value: string) => value.length > 2),
         distinctUntilChanged()
 
