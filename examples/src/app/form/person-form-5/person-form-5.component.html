@@ -1,12 +1,10 @@
 <h1>Person form two way binding</h1>
 <div class="pane-container center-content">
   <div class="pane fixed-size">
-    <div class="alert alert-info">
-    </div>
     <div class="container">
       <h1>Person form</h1>
       <form #form="ngForm" (ngSubmit)="logValues(form.value)">
-        <fieldset ngModelGroup="name">
+        <fieldset>
           <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" required minlength="2" ngModel name="firstName">

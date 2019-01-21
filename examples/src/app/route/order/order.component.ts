@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
     console.log('Order constructed');
   }
 
@@ -28,11 +28,11 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((data: {id: number}) => {
+    this.route.params.subscribe((data: {id: number}) => {
       console.log(data);
       this.orderNo = data.id
     });
-    this.activatedRoute.queryParams.subscribe((data: any) => {
+    this.route.queryParams.subscribe((data: any) => {
       // console.log('Query params', data);
 
     });

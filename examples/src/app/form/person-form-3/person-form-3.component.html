@@ -10,7 +10,7 @@
         <div class="form-group">
           <label for="firstName">First name</label>
           <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
-          <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+          <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger" style="margin-top: 3px">
             First name is required
           </div>
         </div>
