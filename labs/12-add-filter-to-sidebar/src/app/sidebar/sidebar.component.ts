@@ -16,7 +16,6 @@ export class SidebarComponent {
   @Input() public selectedPlayground: Playground;
 
   public selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
     this.selected.emit(playground);
   }
 

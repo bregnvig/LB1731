@@ -1,5 +1,5 @@
-rm -Rf 03-create-first-component
-cp -R ../solutions/03-create-first-component 03-create-first-component
+# rm -Rf 03-create-first-component
+# cp -R ../solutions/03-create-first-component 03-create-first-component
 
 rm -Rf 04-include-feature-module
 cp -R ../solutions/03-create-first-component 04-include-feature-module
