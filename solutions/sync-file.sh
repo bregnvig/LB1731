@@ -10,4 +10,4 @@ cp ./$2/$1 ./09-include-the-map/$1
 cp ./$2/$1 ./10-add-some-pipes/$1
 cp ./$2/$1 ./11-add-some-routes/$1
 cp ./$2/$1 ./12-add-filter-to-sidebar/$1
-cp ./$2/$1 ./13-add-some-tests/$1
+# cp ./$2/$1 ./13-add-some-tests/$1
