@@ -10,8 +10,7 @@ export class TimerService {
   private timer$: Observable<Date>;
 
   constructor() {
-    this.timer$ = Observable
-      .create(observer => {
+    this.timer$ = new Observable(observer => {
         const intervalId = window.setInterval(() => {
           console.log(new Date());
           observer.next(new Date())

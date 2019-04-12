@@ -19,5 +19,6 @@ describe('ExclamationPipe', () => {
     expect(pipe.transform(0)).toEqual('!');
     expect(pipe.transform('')).toEqual('!');
     expect(pipe.transform(false)).toEqual('!');
+    expect(pipe.transform('a')).not.toEqual('!');
   });
 });

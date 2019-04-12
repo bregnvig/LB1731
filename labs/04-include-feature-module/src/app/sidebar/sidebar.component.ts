@@ -10,12 +10,13 @@ import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
 })
 export class SidebarComponent implements OnInit {
 
-  public playgrounds: Playground[] = MOCK_PLAYGROUNDS;
+  public playgrounds: Playground[];
 
   constructor() { 
   }
 
   ngOnInit() {
+    this.playgrounds = MOCK_PLAYGROUNDS;
   }
 
 }

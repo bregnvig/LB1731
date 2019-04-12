@@ -1,7 +1,7 @@
 
 import {interval,  Observable } from 'rxjs';
 
-import {publishReplay, mergeMap, startWith, map, publishLast, refCount} from 'rxjs/operators';
+import {publishReplay, mergeMap, startWith, map, publishLast, refCount, switchMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 
@@ -59,11 +59,10 @@ export class F1AutoRefreshService {
 
   private request$: Observable<Driver[]>;
 
-  constructor(http: HttpClient) {
+  constructor(service: F1BetterService) {
     this.request$ = interval(10000).pipe(
       startWith(null),
-      mergeMap(() => http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`)),
-      map(response => response.MRData.DriverTable.Drivers),
+      switchMap(() => service.getDrivers()),
       publishReplay(1),
       refCount(),
     );

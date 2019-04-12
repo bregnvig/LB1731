@@ -17,7 +17,6 @@ export class BetterAsyncServiceComponent implements OnInit  {
   }
 
   public ngOnInit() {
-    // The subscribe call makes the stream hot!
     this.service.getDrivers().subscribe(drivers => this.drivers = drivers);
   }
 
