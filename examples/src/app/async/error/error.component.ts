@@ -3,8 +3,6 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 
 import {finalize, catchError} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-
 
 
 import { HttpClient } from '@angular/common/http';

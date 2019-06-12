@@ -9,7 +9,7 @@ import { StopwatchComponent } from '../stopwatch';
 })
 export class ViewchildComponent implements OnInit {
 
-  @ViewChild(StopwatchComponent)
+  @ViewChild(StopwatchComponent, { static: true })
   public stopwatch: StopwatchComponent
 
   constructor() { }

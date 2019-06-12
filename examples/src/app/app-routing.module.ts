@@ -14,31 +14,31 @@ const routes: Routes = [
     },
     {
         path: 'components',
-        loadChildren: 'app/components/components.module#ComponentsModule'
+        loadChildren: () => import('app/components/components.module').then(m => m.ComponentsModule)
     },
     {
         path: 'io',
-        loadChildren: 'app/io/io.module#IOModule'
+        loadChildren: () => import('app/io/io.module').then(m => m.IOModule)
     },
     {
         path: 'services',
-        loadChildren: 'app/services/services.module#ServicesModule'
+        loadChildren: () => import('app/services/services.module').then(m => m.ServicesModule)
     },
     {
         path: 'async',
-        loadChildren: 'app/async/async.module#AsyncModule'
+        loadChildren: () => import('app/async/async.module').then(m => m.AsyncModule)
     },
     {
         path: 'pipes',
-        loadChildren: 'app/pipes/pipes.module#PipesModule'
+        loadChildren: () => import('app/pipes/pipes.module').then(m => m.PipesModule)
     },
     {
         path: 'orders',
-        loadChildren: 'app/route/route.module#RouteModule'
+        loadChildren: () => import('app/route/route.module').then(m => m.RouteModule)
     },
     {
         path: 'form',
-        loadChildren: 'app/form/form.module#FormModule'
+        loadChildren: () => import('app/form/form.module').then(m => m.FormModule)
     },
     {
         path: '**',
