@@ -118,7 +118,7 @@
     },
     {
       "id": "legeplads.14",
-      "name": "K�rg�rdsparkens Legeplads 3",
+      "name": "Kærgårdsparkens Legeplads 3",
       "description": "Mellemstore legepladser (10 til 25 børn)",
       "position": {
         "lng": 10.089497,
@@ -332,7 +332,7 @@
     },
     {
       "id": "legeplads.38",
-      "name": "H�jvangsvej, Stautrup",
+      "name": "Højvangsvej, Stautrup",
       "position": {
         "lng": 10.121945,
         "lat": 56.129923
@@ -340,7 +340,7 @@
     },
     {
       "id": "legeplads.39",
-      "name": "�rneredens legeplads",
+      "name": "Ørneredens legeplads",
       "position": {
         "lng": 10.236652,
         "lat": 56.100977
@@ -356,7 +356,7 @@
     },
     {
       "id": "legeplads.41",
-      "name": "<Skjoldhøjkilen",
+      "name": "Skjoldhøjkilen",
       "position": {
         "lng": 10.125356,
         "lat": 56.170021
