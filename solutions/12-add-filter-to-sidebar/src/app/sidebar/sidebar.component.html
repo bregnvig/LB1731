@@ -1,10 +1,10 @@
-<aside class="menu">
+<aside tabindex="1">
   <div class="input-group">
     <div class="input-group-addon"><i class="fa fa-lg fa-search"></i></div>
     <input type="text" class="form-control input-lg" id="filterPlaygrounds" placeholder="Filtrer legepladser" [formControl]="filterControl"
       autocomplete="off">
   </div>
-  <div class="playgrounds-list">
+  <nav>
     <div class="list-group">
       <a class="list-group-item" [class.active]="playground === selectedPlayground" *ngFor="let playground of filteredPlaygrounds$ | async" (click)="selectPlayground(playground)">
         <span class="badge">{{playground.position | distance | humanizeDistance}}</span>
@@ -12,5 +12,5 @@
         <p class="list-group-item-text">{{playground.description | defaultDescription}}</p>
       </a>
     </div>
-  </div>
+  </nav>
 </aside>
