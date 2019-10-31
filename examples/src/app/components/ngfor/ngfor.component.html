@@ -2,7 +2,7 @@
   <div class="pane fixed-size">
     <input type="text" #input (keyup.enter)="addInput(input.value)" autofocus>
     <ul>
-      <li *ngFor="let item of items">{{item}}</li>
+      <li *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
     </ul>
   </div>
 </div>

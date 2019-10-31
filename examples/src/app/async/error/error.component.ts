@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import {throwError,  Observable } from 'rxjs';
 
 import {finalize, catchError} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +24,7 @@ export class ErrorComponent implements OnInit {
     this.zipCodes$ = this.http.get<any>('http://404.com/asd.json').pipe(
       catchError(() => this.http.get<any>('http://404.com/another.404')),
       catchError(() => this.http.get<any>('https://dawa.aws.dk/postnumre')),
-      catchError(() => observableThrowError('No data!!')),
+      catchError(() => throwError('No data!!')),
       finalize(() => this.elapsed = Date.now() - start),
     );
   }

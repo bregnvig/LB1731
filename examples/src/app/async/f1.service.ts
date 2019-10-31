@@ -16,7 +16,7 @@ export class F1SimpleService {
   constructor(private http: HttpClient) { }
 
   public getDrivers(): Observable<any> {
-    return this.http.get(`http://ergast.com/api/f1/2017/drivers.json`);
+    return this.http.get(`http://ergast.com/api/f1/2019/drivers.json`);
   }
 }
 
@@ -25,10 +25,9 @@ export class F1BetterService {
 
   private request$: Observable<Driver[]>;
 
-  constructor(http: HttpClient) {
-    // Cold observable
-    this.request$ = http.get<any>(`http://ergast.com/api/f1/2017/drivers.json`).pipe(
-      map(response => response.MRData.DriverTable.Drivers)
+  constructor(service: F1SimpleService) {
+    this.request$ = service.getDrivers().pipe(
+      map((response: any) => response.MRData.DriverTable.Drivers)
     )
   }
 

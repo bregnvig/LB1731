@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError, fromEvent as observableFromEvent, Observable} from 'rxjs';
+import {throwError, fromEvent, Observable} from 'rxjs';
 
 import {retryWhen} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -15,9 +15,9 @@ export class RetryService {
     this.drivers$ = service.getDrivers().pipe(
       retryWhen(err => {
         if (!window.navigator.onLine) {
-          return observableFromEvent(window, 'online');
+          return fromEvent(window, 'online');
         }
-        return observableThrowError('Could not fetch drivers');
+        return throwError('Could not fetch drivers');
       })
     )
   }

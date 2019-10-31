@@ -9,6 +9,11 @@ export class NgforComponent implements OnInit {
 
   public items:string[] = ['foo', 'bar'];
 
+  myTrack = (index, o) => {
+    console.log(o);
+    return o;
+  }
+
   constructor() { }
 
   ngOnInit() {
