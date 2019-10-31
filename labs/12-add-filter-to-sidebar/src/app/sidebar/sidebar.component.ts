@@ -11,9 +11,8 @@ import { Playground } from '../shared';
 export class SidebarComponent {
 
   @Input() playgrounds: Playground[];
-  @Output() public selected = new EventEmitter<Playground>();
-
   @Input() public selectedPlayground: Playground;
+  @Output() public selected = new EventEmitter<Playground>();
 
   public selectPlayground(playground: Playground): void {
     this.selected.emit(playground);

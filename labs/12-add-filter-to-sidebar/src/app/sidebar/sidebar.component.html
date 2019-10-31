@@ -1,5 +1,5 @@
-<aside class="menu">
-  <div class="playgrounds-list">
+<aside tabindex="1">
+  <nav>
     <div class="list-group">
       <a class="list-group-item" [class.active]="playground === selectedPlayground" *ngFor="let playground of playgrounds" (click)="selectPlayground(playground)">
         <span class="badge">{{playground.position | distance | humanizeDistance}}</span>
@@ -7,5 +7,5 @@
         <p class="list-group-item-text">{{playground.description | defaultDescription}}</p>
       </a>
     </div>
-  </div>
+  </nav>
 </aside>

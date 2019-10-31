@@ -1,11 +1,11 @@
 import { LocationService } from './../shared/location.service';
 import { PlaygroundService } from './../shared/playground.service';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 import { Center, Marker } from './../leaflet';
 import { Playground } from './../shared/playground';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { pluck, filter, switchMap, share, map, merge } from 'rxjs/operators';
+import { pluck, filter, switchMap, share, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -40,9 +40,9 @@ export class MapComponent implements OnInit {
       this.playground = playground;
       this.center = new Center(playground.position.lat, playground.position.lng, 17);
     });
-    this.markers$ = this.locationService.current.pipe(
-      map(location => new Marker('me', location.lat, location.lng)),
-      merge(playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng)))),
+    this.markers$ = merge(
+      this.locationService.current.pipe(map(location => new Marker('me', location.lat, location.lng))),
+      playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng))),
     );
   }
 
