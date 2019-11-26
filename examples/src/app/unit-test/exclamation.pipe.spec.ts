@@ -12,6 +12,7 @@ describe('ExclamationPipe', () => {
   });
   it('should return a input + !', () => {
     expect(pipe.transform('a')).toEqual('a!');
+    expect(pipe.transform('b')).toEqual('b!');
   });
   it('should return ! with falshy input', () => {
     expect(pipe.transform(null)).toEqual('!');

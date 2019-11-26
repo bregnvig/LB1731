@@ -1,5 +1,5 @@
 
-import {refCount, publish} from 'rxjs/operators';
+import {refCount, publish, shareReplay} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -34,8 +34,7 @@ export class SharedTimerService {
 
   constructor() {
     this.timer$ = new TimerService().timer.pipe(
-      publish(),
-      refCount(),
+      shareReplay({bufferSize: 1, refCount: true})
     );
   }
 

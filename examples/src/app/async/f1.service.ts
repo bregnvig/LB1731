@@ -1,7 +1,7 @@
 
-import {interval,  Observable } from 'rxjs';
+import {interval,  Observable, of } from 'rxjs';
 
-import {publishReplay, mergeMap, startWith, map, publishLast, refCount, switchMap} from 'rxjs/operators';
+import {publishReplay, mergeMap, startWith, map, publishLast, refCount, switchMap, tap, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 
@@ -65,6 +65,25 @@ export class F1AutoRefreshService {
       publishReplay(1),
       refCount(),
     );
+  }
+
+  public getDrivers(): Observable<Driver[]> {
+    return this.request$;
+  }
+}
+
+@Injectable()
+export class F1LocalStorageCache {
+  private request$: Observable<Driver[]>;
+
+  constructor(service: F1BetterService) {
+    this.request$ = service.getDrivers().pipe(
+      tap(drivers => localStorage.setItem('drivers', JSON.stringify(drivers))),
+      catchError(error=> {
+        console.log(error);
+        return of<Driver[]>(JSON.parse(localStorage.getItem('drivers')) || [])
+      })
+    )
   }
 
   public getDrivers(): Observable<Driver[]> {

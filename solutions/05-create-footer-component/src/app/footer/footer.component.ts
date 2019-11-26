@@ -8,6 +8,5 @@ import { Playground } from '../shared';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-
   @Input() public playground: Playground;
 }

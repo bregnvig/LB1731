@@ -2,6 +2,7 @@ import { ModuleWithProviders }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent, IntervalComponent, RetryWhenComponent } from './index';
+import { CatchErrorComponent } from './catch-error/catch-error.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
         path: 'cached',
         component: CachedAsyncServiceComponent
+    },
+    {
+        path: 'localStorage',
+        component: CatchErrorComponent
     },
     {
         path: 'retry',

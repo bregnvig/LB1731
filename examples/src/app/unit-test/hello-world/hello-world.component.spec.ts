@@ -67,9 +67,10 @@ describe('HelloWorldComponent', () => {
     const button = debug.query(By.css('button'));
     expect(button).toBeFalsy();
   });
-
+  
   it('should navigate to the register page when the user clicks register', () => {
     const button = debug.query(By.css('button'));
+    expect(button).toBeTruthy();
     button.triggerEventHandler('click', null);
     const routerService: Router = TestBed.get(Router);
     expect(routerService.navigate).toHaveBeenCalledWith(['/register']);

@@ -11,7 +11,7 @@ import { Playground } from './shared';
 export class AppComponent {
   title = 'app works!';
 
-  public playgrounds: Playground[] = MOCK_PLAYGROUNDS;
+  public appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
   public playground: Playground;
 
   public playgroundSelected(playground: Playground): void {
