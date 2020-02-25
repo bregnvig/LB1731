@@ -15,7 +15,7 @@ export class EventComponent implements OnInit {
   }
 
   public count() {
-    this.counter +=1;
+    this.counter += 1;
   }
 
   public up() {

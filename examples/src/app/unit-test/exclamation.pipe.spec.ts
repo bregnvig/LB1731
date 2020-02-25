@@ -10,7 +10,7 @@ describe('ExclamationPipe', () => {
   it('should create an instance', () => {
     expect(pipe).toBeTruthy();
   });
-  it('should return a input + !', () => {
+  it('should return input + !', () => {
     expect(pipe.transform('a')).toEqual('a!');
     expect(pipe.transform('b')).toEqual('b!');
   });

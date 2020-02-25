@@ -53,7 +53,9 @@ describe('HelloWorldComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should say hello stranger, when the user is not logged in', () => {
+  it('should say welcome stranger, when the user is not logged in', () => {
+    console.log(element.textContent);
+
     expect(element.textContent).toContain('Welcome stranger');
   });
 
@@ -67,7 +69,7 @@ describe('HelloWorldComponent', () => {
     const button = debug.query(By.css('button'));
     expect(button).toBeFalsy();
   });
-  
+
   it('should navigate to the register page when the user clicks register', () => {
     const button = debug.query(By.css('button'));
     expect(button).toBeTruthy();

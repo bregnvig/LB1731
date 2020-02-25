@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hello',
@@ -10,11 +10,11 @@ import { Component } from '@angular/core';
     } `
   ]
 })
-export class HelloComponent {
+export class HelloComponent implements OnInit {
 
   public title: string;
 
-  constructor() { 
+  ngOnInit() {
     this.title = 'Hello world!';
   }
 

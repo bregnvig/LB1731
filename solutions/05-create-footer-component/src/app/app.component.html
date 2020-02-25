@@ -2,4 +2,4 @@
   {{title}}
 </h1>
 <app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
-<app-footer [playground]="playground"></app-footer>
+<app-footer  *ngIf="playground" [playground]="playground"></app-footer>

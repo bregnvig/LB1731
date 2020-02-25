@@ -28,21 +28,21 @@ export class MapComponent implements OnInit {
 
   public ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
-    const playground$ = this.route.params.pipe(
-        pluck<Params, string>('id'),
-        filter(id => !!id),
-        switchMap(id => this.service.find(id)),
-        filter(playground => !!playground),
-        shareReplay(),
+    const playground$: Observable<Playground> = this.route.params.pipe(
+      pluck<Params, string>('id'),
+      filter(id => !!id),
+      switchMap(id => this.service.find(id)),
+      filter(playground => !!playground),
+      shareReplay(),
     )
-      
+
     playground$.subscribe(playground => {
       this.playground = playground;
       this.center = new Center(playground.position.lat, playground.position.lng, 12);
     });
     this.markers$ = merge(
       this.locationService.current.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      playground$.pipe(map(p => new Marker(p.name, p.position.lat, p.position.lng))),
+      playground$.pipe(map(p => new Marker('legeplads', p.position.lat, p.position.lng))),
     );
   }
 

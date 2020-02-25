@@ -27,12 +27,12 @@ import { MapComponent } from './map/map.component';
     MapComponent
   ],
   imports: [
-    BrowserModule, 
-    LeafletModule, 
-    HttpClientModule, 
+    BrowserModule,
+    LeafletModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
   providers: [PlaygroundService, LocationService]
 })
-export class AppModule {}
+export class AppModule { }

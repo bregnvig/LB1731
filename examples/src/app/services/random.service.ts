@@ -27,7 +27,7 @@ export class RandomLoggerService {
   constructor(logger: LoggerService) {
     window.setInterval(() => {
       this._random = Math.floor(Math.random() * 100);
-      logger.log('Generated new random number');
+      logger.log('Generated new random number', this._random);
     }, 1000);
   }
 

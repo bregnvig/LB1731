@@ -12,14 +12,14 @@ export class OnewayComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.model['blabla'] = 42;
   }
 
   get diagnostic() {
     return JSON.stringify(this.model);
   }
 
-  logValue(value:any) {
-    console.log('Value', value);
-    
+  logValue(value: any) {
+    console.log('Value', {...this.model, ...value});
   }
 }
