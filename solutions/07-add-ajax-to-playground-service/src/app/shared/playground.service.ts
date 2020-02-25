@@ -16,10 +16,6 @@ export class PlaygroundService {
 
   constructor(http: HttpClient) {
     this.request$ = http.get<Playground[]>('assets/copenhagen.json').pipe(
-      catchError((error: Response) => {
-        console.error('Unable to fetch playgrounds', error.statusText);
-        return of([]);
-      }),
       publishLast(),
       refCount()
     );

@@ -1,8 +1,10 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      <a class="list-group-item" [class.active]="playground === selectedPlayground" 
-        *ngFor="let playground of playgrounds" (click)="selectPlayground(playground)">
+      <a *ngFor="let playground of playgrounds" 
+        class="list-group-item" 
+        [class.active]="playground === selectedPlayground" 
+        (click)="selectPlayground(playground)">
         <h4 class="list-group-item-heading">{{playground.name}}</h4>
         <p class="list-group-item-text">{{playground.description}}</p>
       </a>
