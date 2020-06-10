@@ -22,7 +22,7 @@ export class TimerService {
       });
   }
 
-  public get timer(): Observable<Date> {
+   get timer(): Observable<Date> {
     return this.timer$;
   }
 }
@@ -38,7 +38,7 @@ export class SharedTimerService {
     );
   }
 
-  public get timer(): Observable<Date> {
+   get timer(): Observable<Date> {
     return this.timer$;
   }
 }

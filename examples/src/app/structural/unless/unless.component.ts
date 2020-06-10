@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnlessComponent {
 
-  public show = true;
+   show = true;
 
-  public toggle() {
+   toggle() {
     this.show = !this.show;
   }
 

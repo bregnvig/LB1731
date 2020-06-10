@@ -10,10 +10,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class PersonForm7Component implements OnInit {
 
-  public colors = ["Red", "Green", "Blue"];
-  public model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+   colors = ["Red", "Green", "Blue"];
+   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  public myForm: FormGroup;
+   myForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -29,7 +29,7 @@ export class PersonForm7Component implements OnInit {
     
   }
 
-  public onSubmit() {
+   onSubmit() {
     console.log('Value', this.myForm.value);
 
   }

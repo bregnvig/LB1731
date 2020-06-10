@@ -13,7 +13,7 @@ export class CounterComponent implements OnInit {
   ngOnInit() {
   }
 
-  public increment() {
+   increment() {
     this.counterService.increment();
   }
 

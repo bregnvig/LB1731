@@ -1,11 +1,10 @@
-import { Router } from '@angular/router';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HelloWorldComponent } from './hello-world.component';
 import { DebugElement } from '@angular/core';
-import { User, UserService } from '../user.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { ExclamationPipe } from '../exclamation.pipe';
+import { UserService } from '../user.service';
+import { HelloWorldComponent } from './hello-world.component';
 
 const userService = {
   user: {
@@ -30,11 +29,11 @@ describe('HelloWorldComponent', () => {
       providers: [
         {
           provide: UserService,
-          useValue: userService
+          useFactory: () => userService
         },
         {
           provide: Router,
-          useValue: router
+          useFactory: () => router
         }
       ]
     })
@@ -54,13 +53,11 @@ describe('HelloWorldComponent', () => {
   });
 
   it('should say welcome stranger, when the user is not logged in', () => {
-    console.log(element.textContent);
-
     expect(element.textContent).toContain('Welcome stranger');
   });
 
   it('should say hello Flemming Bregnvig, when Flemming is logged in', () => {
-    const service: UserService = TestBed.get(UserService);
+    const service: UserService = TestBed.inject(UserService);
     service.user.isLoggedIn = true;
     service.user.name = 'Flemming Bregnvig';
     fixture.detectChanges();
@@ -74,7 +71,7 @@ describe('HelloWorldComponent', () => {
     const button = debug.query(By.css('button'));
     expect(button).toBeTruthy();
     button.triggerEventHandler('click', null);
-    const routerService: Router = TestBed.get(Router);
+    const routerService: Router = TestBed.inject(Router);
     expect(routerService.navigate).toHaveBeenCalledWith(['/register']);
   });
 });

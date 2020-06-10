@@ -8,11 +8,11 @@ export class InterceptChildComponent {
   private _value: string;
 
   @Input()
-  public set value(value: string) {
+   set value(value: string) {
     this._value = value.toUpperCase();
   }
 
-  public get value() {
+   get value() {
     return this._value;
   }
 }
@@ -24,7 +24,7 @@ export class InterceptChildComponent {
 })
 export class InterceptComponent implements OnInit {
 
-  public fromProperty = 'From property';
+   fromProperty = 'From property';
 
   ngOnInit() {
   }

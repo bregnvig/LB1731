@@ -13,8 +13,8 @@ import { debounceTime, filter, distinctUntilChanged } from 'rxjs/operators';
 })
 export class SearchFormComponent implements OnInit {
 
-  public searchControl;
-  public searchControl2;
+   searchControl;
+   searchControl2;
 
   constructor() { }
 

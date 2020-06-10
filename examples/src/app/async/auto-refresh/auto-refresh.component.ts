@@ -11,7 +11,7 @@ import { F1AutoRefreshService } from '../f1.service';
 })
 export class AutoRefreshComponent implements OnDestroy {
 
-  public drivers: Driver[];
+   drivers: Driver[];
 
   private subscription: Subscription;
 
@@ -23,11 +23,11 @@ export class AutoRefreshComponent implements OnDestroy {
     });
   }
 
-  public ngOnDestroy() {
+   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  public addSubscribtion() {
+   addSubscribtion() {
     this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 

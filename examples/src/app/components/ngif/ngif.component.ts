@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NgifComponent implements OnInit {
 
-  public show = true;
+   show = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public toggle() {
+   toggle() {
     this.show = !this.show;
   }
 

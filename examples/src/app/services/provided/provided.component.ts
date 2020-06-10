@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RandomService } from 'app/services/random.service';
+import { Component } from '@angular/core';
+import { RandomService } from './../random.service';
 
 @Component({
   selector: 'app-provided',

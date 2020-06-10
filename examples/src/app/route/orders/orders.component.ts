@@ -14,7 +14,7 @@ export class OrdersComponent implements OnInit {
     console.log('Current URL', this.router.routerState.snapshot.url);
   }
 
-  public gotoOrder(orderId: number) {
+   gotoOrder(orderId: number) {
     this.router.navigate([orderId], {relativeTo: this.route});
   }
 

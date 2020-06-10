@@ -9,7 +9,7 @@ import { Driver } from '../driver';
 })
 export class RetryWhenComponent implements OnInit {
 
-  public drivers: Driver[];
+   drivers: Driver[];
 
   constructor(private service: RetryService) { }
 

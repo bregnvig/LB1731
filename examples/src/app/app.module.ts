@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
-import { routing } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './menu';
 import { UnitTestModule } from './unit-test/unit-test.module';
 import { AttributesModule } from './attributes/attributes.module';
@@ -13,7 +13,7 @@ import { CounterComponent } from './shared/counter/counter.component';
     declarations: [AppComponent, MenuComponent, CounterComponent],
     imports: [
         BrowserModule,
-        routing,
+        AppRoutingModule,
         AttributesModule,
         StructuralModule,
         UnitTestModule

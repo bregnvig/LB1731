@@ -7,23 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InterpolationComponent implements OnInit {
 
-  public propertyString = 'Property string!';
-  public propertyNumber = 17;
-  public propertyObject = {
+   propertyString = 'Property string!';
+   propertyNumber = 17;
+   propertyObject = {
     property: 'Object property'
   };
-  public propertyNull = null;
+   propertyNull = null;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public simpleMethod() {
+   simpleMethod() {
     return 'Simple method'
   }
 
-  public parameterMethod(string: string) {
+   parameterMethod(string: string) {
     return `Hello ${string}`;
   }
 

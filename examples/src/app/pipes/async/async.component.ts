@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsyncComponent implements OnInit {
 
-  public drivers$: Observable<Driver[]>;
+   drivers$: Observable<Driver[]>;
 
   constructor(private service: F1BetterService) { }
 

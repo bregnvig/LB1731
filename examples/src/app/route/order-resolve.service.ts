@@ -6,7 +6,7 @@ export class OrderResolveService implements Resolve<number> {
 
   constructor(private router: Router) {}
 
-  public resolve(route: ActivatedRouteSnapshot): any {
+   resolve(route: ActivatedRouteSnapshot): any {
 
     if (route.params['id'] <= 3) {
       return +route.params['id'];

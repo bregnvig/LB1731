@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChainingComponent implements OnInit {
 
-  public today = new Date();
+   today = new Date();
 
   constructor() { }
 

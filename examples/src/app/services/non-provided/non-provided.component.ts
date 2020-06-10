@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NonProvidedService } from 'app/services/non-provided.service';
+import { Component } from '@angular/core';
+import { NonProvidedService } from '../non-provided.service';
 
 @Component({
   selector: 'app-non-provided',
@@ -7,7 +7,7 @@ import { NonProvidedService } from 'app/services/non-provided.service';
 })
 export class NonProvidedComponent {
 
-  public constructor(private service: NonProvidedService) {
+   constructor(private service: NonProvidedService) {
 
   }
 }

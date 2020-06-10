@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntervalComponent implements OnInit {
 
-  public number$: Observable<number>;
+   number$: Observable<number>;
 
   constructor() { }
 

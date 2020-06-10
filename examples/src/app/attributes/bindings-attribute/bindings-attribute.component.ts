@@ -9,6 +9,6 @@ import { RotateFlyover3 } from '../rotate.directive';
 })
 export class BindingsAttributeComponent {
 
-  public angle: number;
+   angle: number;
 
 }

@@ -11,9 +11,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 })
 export class IOEventChildComponent {
-  @Output() public interval = new EventEmitter<string>();
+  @Output()  interval = new EventEmitter<string>();
 
-  public update(value: string) {
+   update(value: string) {
     this.interval.emit(value);
   }
 }
@@ -25,6 +25,6 @@ export class IOEventChildComponent {
 })
 export class IOEventComponent {
 
-  public interval: string;
+   interval: string;
 
 }

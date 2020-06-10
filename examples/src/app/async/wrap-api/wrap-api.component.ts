@@ -12,8 +12,8 @@ import { TimerService } from '../timer.service';
 })
 export class WrapApiComponent implements OnDestroy, OnInit {
 
-  public subscription: Subscription;
-  public date: Date;
+   subscription: Subscription;
+   date: Date;
 
   constructor(private service: TimerService) {
   }
@@ -26,7 +26,7 @@ export class WrapApiComponent implements OnDestroy, OnInit {
     this.stop();
   }
 
-  public stop() {
+   stop() {
     this.subscription.unsubscribe();
   }
 

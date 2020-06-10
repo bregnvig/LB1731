@@ -11,11 +11,11 @@ import { SharedTimerService } from '../timer.service';
 })
 export class RefCountComponent implements OnDestroy {
 
-  public subscription1: Subscription;
-  public date1: Date;
+   subscription1: Subscription;
+   date1: Date;
 
-  public subscription2: Subscription;
-  public date2: Date;
+   subscription2: Subscription;
+   date2: Date;
 
 
   constructor(private service: SharedTimerService) { }
@@ -35,7 +35,7 @@ export class RefCountComponent implements OnDestroy {
     this.subscription2.unsubscribe();
   }
 
-  public ngOnDestroy() {
+   ngOnDestroy() {
   // if (this.subscription2) {
   //     this.subscription2.unsubscribe();
   //   }

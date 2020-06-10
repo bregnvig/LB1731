@@ -11,18 +11,18 @@ import { F1CachedService } from '../f1.service';
 })
 export class CachedAsyncServiceComponent implements OnInit {
 
-  public drivers: Driver[];
+   drivers: Driver[];
 
   constructor(private service: F1CachedService) {
   }
 
-  public ngOnInit() {
+   ngOnInit() {
     this.service.getDrivers().subscribe(drivers => {
       this.drivers = drivers
     });
   }
 
-  public addSubscribtion() {
+   addSubscribtion() {
     this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 }

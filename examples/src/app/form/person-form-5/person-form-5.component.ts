@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonForm5Component implements OnInit {
 
-  public colors = ["Red", "Green", "Blue"];
+   colors = ["Red", "Green", "Blue"];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public logValues(values: any) {
+   logValues(values: any) {
     console.log('Values', values);
   }
 

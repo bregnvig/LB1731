@@ -14,7 +14,7 @@ export class RandomService {
     window.setInterval(() => this._random = Math.floor(Math.random() * 100), 1000);
   }
 
-  public get random(): number {
+   get random(): number {
     return this._random;
   }
 }
@@ -31,7 +31,7 @@ export class RandomLoggerService {
     }, 1000);
   }
 
-  public get random(): number {
+   get random(): number {
     return this._random;
   }
 }

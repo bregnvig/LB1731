@@ -7,22 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
-  public counter = 0;
-  public isDown = false;
+   counter = 0;
+   isDown = false;
   constructor() { }
 
   ngOnInit() {
   }
 
-  public count() {
+   count() {
     this.counter += 1;
   }
 
-  public up() {
+   up() {
     this.isDown = false;
   }
 
-  public down() {
+   down() {
     this.isDown = true;
   }
 

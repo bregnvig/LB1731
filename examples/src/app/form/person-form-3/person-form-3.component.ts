@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonForm3Component implements OnInit {
 
-  public colors = ["Red", "Green", "Blue"];
-  public model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+   colors = ["Red", "Green", "Blue"];
+   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
   constructor() { }
 

@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class StopwatchComponent implements OnInit, OnDestroy {
 
-  public seconds: number = 0;
+   seconds: number = 0;
   private intervalNo: number;
 
   constructor() { }
@@ -20,18 +20,18 @@ export class StopwatchComponent implements OnInit, OnDestroy {
     this.stop();
   }
 
-  public start() {
+   start() {
     this.intervalNo = window.setInterval(() => {
       console.log(this.seconds);
       this.seconds += 1
     }, 1000);
   }
 
-  public stop() {
+   stop() {
     window.clearInterval(this.intervalNo);
   }
 
-  public reset() {
+   reset() {
     this.stop();
     this.seconds = 0;
   }

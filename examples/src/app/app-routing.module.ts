@@ -1,8 +1,7 @@
-import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule }  from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu';
 import { CounterComponent } from './shared/counter/counter.component';
+
 const routes: Routes = [
     {
         path: 'menu',
@@ -14,31 +13,31 @@ const routes: Routes = [
     },
     {
         path: 'components',
-        loadChildren: () => import('app/components/components.module').then(m => m.ComponentsModule)
+        loadChildren: () => import('../app/components/components.module').then(m => m.ComponentsModule)
     },
     {
         path: 'io',
-        loadChildren: () => import('app/io/io.module').then(m => m.IOModule)
+        loadChildren: () => import('../app/io/io.module').then(m => m.IOModule)
     },
     {
         path: 'services',
-        loadChildren: () => import('app/services/services.module').then(m => m.ServicesModule)
+        loadChildren: () => import('../app/services/services.module').then(m => m.ServicesModule)
     },
     {
         path: 'async',
-        loadChildren: () => import('app/async/async.module').then(m => m.AsyncModule)
+        loadChildren: () => import('../app/async/async.module').then(m => m.AsyncModule)
     },
     {
         path: 'pipes',
-        loadChildren: () => import('app/pipes/pipes.module').then(m => m.PipesModule)
+        loadChildren: () => import('../app/pipes/pipes.module').then(m => m.PipesModule)
     },
     {
         path: 'orders',
-        loadChildren: () => import('app/route/route.module').then(m => m.RouteModule)
+        loadChildren: () => import('../app/route/route.module').then(m => m.RouteModule)
     },
     {
         path: 'form',
-        loadChildren: () => import('app/form/form.module').then(m => m.FormModule)
+        loadChildren: () => import('../app/form/form.module').then(m => m.FormModule)
     },
     {
         path: '**',
@@ -47,4 +46,4 @@ const routes: Routes = [
     }
 ];
 
-export const routing = RouterModule.forRoot(routes);
+export const AppRoutingModule = RouterModule.forRoot(routes);

@@ -15,7 +15,7 @@ export class F1SimpleService {
 
   constructor(private http: HttpClient) { }
 
-  public getDrivers(): Observable<any> {
+   getDrivers(): Observable<any> {
     return this.http.get(`http://ergast.com/api/f1/2019/drivers.json`);
   }
 }
@@ -31,7 +31,7 @@ export class F1BetterService {
     )
   }
 
-  public getDrivers(): Observable<Driver[]> {
+   getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -48,7 +48,7 @@ export class F1CachedService {
     );
   }
 
-  public getDrivers(): Observable<Driver[]> {
+   getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -67,7 +67,7 @@ export class F1AutoRefreshService {
     );
   }
 
-  public getDrivers(): Observable<Driver[]> {
+   getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -86,7 +86,7 @@ export class F1LocalStorageCache {
     )
   }
 
-  public getDrivers(): Observable<Driver[]> {
+   getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }

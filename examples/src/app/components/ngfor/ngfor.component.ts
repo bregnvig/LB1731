@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NgforComponent implements OnInit {
 
-  public items:string[] = ['foo', 'bar'];
+   items:string[] = ['foo', 'bar'];
 
   myTrack = (index, o) => {
     console.log(o);

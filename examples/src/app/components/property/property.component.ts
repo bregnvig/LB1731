@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyComponent implements OnInit {
 
-  public showRed = false;
-  public show = false;
+   showRed = false;
+   show = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public toggleRed() {
+   toggleRed() {
     this.showRed = !this.showRed;
   }
-  public toggleShow() {
+   toggleShow() {
     this.show = !this.show;
   }
 

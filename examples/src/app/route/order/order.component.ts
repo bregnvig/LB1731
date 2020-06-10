@@ -10,10 +10,10 @@ import { Subscription } from 'rxjs';
 })
 export class OrderComponent implements OnInit, OnDestroy {
 
-  public orderNo: number;
-  public exact = false;
+   orderNo: number;
+   exact = false;
 
-  public data = {
+   data = {
     foo: 'bar'
   }
 
@@ -23,7 +23,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     console.log('Order constructed');
   }
 
-  public ngOnDestroy() {
+   ngOnDestroy() {
     console.log('Component destroyed', this.orderNo);
   }
 
@@ -39,7 +39,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     // this.orderNo = this.activatedRoute.snapshot.params['id'];
   }
 
-  public toggle() {
+   toggle() {
     this.exact = !this.exact;
   }
 }

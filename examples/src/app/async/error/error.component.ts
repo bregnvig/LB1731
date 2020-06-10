@@ -14,12 +14,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ErrorComponent implements OnInit {
 
-  public zipCodes$: Observable<any>
-  public elapsed: number;
+   zipCodes$: Observable<any>
+   elapsed: number;
 
   constructor(private http: HttpClient) { }
 
-  public ngOnInit() {
+   ngOnInit() {
     const start: number = Date.now();
     this.zipCodes$ = this.http.get<any>('http://404.com/asd.json').pipe(
       catchError(() => this.http.get<any>('http://404.com/another.404')),

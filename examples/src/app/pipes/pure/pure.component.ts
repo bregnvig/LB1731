@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PureComponent {
 
-  public noop() {
+   noop() {
   }
 
 }

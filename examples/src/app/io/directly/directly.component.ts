@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   template: '<p>{{value1}}</p> <p>{{value2}}</p>'
 })
 export class DirectlyChildComponent {
-  @Input() public value1: string;
-  @Input() public value2: string;
+  @Input()  value1: string;
+  @Input()  value2: string;
 
 }
 
@@ -18,7 +18,7 @@ export class DirectlyChildComponent {
 })
 export class DirectlyComponent implements OnInit {
 
-  public fromProperty = 'From property';
+   fromProperty = 'From property';
 
   constructor() { }
 

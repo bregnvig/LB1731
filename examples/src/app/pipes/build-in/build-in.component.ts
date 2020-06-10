@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuildInComponent implements OnInit {
 
-  public today = new Date();
-  public format = 'G';
-  public name = 'Angular';
-  public object = {
+   today = new Date();
+   format = 'G';
+   name = 'Angular';
+   object = {
     a: 'b',
     b: 'c',
     c: 42

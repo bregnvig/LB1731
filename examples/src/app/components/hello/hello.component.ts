@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelloComponent implements OnInit {
 
-  public title: string;
+   title: string;
 
   ngOnInit() {
     this.title = 'Hello world!';

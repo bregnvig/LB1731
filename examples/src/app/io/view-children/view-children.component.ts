@@ -16,27 +16,27 @@ export class ViewChildrenComponent implements OnInit {
   ngOnInit() {
   }
 
-  public start() {
+   start() {
     this.stopwatches.forEach((child) => child.start());
   }
 
-  public stop() {
+   stop() {
     this.stopwatches.forEach((child) => child.stop());
   }
 
-  public reset() {
+   reset() {
     this.stopwatches.forEach((child) => child.reset());
   }
 
-  public startString() {
+   startString() {
     this.stopwatchesString.forEach((child) => child.start());
   }
 
-  public stopString() {
+   stopString() {
     this.stopwatchesString.forEach((child) => child.stop());
   }
 
-  public resetString() {
+   resetString() {
     this.stopwatchesString.forEach((child) => child.reset());
   }
 

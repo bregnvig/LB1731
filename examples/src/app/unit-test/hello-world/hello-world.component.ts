@@ -11,10 +11,10 @@ export class HelloWorldComponent implements OnInit {
 
   constructor(public service: UserService, private router: Router) { }
 
-  public ngOnInit() {
+   ngOnInit() {
   }
 
-  public gotoRegistration() {
+   gotoRegistration() {
     this.router.navigate(['/register']);
   }
 

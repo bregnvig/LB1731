@@ -10,10 +10,10 @@ export class UserService {
 
   constructor() { }
 
-  public get user(): User {
+   get user(): User {
     return <User> {
       isLoggedIn: true,
-      name: 'Flemming Bregnvig'
+      name: 'Flemming'
     }
   }
 }

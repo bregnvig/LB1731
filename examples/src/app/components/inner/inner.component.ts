@@ -13,7 +13,7 @@ export class InnerComponent implements OnInit, OnDestroy {
     console.log('Constructed');
   }
 
-  public ngOnDestroy() {
+   ngOnDestroy() {
     console.log('Destroyed!!');
   }
 

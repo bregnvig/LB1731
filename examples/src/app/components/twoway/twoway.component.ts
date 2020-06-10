@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TwowayComponent implements OnInit {
 
-  public myTitle = 'Two way binding!!!';
+   myTitle = 'Two way binding!!!';
 
   constructor() { }
 

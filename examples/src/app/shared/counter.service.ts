@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class CounterService {
   private _count;
 
-  public increment(): void {
+   increment(): void {
     this._count += 1;
   }
 
-  public get count(): number {
+   get count(): number {
     return this._count;
   }
 }
