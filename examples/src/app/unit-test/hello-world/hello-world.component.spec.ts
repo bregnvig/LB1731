@@ -53,7 +53,7 @@ describe('HelloWorldComponent', () => {
   });
 
   it('should say welcome stranger, when the user is not logged in', () => {
-    expect(element.textContent).toContain('Welcome stranger');
+    expect(element.textContent).toContain('Welcome stranger!');
   });
 
   it('should say hello Flemming Bregnvig, when Flemming is logged in', () => {

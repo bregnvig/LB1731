@@ -1,7 +1,6 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-
-import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Playground } from '../shared';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -11,11 +10,11 @@ import { Playground } from '../shared';
 export class SidebarComponent {
 
   @Input() playgrounds: Playground[];
-  @Output() public selected = new EventEmitter<Playground>();
+  @Output() selected = new EventEmitter<Playground>();
 
-  public selectedPlayground: Playground;
+  @Input() selectedPlayground: Playground;
 
-  public selectPlayground(playground: Playground): void {
+  selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
     this.selected.emit(playground);
   }
