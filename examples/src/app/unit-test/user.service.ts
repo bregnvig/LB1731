@@ -10,9 +10,9 @@ export class UserService {
 
   constructor() { }
 
-   get user(): User {
-    return <User> {
-      isLoggedIn: true,
+  get user(): User {
+    return <User>{
+      isLoggedIn: false,
       name: 'Flemming'
     }
   }

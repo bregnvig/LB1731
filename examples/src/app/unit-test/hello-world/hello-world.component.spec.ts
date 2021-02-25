@@ -6,17 +6,6 @@ import { ExclamationPipe } from '../exclamation.pipe';
 import { UserService } from '../user.service';
 import { HelloWorldComponent } from './hello-world.component';
 
-const userService = {
-  user: {
-    isLoggedIn: false,
-    name: null,
-  }
-};
-
-const router = {
-  navigate: jasmine.createSpy('navigate')
-};
-
 describe('HelloWorldComponent', () => {
   let component: HelloWorldComponent;
   let fixture: ComponentFixture<HelloWorldComponent>;
@@ -29,11 +18,18 @@ describe('HelloWorldComponent', () => {
       providers: [
         {
           provide: UserService,
-          useFactory: () => userService
+          useValue: {
+            user: {
+              isLoggedIn: false,
+              name: null,
+            }
+          }
         },
         {
           provide: Router,
-          useFactory: () => router
+          useValue: {
+            navigate: jasmine.createSpy('navigate')
+          }
         }
       ]
     })
