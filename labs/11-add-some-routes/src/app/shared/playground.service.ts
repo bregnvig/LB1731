@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, publishLast, refCount } from 'rxjs/operators';
+import { catchError, publishLast, refCount } from 'rxjs/operators';
 import { Playground } from './playground';
-
-
-
-
-
 
 @Injectable()
 export class PlaygroundService {
@@ -27,11 +22,5 @@ export class PlaygroundService {
 
   getPlaygrounds(): Observable<Playground[]> {
     return this.request$;
-  }
-
-  find(id: string): Observable<Playground> {
-    return this.getPlaygrounds().pipe(
-      map(playgrounds => playgrounds.find(p => p.id === id))
-    );
   }
 }
