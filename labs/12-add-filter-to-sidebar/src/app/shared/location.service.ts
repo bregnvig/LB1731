@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-
-import { Coordinate } from './coordinate';
 import { map, publishReplay, refCount } from 'rxjs/operators';
+import { Coordinate } from './coordinate';
+
+
 
 @Injectable()
 export class LocationService {
@@ -18,15 +18,15 @@ export class LocationService {
         }, error => observer.error(error));
         return () => window.navigator.geolocation.clearWatch(watchId);
       }).pipe(
-      map((position: Position) => {
-        return {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-      }),
-      publishReplay(1),
-      refCount(),
-    );
+        map((position: GeolocationPosition) => {
+          return {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          }
+        }),
+        publishReplay(1),
+        refCount(),
+      );
   }
 
   public get current(): Observable<Coordinate> {
