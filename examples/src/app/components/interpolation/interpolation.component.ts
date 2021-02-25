@@ -1,29 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-interpolation',
   templateUrl: './interpolation.component.html',
   styleUrls: ['./interpolation.component.css']
 })
-export class InterpolationComponent implements OnInit {
+export class InterpolationComponent {
 
-   propertyString = 'Property string!';
-   propertyNumber = 17;
-   propertyObject = {
+  propertyString = 'Property string!';
+  propertyNumber = 17;
+  propertyObject = {
     property: 'Object property'
   };
-   propertyNull = null;
+  propertyNull = null;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-   simpleMethod() {
+  simpleMethod() {
     return 'Simple method'
   }
 
-   parameterMethod(string: string) {
+  parameterMethod(string: string) {
     return `Hello ${string}`;
   }
 
