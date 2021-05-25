@@ -12,7 +12,7 @@ import { LocationService, PlaygroundService } from './service';
 })
 export class AppComponent {
 
-  playgrounds: Playground[] = [];
+  playgrounds$: Observable<Playground[]> | undefined;
   playground: Playground | undefined;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
@@ -21,7 +21,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.service.playgrounds$.subscribe(playgrounds => this.playgrounds = playgrounds);
     this.locationService.location$.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
@@ -30,7 +29,7 @@ export class AppComponent {
     );
 
     const getDistance = this.locationService.getDistance;
-    combineLatest([
+    this.playgrounds$ = combineLatest([
       this.service.playgrounds$,
       this.locationService.location$
     ]).pipe(
