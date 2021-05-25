@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-auto btn-group">
+    <button class="btn btn-primary" (click)="fetchPlaygrounds()">Fetch playgrounds</button>
+    <button [disabled]="!playgrounds?.length" class="btn btn-outline-warning" (click)="playgrounds = []">Clear</button>
+  </div>
+</div>
+<article  *ngIf="playgrounds?.length" class="row">
+  <div class="col">
+    <ul class="list-group mt-3">
+      <li class="list-group-item">
+        <div class="row">
+          <input type="text" placeholder="Filter playgrounds" class="col" autofocus [(ngModel)]="term">
+          <div class="col-auto">
+            <button type="button" class="btn btn-secondary" (click)="filterPlaygrounds()">Filter</button>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" *ngFor="let p of playgrounds">
+        <p>{{p.name}}</p>
+        <small></small>
+      </li>
+    </ul>
+  </div>
+</article>

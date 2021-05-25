@@ -1,0 +1,13 @@
+<div class="d-flex min-vh-100">
+  <div class="px-0 d-flex">
+    <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
+      <li ngbNavItem="top">
+        <a ngbNavLink routerLink="/rxjs/imperative" routerLinkActive="active">RxJS</a>
+      </li>
+    </ul>
+  </div>
+  <div class="m-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<img height="256" src="assets/angular.svg">
