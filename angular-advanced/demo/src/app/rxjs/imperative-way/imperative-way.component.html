@@ -4,20 +4,20 @@
     <button [disabled]="!playgrounds?.length" class="btn btn-outline-warning" (click)="playgrounds = []">Clear</button>
   </div>
 </div>
-<article  *ngIf="playgrounds?.length" class="row">
+<article  *ngIf="playgrounds?.length" class="row w-100">
   <div class="col">
     <ul class="list-group mt-3">
       <li class="list-group-item">
         <div class="row">
-          <input type="text" placeholder="Filter playgrounds" class="col" autofocus [(ngModel)]="term">
+          <input type="text" placeholder="Filter playgrounds" class="col" autofocus [(ngModel)]="term" (keydown.enter)="filterPlaygrounds()">
           <div class="col-auto">
             <button type="button" class="btn btn-secondary" (click)="filterPlaygrounds()">Filter</button>
           </div>
         </div>
       </li>
-      <li class="list-group-item" *ngFor="let p of playgrounds">
-        <p>{{p.name}}</p>
-        <small></small>
+      <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
+        {{p.name}}
+        <span class="badge badge-primary">{{getDistance(p)}}</span>
       </li>
     </ul>
   </div>
