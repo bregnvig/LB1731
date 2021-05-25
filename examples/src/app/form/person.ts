@@ -1,3 +1,3 @@
 export class Person {
-  constructor(public firstName: string, public lastName: string, public favoriteColor: string, public height?: number) {}
+  constructor(public firstName: string, public lastName: string, public favoriteColor: string, public height?: number, public blabla = 42) { }
 }

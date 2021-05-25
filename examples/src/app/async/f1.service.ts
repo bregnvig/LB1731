@@ -1,12 +1,12 @@
 
-import {interval,  Observable, of } from 'rxjs';
-
-import {publishReplay, mergeMap, startWith, map, publishLast, refCount, switchMap, tap, catchError} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-
+import { interval, Observable, of } from 'rxjs';
+import { catchError, map, publishLast, publishReplay, refCount, startWith, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
-import {HttpClient} from '@angular/common/http';
+
+
+
 
 
 
@@ -15,8 +15,8 @@ export class F1SimpleService {
 
   constructor(private http: HttpClient) { }
 
-   getDrivers(): Observable<any> {
-    return this.http.get(`http://ergast.com/api/f1/2019/drivers.json`);
+  getDrivers(): Observable<any> {
+    return this.http.get(`http://ergast.com/api/f1/2020/drivers.json`);
   }
 }
 
@@ -31,7 +31,7 @@ export class F1BetterService {
     )
   }
 
-   getDrivers(): Observable<Driver[]> {
+  getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -48,7 +48,7 @@ export class F1CachedService {
     );
   }
 
-   getDrivers(): Observable<Driver[]> {
+  getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -67,7 +67,7 @@ export class F1AutoRefreshService {
     );
   }
 
-   getDrivers(): Observable<Driver[]> {
+  getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
@@ -79,14 +79,14 @@ export class F1LocalStorageCache {
   constructor(service: F1BetterService) {
     this.request$ = service.getDrivers().pipe(
       tap(drivers => localStorage.setItem('drivers', JSON.stringify(drivers))),
-      catchError(error=> {
+      catchError(error => {
         console.log(error);
         return of<Driver[]>(JSON.parse(localStorage.getItem('drivers')) || [])
       })
     )
   }
 
-   getDrivers(): Observable<Driver[]> {
+  getDrivers(): Observable<Driver[]> {
     return this.request$;
   }
 }
