@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, interval, Observable } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { Center, Marker } from './leaflet';
 import { Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
+import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
@@ -30,7 +31,7 @@ export class AppComponent {
 
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([
-      this.service.playgrounds$,
+      interval(10000).pipe(startWith(null), switchMap(() => this.service.playgrounds$.pipe(withLength()))),
       this.locationService.location$
     ]).pipe(
       map(([playgrounds, location]) =>
