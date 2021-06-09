@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Coordinate, Playground } from 'src/app/model';
-import { LocationService } from 'src/app/service';
+import { LocationService } from 'src/app/shared/service';
+import { Coordinate, Playground } from '../model';
 
 @Pipe({
   name: 'distance'

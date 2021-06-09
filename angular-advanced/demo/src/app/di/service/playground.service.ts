@@ -1,4 +1,7 @@
-[
+import { Injectable } from "@angular/core";
+import { of } from "rxjs";
+
+const aarhusPlaygrounds = [
   {
     "id": "legeplads.1",
     "name": "Havrebakkens Legeplads 3",
@@ -403,3 +406,15 @@
     }
   }
 ]
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AarhusPlaygroundService {
+  playgrounds$ = of(aarhusPlaygrounds);
+
+  constructor() {
+    console.log('Angular just created the AarhusPlaygroundService');
+
+  }
+}

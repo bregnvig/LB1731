@@ -3,19 +3,20 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../shared/shared.module';
 import { ImperativeWayComponent } from './imperative-way/imperative-way.component';
-import { DistancePipe } from './pipe/distance.pipe';
 import { RxJSWayComponent } from './rxjs-way/rxjs-way.component';
 import { RxJSComponent } from './rxjs.component';
 
 
 @NgModule({
-  declarations: [RxJSComponent, ImperativeWayComponent, RxJSWayComponent, DistancePipe],
+  declarations: [RxJSComponent, ImperativeWayComponent, RxJSWayComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

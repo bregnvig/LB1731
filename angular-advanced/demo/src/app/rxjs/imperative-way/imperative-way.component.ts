@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Coordinate, Playground } from 'src/app/model';
-import { LocationService, PlaygroundService } from 'src/app/service';
+import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
   selector: 'loop-imperative-way',

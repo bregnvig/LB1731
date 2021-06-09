@@ -1,0 +1,9 @@
+<ul ngbNav class="nav-tabs mb-3" activeId="imperative">
+  <li ngbNavItem="without-di">
+    <a ngbNavLink routerLink="without-di" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Without DI</a>
+  </li>
+  <li ngbNavItem="with-di">
+    <a ngbNavLink routerLink="with-di" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">With DI</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

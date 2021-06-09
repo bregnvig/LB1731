@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
-import { Playground } from 'src/app/model';
-import { LocationService, PlaygroundService } from 'src/app/service';
+import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 import { debug, useCacheOnError } from '../rxjs-utils';
 
 @Component({

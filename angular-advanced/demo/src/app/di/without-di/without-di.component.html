@@ -1,0 +1,10 @@
+<article  class="row w-100">
+  <div class="col">
+    <ul class="list-group mt-3">
+      <li class="list-group-item" *ngFor="let p of playgrounds$ | async">
+        {{p.name}}
+        <span class="badge badge-primary">{{p | distance: (location$ | async)  }}</span>
+      </li>
+    </ul>
+  </div>
+</article>

@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,7 +17,12 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: PLAYGROUND_SERVICE_URL,
+    //   useValue: 'assets/aarhus.json',
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
