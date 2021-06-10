@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, of, throwError } from 'rxjs';
+import { catchError, debounceTime, map, retryWhen, startWith, switchMap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
-import { debug, useCacheOnError } from '../rxjs-utils';
+import { debug } from '../rxjs-utils';
 
 @Component({
   selector: 'loop-rxjs-way',
@@ -25,9 +25,9 @@ export class RxJSWayComponent implements OnInit {
     const playgrounds$ = this.refresh$.pipe(
       switchMap(() => this.service.playgrounds$),
       debug('playgrounds'),
-      useCacheOnError('playgrounds'),
-      // retryWhen(error => window.navigator.onLine ? throwError(error) : fromEvent(window, 'online')),
-      // catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]') as Playground[]))
+      // useCacheOnError('playgrounds'),
+      retryWhen(error => window.navigator.onLine ? throwError(error) : fromEvent(window, 'online')),
+      catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]') as Playground[]))
     );
     const filtered$ = combineLatest([
       playgrounds$,
