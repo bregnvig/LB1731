@@ -6,15 +6,15 @@ interface Engine {
 }
 
 class AMG178 implements Engine {
-  effect: 503;
-  torgue: 700;
-  cylinders: 6;
+  effect = 503;
+  torgue = 700;
+  cylinders = 6;
 }
 
 class AMG139 implements Engine {
-  effect: 422;
-  torgue: 500;
-  cylinders: 4;
+  effect = 422;
+  torgue = 500;
+  cylinders = 4;
 }
 
 class NonDICar {

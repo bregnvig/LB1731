@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { DIComponent } from './di.component';
+import { RandomListComponent } from './random-list/random-list.component';
+import { RandomComponent } from './random/random.component';
 import { WithDIComponent } from './with-di/with-di.component';
 import { WithoutDIComponent } from './without-di/without-di.component';
 
@@ -13,7 +15,9 @@ import { WithoutDIComponent } from './without-di/without-di.component';
   declarations: [
     WithoutDIComponent,
     DIComponent,
-    WithDIComponent
+    WithDIComponent,
+    RandomComponent,
+    RandomListComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,10 @@ import { WithoutDIComponent } from './without-di/without-di.component';
           {
             path: 'with-di',
             component: WithDIComponent,
+          },
+          {
+            path: 'levels',
+            component: RandomListComponent,
           },
           {
             path: '**',
