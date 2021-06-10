@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { combineLatest, interval, Observable } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { Center, Marker } from './leaflet';
-import { Playground } from './model';
+import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { withLength } from './utils/rxjs-utils';
 
@@ -14,7 +14,7 @@ import { withLength } from './utils/rxjs-utils';
 export class AppComponent {
 
   playgrounds$: Observable<Playground[]> | undefined;
-  playground: Playground | undefined;
+  playground$ = new Subject<Playground>();
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
 
@@ -25,14 +25,16 @@ export class AppComponent {
     this.locationService.location$.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
-    this.markers$ = this.locationService.location$.pipe(
-      map(location => new Marker('me', location.lat, location.lng))
+    this.markers$ = merge(
+      this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
+      this.playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng, p.name))),
     );
 
     const getDistance = this.locationService.getDistance;
+    const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
       interval(10000).pipe(startWith(null), switchMap(() => this.service.playgrounds$.pipe(withLength()))),
-      this.locationService.location$
+      this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
@@ -40,8 +42,4 @@ export class AppComponent {
     );
   }
 
-  playgroundSelected(playground: Playground): void {
-    this.playground = playground;
-    console.log('Playground selected', playground);
-  }
 }

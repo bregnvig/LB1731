@@ -154,7 +154,7 @@
     },
     {
       "id": "legeplads.18",
-      "name": "S�parkens Legeplads 3",
+      "name": "Søparkens Legeplads 3",
       "description": "Mellemstore legepladser (10 til 25 børn)",
       "position": {
         "lng": 10.106169,
@@ -226,7 +226,7 @@
     },
     {
       "id": "legeplads.26",
-      "name": "Pr�stevangens Legeplads 3",
+      "name": "Præstevangens Legeplads 3",
       "description": "Mellemstore legepladser (10 til 25 børn)",
       "position": {
         "lng": 10.168206,
@@ -289,7 +289,7 @@
     },
     {
       "id": "legeplads.33",
-      "name": "�by Parks Legeplads 2",
+      "name": "Øby Parks Legeplads 2",
       "description": "Store legepladser (over 25 børn)",
       "position": {
         "lng": 10.165752,

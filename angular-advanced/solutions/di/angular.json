@@ -70,6 +70,20 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "aarhus": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.aarhus.ts"
+                }
+              ]              
             }
           },
           "defaultConfiguration": "production"
@@ -82,6 +96,9 @@
             },
             "development": {
               "browserTarget": "rxjs:build:development"
+            },
+            "aarhus": {
+              "browserTarget": "rxjs:build:aarhus"
             }
           },
           "defaultConfiguration": "development"
