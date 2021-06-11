@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { ImperativeWayComponent } from './imperative-way/imperative-way.component';
+import { MemoryLeakComponent } from './memory-leak/memory-leak.component';
 import { RxJSWayComponent } from './rxjs-way/rxjs-way.component';
 import { RxJSComponent } from './rxjs.component';
 
 
 @NgModule({
-  declarations: [RxJSComponent, ImperativeWayComponent, RxJSWayComponent],
+  declarations: [RxJSComponent, ImperativeWayComponent, RxJSWayComponent, MemoryLeakComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,6 +30,10 @@ import { RxJSComponent } from './rxjs.component';
           {
             path: 'rxjs-way',
             component: RxJSWayComponent,
+          },
+          {
+            path: 'memory-leak',
+            component: MemoryLeakComponent,
           },
           {
             path: '**',

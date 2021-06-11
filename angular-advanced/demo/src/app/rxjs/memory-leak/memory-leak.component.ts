@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { interval, Observable } from 'rxjs';
+
+let creation = 0;
+
+@Component({
+  selector: 'loop-memory-leak',
+  template: `
+    <button type="button" class="btn btn-primary" (click)="go()">Start</button>
+    <ul>
+      <li *ngFor="let no of nos">{{no}}</li>
+    </ul>
+    <!-- <ul>
+      <li *ngFor="let no of nos$ | async">{{no}}</li>
+    </ul> -->
+  `,
+})
+export class MemoryLeakComponent {
+
+  nos: number[] = [];
+  instanceNo = creation++;
+
+  nos$: Observable<number[]> | undefined;
+
+  go() {
+    // this.nos$ = interval(1).pipe(scan((acc, no) => {
+    //   acc.push(no);
+    //   return acc;
+    // }, [] as number[]));
+    interval(1).subscribe(no => {
+      console.log(`Creation ${this.instanceNo}`, no);
+      this.nos.push(no);
+    })
+  }
+}

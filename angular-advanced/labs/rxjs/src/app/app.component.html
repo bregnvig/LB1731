@@ -1,3 +1,3 @@
 <leaflet [center]="center" [markers]="markers$"></leaflet>
-<loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)"></loop-sidebar>
-<loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+<loop-sidebar [playgrounds]="playgrounds" (selected)="playground  = $event"></loop-sidebar>
+<loop-footer *ngIf="playground" [playground]="playground"></loop-footer>
