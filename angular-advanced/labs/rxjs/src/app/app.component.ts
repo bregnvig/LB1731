@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Center, Marker } from './leaflet';
 import { Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
-import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
@@ -24,7 +23,7 @@ export class AppComponent {
     this.locationService.location$.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
-    this.service.playgrounds$.pipe(withLength()).subscribe(playgrounds => this.playgrounds = playgrounds);
+    this.service.playgrounds$.subscribe(playgrounds => this.playgrounds = playgrounds);
   }
 
 }
