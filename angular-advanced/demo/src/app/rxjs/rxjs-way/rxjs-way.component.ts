@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, startWith, tap } from 'rxjs/operators';
+import { debounceTime, exhaustMap, map, startWith, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 import { useCacheOnError } from '../rxjs-utils';
 
@@ -22,7 +22,7 @@ export class RxJSWayComponent implements OnInit {
 
   ngOnInit(): void {
     const playgrounds$ = combineLatest([
-      this.service.playgrounds$.pipe(useCacheOnError('playgrounds')),
+      this.refresh$.pipe(exhaustMap(() => this.service.playgrounds$.pipe(useCacheOnError('playgrounds')))),
       this.filterControl.valueChanges.pipe(
         debounceTime<string>(300),
         tap(_ => console.log(_)),
@@ -30,10 +30,7 @@ export class RxJSWayComponent implements OnInit {
         map(term => term.toLocaleLowerCase())
       ),
     ]).pipe(
-      map(([playgrounds, term]) => term.length > 3
-        ? playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term))
-        : []
-      )
+      map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
     );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([
