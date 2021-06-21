@@ -59,7 +59,7 @@ export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy
 
   ngOnDestroy() {
     this.destroyed$.next(true);
-    (this.subscriptions || []).forEach(s => s.unsubscribe);
+    (this.subscriptions || []).forEach(s => s.unsubscribe());
   }
 
   takeUntilDestroyed<T>(): UnaryFunction<Observable<T>, Observable<T>> {

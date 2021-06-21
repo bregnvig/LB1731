@@ -3,7 +3,7 @@
     <button class="btn btn-primary" (click)="refresh$.next()">Refresh</button>
   </div>
 </div>
-<article  *ngIf="playgrounds$ | async as playgrounds" class="row w-100">
+<article class="row w-100">
   <div class="col">
     <ul class="list-group mt-3">
       <li class="list-group-item">
@@ -11,10 +11,13 @@
           <input type="text" placeholder="Filter playgrounds" class="col" autofocus [formControl]="filterControl">
         </div>
       </li>
-      <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
-        {{p.name}}
-        <span class="badge badge-primary">{{p | distance:(location$ | async)}}</span>
-      </li>
+      <ng-container  *ngIf="playgrounds$ | async as playgrounds" >
+
+        <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
+          {{p.name}}
+          <span class="badge badge-primary">{{p | distance:(location$ | async)}}</span>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </article>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Host } from '@angular/core';
 import { RandomService } from '../service/random.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { RandomService } from '../service/random.service';
 })
 export class RandomComponent {
 
-  constructor(public service: RandomService) { }
+  constructor(@Host() public service: RandomService) { }
+
 
 }

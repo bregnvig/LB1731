@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, throwError } from 'rxjs';
-import { catchError, debounceTime, map, retryWhen, startWith, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { debounceTime, map, startWith, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
-import { debug } from '../rxjs-utils';
+import { useCacheOnError } from '../rxjs-utils';
 
 @Component({
   selector: 'loop-rxjs-way',
@@ -18,26 +18,26 @@ export class RxJSWayComponent implements OnInit {
   location$ = this.locationService.location$;
   trackById = (i: number, playground: Playground): string => playground.id;
 
-  constructor(private service: PlaygroundService, private locationService: LocationService) {
-  }
+  constructor(private service: PlaygroundService, private locationService: LocationService) { }
 
   ngOnInit(): void {
-    const playgrounds$ = this.refresh$.pipe(
-      switchMap(() => this.service.playgrounds$),
-      debug('playgrounds'),
-      // useCacheOnError('playgrounds'),
-      retryWhen(error => window.navigator.onLine ? throwError(error) : fromEvent(window, 'online')),
-      catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]') as Playground[]))
-    );
-    const filtered$ = combineLatest([
-      playgrounds$,
-      this.filterControl.valueChanges.pipe(debounceTime<string>(300), startWith(''), map(term => term.toLocaleLowerCase())),
+    const playgrounds$ = combineLatest([
+      this.service.playgrounds$.pipe(useCacheOnError('playgrounds')),
+      this.filterControl.valueChanges.pipe(
+        debounceTime<string>(300),
+        tap(_ => console.log(_)),
+        startWith(''),
+        map(term => term.toLocaleLowerCase())
+      ),
     ]).pipe(
-      map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
+      map(([playgrounds, term]) => term.length > 3
+        ? playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term))
+        : []
+      )
     );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([
-      filtered$,
+      playgrounds$,
       this.locationService.location$
     ]).pipe(
       map(([playgrounds, location]) =>
