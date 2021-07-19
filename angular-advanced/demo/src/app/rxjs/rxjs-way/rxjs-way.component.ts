@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, exhaustMap, map, startWith, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { catchError, debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
-import { useCacheOnError } from '../rxjs-utils';
 
 @Component({
   selector: 'loop-rxjs-way',
@@ -22,15 +21,15 @@ export class RxJSWayComponent implements OnInit {
 
   ngOnInit(): void {
     const playgrounds$ = combineLatest([
-      this.refresh$.pipe(exhaustMap(() => this.service.playgrounds$.pipe(useCacheOnError('playgrounds')))),
-      this.filterControl.valueChanges.pipe(
-        debounceTime<string>(300),
-        tap(_ => console.log(_)),
-        startWith(''),
-        map(term => term.toLocaleLowerCase())
+      this.refresh$.pipe(
+        switchMap(() => this.service.playgrounds$),
+        tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
+        catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
       ),
+      this.filterControl.valueChanges.pipe(debounceTime(400), startWith(''), map((term: string) => term.toLowerCase()))
     ]).pipe(
-      map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
+      tap(_ => console.log(_)),
+      map(([playgrounds, term]: [Playground[], string]) => playgrounds.filter(p => p.name.toLowerCase().includes(term)))
     );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([

@@ -1,13 +1,13 @@
 import { Directive, OnDestroy } from "@angular/core";
-import { fromEvent, Observable, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
-import { switchMapTo, takeUntil, tap } from "rxjs/operators";
+import { fromEvent, Observable, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
+import { switchMap, takeUntil, tap } from "rxjs/operators";
 
 export function useCacheOnError(key: string) {
   return function <T>(source: Observable<T>): Observable<T> {
-    let innerSub: Subscription;
+    let innerSubscription: Subscription;
     const subscribeForCacheAndRetry = function (innerSource: Observable<T>, subscriber: Subscriber<T>) {
-      innerSub?.unsubscribe();
-      innerSub = innerSource.subscribe({
+      innerSubscription?.unsubscribe();
+      innerSubscription = innerSource.subscribe({
         next(value) {
           localStorage.setItem(key, JSON.stringify(value));
           subscriber.next(value);
@@ -16,7 +16,7 @@ export function useCacheOnError(key: string) {
           console.log('Problems fetching data', error);
           localStorage.getItem(key) && subscriber.next(JSON.parse(localStorage.getItem(key)!));
           !window.navigator.onLine && subscribeForCacheAndRetry(fromEvent(window, 'online').pipe(
-            switchMapTo(source),
+            switchMap(() => source),
           ), subscriber);
           window.navigator.onLine && !localStorage.getItem(key) && subscriber.error(error);
         },
@@ -30,7 +30,7 @@ export function useCacheOnError(key: string) {
       subscribeForCacheAndRetry(source, subscriber)
       return () => {
         console.log(`Unsubscribing from source`);
-        innerSub?.unsubscribe()
+        innerSubscription?.unsubscribe()
       };
     })
   }
@@ -63,7 +63,7 @@ export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy
   }
 
   takeUntilDestroyed<T>(): UnaryFunction<Observable<T>, Observable<T>> {
-    return pipe(takeUntil<T>(this.destroyed$));
+    return takeUntil<T>(this.destroyed$);
   }
 
 }
