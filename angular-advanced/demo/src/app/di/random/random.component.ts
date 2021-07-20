@@ -4,7 +4,7 @@ import { RandomService } from '../service/random.service';
 @Component({
   selector: 'loop-random',
   template: '{{service.no}}',
-  // providers: [RandomService]
+  providers: [RandomService]
 })
 export class RandomComponent {
 
