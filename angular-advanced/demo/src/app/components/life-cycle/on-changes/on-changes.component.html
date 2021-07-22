@@ -1,0 +1,13 @@
+<div class="form-group row">
+  <div class="col">
+    <input id="text" type="text" placeholder="Skriv tekst" class="form-control" (keydown.enter)="add()" [formControl]="control">
+  </div>
+</div>
+<article class="row">
+  <section class="col-6">
+    <loop-on-change-display-list [items]="items1"></loop-on-change-display-list>
+  </section>
+  <section class="col-6">
+    <loop-on-change-display-list [items]="items2"></loop-on-change-display-list>
+  </section>
+</article>

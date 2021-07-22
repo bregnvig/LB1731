@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./di/di.module').then(m => m.DIModule)
   },
   {
+    path: 'components',
+    loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
+  },
+  {
     path: '**',
     redirectTo: 'rxjs'
   }
