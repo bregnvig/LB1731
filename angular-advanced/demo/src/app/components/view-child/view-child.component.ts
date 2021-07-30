@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
@@ -6,14 +6,18 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
   templateUrl: './view-child.component.html',
   styleUrls: ['./view-child.component.scss']
 })
-export class ViewChildComponent {
+export class ViewChildComponent implements OnInit {
 
-  @ViewChild(StopWatchComponent) stopWatch: StopWatchComponent | undefined;
+  @ViewChild(StopWatchComponent, { static: true }) stopWatch!: StopWatchComponent;
+
+  ngOnInit() {
+    this.stopWatch.start();
+  }
 
   start() {
-    this.stopWatch?.start();
+    this.stopWatch.start();
   }
   stop() {
-    this.stopWatch?.stop();
+    this.stopWatch.stop();
   }
 }

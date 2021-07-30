@@ -1,0 +1,9 @@
+<ul class="list-group">
+  <li *ngFor="let playground of playgrounds$ | async" 
+    class="list-group-item">
+    <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
+    <ng-template  #popoverContent>
+      <loop-popover-content [playground]="playground"></loop-popover-content>
+    </ng-template>
+  </li>
+</ul>

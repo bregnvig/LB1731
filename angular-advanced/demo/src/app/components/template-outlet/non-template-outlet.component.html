@@ -1,0 +1,14 @@
+<div class="form-group row">
+  <div class="col">
+    <input id="filter" type="text" class="form-control" [formControl]="filterControl">
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <ul class="list-group" *ngIf="playgrounds$ | async as playgrounds">
+      <li *ngFor="let playground of playgrounds" class="list-group-item">
+        {{playground.name}}
+      </li>
+    </ul>
+  </div>
+</div>
