@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-6" style="background-color: coral;" (mousemove)="mouseMove($event)"></div>
+  <div #outside class="col-6" style="background-color: greenyellow;"></div>
+</div>
+<hr>
+<h5>Change detection strategies <button class="btn btn-primary" [disabled]="no.value !== 0" (click)="startCounter()">Start</button></h5>
+<loop-input-property [no]="no"></loop-input-property>
+<loop-input-property-on-push-by-reference [no]="no"></loop-input-property-on-push-by-reference>
+<loop-input-property-on-push-simple-type [no]="no.value"></loop-input-property-on-push-simple-type>

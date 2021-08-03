@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { SharedModule } from '../shared/shared.module';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { InputPropertyOnPushByReferenceComponent } from './change-detection/input-property/input-property-on-push-by-reference.component';
+import { InputPropertyOnPushSimpleTypeComponent } from './change-detection/input-property/input-property-on-push-simple-type.component';
+import { InputPropertyComponent } from './change-detection/input-property/input-property.component copy';
 import { ComponentsComponent } from './components.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
@@ -52,7 +56,11 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     NgDynamicComponentComponent,
     TemplateOutletComponent,
     CommonFilterListComponent,
-    NonTemplateOutletComponent
+    NonTemplateOutletComponent,
+    ChangeDetectionComponent,
+    InputPropertyComponent,
+    InputPropertyOnPushByReferenceComponent,
+    InputPropertyOnPushSimpleTypeComponent,
   ],
   imports: [
     CommonModule,
@@ -97,6 +105,10 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
           {
             path: 'template-outlet',
             component: TemplateOutletComponent,
+          },
+          {
+            path: 'change-detection',
+            component: ChangeDetectionComponent,
           },
           {
             path: '**',
