@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -23,8 +23,8 @@ export class RxJSWayComponent implements OnInit {
     const playgrounds$ = combineLatest([
       this.refresh$.pipe(
         switchMap(() => this.service.playgrounds$),
-        tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
-        catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
+        // tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
+        // catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
       ),
       this.filterControl.valueChanges.pipe(debounceTime(400), startWith(''), map((term: string) => term.toLowerCase()))
     ]).pipe(
@@ -39,6 +39,6 @@ export class RxJSWayComponent implements OnInit {
       map(([playgrounds, location]) =>
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
-    )
+    );
   }
 }
