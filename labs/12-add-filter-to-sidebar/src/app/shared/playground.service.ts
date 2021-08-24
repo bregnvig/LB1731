@@ -30,6 +30,8 @@ export class PlaygroundService {
   }
 
   public find(id: string): Observable<Playground> {
-    return this.getPlaygrounds().pipe(map(playgrounds => playgrounds.find(playground => playground.id === id)));
+    return this.request$.pipe(
+      map(playgrounds => playgrounds.find(p => p.id === id))
+    );
   }
 }

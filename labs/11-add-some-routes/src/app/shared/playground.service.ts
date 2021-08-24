@@ -1,7 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, publishLast, refCount } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+import {Observable, of} from 'rxjs';
+import {catchError, publishLast, refCount} from 'rxjs/operators';
+
+
+
+
 import { Playground } from './playground';
 
 @Injectable()
@@ -20,7 +25,7 @@ export class PlaygroundService {
     );
   }
 
-  getPlaygrounds(): Observable<Playground[]> {
+  public getPlaygrounds(): Observable<Playground[]> {
     return this.request$;
   }
 }
