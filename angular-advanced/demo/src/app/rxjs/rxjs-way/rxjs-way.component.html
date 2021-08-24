@@ -12,7 +12,6 @@
         </div>
       </li>
       <ng-container  *ngIf="playgrounds$ | async as playgrounds" >
-
         <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
           {{p.name}}
           <span class="badge badge-primary">{{p | distance:(location$ | async)}}</span>
