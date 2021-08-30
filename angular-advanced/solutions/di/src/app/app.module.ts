@@ -45,7 +45,7 @@ function prefetch(service: PlaygroundService) {
     // },
     {
       provide: PLAYGROUNDS_URL,
-      useValue: environment.location
+      useValue: environment.playgroundsURL
     },
     {
       provide: APP_INITIALIZER,

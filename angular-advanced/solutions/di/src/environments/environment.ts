@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  location: 'copenhagen'
+  location: 'copenhagen',
+  playgroundsURL: 'assets/copenhagen.json'
 };
 
 /*
