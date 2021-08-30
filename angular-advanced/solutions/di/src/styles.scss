@@ -40,25 +40,25 @@ aside {
   z-index: 501;
   transition: 0.43s ease-in-out;
   form {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
   > nav {
-      max-height: calc(100vh - 86px);
-      overflow: auto;
+    max-height: calc(100vh - 86px);
+    overflow: auto;
   }
   @media screen and (max-width: 599px) {
-      border-radius: 0;
-      top: calc(100vh - 20px);
-      right: 0;
-      width: 100%;
-      height: calc(50vh + 20px);
-      border-top: 18px solid black;
-      margin: 0;
-      transition: 0.43s ease-in-out;
-      &:focus {
-        border-top-color: orange;
-        transform: translateY(-50vh);
-      }
+    border-radius: 0;
+    top: calc(100vh - 20px);
+    right: 0;
+    width: 100%;
+    height: calc(50vh + 20px);
+    border-top: 18px solid black;
+    margin: 0;
+    transition: 0.43s ease-in-out;
+    &:focus {
+      border-top-color: orange;
+      transform: translateY(-50vh);
+    }
   }
 
 }
@@ -73,6 +73,12 @@ footer {
   background-color:rgba(0, 0, 0, 0.5);
   z-index: 500;
   @media screen and (max-width: 599px) {
-      bottom: 20px;
+    h3 {
+      font-size: 1.5rem !important;
+    }
+    p {
+      font-size: 1rem;
+    }
+    bottom: 20px;
   }
 }
