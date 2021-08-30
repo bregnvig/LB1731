@@ -405,7 +405,7 @@ const aarhusPlaygrounds = [
       "lat": 56.20603
     }
   }
-]
+];
 
 @Injectable({
   providedIn: 'root'
@@ -415,6 +415,5 @@ export class AarhusPlaygroundService {
 
   constructor() {
     console.log('Angular just created the AarhusPlaygroundService');
-
   }
 }

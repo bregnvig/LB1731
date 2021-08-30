@@ -1,25 +1,22 @@
+import { Component } from '@angular/core';
 import { Person } from './../person';
-import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-oneway',
   templateUrl: './oneway.component.html',
   styleUrls: ['./oneway.component.css']
 })
-export class OnewayComponent implements OnInit {
-   colors = ["Red", "Green", "Blue"];
-   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+export class OnewayComponent {
+  colors = ["Red", "Green", "Blue"];
+  model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
   constructor() { }
-
-  ngOnInit() {
-    this.model['blabla'] = 42;
-  }
 
   get diagnostic() {
     return JSON.stringify(this.model);
   }
 
   logValue(value: any) {
-    console.log('Value', {...this.model, ...value});
+    console.log('Value', { ...this.model, ...value });
+    // console.log('Value', Object.assign(this.model, value));
   }
 }

@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import localeDa from '@angular/common/locales/da';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -31,6 +33,7 @@ library.add(fas, far);
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
+    registerLocaleData(localeDa);
     // Add multiple icons to the library
     library.addIconPacks(fas, far);
   }

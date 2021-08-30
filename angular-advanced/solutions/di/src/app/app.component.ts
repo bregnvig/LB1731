@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
@@ -33,7 +33,7 @@ export class AppComponent {
     const getDistance = this.locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
-      interval(10000).pipe(startWith(null), switchMap(() => this.service.playgrounds$.pipe(withLength()))),
+      this.service.playgrounds$.pipe(withLength()),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
