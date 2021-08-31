@@ -11,6 +11,7 @@ import { RandomListComponent } from './random-list/random-list.component';
 import { RandomWrapperComponent } from './random-list/random-wrapper.component';
 import { RandomComponent } from './random/random.component';
 import { WithDIComponent } from './with-di/with-di.component';
+import { WithInjectorComponent } from './with-injector/with-injector.component';
 import { WithoutDIComponent } from './without-di/without-di.component';
 
 
@@ -20,6 +21,7 @@ import { WithoutDIComponent } from './without-di/without-di.component';
     WithoutDIComponent,
     DIComponent,
     WithDIComponent,
+    WithInjectorComponent,
     RandomComponent,
     RandomListComponent,
     RandomWrapperComponent,
@@ -43,6 +45,10 @@ import { WithoutDIComponent } from './without-di/without-di.component';
           {
             path: 'with-di',
             component: WithDIComponent,
+          },
+          {
+            path: 'with-injector',
+            component: WithInjectorComponent,
           },
           {
             path: 'levels',
