@@ -1,28 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  templateUrl: './event.component.html'
 })
-export class EventComponent implements OnInit {
+export class EventComponent {
 
-   counter = 0;
-   isDown = false;
-  constructor() { }
+  counter = 0;
+  isDown = false;
 
-  ngOnInit() {
-  }
-
-   count() {
+  count() {
     this.counter += 1;
   }
 
-   up() {
+  up() {
     this.isDown = false;
   }
 
-   down() {
+  down() {
     this.isDown = true;
   }
 

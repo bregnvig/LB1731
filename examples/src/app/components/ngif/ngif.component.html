@@ -2,10 +2,11 @@
   <div class="pane fixed-size">
     <button class="btn btn-primary" (click)="toggle()">Toggle</button>
 
-    <p *ngIf="show">
+    <p *ngIf="show; else myElse">
       ngif works!
       <app-inner></app-inner>
     </p>
+    <ng-template #myElse>The <code>else</code> template could go here</ng-template>
   </div>
   
 

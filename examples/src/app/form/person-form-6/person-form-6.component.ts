@@ -15,7 +15,7 @@ export class PersonForm6Component implements OnInit {
   myForm: FormGroup;
 
   ngOnInit() {
-    const mustBeFlemming = (control: AbstractControl): ValidationErrors | null => control.value === 'Flemming' ? null : { required: true };
+    const mustBeFlemming = (control: AbstractControl): ValidationErrors | null => control.value === 'Flemming' ? null : { mustBeFlemming: true };
     this.myForm = new FormGroup(
       {
         name: new FormGroup({

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hello',
-  template: '<h1>{{title}}</h1>',
-  // templateUrl: './hello.component.html',
+  template: `
+  <h1>
+    {{title}}
+  </h1>`,
   styles: [
     `h1 {
       color: darkred !important;
@@ -12,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelloComponent implements OnInit {
 
-   title: string;
+  title: string;
 
   ngOnInit() {
     this.title = 'Hello world!';

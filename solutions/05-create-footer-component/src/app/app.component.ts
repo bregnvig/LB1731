@@ -1,7 +1,6 @@
-import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 import { Component } from '@angular/core';
-
 import { Playground } from './shared';
+import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 
 @Component({
   selector: 'app-root',
