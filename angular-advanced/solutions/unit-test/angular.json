@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "615dde11-b503-4416-8da6-501d321f39ef"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rxjs": {
+    "unit-test": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,12 +15,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "loop",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/rxjs",
+            "outputPath": "dist/unit-test",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -34,13 +31,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss", 
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js"
-            ]
-          },
+            ]          },
           "configurations": {
             "production": {
               "budgets": [
@@ -78,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rxjs:build:production"
+              "browserTarget": "unit-test:build:production"
             },
             "development": {
-              "browserTarget": "rxjs:build:development"
+              "browserTarget": "unit-test:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,16 +85,14 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rxjs:build"
+            "browserTarget": "unit-test:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
@@ -113,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "rxjs"
+  "defaultProject": "unit-test"
 }
