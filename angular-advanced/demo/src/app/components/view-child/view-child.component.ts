@@ -9,6 +9,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 export class ViewChildComponent implements OnInit {
 
   @ViewChild(StopWatchComponent, { static: true }) stopWatch!: StopWatchComponent;
+  running = true;
 
   ngOnInit() {
     this.stopWatch.start();
@@ -16,8 +17,10 @@ export class ViewChildComponent implements OnInit {
 
   start() {
     this.stopWatch.start();
+    this.running = true;
   }
   stop() {
     this.stopWatch.stop();
+    this.running = false;
   }
 }

@@ -15,10 +15,8 @@ import { PlaygroundListItemComponent } from './content-projection/playground-lis
 import { DynamicComponentComponent } from './dynamic-component/dynamic-component.component';
 import { DynamicHostDirective } from './dynamic-component/dynamic-host.directive';
 import { FancyPlaygroundDetailsComponent } from './dynamic-component/fancy-playground-details/fancy-playground-details.component';
-import { FancyPopoverService } from './dynamic-component/fancy-popover.service';
 import { NgDynamicComponentComponent } from './dynamic-component/ng-dynamic-component.component';
 import { PopoverContentComponent } from './dynamic-component/popover-content/popover-content.component';
-import { PopoverService } from './dynamic-component/popover.service';
 import { SimplePlaygroundDetailsComponent } from './dynamic-component/simple-playground-details/simple-playground-details.component';
 import { AfterViewInitComponent } from './life-cycle/after-view-init/after-view-init.component';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
@@ -119,10 +117,10 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     ])
   ],
   providers: [
-    {
-      provide: PopoverService,
-      useClass: FancyPopoverService,
-    }
+    // {
+    //   provide: PopoverService,
+    //   useClass: FancyPopoverService,
+    // }
   ]
 })
 export class ComponentsModule { }
