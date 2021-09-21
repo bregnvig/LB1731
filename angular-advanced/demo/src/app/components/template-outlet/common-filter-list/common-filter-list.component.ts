@@ -10,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class CommonFilterListComponent implements OnInit {
 
-  @Input() items: any;
+  @Input() items: unknown[] | undefined;
   @Input() itemTemplateRef: TemplateRef<any> | undefined;
   @Output() filter = new EventEmitter<string>();
 
