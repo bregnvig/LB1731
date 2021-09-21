@@ -16,7 +16,7 @@ export class OnChangeDisplayListComponent implements OnChanges {
   @Input() items: string[] | undefined;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.items?.sort();
+    this.items = changes['items']?.currentValue.sort();
   }
 
 }
