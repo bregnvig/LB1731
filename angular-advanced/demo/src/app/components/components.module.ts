@@ -30,6 +30,7 @@ import { NonTemplateOutletComponent } from './template-outlet/non-template-outle
 import { TemplateOutletComponent } from './template-outlet/template-outlet.component';
 import { ViewChildComponent } from './view-child/view-child.component';
 import { ViewChildrenComponent } from './view-children/view-children.component';
+import { CommonListFilterFilterFnComponent } from './template-outlet/common-list-filter-filter-fn/common-list-filter-filter-fn.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     InputPropertyComponent,
     InputPropertyOnPushByReferenceComponent,
     InputPropertyOnPushSimpleTypeComponent,
+    CommonListFilterFilterFnComponent,
   ],
   imports: [
     CommonModule,
