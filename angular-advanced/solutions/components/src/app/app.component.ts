@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
@@ -17,6 +18,7 @@ export class AppComponent {
   playground$ = new Subject<Playground>();
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
+  footerComponent = FooterComponent;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) {
   }
