@@ -6,13 +6,18 @@ import { Coordinate, Playground } from 'src/app/model';
   selector: 'loop-sidebar-list-item',
   template: `
     <a
-      class="list-group-item d-flex list-group-item-action justify-content-between align-items-center"
+      class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
       [class.active]="selected">
-      <div class="d-flex flex-column justify-content-between">
-        <h5 class="mb-1">{{playground.name}}</h5>
+      <div class="flex-item d-flex flex-column justify-content-between">
+        <h6 class="mb-1">
+          {{playground.name}}
+          <span class="badge bg-primary">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
+        </h6>
         <small>{{playground.description | defaultDescription}}</small>
       </div>
-      <span class="badge bg-primary">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
+      <div>
+        <ng-content select="button"></ng-content>
+      </div>
     </a>  
   `,
 })

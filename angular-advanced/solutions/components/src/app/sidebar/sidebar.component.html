@@ -6,6 +6,9 @@
         [playground]="playground"
         [selected]="playground === selectedPlayground"
         [location$]="location$">
+        <button class="btn btn-sm btn-secondary">
+          <fa-icon [icon]="['fas', 'check']" (click)="selectPlayground(playground)"></fa-icon> 
+        </button>
       </loop-sidebar-list-item>
     </div>
   </nav>
