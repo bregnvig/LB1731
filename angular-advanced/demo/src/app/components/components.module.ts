@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { InputPropertyOnPushByReferenceComponent } from './change-detection/input-property/input-property-on-push-by-reference.component';
 import { InputPropertyOnPushSimpleTypeComponent } from './change-detection/input-property/input-property-on-push-simple-type.component';
-import { InputPropertyComponent } from './change-detection/input-property/input-property.component copy';
+import { InputPropertyComponent } from './change-detection/input-property/input-property.component';
 import { ComponentsComponent } from './components.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
@@ -31,6 +31,7 @@ import { TemplateOutletComponent } from './template-outlet/template-outlet.compo
 import { ViewChildComponent } from './view-child/view-child.component';
 import { ViewChildrenComponent } from './view-children/view-children.component';
 import { CommonListFilterFilterFnComponent } from './template-outlet/common-list-filter-filter-fn/common-list-filter-filter-fn.component';
+import { ObservableEventsComponent } from './change-detection/observable-events/observable-events.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { CommonListFilterFilterFnComponent } from './template-outlet/common-list
     InputPropertyOnPushByReferenceComponent,
     InputPropertyOnPushSimpleTypeComponent,
     CommonListFilterFilterFnComponent,
+    ObservableEventsComponent,
   ],
   imports: [
     CommonModule,
