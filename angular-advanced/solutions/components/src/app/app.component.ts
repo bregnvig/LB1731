@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { Component, ViewChild } from '@angular/core';
+import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
@@ -14,8 +15,10 @@ import { withLength } from './utils/rxjs-utils';
 })
 export class AppComponent {
 
+  @ViewChild(SidebarComponent, { static: true }) sidebar!: SidebarComponent;
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();
+  location$: Observable<Coordinate> = this.locationService.location$;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
   footerComponent = FooterComponent;
@@ -36,10 +39,13 @@ export class AppComponent {
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
       this.service.playgrounds$.pipe(withLength()),
+      this.sidebar.filterChanged.pipe(map(term => term.toLowerCase()), startWith('')),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
-      map(([playgrounds, location]) =>
-        playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+      map(([playgrounds, term, location]) =>
+        playgrounds
+          .filter(playground => playground.name.toLowerCase().includes(term))
+          .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
   }

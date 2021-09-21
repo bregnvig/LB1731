@@ -1,25 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Coordinate, Playground } from '../model';
-import { LocationService } from '../service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
-  @Input() playgrounds: Playground[] | null = [];
-  @Output() selected = new EventEmitter<Playground>();
+  @Input() items: any[] | null = [];
+  @Input() itemTemplate: TemplateRef<any> | undefined;
+  @Output() selected = new EventEmitter<any>();
+  @Output() filterChanged = new EventEmitter<string>();
 
-  selectedPlayground: Playground | undefined;
-  location$: Observable<Coordinate> = this.locationService.location$;
+  filterControl = new FormControl('');
+  selectedItem: any | undefined;
 
-  constructor(private locationService: LocationService) { }
+  constructor() { }
 
-  selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
-    this.selected.emit(playground);
+  ngOnInit() {
+    this.filterControl.valueChanges.subscribe(term => this.filterChanged.emit(term));
+  }
+
+  selectItem(item: any): void {
+    this.selectedItem = item;
+    this.selected.emit(item);
   }
 
 }

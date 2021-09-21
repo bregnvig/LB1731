@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from 'src/app/model';
 
@@ -20,6 +20,7 @@ import { Coordinate, Playground } from 'src/app/model';
       </div>
     </a>  
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarListItemComponent {
 
