@@ -3,8 +3,16 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
   selector: 'loop-view-children',
-  templateUrl: './view-children.component.html',
-  styleUrls: ['./view-children.component.scss']
+  template: `
+    <div class="row">
+      <div class="col"><button class="btn btn-primary" (click)="addWatch()">Add stopwatch</button></div>
+    </div>
+    <div class="row" *ngFor="let no of watchNos">
+      <div class="col">
+        Stop watch {{no}} - <loop-stop-watch></loop-stop-watch>
+      </div>
+    </div>
+  `,
 })
 export class ViewChildrenComponent implements AfterViewInit {
 

@@ -15,5 +15,7 @@ export class InputPropertyOnPushByReferenceComponent {
 
   @Input() no: No | undefined;
 
-  noop() { }
+  noop() {
+    console.log('Force change detection');
+  }
 }

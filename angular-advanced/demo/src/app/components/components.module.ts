@@ -8,17 +8,15 @@ import { SharedModule } from '../shared/shared.module';
 import { ChangeDetectionComponent } from './change-detection/change-detection.component';
 import { InputPropertyOnPushByReferenceComponent } from './change-detection/input-property/input-property-on-push-by-reference.component';
 import { InputPropertyOnPushSimpleTypeComponent } from './change-detection/input-property/input-property-on-push-simple-type.component';
-import { InputPropertyComponent } from './change-detection/input-property/input-property.component copy';
+import { InputPropertyComponent } from './change-detection/input-property/input-property.component';
 import { ComponentsComponent } from './components.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
 import { DynamicComponentComponent } from './dynamic-component/dynamic-component.component';
 import { DynamicHostDirective } from './dynamic-component/dynamic-host.directive';
 import { FancyPlaygroundDetailsComponent } from './dynamic-component/fancy-playground-details/fancy-playground-details.component';
-import { FancyPopoverService } from './dynamic-component/fancy-popover.service';
 import { NgDynamicComponentComponent } from './dynamic-component/ng-dynamic-component.component';
 import { PopoverContentComponent } from './dynamic-component/popover-content/popover-content.component';
-import { PopoverService } from './dynamic-component/popover.service';
 import { SimplePlaygroundDetailsComponent } from './dynamic-component/simple-playground-details/simple-playground-details.component';
 import { AfterViewInitComponent } from './life-cycle/after-view-init/after-view-init.component';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
@@ -32,6 +30,8 @@ import { NonTemplateOutletComponent } from './template-outlet/non-template-outle
 import { TemplateOutletComponent } from './template-outlet/template-outlet.component';
 import { ViewChildComponent } from './view-child/view-child.component';
 import { ViewChildrenComponent } from './view-children/view-children.component';
+import { CommonListFilterFilterFnComponent } from './template-outlet/common-list-filter-filter-fn/common-list-filter-filter-fn.component';
+import { ObservableEventsComponent } from './change-detection/observable-events/observable-events.component';
 
 
 @NgModule({
@@ -61,6 +61,8 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     InputPropertyComponent,
     InputPropertyOnPushByReferenceComponent,
     InputPropertyOnPushSimpleTypeComponent,
+    CommonListFilterFilterFnComponent,
+    ObservableEventsComponent,
   ],
   imports: [
     CommonModule,
@@ -119,10 +121,10 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     ])
   ],
   providers: [
-    {
-      provide: PopoverService,
-      useClass: FancyPopoverService,
-    }
+    // {
+    //   provide: PopoverService,
+    //   useClass: FancyPopoverService,
+    // }
   ]
 })
 export class ComponentsModule { }

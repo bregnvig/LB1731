@@ -7,7 +7,10 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
 @Component({
   selector: 'loop-template-outlet',
   template: `
+    <h5>Using event emitter</h5>
     <loop-common-filter-list [items]="playgrounds$ | async" [itemTemplateRef]="playgroundInfo"></loop-common-filter-list>
+    <h5>Using filter function</h5>
+    <loop-common-list-filter-filter-fn class="mt-3" [items$]="service.playgrounds$" [filterFn]="filterFn" [itemTemplateRef]="playgroundInfo"></loop-common-list-filter-filter-fn>
     <ng-template #playgroundInfo let-playground>
       {{playground.name}}
     </ng-template>
@@ -17,8 +20,9 @@ export class TemplateOutletComponent implements OnInit {
 
   @ViewChild(CommonFilterListComponent, { static: true }) filterComponent!: CommonFilterListComponent;
   playgrounds$!: Observable<Playground[]>;
+  filterFn = (term: string, playgrounds: Playground[]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
 
-  constructor(private service: PlaygroundService) { }
+  constructor(public service: PlaygroundService) { }
 
   ngOnInit(): void {
     this.playgrounds$ = combineLatest([

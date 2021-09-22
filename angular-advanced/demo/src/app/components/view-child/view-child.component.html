@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-auto">
-    <button class="btn btn-primary" (click)="start()">Start</button>
-  </div>
-  <div class="col-auto">
-    <button class="btn btn-secondary" (click)="stop()">Stop</button>
+  <div class="col">
+    <loop-stop-watch></loop-stop-watch>
   </div>
 </div>
 <div class="row">
-  <div class="col">
-    <loop-stop-watch></loop-stop-watch>
+  <div class="col-auto">
+    <button class="btn btn-primary" [disabled]="running" (click)="start()">Start</button>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary" [disabled]="!running" (click)="stop()">Stop</button>
   </div>
 </div>

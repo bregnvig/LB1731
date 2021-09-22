@@ -1,0 +1,17 @@
+<ng-template #defaultTemplate let-item>
+  {{item}}
+</ng-template>
+<div class="form-group row">
+  <div class="col">
+    <input id="filter" type="text" class="form-control" [formControl]="filterControl">
+  </div>
+</div>
+<div class="row list">
+  <div class="col">
+    <ul class="list-group">
+      <li *ngFor="let item of filtered$ |async" class="list-group-item">
+        <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
+      </li>
+    </ul>
+  </div>
+</div>
