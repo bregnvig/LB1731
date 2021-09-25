@@ -1,0 +1,6 @@
+{
+    "name": "angular-advanced",
+    "workspaces": [
+      "solutions/unit-test"
+    ]
+  }
