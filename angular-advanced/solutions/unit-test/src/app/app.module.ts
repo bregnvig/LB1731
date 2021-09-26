@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
