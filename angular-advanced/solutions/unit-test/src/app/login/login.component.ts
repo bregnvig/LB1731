@@ -18,6 +18,7 @@ export class LoginComponent {
 
   login(): void {
     const { email, password } = this.fg.value;
+    this.fg.valid && this.authService.login(email, password);
   }
 
 }
