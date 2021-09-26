@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
@@ -11,7 +12,10 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule],
+      imports: [
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+      ],
     }).compileComponents();
   });
 
@@ -29,7 +33,7 @@ describe('LoginComponent', () => {
     const authSpy = jest.spyOn(authService, 'login');
     component.fg.patchValue({ email, password });
     component.login();
-    
+
     // The Expect
     expect(authSpy).toHaveBeenCalledTimes(1);
     expect(authSpy).toHaveBeenCalledWith(email, password);
@@ -43,7 +47,7 @@ describe('LoginComponent', () => {
     const authSpy = jest.spyOn(authService, 'login');
     component.fg.patchValue({ email, password });
     component.login();
-    
+
     // The Expect
     expect(authSpy).toHaveBeenCalledTimes(0);
   });
