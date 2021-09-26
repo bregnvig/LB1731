@@ -76,3 +76,7 @@ footer {
       bottom: 20px;
   }
 }
+
+input.ng-dirty.ng-invalid {
+  color: red
+}
