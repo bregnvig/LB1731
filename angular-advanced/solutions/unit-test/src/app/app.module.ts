@@ -10,6 +10,7 @@ import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LoginComponent } from './login/login.component';
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
