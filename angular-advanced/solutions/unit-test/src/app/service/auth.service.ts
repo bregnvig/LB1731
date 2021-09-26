@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs/operators';
 
 const isNullOrUndefined = (value: any): value is null | undefined => value === null || value === undefined;
 
@@ -7,30 +10,38 @@ const isNullOrUndefined = (value: any): value is null | undefined => value === n
 })
 export class AuthService {
 
-  private _isLoggedIn = false;
+  private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  login(email: string, password: string): void {
-
-    if (this.isLoggedIn) {
-      throw new Error('Already logged in');
-    }
+  login(email: string, password: string): Observable<boolean> {
     if ([email, password].some(isNullOrUndefined)) {
-      throw new Error('email and password must be non-nullish strings');
+      throw 'email and password must be non-nullish strings';
     }
     if ([email, password].some(value => value === '')) {
-      throw new Error('email and password must be non-empty strings');
+      throw 'email and password must be non-empty strings';
     }
-    this.isLoggedIn = true;
+
+    return this.isLoggedIn$.pipe(
+      first(),
+      switchMap(isLoggedIn => {
+        if (isLoggedIn) {
+          throw 'Already logged in';
+        }
+        return this.httpClient.post<boolean>(`/api/login`, { email, password }).pipe(
+          tap(isLoggedIn => this._isLoggedIn$.next(isLoggedIn))
+        );
+      }),
+    );
   }
 
   get isLoggedIn(): boolean {
-    return this._isLoggedIn;
+    return this._isLoggedIn$.value;
   }
-  
-  private set isLoggedIn(isLoggedIn: boolean) {
-    this._isLoggedIn = isLoggedIn;
+
+  get isLoggedIn$(): Observable<boolean> {
+    return this._isLoggedIn$.asObservable();
   }
 
 }
