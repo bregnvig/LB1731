@@ -3,6 +3,24 @@ import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
 
+  describe("Always", () => {
+    let service: AuthService;
+
+    beforeEach(() => {
+      service = TestBed.inject(AuthService);
+    });
+
+    it("throws when calling login with nullish email or password", () => {
+      const undefinedAsString = undefined as any as string;
+      expect(() => service.login(undefinedAsString, undefinedAsString)).toThrow('email and password must be non-nullish strings');
+    });
+
+    it("throws when calling login with empty string email or password", () => {
+      expect(() => service.login('', '')).toThrow('email and password must be non-empty strings');
+    });
+
+  });
+
   describe("Initially", () => {
     let service: AuthService;
 
@@ -18,15 +36,15 @@ describe('AuthService', () => {
 
   describe("When logged in", () => {
     let service: AuthService;
+    const email = 'email@email.com';
+    const password = 'password';
 
     beforeEach(() => {
       service = TestBed.inject(AuthService);
-      service.isLoggedIn = true;
+      service.login(email, password);
     });
 
-    it("should throw when calling login", () => {
-      const email = 'email@email.com';
-      const password = 'password';
+    it("throws when calling login", () => {
       expect(() => service.login(email, password)).toThrow("Already logged in");
     });
 
