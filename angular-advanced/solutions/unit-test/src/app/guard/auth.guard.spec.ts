@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../service/auth.service';
 import { AuthGuard } from './auth.guard';
@@ -18,9 +18,12 @@ describe('AuthGuard', () => {
   });
 
   it('should return true when AuthService isLoggedIn is true', () => {
-    TestBed.overrideProvider(AuthService, { useValue: { isLoggedIn: true } }); // <= Stub
+    const authServiceProvider = { useValue: { isLoggedIn: true } }; // <= Stub
+    TestBed.overrideProvider(AuthService, authServiceProvider);
     const guard = TestBed.inject(AuthGuard);
-    expect(guard.canActivate({} as any, {} as any)).toEqual(true);
+    const route: ActivatedRouteSnapshot = {} as any;
+    const state: RouterStateSnapshot = {} as any;
+    expect(guard.canActivate(route, state)).toEqual(true);
   });
 
   it('should return true when AuthService isLoggedIn is true', () => {
