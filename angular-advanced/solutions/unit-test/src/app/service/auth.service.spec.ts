@@ -8,10 +8,6 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it("logins with email & password", () => {
     const email = 'email@email.com';
     const password = 'password';
