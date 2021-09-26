@@ -10,6 +10,9 @@ export class AuthService {
   constructor() { }
 
   login(email: string, password: string): void {
+    if(this.isLoggedIn) {
+      throw new Error('Already logged in');
+    }
     this.isLoggedIn = true;
   }
 
