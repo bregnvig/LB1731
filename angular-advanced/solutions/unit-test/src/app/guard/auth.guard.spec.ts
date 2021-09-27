@@ -18,16 +18,18 @@ describe('AuthGuard', () => {
   });
 
   it('should return true when AuthService isLoggedIn is true', () => {
-    const authServiceProvider = { useValue: { isLoggedIn: true } }; // <= Stub
-    TestBed.overrideProvider(AuthService, authServiceProvider);
+    const authService = TestBed.inject(AuthService);
+    const authServiceIsLoggedInSpy = jest.spyOn(authService, 'isLoggedIn', 'get').mockReturnValue(true);
     const guard = TestBed.inject(AuthGuard);
     const route: ActivatedRouteSnapshot = {} as any;
     const state: RouterStateSnapshot = {} as any;
     expect(guard.canActivate(route, state)).toEqual(true);
+    expect(authServiceIsLoggedInSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should return true when AuthService isLoggedIn is true', () => {
-    TestBed.overrideProvider(AuthService, { useValue: { isLoggedIn: false } }); // <= Stub
+    const authService = TestBed.inject(AuthService);
+    const authServiceIsLoggedInSpy = jest.spyOn(authService, 'isLoggedIn', 'get').mockReturnValue(false);
     const guard = TestBed.inject(AuthGuard);
     const router = TestBed.inject(Router);
     expect(guard.canActivate({} as any, {} as any)).toEqual(router.createUrlTree(['/login']));
