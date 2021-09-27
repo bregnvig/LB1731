@@ -33,6 +33,7 @@ describe('AuthGuard', () => {
     const guard = TestBed.inject(AuthGuard);
     const router = TestBed.inject(Router);
     expect(guard.canActivate({} as any, {} as any)).toEqual(router.createUrlTree(['/login']));
+    expect(authServiceIsLoggedInSpy).toHaveBeenCalledTimes(1);
   });
 
 });
