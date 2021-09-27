@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonModule } from '../button/button.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -22,3 +24,10 @@ export class LoginComponent {
   }
 
 }
+
+@NgModule({
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
+  declarations: [LoginComponent],
+  exports: [LoginComponent],
+})
+export class LoginModule {}

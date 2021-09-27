@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { LoginComponent } from './login.component';
+import { LoginComponent, LoginModule } from './login.component';
 
 
 describe('LoginComponent', () => {
@@ -11,8 +11,8 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
       imports: [
+        LoginModule,
         ReactiveFormsModule,
         HttpClientTestingModule,
       ],
