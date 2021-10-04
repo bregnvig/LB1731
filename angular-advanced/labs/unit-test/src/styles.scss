@@ -76,3 +76,7 @@ footer {
       bottom: 20px;
   }
 }
+
+input.ng-touched.ng-invalid {
+  border-color: var(--danger)
+}
