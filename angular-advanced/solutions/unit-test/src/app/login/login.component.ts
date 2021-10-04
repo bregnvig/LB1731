@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonModule } from '../button/button.component';
 import { AuthService } from '../service/auth.service';
 
@@ -16,11 +17,13 @@ export class LoginComponent {
     password: [, Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   login(): void {
     const { email, password } = this.fg.value;
-    this.fg.valid && this.authService.login(email, password);
+    if(this.fg.valid) {
+      this.authService.login(email, password).subscribe(value => this.router.navigate(['/']));
+    }
   }
 
 }

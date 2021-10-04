@@ -11,12 +11,12 @@ describe('AuthService', () => {
       service = new AuthService({} as any);
     });
 
-    it("throws when calling login with nullish email or password", () => {
+    it("should throw when calling login with nullish email or password", () => {
       const undefinedAsString = undefined as any as string;
       expect(() => service.login(undefinedAsString, undefinedAsString)).toThrow('email and password must be non-nullish strings');
     });
 
-    it("throws when calling login with empty string email or password", () => {
+    it("should throw when calling login with empty string email or password", () => {
       expect(() => service.login('', '')).toThrow('email and password must be non-empty strings');
     });
 
@@ -29,7 +29,7 @@ describe('AuthService', () => {
       service = new AuthService({} as any);
     });
 
-    it("is not logged in", done => {
+    it("should not be logged in", done => {
       service.isLoggedIn$.pipe(first()).subscribe(
         isLoggedIn => expect(isLoggedIn).toEqual(false),
         error => { throw error; },
@@ -45,14 +45,14 @@ describe('AuthService', () => {
     const password = 'password';
 
     beforeEach(async () => {
-      const httpClientMock = { post: jest.fn().mockReturnValue(of(true)) };
+      const httpClientMock = { post: jest.fn().mockReturnValue(of({ authenticated: true })) };
       service = new AuthService(httpClientMock as any);
       await service.login(email, password).pipe(first()).toPromise();
     });
 
-    it("throws when calling login", done => {
+    it("should throw on login", done => {
       service.login(email, password).subscribe(
-        isLoggedIn => done(`Received unexpected next: ${isLoggedIn}`),
+        authUser => done(`Received unexpected next: ${authUser}`),
         error => {
           expect(error).toEqual('Already logged in');
           done();
@@ -67,11 +67,11 @@ describe('AuthService', () => {
     let httpClientMock: any;
 
     beforeEach(() => {
-      httpClientMock = { post: jest.fn().mockReturnValue(of(true)) };
+      httpClientMock = { post: jest.fn().mockReturnValue(of({ authenticated: true })) };
       service = new AuthService(httpClientMock as any);
     });
 
-    it("logins with email & password", (done) => {
+    it("should login with email & password", (done) => {
       const email = 'email@email.com';
       const password = 'password';
       service.login(email, password).subscribe(
