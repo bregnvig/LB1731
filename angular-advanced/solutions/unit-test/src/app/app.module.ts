@@ -9,7 +9,7 @@ import { ButtonModule } from './button/button.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LeafletModule } from './leaflet';
-import { LoginComponent } from './login/login.component';
+import { LoginModule } from './login/login.component';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
@@ -22,7 +22,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
-    LoginComponent,
     HomeComponent,
   ],
   imports: [
@@ -33,6 +32,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ButtonModule,
     NgbModule,
     LeafletModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
