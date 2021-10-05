@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
@@ -21,7 +23,11 @@ export class AppComponent {
   markers$: Observable<Marker> | undefined;
   footerComponent = FooterComponent;
 
-  constructor(private service: PlaygroundService, private locationService: LocationService) {
+  constructor(
+    private service: PlaygroundService,
+    private locationService: LocationService,
+    private modal: NgbModal,
+  ) {
   }
 
   ngOnInit() {
@@ -44,6 +50,10 @@ export class AppComponent {
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
+  }
+
+  edit(playground: Playground) {
+    EditPlaygroundModalComponent.open(this.modal, playground);
   }
 
 }

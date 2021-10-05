@@ -11,10 +11,10 @@
           </h6>
           <small>{{playground.description | defaultDescription}}</small>
         </div>
-        <div>
+        <div class="d-none d-lg-block">
           <div class="btn-group">
-            <button class="btn btn-sm btn-secondary">
-              <fa-icon [icon]="['fas', 'edit']"></fa-icon>
+            <button class="btn btn-sm btn-secondary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
+              <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
             </button>
           </div>
         </div>
