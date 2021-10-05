@@ -3,10 +3,10 @@
     <h5 class="modal-title">{{playground.name}}</h5>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
   </div>
-  <div class="modal-body">
+  <form class="modal-body">
     <div>
       <label class="form-label" for="name">Name</label>
-      <input id="name" type="text" class="form-control">
+      <input ngbAutoFocus id="name" type="text" class="form-control">
     </div>    
     <div>
       <label class="form-label" for="description">Description</label>
@@ -16,9 +16,9 @@
       <label class="form-label" for="addressDescription">Address description</label>
       <input id="addressDescription" type="text" class="form-control">
     </div>    
-  </div>
+  </form>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Luk</button>
-    <button type="button" class="btn btn-primary">OK</button>
+    <button type="button" class="btn btn-primary" (click)="save()">OK</button>
   </div>
 </div>
