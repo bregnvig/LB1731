@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
@@ -15,7 +14,6 @@ import { withLength } from './utils/rxjs-utils';
 })
 export class AppComponent {
 
-  @ViewChild(SidebarComponent, { static: true }) sidebar!: SidebarComponent;
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();
   location$: Observable<Coordinate> = this.locationService.location$;
@@ -39,12 +37,10 @@ export class AppComponent {
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
       this.service.playgrounds$.pipe(withLength()),
-      this.sidebar.filterChanged.pipe(map(term => term.toLowerCase()), startWith('')),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
-      map(([playgrounds, term, location]) =>
+      map(([playgrounds, location]) =>
         playgrounds
-          .filter(playground => playground.name.toLowerCase().includes(term))
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
