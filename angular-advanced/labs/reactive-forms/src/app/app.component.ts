@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, Observable, Subject } from 'rxjs';
+import { combineLatest, merge, noop, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
@@ -53,7 +53,7 @@ export class AppComponent {
   }
 
   edit(playground: Playground) {
-    EditPlaygroundModalComponent.open(this.modal, playground);
+    EditPlaygroundModalComponent.open(this.modal, playground).then(playground => this.service.update(playground), noop);
   }
 
 }

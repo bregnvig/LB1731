@@ -25,6 +25,7 @@ export class PlaygroundService {
   }
 
   update(playground: Playground) {
+    console.log('Saving', playground);
     this.altered$.next([...this.altered$.value.filter(p => p.id !== playground.id), playground]);
   }
 }

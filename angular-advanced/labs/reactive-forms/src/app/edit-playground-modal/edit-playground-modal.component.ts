@@ -10,9 +10,10 @@ import { Playground } from '../model';
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
-  static open(modal: NgbModal, playground: Playground) {
+  static open(modal: NgbModal, playground: Playground): Promise<Playground> {
     const ref = modal.open(EditPlaygroundModalComponent, { size: 'lg' });
     (ref.componentInstance as EditPlaygroundModalComponent).initialize(playground);
+    return ref.result;
   }
 
   playground!: Playground;
@@ -24,6 +25,10 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   initialize(playground: Playground) {
     this.playground = playground;
+  }
+
+  save() {
+    this.modal.close(this.playground);
   }
 
 }
