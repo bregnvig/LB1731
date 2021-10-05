@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
@@ -25,6 +26,7 @@ library.add(fas, far);
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
+    EditPlaygroundModalComponent,
   ],
   imports: [
     BrowserModule,

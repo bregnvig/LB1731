@@ -12,6 +12,7 @@ export class SidebarComponent {
 
   @Input() playgrounds: Playground[] | null = [];
   @Output() selected = new EventEmitter<Playground>();
+  @Output() edit = new EventEmitter<Playground>();
 
   selectedPlayground: Playground | undefined;
   location$: Observable<Coordinate> = this.locationService.location$;
