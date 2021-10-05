@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "test": "jest --verbose",
-    "test:watch": "jest --watch --verbose",
+    "test:watch": "jest --watchAll --verbose",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
