@@ -19,6 +19,6 @@
   </form>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Luk</button>
-    <button type="button" class="btn btn-primary" (click)="save()">OK</button>
+    <button type="button" [disabled]="fg.invalid" class="btn btn-primary" (click)="save()">OK</button>
   </div>
 </div>

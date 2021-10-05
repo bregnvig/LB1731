@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
 
@@ -17,9 +17,9 @@ export class EditPlaygroundModalComponent implements OnInit {
   }
 
   fg = this.fb.group({
-    name: [],
+    name: [undefined, Validators.required],
     description: [],
-    addressDescription: []
+    addressDescription: [],
   });
 
   playground!: Playground;
