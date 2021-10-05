@@ -12,7 +12,8 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
     <h5>Using filter function</h5>
     <loop-common-list-filter-filter-fn class="mt-3" [items$]="service.playgrounds$" [filterFn]="filterFn" [itemTemplateRef]="playgroundInfo"></loop-common-list-filter-filter-fn>
     <ng-template #playgroundInfo let-playground>
-      {{playground.name}}
+      <h6>{{playground.name}}</h6>
+      <small>{{playground.description}}</small>
     </ng-template>
   `,
 })

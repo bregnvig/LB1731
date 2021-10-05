@@ -1,0 +1,17 @@
+<ng-template #defaultTemplate let-item>
+  <li class="list-group-item">{{item}}</li>
+</ng-template>
+<aside tabindex="1">
+  <nav>
+    <div class="row">
+      <div class="col">
+        <input id="filter" type="text" autofocus class="form-control form-control-lg" [formControl]="filterControl">
+      </div>
+    </div>
+    <div class="list-group">
+      <ng-container *ngFor="let item of items">
+        <ng-container *ngTemplateOutlet="itemTemplate || defaultTemplate; context: {$implicit: item}"></ng-container>
+      </ng-container>
+    </div>
+  </nav>
+</aside>
