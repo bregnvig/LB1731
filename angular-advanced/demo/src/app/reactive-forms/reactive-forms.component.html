@@ -1,0 +1,15 @@
+<ul ngbNav class="nav-tabs mb-3" activeId="top-5">
+  <li ngbNavItem="top-5">
+    <a ngbNavLink routerLink="top-5" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">TOP - 5</a>
+  </li>
+  <li ngbNavItem="form-array">
+    <a ngbNavLink routerLink="form-array" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Form array</a>
+  </li>
+  <li ngbNavItem="validators">
+    <a ngbNavLink routerLink="validators" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Validators</a>
+  </li>
+  <li ngbNavItem="custom-controls">
+    <a ngbNavLink routerLink="custom-controls" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Custom controls</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

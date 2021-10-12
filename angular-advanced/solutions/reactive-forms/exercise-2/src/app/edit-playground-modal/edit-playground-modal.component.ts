@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
 
@@ -20,7 +20,9 @@ export class EditPlaygroundModalComponent implements OnInit {
     name: [undefined, Validators.required],
     description: [],
     addressDescription: [],
-  });
+  }, {
+    validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
+  } as AbstractControlOptions);
 
   playground!: Playground;
 
