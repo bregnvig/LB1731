@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -21,24 +21,17 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   private validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
     first(),
-    map(playgrounds => playgrounds.some(p => p.name === control.value && p.id !== this.playground.id)),
+    map(playgrounds => playgrounds.some(p => p.name === control.value?.name && p.id !== this.playground.id)),
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  fg = this.fb.group({
-    name: [undefined, Validators.required, this.validateUniqueName],
-    description: [],
-    addressDescription: [],
-  }, {
-    validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
-  } as AbstractControlOptions);
-
+  editControl = new FormControl(undefined, null, this.validateUniqueName);
   playground!: Playground;
 
-  constructor(private service: PlaygroundService, private fb: FormBuilder, public modal: NgbActiveModal) { }
+  constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }
 
   ngOnInit(): void {
-    this.fg.reset(this.playground || {});
+    this.editControl.reset(this.playground || {});
   }
 
   initialize(playground: Playground) {
@@ -46,7 +39,7 @@ export class EditPlaygroundModalComponent implements OnInit {
   }
 
   save() {
-    this.modal.close({ ...this.playground, ...this.fg.value });
+    this.modal.close({ ...this.playground, ...this.editControl.value });
   }
 
 }
