@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 import { Playground } from '../model';
+import { PlaygroundService } from '../service';
 
 @Component({
   selector: 'loop-edit-playground-modal',
@@ -16,8 +19,14 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
+  private validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
+    first(),
+    map(playgrounds => playgrounds.some(p => p.name === control.value && p.id !== this.playground.id)),
+    map(nonUnique => nonUnique ? { nonUnique } : null),
+  );
+
   fg = this.fb.group({
-    name: [undefined, Validators.required],
+    name: [undefined, Validators.required, this.validateUniqueName],
     description: [],
     addressDescription: [],
   }, {
@@ -26,7 +35,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   playground!: Playground;
 
-  constructor(private fb: FormBuilder, public modal: NgbActiveModal) { }
+  constructor(private service: PlaygroundService, private fb: FormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});
