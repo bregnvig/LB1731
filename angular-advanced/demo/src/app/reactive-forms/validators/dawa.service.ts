@@ -6,7 +6,7 @@ import { first, map, switchMapTo } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class ValidatorsService {
+export class DawaService {
 
   constructor(private http: HttpClient) {
   }

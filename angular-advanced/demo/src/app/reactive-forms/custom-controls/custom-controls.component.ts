@@ -12,7 +12,7 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
   fg = this.fb.group({
     isCompany: [false],
     name: [undefined, Validators.required],
-    homeAddress: [],
+    homeAddress: [undefined, Validators.required],
     workAddress: [{
       street: 'Amaliegade',
       streetNumber: '5C',

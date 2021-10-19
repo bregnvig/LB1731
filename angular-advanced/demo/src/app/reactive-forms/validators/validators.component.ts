@@ -3,7 +3,7 @@ import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Valida
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
-import { ValidatorsService } from './validators.service';
+import { DawaService } from './dawa.service';
 
 const zipValidator = (control: AbstractControl): null | ValidationErrors => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZipCode: control.value };
 
@@ -32,7 +32,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
     } as AbstractControlOptions)
   });
 
-  constructor(private fb: FormBuilder, private service: ValidatorsService) {
+  constructor(private fb: FormBuilder, private service: DawaService) {
     super();
   }
 

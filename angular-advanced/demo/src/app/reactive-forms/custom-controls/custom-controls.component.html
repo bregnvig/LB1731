@@ -15,10 +15,12 @@
     <fieldset>
       <legend>Home address</legend>
       <loop-address-control formControlName="homeAddress"></loop-address-control>
+      <loop-error-message [control]="controls.homeAddress"></loop-error-message>
     </fieldset>
     <fieldset>
       <legend>Work address</legend>
       <loop-address-control formControlName="workAddress"></loop-address-control>
+      <loop-error-message [control]="controls.workAddress"></loop-error-message>
     </fieldset>
   </ng-container>
 </form>

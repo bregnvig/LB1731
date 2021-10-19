@@ -1,6 +1,8 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { map } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
+import { DawaService } from '../../validators/dawa.service';
 import { Address } from '../address.model';
 
 @Component({
@@ -12,31 +14,37 @@ import { Address } from '../address.model';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => AddressControlComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => AddressControlComponent),
+      multi: true
     }
   ],
 })
-export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit, ControlValueAccessor {
+export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit, ControlValueAccessor, Validator {
 
   fg = this.fb.group({
     street: [],
     streetNumber: [],
     floor: [],
     attention: [],
-    zip: [],
+    zip: [undefined, (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }],
     city: [],
   });
 
   private propagateChange: ((_: any) => any) | undefined;
   private propagateTouched: (() => void) | undefined;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private service: DawaService) {
     super();
   }
 
   ngOnInit(): void {
     this.fg.valueChanges.pipe(
+      map(value => Object.entries(value).filter(([, value]) => value).reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})),
       this.takeUntilDestroyed(),
-    ).subscribe(value => this.propagateChange!(value));
+    ).subscribe(value => this.propagateChange!(Object.keys(value).length ? value : undefined));
   }
 
   onBlur() {
@@ -57,5 +65,9 @@ export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirecti
 
   setDisabledState(isDisabled: boolean): void {
     isDisabled ? this.fg.disable() : this.fg.enable();
+  }
+
+  validate(): ValidationErrors | null {
+    return Object.values(this.fg.controls).reduce((acc, control) => ({ ...acc, ...control.errors }), {} as ValidationErrors);
   }
 }
