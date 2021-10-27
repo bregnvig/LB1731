@@ -32,6 +32,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.editControl.reset(this.playground || {});
+    this.editControl.valueChanges.subscribe(_ => console.log(_));
   }
 
   initialize(playground: Playground) {
