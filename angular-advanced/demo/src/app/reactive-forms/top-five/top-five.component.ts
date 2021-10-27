@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
@@ -9,19 +9,38 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 })
 export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  @ViewChild('inputControl', { static: true }) inputControl!: HTMLInputElement;
-  emailControl = new FormControl(undefined, Validators.required);
+  @ViewChild('emailControl', { static: true }) emailControl!: ElementRef<HTMLInputElement>;
+  @ViewChild('nameControl', { static: true }) nameControl!: ElementRef<HTMLInputElement>;
+  fg = this.fb.group({
+    email: [undefined, Validators.required],
+    name: [undefined, Validators.required],
+  });
+
   emitEventControl = new FormControl(true, Validators.required);
   classes: string | undefined;
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     super();
   }
 
   ngOnInit(): void {
-    this.emailControl.valueChanges.pipe(
+    this.fg.valueChanges.pipe(
       this.takeUntilDestroyed(),
     ).subscribe(_ => console.log(_));
+  }
+
+  patch() {
+    this.fg.patchValue({
+      name: this.nameControl.nativeElement.value,
+      email: this.emailControl.nativeElement.value
+    }, { emitEvent: this.emitEventControl.value });
+  }
+
+  reset() {
+    const value: any = {};
+    this.nameControl.nativeElement.value && (value.name = this.nameControl.nativeElement.value);
+    this.emailControl.nativeElement.value && (value.email = this.emailControl.nativeElement.value);
+    this.fg.reset(value, { emitEvent: this.emitEventControl.value });
   }
 
 }
