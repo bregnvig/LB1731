@@ -27,7 +27,6 @@ export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirecti
     street: [],
     streetNumber: [],
     floor: [],
-    attention: [],
     zip: [undefined, (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }],
     city: [],
   });

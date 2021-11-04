@@ -28,7 +28,11 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       ],
       city: [undefined]
     }, {
-      validators: (zipAndCity: FormGroup): null | ValidationErrors => zipAndCity.get('zip')?.valid && zipAndCity.get('zip')?.value && !zipAndCity.get('city')?.value ? { required: true } : null,
+      validators: (zipAndCity: FormGroup): null | ValidationErrors => {
+        console.log(zipAndCity.value, zipAndCity.get('zip')?.valid, zipAndCity.get('zip')?.value, !zipAndCity.get('city')?.value);
+
+        return zipAndCity.get('zip')?.valid && zipAndCity.get('zip')?.value && !zipAndCity.get('city')?.value ? { required: 'city' } : null;
+      },
     } as AbstractControlOptions)
   });
 

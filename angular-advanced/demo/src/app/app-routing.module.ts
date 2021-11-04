@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./reactive-forms/reactive-forms.module').then(m => m.ReactiveFormsModule)
   },
   {
+    path: 'routing',
+    loadChildren: () => import('./routing/routing.module').then(m => m.RoutingModule)
+  },
+  {
     path: '**',
     redirectTo: 'rxjs'
   }

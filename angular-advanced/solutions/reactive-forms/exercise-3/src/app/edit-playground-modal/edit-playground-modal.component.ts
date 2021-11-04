@@ -31,7 +31,7 @@ export class EditPlaygroundModalComponent implements OnInit {
   constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }
 
   ngOnInit(): void {
-    this.editControl.reset(this.playground || {});
+    this.editControl.reset(this.playground);
     this.editControl.valueChanges.subscribe(_ => console.log(_));
   }
 
