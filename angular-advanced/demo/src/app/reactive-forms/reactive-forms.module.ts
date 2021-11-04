@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'custom-controls',
         component: CustomControlsComponent
       },
+      {
+        path: '**',
+        redirectTo: 'top-5'
+      },
     ]
   }
 ];

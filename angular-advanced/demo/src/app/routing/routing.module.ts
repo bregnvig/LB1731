@@ -23,7 +23,11 @@ import { RoutingComponent } from './routing.component';
           {
             path: 'params',
             component: ParamsComponent,
-          }
+          },
+          {
+            path: '**',
+            redirectTo: 'recap/monospace'
+          },
         ]
       }
     ])
