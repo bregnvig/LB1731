@@ -12,10 +12,9 @@ import { LocationService } from '../service';
 export class SidebarComponent {
 
   @Input() playgrounds: Playground[] | null | undefined = [];
-  @Output() selected = new EventEmitter<Playground>();
+  @Input() selectedPlayground: Playground | null | undefined = null;
   @Output() edit = new EventEmitter<Playground>();
 
-  @Input() selectedPlayground: Playground | null | undefined = null;
   location$: Observable<Coordinate> = this.locationService.location$;
 
   constructor(private locationService: LocationService) { }
