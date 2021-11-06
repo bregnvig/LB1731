@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
@@ -6,13 +6,18 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
   templateUrl: './view-child.component.html',
   styleUrls: ['./view-child.component.scss']
 })
-export class ViewChildComponent implements OnInit {
+export class ViewChildComponent implements OnInit, AfterViewInit {
 
   @ViewChild(StopWatchComponent, { static: true }) stopWatch!: StopWatchComponent;
   running = true;
 
   ngOnInit() {
-    this.stopWatch.start();
+    // this.stopWatch.start();
+  }
+
+  ngAfterViewInit() {
+    // this.stopWatch.start();
+
   }
 
   start() {

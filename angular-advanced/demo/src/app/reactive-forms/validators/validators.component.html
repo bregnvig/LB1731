@@ -1,0 +1,19 @@
+<form [formGroup]="fg">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control col" id="name" formControlName="name">
+  </div>
+  <div class="form-group" formGroupName="zipAndCity">
+    <label for="zipAndCity">Zip & city</label>
+    <div id="zipAndCity" class="row">
+      <div class="col-auto">
+        <input type="text" size="4" class="form-control" id="zip" formControlName="zip">
+        <loop-error-message [control]="zipAndCityControl.get('zip')"></loop-error-message>
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" id="city" formControlName="city">
+      </div>
+    </div>
+    <loop-error-message [control]="zipAndCityControl"></loop-error-message>
+  </div>
+</form>

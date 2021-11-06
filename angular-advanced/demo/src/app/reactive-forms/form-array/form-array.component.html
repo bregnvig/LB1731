@@ -1,0 +1,17 @@
+<form [formGroup]="fg">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input #email type="email" class="form-control col" id="email" (keydown.enter)="addEmail(email.value)">
+  </div>
+  <hr>
+  <h5>Form array content</h5>
+  <div class="form-group flex-wrap" formArrayName="emailAddresses">
+    <div *ngFor="let _ of emailAddressesControl.controls; index as i" class="col-12  input-group mb-2">
+      <span class="input-group-text">{{i}}</span>
+      <input
+        type="text"
+        class="form-control"
+        [formControlName]="i">
+    </div>
+  </div>
+</form>

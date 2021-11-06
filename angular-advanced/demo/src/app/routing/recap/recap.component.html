@@ -1,0 +1,22 @@
+<div class="row form-group">
+  <div class="col-auto"><a [routerLink]="[{}]">Show all</a></div>
+  <div class="col-auto"><a [routerLink]="[{row: 1}]">Show 1</a></div>
+  <div class="col-auto"><a [routerLink]="[{row: 2}]">Show 2</a></div>
+  <div class="col-auto"><a [routerLink]="[{row: 3}]">Show 3</a></div>
+  <div class="col-auto"><button class="btn btn-primary" (click)="goto(undefined)">Show all</button></div>
+  <div class="col-auto"><button class="btn btn-primary" (click)="goto(1)">Show 1</button></div>
+  <div class="col-auto"><button class="btn btn-primary" (click)="goto(2)">Show 2</button></div>
+  <div class="col-auto"><button class="btn btn-primary" (click)="goto(3)">Show 3</button></div>
+</div>
+<ul class="list-group">
+  <li *ngIf="showRow(1)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-primary">This is first row!</li>
+  <li *ngIf="showRow(2)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-secondary">This is second row!</li>
+  <li *ngIf="showRow(3)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-success">This is third row!</li>
+</ul>
+<div class="row form-group mt-3">
+  <div class="col-auto"><a class="btn btn-secondary" routerLink="../none">No transform</a></div>
+  <div class="col-auto"><a class="btn btn-secondary text-lowercase" routerLink="../lowercase">Lowercase</a></div>
+  <div class="col-auto"><a class="btn btn-secondary text-uppercase" routerLink="../uppercase">Uppercase</a></div>
+  <div class="col-auto"><a class="btn btn-secondary" routerLink="../capitalize">Capitalize</a></div>
+  <div class="col-auto"><a class="btn btn-secondary text-monospace" routerLink="../monospace">Mono space</a></div>
+</div>

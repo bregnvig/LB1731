@@ -9,6 +9,7 @@ import { ChangeDetectionComponent } from './change-detection/change-detection.co
 import { InputPropertyOnPushByReferenceComponent } from './change-detection/input-property/input-property-on-push-by-reference.component';
 import { InputPropertyOnPushSimpleTypeComponent } from './change-detection/input-property/input-property-on-push-simple-type.component';
 import { InputPropertyComponent } from './change-detection/input-property/input-property.component';
+import { ObservableEventsComponent } from './change-detection/observable-events/observable-events.component';
 import { ComponentsComponent } from './components.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
@@ -26,12 +27,11 @@ import { OnDestroyRandomComponent } from './life-cycle/on-destroy/on-destroy-ran
 import { OnDestroyComponent } from './life-cycle/on-destroy/on-destroy.component';
 import { StopWatchComponent } from './stop-watch/stop-watch.component';
 import { CommonFilterListComponent } from './template-outlet/common-filter-list/common-filter-list.component';
+import { CommonListFilterFilterFnComponent } from './template-outlet/common-list-filter-filter-fn/common-list-filter-filter-fn.component';
 import { NonTemplateOutletComponent } from './template-outlet/non-template-outlet.component';
 import { TemplateOutletComponent } from './template-outlet/template-outlet.component';
 import { ViewChildComponent } from './view-child/view-child.component';
 import { ViewChildrenComponent } from './view-children/view-children.component';
-import { CommonListFilterFilterFnComponent } from './template-outlet/common-list-filter-filter-fn/common-list-filter-filter-fn.component';
-import { ObservableEventsComponent } from './change-detection/observable-events/observable-events.component';
 
 
 @NgModule({
