@@ -1,15 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard';
+import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapComponent
+    pathMatch: 'full',
+    redirectTo: 'playground',
   },
   {
-    path: ':id',
-    component: MapComponent
+    path: 'playground',
+    component: MapComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'playground/:id',
+    component: MapComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   }
 ];
 

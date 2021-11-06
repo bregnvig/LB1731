@@ -5,12 +5,17 @@ import { MapComponent } from './map/map.component';
 const routes: Routes = [
   {
     path: '',
-    component: MapComponent
+    pathMatch: 'full',
+    redirectTo: 'playground',
   },
   {
-    path: ':id',
-    component: MapComponent
-  }
+    path: 'playground',
+    component: MapComponent,
+  },
+  {
+    path: 'playground/:id',
+    component: MapComponent,
+  },
 ];
 
 @NgModule({
