@@ -28,4 +28,10 @@ export class PlaygroundService {
     console.log('Saving', playground);
     this.altered$.next([...this.altered$.value.filter(p => p.id !== playground.id), playground]);
   }
+
+  getById(id: string): Observable<Playground | undefined> {
+    return this.playgrounds$.pipe(
+      map(playgrounds => playgrounds.find(playground => playground.id === id))
+    );
+  }
 }

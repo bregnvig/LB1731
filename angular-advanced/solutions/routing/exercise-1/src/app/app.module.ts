@@ -16,6 +16,7 @@ import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EditPlaygroundControlComponent } from './edit-playground-control/edit-playground-control.component';
+import { MapComponent } from './map/map.component';
 
 library.add(fas, far);
 
@@ -29,6 +30,7 @@ library.add(fas, far);
     DefaultDescriptionPipe,
     EditPlaygroundModalComponent,
     EditPlaygroundControlComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

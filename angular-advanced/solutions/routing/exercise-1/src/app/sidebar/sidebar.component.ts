@@ -11,18 +11,13 @@ import { LocationService } from '../service';
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
+  @Input() playgrounds: Playground[] | null | undefined = [];
   @Output() selected = new EventEmitter<Playground>();
   @Output() edit = new EventEmitter<Playground>();
 
-  selectedPlayground: Playground | undefined;
+  @Input() selectedPlayground: Playground | null | undefined = null;
   location$: Observable<Coordinate> = this.locationService.location$;
 
   constructor(private locationService: LocationService) { }
-
-  selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
-    this.selected.emit(playground);
-  }
 
 }
