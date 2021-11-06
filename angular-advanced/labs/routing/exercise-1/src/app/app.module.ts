@@ -13,6 +13,7 @@ import { EditPlaygroundControlComponent } from './edit-playground-control/edit-p
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
+import { LoginComponent } from './login/login.component';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
@@ -28,6 +29,7 @@ library.add(fas, far);
     DefaultDescriptionPipe,
     EditPlaygroundModalComponent,
     EditPlaygroundControlComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
