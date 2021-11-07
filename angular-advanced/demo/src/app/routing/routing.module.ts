@@ -4,6 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { GuardComponent } from './guard/guard.component';
+import { MissingPlaygroundComponent } from './guard/missing-playground/missing-playground.component';
+import { PlaygroundGuardService } from './guard/playground-guard.service';
 import { ParamsComponent } from './params/params.component';
 import { PlaygroundDetailsComponent } from './params/playground-details/playground-details.component';
 import { RecapComponent } from './recap/recap.component';
@@ -12,7 +15,7 @@ import { ResolverComponent } from './resolver/resolver.component';
 import { RoutingComponent } from './routing.component';
 
 @NgModule({
-  declarations: [RoutingComponent, ParamsComponent, RecapComponent, PlaygroundDetailsComponent, ResolverComponent],
+  declarations: [RoutingComponent, ParamsComponent, RecapComponent, PlaygroundDetailsComponent, ResolverComponent, GuardComponent, MissingPlaygroundComponent],
   imports: [
     CommonModule,
     NgbModule,
@@ -43,6 +46,29 @@ import { RoutingComponent } from './routing.component';
             resolve: {
               playground: PlaygroundResolverService
             }
+          },
+          {
+            path: 'guard',
+            component: GuardComponent,
+            children: [
+              {
+                path: 'missing',
+                component: MissingPlaygroundComponent,
+                canDeactivate: [
+                  PlaygroundGuardService,
+                ],
+              },
+              {
+                path: ':id',
+                component: ResolverComponent,
+                canActivate: [
+                  PlaygroundGuardService,
+                ],
+                resolve: {
+                  playground: PlaygroundResolverService
+                }
+              },
+            ]
           },
           {
             path: '**',
