@@ -7,16 +7,11 @@ import { MapComponent } from './map/map.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'playground',
-  },
-  {
-    path: 'playground',
     component: MapComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'playground/:id',
+    path: ':id',
     component: MapComponent,
     canActivate: [AuthGuard],
   },
