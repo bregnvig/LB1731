@@ -5,15 +5,10 @@ import { MapComponent } from './map/map.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'playground',
-  },
-  {
-    path: 'playground',
     component: MapComponent,
   },
   {
-    path: 'playground/:id',
+    path: ':id',
     component: MapComponent,
   },
 ];
