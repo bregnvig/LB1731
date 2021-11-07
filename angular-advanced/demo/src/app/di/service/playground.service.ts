@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
+import { Playground } from "src/app/shared";
 
 const aarhusPlaygrounds = [
   {
@@ -416,4 +418,11 @@ export class AarhusPlaygroundService {
   constructor() {
     console.log('Angular just created the AarhusPlaygroundService');
   }
+
+  getById(id: string): Observable<Playground | undefined> {
+    return this.playgrounds$.pipe(
+      map(playgrounds => playgrounds.find(p => p.id === id))
+    );
+  }
+
 }

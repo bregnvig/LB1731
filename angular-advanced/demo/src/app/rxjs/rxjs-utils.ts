@@ -1,6 +1,6 @@
 import { Directive, OnDestroy } from "@angular/core";
-import { fromEvent, Observable, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
-import { switchMap, takeUntil, tap } from "rxjs/operators";
+import { fromEvent, Observable, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
+import { filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
 
 export function useCacheOnError(key: string) {
   return function <T>(source: Observable<T>): Observable<T> {
@@ -24,31 +24,34 @@ export function useCacheOnError(key: string) {
           subscriber.complete();
         }
       });
-    }
+    };
 
     return new Observable(subscriber => {
-      subscribeForCacheAndRetry(source, subscriber)
+      subscribeForCacheAndRetry(source, subscriber);
       return () => {
         console.log(`Unsubscribing from source`);
-        innerSubscription?.unsubscribe()
+        innerSubscription?.unsubscribe();
       };
-    })
-  }
+    });
+  };
 }
 
 export function debug<T>(tag: string) {
   return tap<T>({
     next(value) {
-      console.log(`%c[${tag}: Next]`, "background: #009688; color: #fff; padding: 3px; font-size: 9px;", value)
+      console.log(`%c[${tag}: Next]`, "background: #009688; color: #fff; padding: 3px; font-size: 9px;", value);
     },
     error(error) {
-      console.log(`%c[${tag}: Error]`, "background: #E91E63; color: #fff; padding: 3px; font-size: 9px;", error)
+      console.log(`%c[${tag}: Error]`, "background: #E91E63; color: #fff; padding: 3px; font-size: 9px;", error);
     },
     complete() {
-      console.log(`%c[${tag}]: Complete`, "background: #00BCD4; color: #fff; padding: 3px; font-size: 9px;")
+      console.log(`%c[${tag}]: Complete`, "background: #00BCD4; color: #fff; padding: 3px; font-size: 9px;");
     },
-  })
+  });
 }
+
+export const shareLatest = <T>() => pipe(shareReplay<T>({ bufferSize: 1, refCount: true }));
+export const truthy = <T>() => pipe(filter((a: T) => !!a));
 
 @Directive()
 export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy {
