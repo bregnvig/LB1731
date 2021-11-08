@@ -16,8 +16,8 @@ import { LocationService, PlaygroundService } from 'src/app/shared/service';
 export class ParamsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
   fg = this.fb.group({
-    filter: [this.route.snapshot.params.term],
-    useQueryParams: [false],
+    filter: [this.route.snapshot.params.term || this.route.snapshot.queryParams.term],
+    useQueryParams: [this.route.snapshot.params.useQueryParams || this.route.snapshot.queryParams.useQueryParams],
   });
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new BehaviorSubject<void>(undefined);
@@ -39,8 +39,8 @@ export class ParamsComponent extends AbstractSubscribeUnsubscribeDirective imple
     this.subscriptions.push(
       this.fg.valueChanges.subscribe(({ useQueryParams, filter }) => {
         useQueryParams
-          ? this.router.navigate([], { queryParams: { term: filter }, })
-          : this.router.navigate([{ term: filter }], { relativeTo: this.route });
+          ? this.router.navigate([], { queryParams: { term: filter, useQueryParams }, })
+          : this.router.navigate([{ term: filter, useQueryParams }], { relativeTo: this.route });
       }),
       this.route.url.subscribe(params => console.log('Params url', this.router.url)),
       this.route.params.subscribe(params => console.log('Params matrix', params)),
