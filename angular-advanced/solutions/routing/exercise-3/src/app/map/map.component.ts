@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, noop, Observable } from 'rxjs';
+import { combineLatest, merge, noop, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from '../edit-playground-modal/edit-playground-modal.component';
-import { FooterComponent } from '../footer/footer.component';
 import { Center, Marker } from '../leaflet';
 import { LeafletComponent } from '../leaflet/leaflet.component';
 import { Coordinate, Playground } from '../model';
@@ -26,9 +25,8 @@ export class MapComponent implements OnInit {
   playground$!: Observable<Playground | undefined>;
   term$: Observable<string> = this.route.queryParams.pipe(map(params => params.term));
   location$: Observable<Coordinate> = this.locationService.location$;
-  center: Center = new Center(56.360029, 10.746635);
+  center$: Observable<Center> = of(new Center(56.360029, 10.746635));
   markers$: Observable<Marker> | undefined;
-  footerComponent = FooterComponent;
 
   constructor(
     private service: PlaygroundService,
@@ -45,14 +43,10 @@ export class MapComponent implements OnInit {
       switchMap(id => this.service.getById(id)),
       shareLatest(),
     );
-    combineLatest([
-      this.locationService.location$,
-      this.route.queryParams.pipe(
-        map(params => params.zoom || 12),
-      )
-    ]).subscribe(([location, zoomLevel]) => {
-      this.center = new Center(location.lat, location.lng, zoomLevel);
-    });
+    this.center$ = this.locationService.location$.pipe(
+      map(location => new Center(location.lat, location.lng, this.route.snapshot.queryParams.zoom || 12))
+    );
+
     combineLatest([
       this.leaflet.zoomed.pipe(debounceTime(200)),
       this.sidebar.filter.pipe(debounceTime(300), startWith(this.route.snapshot.queryParams.term)),
