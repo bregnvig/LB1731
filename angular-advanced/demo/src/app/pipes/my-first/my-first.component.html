@@ -1,0 +1,15 @@
+<article>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="myFirst" class="form-label">My first</label>
+        <input type="text" name="myFirst" [(ngModel)]="myFirst" class="form-control" id="myFirst">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{myFirst | myFirst}}
+    </div>
+  </div>
+</article>

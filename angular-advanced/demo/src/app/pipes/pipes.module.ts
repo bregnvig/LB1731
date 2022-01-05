@@ -4,7 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { AsyncPipeComponent } from './async-pipe/async-pipe.component';
 import { JsonComponent } from './json/json.component';
+import { KeyValueComponent } from './key-value/key-value.component';
+import { MyFirstComponent } from './my-first/my-first.component';
+import { MyFirstPipe } from './my-first/my-first.pipe';
 import { PipesComponent } from './pipes/pipes.component';
 
 
@@ -12,7 +16,11 @@ import { PipesComponent } from './pipes/pipes.component';
 @NgModule({
   declarations: [
     PipesComponent,
-    JsonComponent
+    JsonComponent,
+    KeyValueComponent,
+    AsyncPipeComponent,
+    MyFirstComponent,
+    MyFirstPipe
   ],
   imports: [
     CommonModule,
@@ -27,6 +35,18 @@ import { PipesComponent } from './pipes/pipes.component';
           {
             path: 'json',
             component: JsonComponent,
+          },
+          {
+            path: 'keyvalue',
+            component: KeyValueComponent,
+          },
+          {
+            path: 'async',
+            component: AsyncPipeComponent,
+          },
+          {
+            path: 'my-first',
+            component: MyFirstComponent,
           },
           {
             path: '**',

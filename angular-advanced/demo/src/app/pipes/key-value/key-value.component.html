@@ -1,0 +1,7 @@
+<article class="row">
+  <div class="col">
+    <p *ngFor="let entry of myObject | keyvalue">
+      {{entry.key | uppercase}}: {{entry.value}}
+    </p>
+  </div>
+</article>
