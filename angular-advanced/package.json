@@ -1,7 +1,6 @@
 {
     "name": "angular-advanced",
     "workspaces": [
-      "solutions/unit-test",
-      "solutions/routing/exercise-2/routing-2"
+      "./solutions/*"
     ]
   }

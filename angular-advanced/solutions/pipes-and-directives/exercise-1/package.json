@@ -1,5 +1,5 @@
 {
-  "name": "components",
+  "name": "pipes-and-directives-exercise-1",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
