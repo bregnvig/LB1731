@@ -3,12 +3,16 @@ import { Subscription } from 'rxjs';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
 
+const distanceKeyFn = (a: Coordinate, b: Coordinate) => `${a.lat}${a.lng}${b.lat}${b.lng}`;
 @Pipe({
-  name: 'distance'
+  name: 'distance',
+  pure: false,
 })
 export class DistancePipe implements PipeTransform, OnDestroy {
 
-  private lastKnownLocation?: Coordinate;
+  private distanceKey?: string;
+  private distance: number | string = 'Ukendt';
+  private lastKnownLocation!: Coordinate;
   private subscription: Subscription;
 
   constructor(private locationService: LocationService) {
@@ -20,7 +24,12 @@ export class DistancePipe implements PipeTransform, OnDestroy {
   }
 
   transform(value: Coordinate): number | string {
-    return this.lastKnownLocation ? this.locationService.getDistance(this.lastKnownLocation, value) : 'Ukendt';
+    const key = distanceKeyFn(this.lastKnownLocation, value);
+    if(key !== this.distanceKey) {
+      this.distanceKey = key;
+      this.distance = this.locationService.getDistance(this.lastKnownLocation, value);
+    }
+    return this.distance;
   }
 
 }
