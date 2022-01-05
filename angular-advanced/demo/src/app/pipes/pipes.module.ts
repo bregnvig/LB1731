@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { AsyncPipeComponent } from './async-pipe/async-pipe.component';
 import { JsonComponent } from './json/json.component';
 import { KeyValueComponent } from './key-value/key-value.component';
+import { MyFirstImpureComponent } from './my-first-impure/my-first-impure.component';
+import { MyFirstImpurePipe } from './my-first-impure/my-first-impure.pipe';
 import { MyFirstComponent } from './my-first/my-first.component';
 import { MyFirstPipe } from './my-first/my-first.pipe';
 import { PipesComponent } from './pipes/pipes.component';
@@ -20,7 +22,9 @@ import { PipesComponent } from './pipes/pipes.component';
     KeyValueComponent,
     AsyncPipeComponent,
     MyFirstComponent,
-    MyFirstPipe
+    MyFirstPipe,
+    MyFirstImpurePipe,
+    MyFirstImpureComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +51,10 @@ import { PipesComponent } from './pipes/pipes.component';
           {
             path: 'my-first',
             component: MyFirstComponent,
+          },
+          {
+            path: 'my-first-impure',
+            component: MyFirstImpureComponent,
           },
           {
             path: '**',

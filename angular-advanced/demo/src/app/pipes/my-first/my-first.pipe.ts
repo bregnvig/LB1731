@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MyFirstPipe implements PipeTransform {
 
   transform(value: string): string {
+    console.log(`Pure ${value}`);
     return `My first ${value}`;
   }
 

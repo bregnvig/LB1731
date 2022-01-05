@@ -1,0 +1,6 @@
+div.col-2 {
+  background-color: orange;
+  &:hover {
+    background-color: orangered;
+  }
+}

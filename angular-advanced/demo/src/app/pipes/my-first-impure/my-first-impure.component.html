@@ -1,0 +1,21 @@
+<article>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="myFirst" class="form-label">My first impure</label>
+        <input type="text" name="myFirst" [(ngModel)]="myFirst" class="form-control" id="myFirst">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      {{myFirst | myFirst}}
+    </div>
+    <div class="col-2" (mousemove)="noop()">
+      
+    </div>
+    <div class="col-5">
+      {{myFirst | myFirstImpure}}
+    </div>
+  </div>
+</article>
