@@ -4,24 +4,33 @@
       <div class="list-group-item">
         <input id="filter" type="text" autofocus placeholder="Filter playgrounds">
       </div>
-      <a
-        class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
-        [class.active]="playground === selectedPlayground" *ngFor="let playground of playgrounds"
-        (click)="selectPlayground(playground)">
-        <div class="d-flex flex-column justify-content-between">
-          <h6 class="mb-1">{{playground.name}}
-            <span class="badge bg-primary badge-pill">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
-          </h6>
-          <small>{{playground.description | defaultDescription}}</small>
-        </div>
-        <div class="d-none d-sm-block">
-          <div class="btn-group">
-            <button class="btn btn-sm btn-secondary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
-              <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
-            </button>
+      <ng-container *ngIf="location$ | async; else loading">
+        <a  *ngFor="let playground of playgrounds"
+            class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
+            [class.active]="playground === selectedPlayground"
+            (click)="selectPlayground(playground)">
+          <div class="d-flex flex-column justify-content-between">
+            <h6 class="mb-1">{{playground.name}}
+              <span class="badge bg-primary badge-pill">{{playground.position | distance | humanizeDistance}}</span>
+            </h6>
+            <small>{{playground.description | defaultDescription}}</small>
           </div>
-        </div>
-      </a>
+          <div class="d-none d-sm-block">
+            <div class="btn-group">
+              <button class="btn btn-sm btn-secondary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
+                <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </a>
+      </ng-container>
     </div>
   </nav>
 </aside>
+
+<ng-template #loading>
+  <div class="flex-item list-group-item d-flex justify-content-between">
+    <span>Henter din lokation</span>
+    <fa-icon size="lg" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
+  </div>
+</ng-template>
