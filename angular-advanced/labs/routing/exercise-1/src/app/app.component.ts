@@ -3,7 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, merge, noop, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
-import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
@@ -21,7 +20,6 @@ export class AppComponent {
   location$: Observable<Coordinate> = this.locationService.location$;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
-  footerComponent = FooterComponent;
 
   constructor(
     private service: PlaygroundService,
