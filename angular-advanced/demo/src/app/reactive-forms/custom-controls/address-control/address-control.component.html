@@ -1,0 +1,26 @@
+<form [formGroup]="fg" tabindex="0">
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="street">Address</label>
+      <input id="street" type="text" class="form-control" formControlName="street" (blur)="onBlur()">
+    </div>
+    <div class="form-group col-auto">
+      <label for="streetNumber">Street no.</label>
+      <input id="streetNumber" type="text" size="6" class="form-control" formControlName="streetNumber" (blur)="onBlur()">
+    </div>
+    <div class="form-group col-auto">
+      <label for="floor">Floor</label>
+      <input id="floor" type="text" size="5" class="form-control" formControlName="floor" (blur)="onBlur()">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-auto">
+      <label for="zip">Zip</label>
+      <input id="zip" type="text" size="4" class="form-control" formControlName="zip" (blur)="onBlur()">
+    </div>
+    <div class="form-group col">
+      <label for="city">City</label>
+      <input id="city" type="text" class="form-control" formControlName="city" (blur)="onBlur()">
+    </div>
+  </div>
+</form>

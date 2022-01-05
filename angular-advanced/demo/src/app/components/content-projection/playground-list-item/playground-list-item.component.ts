@@ -5,10 +5,13 @@ import { Playground } from 'src/app/shared';
   selector: 'loop-playground-list-item',
   template: `
     <li class="list-group-item d-flex">
-      <span class="flex-item">{{playground?.name}}</span>
+      <div class="flex-item d-flex flex-column">
+        <span class="flex-item">{{playground?.name}}</span>
+        <small><ng-content></ng-content></small>
+      </div>
       <div>
         <div class="btn-group">
-          <ng-content></ng-content>
+          <ng-content select="button"></ng-content>
         </div>
       </div>
     </li>

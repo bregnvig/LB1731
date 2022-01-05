@@ -7,17 +7,18 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
     <div class="row">
       <div class="col"><button class="btn btn-primary" (click)="addWatch()">Add stopwatch</button></div>
     </div>
-    <div class="row" *ngFor="let no of watchNos">
+    <div class="row">
       <div class="col">
-        Stop watch {{no}} - <loop-stop-watch></loop-stop-watch>
+        <loop-stop-watch #watch1></loop-stop-watch>
+        <loop-stop-watch #watch2></loop-stop-watch>
       </div>
     </div>
   `,
 })
 export class ViewChildrenComponent implements AfterViewInit {
 
-  watchNos: number[] = [0];
-  @ViewChildren(StopWatchComponent) watches!: QueryList<StopWatchComponent>;
+  watchNos: number[] = [0, 1, 2, 3, 4];
+  @ViewChildren('watch1, watch2') watches!: QueryList<StopWatchComponent>;
 
   ngAfterViewInit(): void {
     this.watches.forEach(w => w.start());

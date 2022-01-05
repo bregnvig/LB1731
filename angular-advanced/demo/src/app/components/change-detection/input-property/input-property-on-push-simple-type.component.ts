@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       input-property-on-push-simple-type component {{no}}!
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPropertyOnPushSimpleTypeComponent {
 

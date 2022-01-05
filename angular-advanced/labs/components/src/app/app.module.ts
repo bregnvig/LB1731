@@ -24,7 +24,6 @@ library.add(fas, far);
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
-    SidebarListItemComponent,
   ],
   imports: [
     BrowserModule,
