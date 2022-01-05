@@ -60,7 +60,13 @@ export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy
 
   protected destroyed$ = new Subject<boolean>();
 
+  constructor() {
+    console.log('Created', this['constructor'].name);
+  }
+
   ngOnDestroy() {
+    console.log('Destroyed', this['constructor'].name);
+
     this.destroyed$.next(true);
     (this.subscriptions || []).forEach(s => s.unsubscribe());
   }
