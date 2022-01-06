@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectAllComponent implements OnInit {
 
+  text = 'lorem ipsum dolor';
+
   constructor() { }
 
   ngOnInit(): void {
