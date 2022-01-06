@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center h-100">
+    <div class="card form-signin">
+        <form [formGroup]="fg" (submit)="login()">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <input formControlName="email" type="email" class="form-control" placeholder="Email address" autofocus="">
+            <input formControlName="password" type="password" class="mt-2 form-control" placeholder="Password">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>

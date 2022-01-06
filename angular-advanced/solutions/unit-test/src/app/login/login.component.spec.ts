@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -16,7 +15,6 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         LoginModule,
-        ReactiveFormsModule,
         HttpClientTestingModule,
         RouterTestingModule,
       ],
@@ -71,7 +69,5 @@ describe('LoginComponent', () => {
     // The Expect
     expect(routerSpy).toHaveBeenCalledWith(['/']);
   });
-
-
 
 });
