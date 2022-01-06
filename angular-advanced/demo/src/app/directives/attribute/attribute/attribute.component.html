@@ -1,0 +1,9 @@
+<ul ngbNav class="nav-tabs mb-3" activeId="imperative">
+  <li ngbNavItem="select-all">
+    <a ngbNavLink routerLink="select-all" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Select all</a>
+  </li>
+  <li ngbNavItem="focus-empty">
+    <a ngbNavLink routerLink="focus-empty" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Focus empty</a>
+  </li>
+</ul>
+<router-outlet></router-outlet>

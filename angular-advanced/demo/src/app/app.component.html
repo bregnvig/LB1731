@@ -19,8 +19,14 @@
       <li ngbNavItem>
         <a ngbNavLink routerLink="/pipes" routerLinkActive="active">Pipes</a>
       </li>
+      <li ngbNavItem [disabled]="true">
+        <a ngbNavLink>Directives</a>
+      </li>
       <li ngbNavItem>
-        <a ngbNavLink routerLink="/structural" routerLinkActive="active">Structural</a>
+        <a class="ml-3" ngbNavLink routerLink="/directives/attribute" routerLinkActive="active">Attribute</a>
+      </li>
+      <li ngbNavItem>
+        <a class="ml-3" ngbNavLink routerLink="/directives/structural" routerLinkActive="active">Structural</a>
       </li>
     </ul>
   </div>

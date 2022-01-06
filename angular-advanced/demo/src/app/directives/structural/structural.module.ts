@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { NgForComponent } from './ng-for/ng-for.component';
 import { NgIfComponent } from './ng-if/ng-if.component';
 import { StructuralComponent } from './structural/structural.component';
