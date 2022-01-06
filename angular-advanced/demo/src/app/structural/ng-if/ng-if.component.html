@@ -1,1 +1,89 @@
-<p>ng-if works!</p>
+<article>
+  <div class="form-group row">
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="blue" [formControl]="blueControl">
+        <label class="form-check-label" for="blue">Make it blue</label>
+      </div>
+    </div>
+  </div>
+  <h5 class="mb-3">Using two ngIf</h5>
+  <div class="row">
+    <div *ngIf="!blueControl.value" class="col-auto">
+      <div class="box red"></div>
+    </div>
+    <div *ngIf="blueControl.value" class="col-auto">
+      <div class="box blue"></div>
+    </div>
+    <div class="col">
+      <code>
+        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
+          &lt;div *ngIf=&quot;!blueControl.value&quot; class=&quot;col-auto&quot;&gt;
+            &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </pre>
+        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
+          &lt;div *ngIf=&quot;blueControl.value&quot; class=&quot;col-auto&quot;&gt;
+            &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </pre>
+      </code>
+    </div>
+  </div>
+  <h5 class="mb-3">Using else</h5>
+  <div class="row">
+    <ng-template #useRed>
+        <div class="box red"></div>
+    </ng-template>
+    <div class="col-auto">
+      <div *ngIf="blueControl.value; else useRed" class="box blue"></div>
+    </div>
+    <div class="col">
+      <code>
+        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
+          &lt;ng-template #useRed&gt;
+            &lt;div class=&quot; box red&quot;&gt;&lt;/div&gt;
+          &lt;/ng-template&gt;
+        </pre>
+        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
+          &lt;div class=&quot;col-auto&quot;&gt;
+            &lt;div *ngIf=&quot;blueControl.value; else <span [class.font-weight-normal]="blueControl.value" [class.font-weight-bolder]="!blueControl.value">useRed</span>&quot; 
+              class=&quot;box blue&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </pre>
+      </code>
+    </div>
+  </div>
+  <h5 class="mb-3">Using then/else</h5>
+  <div class="row">
+    <ng-template #useRed>
+        <div class="box red"></div>
+    </ng-template>
+    <ng-template #useBlue>
+        <div class="box blue"></div>
+    </ng-template>
+    <div class="col-auto">
+      <ng-container *ngIf="blueControl.value; then useBlue else useRed"></ng-container>
+    </div>
+    <div class="col">
+      <code>
+        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
+          &lt;ng-template #useRed&gt;
+            &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
+          &lt;/ng-template&gt;
+        </pre>
+        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
+          &lt;ng-template #useBlue&gt;
+            &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
+          &lt;/ng-template&gt;
+        </pre>        
+        <pre class="fs-3">
+          &lt;div class=&quot;col-auto&quot;&gt;
+            &lt;ng-container *ngIf=&quot;blueControl.value; 
+              <span [class.font-weight-normal]="!blueControl.value" [class.font-weight-bolder]="blueControl.value">then useBlue</span> <span [class.font-weight-normal]="blueControl.value" [class.font-weight-bolder]="!blueControl.value">else useRed</span>&quot;&gt;&lt;/ng-container&gt;
+          &lt;/div&gt;
+        </pre>
+      </code>      
+    </div>
+  </div>
+</article>

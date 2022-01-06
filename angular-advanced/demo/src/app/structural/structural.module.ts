@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
@@ -17,6 +18,7 @@ import { StructuralComponent } from './structural/structural.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     NgbModule,
     RouterModule.forChild([
@@ -31,6 +33,10 @@ import { StructuralComponent } from './structural/structural.component';
           {
             path: 'ng-for',
             component: NgForComponent
+          },
+          {
+            path: '**',
+            redirectTo: 'ng-if'
           }
         ]
       }
