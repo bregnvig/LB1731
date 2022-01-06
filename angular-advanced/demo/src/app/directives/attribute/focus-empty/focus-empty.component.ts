@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FocusEmptyComponent {
 
   fg: FormGroup;
+  submitted = false;
 
   constructor(private fb: FormBuilder) {
     this.fg = this.fb.group({
@@ -19,9 +20,7 @@ export class FocusEmptyComponent {
   }
 
   submit() {
-    if (this.fg.valid) {
-      console.log(this.fg);
-    } 
+    this.submitted = this.fg.valid;
     this.fg.markAllAsTouched();
   }
 
