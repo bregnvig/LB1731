@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./pipes/pipes.module').then(m => m.PipesModule)
   },
   {
+    path: 'structural',
+    loadChildren: () => import('./structural/structural.module').then(m => m.StructuralModule)
+  },
+  {
     path: '**',
     redirectTo: 'rxjs'
   }
