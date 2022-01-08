@@ -1,0 +1,16 @@
+<li class="list-group-item d-flex">
+  <div class="col-4 d-flex flex-column">
+    <div><button class="btn btn-primary" (click)="collapse.toggle()" >Toggle</button></div>
+    <ng-content></ng-content>
+  </div>
+  <div class="col-8">
+    <div #collapse="ngbCollapse" [ngbCollapse]="true">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{index}}. card</h5>
+          <textarea class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+    </div>    
+  </div>
+</li>
