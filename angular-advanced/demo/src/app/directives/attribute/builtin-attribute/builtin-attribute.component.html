@@ -1,0 +1,13 @@
+<article>
+  <div class="d-flex flex-column">
+    <div class="trafic-light">
+      <div [class.active]="state === 'red'" class="light red"></div>
+    </div>
+    <div class="trafic-light">
+      <div [class.active]="state === 'yellow'" class="light yellow"></div>
+    </div>
+    <div class="trafic-light">
+      <div [class.active]="state === 'green'" class="light green"></div>
+    </div>
+  </div>
+</article>
