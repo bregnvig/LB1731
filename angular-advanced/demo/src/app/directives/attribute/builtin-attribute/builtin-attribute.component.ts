@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 type LigthState = 'red' | 'yellow' | 'green';
 
@@ -7,7 +9,7 @@ type LigthState = 'red' | 'yellow' | 'green';
   templateUrl: './builtin-attribute.component.html',
   styleUrls: ['./builtin-attribute.component.scss']
 })
-export class BuiltinAttributeComponent implements OnInit {
+export class BuiltinAttributeComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
 
   get state(): LigthState {
@@ -23,10 +25,10 @@ export class BuiltinAttributeComponent implements OnInit {
 
   private index = 0;
 
-  constructor() { }
-
   ngOnInit(): void {
-    setInterval(() => (this.index = this.index + 1 === this.states.length ? 0 : this.index + 1), 1000);
+    interval(1000).pipe(
+      this.takeUntilDestroyed(),
+    ).subscribe(() => this.index = this.index + 1 === this.states.length ? 0 : this.index + 1);
   }
 
 }
