@@ -7,6 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CollapseStateComponent } from './ng-for/collapse-state/collapse-state.component';
 import { NgForComponent } from './ng-for/ng-for.component';
 import { NgIfComponent } from './ng-if/ng-if.component';
+import { NgSwitchComponent } from './ng-switch/ng-switch.component';
 import { StructuralComponent } from './structural/structural.component';
 
 
@@ -17,6 +18,7 @@ import { StructuralComponent } from './structural/structural.component';
     NgForComponent,
     StructuralComponent,
     CollapseStateComponent,
+    NgSwitchComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,10 @@ import { StructuralComponent } from './structural/structural.component';
           {
             path: 'ng-for',
             component: NgForComponent
+          },
+          {
+            path: 'ng-switch',
+            component: NgSwitchComponent
           },
           {
             path: '**',

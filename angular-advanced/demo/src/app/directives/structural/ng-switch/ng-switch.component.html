@@ -1,0 +1,21 @@
+<article>
+  <div class="d-flex justify-content-center align-items-center" [ngSwitch]="selectedNumber">
+    <span *ngSwitchCase="1">1</span>
+    <span *ngSwitchCase="2">2</span>
+    <span *ngSwitchCase="0">3</span>
+    <span *ngSwitchDefault>?</span>
+  </div>
+  <pre>
+    <code>
+    &lt;article&gt;
+      &lt;div class=&quot;d-flex justify-content-center align-items-center&quot; 
+        <span class="font-weight-bolder">[ngSwitch]=&quot;selectedNumber&quot;</span>&gt;
+        <span [class.font-weight-bolder]="selectedNumber === 1">&lt;span *ngSwitchCase=&quot;1&quot;&gt;1&lt;/span&gt;</span>
+        <span [class.font-weight-bolder]="selectedNumber === 2">&lt;span *ngSwitchCase=&quot;2&quot;&gt;2&lt;/span&gt;</span>
+        <span [class.font-weight-bolder]="selectedNumber === 0">&lt;span *ngSwitchCase=&quot;0&quot;&gt;3&lt;/span&gt;</span>
+        <span [class.font-weight-bolder]="selectedNumber === undefined">&lt;span *ngSwitchDefault&gt;?&lt;/span&gt;</span>
+      &lt;/div&gt;
+    &lt;/article&gt;      
+    </code>
+  </pre>
+</article>
