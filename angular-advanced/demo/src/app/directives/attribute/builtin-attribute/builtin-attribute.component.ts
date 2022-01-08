@@ -19,7 +19,6 @@ export class BuiltinAttributeComponent implements OnInit {
     'yellow',
     'green',
     'yellow',
-    'red',
   ];
 
   private index = 0;
