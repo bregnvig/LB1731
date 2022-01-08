@@ -7,15 +7,15 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Vali
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
-        <input formControlName="name" ngbAutoFocus id="name" type="text" class="form-control" (blur)="onBlur()">
+        <input loopSelectAllText formControlName="name" ngbAutoFocus id="name" type="text" class="form-control" (blur)="onBlur()">
       </div>    
       <div>
         <label class="form-label" for="description">Description</label>
-        <input formControlName="description" id="description" type="text" class="form-control" (blur)="onBlur()">
+        <input loopSelectAllText formControlName="description" id="description" type="text" class="form-control" (blur)="onBlur()">
       </div>    
       <div>
         <label class="form-label" for="addressDescription">Address description</label>
-        <input formControlName="addressDescription" id="addressDescription" type="text" class="form-control" (blur)="onBlur()">
+        <input loopSelectAllText formControlName="addressDescription" id="addressDescription" type="text" class="form-control" (blur)="onBlur()">
       </div>    
     </form>
   `,
