@@ -11,7 +11,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Vali
       </div>    
       <div>
         <label class="form-label" for="description">Description</label>
-        <input loopSelectAllText formControlName="description" id="description" type="text" class="form-control" (blur)="onBlur()">
+        <input [loopFocus]="!fg.value.description" loopSelectAllText formControlName="description" id="description" type="text" class="form-control" (blur)="onBlur()">
       </div>    
       <div>
         <label class="form-label" for="addressDescription">Address description</label>

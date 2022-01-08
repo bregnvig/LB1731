@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SelectAllTextDirective } from './directive/select-all-text.directive';
+import { FocusDirective } from './directive/focus.directive';
 
 library.add(fas, far);
 
@@ -32,6 +33,7 @@ library.add(fas, far);
     EditPlaygroundControlComponent,
     LoginComponent,
     SelectAllTextDirective,
+    FocusDirective,
   ],
   imports: [
     BrowserModule,
