@@ -4,7 +4,7 @@
       <div class="form-group row">
         <div class="col">
           <label class="form-label">Some text</label>
-          <input selectAll class="form-control" type="text" [(ngModel)]="text">
+          <input selectAll required [loopExpand]="false" class="form-control" type="text" [(ngModel)]="text">
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
           &lt;div class="form-group row"&gt;
             &lt;div class="col"&gt;
               &lt;label class="form-label"&gt;Some text&lt;/label&gt;
-              &lt;input <strong>selectAll</strong> class="form-control" type="text" [(ngModel)]="text"&gt;
+              &lt;input <strong>selectAll</strong> class="form-control" type="text" <strong>required</strong> [(ngModel)]="text"&gt;
             &lt;/div&gt;
           &lt;/div&gt;
         </code>

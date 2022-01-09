@@ -7,7 +7,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Vali
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
-        <input loopSelectAllText formControlName="name" ngbAutoFocus id="name" type="text" class="form-control" (blur)="onBlur()">
+        <input loopSelectAllText formControlName="name" id="name" type="text" class="form-control" (blur)="onBlur()">
       </div>    
       <div>
         <label class="form-label" for="description">Description</label>

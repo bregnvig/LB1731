@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 type LigthState = 'red' | 'yellow' | 'green';
 
@@ -14,14 +14,14 @@ const code = `
     <div [class.active]="state === 'green'" class="light green"></div>
   </div>
 </div>
-`
+`;
 
 @Component({
   selector: 'loop-builtin-attribute',
   templateUrl: './builtin-attribute.component.html',
   styleUrls: ['./builtin-attribute.component.scss']
 })
-export class BuiltinAttributeComponent implements OnInit {
+export class BuiltinAttributeComponent implements OnDestroy {
 
   code = code;
   get state(): LigthState {
@@ -36,11 +36,14 @@ export class BuiltinAttributeComponent implements OnInit {
   ];
 
   private index = 0;
+  private _interval: any;
 
-  constructor() { }
+  constructor() {
+    this._interval = setInterval(() => (this.index = this.index + 1 === this.states.length ? 0 : this.index + 1), 1000);
+  }
 
-  ngOnInit(): void {
-    setInterval(() => (this.index = this.index + 1 === this.states.length ? 0 : this.index + 1), 1000);
+  ngOnDestroy() {
+    clearInterval(this._interval);
   }
 
 }
