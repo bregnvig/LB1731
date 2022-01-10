@@ -1,8 +1,39 @@
 <article>
-  <div class="form-group row">
-    <div class="col">
-      <label class="form-label">Some text</label>
-      <input selectAll class="form-control" type="text" [(ngModel)]="text">
+  <div class="row">
+    <div class="col-auto">
+      <div class="form-group row">
+        <div class="col">
+          <label class="form-label">Some text</label>
+          <input selectAll required [loopExpand]="false" class="form-control" type="text" [(ngModel)]="text">
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex flex-column">
+      <pre>
+        <code>
+          &lt;div class="form-group row"&gt;
+            &lt;div class="col"&gt;
+              &lt;label class="form-label"&gt;Some text&lt;/label&gt;
+              &lt;input <strong>selectAll</strong> class="form-control" type="text" <strong>required</strong> [(ngModel)]="text"&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <pre>
+        <code>
+          @Directive(&#123; selector: '[<strong>selectAll</strong>]' &#125;)
+          export class SelectAllDirective &#123;
+          
+            constructor(<strong>private elementRef: ElementRef</strong>) &#123; &#125;
+          
+            <strong>@HostListener('focus', ['$event.target.value'])</strong>
+            onFocus(value: string) &#123;
+              <strong>this.elementRef.nativeElement.setSelectionRange(0, value.length);</strong>
+            &#125;
+          
+          &#125;
+        </code>
+      </pre>
     </div>
   </div>
 </article>
