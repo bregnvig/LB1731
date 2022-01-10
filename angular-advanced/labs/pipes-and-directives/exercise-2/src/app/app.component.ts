@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, merge, noop, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
-import { LocationService, PlaygroundService } from './service';
+import { AuthService, LocationService, PlaygroundService } from './service';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
@@ -20,10 +21,12 @@ export class AppComponent {
   location$: Observable<Coordinate> = this.locationService.location$;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
+  roleControl = new FormControl('anonymous');
 
   constructor(
     private service: PlaygroundService,
     private locationService: LocationService,
+    private authService: AuthService,
     private modal: NgbModal,
   ) {
   }
@@ -48,6 +51,7 @@ export class AppComponent {
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
+    this.roleControl.valueChanges.subscribe(value => this.authService.role$.next(value));
   }
 
   edit(playground: Playground) {
