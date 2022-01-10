@@ -1,0 +1,22 @@
+<article>
+  <div class="row">
+    <div class="col">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [formControl]="roleControl">
+        <label ngbButtonLabel class="btn-outline-primary">
+          <input ngbButton type="radio" value="anonymous"> Anonymous
+        </label>
+        <label ngbButtonLabel class="btn-outline-primary">
+          <input ngbButton type="radio" value="user"> User
+        </label>
+        <label ngbButtonLabel class="btn-outline-primary">
+          <input ngbButton type="radio" value="admin"> Admin
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4"><p class="m-2" *loopIsInRole="'anonymous'; role as r">I'm in role as anonymous. Role is {{r}}</p></div>
+    <div class="col-4"><p class="m-2" *loopIsInRole="'user'; role as r">I'm in role as user. Role is {{r}}</p></div>
+    <div class="col-4"><p class="m-2" *loopIsInRole="'admin'; role as r">I'm in role as admin. Role is {{r}}</p></div>  
+  </div>
+</article>
