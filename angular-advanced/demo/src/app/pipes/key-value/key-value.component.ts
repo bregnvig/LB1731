@@ -12,5 +12,10 @@ export class KeyValueComponent {
     b: 'B is the second',
   };
 
+  myMap = new Map<string, string>([
+    ['a', 'A is the first letter'],
+    ['b', 'B is the second'],
+  ]);
+
 
 }
