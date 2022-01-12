@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
@@ -7,7 +7,6 @@ import { LocationService } from '../service';
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
 

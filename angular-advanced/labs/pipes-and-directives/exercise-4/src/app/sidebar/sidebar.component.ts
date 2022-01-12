@@ -7,7 +7,6 @@ import { LocationService } from '../service';
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
 
