@@ -1,7 +1,18 @@
-<article class="row">
-  <div class="col">
-    <p *ngFor="let entry of myObject | keyvalue">
-      {{entry.key | uppercase}}: {{entry.value}}
-    </p>
+<article>
+  <h5>My object</h5>
+  <div class="row mt-3">
+    <div class="col">
+      <p *ngFor="let entry of myObject | keyvalue">
+        {{entry.key | uppercase}}: {{entry.value}}
+      </p>
+    </div>
+  </div>
+  <h5>My map</h5>
+  <div class="row mt-3">
+    <div class="col">
+      <p *ngFor="let entry of myMap | keyvalue">
+        {{entry.key | uppercase}}: {{entry.value}}
+      </p>
+    </div>
   </div>
 </article>
