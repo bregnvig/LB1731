@@ -8,19 +8,19 @@ import { LocationService } from '../service';
 })
 export class DistancePipe implements PipeTransform, OnDestroy {
 
-  private lastKnownLocation?: Coordinate;
+  private location!: Coordinate;
   private subscription: Subscription;
 
   constructor(private locationService: LocationService) {
-    this.subscription = locationService.location$.subscribe(location => this.lastKnownLocation = location);
+    this.subscription = locationService.location$.subscribe(location => this.location = location);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  transform(value: Coordinate): number | string {
-    return this.lastKnownLocation ? this.locationService.getDistance(this.lastKnownLocation, value) : 'Ukendt';
+  transform(value: Coordinate): number {
+    return this.locationService.getDistance(this.location, value);
   }
 
 }
