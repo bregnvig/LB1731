@@ -5,12 +5,12 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class SelectAllTextDirective {
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef<HTMLInputElement>) {
   }
 
   @HostListener('focus', ['$event.target.value'])
   onFocus(value: string) {
-    this.elementRef.nativeElement.setSelectionRange(0, value.length);
+    this.elementRef.nativeElement.select();
   }
 
 }
