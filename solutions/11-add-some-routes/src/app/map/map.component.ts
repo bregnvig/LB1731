@@ -1,11 +1,11 @@
-import { LocationService } from './../shared/location.service';
-import { PlaygroundService } from './../shared/playground.service';
-import { Observable, merge } from 'rxjs';
-import { Center, Marker } from './../leaflet';
-import { Playground } from './../shared/playground';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { pluck, filter, switchMap, share, map, shareReplay } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { merge, Observable } from 'rxjs';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
+import { Center, Marker } from './../leaflet';
+import { LocationService } from './../shared/location.service';
+import { Playground } from './../shared/playground';
+import { PlaygroundService } from './../shared/playground.service';
 
 @Component({
   selector: 'app-map',
@@ -29,12 +29,12 @@ export class MapComponent implements OnInit {
   public ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
     const playground$: Observable<Playground> = this.route.params.pipe(
-      pluck<Params, string>('id'),
+      map<Params, string>(({ id }) => id),
       filter(id => !!id),
       switchMap(id => this.service.find(id)),
       filter(playground => !!playground),
-      shareReplay(),
-    )
+      shareReplay(1),
+    );
 
     playground$.subscribe(playground => {
       this.playground = playground;

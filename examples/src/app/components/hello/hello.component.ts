@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-hello',
   template: `
-  <h1>
-    {{title}}
-  </h1>`,
+    <h1>
+      {{title}}
+    </h1>
+  `,
   styles: [
     `h1 {
       color: darkred !important;

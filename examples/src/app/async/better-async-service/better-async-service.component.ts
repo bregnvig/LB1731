@@ -9,18 +9,18 @@ import { F1BetterService } from '../f1.service';
   styleUrls: ['./better-async-service.component.css'],
   providers: [F1BetterService]
 })
-export class BetterAsyncServiceComponent implements OnInit  {
+export class BetterAsyncServiceComponent implements OnInit {
 
-   drivers: Driver[];
+  drivers: Driver[];
 
   constructor(private service: F1BetterService) {
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.service.getDrivers().subscribe(drivers => this.drivers = drivers);
   }
 
-   addSubscribtion() {
+  addSubscribtion() {
     this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 

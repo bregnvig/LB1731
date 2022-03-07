@@ -1,12 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import {Observable, of} from 'rxjs';
-import {catchError, publishLast, refCount} from 'rxjs/operators';
-
-
-
-
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { Playground } from './playground';
 
 @Injectable()
@@ -20,8 +15,7 @@ export class PlaygroundService {
         console.error('Unable to fetch playgrounds', error.statusText);
         return of([]);
       }),
-      publishLast(),
-      refCount()
+      shareReplay(1),
     );
   }
 
