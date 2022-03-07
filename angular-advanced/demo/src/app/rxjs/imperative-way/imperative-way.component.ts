@@ -28,18 +28,18 @@ export class ImperativeWayComponent implements OnInit {
   }
 
   fetchPlaygrounds(): void {
-    this.service.playgrounds$.subscribe(playgrounds =>
-      this.setPlaygrounds(playgrounds),
-      error => error instanceof HttpErrorResponse && !window.navigator.onLine && (this.fetchedFailed = true),
-      () => console.log('Complete')
-    );
+    this.service.playgrounds$.subscribe({
+      next: playgrounds => this.setPlaygrounds(playgrounds),
+      error: error => error instanceof HttpErrorResponse && !window.navigator.onLine && (this.fetchedFailed = true),
+      complete: () => console.log('Complete'),
+    });
   }
 
   filterPlaygrounds() {
     const term = this.term.toLocaleLowerCase();
     this.playgrounds = this.fetchedPlaygrounds.filter(p => p.name.toLocaleLowerCase().includes(term));
     // Lets say I forgot to call this here
-    // this.sortPlaygrounds(); 
+    // this.sortPlaygrounds();
   }
 
   getDistance(playground: Playground): string | undefined {

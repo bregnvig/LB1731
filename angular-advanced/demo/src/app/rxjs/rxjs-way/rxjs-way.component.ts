@@ -26,10 +26,14 @@ export class RxJSWayComponent implements OnInit {
         // tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
         // catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
       ),
-      this.filterControl.valueChanges.pipe(debounceTime(400), startWith(''), map((term: string) => term.toLowerCase()))
+      this.filterControl.valueChanges.pipe(
+        debounceTime(400),
+        startWith(''),
+        map((term: string) => new RegExp(term, 'i'))
+      )
     ]).pipe(
       tap(_ => console.log(_)),
-      map(([playgrounds, term]: [Playground[], string]) => playgrounds.filter(p => p.name.toLowerCase().includes(term)))
+      map(([playgrounds, term]: [Playground[], RegExp]) => playgrounds.filter(p => term.test(p.name)))
     );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([

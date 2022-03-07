@@ -2,23 +2,23 @@ import { Directive, OnDestroy } from "@angular/core";
 import { fromEvent, Observable, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
 import { filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
 
-export function useCacheOnError(key: string) {
+export function useCacheOnError(localStorageKey: string) {
   return function <T>(source: Observable<T>): Observable<T> {
     let innerSubscription: Subscription;
     const subscribeForCacheAndRetry = function (innerSource: Observable<T>, subscriber: Subscriber<T>) {
       innerSubscription?.unsubscribe();
       innerSubscription = innerSource.subscribe({
         next(value) {
-          localStorage.setItem(key, JSON.stringify(value));
+          localStorage.setItem(localStorageKey, JSON.stringify(value));
           subscriber.next(value);
         },
         error(error) {
           console.log('Problems fetching data', error);
-          localStorage.getItem(key) && subscriber.next(JSON.parse(localStorage.getItem(key)!));
+          localStorage.getItem(localStorageKey) && subscriber.next(JSON.parse(localStorage.getItem(localStorageKey)!));
           !window.navigator.onLine && subscribeForCacheAndRetry(fromEvent(window, 'online').pipe(
             switchMap(() => source),
           ), subscriber);
-          window.navigator.onLine && !localStorage.getItem(key) && subscriber.error(error);
+          window.navigator.onLine && !localStorage.getItem(localStorageKey) && subscriber.error(error);
         },
         complete() {
           subscriber.complete();
