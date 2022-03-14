@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -10,7 +10,7 @@ import { debounceTime, map, startWith } from 'rxjs/operators';
 })
 export class CommonListFilterFilterFnComponent implements OnInit {
 
-  @Input() items$!: Observable<any[]>;
+  @Input() items!: any[] | null;
   @Input() itemTemplateRef: TemplateRef<any> | undefined;
   @Input() filterFn!: (term: string, items: any[]) => any[];
 
@@ -20,14 +20,10 @@ export class CommonListFilterFilterFnComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.filtered$ = combineLatest([
-      this.filterControl.valueChanges.pipe(
-        debounceTime(300),
-        startWith(''),
-      ),
-      this.items$
-    ]).pipe(
-      map(([term, items]) => this.filterFn(term, items))
+    this.filtered$ = this.filterControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      map(term => this.filterFn(term, this.items || []))
     );
   }
 

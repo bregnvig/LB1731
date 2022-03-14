@@ -10,7 +10,7 @@
   <div class="col">
     <ul class="list-group">
       <li *ngFor="let item of items" class="list-group-item">
-        <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
+        <ng-container [ngTemplateOutlet]="itemTemplateRef || defaultTemplate" [ngTemplateOutletContext]="{$implicit: item}"></ng-container>
       </li>
     </ul>
   </div>
