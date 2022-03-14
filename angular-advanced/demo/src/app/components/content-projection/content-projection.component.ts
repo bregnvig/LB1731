@@ -9,9 +9,6 @@ import { PlaygroundService } from 'src/app/shared';
         <button class="btn btn-action btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name">
           <fa-icon [icon]="['fas', 'pen']"></fa-icon>      
         </button>
-        <button class="btn btn-action btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name">
-          <fa-icon [icon]="['fas', 'edit']"></fa-icon>      
-        </button>
         <p>{{playground.description}}</p>
       </loop-playground-list-item>
     </ul>
