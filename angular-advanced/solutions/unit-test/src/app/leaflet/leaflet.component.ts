@@ -29,7 +29,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
 
   constructor() {
     this.baseMaps = {
-      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      OpenStreetMap: tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       })
     };
