@@ -17,6 +17,7 @@ export class PlaygroundService {
   playgrounds$: Observable<Playground[]>;
 
   constructor(http: HttpClient, @Inject(PLAYGROUND_SERVICE_URL) url: string) {
+    console.log('Angular jost created the PlaygroundService')
     this.playgrounds$ = http.get<Playground[]>(url);
   }
 
