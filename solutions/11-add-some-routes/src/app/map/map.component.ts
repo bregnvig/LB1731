@@ -29,8 +29,7 @@ export class MapComponent implements OnInit {
   public ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
     const playground$: Observable<Playground> = this.route.params.pipe(
-      map<Params, string>(({ id }) => id),
-      filter(id => !!id),
+      map<Params, string>(params => params.id),
       switchMap(id => this.service.find(id)),
       filter(playground => !!playground),
       shareReplay(1),

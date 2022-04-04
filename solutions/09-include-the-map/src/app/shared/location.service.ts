@@ -5,16 +5,18 @@ import { Coordinate } from './coordinate';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LocationService {
 
   private location$: Observable<Coordinate>;
 
   constructor() {
-    this.location$ = Observable
-      .create(observer => {
+    this.location$ = new Observable(
+      observer => {
         const watchId = window.navigator.geolocation.watchPosition(position => {
-          observer.next(position)
+          observer.next(position);
         }, error => observer.error(error));
         return () => window.navigator.geolocation.clearWatch(watchId);
       }).pipe(
@@ -22,7 +24,7 @@ export class LocationService {
           return {
             lat: position.coords.latitude,
             lng: position.coords.longitude
-          }
+          };
         }),
         publishReplay(1),
         refCount(),

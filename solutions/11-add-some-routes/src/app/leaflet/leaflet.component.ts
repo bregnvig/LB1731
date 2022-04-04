@@ -1,15 +1,15 @@
 
-import { Component, OnDestroy, AfterViewInit, Input } from '@angular/core';
-
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { control, latLng, LatLng, Map, map, Marker as LeafletMarker, TileLayer, tileLayer } from 'leaflet';
+import { Observable, Subscription } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
-
-import { TileLayer, tileLayer, Map, map, latLng, LatLng, control, Marker as LeafletMarker } from 'leaflet';
-
-
-import { Observable, Subscription } from 'rxjs';
-
 import { MarkerFactory } from './marker-factory';
+
+
+
+
+
 
 /* tslint:disable:component-selector-name */
 /* tslint:disable:component-selector-prefix */
@@ -22,20 +22,20 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
 
   @Input() public mapId = 'leafletMap';
 
-  public baseMaps: { [name: string]: TileLayer };
+  public baseMaps: { [name: string]: TileLayer; };
   private _map: Map;
   private _zoom = 8;
   private _center: LatLng;
 
   private _markers: Observable<Marker>;
   private _markersSubscription: Subscription;
-  private _namedMarkers: { [key: string]: LeafletMarker } = {};
+  private _namedMarkers: { [key: string]: LeafletMarker; } = {};
 
 
 
   constructor() {
     this.baseMaps = {
-      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       })
     };

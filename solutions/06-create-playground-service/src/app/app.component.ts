@@ -10,19 +10,19 @@ import { Playground } from './shared';
 })
 export class AppComponent implements OnInit {
 
-  public title = 'app works!';
-  public playgrounds: Playground[];
-  public playground: Playground;
+  title = 'app works!';
+  playgrounds: Playground[];
+  playground: Playground;
 
-  public constructor(private service: PlaygroundService) {
+  constructor(private service: PlaygroundService) {
 
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.playgrounds = this.service.getPlaygrounds();
   }
 
-  public playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground): void {
     this.playground = playground;
     console.log('Playground selected', playground);
   }

@@ -3,11 +3,11 @@ import { Playground } from './playground';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class PlaygroundService {
 
-    public getPlaygrounds(): Playground[] {
-        return MOCK_PLAYGROUNDS;
-    }
+  getPlaygrounds(): Playground[] {
+    return MOCK_PLAYGROUNDS;
+  }
 }

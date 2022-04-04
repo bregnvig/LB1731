@@ -9,12 +9,12 @@ import { Playground } from '../shared';
 })
 export class SidebarComponent {
 
-  @Input() public playgrounds: Playground[];
-  @Output() public selected = new EventEmitter<Playground>();
+  @Input() playgrounds: Playground[];
+  @Output() selected = new EventEmitter<Playground>();
 
-  public selectedPlayground: Playground;
+  selectedPlayground: Playground;
 
-  public selectPlayground(playground: Playground): void {
+  selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
     this.selected.emit(playground);
   }

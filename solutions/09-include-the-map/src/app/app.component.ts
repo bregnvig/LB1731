@@ -14,16 +14,16 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 
-  public title = 'app works!';
-  public playgrounds: Playground[];
-  public playground: Playground;
-  public center: Center = new Center(56.360029, 10.746635);
-  public markers$: Observable<Marker>;
+  title = 'app works!';
+  playgrounds: Playground[];
+  playground: Playground;
+  center: Center = new Center(56.360029, 10.746635);
+  markers$: Observable<Marker>;
 
-  public constructor(private service: PlaygroundService, private locationService: LocationService) {
+  constructor(private service: PlaygroundService, private locationService: LocationService) {
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
     this.locationService.current.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground): void {
     this.playground = playground;
     console.log('Playground selected', playground);
   }

@@ -10,10 +10,10 @@ import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 export class AppComponent {
   title = 'app works!';
 
-  public appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
-  public playground: Playground;
+  appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
+  playground: Playground;
 
-  public playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground): void {
     this.playground = playground;
     console.log('Playground selected', playground);
   }

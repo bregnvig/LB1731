@@ -24,7 +24,7 @@ export class FancyPlaygroundDetailsComponent {
     this.title = value.name;
     this.options = {
       layers: [
-        tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
+        tileLayer('http://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
         marker([value.position.lat, value.position.lng], {
           icon: icon({
             iconUrl: 'assets/marker-icon.png',

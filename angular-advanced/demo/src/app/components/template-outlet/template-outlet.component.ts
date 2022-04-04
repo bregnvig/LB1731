@@ -21,7 +21,8 @@ export class TemplateOutletComponent implements OnInit {
 
   @ViewChild(CommonFilterListComponent, { static: true }) filterComponent!: CommonFilterListComponent;
   playgrounds$!: Observable<Playground[]>;
-  filterFn = (term: string, playgrounds: Playground[]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
+  filterFn = (term: string, playgrounds: Playground[]) =>
+    playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
 
   constructor(public service: PlaygroundService) { }
 
@@ -30,10 +31,10 @@ export class TemplateOutletComponent implements OnInit {
       this.service.playgrounds$,
       this.filterComponent.filter.pipe(
         startWith(''),
-        map(term => term.toLocaleLowerCase())
+        map(term => new RegExp(term, 'i'))
       )
     ]).pipe(
-      map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
+      map(([playgrounds, term]) => playgrounds.filter(p => term.test(p.name)))
     );
   }
 

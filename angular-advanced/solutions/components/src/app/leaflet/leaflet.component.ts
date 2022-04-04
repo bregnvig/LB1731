@@ -15,21 +15,21 @@ import { MarkerFactory } from './marker-factory';
 })
 export class LeafletComponent implements AfterViewInit, OnDestroy {
 
-  baseMaps: { [name: string]: TileLayer };
+  baseMaps: { [name: string]: TileLayer; };
 
   private map: Map | undefined;
   private _zoom = 8;
   private _center: LatLng | undefined;
 
   private _markers$: Observable<Marker> | undefined;
-  private namedMarkers: { [key: string]: LeafletMarker | undefined } = {};
+  private namedMarkers: { [key: string]: LeafletMarker | undefined; } = {};
   private subscriptions: Subscription[] = [];
 
 
 
   constructor() {
     this.baseMaps = {
-      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.de/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       })
     };

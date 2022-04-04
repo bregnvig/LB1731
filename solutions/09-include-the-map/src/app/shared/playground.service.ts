@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { Playground } from './playground';
 
 @Injectable()
@@ -11,10 +11,6 @@ export class PlaygroundService {
 
   constructor(http: HttpClient) {
     this.request$ = http.get<Playground[]>('assets/copenhagen.json').pipe(
-      catchError((error: Response) => {
-        console.error('Unable to fetch playgrounds', error.statusText);
-        return of([]);
-      }),
       shareReplay(1),
     );
   }
