@@ -14,6 +14,6 @@ export class HumanizeDistancePipe implements PipeTransform {
     } else if (value <= 1500) {
       return 'Quite a walk'
     }
-    return 'Get a cap!';
+    return 'Get a cab!';
   }
 }
