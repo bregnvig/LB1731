@@ -9,7 +9,6 @@
 
 # dependencies
 /node_modules
-/.angular
 
 # profiling files
 chrome-profiler-events*.json
@@ -31,16 +30,15 @@ chrome-profiler-events*.json
 !.vscode/extensions.json
 .history/*
 
-# misc
-/.sass-cache
+# Miscellaneous
+/.angular/cache
+.sass-cache/
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 /typings
 
-# System Files
+# System files
 .DS_Store
 Thumbs.db
