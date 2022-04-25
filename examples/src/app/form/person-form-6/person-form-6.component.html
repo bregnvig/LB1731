@@ -3,7 +3,7 @@
   <div class="pane fixed-size">
     <div class="container">
       <h1>Person form</h1>
-      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
         <fieldset formGroupName="name">
           <div class="form-group">
             <label for="firstName">First name</label>
@@ -24,7 +24,7 @@
           <label for="height">Height</label>
           <input type="number" class="form-control" id="height" formControlName="height">
         </div>
-        <button type=" submit " class="btn btn-default " [disabled]="myForm.invalid">Submit</button>
+        <button type=" submit " class="btn btn-default " >Submit</button>
       </form>
     </div>
   </div>

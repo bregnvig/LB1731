@@ -16,6 +16,7 @@ export class OnewayComponent {
   }
 
   logValue(value: any) {
+    console.log('NgForm Value', { ...value });
     console.log('Value', { ...this.model, ...value });
     // console.log('Value', Object.assign(this.model, value));
   }

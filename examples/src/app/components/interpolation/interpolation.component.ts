@@ -7,15 +7,15 @@ import { Component } from '@angular/core';
 })
 export class InterpolationComponent {
 
-  propertyString = 'Property string!';
+  propertyString = 'My property string!';
   propertyNumber = 17;
   propertyObject = {
-    property: 'Object property'
+    property: 'My object property'
   };
   propertyNull = null;
 
   simpleMethod() {
-    return 'Simple method'
+    return 'Simple method';
   }
 
   parameterMethod(string: string) {
