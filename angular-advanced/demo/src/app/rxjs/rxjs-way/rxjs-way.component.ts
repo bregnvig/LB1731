@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
+import { debounceTime, map, repeatWhen, startWith, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -13,16 +13,20 @@ export class RxJSWayComponent implements OnInit {
 
   filterControl = new FormControl();
   playgrounds$: Observable<Playground[]> | undefined;
-  refresh$ = new BehaviorSubject<void>(undefined);
+  refresh$ = new Subject<void>();
   location$ = this.locationService.location$;
   trackById = (i: number, playground: Playground): string => playground.id;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) { }
 
   ngOnInit(): void {
+    const refresh$ = merge(
+      this.refresh$,
+      interval(10000),
+    );
     const playgrounds$ = combineLatest([
-      this.refresh$.pipe(
-        switchMap(() => this.service.playgrounds$),
+      this.service.playgrounds$.pipe(
+        repeatWhen(() => refresh$),
         // tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
         // catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
       ),
@@ -36,11 +40,11 @@ export class RxJSWayComponent implements OnInit {
       map(([playgrounds, term]: [Playground[], RegExp]) => playgrounds.filter(p => term.test(p.name)))
     );
     const getDistance = this.locationService.getDistance;
-    this.playgrounds$ = combineLatest([
-      playgrounds$,
-      this.locationService.location$
-    ]).pipe(
-      map(([playgrounds, location]) =>
+    this.playgrounds$ = combineLatest({
+      location: this.locationService.location$,
+      playgrounds: playgrounds$,
+    }).pipe(
+      map(({ playgrounds, location }) =>
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );

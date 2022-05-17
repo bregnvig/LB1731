@@ -9,8 +9,8 @@ export class SelectAllDirective {
   }
 
   @HostListener('focus', ['$event.target.value'])
-  onFocus(value: string) {
-    this.elementRef.nativeElement.setSelectionRange(0, value.length);
+  onFocus() {
+    this.elementRef.nativeElement.select();
   }
 
 }

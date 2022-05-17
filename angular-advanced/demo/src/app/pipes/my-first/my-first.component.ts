@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class MyFirstComponent {
 
-  myFirst = 'pipe';
+  myInput = 'pipe';
 
 }

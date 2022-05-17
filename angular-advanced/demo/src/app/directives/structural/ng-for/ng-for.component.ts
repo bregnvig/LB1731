@@ -11,7 +11,7 @@ export class NgForComponent implements OnInit {
   numberOfCards = this.createArray();
   trackByControl = new FormControl(true);
 
-  trackByIndexFn = (_: number, { index }: { index: number; }) => index;
+  trackByIndexFn = (_: number, o: { index: number; }) => o.index;
 
   ngOnInit(): void {
   }
