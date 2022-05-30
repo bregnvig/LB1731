@@ -1,11 +1,10 @@
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Center, Marker } from './leaflet';
+import { Playground } from './shared';
 import { LocationService } from './shared/location.service';
 import { PlaygroundService } from './shared/playground.service';
-import { Component, OnInit } from '@angular/core';
-
-import { Playground } from './shared';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

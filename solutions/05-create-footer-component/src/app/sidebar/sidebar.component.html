@@ -3,7 +3,7 @@
     <div class="list-group">
       <a *ngFor="let playground of playgrounds" 
         class="list-group-item" 
-        [class.active]="playground === selectedPlayground" 
+        [class.active]="playground.id === selectedPlayground?.id" 
         (click)="selectPlayground(playground)">
         <h4 class="list-group-item-heading">{{playground.name}}</h4>
         <p class="list-group-item-text">{{playground.description}}</p>

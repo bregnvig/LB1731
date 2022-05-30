@@ -13,13 +13,7 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
     isCompany: [false],
     name: [undefined, Validators.required],
     homeAddress: [undefined, Validators.required],
-    workAddress: [{
-      street: 'Amaliegade',
-      streetNumber: '5C',
-      floor: '2',
-      zip: '1256',
-      city: 'København K'
-    }]
+    workAddress: []
   });
 
   controls = {
@@ -34,6 +28,15 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
   }
 
   ngOnInit(): void {
+    this.fg.reset({
+      workAddress: {
+        street: 'Amaliegade',
+        streetNumber: '5C',
+        floor: '2',
+        zip: '1256',
+        city: 'København K'
+      }
+    });
     this.subscriptions.push(
       this.fg.valueChanges.subscribe(value => console.log(value)),
       this.controls.isCompany!.valueChanges.subscribe(isCompany => isCompany ? this.controls.homeAddress?.disable() : this.controls.homeAddress?.enable()),

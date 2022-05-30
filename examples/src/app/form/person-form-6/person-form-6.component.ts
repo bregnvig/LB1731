@@ -12,11 +12,11 @@ export class PersonForm6Component implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  myForm: FormGroup;
+  fg: FormGroup;
 
   ngOnInit() {
     const mustBeFlemming = (control: AbstractControl): ValidationErrors | null => control.value === 'Flemming' ? null : { mustBeFlemming: true };
-    this.myForm = new FormGroup(
+    this.fg = new FormGroup(
       {
         name: new FormGroup({
           firstName: new FormControl(this.model.firstName, [Validators.required, mustBeFlemming]),
@@ -29,7 +29,9 @@ export class PersonForm6Component implements OnInit {
   }
 
   onSubmit() {
-    console.log('Value', this.myForm.value);
+    console.log(this.fg.valid);
+
+    console.log('Value', this.fg.value);
 
   }
 
