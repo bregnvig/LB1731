@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ComponentFactoryResolver, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { Playground } from 'src/app/shared';
 import { DynamicHostDirective } from '../dynamic-host.directive';
 import { PopoverService } from '../popover.service';
@@ -18,16 +18,14 @@ export class PopoverContentComponent {
   @ViewChild(DynamicHostDirective, { static: true }) host!: DynamicHostDirective;
 
   constructor(
-    private popoverService: PopoverService,
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+    private popoverService: PopoverService) { }
 
   @Input()
   set playground(value: Playground) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.popoverService.popoverComponent);
     const viewContainerRef = this.host.viewContainerRef;
     // viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent<SimplePlaygroundDetailsComponent>(componentFactory);
+    const componentRef = viewContainerRef.createComponent<SimplePlaygroundDetailsComponent>(this.popoverService.popoverComponent);
     // const componentRef = viewContainerRef.createComponent<SimplePlaygroundDetailsComponent>(this.popoverService.popoverComponent);
     componentRef.instance.playground = value;
   }
