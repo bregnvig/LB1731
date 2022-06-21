@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
@@ -10,7 +10,7 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
   fg = this.fb.group({
-    emailAddresses: this.fb.array(['flemming.bregnvig@lundogbendsen.dk'])
+    emailAddresses: this.fb.array([this.fb.control('flemming.bregnvig@lundogbendsen.dk', Validators.email)])
   });
 
   constructor(private fb: FormBuilder) {
@@ -24,7 +24,7 @@ export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective im
   }
 
   addEmail(value: string) {
-    this.emailAddressesControl.push(this.fb.control(value));
+    this.emailAddressesControl.push(this.fb.control(value, Validators.email));
   }
 
   get emailAddressesControl(): FormArray {
