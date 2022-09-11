@@ -16,7 +16,7 @@ export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective impl
     name: [undefined, Validators.required],
   });
 
-  emitEventControl = new FormControl(true, Validators.required);
+  emitEventControl = this.fb.control(true, Validators.required);
   classes: string | undefined;
 
   constructor(private fb: FormBuilder) {
