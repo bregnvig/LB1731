@@ -1,8 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-inner',
-  templateUrl: './inner.component.html',
+  template: `
+  <p>
+    I'm inner
+  </p>
+ `,
   styleUrls: ['./inner.component.css']
 })
 export class InnerComponent implements OnInit, OnDestroy {
@@ -13,7 +17,7 @@ export class InnerComponent implements OnInit, OnDestroy {
     console.log('Constructed');
   }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     console.log('Destroyed!!');
   }
 
