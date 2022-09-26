@@ -24,8 +24,8 @@ export class PersonForm7Component implements OnInit {
         firstName: [this.model.firstName, [Validators.required, nameValidator]],
         lastName: [this.model.lastName, Validators.required]
       }),
-      favoriteColor: [],
-      height: [undefined, [Validators.min(100), Validators.max(200)]]
+      favoriteColor: [this.model.favoriteColor],
+      height: [this.model.height, [Validators.min(100), Validators.max(200)]]
     });
 
   }

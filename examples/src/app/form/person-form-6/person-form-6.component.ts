@@ -22,8 +22,8 @@ export class PersonForm6Component implements OnInit {
           firstName: new UntypedFormControl(this.model.firstName, [Validators.required, mustBeFlemming]),
           lastName: new UntypedFormControl(this.model.lastName, Validators.required)
         }),
-        favoriteColor: new UntypedFormControl(),
-        height: new UntypedFormControl(null, [Validators.min(100), Validators.max(220)])
+        favoriteColor: new UntypedFormControl(this.model.favoriteColor),
+        height: new UntypedFormControl(this.model.height, [Validators.min(100), Validators.max(220)])
       }
     );
   }
