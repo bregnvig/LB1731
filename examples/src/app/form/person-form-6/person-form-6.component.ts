@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Person } from './../person';
 
 @Component({
@@ -12,18 +12,18 @@ export class PersonForm6Component implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  fg: FormGroup;
+  fg: UntypedFormGroup;
 
   ngOnInit() {
     const mustBeFlemming = (control: AbstractControl): ValidationErrors | null => control.value === 'Flemming' ? null : { mustBeFlemming: true };
-    this.fg = new FormGroup(
+    this.fg = new UntypedFormGroup(
       {
-        name: new FormGroup({
-          firstName: new FormControl(this.model.firstName, [Validators.required, mustBeFlemming]),
-          lastName: new FormControl(this.model.lastName, Validators.required)
+        name: new UntypedFormGroup({
+          firstName: new UntypedFormControl(this.model.firstName, [Validators.required, mustBeFlemming]),
+          lastName: new UntypedFormControl(this.model.lastName, Validators.required)
         }),
-        favoriteColor: new FormControl(),
-        height: new FormControl(null, [Validators.min(100), Validators.max(220)])
+        favoriteColor: new UntypedFormControl(),
+        height: new UntypedFormControl(null, [Validators.min(100), Validators.max(220)])
       }
     );
   }

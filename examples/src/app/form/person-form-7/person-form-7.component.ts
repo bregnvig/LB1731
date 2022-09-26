@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Person } from './../person';
 
 
@@ -13,9 +13,9 @@ export class PersonForm7Component implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  fg: FormGroup;
+  fg: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: UntypedFormBuilder) { }
 
   ngOnInit() {
     const nameValidator = (control: AbstractControl) => control.value === 'Flemming' ? null : { nameIsWrong: true };

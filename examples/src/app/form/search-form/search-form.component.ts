@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { debounceTime, filter, distinctUntilChanged } from 'rxjs/operators';
 
 
@@ -19,8 +19,8 @@ export class SearchFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.searchControl = new FormControl();
-    this.searchControl2 = new FormControl();
+    this.searchControl = new UntypedFormControl();
+    this.searchControl2 = new UntypedFormControl();
     this.searchControl
       .valueChanges.pipe(
         debounceTime(400),
