@@ -5,18 +5,13 @@ import { interval, Observable, of } from 'rxjs';
 import { catchError, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
-
-
-
-
-
 @Injectable()
 export class F1SimpleService {
 
   constructor(private http: HttpClient) { }
 
   getDrivers(): Observable<any> {
-    return this.http.get(`http://ergast.com/api/f1/2021/drivers.json`);
+    return this.http.get(`http://ergast.com/api/f1/2022/drivers.json`);
   }
 }
 

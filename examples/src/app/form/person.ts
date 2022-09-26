@@ -4,7 +4,7 @@ export class Person {
     public lastName: string,
     public favoriteColor: string,
     public height?: number,
-    public blabla = 42) {
+    public shoeSize = 42) {
 
   }
 }
