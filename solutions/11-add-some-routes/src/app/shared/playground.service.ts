@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {Observable, of} from 'rxjs';
-import {catchError, publishLast, refCount, map} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, publishLast, refCount } from 'rxjs/operators';
 
 
 
@@ -25,11 +25,11 @@ export class PlaygroundService {
     );
   }
 
-  public getPlaygrounds(): Observable<Playground[]> {
+  getPlaygrounds(): Observable<Playground[]> {
     return this.request$;
   }
 
-  public find(id: string): Observable<Playground> {
+  find(id: string): Observable<Playground | undefined> {
     return this.request$.pipe(
       map(playgrounds => playgrounds.find(p => p.id === id))
     );

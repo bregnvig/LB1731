@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { merge, Observable } from 'rxjs';
-import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, merge, Observable } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Center, Marker } from './../leaflet';
 import { LocationService } from './../shared/location.service';
 import { Playground } from './../shared/playground';
@@ -29,15 +29,18 @@ export class MapComponent implements OnInit {
   public ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
     const playground$: Observable<Playground> = this.route.params.pipe(
-      map<Params, string>(params => params.id),
+      map(params => params['id']),
       switchMap(id => this.service.find(id)),
-      filter(playground => !!playground),
       shareReplay(1),
     );
-
-    playground$.subscribe(playground => {
+    combineLatest([
+      playground$,
+      this.locationService.current,
+    ]).subscribe(([playground, location]) => {
       this.playground = playground;
-      this.center = new Center(playground.position.lat, playground.position.lng, 12);
+      this.center = playground
+        ? new Center(playground.position.lat, playground.position.lng, 12)
+        : new Center(location.lat, location.lng, 14);
     });
     this.markers$ = merge(
       this.locationService.current.pipe(map(location => new Marker('me', location.lat, location.lng))),
@@ -45,8 +48,7 @@ export class MapComponent implements OnInit {
     );
   }
 
-  public playgroundSelected(playground: Playground): void {
-    // this.playground = playground;
+  playgroundSelected(playground: Playground): void {
     this.router.navigate([playground.id]);
     console.log('Playground selected', playground);
   }

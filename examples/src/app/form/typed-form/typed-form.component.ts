@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../person';
 
-type PersonForm = {
-  [K in keyof Person]?: AbstractControl<Person[K]>
-};
+export type TypedForm<T> = { [P in keyof T]?: AbstractControl<T[P]> };
 
 @Component({
   selector: 'app-typed-form',
@@ -16,12 +14,12 @@ export class TypedFormComponent implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  fg: FormGroup<PersonForm>;
+  fg: FormGroup<TypedForm<Person>>;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.fg = this.fb.group<PersonForm>({
+    this.fg = this.fb.group<TypedForm<Person>>({
       firstName: this.fb.control(this.model.firstName, [Validators.required]),
       lastName: this.fb.control(this.model.firstName, [Validators.required]),
       favoriteColor: this.fb.control(this.model.favoriteColor),
@@ -31,6 +29,7 @@ export class TypedFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.fg.value;
     console.log('Value', { ...this.model, ...this.fg.value });
   }
 }
