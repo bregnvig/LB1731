@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
-import { finalize, map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -12,14 +12,17 @@ export class TimerService {
   constructor() {
     this.timer$ = new Observable(observer => {
       const intervalId = window.setInterval(() => {
-        console.log(new Date());
         observer.next(new Date());
       }, 1000);
       return () => {
-        console.log('Stopping timer!');
         window.clearInterval(intervalId);
       };
     });
+    this.timer$ = interval(1000).pipe(
+      map(() => new Date()),
+      tap(date => console.log(date)),
+      // finalize(() => console.log('Stopping timer'))
+    );
     // this.timer$ = interval(1000).pipe(
     //   map(() => {
     //     console.log(new Date());

@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
+@UntilDestroy()
 @Component({
   selector: 'loop-imperative-way',
   templateUrl: './imperative-way.component.html',
@@ -15,22 +17,22 @@ export class ImperativeWayComponent implements OnInit {
 
   private fetchedPlaygrounds: Playground[] = this.playgrounds;
   private location: Coordinate | undefined;
-  private fetchedFailed = false;
+  private fetchFailed = false;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) { }
 
   ngOnInit(): void {
     this.fetchPlaygrounds();
-    this.locationService.location$.subscribe(
+    this.locationService.location$.pipe(untilDestroyed(this)).subscribe(
       location => this.updateLocation(location),
     );
-    window.addEventListener('online', () => this.fetchedFailed && this.fetchPlaygrounds());
+    window.addEventListener('online', () => this.fetchFailed && this.fetchPlaygrounds());
   }
 
   fetchPlaygrounds(): void {
     this.service.playgrounds$.subscribe({
       next: playgrounds => this.setPlaygrounds(playgrounds),
-      error: error => error instanceof HttpErrorResponse && !window.navigator.onLine && (this.fetchedFailed = true),
+      error: error => error instanceof HttpErrorResponse && !window.navigator.onLine && (this.fetchFailed = true),
       complete: () => console.log('Complete'),
     });
   }
@@ -47,7 +49,7 @@ export class ImperativeWayComponent implements OnInit {
   }
 
   private setPlaygrounds(playgrounds: Playground[]) {
-    this.fetchedFailed = false;
+    this.fetchFailed = false;
     this.fetchedPlaygrounds = playgrounds;
     this.filterPlaygrounds();
     this.sortPlaygrounds();
@@ -61,9 +63,10 @@ export class ImperativeWayComponent implements OnInit {
   }
 
   private sortPlaygrounds() {
-    if (this.playgrounds?.length && this.location) {
+    if (this.location && this.playgrounds?.length) {
       const getDistance = this.locationService.getDistance;
-      const sortFn = (a: Playground, b: Playground) => getDistance(a.position, this.location!) - getDistance(b.position, this.location!);
+      const location = this.location;
+      const sortFn = (a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location);
       this.playgrounds.sort(sortFn);
     }
   }

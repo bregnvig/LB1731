@@ -22,7 +22,7 @@ export class F1BetterService {
 
   constructor(service: F1SimpleService) {
     this.request$ = service.getDrivers().pipe(
-      map((response: any) => response.MRData.DriverTable.Drivers)
+      map(response => response.MRData.DriverTable.Drivers)
     );
   }
 

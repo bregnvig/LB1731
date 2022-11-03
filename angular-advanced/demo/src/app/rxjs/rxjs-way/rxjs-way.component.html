@@ -12,9 +12,9 @@
         </div>
       </li>
       <ng-container  *ngIf="playgrounds$ | async as playgrounds" >
-        <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
+        <li class="list-group-item d-flex" *ngFor="let p of playgrounds; trackBy: trackById">
           <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
-          <span class="ml-2 badge badge-primary">{{p | distance:(location$ | async)}}</span>
+          <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
         </li>
       </ng-container>
     </ul>

@@ -12,9 +12,9 @@
           <input type="text" placeholder="Filter playgrounds" class="col" autofocus [(ngModel)]="term" (ngModelChange)="filterPlaygrounds()">
         </div>
       </li>
-      <li class="list-group-item" *ngFor="let p of playgrounds; trackBy: trackById">
-        {{p.name}}
-        <span class="badge badge-primary">{{getDistance(p)}}</span>
+      <li class="list-group-item d-flex" *ngFor="let p of playgrounds; trackBy: trackById">
+        <ngb-highlight [term]="term" [result]="p.name"></ngb-highlight>
+        <span class="ms-2 badge bg-primary">{{getDistance(p)}}</span>
       </li>
     </ul>
   </div>

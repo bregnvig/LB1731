@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, map, repeatWhen, startWith, tap } from 'rxjs/operators';
+import { debounceTime, exhaustMap, map, repeat, startWith, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -21,15 +21,20 @@ export class RxJSWayComponent implements OnInit {
 
   ngOnInit(): void {
     const refresh$ = merge(
-      this.refresh$,
+      this.refresh$, //.pipe(startWith(0)),
       interval(10000),
     );
-    const playgrounds$ = combineLatest([
+
+    // Using two different style by design
+    const filteredPlaygrounds$ = combineLatest([
       this.service.playgrounds$.pipe(
-        repeatWhen(() => refresh$),
+        repeat({ delay: () => refresh$ }),
         // tap(_ => localStorage.setItem('playgrounds', JSON.stringify(_))),
         // catchError(() => of(JSON.parse(localStorage.getItem('playgrounds') || '[]')))
       ),
+      // refresh$.pipe(
+      //   exhaustMap(() => this.service.playgrounds$),
+      // ),
       this.filterControl.valueChanges.pipe(
         debounceTime(400),
         startWith(''),
@@ -37,12 +42,12 @@ export class RxJSWayComponent implements OnInit {
       )
     ]).pipe(
       tap(_ => console.log(_)),
-      map(([playgrounds, term]: [Playground[], RegExp]) => playgrounds.filter(p => term.test(p.name)))
+      map(([playgrounds, term]) => playgrounds.filter(p => term.test(p.name)))
     );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest({
       location: this.locationService.location$,
-      playgrounds: playgrounds$,
+      playgrounds: filteredPlaygrounds$,
     }).pipe(
       map(({ playgrounds, location }) =>
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))

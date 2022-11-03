@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, merge, Observable } from 'rxjs';
-import { map, shareReplay, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import { Center, Marker } from './../leaflet';
 import { LocationService } from './../shared/location.service';
 import { Playground } from './../shared/playground';
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
 
   public ngOnInit() {
     this.service.getPlaygrounds().subscribe(playgrounds => this.playgrounds = playgrounds);
-    const playground$: Observable<Playground> = this.route.params.pipe(
+    const playground$: Observable<Playground | undefined> = this.route.params.pipe(
       map(params => params['id']),
       switchMap(id => this.service.find(id)),
       shareReplay(1),
@@ -44,7 +44,7 @@ export class MapComponent implements OnInit {
     });
     this.markers$ = merge(
       this.locationService.current.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      playground$.pipe(map(p => new Marker('legeplads', p.position.lat, p.position.lng))),
+      playground$.pipe(filter(p => !!p), map(p => new Marker('legeplads', p.position.lat, p.position.lng))),
     );
   }
 

@@ -17,8 +17,10 @@ export class PlaygroundService {
   playgrounds$: Observable<Playground[]>;
 
   constructor(http: HttpClient, @Inject(PLAYGROUND_SERVICE_URL) url: string) {
-    console.log('Angular jost created the PlaygroundService')
-    this.playgrounds$ = http.get<Playground[]>(url);
+    console.log('Angular just created the PlaygroundService');
+    this.playgrounds$ = http.get<Playground[]>(url).pipe(
+      // shareReplay({ bufferSize: 1, refCount: false })
+    );
   }
 
   getById(id: string): Observable<Playground | undefined> {
