@@ -1,5 +1,5 @@
 import { Directive, OnDestroy } from "@angular/core";
-import { fromEvent, Observable, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
+import { fromEvent, Observable, OperatorFunction, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
 import { filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
 
 export function useCacheOnError(localStorageKey: string) {
@@ -52,6 +52,8 @@ export function debug<T>(tag: string) {
 
 export const shareLatest = <T>() => pipe(shareReplay<T>({ bufferSize: 1, refCount: true }));
 export const truthy = <T>() => pipe(filter((a: T) => !!a));
+export const truthyWithGuard = <T>() => pipe(filter(x => !!x) as OperatorFunction<T | undefined | null | '', T>);
+
 
 @Directive()
 export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy {
