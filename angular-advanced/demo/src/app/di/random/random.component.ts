@@ -4,8 +4,8 @@ import { RandomService } from '../service/random.service';
 @Component({
   selector: 'loop-random',
   template: `
-    {{service?.no || "I have no random service 😢"}}<br>
-    {{rootService?.no || "I have no random service 😢"}}
+    {{service.no || "I have no random service 😢"}}<br>
+    {{rootService.no || "I have no random service 😢"}}
   `,
   providers: [RandomService]
 })

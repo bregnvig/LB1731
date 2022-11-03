@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-auto btn-group">
     <button class="btn btn-primary" (click)="fetchPlaygrounds()">Fetch playgrounds</button>
-    <button [disabled]="!playgrounds?.length" class="btn btn-outline-warning" (click)="playgrounds = []">Clear</button>
+    <button [disabled]="!playgrounds.length" class="btn btn-outline-warning" (click)="playgrounds = []">Clear</button>
   </div>
 </div>
 <article class="row w-100">
