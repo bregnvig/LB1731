@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-ng-for',
@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 export class NgForComponent implements OnInit {
 
   numberOfCards = this.createArray();
-  trackByControl = new FormControl(true);
+  trackByControl = new UntypedFormControl(true);
 
   trackByIndexFn = (_: number, o: { index: number; }) => o.index;
 

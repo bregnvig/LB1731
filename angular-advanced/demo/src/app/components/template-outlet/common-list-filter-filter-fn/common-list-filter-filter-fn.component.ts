@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 
@@ -15,7 +15,7 @@ export class CommonListFilterFilterFnComponent implements OnInit {
   @Input() filterFn!: (term: string, items: any[]) => any[];
 
   filtered$!: Observable<any[]>;
-  filterControl = new FormControl();
+  filterControl = new UntypedFormControl();
 
   constructor() { }
 

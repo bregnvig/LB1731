@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-on-changes',
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class OnChangesComponent implements OnInit {
 
-  control = new FormControl();
+  control = new UntypedFormControl();
   items1: string[] = ['D', 'C', 'B', 'A'];
   items2: string[] = ['D', 'C', 'B', 'A'];
 

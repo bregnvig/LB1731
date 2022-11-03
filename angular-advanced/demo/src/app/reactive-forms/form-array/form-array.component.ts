@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
@@ -13,7 +13,7 @@ export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective im
     emailAddresses: this.fb.array([this.fb.control('flemming.bregnvig@lundogbendsen.dk', Validators.email)])
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     super();
   }
 
@@ -27,7 +27,7 @@ export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective im
     this.emailAddressesControl.push(this.fb.control(value, Validators.email));
   }
 
-  get emailAddressesControl(): FormArray {
-    return this.fg.get('emailAddresses') as FormArray;
+  get emailAddressesControl(): UntypedFormArray {
+    return this.fg.get('emailAddresses') as UntypedFormArray;
   }
 }

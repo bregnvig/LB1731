@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -25,7 +25,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MissingPlaygroundComponent implements OnInit {
 
   id!: string;
-  acceptIt = new FormControl(false);
+  acceptIt = new UntypedFormControl(false);
 
   constructor(private route: ActivatedRoute) { }
 

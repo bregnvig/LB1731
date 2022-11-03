@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
@@ -28,7 +28,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       ],
       city: [undefined]
     }, {
-      validators: (zipAndCity: FormGroup): null | ValidationErrors => {
+      validators: (zipAndCity: UntypedFormGroup): null | ValidationErrors => {
         console.log(zipAndCity.value, zipAndCity.get('zip')?.valid, zipAndCity.get('zip')?.value, !zipAndCity.get('city')?.value);
 
         return zipAndCity.get('zip')?.valid && zipAndCity.get('zip')?.value && !zipAndCity.get('city')?.value ? { required: 'city' } : null;
@@ -36,7 +36,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
     } as AbstractControlOptions)
   });
 
-  constructor(private fb: FormBuilder, private service: DawaService) {
+  constructor(private fb: UntypedFormBuilder, private service: DawaService) {
     super();
   }
 
@@ -53,7 +53,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
     // ).subscribe(city => this.zipAndCityControl.get('city')?.patchValue(city));
   }
 
-  get zipAndCityControl(): FormGroup {
-    return this.fg.get('zipAndCity') as FormGroup;
+  get zipAndCityControl(): UntypedFormGroup {
+    return this.fg.get('zipAndCity') as UntypedFormGroup;
   }
 }

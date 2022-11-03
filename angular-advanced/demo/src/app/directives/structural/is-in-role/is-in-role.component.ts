@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { UserService } from '../user.service';
 
@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
 })
 export class IsInRoleComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  roleControl = new FormControl('anonymous');
+  roleControl = new UntypedFormControl('anonymous');
 
   constructor(public service: UserService) {
     super();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-ng-if',
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class NgIfComponent implements OnInit {
 
-  blueControl = new FormControl(false);
+  blueControl = new UntypedFormControl(false);
 
   constructor() { }
 

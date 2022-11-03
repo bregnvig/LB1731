@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
 import { debounceTime, exhaustMap, map, repeat, startWith, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
@@ -11,7 +11,7 @@ import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 })
 export class RxJSWayComponent implements OnInit {
 
-  filterControl = new FormControl();
+  filterControl = new UntypedFormControl();
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new Subject<void>();
   location$ = this.locationService.location$;

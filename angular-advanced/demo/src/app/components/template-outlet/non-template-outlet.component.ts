@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 import { PlaygroundService } from 'src/app/shared';
@@ -12,7 +12,7 @@ import { PlaygroundService } from 'src/app/shared';
 export class NonTemplateOutletComponent implements OnInit {
 
   playgrounds$ = this.service.playgrounds$;
-  filterControl = new FormControl();
+  filterControl = new UntypedFormControl();
 
   constructor(private service: PlaygroundService) { }
 

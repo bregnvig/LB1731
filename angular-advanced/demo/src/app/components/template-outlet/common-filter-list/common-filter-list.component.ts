@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ export class CommonFilterListComponent implements OnInit {
   @Input() itemTemplateRef: TemplateRef<any> | undefined;
   @Output() filter = new EventEmitter<string>();
 
-  filterControl = new FormControl();
+  filterControl = new UntypedFormControl();
 
   constructor() { }
 
