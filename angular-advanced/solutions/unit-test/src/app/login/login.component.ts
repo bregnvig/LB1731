@@ -13,8 +13,8 @@ import { AuthService } from '../service/auth.service';
 export class LoginComponent {
 
   fg = this.fb.group({
-    email: [, [Validators.required, Validators.email]],
-    password: [, Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -22,7 +22,7 @@ export class LoginComponent {
   login(): void {
     const { email, password } = this.fg.value;
     if(this.fg.valid) {
-      this.authService.login(email, password).subscribe(value => {
+      this.authService.login(email!, password!).subscribe(value => {
         if(value) {
           this.router.navigate(['/'])
         }
