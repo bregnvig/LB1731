@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -26,38 +26,39 @@ describe('AuthService', () => {
     let service: AuthService;
 
     beforeEach(() => {
-      service = new AuthService({} as any);
+      service = new AuthService({} as any); // Dummy
     });
 
     it("should not be logged in", done => {
-      service.isLoggedIn$.pipe(first()).subscribe(
-        isLoggedIn => expect(isLoggedIn).toEqual(false),
-        error => { throw error; },
-        () => done(),
-      );
+      service.isLoggedIn$.pipe(first()).subscribe({
+        next: isLoggedIn => {
+          expect(isLoggedIn).toEqual(false);
+          done();
+        },
+        error: error => done(error),
+
+      });
     });
 
   });
 
   describe("When logged in", () => {
     let service: AuthService;
-    const email = 'email@email.com';
-    const password = 'password';
 
     beforeEach(async () => {
       const httpClientMock = { post: jest.fn().mockReturnValue(of({ authenticated: true })) };
       service = new AuthService(httpClientMock as any);
-      await service.login(email, password).pipe(first()).toPromise();
+      await firstValueFrom(service.login('email@email.com', 'password').pipe(first()));
     });
 
     it("should throw on login", done => {
-      service.login(email, password).subscribe(
-        authUser => done(`Received unexpected next: ${authUser}`),
-        error => {
+      service.login('email@email.com', 'password').subscribe({
+        next: isLoggedIn => done(`Received unexpected next: ${isLoggedIn}`),
+        error: error => {
           expect(error).toEqual('Already logged in');
           done();
         },
-      );
+      });
     });
 
   });
@@ -72,27 +73,25 @@ describe('AuthService', () => {
     });
 
     it("should login with email & password", (done) => {
-      const email = 'email@email.com';
-      const password = 'password';
-      service.login(email, password).subscribe(
-        isLoggedIn => {
+      service.login('email@email.com', 'password').subscribe({
+        next: isLoggedIn => {
           expect(isLoggedIn).toEqual(true);
           done();
         },
-        error => done(error),
-      );
+        error: error => done(error),
+      });
     });
 
     it("should call '/api/login'", (done) => {
       const email = 'email@email.com';
       const password = 'password';
-      service.login(email, password).subscribe(
-        () => {
+      service.login(email, password).subscribe({
+        next: () => {
           expect(httpClientMock.post).toHaveBeenCalledWith('/api/login', { email, password });
           done();
         },
-        error => done(error),
-      );
+        error: error => done(error),
+      });
     });
 
   });

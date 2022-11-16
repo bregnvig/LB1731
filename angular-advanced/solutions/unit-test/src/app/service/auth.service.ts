@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { first, map, shareReplay, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, first, map, Observable, shareReplay, switchMap } from 'rxjs';
+import { AuthUser } from '../model';
+import { isNullOrUndefined } from '../utils';
 
-const isNullOrUndefined = (value: any): value is null | undefined => value === null || value === undefined;
-type AuthUser = {authenticated: boolean};
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +12,8 @@ export class AuthService {
   private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> =  this._isLoggedIn$.asObservable().pipe(shareReplay({refCount: false, bufferSize: 1}));
 
-  constructor(private httpClient: HttpClient) {
-  }
+
+  constructor(private httpClient: HttpClient) { }
 
   login(email: string, password: string): Observable<boolean> {
     if ([email, password].some(isNullOrUndefined)) {
@@ -43,5 +42,5 @@ export class AuthService {
   get isLoggedIn(): boolean {
     return this._isLoggedIn$.value;
   }
-
+  
 }
