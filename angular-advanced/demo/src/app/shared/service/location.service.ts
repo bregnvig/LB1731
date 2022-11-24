@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, timeout } from 'rxjs/operators';
 import { Coordinate } from '../model';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class LocationService {
   constructor() {
     this.location$ = new Observable<GeolocationPosition>(observer => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
-        observer.next(position)
+        observer.next(position);
       }, error => observer.error(error));
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
@@ -21,8 +21,9 @@ export class LocationService {
         return {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        }
+        };
       }),
+      timeout(10000), // Sometimes we don't get a location. Which makes you think the UI is not working...
       shareReplay({ bufferSize: 1, refCount: true })
     );
   }

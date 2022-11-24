@@ -5,7 +5,7 @@ import { RandomService } from '../service/random.service';
   selector: 'loop-random-wrapper',
   template: `
     <p>
-      I'm a wrapped random component
+      I'm a wrapped random component<br>
       <ng-content></ng-content>
     </p>
   `,
