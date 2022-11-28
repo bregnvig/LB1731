@@ -7,7 +7,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
     I'm inner
   </p>
  `,
-  styleUrls: ['./inner.component.css']
 })
 export class InnerComponent implements OnInit, OnDestroy {
 

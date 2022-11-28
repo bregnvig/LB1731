@@ -1,23 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ngfor',
   templateUrl: './ngfor.component.html',
-  styleUrls: ['./ngfor.component.css']
 })
-export class NgforComponent implements OnInit {
+export class NgforComponent {
 
   items: string[] = ['foo', 'bar'];
 
-  myTrack = (index: number, o: string) => {
-    console.log(o);
-    return o;
-  };
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  myTrack = (index: number, o: string) => o;
 
   addInput(input: string) {
     this.items.push(input);

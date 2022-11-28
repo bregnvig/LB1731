@@ -1,17 +1,13 @@
-<h1>&#123; &#123; interpolation &#125; &#125;</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <ul>
-      <li>Property string: {{propertyString}}</li>
-      <li>Property number: {{propertyNumber}}</li>
-      <li>Property object: {{propertyObject.property}}</li>
-      <li>Property null: {{propertyNull}}</li>
-      <li>Property null - wont fail: {{propertyNull?.property}}</li>
-      <!-- <li>Property null - will fail: {{propertyNull.property}}</li> -->
-      <li>Simple method: {{simpleMethod()}}</li>
-      <li>Parameter method: {{parameterMethod('world')}}</li>
-      <li>Simple expressions: {{40+2}}</li>
-      <!--<li>New object - will fail {{new Date()}}</li>-->
-    </ul>
-  </div>
-</div>
+<h2>&#123; &#123; interpolation &#125; &#125;</h2>
+<ul class="list-group">
+  <li class="list-group-item">Property string: {{propertyString}}</li>
+  <li class="list-group-item">Property number: {{propertyNumber}}</li>
+  <li class="list-group-item">Property object: {{propertyObject.property}}</li>
+  <li class="list-group-item">Property null: {{propertyNull}}</li>
+  <li class="list-group-item">Property null - wont fail: {{propertyNull?.property}}</li>
+  <!-- <li class="list-group-item">Property null - will fail: {{propertyNull.property}}</li> -->
+  <li class="list-group-item">Simple method: {{simpleMethod()}}</li>
+  <li class="list-group-item">Parameter method: {{parameterMethod('world')}}</li>
+  <li class="list-group-item">Simple expressions: {{40+2}}</li>
+  <!--<li class="list-group-item">New object - will fail {{new Date()}}</li>-->
+</ul>

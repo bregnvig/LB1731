@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-hello',
   template: `
-    <h1>
+    <h2>
       {{title}}
-    </h1>
+    </h2>
   `,
   styles: [
-    `h1 {
+    `h2 {
       color: darkred !important;
     } `
   ]

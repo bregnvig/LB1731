@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-property',
   templateUrl: './property.component.html',
-  styleUrls: ['./property.component.css']
 })
-export class PropertyComponent implements OnInit {
+export class PropertyComponent {
 
-   showRed = false;
-   show = false;
+  showRed = false;
+  show = false;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-   toggleRed() {
+  toggleRed() {
     this.showRed = !this.showRed;
   }
-   toggleShow() {
+  toggleShow() {
     this.show = !this.show;
   }
 

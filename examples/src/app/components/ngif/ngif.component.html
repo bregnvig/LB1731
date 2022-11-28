@@ -1,12 +1,12 @@
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <button class="btn btn-primary" (click)="toggle()">Toggle</button>
+<h2>*ngIf</h2>
+<button class="btn btn-primary" (click)="toggle()">Toggle</button>
+<article class="mt-3">
+  <p *ngIf="show else myElse">
+    ngIf works!
+    <app-inner></app-inner>
+  </p>
+  <ng-template #myElse>
+    <div>The <code>else</code> template could go here</div>
+  </ng-template>
 
-    <p *ngIf="show; else myElse">
-      ngif works!
-      <app-inner></app-inner>
-    </p>
-    <ng-template #myElse><div>The <code>else</code> template could go here</div></ng-template>
-  </div>
-  
-
+</article>

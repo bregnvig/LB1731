@@ -1,9 +1,5 @@
-<h1>(event)</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <ul>
-      <li><span (click)="count()">Clicked {{counter}} times</span></li>
-      <li><input (keydown.enter)="down()" (keyup)="up()"><br>{{isDown ? 'Key is down' : 'Key is up!'}}</li>
-    </ul>
-  </div>
-</div>
+<h2>(event)</h2>
+<ul>
+  <li><button class="btn btn-outline-primary">(click)="count()">Clicked {{counter}} times</button></li>
+  <li><input (keydown.enter)="down()" (keyup)="up()"><br>{{isDown ? 'Key is down' : 'Key is up!'}}</li>
+</ul>
