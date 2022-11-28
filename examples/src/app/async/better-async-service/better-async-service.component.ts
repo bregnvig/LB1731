@@ -6,7 +6,6 @@ import { F1BetterService } from '../f1.service';
 @Component({
   selector: 'app-better-async-service',
   templateUrl: './better-async-service.component.html',
-  styleUrls: ['./better-async-service.component.css'],
   providers: [F1BetterService]
 })
 export class BetterAsyncServiceComponent implements OnInit {

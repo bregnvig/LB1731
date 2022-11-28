@@ -6,8 +6,6 @@ import { F1CachedService } from '../f1.service';
 @Component({
   selector: 'app-cached-async-service',
   templateUrl: './cached-async-service.component.html',
-  styleUrls: ['./cached-async-service.component.css'],
-  // providers: [F1CachedService]
 })
 export class CachedAsyncServiceComponent implements OnInit {
 

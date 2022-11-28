@@ -5,7 +5,6 @@ import { F1LocalStorageCache } from '../f1.service';
 @Component({
   selector: 'app-catch-error',
   templateUrl: './catch-error.component.html',
-  styleUrls: ['./catch-error.component.css']
 })
 export class CatchErrorComponent implements OnInit {
   drivers?: Driver[];

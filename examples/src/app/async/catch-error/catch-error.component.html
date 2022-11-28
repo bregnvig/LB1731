@@ -1,13 +1,9 @@
-<h1>Cached async service</h1>
-<div class="pane-container center-content">
-  <button class="btn btn-primary pane fixed-size" (click)="addSubscribtion()">Add subscribe</button>
+<h2>Cached async service</h2>
+<div>
+  <button class="btn btn-primary" (click)="addSubscribtion()">Add subscribe</button>
 </div>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <ul>
-      <li *ngFor="let driver of drivers">
-        {{driver.givenName}} {{driver.familyName}}
-      </li>
-    </ul>
-  </div>
-</div>
+<ul class="list-group">
+  <li *ngFor="let driver of drivers" class="list-group-item">
+    {{driver.givenName}} {{driver.familyName}}
+  </li>
+</ul>

@@ -5,7 +5,14 @@ import { F1SimpleService } from '../f1.service';
 
 @Component({
   selector: 'app-simple-http-service',
-  templateUrl: './simple-http-service.component.html',
+  template: `
+    <h2>Simple HTTP Service</h2>
+    <ul class="list.form-group">
+      <li *ngFor="let driver of drivers" class="list-group-item">
+        {{driver.givenName}} {{driver.familyName}}
+      </li>
+    </ul>
+  `,
 })
 export class SimpleHttpServiceComponent implements OnInit {
 

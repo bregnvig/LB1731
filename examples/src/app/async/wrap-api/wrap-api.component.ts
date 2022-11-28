@@ -7,7 +7,6 @@ import { TimerService } from '../timer.service';
 @Component({
   selector: 'app-wrap-api',
   templateUrl: './wrap-api.component.html',
-  styleUrls: ['./wrap-api.component.css'],
   providers: [TimerService]
 })
 export class WrapApiComponent implements OnDestroy, OnInit {
