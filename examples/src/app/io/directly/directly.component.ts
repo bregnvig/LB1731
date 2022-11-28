@@ -14,8 +14,11 @@ export class DirectlyChildComponent {
 
 @Component({
   selector: 'app-directly',
-  templateUrl: './directly.component.html',
-  styleUrls: ['./directly.component.css'],
+  template: `
+    <h2>Parent -> child directly</h2>
+    <app-directly-child value1="My value" [value2]="fromProperty"></app-directly-child>
+    <input class="form-control" [(ngModel)]="fromProperty">
+  `,
 })
 export class DirectlyComponent {
 

@@ -1,19 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-stopwatch',
   template: '{{seconds}}',
-  styleUrls: ['./stopwatch.component.css']
 })
-export class StopwatchComponent implements OnInit, OnDestroy {
+export class StopwatchComponent implements OnDestroy {
 
   seconds: number = 0;
-  private intervalNo?: number;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  #intervalNo?: number;
 
   ngOnDestroy() {
     console.log('Destroyed');
@@ -21,14 +15,14 @@ export class StopwatchComponent implements OnInit, OnDestroy {
   }
 
   start() {
-    this.intervalNo = window.setInterval(() => {
+    this.#intervalNo = window.setInterval(() => {
       console.log(this.seconds);
       this.seconds += 1;
     }, 1000);
   }
 
   stop() {
-    window.clearInterval(this.intervalNo);
+    window.clearInterval(this.#intervalNo);
   }
 
   reset() {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-intercept-child',
@@ -19,14 +19,13 @@ export class InterceptChildComponent {
 
 @Component({
   selector: 'app-intercept',
-  templateUrl: './intercept.component.html',
-  styleUrls: ['./intercept.component.css'],
+  template: `
+    <h2>Parent -> child intercept</h2>
+    <app-intercept-child [value]="fromProperty"></app-intercept-child>
+    <input class="form-control" [(ngModel)]="fromProperty">
+  `,
 })
-export class InterceptComponent implements OnInit {
+export class InterceptComponent {
 
   fromProperty = 'From property';
-
-  ngOnInit() {
-  }
-
 }

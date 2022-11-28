@@ -1,21 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
 
 @Component({
   selector: 'app-viewchild',
   templateUrl: './viewchild.component.html',
-  styleUrls: ['./viewchild.component.css']
 })
-export class ViewchildComponent implements OnInit {
+export class ViewchildComponent {
 
   @ViewChild(StopwatchComponent, { static: true })
   stopwatch!: StopwatchComponent;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   start() {
     console.log('Started!');

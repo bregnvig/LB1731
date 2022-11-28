@@ -1,31 +1,32 @@
-<h1>@ViewChildren</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <p>
-      <app-stopwatch></app-stopwatch>
-      <app-stopwatch></app-stopwatch>
-      <app-stopwatch></app-stopwatch>
-    </p>
-    <p>
-      <button class="btn btn-success" (click)="start()">Start</button>
-      <button class="btn btn-default" (click)="stop()">Stop</button>
-      <button class="btn btn-danger" (click)="reset()">Reset</button>
-    </p>
+<h2>@ViewChildren</h2>
+<h3 class="row g-3">
+  <app-stopwatch class="col-auto"></app-stopwatch>
+  <app-stopwatch class="col-auto"></app-stopwatch>
+  <app-stopwatch class="col-auto"></app-stopwatch>
+</h3>
+<div>
+  <button class="btn btn-success" (click)="start()">Start</button>
+  <button class="btn btn-default" (click)="stop()">Stop</button>
+  <button class="btn btn-danger" (click)="reset()">Reset</button>
+</div>
 
-    <p *ngFor="let i of [0,2,3]">
-      Loop {{i}}
-      <app-stopwatch></app-stopwatch>  
-    </p>
+<hr>
 
-    <app-stopwatch #stop1></app-stopwatch>
-    <app-stopwatch #stop2></app-stopwatch>
-    <app-stopwatch #stop3></app-stopwatch>
+<p *ngFor="let i of [0,2,3]">
+  Loop {{i}}
+  <app-stopwatch></app-stopwatch>
+</p>
 
-    <p>
-      <button class="btn btn-success" (click)="startString()">Start</button>
-      <button class="btn btn-default" (click)="stopString()">Stop</button>
-      <button class="btn btn-danger" (click)="resetString()">Reset</button>
-    </p>
+<hr>
 
-  </div>
+<h3 class="row g-3">
+  <app-stopwatch class="col-auto" #stop1></app-stopwatch>
+  <app-stopwatch class="col-auto" #stop2></app-stopwatch>
+  <app-stopwatch class="col-auto" #stop3></app-stopwatch>
+</h3>
+
+<div>
+  <button class="btn btn-success" (click)="startString()">Start</button>
+  <button class="btn btn-default" (click)="stopString()">Stop</button>
+  <button class="btn btn-danger" (click)="resetString()">Reset</button>
 </div>

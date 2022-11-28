@@ -1,20 +1,14 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
 
 @Component({
   selector: 'app-view-children',
   templateUrl: './view-children.component.html',
-  styleUrls: ['./view-children.component.css']
 })
-export class ViewChildrenComponent implements OnInit {
+export class ViewChildrenComponent {
   @ViewChildren(StopwatchComponent) stopwatches?: QueryList<StopwatchComponent>;
   @ViewChildren('stop1,stop2,stop3') stopwatchesString?: QueryList<StopwatchComponent>;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   start() {
     this.stopwatches?.forEach((child) => child.start());
