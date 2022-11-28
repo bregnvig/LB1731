@@ -5,12 +5,12 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AttributesModule } from './attributes/attributes.module';
-import { MenuComponent } from './menu';
+import { MenuComponent, MenuPageComponent } from './menu-page';
 import { CounterComponent } from './shared/counter/counter.component';
 import { StructuralModule } from './structural/structural.module';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, CounterComponent],
+  declarations: [AppComponent, MenuPageComponent, MenuComponent, CounterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

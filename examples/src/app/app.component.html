@@ -1,15 +1,11 @@
-<div class="container" style="margin-top: 20px">
-  <div class="jumbotron">
-    <div class="pane-container">
-      <div class="pane fixed-size">
-        <a routerLink="/"><img src="assets/angular.svg" height="100px"></a>
-      </div>
-      <div class="pane pane-container">
-        <div class="pane center-self">
-          <h3>Examples for Angular Foundation</h3>
-        </div>
-      </div>
-    </div>
+<nav class="navbar bg-light">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="/assets/angular.svg" alt="Bootstrap" width="30" height="24">
+      Examples for Angular Foundation
+    </a>
   </div>
-</div>
-<router-outlet></router-outlet>
+</nav>
+<main class="container mt-4">
+  <router-outlet></router-outlet>
+</main>

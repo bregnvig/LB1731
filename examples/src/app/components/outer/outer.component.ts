@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { InnerComponent } from '../inner';
 
 @Component({
   selector: 'app-outer',
-  templateUrl: './outer.component.html',
-  styleUrls: ['./outer.component.css']
+  template: `
+    <h2>Outer & inner components</h2>
+    <p>I'm outer</p>
+    <app-inner></app-inner>  
+  `,
 })
-export class OuterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class OuterComponent {
 
 }

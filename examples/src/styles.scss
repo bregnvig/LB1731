@@ -4,4 +4,9 @@ input.ng-invalid.ng-touched {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+
+h2 {
+  border-bottom: 3px solid var(--bs-light);
+  margin-bottom: 16px;
+}
