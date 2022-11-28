@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DirectlyChildComponent {
-  @Input() value1: string;
-  @Input() value2: string;
+  @Input() value1?: string;
+  @Input() value2?: string;
 
 }
 

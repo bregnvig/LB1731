@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { RotateFlyover2 } from '../rotate.directive';
 
 @Component({
   selector: 'app-binding-attribute',
@@ -9,7 +8,5 @@ import { RotateFlyover2 } from '../rotate.directive';
 })
 export class BindingAttributeComponent {
 
-   angle: number;
-
-
+  angle: number = 0;
 }

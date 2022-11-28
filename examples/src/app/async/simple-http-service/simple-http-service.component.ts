@@ -9,12 +9,12 @@ import { F1SimpleService } from '../f1.service';
 })
 export class SimpleHttpServiceComponent implements OnInit {
 
-   drivers: Driver[];
+  drivers?: Driver[];
 
   constructor(private service: F1SimpleService) {
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.service.getDrivers().subscribe(response => this.drivers = response.MRData.DriverTable.Drivers);
   }
 }

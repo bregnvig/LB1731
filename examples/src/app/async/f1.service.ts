@@ -74,7 +74,7 @@ export class F1LocalStorageCache {
       tap(drivers => localStorage.setItem('drivers', JSON.stringify(drivers))),
       catchError(error => {
         console.log(error);
-        return of<Driver[]>(JSON.parse(localStorage.getItem('drivers')) || []);
+        return of<Driver[]>(JSON.parse(localStorage.getItem('drivers') || '[]'));
       })
     );
   }

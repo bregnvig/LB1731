@@ -13,7 +13,7 @@ export class PersonForm7Component implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  fg: UntypedFormGroup;
+  fg!: UntypedFormGroup;
 
   constructor(private formBuilder: UntypedFormBuilder) { }
 

@@ -11,7 +11,7 @@ import { F1AutoRefreshService } from '../f1.service';
 })
 export class AutoRefreshComponent implements OnDestroy {
 
-  drivers: Driver[];
+  drivers?: Driver[];
 
   private subscription: Subscription;
 

@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NgforComponent implements OnInit {
 
-   items:string[] = ['foo', 'bar'];
+  items: string[] = ['foo', 'bar'];
 
-  myTrack = (index, o) => {
+  myTrack = (index: number, o: string) => {
     console.log(o);
     return o;
-  }
+  };
 
   constructor() { }
 

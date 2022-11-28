@@ -11,7 +11,7 @@ import { F1BetterService } from '../f1.service';
 })
 export class BetterAsyncServiceComponent implements OnInit {
 
-  drivers: Driver[];
+  drivers?: Driver[];
 
   constructor(private service: F1BetterService) {
   }

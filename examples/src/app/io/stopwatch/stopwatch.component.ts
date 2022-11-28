@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class StopwatchComponent implements OnInit, OnDestroy {
 
   seconds: number = 0;
-  private intervalNo: number;
+  private intervalNo?: number;
 
   constructor() { }
 

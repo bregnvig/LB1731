@@ -11,7 +11,7 @@ import { F1CachedService } from '../f1.service';
 })
 export class CachedAsyncServiceComponent implements OnInit {
 
-  drivers: Driver[];
+  drivers?: Driver[];
 
   constructor(private service: F1CachedService) {
   }

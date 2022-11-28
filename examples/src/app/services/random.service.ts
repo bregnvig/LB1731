@@ -1,5 +1,5 @@
-import { LoggerService } from './logger.service';
 import { Injectable, InjectionToken } from '@angular/core';
+import { LoggerService } from './logger.service';
 
 export const RANDOM_FACTORY = new InjectionToken<RandomService>('RandomFactory');
 
@@ -8,13 +8,13 @@ export const factoryMethod = () => () => new RandomService();
 @Injectable()
 export class RandomService {
 
-  private _random: number;
+  private _random: number = Math.floor(Math.random() * 100);
 
   constructor() {
     window.setInterval(() => this._random = Math.floor(Math.random() * 100), 1000);
   }
 
-   get random(): number {
+  get random(): number {
     return this._random;
   }
 }
@@ -22,7 +22,7 @@ export class RandomService {
 @Injectable()
 export class RandomLoggerService {
 
-  private _random: number;
+  private _random = Math.floor(Math.random() * 100);
 
   constructor(logger: LoggerService) {
     window.setInterval(() => {
@@ -31,7 +31,7 @@ export class RandomLoggerService {
     }, 1000);
   }
 
-   get random(): number {
+  get random(): number {
     return this._random;
   }
 }

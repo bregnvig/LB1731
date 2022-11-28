@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
 
@@ -8,36 +8,36 @@ import { StopwatchComponent } from '../stopwatch';
   styleUrls: ['./view-children.component.css']
 })
 export class ViewChildrenComponent implements OnInit {
-  @ViewChildren(StopwatchComponent) stopwatches: QueryList<StopwatchComponent>;
-  @ViewChildren('stop1,stop2,stop3') stopwatchesString: QueryList<StopwatchComponent>;
+  @ViewChildren(StopwatchComponent) stopwatches?: QueryList<StopwatchComponent>;
+  @ViewChildren('stop1,stop2,stop3') stopwatchesString?: QueryList<StopwatchComponent>;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-   start() {
-    this.stopwatches.forEach((child) => child.start());
+  start() {
+    this.stopwatches?.forEach((child) => child.start());
   }
 
-   stop() {
-    this.stopwatches.forEach((child) => child.stop());
+  stop() {
+    this.stopwatches?.forEach((child) => child.stop());
   }
 
-   reset() {
-    this.stopwatches.forEach((child) => child.reset());
+  reset() {
+    this.stopwatches?.forEach((child) => child.reset());
   }
 
-   startString() {
-    this.stopwatchesString.forEach((child) => child.start());
+  startString() {
+    this.stopwatchesString?.forEach((child) => child.start());
   }
 
-   stopString() {
-    this.stopwatchesString.forEach((child) => child.stop());
+  stopString() {
+    this.stopwatchesString?.forEach((child) => child.stop());
   }
 
-   resetString() {
-    this.stopwatchesString.forEach((child) => child.reset());
+  resetString() {
+    this.stopwatchesString?.forEach((child) => child.reset());
   }
 
 

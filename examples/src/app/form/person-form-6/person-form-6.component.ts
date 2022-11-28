@@ -12,7 +12,7 @@ export class PersonForm6Component implements OnInit {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  fg: UntypedFormGroup;
+  fg!: UntypedFormGroup;
 
   ngOnInit() {
     const mustBeFlemming = (control: AbstractControl): ValidationErrors | null => control.value === 'Flemming' ? null : { mustBeFlemming: true };

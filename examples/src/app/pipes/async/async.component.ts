@@ -1,7 +1,7 @@
-import { Driver } from './../../async/driver';
-import { Observable } from 'rxjs';
-import { F1BetterService } from './../../async/f1.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Driver } from './../../async/driver';
+import { F1BetterService } from './../../async/f1.service';
 
 @Component({
   selector: 'app-async',
@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsyncComponent implements OnInit {
 
-   drivers$: Observable<Driver[]>;
+  drivers$!: Observable<Driver[]>;
 
   constructor(private service: F1BetterService) { }
 

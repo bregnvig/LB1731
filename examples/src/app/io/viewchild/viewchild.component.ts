@@ -10,24 +10,24 @@ import { StopwatchComponent } from '../stopwatch';
 export class ViewchildComponent implements OnInit {
 
   @ViewChild(StopwatchComponent, { static: true })
-   stopwatch: StopwatchComponent
+  stopwatch!: StopwatchComponent;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-   start() {
+  start() {
     console.log('Started!');
     this.stopwatch.start();
   }
 
-   stop() {
+  stop() {
     console.log('Stopped!');
     this.stopwatch.stop();
   }
 
-   reset() {
+  reset() {
     this.stopwatch.reset();
   }
 
