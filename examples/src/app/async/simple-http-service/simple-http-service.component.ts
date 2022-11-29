@@ -7,7 +7,7 @@ import { F1SimpleService } from '../f1.service';
   selector: 'app-simple-http-service',
   template: `
     <h2>Simple HTTP Service</h2>
-    <ul class="list.form-group">
+    <ul class="list-group">
       <li *ngFor="let driver of drivers" class="list-group-item">
         {{driver.givenName}} {{driver.familyName}}
       </li>

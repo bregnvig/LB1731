@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, TodayComponent, PurePipe, ImpurePipe, PhonePipe } from './index';
+import { BuildInComponent, ChainingComponent, ImpurePipe, PhoneComponent, PhonePipe, PureComponent, PurePipe, TodayComponent } from './index';
 
-import { routing } from './pipes.routing';
+import { HttpClientModule } from '@angular/common/http';
 import { AsyncComponent } from './async/async.component';
+import { routing } from './pipes.routing';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, routing],
-    declarations: [BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, TodayComponent, PurePipe, ImpurePipe, PhonePipe, AsyncComponent]
+  imports: [CommonModule, HttpClientModule, FormsModule, routing],
+  declarations: [BuildInComponent, ChainingComponent, PhoneComponent, PureComponent, TodayComponent, PurePipe, ImpurePipe, PhonePipe, AsyncComponent]
 })
 export class PipesModule { }

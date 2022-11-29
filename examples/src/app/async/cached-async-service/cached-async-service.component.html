@@ -2,7 +2,7 @@
 <div>
   <button class="btn btn-primary fixed-size" (click)="addSubscribtion()">Add subscribe</button>
 </div>
-<ul class="list-group">
+<ul class="mt-3 list-group">
   <li *ngFor="let driver of drivers" class="list-group-item">
     {{driver.givenName}} {{driver.familyName}}
   </li>
