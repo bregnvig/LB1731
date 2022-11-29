@@ -1,8 +1,6 @@
-<h1>Person form two way binding</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
+<h2>Person form no domain model</h2>
     <div class="container">
-      <h1>Person form</h1>
+      <h3>Person form</h3>
       <form #form="ngForm" (ngSubmit)="logValues(form.value)">
         <fieldset>
           <div class="form-group">
@@ -11,7 +9,7 @@
           </div>
           <div class="form-group">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" required ngModel name="lastName"><br>
+            <input type="text" class="form-control" id="lastName" required ngModel name="lastName">
           </div>
         </fieldset>
         <div class="form-group">
@@ -20,12 +18,10 @@
               <option *ngFor="let color of colors" [value]="color">{{color}}</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="height">Height</label>
           <input type="text" min=100 max=220 maxlength="2" class="form-control" id="height" ngModel name="height">
         </div>
-        <button type="submit" class="btn btn-default ">Submit</button>
+        <button type="submit" class="btn btn-primary ">Submit</button>
       </form>
     </div>
-  </div>
-</div>

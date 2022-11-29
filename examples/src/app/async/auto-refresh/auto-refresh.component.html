@@ -1,13 +1,9 @@
-<h1>Auto refresh service - with memory leak</h1>
-<div class="pane-container center-content">
+<h2>Auto refresh service - with memory leak</h2>
+<div>
   <button class="btn btn-primary pane fixed-size" (click)="addSubscribtion()">Add subscribe</button>
 </div>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <ul>
-      <li *ngFor="let driver of drivers">
-        {{driver.givenName}} {{driver.familyName}}
-      </li>
-    </ul>
-  </div>
-</div>
+<ul class="mt-3 list-group">
+  <li *ngFor="let driver of drivers" class="list-group-item">
+    {{driver.givenName}} {{driver.familyName}}
+  </li>
+</ul>

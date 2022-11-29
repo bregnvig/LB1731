@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-hello',
   template: `
-    <h1>
+    <h2>
       {{title}}
-    </h1>
+    </h2>
   `,
   styles: [
-    `h1 {
+    `h2 {
       color: darkred !important;
     } `
   ]
 })
-export class HelloComponent implements OnInit {
+export class HelloComponent {
 
-  title: string;
-
-  ngOnInit() {
-    this.title = 'Hello world!';
-  }
+  title = 'Hello world!';
 
 }

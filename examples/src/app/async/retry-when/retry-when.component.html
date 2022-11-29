@@ -1,10 +1,6 @@
-<h1>Retry when Service</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <ul>
-      <li *ngFor="let driver of drivers">
-        {{driver.givenName}} {{driver.familyName}}
-      </li>
-    </ul>
-  </div>
-</div>
+<h2>Retry when Service</h2>
+<ul class="list-group">
+  <li *ngFor="let driver of drivers" class="list-group-item">
+    {{driver.givenName}} {{driver.familyName}}
+  </li>
+</ul>

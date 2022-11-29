@@ -3,7 +3,7 @@ export class Person {
     public firstName: string,
     public lastName: string,
     public favoriteColor: string,
-    public height?: number,
+    public height?: number | null,
     public shoeSize = 42) {
 
   }

@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ngif',
   templateUrl: './ngif.component.html',
-  styleUrls: ['./ngif.component.css']
 })
-export class NgifComponent implements OnInit {
+export class NgifComponent {
 
-   show = true;
+  show = true;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-   toggle() {
+  toggle() {
     this.show = !this.show;
   }
 

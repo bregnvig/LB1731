@@ -12,7 +12,7 @@ export class InterpolationComponent {
   propertyObject = {
     property: 'My object property'
   };
-  propertyNull = null;
+  propertyNull?: any = null;
 
   simpleMethod() {
     return 'Simple method';

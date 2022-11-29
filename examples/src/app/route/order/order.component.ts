@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -10,12 +9,12 @@ import { Subscription } from 'rxjs';
 })
 export class OrderComponent implements OnInit, OnDestroy {
 
-   orderNo: number;
-   exact = false;
+  orderNo: number = this.route.snapshot.params['id'];
+  exact = false;
 
-   data = {
+  data = {
     foo: 'bar'
-  }
+  };
 
 
 
@@ -23,14 +22,14 @@ export class OrderComponent implements OnInit, OnDestroy {
     console.log('Order constructed');
   }
 
-   ngOnDestroy() {
+  ngOnDestroy() {
     console.log('Component destroyed', this.orderNo);
   }
 
   ngOnInit() {
-    this.route.params.subscribe((data: {id: number}) => {
-      console.log(data);
-      this.orderNo = data.id
+    this.route.params.subscribe(params => {
+      console.log(params);
+      this.orderNo = params['id'];
     });
     this.route.queryParams.subscribe((data: any) => {
       // console.log('Query params', data);
@@ -39,7 +38,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     // this.orderNo = this.activatedRoute.snapshot.params['id'];
   }
 
-   toggle() {
+  toggle() {
     this.exact = !this.exact;
   }
 }

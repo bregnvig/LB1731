@@ -1,32 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-intercept-child',
   template: '<p>{{value}}</p>'
 })
 export class InterceptChildComponent {
-  private _value: string;
+  private _value?: string;
 
   @Input()
-   set value(value: string) {
-    this._value = value.toUpperCase();
+  set value(value: string | undefined) {
+    this._value = value?.toUpperCase();
   }
 
-   get value() {
+  get value() {
     return this._value;
   }
 }
 
 @Component({
   selector: 'app-intercept',
-  templateUrl: './intercept.component.html',
-  styleUrls: ['./intercept.component.css'],
+  template: `
+    <h2>Parent -> child intercept</h2>
+    <app-intercept-child [value]="fromProperty"></app-intercept-child>
+    <input class="form-control" [(ngModel)]="fromProperty">
+  `,
 })
-export class InterceptComponent implements OnInit {
+export class InterceptComponent {
 
-   fromProperty = 'From property';
-
-  ngOnInit() {
-  }
-
+  fromProperty = 'From property';
 }

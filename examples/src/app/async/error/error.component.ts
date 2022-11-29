@@ -1,8 +1,8 @@
 
-import {throwError,  Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
-import {finalize, catchError} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
+import { catchError, finalize } from 'rxjs/operators';
 
 
 import { HttpClient } from '@angular/common/http';
@@ -10,16 +10,15 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
-  styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
 
-   zipCodes$: Observable<any>
-   elapsed: number;
+  zipCodes$!: Observable<any>;
+  elapsed: number = 0;
 
   constructor(private http: HttpClient) { }
 
-   ngOnInit() {
+  ngOnInit() {
     const start: number = Date.now();
     this.zipCodes$ = this.http.get<any>('http://404.com/asd.json').pipe(
       catchError(() => this.http.get<any>('http://404.com/another.404')),

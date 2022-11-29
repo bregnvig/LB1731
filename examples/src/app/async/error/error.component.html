@@ -1,15 +1,9 @@
-<h1>Errors</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <div>
-        <p>
-          It took {{elapsed}} ms
-        </p>
-        <ul>
-          <li *ngFor="let postNummer of zipCodes$ | async">
-            {{postNummer.nr}} - {{postNummer.navn}}
-          </li>
-        </ul>
-    </div>
-  </div>
-</div>
+<h2>Errors</h2>
+<p>
+  It took {{elapsed}} ms
+</p>
+<ul class="list-group">
+  <li *ngFor="let postNummer of zipCodes$ | async" class="list-group-item">
+    {{postNummer.nr}} - {{postNummer.navn}}
+  </li>
+</ul>

@@ -1,13 +1,9 @@
-<h1>Local reference variable</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <p>
-      <app-stopwatch #stopwatch></app-stopwatch>
-    </p>
-    <p>
-      <button class="btn btn-success" (click)="stopwatch.start()">Start</button>
-      <button class="btn btn-default" (click)="stopwatch.stop()">Stop</button>
-      <button class="btn btn-danger" (click)="stopwatch.reset()">Reset</button>
-    </p>
-  </div>
+<h2>Local reference variable</h2>
+<h3>
+  <app-stopwatch #stopwatch></app-stopwatch>
+</h3>
+<div>
+  <button class="btn btn-success me-3" (click)="stopwatch.start()">Start</button>
+  <button class="btn btn-default me-3" (click)="stopwatch.stop()">Stop</button>
+  <button class="btn btn-danger" (click)="stopwatch.reset()">Reset</button>
 </div>

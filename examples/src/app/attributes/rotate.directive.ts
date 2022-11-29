@@ -6,7 +6,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 export class Rotate180 {
 
   constructor(el: ElementRef) {
-    el.nativeElement.style="transform: rotate(180deg)";
+    el.nativeElement.style = "transform: rotate(180deg)";
   }
 }
 
@@ -18,12 +18,12 @@ export class RotateFlyover {
   constructor(private el: ElementRef) { }
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style=`transform: rotate(${deg || 0}deg)`;
+    this.el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
   }
-  @HostListener('mouseover')  rotate() {
+  @HostListener('mouseover') rotate() {
     this.rotateText(180);
   }
-  @HostListener('mouseout')  reset() {
+  @HostListener('mouseout') reset() {
     this.rotateText(0);
   }
 }
@@ -35,15 +35,15 @@ export class RotateFlyover2 {
 
   constructor(private el: ElementRef) { }
 
-  @Input('rotateFlyover2')  angle:number
+  @Input('rotateFlyover2') angle: number = 0;
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style=`transform: rotate(${deg || 0}deg)`;
+    this.el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
   }
-  @HostListener('mouseover')  rotate() {
+  @HostListener('mouseover') rotate() {
     this.rotateText(this.angle);
   }
-  @HostListener('mouseout')  reset() {
+  @HostListener('mouseout') reset() {
     this.rotateText(0);
   }
 }
@@ -56,16 +56,16 @@ export class RotateFlyover3 {
 
   constructor(private el: ElementRef) { }
 
-  @Input('rotateFlyover3')  angle:number
-  @Input()  defaultAngle:number = 0
+  @Input('rotateFlyover3') angle: number = 0;
+  @Input() defaultAngle: number = 0;
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style=`transform: rotate(${deg}deg)`;
+    this.el.nativeElement.style = `transform: rotate(${deg}deg)`;
   }
-  @HostListener('mouseover')  rotate() {
+  @HostListener('mouseover') rotate() {
     this.rotateText(this.angle || this.defaultAngle);
   }
-  @HostListener('mouseout')  reset() {
+  @HostListener('mouseout') reset() {
     this.rotateText(0);
   }
 }

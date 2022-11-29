@@ -1,47 +1,45 @@
-<h1>Build-in</h1>
-<div class="pane-container center-content space-between">
-  <div class="pane">
-    <h2>Date</h2>
-    <p>
-      Today is {{today | date}}
-    </p>
-    <p>
-      Today is {{today | date:'yy-MM-dd'}}
-    </p>
-    <p>
-      Time is {{today | date:'hh:mm'}}
-    </p>
-    <input type="text" [(ngModel)]="format">
-    <p>
-      Formatted {{today | date:format}}
-    </p>
-  </div>
-  <div class="pane">
-    <h2>Uppercase & lowercase</h2>
-    <input type="text" [(ngModel)]="name">
-    <p>
-      Uppercase {{name | uppercase}}
-    </p>
-    <p>
-      Lowecase {{name | lowercase}}
-    </p>
-  </div>
-  <div class="pane">
-    <h2>Currency</h2>
-    <p>
-      Curerncy {{17.1234 | currency}}
-    </p>
-    <p>
-      Curerncy {{17.1234 | currency:'USD':true}}
-    </p>
-    <p>
-      Curerncy {{17.1234 | currency:'USD':true:'1.2-2'}}
-    </p>
-  </div>
-  <div class="pane">
-    <h2>JSON</h2>
-    <p>
-      JSON {{object | json}}
-    </p>
-  </div>
+<h2>Build-in</h2>
+<div class="row g-3">
+  <h3>Date</h3>
+  <p>
+    Today is {{today | date}}
+  </p>
+  <p>
+    Today is {{today | date:'yy-MM-dd'}}
+  </p>
+  <p>
+    Time is {{today | date:'hh:mm'}}
+  </p>
+  <input class="form-control" type="text" [(ngModel)]="format">
+  <p>
+    Formatted {{today | date:format}}
+  </p>
+</div>
+<div class="row g-3">
+  <h3>Uppercase & lowercase</h3>
+  <input class="form-control" type="text" [(ngModel)]="name">
+  <p>
+    Uppercase {{name | uppercase}}
+  </p>
+  <p>
+    Lowecase {{name | lowercase}}
+  </p>
+</div>
+<div class="row g-3">
+  <h3>Currency</h3>
+  <p>
+    Curerncy {{17.1234 | currency}}
+  </p>
+  <p>
+    Curerncy {{17.1234 | currency:'USD':true}}
+  </p>
+  <p>
+    Curerncy {{17.1234 | currency:'USD':true:'1.2-2'}}
+  </p>
+</div>
+<div class="row g-3">
+  <h3>JSON</h3>
+  <p>
+    JSON {{object | json}}
+  </p>
 </div>

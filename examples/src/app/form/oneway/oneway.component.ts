@@ -3,13 +3,10 @@ import { Person } from './../person';
 @Component({
   selector: 'app-oneway',
   templateUrl: './oneway.component.html',
-  styleUrls: ['./oneway.component.css']
 })
 export class OnewayComponent {
   colors = ["Red", "Green", "Blue"];
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
-
-  constructor() { }
 
   get diagnostic() {
     return JSON.stringify(this.model);

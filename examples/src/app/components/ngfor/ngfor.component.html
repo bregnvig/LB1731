@@ -1,8 +1,5 @@
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <input type="text" #input (keyup.enter)="addInput(input.value)" autofocus>
-    <ul>
-      <li *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
-    </ul>
-  </div>
-</div>
+<h2>*ngFor</h2>
+<input class="form-control" type="text" #input (keyup.enter)="addInput(input.value)" autofocus>
+<ul class="mt-3 list-group">
+  <li class="list-group-item" *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
+</ul>

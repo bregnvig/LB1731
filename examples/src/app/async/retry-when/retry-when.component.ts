@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RetryService } from '../retry.service';
 import { Driver } from '../driver';
+import { RetryService } from '../retry.service';
 @Component({
   selector: 'app-retry-when',
   templateUrl: './retry-when.component.html',
-  styleUrls: ['./retry-when.component.css']
 })
 export class RetryWhenComponent implements OnInit {
 
-   drivers: Driver[];
+  drivers?: Driver[];
 
   constructor(private service: RetryService) { }
 

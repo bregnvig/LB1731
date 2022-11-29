@@ -1,0 +1,8 @@
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+img.fixed-bottom {
+  left: auto;
+}

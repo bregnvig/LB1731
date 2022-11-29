@@ -1,9 +1,5 @@
-<h1>Wrap API</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <div>
-      <span class="pane fixed-size">{{date | date:'HH:mm:ss'}}</span>
-      <button class="pane btn btn-default" (click)="stop()">Stop timer</button>
-    </div>
-  </div>
+<h2>Wrap API</h2>
+<div class="d-flex">
+  <span class="col-auto">{{date | date:'HH:mm:ss'}}</span>
+  <button class="col btn btn-default" (click)="stop()">Stop timer</button>
 </div>
