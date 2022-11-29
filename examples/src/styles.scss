@@ -7,7 +7,7 @@ body {
   padding: 0 10px;
 }
 
-body>.pane-container {
+body > .pane-container {
   height: 100%;
 }
 
@@ -80,7 +80,7 @@ a.active {
 }
 
 .ng-valid[required] {
-  border-left: 5px solid #42A948;
+  border-left: 5px solid #42a948;
   /* green */
 }
 

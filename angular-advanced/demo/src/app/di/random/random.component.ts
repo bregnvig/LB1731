@@ -13,7 +13,7 @@ import { RandomService } from '../service/random.service';
 export class RandomComponent {
 
   constructor(
-    @Optional() @Self() public service: RandomService,
+    @Self() public service: RandomService,
     @SkipSelf() public rootService: RandomService,
     @Host() @SkipSelf() @Optional() public hostService?: RandomService,
   ) { }
