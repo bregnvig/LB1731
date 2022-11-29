@@ -1,23 +1,12 @@
+import { Component } from '@angular/core';
 import { Person } from './../person';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-person-form-2',
   templateUrl: './person-form-2.component.html',
-  styleUrls: ['./person-form-2.component.css']
 })
-export class PersonForm2Component implements OnInit {
+export class PersonForm2Component {
 
-   colors = ["Red", "Green", "Blue"];
-   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  get diagnostic() {
-    return JSON.stringify(this.model);
-  }
-
+  colors = ["Red", "Green", "Blue"];
+  model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 }

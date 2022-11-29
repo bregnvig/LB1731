@@ -1,8 +1,6 @@
-<h1>Error messages</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
+<h2>Error messages</h2>
     <div class="alert alert-info">
-      {{diagnostic}}
+      {{model  | json}}
     </div>
     <div class="container">
       <h1>Person form</h1>
@@ -10,7 +8,7 @@
         <div class="form-group">
           <label for="firstName">First name</label>
           <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
-          <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger" style="margin-top: 3px">
+          <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger mt-2" >
             First name is required
           </div>
         </div>
@@ -24,12 +22,10 @@
               <option *ngFor="let color of colors" [value]="color">{{color}}</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="height">Height</label>
           <input type="number" min=100 max=220 class="form-control" id="height" [(ngModel)]="model.height" name="height">
         </div>
-        <button type=" submit " class="btn btn-default ">Submit</button>
+        <button type=" submit " class="btn btn-primary">Submit</button>
       </form>
     </div>
-  </div>
-</div>

@@ -7,7 +7,6 @@ export type TypedForm<T> = { [P in keyof T]?: AbstractControl<T[P] | null> };
 @Component({
   selector: 'app-typed-form',
   templateUrl: './typed-form.component.html',
-  styleUrls: ['./typed-form.component.scss']
 })
 export class TypedFormComponent {
 

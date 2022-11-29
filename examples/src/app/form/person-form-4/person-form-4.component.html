@@ -1,11 +1,11 @@
-<h1>ngForm</h1>
-<div class="pane-container center-content">
-  <div class="pane fixed-size">
-    <div class="alert alert-info">
-      {{diagnostic}}
+<h2>ngForm</h2>
+    <div class="row">
+      <div class="col alert alert-info">
+        {{diagnostic}}
+      </div>
     </div>
     <div class="container">
-      <h1>Person form</h1>
+      <h3>Person form</h3>
       <form #myForm="ngForm">
         <div class="form-group">
           <label for="firstName">First name</label>
@@ -21,12 +21,10 @@
               <option *ngFor="let color of colors" [value]="color">{{color}}</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="height">Height</label>
           <input type="number" min=100 max=220 class="form-control" id="height" [(ngModel)]="model.height" name="height">
         </div>
         <button type="submit" [disabled]="myForm.form.invalid" class="btn btn-default ">Submit</button>
       </form>
     </div>
-  </div>
-</div>
