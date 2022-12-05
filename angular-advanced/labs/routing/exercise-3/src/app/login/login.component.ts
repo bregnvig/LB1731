@@ -27,7 +27,7 @@ export class LoginComponent {
   login(): void {
     const { email, password } = this.fg.value;
     if (this.fg.valid) {
-      this.authService.login(email, password).subscribe(value => {
+      this.authService.login(email!, password!).subscribe(value => {
         if (value) {
           this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.router.navigate(['/']);
         }
