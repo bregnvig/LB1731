@@ -22,6 +22,7 @@ library.add(fas, far);
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    // QuicklinkModule,
   ],
   providers: [
     // {

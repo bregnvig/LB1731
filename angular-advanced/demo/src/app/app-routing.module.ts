@@ -24,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'pipes',
+    data: {
+      preload: false
+    },
     loadChildren: () => import('./pipes/pipes.module').then(m => m.PipesModule)
   },
   {
@@ -46,7 +49,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      // preloadingStrategy: QuicklinkStrategy
+    }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
