@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
+import { TypedForm } from '../utils';
 
 @Component({
   selector: 'loop-edit-playground-modal',
@@ -16,10 +17,10 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
-  fg = this.fb.group({
-    name: [],
-    description: [],
-    addressDescription: []
+  fg = this.fb.group<TypedForm<Playground>>({
+    name: this.fb.control(''),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   });
 
   playground!: Playground;
