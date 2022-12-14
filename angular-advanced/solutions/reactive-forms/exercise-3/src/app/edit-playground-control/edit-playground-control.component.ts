@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'loop-edit-playground-control',
@@ -42,7 +42,7 @@ export class EditPlaygroundControlComponent implements OnInit {
   } as AbstractControlOptions);
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.fg.valueChanges.subscribe(value => this.propagateChange && this.propagateChange(value));

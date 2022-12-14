@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
 
@@ -24,7 +24,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   playground!: Playground;
 
-  constructor(private fb: FormBuilder, public modal: NgbActiveModal) { }
+  constructor(private fb: UntypedFormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, ValidationErrors } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -25,7 +25,7 @@ export class EditPlaygroundModalComponent implements OnInit {
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  editControl = new FormControl(undefined, null, this.validateUniqueName);
+  editControl = new UntypedFormControl(undefined, null, this.validateUniqueName);
   playground!: Playground;
 
   constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }

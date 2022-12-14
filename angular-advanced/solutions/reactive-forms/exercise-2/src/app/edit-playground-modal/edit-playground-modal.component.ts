@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormGroup, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   playground!: Playground;
 
-  constructor(private service: PlaygroundService, private fb: FormBuilder, public modal: NgbActiveModal) { }
+  constructor(private service: PlaygroundService, private fb: UntypedFormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});
