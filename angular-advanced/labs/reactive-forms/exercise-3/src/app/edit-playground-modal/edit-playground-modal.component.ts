@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormGroup, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Playground } from '../model';
 import { PlaygroundService } from '../service';
+
+type PlaygroupControls = {
+  name: FormControl<string | null>,
+  description: FormControl<string | null>,
+  addressDescription: FormControl<string | null>,
+};
 
 @Component({
   selector: 'loop-edit-playground-modal',
@@ -25,17 +31,17 @@ export class EditPlaygroundModalComponent implements OnInit {
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  fg = this.fb.group({
-    name: [undefined, Validators.required, this.validateUniqueName],
-    description: [],
-    addressDescription: [],
+  fg: FormGroup<PlaygroupControls> = this.fb.group({
+    name: this.fb.control('', Validators.required, this.validateUniqueName),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   }, {
     validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
   playground!: Playground;
 
-  constructor(private service: PlaygroundService, private fb: UntypedFormBuilder, public modal: NgbActiveModal) { }
+  constructor(private service: PlaygroundService, private fb: FormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});

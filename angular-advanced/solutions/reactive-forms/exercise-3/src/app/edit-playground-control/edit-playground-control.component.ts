@@ -1,5 +1,11 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormGroup, NG_VALUE_ACCESSOR, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators } from '@angular/forms';
+
+type PlaygroupControls = {
+  name: FormControl<string | null>,
+  description: FormControl<string | null>,
+  addressDescription: FormControl<string | null>,
+};
 
 @Component({
   selector: 'loop-edit-playground-control',
@@ -33,16 +39,16 @@ export class EditPlaygroundControlComponent implements OnInit {
   private propagateChange: ((_: any) => any) | undefined;
   private propagateTouched: (() => void) | undefined;
 
-  fg = this.fb.group({
-    name: [undefined, Validators.required],
-    description: [],
-    addressDescription: [],
+  fg: FormGroup<PlaygroupControls> = this.fb.group({
+    name: this.fb.control('', Validators.required),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   }, {
     validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
 
-  constructor(private fb: UntypedFormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.fg.valueChanges.subscribe(value => this.propagateChange && this.propagateChange(value));

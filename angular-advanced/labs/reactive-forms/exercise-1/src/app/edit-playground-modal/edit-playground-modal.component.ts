@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
+
+type PlaygroupControls = {
+  name: FormControl<string | null>,
+  description: FormControl<string | null>,
+  addressDescription: FormControl<string | null>,
+};
+
 
 @Component({
   selector: 'loop-edit-playground-modal',
@@ -18,7 +25,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   playground!: Playground;
 
-  constructor(private fb: UntypedFormBuilder, public modal: NgbActiveModal) { }
+  constructor(private fb: FormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
   }

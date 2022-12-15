@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Playground } from '../model';
 import { PlaygroundService } from '../service';
-import { TypedControl } from '../utils';
 
-type PlaygroupControls = TypedControl<Pick<Playground, 'name' | 'addressDescription' | 'description'>>;
+type PlaygroupControls = {
+  name: FormControl<string | null>,
+  description: FormControl<string | null>,
+  addressDescription: FormControl<string | null>,
+};
 
 @Component({
   selector: 'loop-edit-playground-modal',
