@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { catchError, mapTo } from 'rxjs/operators';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { combineLatest, Observable, of } from 'rxjs';
+import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
+import { TypedForm } from '../form-utils';
 import { DawaService } from './dawa.service';
 
 const zipValidator = (control: AbstractControl): null | ValidationErrors => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZipCode: control.value };
+
 
 @Component({
   selector: 'loop-validators',
@@ -15,45 +17,43 @@ const zipValidator = (control: AbstractControl): null | ValidationErrors => !con
 export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
   fg = this.fb.group({
-    name: [undefined, Validators.required],
+    name: ['', Validators.required],
     zipAndCity: this.fb.group({
       zip: [
-        undefined,
+        '',
         Validators.pattern(/^[1-9][0-9]{3}$/),
-        (control: AbstractControl): Observable<null | ValidationErrors> =>
+        (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
           !control.errors && control.value && this.service.getCityName(control.value).pipe(
-            mapTo(null),
+            map(() => null),
             catchError(() => of({ nonExistingZip: true }))
           ) || of(null)
       ],
-      city: [undefined]
+      city: ['']
     }, {
-      validators: (zipAndCity: UntypedFormGroup): null | ValidationErrors => {
-        console.log(zipAndCity.value, zipAndCity.get('zip')?.valid, zipAndCity.get('zip')?.value, !zipAndCity.get('city')?.value);
+      validators: (zipAndCity: FormGroup<TypedForm<{ zip: string, city: string; }>>): null | ValidationErrors => {
+        console.log(zipAndCity.value, zipAndCity.controls['zip']?.valid, zipAndCity.controls['zip']?.value, !zipAndCity.controls['city']?.value);
 
-        return zipAndCity.get('zip')?.valid && zipAndCity.get('zip')?.value && !zipAndCity.get('city')?.value ? { required: 'city' } : null;
+        return zipAndCity.controls['zip']?.valid && zipAndCity.controls['zip']?.value && !zipAndCity.controls['city']?.value ? { required: 'city' } : null;
       },
     } as AbstractControlOptions)
   });
 
-  constructor(private fb: UntypedFormBuilder, private service: DawaService) {
+  constructor(private fb: FormBuilder, private service: DawaService) {
     super();
   }
 
   ngOnInit(): void {
-    // combineLatest({
-    //   zip: this.zipAndCityControl.get('zip')!.valueChanges,
-    //   status: this.zipAndCityControl.get('zip')!.statusChanges,
-    // }).pipe(
-    //   debounceTime(500),
-    //   filter(({ zip, status }) => status === 'VALID' && zip),
-    //   switchMap(({ zip }) => this.service.getCityName(zip)),
-    //   catchError(() => of(null)),
-    //   filter(city => !!city),
-    // ).subscribe(city => this.zipAndCityControl.get('city')?.patchValue(city));
+    combineLatest({
+      zip: this.zipAndCityControl.controls['zip']!.valueChanges,
+      status: this.zipAndCityControl.controls['zip']!.statusChanges,
+    }).pipe(
+      debounceTime(500),
+      switchMap(({ status, zip }) => status === 'VALID' && zip ? this.service.getCityName(zip) : of(null)),
+      catchError(() => of(null)),
+    ).subscribe(city => this.zipAndCityControl.controls['city']?.patchValue(city));
   }
 
-  get zipAndCityControl(): UntypedFormGroup {
-    return this.fg.get('zipAndCity') as UntypedFormGroup;
+  get zipAndCityControl() {
+    return this.fg.controls['zipAndCity'];
   }
 }

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormGroup, UntypedFormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Playground } from '../model';
 import { PlaygroundService } from '../service';
+import { TypedControl } from '../utils';
+
+type PlaygroupControls = TypedControl<Pick<Playground, 'name' | 'addressDescription' | 'description'>>;
 
 @Component({
   selector: 'loop-edit-playground-modal',
@@ -19,23 +22,23 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
-  private validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
+  private validateUniqueName = (control: AbstractControl<string>): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
     first(),
     map(playgrounds => playgrounds.some(p => p.name === control.value && p.id !== this.playground.id)),
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  fg = this.fb.group({
-    name: [undefined, Validators.required, this.validateUniqueName],
-    description: [],
-    addressDescription: [],
+  fg: FormGroup<PlaygroupControls> = this.fb.group({
+    name: this.fb.control('', Validators.required, this.validateUniqueName),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
+    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
   playground!: Playground;
 
-  constructor(private service: PlaygroundService, private fb: UntypedFormBuilder, public modal: NgbActiveModal) { }
+  constructor(private service: PlaygroundService, private fb: FormBuilder, public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});

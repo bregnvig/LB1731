@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
@@ -12,14 +12,14 @@ export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective impl
   @ViewChild('emailControl', { static: true }) emailControl!: ElementRef<HTMLInputElement>;
   @ViewChild('nameControl', { static: true }) nameControl!: ElementRef<HTMLInputElement>;
   fg = this.fb.group({
-    email: [undefined, Validators.required],
-    name: [undefined, Validators.required],
+    email: ['', Validators.required],
+    name: ['', Validators.required],
   });
 
-  emitEventControl = this.fb.control(true, Validators.required);
+  emitEventControl = this.fb.control<boolean>(true, { validators: Validators.required, nonNullable: true });
   classes: string | undefined;
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     super();
   }
 

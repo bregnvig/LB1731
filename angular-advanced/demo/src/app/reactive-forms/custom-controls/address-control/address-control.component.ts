@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, UntypedFormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, UntypedFormBuilder, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { Address } from '../address.model';
@@ -24,17 +24,17 @@ import { Address } from '../address.model';
 export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit, ControlValueAccessor, Validator {
 
   fg = this.fb.group({
-    street: [],
-    streetNumber: [],
-    floor: [],
-    zip: [undefined, (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }],
-    city: [],
+    street: [''],
+    streetNumber: [''],
+    floor: [''],
+    zip: ['', (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }],
+    city: [''],
   });
 
   private propagateChange: ((_: any) => any) | undefined;
   private propagateTouched: (() => void) | undefined;
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     super();
   }
 
