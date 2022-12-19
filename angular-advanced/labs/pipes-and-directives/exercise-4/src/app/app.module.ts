@@ -9,15 +9,14 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AppComponent } from './app.component';
+import { FocusDirective } from './directive/focus.directive';
+import { SelectAllTextDirective } from './directive/select-all-text.directive';
 import { EditPlaygroundControlComponent } from './edit-playground-control/edit-playground-control.component';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
-import { LoginComponent } from './login/login.component';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { SelectAllTextDirective } from './directive/select-all-text.directive';
-import { FocusDirective } from './directive/focus.directive';
 
 library.add(fas, far);
 
@@ -31,7 +30,6 @@ library.add(fas, far);
     DefaultDescriptionPipe,
     EditPlaygroundModalComponent,
     EditPlaygroundControlComponent,
-    LoginComponent,
     SelectAllTextDirective,
     FocusDirective,
   ],

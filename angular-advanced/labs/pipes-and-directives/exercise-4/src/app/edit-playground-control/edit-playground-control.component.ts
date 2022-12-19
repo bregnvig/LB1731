@@ -1,5 +1,11 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators } from '@angular/forms';
+
+interface PlaygroundForm {
+  name: FormControl<string | null>;
+  description: FormControl<string | null>;
+  addressDescription: FormControl<string | null>;
+}
 
 @Component({
   selector: 'loop-edit-playground-control',
@@ -33,14 +39,14 @@ export class EditPlaygroundControlComponent implements OnInit {
   private propagateChange: ((_: any) => any) | undefined;
   private propagateTouched: (() => void) | undefined;
 
-  fg = this.fb.group({
-    name: [undefined, Validators.required],
-    description: [],
-    addressDescription: [],
+  fg = this.fb.group<PlaygroundForm>({
+    name: this.fb.control('', Validators.required),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
+    validators: (fg: FormGroup<PlaygroundForm>): null | ValidationErrors =>
+      fg.controls['description']?.value || fg.controls['addressDescription']?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
-
 
   constructor(private fb: FormBuilder) { }
 

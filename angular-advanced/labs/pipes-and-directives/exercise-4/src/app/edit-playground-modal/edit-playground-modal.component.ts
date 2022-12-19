@@ -25,7 +25,7 @@ export class EditPlaygroundModalComponent implements OnInit {
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  editControl = new FormControl(undefined, null, this.validateUniqueName);
+  editControl = new FormControl<Playground | null>(null, { asyncValidators: this.validateUniqueName });
   playground!: Playground;
 
   constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }
