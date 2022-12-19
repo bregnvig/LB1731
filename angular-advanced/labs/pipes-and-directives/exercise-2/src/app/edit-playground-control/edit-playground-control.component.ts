@@ -48,7 +48,6 @@ export class EditPlaygroundControlComponent implements OnInit {
       fg.controls['description']?.value || fg.controls['addressDescription']?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
