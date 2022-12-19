@@ -36,7 +36,7 @@ export class EditPlaygroundModalComponent implements OnInit {
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
+    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => (fg.controls['description']?.value || fg.controls['addressDescription']?.value) ? null : { requiredOr: ['description', 'addressDescription'] },
   } as AbstractControlOptions);
 
   playground!: Playground;
@@ -45,7 +45,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});
-  }
+  };
 
   initialize(playground: Playground) {
     this.playground = playground;

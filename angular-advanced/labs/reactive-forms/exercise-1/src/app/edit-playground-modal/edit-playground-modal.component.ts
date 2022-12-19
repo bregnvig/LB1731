@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
@@ -15,7 +15,7 @@ type PlaygroupControls = {
   templateUrl: './edit-playground-modal.component.html',
   styleUrls: ['./edit-playground-modal.component.scss']
 })
-export class EditPlaygroundModalComponent implements OnInit {
+export class EditPlaygroundModalComponent {
 
   static open(modal: NgbModal, playground: Playground): Promise<Playground> {
     const ref = modal.open(EditPlaygroundModalComponent);
@@ -23,12 +23,15 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
+  fg = this.fb.group({
+    name: [''],
+    addressDescription: [''],
+    description: [''],
+  });
+
   playground!: Playground;
 
   constructor(private fb: FormBuilder, public modal: NgbActiveModal) { }
-
-  ngOnInit(): void {
-  }
 
   initialize(playground: Playground) {
     this.playground = playground;

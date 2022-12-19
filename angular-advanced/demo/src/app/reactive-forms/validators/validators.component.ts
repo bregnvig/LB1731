@@ -6,7 +6,11 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { TypedForm } from '../form-utils';
 import { DawaService } from './dawa.service';
 
-const zipValidator = (control: AbstractControl): null | ValidationErrors => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZipCode: control.value };
+const isValidZip = (service: DawaService) => (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
+  !control.errors && control.value && service.getCityName(control.value).pipe(
+    map(() => null),
+    catchError(() => of({ nonExistingZip: true }))
+  ) || of(null);
 
 
 @Component({
@@ -22,11 +26,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       zip: [
         '',
         Validators.pattern(/^[1-9][0-9]{3}$/),
-        (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
-          !control.errors && control.value && this.service.getCityName(control.value).pipe(
-            map(() => null),
-            catchError(() => of({ nonExistingZip: true }))
-          ) || of(null)
+        isValidZip(this.service),
       ],
       city: ['']
     }, {
