@@ -6,7 +6,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
-import { AuthService, LocationService, PlaygroundService } from './service';
+import { AuthService, LocationService, PlaygroundService, Role } from './service';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent {
   location$: Observable<Coordinate> = this.locationService.location$;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
-  roleControl = new FormControl('anonymous');
+  roleControl = new FormControl<Role>('anonymous', { nonNullable: true });
 
   constructor(
     private service: PlaygroundService,
