@@ -1,18 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-ng-if',
   templateUrl: './ng-if.component.html',
   styleUrls: ['./ng-if.component.scss']
 })
-export class NgIfComponent implements OnInit {
+export class NgIfComponent {
 
-  blueControl = new UntypedFormControl(false);
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  blueControl = new FormControl<boolean>(false);
 }

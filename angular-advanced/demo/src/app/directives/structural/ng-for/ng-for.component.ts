@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-ng-for',
   templateUrl: './ng-for.component.html',
   styleUrls: ['./ng-for.component.scss']
 })
-export class NgForComponent implements OnInit {
+export class NgForComponent {
 
   numberOfCards = this.createArray();
-  trackByControl = new UntypedFormControl(true);
+  trackByControl = new FormControl<boolean>(true);
 
   trackByIndexFn = (_: number, o: { index: number; }) => o.index;
-
-  ngOnInit(): void {
-  }
 
   simulate() {
     this.numberOfCards = this.createArray();

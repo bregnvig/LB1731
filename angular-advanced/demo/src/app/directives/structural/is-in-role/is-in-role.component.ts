@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
-import { UserService } from '../user.service';
+import { Role, UserService } from '../user.service';
 
 @Component({
   selector: 'loop-is-in-role',
@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
 })
 export class IsInRoleComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  roleControl = new UntypedFormControl('anonymous');
+  roleControl = new FormControl<Role>('anonymous', { nonNullable: true });
 
   constructor(public service: UserService) {
     super();

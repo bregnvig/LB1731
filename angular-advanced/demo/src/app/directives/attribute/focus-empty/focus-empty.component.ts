@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 const code = `
 <form focusEmpty [formGroup]="fg" (ngSubmit)="submit()" class="flex-item">
@@ -23,7 +23,7 @@ const code = `
     </div>
     <button class="btn btn-primary">Submit</button>
 </form>
-`
+`;
 
 @Component({
   selector: 'loop-focus-empty',
@@ -33,15 +33,14 @@ const code = `
 export class FocusEmptyComponent {
 
   code = code;
-  fg: UntypedFormGroup;
+  fg = this.fb.group({
+    first: ['', Validators.required],
+    last: ['', Validators.required],
+    age: [],
+  });
   submitted = false;
 
-  constructor(private fb: UntypedFormBuilder) {
-    this.fg = this.fb.group({
-      first: ['', Validators.required],
-      last: ['', Validators.required],
-      age: [],
-    });
+  constructor(private fb: FormBuilder) {
   }
 
   submit() {
