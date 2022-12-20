@@ -4,36 +4,36 @@
       <div class="form-group row">
         <div class="col">
           <label class="form-label">Some text</label>
-          <input selectAll required [loopExpand]="false" class="form-control" type="text" [(ngModel)]="text">
+          <input selectAll required [loopExpand]="true" class="form-control" type="text" [(ngModel)]="text" (focus)="hasFocus = true" (blur)="hasFocus = false">
         </div>
       </div>
     </div>
-    <div class="col d-flex flex-column">
-      <pre>
-        <code>
-          &lt;div class="form-group row"&gt;
-            &lt;div class="col"&gt;
-              &lt;label class="form-label"&gt;Some text&lt;/label&gt;
-              &lt;input <strong>selectAll</strong> class="form-control" type="text" <strong>required</strong> [(ngModel)]="text"&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-        </code>
-      </pre>
-      <pre>
-        <code>
-          @Directive(&#123; selector: '[<strong>selectAll</strong>]' &#125;)
-          export class SelectAllDirective &#123;
-          
-            constructor(<strong>private elementRef: ElementRef</strong>) &#123; &#125;
-          
-            <strong>@HostListener('focus', ['$event.target.value'])</strong>
-            onFocus(value: string) &#123;
-              <strong>this.elementRef.nativeElement.setSelectionRange(0, value.length);</strong>
-            &#125;
-          
-          &#125;
-        </code>
-      </pre>
+    <div class="col-12 d-flex flex-column mt-3">
+      <code>
+      <pre class="fs-5">
+&lt;div class="form-group row"&gt;
+  &lt;div class="col"&gt;
+    &lt;label class="form-label"&gt;Some text&lt;/label&gt;
+    &lt;input <strong>selectAll</strong> class="form-control" type="text" <strong>required</strong> [(ngModel)]="text"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+      </code>
+      <code>
+      <pre class="fs-5">
+@Directive(&#123; selector: '[<strong>selectAll</strong>]' &#125;)
+export class SelectAllDirective &#123;
+
+  constructor(<strong>private elementRef: ElementRef</strong>) &#123; &#125;
+
+  <span [class.fw-bolder]="hasFocus">@HostListener('focus')</span>
+  onFocus(value: string) &#123;
+    <span [class.fw-bolder]="hasFocus">this.elementRef.nativeElement.select();</span>
+  &#125;
+
+&#125;
+        </pre>
+      </code>
     </div>
   </div>
 </article>

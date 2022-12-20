@@ -17,15 +17,15 @@
     </div>
     <div class="col">
       <code>
-        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
-          &lt;div *ngIf=&quot;!blueControl.value&quot; class=&quot;col-auto&quot;&gt;
-            &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
-          &lt;/div&gt;
+        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+&lt;div *ngIf=&quot;!blueControl.value&quot; class=&quot;col-auto&quot;&gt;
+  &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
         </pre>
-        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
-          &lt;div *ngIf=&quot;blueControl.value&quot; class=&quot;col-auto&quot;&gt;
-            &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
-          &lt;/div&gt;
+        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+&lt;div *ngIf=&quot;blueControl.value&quot; class=&quot;col-auto&quot;&gt;
+  &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
         </pre>
       </code>
     </div>
@@ -40,16 +40,16 @@
     </div>
     <div class="col">
       <code>
-        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
-          &lt;ng-template #useRed&gt;
-            &lt;div class=&quot; box red&quot;&gt;&lt;/div&gt;
-          &lt;/ng-template&gt;
+        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+&lt;ng-template #useRed&gt;
+  &lt;div class=&quot; box red&quot;&gt;&lt;/div&gt;
+&lt;/ng-template&gt;
         </pre>
-        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
-          &lt;div class=&quot;col-auto&quot;&gt;
-            &lt;div *ngIf=&quot;blueControl.value; else <span [class.font-weight-normal]="blueControl.value" [class.font-weight-bolder]="!blueControl.value">useRed</span>&quot; 
-              class=&quot;box blue&quot;&gt;&lt;/div&gt;
-          &lt;/div&gt;
+        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+&lt;div class=&quot;col-auto&quot;&gt;
+  &lt;div *ngIf=&quot;blueControl.value; else <span [class.fw-normal]="blueControl.value" [class.fw-bolder]="!blueControl.value">useRed</span>&quot; 
+    class=&quot;box blue&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
         </pre>
       </code>
     </div>
@@ -67,21 +67,21 @@
     </div>
     <div class="col">
       <code>
-        <pre class="fs-3" [class.font-weight-bolder]="!blueControl.value">
-          &lt;ng-template #useRed&gt;
-            &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
-          &lt;/ng-template&gt;
+        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+&lt;ng-template #useRed&gt;
+  &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
+&lt;/ng-template&gt;
         </pre>
-        <pre class="fs-3" [class.font-weight-bolder]="blueControl.value">
-          &lt;ng-template #useBlue&gt;
-            &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
-          &lt;/ng-template&gt;
+        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+&lt;ng-template #useBlue&gt;
+  &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
+&lt;/ng-template&gt;
         </pre>        
-        <pre class="fs-3">
-          &lt;div class=&quot;col-auto&quot;&gt;
-            &lt;ng-container *ngIf=&quot;blueControl.value; 
-              <span [class.font-weight-normal]="!blueControl.value" [class.font-weight-bolder]="blueControl.value">then useBlue</span> <span [class.font-weight-normal]="blueControl.value" [class.font-weight-bolder]="!blueControl.value">else useRed</span>&quot;&gt;&lt;/ng-container&gt;
-          &lt;/div&gt;
+        <pre class="fs-5">
+&lt;div class=&quot;col-auto&quot;&gt;
+  &lt;ng-container *ngIf=&quot;blueControl.value; 
+    <span [class.fw-normal]="!blueControl.value" [class.fw-bolder]="blueControl.value">then useBlue</span> <span [class.fw-normal]="blueControl.value" [class.fw-bolder]="!blueControl.value">else useRed</span>&quot;&gt;&lt;/ng-container&gt;
+&lt;/div&gt;
         </pre>
       </code>      
     </div>

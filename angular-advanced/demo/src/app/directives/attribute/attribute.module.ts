@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../../shared/shared.module';
 import { AttributeComponent } from './attribute/attribute.component';
+import { BuiltinAttributeClassDotComponent } from './builtin-attribute/builtin-attribute-class-dot.component';
 import { BuiltinAttributeComponent } from './builtin-attribute/builtin-attribute.component';
 import { FocusEmptyComponent } from './focus-empty/focus-empty.component';
 import { SelectAllComponent } from './select-all/select-all.component';
@@ -15,6 +16,7 @@ import { SelectAllComponent } from './select-all/select-all.component';
   declarations: [
     AttributeComponent,
     BuiltinAttributeComponent,
+    BuiltinAttributeClassDotComponent,
     SelectAllComponent,
     FocusEmptyComponent,
   ],
@@ -33,6 +35,10 @@ import { SelectAllComponent } from './select-all/select-all.component';
           {
             path: 'built-in',
             component: BuiltinAttributeComponent
+          },
+          {
+            path: 'built-in-class-dot',
+            component: BuiltinAttributeClassDotComponent,
           },
           {
             path: 'select-all',

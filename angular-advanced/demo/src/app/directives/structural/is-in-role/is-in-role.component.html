@@ -1,23 +1,33 @@
 <article>
   <div class="row">
     <div class="col">
-      <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [formControl]="roleControl">
-        <label ngbButtonLabel class="btn-outline-primary">
-          <input ngbButton type="radio" value="anonymous"> Anonymous
-        </label>
-        <label ngbButtonLabel class="btn-outline-primary">
-          <input ngbButton type="radio" value="user"> User
-        </label>
-        <label ngbButtonLabel class="btn-outline-primary">
-          <input ngbButton type="radio" value="admin"> Admin
-        </label>
+
+      <div class="row">
+        <div class="form-check col-4">
+          <input class="form-check-input" [formControl]="roleControl" type="radio" value="anonymous" id="anonymous">
+          <label class="form-check-label" for="anonymous">
+            Anonymous
+          </label>
+        </div>
+        <div class="form-check col-4">
+          <input class="form-check-input" [formControl]="roleControl" type="radio" value="user" id="user">
+          <label class="form-check-label" for="user">
+            User
+          </label>
+        </div>
+        <div class="form-check col-4">
+          <input class="form-check-input" [formControl]="roleControl" type="radio" value="admin" id="admin">
+          <label class="form-check-label" for="admin">
+            Admin
+          </label>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-4"><p class="m-2" *loopIsInRole="'anonymous'; role as r">I'm in role as anonymous. Role is {{r}}</p></div>
-    <div class="col-4"><p class="m-2" *loopIsInRole="'user'; role as r">I'm in role as user. Role is {{r}}</p></div>
-    <div class="col-4"><p class="m-2" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I'm in role as admin. Role is {{r}}</p></div>  
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'anonymous'; role as r">I'm have role as anonymous. Role is {{r}}</p></div>
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'user'; role as r">I'm have role as user. Role is {{r}}</p></div>
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I'm have role as admin. Role is {{r}}</p></div>  
     <ng-template #iWishIWasAdmin>
       I wish I was an admin😭
     </ng-template>

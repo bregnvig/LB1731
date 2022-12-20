@@ -16,11 +16,11 @@ export class ExpandDirective {
   @HostBinding('style.width.px') width?: number;
 
   @HostListener('focus') onFocus() {
-    this._expand && (this.width = this.ref.nativeElement.offsetWidth + 16);
+    this._expand && (this.width = this.ref.nativeElement.offsetWidth + 160);
   }
 
   @HostListener('blur') onBlur() {
-    this._expand && (this.width = this.ref.nativeElement.offsetWidth - 16);
+    this._expand && (this.width = this.ref.nativeElement.offsetWidth - 160);
   }
 
 }

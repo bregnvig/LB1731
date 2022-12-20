@@ -8,7 +8,7 @@ export class SelectAllDirective {
   constructor(private elementRef: ElementRef) {
   }
 
-  @HostListener('focus', ['$event.target.value'])
+  @HostListener('focus')
   onFocus() {
     this.elementRef.nativeElement.select();
   }

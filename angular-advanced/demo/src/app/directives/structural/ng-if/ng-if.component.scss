@@ -1,14 +1,19 @@
 .box {
-  &.red{
+  &.red {
     background-color: orangered;
   }
-  &.blue{
+  &.blue {
     background-color: lightskyblue;
   }
   width: 200px;
   height: 200px;
   border-radius: 50%;
 }
-pre.fs-3 {
-  font-size: 1.1rem;
+pre,
+span {
+  opacity: 0.5;
+  &.fw-bolder {
+    opacity: 1;
+    color: var(--bs-success);
+  }
 }

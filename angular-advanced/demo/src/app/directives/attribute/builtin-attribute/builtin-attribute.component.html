@@ -11,22 +11,22 @@
         <div [ngStyle]="{'opacity': state === 'green' ? '1' : '.2' }" class="light green"></div>
       </div>
     </div>
-    <div class="col">
-      <pre>
-        <code>
-          &lt;div class="col-auto d-flex flex-column flex-item"&gt;
-            &lt;div class="trafic-light"&gt;
-              <span [class.font-weight-bold]="state === 'red'">&lt;div [ngClass]="state === 'red' ? 'active' : ''" class="light red"&gt;&lt;/div&gt;</span>
-            &lt;/div&gt;
-            &lt;div class="trafic-light"&gt;
-              <span [class.font-weight-bold]="state === 'yellow'">&lt;div [ngClass]="&#123;'active': state === 'yellow'&#125;" class="light yellow"&gt;&lt;/div&gt;</span>
-            &lt;/div&gt;
-            &lt;div class="trafic-light"&gt;
-              <span [class.font-weight-bold]="state === 'green'">&lt;div [ngStyle]="&#123;'opacity.%': state === 'green' ? 0 : .5 &#125;" class="light green"&gt;&lt;/div&gt;</span>
-            &lt;/div&gt;
-          &lt;/div&gt;
-        </code>
-      </pre>
+    <div class="col mt-3">
+      <code>
+        <pre class="fs-5">
+&lt;div class="col-auto d-flex flex-column flex-item"&gt;
+  &lt;div class="trafic-light"&gt;
+    <span [class.fw-bold]="state === 'red'">&lt;div [ngClass]="state === 'red' ? 'active' : ''" class="light red"&gt;&lt;/div&gt;</span>
+  &lt;/div&gt;
+  &lt;div class="trafic-light"&gt;
+    <span [class.fw-bold]="state === 'yellow'">&lt;div [ngClass]="&#123;'active': state === 'yellow'&#125;" class="light yellow"&gt;&lt;/div&gt;</span>
+  &lt;/div&gt;
+  &lt;div class="trafic-light"&gt;
+    <span [class.fw-bold]="state === 'green'">&lt;div [ngStyle]="&#123;'opacity.%': state === 'green' ? 0 : .5 &#125;" class="light green"&gt;&lt;/div&gt;</span>
+  &lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+      </code>
     </div>
   </div>
 </article>
