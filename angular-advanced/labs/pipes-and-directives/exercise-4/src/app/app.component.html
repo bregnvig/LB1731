@@ -5,3 +5,19 @@
   (selected)="playground$.next($event)">
 </loop-sidebar>
 <loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+<div class="mt-3 mx-4 p-3 roles">
+  <div class="row">
+    <div class="form-check col-6">
+      <input class="form-check-input" [formControl]="roleControl" type="radio" value="anonymous" id="anonymous">
+      <label class="form-check-label" for="anonymous">
+        Anonymous
+      </label>
+    </div>
+    <div class="form-check col-6">
+      <input class="form-check-input" [formControl]="roleControl" type="radio" value="admin" id="admin">
+      <label class="form-check-label" for="admin">
+        Admin
+      </label>
+    </div>
+</div>
+</div>
