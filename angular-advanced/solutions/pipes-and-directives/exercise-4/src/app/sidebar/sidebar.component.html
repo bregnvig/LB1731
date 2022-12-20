@@ -12,7 +12,7 @@
             </h6>
             <small>{{playground.description | defaultDescription}}</small>
           </div>
-          <div class="d-none d-sm-block">
+          <div class="d-none d-sm-block" *loopIsInRole="'admin'">
             <div class="btn-group">
               <button class="btn btn-sm btn-secondary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
                 <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
