@@ -1,23 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Playground } from './shared';
+import { Component } from '@angular/core';
 import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
+import { Playground } from './shared/playground';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  appPlaygrounds: Playground[];
-  playground: Playground;
+  appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
+  playground?: Playground;
 
-  ngOnInit(): void {
-    this.appPlaygrounds = MOCK_PLAYGROUNDS;
-  }
-
-  playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground) {
+    console.log(playground);
     this.playground = playground;
-    console.log('Playground selected', playground);
   }
 }

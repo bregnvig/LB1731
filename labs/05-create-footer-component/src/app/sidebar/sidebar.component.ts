@@ -1,21 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Playground } from '../shared';
+import { Component } from '@angular/core';
 import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
+import { Playground } from '../shared/playground';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
-
-  public playgrounds: Playground[] = MOCK_PLAYGROUNDS;
-
-  constructor() { 
-  }
-
-  ngOnInit() {
-  }
-
+export class SidebarComponent {
+  playgrounds: Playground[] = MOCK_PLAYGROUNDS;
 }

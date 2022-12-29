@@ -1,17 +1,28 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
-
-import { SidebarComponent } from './sidebar';
-import { FooterComponent } from './footer';
-import { LeafletModule } from './leaflet';
-import { PlaygroundService } from './shared/playground.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FooterComponent } from './footer/footer.component';
+import { LeafletModule } from './leaflet';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
-    declarations: [AppComponent, SidebarComponent, FooterComponent],
-    imports:      [BrowserModule, LeafletModule, HttpClientModule],
-    bootstrap:    [AppComponent],
-    providers:    [PlaygroundService],
+  declarations: [
+    AppComponent,
+    SidebarComponent,
+    FooterComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    LeafletModule,
+    HttpClientModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

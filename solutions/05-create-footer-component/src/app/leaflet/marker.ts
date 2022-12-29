@@ -1,8 +1,5 @@
-export class Marker {
-
-    constructor(public readonly name: string, public readonly latitude: number, public readonly longitude: number, public readonly message: string = '') { }
-
-    public get hasPosition(): boolean {
-        return !!this.latitude && !!this.longitude;
-    }
-}
+export type Marker = {
+  lat: number;
+  lng: number;
+  message?: string;
+} | undefined;

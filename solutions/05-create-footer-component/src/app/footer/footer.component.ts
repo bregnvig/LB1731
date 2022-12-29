@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Playground } from '../shared';
-
 
 @Component({
   selector: 'app-footer',
   template: `
-    <footer>
-      <h3>{{playground.name}}</h3>
-      <p>{{playground.addressDescription}}</p>
-      <p>{{playground.description}}</p>
-    </footer>
+  <footer>
+    <h3>{{playground.name}}</h3>
+    <p>{{playground.description}}</p>
+    <p>{{playground.addressDescription}}</p>
+  </footer>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+  ]
 })
 export class FooterComponent {
-  @Input() playground: Playground;
+
+  @Input() playground!: Playground;
 }

@@ -16,6 +16,7 @@ examples/.vscode
 # dependencies
 /node_modules
 **/node_modules
+**/.angular/cache
 
 # profiling files
 chrome-profiler-events*.json

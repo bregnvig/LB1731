@@ -1,2 +1,3 @@
 export * from './coordinate';
-export * from './playground';
+export * from './location.service';
+

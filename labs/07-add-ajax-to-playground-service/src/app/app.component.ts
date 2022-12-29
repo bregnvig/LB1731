@@ -1,29 +1,23 @@
+import { Component } from '@angular/core';
+import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';
-import { Component, OnInit } from '@angular/core';
-
-import { Playground } from './shared';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  public title = 'app works!';
-  public playgrounds: Playground[];
-  public playground: Playground;
+  appPlaygrounds: Playground[];
+  playground?: Playground;
 
-  public constructor(private service: PlaygroundService) {
-
+  constructor(service: PlaygroundService) {
+    this.appPlaygrounds = service.getPlaygrounds();
   }
 
-  public ngOnInit() {
-    this.playgrounds = this.service.getPlaygrounds();
-  }
-
-  public playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground) {
+    console.log(playground);
     this.playground = playground;
-    console.log('Playground selected', playground);
   }
 }

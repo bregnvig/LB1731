@@ -1,21 +1,19 @@
-import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 import { Component } from '@angular/core';
-
-import { Playground } from './shared';
+import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
+import { Playground } from './shared/playground';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
 
-  public appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
-  public playground: Playground;
+  appPlaygrounds: Playground[] = MOCK_PLAYGROUNDS;
+  playground?: Playground;
 
-  public playgroundSelected(playground: Playground): void {
+  playgroundSelected(playground: Playground) {
+    console.log(playground);
     this.playground = playground;
-    console.log('Playground selected', playground);
   }
 }

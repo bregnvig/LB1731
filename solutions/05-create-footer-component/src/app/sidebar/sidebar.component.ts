@@ -1,20 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Playground } from '../shared';
 
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-
-  @Input() playgrounds: Playground[];
+  @Input() playgrounds?: Playground[];
   @Output() selected = new EventEmitter<Playground>();
 
-  selectedPlayground: Playground;
+  selectedPlayground?: Playground;
 
-  selectPlayground(playground: Playground): void {
+  selectPlayground(playground: Playground) {
     this.selectedPlayground = playground;
     this.selected.emit(playground);
   }

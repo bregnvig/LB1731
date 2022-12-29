@@ -1,13 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { Playground } from '../shared';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  template: `
+  <footer>
+    <h3>{{playground.name}}</h3>
+    <p>{{playground.description}}</p>
+    <p>{{playground.addressDescription}}</p>
+  </footer>
+  `,
+  styles: [
+  ]
 })
 export class FooterComponent {
 
-  @Input() public playground: Playground;
+  @Input() playground!: Playground;
 }

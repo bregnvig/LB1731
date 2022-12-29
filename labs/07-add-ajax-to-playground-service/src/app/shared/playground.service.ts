@@ -1,13 +1,12 @@
-import { MOCK_PLAYGROUNDS } from './mock-playgrounds';
-import { Playground } from './playground';
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { MOCK_PLAYGROUNDS } from "./mock-playgrounds";
+import { Playground } from "./playground";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class PlaygroundService {
-
-    public getPlaygrounds(): Playground[] {
-        return MOCK_PLAYGROUNDS;
-    }
+  getPlaygrounds(): Playground[] {
+    return MOCK_PLAYGROUNDS;
+  }
 }

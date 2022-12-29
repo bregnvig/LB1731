@@ -1,0 +1,5 @@
+<main class="vh-100 d-flex justify-content-center align-items-center">
+  <app-sidebar [playgrounds]="appPlaygrounds" [selectedPlayground]="playground" (selected)="playgroundSelected($event)"></app-sidebar>
+  <leaflet [center]="center" [markers]="markers$ | async"></leaflet>
+</main>
+<app-footer *ngIf="playground" [playground]="playground"></app-footer>

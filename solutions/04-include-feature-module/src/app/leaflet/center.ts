@@ -1,4 +1,5 @@
-export class Center {
-    constructor(public readonly latitude: number, public readonly longitude: number, public readonly zoom?:number) {
-    }
+export interface Center {
+  lat: number;
+  lng: number;
+  zoom?: number;
 }
