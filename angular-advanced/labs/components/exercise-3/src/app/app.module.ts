@@ -7,13 +7,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DynamicIoModule } from 'ng-dynamic-component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 library.add(fas, far);
 
@@ -35,6 +36,7 @@ library.add(fas, far);
     NgbModule,
     LeafletModule,
     FontAwesomeModule,
+    DynamicIoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
