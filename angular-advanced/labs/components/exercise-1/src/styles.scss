@@ -2,7 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "scss/variables";
-@import '~bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
 @import "scss/bootswatch";
 
 @font-face {
@@ -24,9 +24,6 @@ body {
   height: 100vh;
   width: 100vw;
 }
-
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
 
 aside {
   position: fixed;
