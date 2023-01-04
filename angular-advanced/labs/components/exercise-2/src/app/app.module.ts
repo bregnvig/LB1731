@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
 
 library.add(fas, far);
 
@@ -24,6 +25,7 @@ library.add(fas, far);
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
+    SidebarListItemComponent,
   ],
   imports: [
     BrowserModule,
