@@ -8,15 +8,15 @@
 @font-face {
   font-family: 'Lato';
   src: url('assets/lato/Lato-Regular.ttf') format('truetype'),
-  url('assets/lato/Lato-Black.ttf') format('truetype'),
-  url('assets/lato/Lato-BlackItalic.ttf') format('truetype'),
-  url('assets/lato/Lato-Bold.ttf') format('truetype'),
-  url('assets/lato/Lato-BoldItalic.ttf') format('truetype'),
-  url('assets/lato/Lato-Italic.ttf') format('truetype'),
-  url('assets/lato/Lato-Light.ttf') format('truetype'),
-  url('assets/lato/Lato-LightItalic.ttf') format('truetype'),
-  url('assets/lato/Lato-Thin.ttf') format('truetype'),
-  url('assets/lato/Lato-ThinItalic.ttf') format('truetype')
+    url('assets/lato/Lato-Black.ttf') format('truetype'),
+    url('assets/lato/Lato-BlackItalic.ttf') format('truetype'),
+    url('assets/lato/Lato-Bold.ttf') format('truetype'),
+    url('assets/lato/Lato-BoldItalic.ttf') format('truetype'),
+    url('assets/lato/Lato-Italic.ttf') format('truetype'),
+    url('assets/lato/Lato-Light.ttf') format('truetype'),
+    url('assets/lato/Lato-LightItalic.ttf') format('truetype'),
+    url('assets/lato/Lato-Thin.ttf') format('truetype'),
+    url('assets/lato/Lato-ThinItalic.ttf') format('truetype')
 }
 
 body {
@@ -24,6 +24,7 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
@@ -39,26 +40,30 @@ aside {
   overflow: auto;
   z-index: 501;
   transition: 0.43s ease-in-out;
+
   form {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
+
   > nav {
-      max-height: calc(100vh - 86px);
-      overflow: auto;
+    max-height: calc(100vh - 86px);
+    overflow: auto;
   }
+
   @media screen and (max-width: 599px) {
-      border-radius: 0;
-      top: calc(100vh - 20px);
-      right: 0;
-      width: 100%;
-      height: calc(50vh + 20px);
-      border-top: 18px solid black;
-      margin: 0;
-      transition: 0.43s ease-in-out;
-      &:focus {
-        border-top-color: orange;
-        transform: translateY(-50vh);
-      }
+    border-radius: 0;
+    top: calc(100vh - 20px);
+    right: 0;
+    width: 100%;
+    height: calc(50vh + 20px);
+    border-top: 18px solid black;
+    margin: 0;
+    transition: 0.43s ease-in-out;
+
+    &:focus {
+      border-top-color: orange;
+      transform: translateY(-50vh);
+    }
   }
 
 }
@@ -70,9 +75,10 @@ footer {
   left: 0;
   color: #FFF;
   padding-left: 8px;
-  background-color:rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 500;
+
   @media screen and (max-width: 599px) {
-      bottom: 20px;
+    bottom: 20px;
   }
 }
