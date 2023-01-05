@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -6,16 +6,11 @@ import { UntypedFormControl } from '@angular/forms';
   templateUrl: './on-changes.component.html',
   styleUrls: ['./on-changes.component.scss']
 })
-export class OnChangesComponent implements OnInit {
+export class OnChangesComponent {
 
   control = new UntypedFormControl();
   items1: string[] = ['D', 'C', 'B', 'A'];
   items2: string[] = ['D', 'C', 'B', 'A'];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   add() {
     this.items1 = [...this.items1, this.control.value];

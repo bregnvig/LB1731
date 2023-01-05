@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { interval, map, Observable, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'loop-stop-watch',
@@ -17,7 +17,7 @@ export class StopWatchComponent implements OnInit {
   }
 
   start() {
-    // this.seconds$ = interval(1000).pipe(map(seconds => seconds + 1), startWith(0));
+    this.seconds$ = interval(1000).pipe(map(seconds => seconds + 1), startWith(0));
   }
 
   stop() {

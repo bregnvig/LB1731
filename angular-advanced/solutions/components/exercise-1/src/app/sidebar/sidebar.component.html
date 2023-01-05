@@ -1,7 +1,7 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      <loop-sidebar-list-item *ngFor="let playground of playgrounds" [playground]="playground" [selected]="selectedPlayground">
+      <loop-sidebar-list-item *ngFor="let playground of playgrounds" [playground]="playground" [selected]="selectedPlayground" [location$]="location$">
         <button class="btn btn-sm btn-secondary" (click)="selectPlayground(playground)">
           <fa-icon [icon]="['fas', 'check']"></fa-icon> 
         </button>        
