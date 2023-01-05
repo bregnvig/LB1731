@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'loop-input-property-on-push-simple-type',
   template: `
     <p>
-      input-property-on-push-simple-type component {{no}}!
+      input-property-on-push-simple-type component <span class="badge bg-success">{{no}}</span>!
     </p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

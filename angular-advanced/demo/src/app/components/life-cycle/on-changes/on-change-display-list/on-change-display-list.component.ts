@@ -18,7 +18,7 @@ export class OnChangeDisplayListComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log('On changes has been executed', changes);
 
-    changes['items'] && (this.items = this.items?.sort());
+    changes['items'] && (this.items = this.items?.map(i => i.toUpperCase())?.sort());
   }
 
 }

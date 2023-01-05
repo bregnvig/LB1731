@@ -5,7 +5,7 @@ import { No } from '../change-detection.component';
   selector: 'loop-input-property',
   template: `
     <p>
-      input-property component {{no?.value}}!
+      input-property component <span class="badge bg-success">{{no?.value}}</span>
     </p>
   `,
 })

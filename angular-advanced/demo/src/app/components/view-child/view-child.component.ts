@@ -9,15 +9,14 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 export class ViewChildComponent implements OnInit, AfterViewInit {
 
   @ViewChild(StopWatchComponent, { static: true }) stopWatch!: StopWatchComponent;
-  running = true;
+  running = false;
 
   ngOnInit() {
-    // this.stopWatch.start();
+    // this.start();
   }
 
   ngAfterViewInit() {
-    // this.stopWatch.start();
-
+    // this.start();
   }
 
   start() {

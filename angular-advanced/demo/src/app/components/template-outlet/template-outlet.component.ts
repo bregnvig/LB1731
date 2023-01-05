@@ -9,7 +9,7 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
   template: `
     <h5>Using event emitter</h5>
     <loop-common-filter-list [items]="playgrounds$ | async" [itemTemplateRef]="playgroundInfo"></loop-common-filter-list>
-    <h5>Using filter function</h5>
+    <h5 class="mt-5">Using filter function</h5>
     <loop-common-list-filter-filter-fn class="mt-3" [items]="playgrounds$ | async" [filterFn]="filterFn" [itemTemplateRef]="playgroundInfo"></loop-common-list-filter-filter-fn>
     <ng-template #playgroundInfo let-playground>
       <h6>{{playground.name}}</h6>

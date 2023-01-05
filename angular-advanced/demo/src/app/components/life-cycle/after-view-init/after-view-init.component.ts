@@ -13,7 +13,7 @@ export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
   constructor() { }
 
   ngOnInit(): void {
-    // this.accordian!.expand('simple');
+    // this.accordian.expand('simple');
   }
 
   ngAfterViewInit(): void {
