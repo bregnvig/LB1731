@@ -22,7 +22,7 @@ export class F1BetterService {
 
   constructor(service: F1SimpleService) {
     this.request$ = service.getDrivers().pipe(
-      map(response => response.MRData.DriverTable.Drivers)
+      map(response => response.MRData.DriverTable.Drivers),
     );
   }
 
@@ -38,7 +38,7 @@ export class F1CachedService {
 
   constructor(service: F1BetterService) {
     this.request$ = service.getDrivers().pipe(
-      shareReplay(1),
+      shareReplay({ refCount: false, bufferSize: 1 }),
     );
   }
 

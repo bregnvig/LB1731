@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-twoway',
-  templateUrl: './twoway.component.html',
+  template: `
+    <h2>[(twoWay)]</h2>
+    <h3>{{myTitle}}</h3>
+    <input class="form-control" [(ngModel)]="myTitle" autofocus>
+  `,
 })
 export class TwowayComponent {
 

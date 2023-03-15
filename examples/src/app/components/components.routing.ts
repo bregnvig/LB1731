@@ -37,4 +37,4 @@ const routes: Routes = [
   }
 ];
 
-export const componentsRouting = RouterModule.forChild(routes);
+export const ComponentsRoutingModule = RouterModule.forChild(routes);
