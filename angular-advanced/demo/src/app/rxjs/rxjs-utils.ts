@@ -6,7 +6,7 @@ export function useCacheOnError(localStorageKey: string) {
   return function <T>(source: Observable<T>): Observable<T> {
     let innerSubscription: Subscription;
     const subscribeForCacheAndRetry = function (innerSource: Observable<T>, subscriber: Subscriber<T>) {
-      innerSubscription?.unsubscribe();
+      innerSubscription?.unsubscribe(); // If we are here agsin, lets unsubscribe
       innerSubscription = innerSource.subscribe({
         next(value) {
           localStorage.setItem(localStorageKey, JSON.stringify(value));

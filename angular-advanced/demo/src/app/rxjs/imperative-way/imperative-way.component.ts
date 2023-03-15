@@ -1,15 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
-@UntilDestroy()
 @Component({
   selector: 'loop-imperative-way',
   templateUrl: './imperative-way.component.html',
   styleUrls: ['./imperative-way.component.scss']
 })
-export class ImperativeWayComponent implements OnInit {
+export class ImperativeWayComponent implements OnInit, OnDestroy {
 
   playgrounds: Playground[] = [];
   term: string = '';
@@ -18,15 +16,18 @@ export class ImperativeWayComponent implements OnInit {
   private fetchedPlaygrounds: Playground[] = this.playgrounds;
   private location: Coordinate | undefined;
   private fetchFailed = false;
+  private watchId: number | undefined;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.initializeLocation();
     this.fetchPlaygrounds();
-    this.locationService.location$.pipe(untilDestroyed(this)).subscribe(
-      location => this.updateLocation(location),
-    );
     window.addEventListener('online', () => this.fetchFailed && this.fetchPlaygrounds());
+  }
+
+  ngOnDestroy(): void {
+    this.watchId && window.navigator.geolocation.clearWatch(this.watchId);
   }
 
   fetchPlaygrounds(): void {
@@ -39,6 +40,7 @@ export class ImperativeWayComponent implements OnInit {
 
   filterPlaygrounds() {
     const term = this.term.toLocaleLowerCase();
+    console.log('Filtering by', term);
     this.playgrounds = this.fetchedPlaygrounds.filter(p => p.name.toLocaleLowerCase().includes(term));
     // Lets say I forgot to call this here
     // this.sortPlaygrounds();
@@ -69,6 +71,15 @@ export class ImperativeWayComponent implements OnInit {
       const sortFn = (a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location);
       this.playgrounds.sort(sortFn);
     }
+  }
+
+  private initializeLocation() {
+    this.watchId = window.navigator.geolocation.watchPosition(position => {
+      this.updateLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    });
   }
 
 }

@@ -1,8 +1,8 @@
-<!-- <div class="row">
-  <div class="col">
-    Showing {{(playgrounds$ | async)?.length}} playgrounds
+<div class="row">
+  <div class="col-auto btn-group">
+    <button class="btn btn-primary" (click)="refresh$.next()">Refresh</button>
   </div>
-</div> -->
+</div>
 <article class="row w-100">
   <div class="col">
     <ul class="list-group mt-3">
