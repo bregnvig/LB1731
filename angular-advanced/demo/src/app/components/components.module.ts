@@ -13,6 +13,7 @@ import { ObservableEventsComponent } from './change-detection/observable-events/
 import { ComponentsComponent } from './components.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
+import { SingleSlotContentProjectionComponent } from './content-projection/single-slot-content-projection.component';
 import { DynamicComponentComponent } from './dynamic-component/dynamic-component.component';
 import { DynamicHostDirective } from './dynamic-component/dynamic-host.directive';
 import { FancyPlaygroundDetailsComponent } from './dynamic-component/fancy-playground-details/fancy-playground-details.component';
@@ -63,6 +64,7 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     InputPropertyOnPushSimpleTypeComponent,
     CommonListFilterFilterFnComponent,
     ObservableEventsComponent,
+    SingleSlotContentProjectionComponent,
   ],
   imports: [
     CommonModule,
@@ -81,7 +83,11 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
             component: LifeCycleComponent
           },
           {
-            path: 'content-projection',
+            path: 'single-slot-content-projection',
+            component: SingleSlotContentProjectionComponent,
+          },
+          {
+            path: 'multi-slot-content-projection',
             component: ContentProjectionComponent,
           },
           {

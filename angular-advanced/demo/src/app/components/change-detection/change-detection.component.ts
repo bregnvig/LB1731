@@ -1,5 +1,5 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { interval } from 'rxjs';
+import { timer } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 export interface No {
@@ -29,6 +29,6 @@ export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirect
   }
 
   startCounter() {
-    interval(1000).pipe(this.takeUntilDestroyed()).subscribe(no => this.no.value = no);
+    timer(0, 1000).pipe(this.takeUntilDestroyed()).subscribe(no => this.no.value = no);
   }
 }
