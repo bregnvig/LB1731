@@ -25,7 +25,9 @@ export class RxJSWayComponent implements OnInit {
         startWith(''),
         map(term => term.toLocaleLowerCase()),
       ),
-    ]).pipe(map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term))));
+    ]).pipe(
+      map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
+    );
     const getDistance = this.locationService.getDistance;
     this.playgrounds$ = combineLatest([playgrounds$, this.locationService.location$]).pipe(
       map(([playgrounds, location]) =>
