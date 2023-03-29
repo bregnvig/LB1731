@@ -1,0 +1,16 @@
+<aside tabindex="1">
+  <nav>
+    <div class="list-group">
+      <a
+        class="list-group-item d-flex list-group-item-action justify-content-between align-items-center"
+        [class.active]="playground === selectedPlayground" *ngFor="let playground of playgrounds"
+        (click)="selectPlayground(playground)">
+        <div class="d-flex flex-column justify-content-between">
+          <h5 class="mb-1">{{playground.name}}</h5>
+          <small>{{playground.description | defaultDescription}}</small>
+        </div>
+        <span class="badge badge-primary badge-pill">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
+      </a>
+    </div>
+  </nav>
+</aside>
