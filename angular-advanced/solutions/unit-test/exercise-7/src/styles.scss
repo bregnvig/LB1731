@@ -78,5 +78,9 @@ footer {
 }
 
 input.ng-touched.ng-invalid {
-  border-color: var(--danger)
+  border-color: var(--bs-danger)
+}
+
+input.ng-touched.ng-valid {
+  border-color: var(--bs-success)
 }
