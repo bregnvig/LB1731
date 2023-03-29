@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { firstValueFrom, of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-import { LoginComponent, LoginModule } from './login.component';
+import { LoginComponent } from './login.component';
 
 
 describe('LoginComponent', () => {
@@ -18,7 +18,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule,
         RouterTestingModule,
-        LoginModule,
+        LoginComponent,
       ],
     }).compileComponents();
   });

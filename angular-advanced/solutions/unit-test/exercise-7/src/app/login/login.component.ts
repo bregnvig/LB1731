@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonModule } from '../button/button.component';
@@ -8,7 +8,9 @@ import { AuthService } from '../service/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
 })
 export class LoginComponent {
 
@@ -31,10 +33,3 @@ export class LoginComponent {
   }
 
 }
-
-@NgModule({
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
-  declarations: [LoginComponent],
-  exports: [LoginComponent],
-})
-export class LoginModule {}
