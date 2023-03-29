@@ -9,9 +9,9 @@ export class HumanizeDistancePipe implements PipeTransform {
     if (typeof value !== 'number') {
       return value;
     }
-    if (value <= 750) {
+    if (value <= 1500) {
       return `${value} m`;
-    } else if (value <= 1500) {
+    } else if (value <= 2500) {
       return 'Quite a walk'
     }
     return 'Get a cab!';
