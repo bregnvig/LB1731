@@ -24,7 +24,7 @@ export class MatrixParamsComponent extends AbstractSubscribeUnsubscribeDirective
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private service: PlaygroundService,
     private locationService: LocationService) {
     super();

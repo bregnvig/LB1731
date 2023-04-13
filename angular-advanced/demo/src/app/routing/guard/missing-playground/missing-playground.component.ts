@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'loop-missing-playground',
   template: `
     <h3>Playground with id: {{id}} is gone 😰</h3>
-    <p>You can never ever visit again!</p>
+    <p>You must accept that it is gone!</p>
     <div class="row form-group">
       <div class="col">
         <div class="form-check">
@@ -17,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
     </div>
     <div class="row form-group">
       <div class="col">
-        <a class="btn btn-primary" [routerLink]="['/routing', 'guard', {accepted: acceptIt.value}]">OK</a>
+        <a class="btn btn-primary" [routerLink]="['/routing', 'guard']">OK</a>
       </div>
     </div>
   `,
