@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 type Transform = 'lowercase' | 'uppercase' | 'capitalized';
 
+@UntilDestroy()
 @Component({
   selector: 'loop-recap',
   templateUrl: './recap.component.html',
   styleUrls: ['./recap.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecapComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
+export class RecapComponent implements OnInit, OnDestroy {
 
   private row: number | undefined;
 
@@ -20,7 +21,6 @@ export class RecapComponent extends AbstractSubscribeUnsubscribeDirective implem
   links!: any[];
 
   constructor(private router: Router, public route: ActivatedRoute) {
-    super();
   }
 
   ngOnInit(): void {
@@ -38,15 +38,19 @@ export class RecapComponent extends AbstractSubscribeUnsubscribeDirective implem
     );
     this.route.params.pipe(
       map<Params, number | undefined>(params => params['row'] && parseInt(params['row'])),
-      this.takeUntilDestroyed()
+      untilDestroyed(this),
     ).subscribe(row => this.row = row);
+  }
+
+  ngOnDestroy(): void {
+    console.log('Recap component destroyed');
   }
 
   showRow(row: number) {
     return !this.row || row === this.row;
   }
 
-  goto(row: number | undefined) {
+  goto(row?: number | undefined) {
     this.router.navigate([{ row }], { relativeTo: this.route });
   }
 }
