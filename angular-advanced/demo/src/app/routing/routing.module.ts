@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { GuardComponent } from './guard/guard.component';
 import { MissingPlaygroundComponent } from './guard/missing-playground/missing-playground.component';
 import { PlaygroundGuardService } from './guard/playground-guard.service';
-import { ParamsComponent } from './params/params.component';
+import { MatrixParamsComponent, QueryParamsComponent } from './params';
 import { PlaygroundDetailsComponent } from './params/playground-details/playground-details.component';
 import { RecapComponent } from './recap/recap.component';
 import { PlaygroundResolverService } from './resolver/playground-resolver.service';
@@ -15,7 +15,7 @@ import { ResolverComponent } from './resolver/resolver.component';
 import { RoutingComponent } from './routing.component';
 
 @NgModule({
-  declarations: [RoutingComponent, ParamsComponent, RecapComponent, PlaygroundDetailsComponent, ResolverComponent, GuardComponent, MissingPlaygroundComponent],
+  declarations: [RoutingComponent, MatrixParamsComponent, QueryParamsComponent, RecapComponent, PlaygroundDetailsComponent, ResolverComponent, GuardComponent, MissingPlaygroundComponent],
   imports: [
     CommonModule,
     NgbModule,
@@ -31,8 +31,18 @@ import { RoutingComponent } from './routing.component';
             component: RecapComponent,
           },
           {
-            path: 'params',
-            component: ParamsComponent,
+            path: 'matrix',
+            component: MatrixParamsComponent,
+            children: [
+              {
+                path: ':playgroundId',
+                component: PlaygroundDetailsComponent,
+              }
+            ]
+          },
+          {
+            path: 'query',
+            component: QueryParamsComponent,
             children: [
               {
                 path: ':playgroundId',
