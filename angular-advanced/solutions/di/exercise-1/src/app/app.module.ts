@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,16 +9,9 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
-import { PlaygroundService, PLAYGROUNDS_URL } from './service';
+import { PlaygroundService } from './service';
+import { AarhusPlaygroundService } from './service/aarhus-playground.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
-// const playgroundServiceFactory = (http: HttpClient) => {
-//   return environment.location === 'copenhagen' ? new PlaygroundService(http) : new AarhusPlaygroundService(http);
-// };
-
-function prefetch(service: PlaygroundService) {
-  return () => service.playgrounds$;
-};
 
 @NgModule({
   declarations: [
@@ -38,20 +31,10 @@ function prefetch(service: PlaygroundService) {
     LeafletModule,
   ],
   providers: [
-    // {
-    //   provide: PlaygroundService,
-    //   useFactory: playgroundServiceFactory,
-    //   deps: [HttpClient]
-    // },
     {
-      provide: PLAYGROUNDS_URL,
-      useValue: environment.playgroundsURL
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: prefetch,
-      deps: [PlaygroundService, PLAYGROUNDS_URL],
-      multi: true
+      provide: PlaygroundService,
+      useFactory: (http: HttpClient) => environment.location === 'copenhagen' ? new PlaygroundService(http) : new AarhusPlaygroundService(http),
+      deps: [HttpClient]
     }
   ],
   bootstrap: [AppComponent]
