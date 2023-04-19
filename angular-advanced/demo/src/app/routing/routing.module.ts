@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { first } from 'rxjs';
+import { PlaygroundService } from '../shared';
 import { SharedModule } from '../shared/shared.module';
 import { GuardComponent } from './guard/guard.component';
 import { MissingPlaygroundComponent } from './guard/missing-playground/missing-playground.component';
@@ -73,10 +75,17 @@ import { RoutingComponent } from './routing.component';
                 path: ':id',
                 component: ResolverComponent,
                 canActivate: [
-                  PlaygroundGuardService,
+                  // PlaygroundGuardService,
+                  // (route: ActivatedRouteSnapshot) => {
+                  //   const router = inject(Router);
+                  //   return inject(PlaygroundService).getById(route.params.id).pipe(
+                  //     map(playground => !!playground || router.createUrlTree(['routing', 'guard', 'missing', { id: route.params.id }]))
+                  //   );
+                  // }
                 ],
                 resolve: {
-                  playground: PlaygroundResolverService
+                  playground: PlaygroundResolverService,
+                  p: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params.id).pipe(first()),
                 }
               },
             ]

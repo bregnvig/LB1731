@@ -38,14 +38,14 @@ export class QueryParamsComponent extends AbstractSubscribeUnsubscribeDirective 
       this.route.queryParams.subscribe(params => console.log('Params query', params)),
     );
 
-    const queryParams = this.route.queryParams.pipe(
+    const queryParams$ = this.route.queryParams.pipe(
       map(params => params.term),
       map(term => new RegExp(term || '', 'i'))
     );
 
     this.playgrounds$ = combineLatest([
       this.service.playgrounds$,
-      queryParams,
+      queryParams$,
     ]).pipe(
       map(([playgrounds, matcher]: [Playground[], RegExp]) => playgrounds.filter(p => matcher.test(p.name))),
     );

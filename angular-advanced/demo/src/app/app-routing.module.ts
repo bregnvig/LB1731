@@ -48,13 +48,9 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(
-    routes,
-    {
-      // preloadingStrategy: QuicklinkStrategy
-    }
-  )],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const AppRoutingModule = RouterModule.forRoot(
+  routes,
+  {
+    // preloadingStrategy: QuicklinkStrategy
+  }
+);

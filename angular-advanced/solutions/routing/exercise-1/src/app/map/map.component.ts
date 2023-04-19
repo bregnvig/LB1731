@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, noop, Observable } from 'rxjs';
+import { Observable, combineLatest, merge, noop } from 'rxjs';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from '../edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -18,7 +18,7 @@ import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
 export class MapComponent implements OnInit {
 
   playgrounds$: Observable<Playground[]> | undefined;
-  playground$!: Observable<Playground | undefined>;
+  playground$: Observable<Playground | undefined>;
   location$: Observable<Coordinate> = this.locationService.location$;
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
@@ -30,20 +30,23 @@ export class MapComponent implements OnInit {
     private route: ActivatedRoute,
     private modal: NgbModal,
   ) {
-  }
-
-  ngOnInit() {
     this.playground$ = this.route.params.pipe(
       map(params => params.id),
       switchMap(id => this.service.getById(id)),
       shareLatest(),
     );
+  }
+
+  ngOnInit() {
     this.locationService.location$.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
     this.markers$ = merge(
       this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      this.playground$.pipe(truthy(), map(p => new Marker('playground', p!.position.lat, p!.position.lng, p!.name))),
+      this.playground$.pipe(
+        truthy(),
+        map(p => new Marker('playground', p.position.lat, p.position.lng, p.name))
+      ),
     );
 
     const getDistance = this.locationService.getDistance;

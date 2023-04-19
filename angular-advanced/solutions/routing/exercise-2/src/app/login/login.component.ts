@@ -29,7 +29,7 @@ export class LoginComponent {
     if (this.fg.valid) {
       this.authService.login(email!, password!).subscribe(value => {
         if (value) {
-          this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.router.navigate(['/']);
+          this.router.navigate([this.route.snapshot.params['returnUrl'] || '/']);
         }
       });
     }
