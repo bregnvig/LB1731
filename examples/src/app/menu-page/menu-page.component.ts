@@ -67,9 +67,7 @@ export class MenuPageComponent {
     { routerLink: '/form/person5', title: 'Person form ngForm no domain model' },
     { routerLink: '/form/person3', title: 'Person form Error message' },
     { routerLink: '/form/person2', title: 'Person form CSS classes' },
-    { routerLink: '/form/person6', title: 'Person form Model driven - FormGroup' },
-    { routerLink: '/form/person7', title: 'Person form Model driven - formBuilder' },
-    { routerLink: '/form/typed-form', title: 'Person typed form' },
+    { routerLink: '/form/model-driven', title: 'Model driven person form' },
     { routerLink: '/form/search', title: 'Search stand alone    ' },
   ];
 

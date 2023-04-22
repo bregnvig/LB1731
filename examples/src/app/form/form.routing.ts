@@ -1,7 +1,6 @@
-import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PersonForm1Component, PersonForm2Component, PersonForm3Component, PersonForm4Component, PersonForm5Component, PersonForm6Component, PersonForm7Component, SearchFormComponent, OnewayComponent } from './index';
+import { OnewayComponent, PersonForm1Component, PersonForm2Component, PersonForm3Component, PersonForm4Component, PersonForm5Component, SearchFormComponent } from './index';
 import { TypedFormComponent } from './typed-form/typed-form.component';
 
 const routes: Routes = [
@@ -30,15 +29,7 @@ const routes: Routes = [
     component: PersonForm5Component
   },
   {
-    path: 'person6',
-    component: PersonForm6Component
-  },
-  {
-    path: 'person7',
-    component: PersonForm7Component
-  },
-  {
-    path: 'typed-form',
+    path: 'model-driven',
     component: TypedFormComponent,
   },
   {
