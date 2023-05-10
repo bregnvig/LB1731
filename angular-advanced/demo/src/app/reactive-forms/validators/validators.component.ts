@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { combineLatest, Observable, of } from 'rxjs';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Observable, combineLatest, of } from 'rxjs';
 import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { TypedForm } from '../form-utils';
 import { DawaService } from './dawa.service';
 
-const isValidZip = (service: DawaService) => (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
+const isValidZip = (service: DawaService): AsyncValidatorFn => (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
   !control.errors && control.value && service.getCityName(control.value).pipe(
     map(() => null),
     catchError(() => of({ nonExistingZip: true }))
