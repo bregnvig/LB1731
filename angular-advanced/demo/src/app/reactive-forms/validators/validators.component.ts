@@ -31,9 +31,16 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       city: ['']
     }, {
       validators: (zipAndCity: FormGroup<TypedForm<{ zip: string, city: string; }>>): null | ValidationErrors => {
-        console.log(zipAndCity.value, zipAndCity.controls['zip']?.valid, zipAndCity.controls['zip']?.value, !zipAndCity.controls['city']?.value);
+        const { zip, city } = zipAndCity.controls;
+        console.table({
+          value: JSON.stringify(zipAndCity.value),
+          zipValid: zip?.valid,
+          zipInvalid: zip?.invalid,
+          zipValue: zip?.value,
+          cityValid: city?.valid
+        });
 
-        return zipAndCity.controls['zip']?.valid && zipAndCity.controls['zip']?.value && !zipAndCity.controls['city']?.value ? { required: 'city' } : null;
+        return zip?.valid && zip?.value && !city?.value ? { required: 'city' } : null;
       },
     } as AbstractControlOptions)
   });
