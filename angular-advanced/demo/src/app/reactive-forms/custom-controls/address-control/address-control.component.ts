@@ -42,7 +42,7 @@ export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirecti
     this.fg.valueChanges.pipe(
       map(value => Object.entries(value).filter(([, value]) => value).reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})),
       this.takeUntilDestroyed(),
-    ).subscribe(value => this.propagateChange!(Object.keys(value).length ? value : undefined));
+    ).subscribe(value => this.propagateChange?.(Object.keys(value).length ? value : undefined));
   }
 
   onBlur() {
