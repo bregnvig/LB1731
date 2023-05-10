@@ -51,16 +51,16 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
 
   ngOnInit(): void {
     combineLatest({
-      zip: this.zipAndCityControl.controls['zip']!.valueChanges,
-      status: this.zipAndCityControl.controls['zip']!.statusChanges,
+      zip: this.zipAndCityControl.controls.zip!.valueChanges,
+      status: this.zipAndCityControl.controls.zip!.statusChanges,
     }).pipe(
       debounceTime(500),
       switchMap(({ status, zip }) => status === 'VALID' && zip ? this.service.getCityName(zip) : of(null)),
       catchError(() => of(null)),
-    ).subscribe(city => this.zipAndCityControl.controls['city']?.patchValue(city));
+    ).subscribe(city => this.zipAndCityControl.controls.city?.patchValue(city));
   }
 
   get zipAndCityControl() {
-    return this.fg.controls['zipAndCity'];
+    return this.fg.controls.zipAndCity;
   }
 }
