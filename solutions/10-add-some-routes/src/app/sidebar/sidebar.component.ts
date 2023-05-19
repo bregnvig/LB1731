@@ -8,6 +8,6 @@ import { Playground } from '../shared';
 })
 export class SidebarComponent {
   @Input() playgrounds?: Playground[];
-  @Output() selected = new EventEmitter<Playground>();
   @Input() selectedPlayground?: Playground;
+  @Output() selected = new EventEmitter<Playground>();
 }

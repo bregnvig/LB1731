@@ -22,6 +22,7 @@ export class MapComponent {
     locationService: LocationService,
     route: ActivatedRoute,
     private router: Router) {
+
     service.getPlaygrounds().subscribe(playgrounds => this.appPlaygrounds = playgrounds);
     const playground$ = route.params.pipe(
       map(params => params['id']),
@@ -32,10 +33,7 @@ export class MapComponent {
       locationService.current,
       playground$.pipe(map(p => p?.position))
     ]);
-    route.params.pipe(
-      map(params => params['id']),
-      switchMap(id => service.find(id)),
-    ).subscribe(playground => {
+    playground$.subscribe(playground => {
       this.playground = playground;
       playground && (this.center = { ...playground.position, zoom: 14 });
     });
@@ -44,7 +42,6 @@ export class MapComponent {
   playgroundSelected(playground: Playground) {
     console.log(playground);
     this.router.navigate([playground.id]);
-    this.playground = playground;
   }
 
 }

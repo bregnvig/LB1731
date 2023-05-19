@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Observable, of } from 'rxjs';
+import { interval, Observable, of, timer } from 'rxjs';
 import { catchError, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
@@ -38,7 +38,7 @@ export class F1CachedService {
 
   constructor(service: F1BetterService) {
     this.request$ = service.getDrivers().pipe(
-      shareReplay({ refCount: false, bufferSize: 1 }),
+      shareReplay(1),
     );
   }
 
@@ -53,8 +53,7 @@ export class F1AutoRefreshService {
   private request$: Observable<Driver[]>;
 
   constructor(service: F1BetterService) {
-    this.request$ = interval(10000).pipe(
-      startWith(0),
+    this.request$ = timer(0, 10000).pipe(
       switchMap(() => service.getDrivers()),
       shareReplay(1),
     );

@@ -18,7 +18,7 @@ export class RetryService {
           if (!window.navigator.onLine) {
             return fromEvent(window, 'online');
           }
-          return throwError('Could not fetch drivers');
+          return throwError(() => 'Could not fetch drivers');
         }
       })
     );
