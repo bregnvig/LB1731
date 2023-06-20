@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { interval } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Observable, interval, map } from 'rxjs';
 
 @Component({
   selector: 'loop-observable-events',
@@ -15,12 +15,18 @@ import { interval } from 'rxjs';
 export class ObservableEventsComponent {
 
   no = 0;
+  no$?: Observable<number>;
   running = false;
 
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   start(): void {
-    interval(1000).subscribe(no => this.no = no + 1);
+
+    this.no$ = interval(1000).pipe(
+      map(no => no + 1)
+    );
+
+    this.no$.subscribe(no => this.no = no);
     this.running = true;
   }
 
