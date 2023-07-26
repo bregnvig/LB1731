@@ -22,7 +22,7 @@ export class DirectlyChildComponent {
 })
 export class DirectlyComponent {
 
-  fromProperty = 'From property';
+  fromProperty = 'Dynamic property';
 
 }
 

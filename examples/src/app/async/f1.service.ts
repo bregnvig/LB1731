@@ -1,8 +1,8 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Observable, of, timer } from 'rxjs';
-import { catchError, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, timer } from 'rxjs';
+import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
 @Injectable()
@@ -18,49 +18,49 @@ export class F1SimpleService {
 @Injectable()
 export class F1BetterService {
 
-  private request$: Observable<Driver[]>;
+  private drivers$: Observable<Driver[]>;
 
   constructor(service: F1SimpleService) {
-    this.request$ = service.getDrivers().pipe(
+    this.drivers$ = service.getDrivers().pipe(
       map(response => response.MRData.DriverTable.Drivers),
     );
   }
 
   getDrivers(): Observable<Driver[]> {
-    return this.request$;
+    return this.drivers$;
   }
 }
 
 @Injectable()
 export class F1CachedService {
 
-  private request$: Observable<Driver[]>;
+  private drivers$: Observable<Driver[]>;
 
   constructor(service: F1BetterService) {
-    this.request$ = service.getDrivers().pipe(
+    this.drivers$ = service.getDrivers().pipe(
       shareReplay(1),
     );
   }
 
   getDrivers(): Observable<Driver[]> {
-    return this.request$;
+    return this.drivers$;
   }
 }
 
 @Injectable()
 export class F1AutoRefreshService {
 
-  private request$: Observable<Driver[]>;
+  private drivers$: Observable<Driver[]>;
 
   constructor(service: F1BetterService) {
-    this.request$ = timer(0, 10000).pipe(
+    this.drivers$ = timer(0, 10000).pipe(
       switchMap(() => service.getDrivers()),
       shareReplay(1),
     );
   }
 
   getDrivers(): Observable<Driver[]> {
-    return this.request$;
+    return this.drivers$;
   }
 }
 

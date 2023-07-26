@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, map, Observable, shareReplay, switchMap } from 'rxjs';
+import { Observable, combineLatest, map, shareReplay, switchMap } from 'rxjs';
 import { Center, Marker } from '../leaflet';
 import { LocationService, Playground } from '../shared';
 import { PlaygroundService } from '../shared/playground.service';
@@ -27,7 +27,7 @@ export class MapComponent {
     const playground$ = route.params.pipe(
       map(params => params['id']),
       switchMap(id => service.find(id)),
-      shareReplay({ bufferSize: 1, refCount: true }),
+      shareReplay(1),
     );
     this.markers$ = combineLatest([
       locationService.current,

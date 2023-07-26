@@ -4,16 +4,14 @@ import { Playground } from '../shared';
 @Component({
   selector: 'app-footer',
   template: `
-  <footer>
+  <footer *ngIf="playground">
     <h3>{{playground.name}}</h3>
     <p>{{playground.description}}</p>
     <p>{{playground.addressDescription}}</p>
   </footer>
-  `,
-  styles: [
-  ]
+  `
 })
 export class FooterComponent {
 
-  @Input() playground!: Playground;
+  @Input() playground?: Playground;
 }
