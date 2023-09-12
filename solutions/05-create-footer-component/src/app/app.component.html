@@ -1,8 +1,8 @@
-<app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
 <main class="vh-100 d-flex justify-content-center align-items-center">
   <div class="d-relative">
     <img src="assets/angular.svg" height="400">
     <h1 class="position-absolute font-monospace start-50 translate-middle fw-bolder">Foundation  </h1>
   </div>
 </main>
+<app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
 <app-footer *ngIf="playground" [playground]="playground"></app-footer>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
-import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, map, repeat, startWith, tap } from 'rxjs/operators';
+import { Observable, Subject, combineLatest, interval, merge } from 'rxjs';
+import { debounceTime, map, repeat, startWith, switchMap, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -26,13 +26,16 @@ export class RxJSWayRefreshComponent implements OnInit {
     );
 
     // Using two different style by design
+    const playgroundsDelay$ = this.service.playgrounds$.pipe(
+      repeat({ delay: () => refresh$ }),
+    );
+
+    const playgroundsSwitchmap$ = refresh$.pipe(
+      switchMap(() => this.service.playgrounds$),
+    );
+
     const filteredPlaygrounds$ = combineLatest([
-      this.service.playgrounds$.pipe(
-        repeat({ delay: () => refresh$ }),
-      ),
-      // refresh$.pipe(
-      //   switchMap(() => this.service.playgrounds$),
-      // ),
+      playgroundsDelay$,
       this.filterControl.valueChanges.pipe(
         debounceTime(400),
         startWith(''),
