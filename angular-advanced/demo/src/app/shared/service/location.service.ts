@@ -11,9 +11,9 @@ export class LocationService {
   readonly location$: Observable<Coordinate>;
 
   constructor() {
-    this.location$ = new Observable<GeolocationPosition>(observer => {
+    this.location$ = new Observable<GeolocationPosition>(subscriber => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
-        observer.next(position);
+        subscriber.next(position);
       }, error => {
         // Just ignore it
       });
