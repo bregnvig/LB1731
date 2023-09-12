@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
+import { combineLatest, interval, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
@@ -13,25 +13,20 @@ import { withLength } from './utils/rxjs-utils';
 })
 export class AppComponent {
 
-  playgrounds$: Observable<Playground[]> | undefined;
+  playgrounds$: Observable<Playground[]>;
   playground$ = new Subject<Playground>();
-  center: Center = new Center(56.360029, 10.746635);
-  markers$: Observable<Marker> | undefined;
+  center: Center = { lat: 56.360029, lng: 10.746635 };
+  markers$?: Observable<Marker[]>;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) {
-  }
-
-  ngOnInit() {
-    this.locationService.location$.subscribe(location => {
-      this.center = new Center(location.lat, location.lng, 12);
-    });
-    this.markers$ = merge(
-      this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      this.playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng, p.name))),
-    );
+    this.markers$ = combineLatest([
+      this.locationService.location$,
+      this.playground$.pipe(map(p => p.position), startWith(undefined)),
+    ]);
 
     const getDistance = this.locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
+
     this.playgrounds$ = combineLatest([
       interval(10000).pipe(startWith(null), switchMap(() => this.service.playgrounds$.pipe(withLength()))),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
@@ -40,6 +35,12 @@ export class AppComponent {
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
+  }
+
+  ngOnInit() {
+    this.locationService.location$.subscribe(location => {
+      this.center = { ...location, zoom: 12 };
+    });
   }
 
 }

@@ -5,25 +5,22 @@ import { Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 
 @Component({
-  selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
-  playgrounds: Playground[] = [];
-  playground: Playground | undefined;
-  center: Center = new Center(56.360029, 10.746635);
-  markers$: Observable<Marker> | undefined;
+    playgrounds: Playground[] = [];
+    playground: Playground | undefined;
+    center: Center = { lat: 56.360029, lng: 10.746635 };
+    markers$?: Observable<Marker[]>;
 
-  constructor(private service: PlaygroundService, private locationService: LocationService) {
-  }
+    constructor(private service: PlaygroundService, private locationService: LocationService) {
+    }
 
-  ngOnInit() {
-    this.locationService.location$.subscribe(location => {
-      this.center = new Center(location.lat, location.lng, 12);
-    });
-    this.service.playgrounds$.subscribe(playgrounds => this.playgrounds = playgrounds);
-  }
-
+    ngOnInit() {
+        this.locationService.location$.subscribe(location => this.center = { ...location, zoom: 12 });
+        this.service.playgrounds$.subscribe(playgrounds => this.playgrounds = playgrounds);
+    }
 }
