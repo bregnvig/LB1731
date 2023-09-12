@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Playground, PlaygroundService } from 'src/app/shared';
@@ -7,7 +7,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
 @Injectable({
   providedIn: 'root'
 })
-export class PlaygroundResolverService implements Resolve<Playground | undefined> {
+export class PlaygroundResolverService  {
 
   constructor(private service: PlaygroundService) { }
 

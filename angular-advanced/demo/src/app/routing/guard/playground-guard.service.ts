@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlaygroundService } from 'src/app/shared';
@@ -8,7 +8,7 @@ import { MissingPlaygroundComponent } from './missing-playground/missing-playgro
 @Injectable({
   providedIn: 'root'
 })
-export class PlaygroundGuardService implements CanActivate, CanDeactivate<MissingPlaygroundComponent> {
+export class PlaygroundGuardService  {
 
   constructor(private router: Router, private service: PlaygroundService) {
 
