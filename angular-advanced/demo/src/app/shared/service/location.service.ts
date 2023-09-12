@@ -14,7 +14,9 @@ export class LocationService {
     this.location$ = new Observable<GeolocationPosition>(observer => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
         observer.next(position);
-      }, error => observer.error(error));
+      }, error => {
+        // Just ignore it
+      });
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
       map((position: GeolocationPosition) => {
