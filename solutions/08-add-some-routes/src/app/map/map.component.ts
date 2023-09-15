@@ -7,8 +7,13 @@ import { PlaygroundService } from '../shared/playground.service';
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  template: `
+    <main class="vh-100 d-flex justify-content-center align-items-center">
+      <leaflet [center]="center" [markers]="markers$ | async"></leaflet>
+    </main>
+    <app-sidebar [playgrounds]="appPlaygrounds" [selectedPlayground]="playground" (selected)="playgroundSelected($event)"></app-sidebar>
+    <app-footer *ngIf="playground" [playground]="playground"></app-footer>
+  `,
 })
 export class MapComponent {
 
