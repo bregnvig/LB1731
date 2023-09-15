@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Center } from './leaflet';
-import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';
 
