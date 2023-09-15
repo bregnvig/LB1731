@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocationService } from './shared';
+import { Center } from './leaflet';
 import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';
 
@@ -10,13 +10,17 @@ import { PlaygroundService } from './shared/playground.service';
 })
 export class AppComponent {
 
-  appPlaygrounds?: Playground[];
+  appPlaygrounds: Playground[];
   playground?: Playground;
+  center: Center = {
+    lat: 56.360029,
+    lng: 10.746635
+  };
 
-  constructor(service: PlaygroundService, locationService: LocationService) {
-    service.getPlaygrounds().subscribe(playgrounds => this.appPlaygrounds = playgrounds);
-    locationService.current.subscribe(location => console.log(location));
+  constructor(service: PlaygroundService) {
+    this.appPlaygrounds = service.getPlaygrounds();
   }
+
 
   playgroundSelected(playground: Playground) {
     console.log(playground);
