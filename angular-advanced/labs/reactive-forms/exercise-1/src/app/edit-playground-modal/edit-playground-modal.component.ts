@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
 
@@ -24,7 +24,7 @@ export class EditPlaygroundModalComponent {
   }
 
   fg = this.fb.group({
-    name: [''],
+    name: ['', Validators.required],
     addressDescription: [''],
     description: [''],
   });
@@ -35,10 +35,11 @@ export class EditPlaygroundModalComponent {
 
   initialize(playground: Playground) {
     this.playground = playground;
+    this.fg.reset(playground);
   }
 
   save() {
-    this.modal.close(this.playground);
+    this.modal.close({ ...this.playground, ...this.fg.value });
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, UntypedFormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, UntypedFormControl, ValidationErrors } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -19,13 +19,13 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
-  private validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
+  private validateUniqueName: AsyncValidatorFn = (control: AbstractControl<Playground>): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
     first(),
     map(playgrounds => playgrounds.some(p => p.name === control.value?.name && p.id !== this.playground.id)),
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  editControl = new UntypedFormControl(undefined, null, this.validateUniqueName);
+  editControl = new FormControl<Playground | null>(null, { asyncValidators: [this.validateUniqueName] });
   playground!: Playground;
 
   constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }

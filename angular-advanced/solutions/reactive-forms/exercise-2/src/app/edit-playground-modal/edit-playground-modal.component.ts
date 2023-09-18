@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -25,18 +25,21 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
-  private validateUniqueName = (control: AbstractControl<string>): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
+  private validateUniqueName: AsyncValidatorFn = (control: AbstractControl<string>): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
     first(),
     map(playgrounds => playgrounds.some(p => p.name === control.value && p.id !== this.playground.id)),
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
   fg: FormGroup<PlaygroupControls> = this.fb.group({
-    name: this.fb.control('', Validators.required, this.validateUniqueName),
+    name: this.fb.control('', [Validators.required], [this.validateUniqueName]),
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => (fg.controls['description']?.value || fg.controls['addressDescription']?.value) ? null : { requiredOr: ['description', 'addressDescription'] },
+    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => {
+      const { description, addressDescription } = fg.controls;
+      return (description?.value || addressDescription?.value) ? null : { requiredOr: ['description', 'addressDescription'] };
+    }
   } as AbstractControlOptions);
 
   playground!: Playground;
