@@ -56,7 +56,7 @@ import { RoutingComponent } from './routing.component';
             path: 'resolve/:id',
             component: ResolverComponent,
             resolve: {
-              playground: PlaygroundResolverService
+              playground: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params.id)
             }
           },
           {
