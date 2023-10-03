@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { AuthService } from './service';
 
-
 const authGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
   return inject(AuthService).isLoggedIn$.pipe(
@@ -32,4 +31,3 @@ const routes: Routes = [
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);
-
