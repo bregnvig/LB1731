@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, debounceTime } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
 
@@ -16,24 +16,18 @@ export class SidebarComponent implements OnInit {
   @Input() playgrounds: Playground[] | null | undefined = [];
   @Input() selectedPlayground: Playground | null | undefined = null;
   @Output() edit = new EventEmitter<Playground>();
-  @Output() filter = new EventEmitter<string>();
-
-  filterControl = new FormControl();
 
   location$: Observable<Coordinate> = this.locationService.location$;
+  filterControl = new FormControl(this.route.snapshot.queryParams['filter'] ?? '', { nonNullable: true });
 
-  constructor(private locationService: LocationService) { }
-
-  @Input() set term(value: string | null) {
-    this.filterControl.reset(value);
-  };
+  constructor(private locationService: LocationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.filterControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-    ).subscribe(term => this.filter.emit(term));
-
+      debounceTime(300)
+    ).subscribe(filter => this.router.navigate([], {
+      queryParams: { filter }
+    }));
   }
 
 }

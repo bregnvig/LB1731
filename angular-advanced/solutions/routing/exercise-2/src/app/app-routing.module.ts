@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { map } from 'rxjs';
-import { AuthGuard } from './guard';
 import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { AuthService } from './service';

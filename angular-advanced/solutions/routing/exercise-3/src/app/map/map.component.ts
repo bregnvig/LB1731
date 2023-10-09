@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, noop, Observable, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
+import { Observable, combineLatest, merge, noop } from 'rxjs';
+import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from '../edit-playground-modal/edit-playground-modal.component';
+import { FooterComponent } from '../footer/footer.component';
 import { Center, Marker } from '../leaflet';
-import { LeafletComponent } from '../leaflet/leaflet.component';
 import { Coordinate, Playground } from '../model';
 import { LocationService, PlaygroundService } from '../service';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
 
 @Component({
@@ -18,20 +17,16 @@ import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
 })
 export class MapComponent implements OnInit {
 
-  @ViewChild(LeafletComponent, { static: true }) leaflet!: LeafletComponent;
-  @ViewChild(SidebarComponent, { static: true }) sidebar!: SidebarComponent;
-
   playgrounds$: Observable<Playground[]> | undefined;
   playground$!: Observable<Playground | undefined>;
-  term$: Observable<string> = this.route.queryParams.pipe(map(params => params.term));
   location$: Observable<Coordinate> = this.locationService.location$;
-  center$: Observable<Center> = of(new Center(56.360029, 10.746635));
+  center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
+  footerComponent = FooterComponent;
 
   constructor(
     private service: PlaygroundService,
     private locationService: LocationService,
-    private router: Router,
     private route: ActivatedRoute,
     private modal: NgbModal,
   ) {
@@ -43,14 +38,9 @@ export class MapComponent implements OnInit {
       switchMap(id => this.service.getById(id)),
       shareLatest(),
     );
-    this.center$ = this.locationService.location$.pipe(
-      map(location => new Center(location.lat, location.lng, this.route.snapshot.queryParams.zoom || 12))
-    );
-
-    combineLatest([
-      this.leaflet.zoomed.pipe(debounceTime(200)),
-      this.sidebar.filter.pipe(debounceTime(300), startWith(this.route.snapshot.queryParams.term)),
-    ]).subscribe(([zoom, term]) => this.router.navigate([], { queryParams: { zoom, term } }));
+    this.locationService.location$.subscribe(location => {
+      this.center = new Center(location.lat, location.lng, 12);
+    });
     this.markers$ = merge(
       this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
       this.playground$.pipe(truthy(), map(p => new Marker('playground', p!.position.lat, p!.position.lng, p!.name))),
@@ -62,13 +52,12 @@ export class MapComponent implements OnInit {
       this.service.playgrounds$.pipe(withLength()),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
       this.route.queryParams.pipe(
-        map(params => params.term || ''),
-        map(term => new RegExp(term, 'i')),
-      )
+        map(params => new RegExp(params['filter'] ?? '', 'i'))
+      ),
     ]).pipe(
       map(([playgrounds, location, matcher]) =>
         playgrounds
-          .filter(p => matcher.test(p.name))
+          .filter(({ name }) => matcher.test(name))
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
@@ -77,6 +66,5 @@ export class MapComponent implements OnInit {
   edit(playground: Playground) {
     EditPlaygroundModalComponent.open(this.modal, playground).then(playground => this.service.update(playground), noop);
   }
-
 
 }

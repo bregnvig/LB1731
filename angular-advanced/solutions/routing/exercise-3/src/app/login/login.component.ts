@@ -10,12 +10,10 @@ import { AuthService } from '../service/auth.service';
 })
 export class LoginComponent {
 
-  fg = this.fb.group({
+  fg = this.fb.nonNullable.group({
     email: [sessionStorage.getItem('email'), [Validators.required, Validators.email]],
     password: ['somestring', Validators.required],
   });
-
-  private returnUrl = this.route.snapshot.params['returnUrl'];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +27,7 @@ export class LoginComponent {
     if (this.fg.valid) {
       this.authService.login(email!, password!).subscribe(value => {
         if (value) {
-          this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.router.navigate(['/']);
+          this.router.navigate([this.route.snapshot.params['returnUrl'] || '/']);
         }
       });
     }

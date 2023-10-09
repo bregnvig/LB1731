@@ -8,16 +8,16 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
 
-  @ViewChild(NgbAccordion, { static: true }) accordian!: NgbAccordion;
+  @ViewChild(NgbAccordion, { static: true }) accordion!: NgbAccordion;
 
   constructor() { }
 
   ngOnInit(): void {
-    // this.accordian.expand('simple');
+    // this.accordion.expand('simple');
   }
 
   ngAfterViewInit(): void {
-    this.accordian.expand('simple');
+    this.accordion.expand('simple');
   }
 
 }
