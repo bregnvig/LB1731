@@ -3,7 +3,9 @@ import { Observable, Subscriber, noop } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from './coordinate';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class LocationService {
 
     private location$: Observable<Coordinate>;
