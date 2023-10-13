@@ -416,7 +416,7 @@ export class AarhusPlaygroundService {
   playgrounds$ = of(aarhusPlaygrounds);
 
   constructor() {
-    console.log('Angular just created the AarhusPlaygroundService');
+    console.log('The AarhusPlaygroundService was just created');
   }
 
   getById(id: string): Observable<Playground | undefined> {
