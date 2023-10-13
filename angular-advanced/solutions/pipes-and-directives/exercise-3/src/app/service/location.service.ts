@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, noop } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from '../model';
 
@@ -17,7 +17,7 @@ export class LocationService {
         console.log('Looking for geolocation...');
         observer.next(position);
         console.log('Got for geolocation...');
-      }, error => observer.error(error));
+      }, noop);
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
       map((position: GeolocationPosition) => {
