@@ -22,7 +22,9 @@
   <div class="row mt-3">
     <div class="col">
       <ngb-alert type="info" [dismissible]="false">
-        {{login | json}}
+        <code>
+<pre class="text-white fw-bolder mb-0">{{login | json}}</pre>
+        </code>
       </ngb-alert>
     </div>
   </div>
