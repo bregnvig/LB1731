@@ -14,15 +14,15 @@ export class LocationService {
 
     this.location$ = new Observable<GeolocationPosition>(observer => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
-        observer.next(position)
-      }, error => observer.error(error));
+        observer.next(position);
+      });
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
       map((position: GeolocationPosition) => {
         return {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        }
+        };
       }),
       shareReplay({ bufferSize: 1, refCount: true })
     );
