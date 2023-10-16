@@ -1,14 +1,19 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { Center, Marker } from './leaflet';
+import { FooterComponent } from "./footer/footer.component";
+import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
+  standalone: true,
   templateUrl: './app.component.html',
+  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule],
 })
 export class AppComponent {
 
