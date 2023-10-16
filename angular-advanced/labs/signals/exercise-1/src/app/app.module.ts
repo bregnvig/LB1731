@@ -7,7 +7,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DynamicIoModule } from 'ng-dynamic-component';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { LeafletModule } from './leaflet';
@@ -31,7 +30,6 @@ library.add(fas, far);
     NgbModule,
     LeafletModule,
     FontAwesomeModule,
-    DynamicIoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
