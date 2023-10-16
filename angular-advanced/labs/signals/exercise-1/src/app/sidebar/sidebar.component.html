@@ -8,7 +8,7 @@
           (click)="selectPlayground(playground)">
           <div class="d-flex flex-column justify-content-between">
             <h6 class="mb-1">{{playground.name}}
-              <span class="badge bg-primary badge-pill">{{playground.position}}</span>
+              <span class="badge bg-primary badge-pill">{{playground.position | distance}}</span>
             </h6>
             <small>{{playground.description | defaultDescription}}</small>
           </div>

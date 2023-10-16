@@ -1,9 +1,9 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
-import { DefaultDescriptionPipe } from "../pipe/default-description.pipe";
+import { DefaultDescriptionPipe, DistancePipe } from "../pipe";
 import { LocationService } from '../service';
 
 @Component({
@@ -11,18 +11,15 @@ import { LocationService } from '../service';
   standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe]
+  imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe]
 })
 export class SidebarComponent {
 
   @Input() playgrounds: Playground[] | null = [];
   @Output() selected = new EventEmitter<Playground>();
-  @Output() edit = new EventEmitter<Playground>();
 
   selectedPlayground: Playground | undefined;
-  location$: Observable<Coordinate> = this.locationService.location$;
-
-  constructor(private locationService: LocationService) { }
+  location$: Observable<Coordinate> = inject(LocationService).location$;
 
   selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
