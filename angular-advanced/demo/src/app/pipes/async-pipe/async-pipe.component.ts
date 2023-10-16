@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'loop-async-pipe',
@@ -18,7 +18,10 @@ import { map, startWith, tap } from 'rxjs/operators';
 })
 export class AsyncPipeComponent implements OnInit {
 
-  date$ = interval(1000).pipe(startWith(new Date()), map(() => new Date()), tap(_ => console.log(this.datePipe.transform(_, 'HH:mm:ss'))));
+  date$ = timer(0, 1000).pipe(
+    map(() => new Date()), tap(_ => console.log(this.datePipe.transform(_, 'HH:mm:ss'))),
+    // shareReplay({ bufferSize: 1, refCount: true })
+  );
   // date: Date | undefined;
 
   constructor(private datePipe: DatePipe) { }
