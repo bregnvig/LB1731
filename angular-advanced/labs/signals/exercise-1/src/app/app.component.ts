@@ -1,7 +1,7 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
@@ -13,42 +13,39 @@ import { withLength } from './utils/rxjs-utils';
   selector: 'loop-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule],
+  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf],
 })
 export class AppComponent {
 
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();
   location$: Observable<Coordinate> = this.locationService.location$;
-  center: Center = new Center(56.360029, 10.746635);
-  markers$: Observable<Marker> | undefined;
+  center$: Observable<Center>;
+  markers$: Observable<Marker[]> | undefined;
 
   constructor(
-    private service: PlaygroundService,
+    service: PlaygroundService,
     private locationService: LocationService,
   ) {
-  }
+    this.markers$ = combineLatest([
+      locationService.location$,
+      this.playground$.pipe(map(p => ({ ...p.position, message: p.name })), startWith(undefined)),
+    ]);
 
-  ngOnInit() {
-    this.locationService.location$.subscribe(location => {
-      this.center = new Center(location.lat, location.lng, 12);
-    });
-    this.markers$ = merge(
-      this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      this.playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng, p.name))),
-    );
-
-    const getDistance = this.locationService.getDistance;
+    const getDistance = locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
-      this.service.playgrounds$.pipe(withLength()),
-      this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
+      service.playgrounds$.pipe(withLength()),
+      locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
         playgrounds
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
+    this.center$ = locationService.location$.pipe(
+      startWith({ lat: 56.360029, lng: 10.746635 }),
+      map(location => ({ ...location, zoom: 12 }))
+    );
   }
-
 }

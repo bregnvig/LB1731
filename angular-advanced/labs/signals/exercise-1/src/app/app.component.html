@@ -1,5 +1,5 @@
-<main>
-  <leaflet [center]="center" [markers]="markers$"></leaflet>
+<main class="vw-100 vh-100">
+  <leaflet [center]="center$ | async" [markers]="markers$ | async"></leaflet>
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds$ | async"
