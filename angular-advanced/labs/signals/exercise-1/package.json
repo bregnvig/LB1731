@@ -28,7 +28,6 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.2.3",
     "leaflet": "^1.7.1",
-    "ng-dynamic-component": "^10.5.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.3"
