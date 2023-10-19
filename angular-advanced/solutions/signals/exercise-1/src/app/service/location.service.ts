@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, noop } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { noop } from 'rxjs';
 import { Coordinate } from '../model';
 
 @Injectable({
@@ -8,26 +7,10 @@ import { Coordinate } from '../model';
 })
 export class LocationService {
 
-  readonly location$: Observable<Coordinate>;
+  #location?: WritableSignal<Coordinate | undefined>;
 
-  constructor() {
-
-    this.location$ = new Observable<GeolocationPosition>(observer => {
-      const watchId = window.navigator.geolocation.watchPosition(position => {
-        console.log('Looking for geolocation...');
-        observer.next(position);
-        console.log('Got for geolocation...');
-      }, noop);
-      return () => window.navigator.geolocation.clearWatch(watchId);
-    }).pipe(
-      map((position: GeolocationPosition) => {
-        return {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-      }),
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
+  get location(): WritableSignal<Coordinate | undefined> {
+    return this.#location ?? this.startWatching();
   }
 
   getDistance(p1: Coordinate, p2: Coordinate) {
@@ -39,4 +22,18 @@ export class LocationService {
 
     return Math.floor(12742000 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
   }
+
+  private startWatching(): WritableSignal<Coordinate | undefined> {
+    this.#location = signal(undefined);
+    const watchId = window.navigator.geolocation.watchPosition(position => {
+      console.log('Looking for geolocation...');
+      this.#location?.set({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    }, noop);
+    return this.#location;
+  }
+
+
 }

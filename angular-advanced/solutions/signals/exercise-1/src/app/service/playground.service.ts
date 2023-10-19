@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Injectable, Signal, computed, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Playground } from '../model';
 
 @Injectable({
@@ -9,29 +8,19 @@ import { Playground } from '../model';
 })
 export class PlaygroundService {
 
-  playgrounds$: Observable<Playground[]>;
+  readonly playgrounds: Signal<Playground[]>;
+  readonly playground: Signal<Playground | undefined>;
 
-  private altered$ = new BehaviorSubject<Playground[]>([]);
+  #id = signal<string | undefined>(undefined);
 
   constructor(http: HttpClient) {
-
-    this.playgrounds$ = combineLatest([
-      http.get<Playground[]>('assets/copenhagen.json'),
-      this.altered$,
-    ]).pipe(
-      map(([playgrounds, altered]) => playgrounds.map(p => altered.find(({ id }) => id === p.id) ?? p)),
-      shareReplay(1),
-    );
+    this.playgrounds = toSignal(http.get<Playground[]>('assets/copenhagen.json'), { initialValue: [] });
+    this.playground = computed(() => {
+      return this.playgrounds().find(({ id }) => this.#id() === id);
+    });
   }
 
-  update(playground: Playground) {
-    console.log('Saving', playground);
-    this.altered$.next([...this.altered$.value.filter(p => p.id !== playground.id), playground]);
-  }
-
-  getById(id: string): Observable<Playground | undefined> {
-    return this.playgrounds$.pipe(
-      map(playgrounds => playgrounds.find(playground => playground.id === id))
-    );
+  setSelectedId(id: string) {
+    this.#id.set(id);
   }
 }

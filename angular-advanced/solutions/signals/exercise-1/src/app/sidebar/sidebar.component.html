@@ -1,7 +1,7 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      <ng-container *ngIf="location$ | async; else loading">
+      <ng-container *ngIf="location() else loading">
         <a *ngFor="let playground of playgrounds"
           class="list-group-item d-flex list-group-item-action justify-content-between"
           [class.active]="playground === selectedPlayground"

@@ -19,7 +19,7 @@ export class SidebarComponent {
   @Output() selected = new EventEmitter<Playground>();
 
   selectedPlayground: Playground | undefined;
-  location$: Observable<Coordinate> = inject(LocationService).location$;
+  location = inject(LocationService).location;
 
   selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
