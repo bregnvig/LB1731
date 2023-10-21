@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
-import { SignalsWithRxjsComponent } from "./rxjs/signals-with-rxjs.component";
+import { LocationWithRxjsComponent, LocationWithSignalsComponent } from "./location";
+import { PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent } from "./playgrounds";
 import { SignalsComponent } from "./signals.component";
-import { SignalsWithSignalsComponent } from "./signals/signals-with-signals.component";
 
 export const SignalsRoutes: Routes = [
   {
@@ -9,16 +9,24 @@ export const SignalsRoutes: Routes = [
     component: SignalsComponent,
     children: [
       {
-        path: 'with-rxjs',
-        component: SignalsWithRxjsComponent
+        path: 'playgrounds-rxjs',
+        component: PlaygroundsWithRxjsComponent
       },
       {
-        path: 'with-signals',
-        component: SignalsWithSignalsComponent
+        path: 'playgrounds-signals',
+        component: PlaygroundsWithSignalsComponent
+      },
+      {
+        path: 'location-rxjs',
+        component: LocationWithRxjsComponent
+      },
+      {
+        path: 'location-signals',
+        component: LocationWithSignalsComponent
       },
       {
         path: '**',
-        redirectTo: 'with-rxjs'
+        redirectTo: 'playgrounds-rxjs'
       }
     ]
   }

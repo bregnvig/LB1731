@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,21 +8,21 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
   imports: [RouterLink, RouterLinkActive, RouterOutlet, NgbNav, NgbNavLink, NgbNavItem],
   template: `
   <ul ngbNav class="nav-tabs mb-3">
-    <li ngbNavItem="without-di">
-        <a ngbNavLink routerLink="with-rxjs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Using RxJS</a>
+    <li ngbNavItem="playgrounds-rxjs">
+        <a ngbNavLink routerLink="playgrounds-rxjs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds RxJS</a>
     </li>
-    <li ngbNavItem="with-di">
-        <a ngbNavLink routerLink="with-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Using Signals</a>
+    <li ngbNavItem="playgrounds-signals">
+        <a ngbNavLink routerLink="playgrounds-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds Signals</a>
+    </li>
+    <li ngbNavItem="location-rxjs">
+        <a ngbNavLink routerLink="location-rxjs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location RxJS</a>
+    </li>
+    <li ngbNavItem="location-signals">
+        <a ngbNavLink routerLink="location-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location Signals</a>
     </li>
   </ul>
   <router-outlet></router-outlet>
   `,
 })
-export class SignalsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class SignalsComponent {
 }
