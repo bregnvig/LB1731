@@ -13,12 +13,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => {
-  return () => new Promise<void>(resolve => {
-    faIconLibrary.addIconPacks(fas, far);
-    resolve();
-  });
-};
+const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => () => new Promise<void>(resolve => {
+  faIconLibrary.addIconPacks(fas, far);
+  resolve();
+});
 
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.error(err));
