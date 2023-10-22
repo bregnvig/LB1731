@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from '../model';
@@ -8,16 +9,21 @@ import { Coordinate } from '../model';
 })
 export class LocationService {
 
-  readonly location$: Observable<Coordinate>;
+  get location(): Signal<Coordinate | undefined> {
+    return toSignal(this.location$);
+  }
 
-  constructor() {
-    this.location$ = new Observable<GeolocationPosition>(subscriber => {
+  get location$(): Observable<Coordinate> {
+    return new Observable<GeolocationPosition>(subscriber => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
         subscriber.next(position);
       }, error => {
-        // Just ignore it
+        console.log(error);
       });
-      return () => window.navigator.geolocation.clearWatch(watchId);
+      return () => {
+        console.log(`Stop watching the location`);
+        window.navigator.geolocation.clearWatch(watchId);
+      };
     }).pipe(
       map((position: GeolocationPosition) => {
         return {
