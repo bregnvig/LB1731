@@ -23,23 +23,15 @@ export class EditPlaygroundModalComponent {
     return ref.result;
   }
 
-  fg = this.fb.group({
-    name: ['', Validators.required],
-    addressDescription: [''],
-    description: [''],
-  });
-
   playground!: Playground;
 
   constructor(private fb: FormBuilder, public modal: NgbActiveModal) { }
 
   initialize(playground: Playground) {
     this.playground = playground;
-    this.fg.reset(playground);
   }
 
   save() {
-    this.modal.close({ ...this.playground, ...this.fg.value });
   }
 
 }
