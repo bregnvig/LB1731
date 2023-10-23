@@ -25,7 +25,6 @@ type PlaygroupControls = {
       </div>    
     </form>
   `,
-  styleUrls: ['./edit-playground-control.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
