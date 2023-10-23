@@ -18,16 +18,13 @@ export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective im
   }
 
   ngOnInit(): void {
-    this.emailAddressesControl.valueChanges.pipe(
+    this.fg.controls.emailAddresses.valueChanges.pipe(
       this.takeUntilDestroyed()
     ).subscribe(_ => console.log(_));
   }
 
   addEmail(value: string) {
-    this.emailAddressesControl.push(this.fb.control(value, Validators.email));
+    this.fg.controls.emailAddresses.push(this.fb.control(value, Validators.email));
   }
 
-  get emailAddressesControl() {
-    return this.fg.controls['emailAddresses'];
-  }
 }

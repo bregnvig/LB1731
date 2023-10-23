@@ -6,7 +6,7 @@
   <hr>
   <h5>Form array content</h5>
   <div class="form-group flex-wrap" formArrayName="emailAddresses">
-    <div *ngFor="let _ of emailAddressesControl.controls; index as i" class="col-12  input-group mb-2">
+    <div *ngFor="let _ of fg.controls.emailAddresses.controls; index as i" class="col-12  input-group mb-2">
       <span class="input-group-text">{{i}}</span>
       <input
         type="text"
