@@ -43,4 +43,8 @@ export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective impl
     this.fg.reset(value, { emitEvent: this.emitEventControl.value });
   }
 
+  disable() {
+    this.fg.controls.email.enabled ? this.fg.controls.email.disable() : this.fg.controls.email.enable();
+  }
+
 }

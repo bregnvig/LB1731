@@ -30,11 +30,11 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
   ngOnInit(): void {
     this.fg.reset({
       workAddress: {
-        street: 'Amaliegade',
-        streetNumber: '5C',
-        floor: '2',
-        zip: '1256',
-        city: 'København K'
+        street: 'Kristaniagade',
+        streetNumber: '1',
+        floor: '1',
+        zip: '2100',
+        city: 'København Ø'
       }
     });
     this.subscriptions.push(

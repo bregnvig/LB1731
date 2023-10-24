@@ -18,12 +18,13 @@
   </div>
 
   <div class="col-auto">
-    <button class="btn btn-primary mr-2" (click)="patch()">Patch</button>
-    <button class="btn btn-primary" (click)="reset()">Reset</button>
+    <button class="btn btn-primary me-2" (click)="patch()">Patch</button>
+    <button class="btn btn-primary me-2" (click)="reset()">Reset</button>
+    <button class="btn btn-primary" (click)="disable()">{{fg.controls.email.enabled ? 'Disable' : 'Enable'}}</button>
   </div>
   <div class="col-auto my-auto">
     <input class="form-check-input" [formControl]="emitEventControl" type="checkbox" id="emitEvent">
-    <label class="form-check-label" for="emitEvent">
+    <label class="form-check-label ms-1" for="emitEvent">
       Emit event
     </label>
   </div>
@@ -38,6 +39,15 @@
   <div class="col-8"> {{fg.touched}}</div>
   <div class="col-4">Dirty</div>
   <div class="col-8"> {{fg.dirty}}</div>
+</div>
+<div class="mt-3 row flex-wrap">
+  <h5 class="col-12">E-mail state</h5>
+  <div class="col-4">Value</div>
+  <div class="col-8"> {{fg.value.email| json}}</div>
+  <div class="col-4">Valid</div>
+  <div class="col-8"> {{fg.controls.email.valid}}</div>
+  <div class="col-4">Invalid</div>
+  <div class="col-8"> {{fg.controls.email.invalid}}</div>
 </div>
 <ng-template #popContent>
   CSS classes: <strong>{{emailFormControl.className}}</strong>

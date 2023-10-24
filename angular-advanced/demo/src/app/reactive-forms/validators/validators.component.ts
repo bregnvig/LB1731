@@ -3,7 +3,6 @@ import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder,
 import { Observable, combineLatest, of } from 'rxjs';
 import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
-import { TypedForm } from '../form-utils';
 import { DawaService } from './dawa.service';
 
 const isValidZip = (service: DawaService): AsyncValidatorFn => (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
@@ -28,19 +27,18 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
         Validators.pattern(/^[1-9][0-9]{3}$/),
         isValidZip(this.service),
       ],
-      city: ['']
+      city: [{ value: '', disabled: true }]
     }, {
-      validators: (zipAndCity: FormGroup<TypedForm<{ zip: string, city: string; }>>): null | ValidationErrors => {
+      validators: (zipAndCity: FormGroup<{ zip: AbstractControl<string>, city: AbstractControl<string>; }>): null | ValidationErrors => {
         const { zip, city } = zipAndCity.controls;
         console.table({
           value: JSON.stringify(zipAndCity.value),
-          zipValid: zip?.valid,
-          zipInvalid: zip?.invalid,
-          zipValue: zip?.value,
-          cityValid: city?.valid
+          zipValid: zip.valid,
+          zipInvalid: zip.invalid,
+          zipValue: zip.value,
+          cityValid: city.valid
         });
-
-        return zip?.valid && zip?.value && !city?.value ? { required: 'city' } : null;
+        return zip.valid && zip.value && !city.value ? { required: 'city' } : null;
       },
     } as AbstractControlOptions)
   });
@@ -51,13 +49,16 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
 
   ngOnInit(): void {
     combineLatest({
-      zip: this.zipAndCityControl.controls.zip!.valueChanges,
-      status: this.zipAndCityControl.controls.zip!.statusChanges,
+      zip: this.zipAndCityControl.controls.zip.valueChanges,
+      status: this.zipAndCityControl.controls.zip.statusChanges,
     }).pipe(
       debounceTime(500),
       switchMap(({ status, zip }) => status === 'VALID' && zip ? this.service.getCityName(zip) : of(null)),
       catchError(() => of(null)),
-    ).subscribe(city => this.zipAndCityControl.controls.city?.patchValue(city));
+    ).subscribe(city => {
+      console.log('Found the city', city);
+      // this.zipAndCityControl.controls.city.patchValue(city);
+    });
   }
 
   get zipAndCityControl() {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
@@ -8,12 +8,7 @@ import { AbstractControl } from '@angular/forms';
       {{control!.errors | json}}
     </ngb-alert>
   `,
-  styles: [`
-    :host {
-      position: absolute
-    }
-  `]
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorMessageComponent {
 
