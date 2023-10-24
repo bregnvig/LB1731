@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf, } from '@angular/common';
-import { Component, Signal, computed } from '@angular/core';
+import { Component, Signal, computed, signal } from '@angular/core';
 import { FooterComponent } from "./footer/footer.component";
 import { LeafletModule, Marker } from './leaflet';
 import { Playground } from './model';
@@ -15,17 +15,19 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 export class AppComponent {
 
   playgrounds: Signal<Playground[]>;
-  playground = this.service.playground;
+  playground: Signal<Playground | undefined>;
+  selectedId = signal<string | undefined>(undefined);
   location = this.locationService.location;
   center = computed(() => ({ ...(this.locationService.location() ?? { lat: 56.360029, lng: 10.746635 }), zoom: 14 }));
-
+  
   markers = computed(() => [
     this.locationService.location(),
     this.playground()?.position
   ] as Marker[]);
 
+
   constructor(
-    public service: PlaygroundService,
+    service: PlaygroundService,
     private locationService: LocationService,
   ) {
     const getDistance = locationService.getDistance;
@@ -38,5 +40,9 @@ export class AppComponent {
           : 0;
       });
     });
+    this.playground = computed(() => {
+      return this.playgrounds().find(({ id }) => this.selectedId() === id);
+    });
   }
+
 }

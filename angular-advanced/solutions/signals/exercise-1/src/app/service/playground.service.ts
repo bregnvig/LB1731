@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, Signal, computed, signal } from '@angular/core';
+import { Injectable, Signal, effect } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Playground } from '../model';
 
@@ -9,18 +9,12 @@ import { Playground } from '../model';
 export class PlaygroundService {
 
   readonly playgrounds: Signal<Playground[]>;
-  readonly playground: Signal<Playground | undefined>;
-
-  #id = signal<string | undefined>(undefined);
 
   constructor(http: HttpClient) {
-    this.playgrounds = toSignal(http.get<Playground[]>('assets/copenhagen.json'), { initialValue: [] });
-    this.playground = computed(() => {
-      return this.playgrounds().find(({ id }) => this.#id() === id);
+    this.playgrounds = toSignal(http.get<Playground[]>('assets/copenhagen.json'), {
+      initialValue: JSON.parse(localStorage.getItem('playgrounds') || '[]')
     });
+    effect(() => localStorage.setItem('playgrounds', JSON.stringify(this.playgrounds())));
   }
 
-  setSelectedId(id: string) {
-    this.#id.set(id);
-  }
 }

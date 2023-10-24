@@ -3,6 +3,6 @@
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds()"
-  (selected)="service.setSelectedId($event.id)">
+  (selected)="selectedId.set($event.id)">
 </loop-sidebar>
 <loop-footer *ngIf="playground()" [playground]="playground()"></loop-footer>

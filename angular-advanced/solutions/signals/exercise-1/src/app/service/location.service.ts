@@ -1,5 +1,4 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { noop } from 'rxjs';
 import { Coordinate } from '../model';
 
 @Injectable({
@@ -9,7 +8,7 @@ export class LocationService {
 
   #location?: WritableSignal<Coordinate | undefined>;
 
-  get location(): WritableSignal<Coordinate | undefined> {
+  get location(): Signal<Coordinate | undefined> {
     return this.#location ?? this.startWatching();
   }
 
@@ -23,7 +22,7 @@ export class LocationService {
     return Math.floor(12742000 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
   }
 
-  private startWatching(): WritableSignal<Coordinate | undefined> {
+  private startWatching(): Signal<Coordinate | undefined> {
     this.#location = signal(undefined);
     const watchId = window.navigator.geolocation.watchPosition(position => {
       console.log('Looking for geolocation...');
@@ -31,7 +30,7 @@ export class LocationService {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       });
-    }, noop);
+    });
     return this.#location;
   }
 
