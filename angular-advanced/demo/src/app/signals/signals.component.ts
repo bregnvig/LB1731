@@ -20,6 +20,12 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="location-signals">
         <a ngbNavLink routerLink="location-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location Signals</a>
     </li>
+    <li ngbNavItem="equality">
+        <a ngbNavLink routerLink="equality" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Equality</a>
+    </li>
+    <li ngbNavItem="untracked">
+        <a ngbNavLink routerLink="untracked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Untracked</a>
+    </li>
   </ul>
   <router-outlet></router-outlet>
   `,

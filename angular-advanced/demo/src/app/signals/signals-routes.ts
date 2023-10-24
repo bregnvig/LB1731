@@ -2,6 +2,8 @@ import { Routes } from "@angular/router";
 import { LocationWithRxjsComponent, LocationWithSignalsComponent } from "./location";
 import { PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent } from "./playgrounds";
 import { SignalsComponent } from "./signals.component";
+import { PlaygroundsEqualityComponent } from "./equality/playgrounds-equality.component";
+import { PlaygroundsUntrackedComponent } from "./untracked";
 
 export const SignalsRoutes: Routes = [
   {
@@ -23,6 +25,14 @@ export const SignalsRoutes: Routes = [
       {
         path: 'location-signals',
         component: LocationWithSignalsComponent
+      },
+      {
+        path: 'equality',
+        component: PlaygroundsEqualityComponent
+      },
+      {
+        path: 'untracked',
+        component: PlaygroundsUntrackedComponent
       },
       {
         path: '**',
