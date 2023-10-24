@@ -32,13 +32,16 @@ export class EditPlaygroundModalComponent implements OnInit {
   );
 
   fg: FormGroup<PlaygroupControls> = this.fb.group({
-    name: this.fb.control('', [Validators.required], [this.validateUniqueName]),
+    name: this.fb.control('', {
+      validators: Validators.required,
+      asyncValidators: this.validateUniqueName
+    }),
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => {
-      const { description, addressDescription } = fg.controls;
-      return (description?.value || addressDescription?.value) ? null : { requiredOr: ['description', 'addressDescription'] };
+    validators: (fg: AbstractControl<Omit<Playground, 'id' | 'postion'>>): null | ValidationErrors => {
+      const { description, addressDescription } = fg.value;
+      return (description || addressDescription) ? null : { requiredOr: ['description', 'addressDescription'] };
     }
   } as AbstractControlOptions);
 
