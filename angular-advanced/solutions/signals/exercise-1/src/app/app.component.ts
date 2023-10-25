@@ -17,14 +17,12 @@ export class AppComponent {
   playgrounds: Signal<Playground[]>;
   playground: Signal<Playground | undefined>;
   selectedId = signal<string | undefined>(undefined);
-  location = this.locationService.location;
   center = computed(() => ({ ...(this.locationService.location() ?? { lat: 56.360029, lng: 10.746635 }), zoom: 14 }));
-  
+
   markers = computed(() => [
     this.locationService.location(),
     this.playground()?.position
   ] as Marker[]);
-
 
   constructor(
     service: PlaygroundService,
