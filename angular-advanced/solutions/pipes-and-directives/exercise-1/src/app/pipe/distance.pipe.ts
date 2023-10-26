@@ -8,7 +8,7 @@ import { LocationService } from '../service';
 })
 export class DistancePipe implements PipeTransform, OnDestroy {
 
-  private location!: Coordinate;
+  private location?: Coordinate;
   private subscription: Subscription;
 
   constructor(private locationService: LocationService) {
@@ -19,8 +19,10 @@ export class DistancePipe implements PipeTransform, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  transform(value: Coordinate): number {
-    return this.locationService.getDistance(this.location, value);
+  transform(value: Coordinate): `${number}m` | 'Unknown location' {
+    return this.location
+      ? `${this.locationService.getDistance(this.location, value)}m`
+      : 'Unknown location';
   }
 
 }
