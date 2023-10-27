@@ -1,24 +1,25 @@
 import { JsonPipe, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, signal, untracked } from '@angular/core';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-playgrounds-untracked',
   standalone: true,
-  imports: [NgFor, JsonPipe],
+  imports: [NgFor, JsonPipe, NgbAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>
-      <button type="button" class="btn btn-primary" (click)="updateLocation()">setInitialPlaygrounds</button>
-      <span>
+      <button type="button" class="btn btn-primary" (click)="updateLocation()">updateLocation</button>
+      <ngb-alert type="info" class="mt-3" [dismissible]="false">
         location: {{location() | json}}
-      </span>
+      </ngb-alert>
     </div>
     
     <div class="mt-4">
-      <button type="button" class="btn btn-primary" (click)="updateUser()">setInitialPlaygrounds</button>
-      <span>
+      <button type="button" class="btn btn-primary" (click)="updateUser()">updateUser</button>
+      <ngb-alert type="info" class="mt-3" [dismissible]="false">
         user: {{user() | json}}
-      </span>
+      </ngb-alert>
     </div>
   `,
 })
