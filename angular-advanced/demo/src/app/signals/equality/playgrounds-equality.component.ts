@@ -67,7 +67,7 @@ export class PlaygroundsEqualityComponent {
 
   constructor() {
     effect(() => {
-      console.log('playgrounds changes', this.playgrounds());
+      console.log('playgrounds changed', this.playgrounds());
     });
   }
 
