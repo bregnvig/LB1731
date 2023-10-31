@@ -36,13 +36,13 @@ export class IsInRoleDirective extends AbstractSubscribeUnsubscribeDirective {
 
   private updateView() {
 
-    const thenCondition = this.userService.isInRole(this.role);
+    const showThenCondition = this.userService.isInRole(this.role);
     const userService = this.userService;
-    if (thenCondition && this.hasView !== 'thenCondition') {
+    if (showThenCondition && this.hasView !== 'thenCondition') {
       this.viewContainer.clear();
       this.viewContainer.createEmbeddedView(this.template, { get role() { return userService.role; } });
       this.hasView = 'thenCondition';
-    } else if (!thenCondition) {
+    } else if (!showThenCondition) {
       if (this.elseTemplate && this.hasView !== 'elseCondition') {
         this.viewContainer.clear();
         this.viewContainer.createEmbeddedView(this.elseTemplate, { get role() { return userService.role; } });

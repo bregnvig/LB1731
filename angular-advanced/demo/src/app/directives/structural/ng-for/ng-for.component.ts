@@ -18,6 +18,6 @@ export class NgForComponent {
   }
 
   createArray() {
-    return Array.from({ length: 5000 }, (_, index) => ({ index }));
+    return Array.from({ length: 2500 }, (_, index) => ({ index }));
   }
 }

@@ -1,13 +1,11 @@
-import { Directive, EmbeddedViewRef, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService, Role } from '../service';
 
 @Directive({
   selector: '[loopIsInRole]'
 })
-export class IsInRoleDirective implements OnInit, OnDestroy {
-
-  @Input() loopIsInRole: Role | undefined;
+export class IsInRoleDirective implements OnDestroy {
 
   private view: EmbeddedViewRef<void> | undefined;
   private subscription: Subscription | undefined;
@@ -18,11 +16,11 @@ export class IsInRoleDirective implements OnInit, OnDestroy {
     private auth: AuthService
   ) { }
 
-  ngOnInit() {
-    this.subscription = this.auth.isInRole$(this.loopIsInRole ?? 'admin').subscribe(isInRole => {
+  @Input() set loopIsInRole(value: Role | undefined) {
+    this.subscription?.unsubscribe();
+    this.subscription = this.auth.isInRole$(value ?? 'anonymous').subscribe(isInRole => {
       if (isInRole && !this.view) {
         this.view = this.container.createEmbeddedView(this.template);
-        this.view.markForCheck();
       } else if (!isInRole && this.view) {
         this.container.clear();
         this.view = undefined;

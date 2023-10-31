@@ -25,9 +25,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'anonymous'; role as r">I'm have role as anonymous. Role is {{r}}</p></div>
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'user'; role as r">I'm have role as user. Role is {{r}}</p></div>
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I'm have role as admin. Role is {{r}}</p></div>  
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'anonymous'; role as r">I have acces to role anonymous. My role is {{r}}</p></div>
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'user'; role as r">I have acces to role user. My role is {{r}}</p></div>
+    <div class="col-4"><p class="mt-2" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I have acces to role admin. My role is {{r}}</p></div>  
     <ng-template #iWishIWasAdmin>
       I wish I was an admin😭
     </ng-template>
