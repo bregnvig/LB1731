@@ -15,19 +15,20 @@ const isValidZip = (service: DawaService): AsyncValidatorFn => (control: Abstrac
 @Component({
   selector: 'loop-validators',
   templateUrl: './validators.component.html',
-  styleUrls: ['./validators.component.scss']
 })
 export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
   fg = this.fb.group({
-    name: ['', Validators.required],
+    name: this.fb.control('', Validators.required),
     zipAndCity: this.fb.group({
-      zip: [
+      zip: this.fb.control(
         '',
-        Validators.pattern(/^[1-9][0-9]{3}$/),
-        isValidZip(this.service),
-      ],
-      city: [{ value: '', disabled: true }]
+        {
+          validators: Validators.pattern(/^[1-9][0-9]{3}$/),
+          asyncValidators: isValidZip(this.service)
+        },
+      ),
+      city: this.fb.control({ value: '', disabled: true }),
     }, {
       validators: (zipAndCity: FormGroup<{ zip: AbstractControl<string>, city: AbstractControl<string>; }>): null | ValidationErrors => {
         const { zip, city } = zipAndCity.controls;

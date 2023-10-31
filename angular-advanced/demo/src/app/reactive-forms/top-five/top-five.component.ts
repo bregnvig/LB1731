@@ -12,8 +12,8 @@ export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective impl
   @ViewChild('emailControl', { static: true }) emailControl!: ElementRef<HTMLInputElement>;
   @ViewChild('nameControl', { static: true }) nameControl!: ElementRef<HTMLInputElement>;
   fg = this.fb.group({
-    email: ['', Validators.required],
-    name: ['', Validators.required],
+    email: this.fb.control('', Validators.required),
+    name: this.fb.control('', Validators.required),
   });
 
   emitEventControl = this.fb.control<boolean>(true, { validators: Validators.required, nonNullable: true });

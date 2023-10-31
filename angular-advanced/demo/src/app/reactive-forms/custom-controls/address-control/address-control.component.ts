@@ -24,11 +24,11 @@ import { Address } from '../address.model';
 export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit, ControlValueAccessor, Validator {
 
   fg = this.fb.group({
-    street: [''],
-    streetNumber: [''],
-    floor: [''],
-    zip: ['', (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }],
-    city: [''],
+    street: this.fb.control(''),
+    streetNumber: this.fb.control(''),
+    floor: this.fb.control(''),
+    zip: this.fb.control('', (control: AbstractControl) => !control.value || /^[1-9][0-9]{3}$/.test(control.value) ? null : { invalidZip: true }),
+    city: this.fb.control(''),
   });
 
   private propagateChange: ((_: any) => any) | undefined;

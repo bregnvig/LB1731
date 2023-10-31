@@ -5,23 +5,15 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 @Component({
   selector: 'loop-custom-controls',
   templateUrl: './custom-controls.component.html',
-  styleUrls: ['./custom-controls.component.scss']
 })
 export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
   fg = this.fb.group({
-    isCompany: [false],
-    name: [undefined, Validators.required],
-    homeAddress: [undefined, Validators.required],
-    workAddress: []
+    isCompany: this.fb.control(false),
+    name: this.fb.control(null, Validators.required),
+    homeAddress: this.fb.control(null, Validators.required),
+    workAddress: this.fb.control(null),
   });
-
-  controls = {
-    isCompany: this.fg.get('isCompany'),
-    name: this.fg.get('name'),
-    homeAddress: this.fg.get('homeAddress'),
-    workAddress: this.fg.get('workAddress'),
-  };
 
   constructor(private fb: UntypedFormBuilder) {
     super();
@@ -39,7 +31,7 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
     });
     this.subscriptions.push(
       this.fg.valueChanges.subscribe(value => console.log(value)),
-      this.controls.isCompany!.valueChanges.subscribe(isCompany => isCompany ? this.controls.homeAddress?.disable() : this.controls.homeAddress?.enable()),
+      this.fg.controls.isCompany!.valueChanges.subscribe(isCompany => isCompany ? this.fg.controls.homeAddress?.disable() : this.fg.controls.homeAddress?.enable()),
     );
   }
 
