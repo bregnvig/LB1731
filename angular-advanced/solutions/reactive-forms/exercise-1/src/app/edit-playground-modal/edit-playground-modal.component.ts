@@ -17,9 +17,9 @@ export class EditPlaygroundModalComponent implements OnInit {
   }
 
   fg = this.fb.group({
-    name: [''],
-    description: [''],
-    addressDescription: [''],
+    name: this.fb.control(''),
+    description: this.fb.control(''),
+    addressDescription: this.fb.control(''),
   });
 
   playground!: Playground;
