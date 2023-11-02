@@ -35,7 +35,7 @@ export class AppComponent {
     const getDistance = locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
-      service.playgrounds$.pipe(withLength()),
+      service.list().pipe(withLength()),
       locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
