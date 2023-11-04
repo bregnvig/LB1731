@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as localForage from "localforage";
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
@@ -17,8 +17,7 @@ export class PlaygroundService {
 
   list(): Observable<Playground[]> {
     return from(localForage.getItem<Playground[]>('playgrounds')).pipe(
-      catchError(() => this.http.get<Playground[]>('assets/copenhagen.json')),
-      map(playgrounds => playgrounds || []),
+      switchMap(playgrounds => playgrounds ? of(playgrounds) : this.http.get<Playground[]>('assets/copenhagen.json')),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)
       )),

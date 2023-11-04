@@ -8,6 +8,8 @@ import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
+import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-root',
@@ -24,7 +26,8 @@ export class AppComponent {
   markers$: Observable<Marker[]> | undefined;
 
   constructor(
-    service: PlaygroundService,
+    private service: PlaygroundService,
+    private modal: NgbModal,
     private locationService: LocationService,
   ) {
     this.markers$ = combineLatest([
@@ -35,7 +38,7 @@ export class AppComponent {
     const getDistance = locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
-      service.list().pipe(withLength()),
+      this.service.list().pipe(withLength()),
       locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
@@ -48,4 +51,9 @@ export class AppComponent {
       map(location => ({ ...location, zoom: 12 }))
     );
   }
+
+  async edit(playground: Playground) {
+    EditPlaygroundModalComponent.open(this.modal, playground);
+  }
+
 }

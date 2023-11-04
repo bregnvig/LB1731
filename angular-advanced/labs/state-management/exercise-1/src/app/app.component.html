@@ -3,6 +3,7 @@
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds$ | async"
+  (edit)="edit($event)"
   (selected)="playground$.next($event)">
 </loop-sidebar>
 <loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
