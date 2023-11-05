@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
@@ -19,12 +20,17 @@ export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective im
 
   ngOnInit(): void {
     this.fg.controls.emailAddresses.valueChanges.pipe(
+      debounceTime(400),
       this.takeUntilDestroyed()
     ).subscribe(_ => console.log(_));
   }
 
   addEmail(value: string) {
     this.fg.controls.emailAddresses.push(this.fb.control(value, Validators.email));
+  }
+
+  save() {
+    console.log(this.fg.value);
   }
 
 }
