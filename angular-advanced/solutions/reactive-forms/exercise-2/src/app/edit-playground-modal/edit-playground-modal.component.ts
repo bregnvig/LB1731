@@ -39,7 +39,7 @@ export class EditPlaygroundModalComponent implements OnInit {
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: AbstractControl<Omit<Playground, 'id' | 'postion'>>): null | ValidationErrors => {
+    validators: (fg: AbstractControl<Omit<Playground, 'id' | 'position'>>): null | ValidationErrors => {
       const { description, addressDescription } = fg.value;
       return (description || addressDescription) ? null : { requiredOr: ['description', 'addressDescription'] };
     }
