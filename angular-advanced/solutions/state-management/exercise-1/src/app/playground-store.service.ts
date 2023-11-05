@@ -25,15 +25,12 @@ export class PlaygroundStore {
     return this._state;
   }
 
-  // This would be the actions and also effects and reducer
+  // This would be the actions and also effects
   getPlaygrounds(): void {
     this.service.list().pipe(
       first(),
     ).subscribe(playgrounds => {
-      this._state.update(state => ({
-        ...state,
-        playgrounds
-      }));
+      this.setState(() => ({ playgrounds }));
     });
   }
 
@@ -52,6 +49,14 @@ export class PlaygroundStore {
       ...state,
       id
     }));
+  }
+
+  // Reducer
+  setState<K extends keyof PlaygroundState, E extends Partial<Pick<PlaygroundState, K>>>(
+    fn: (state: PlaygroundState) => E
+  ): void {
+    const state = fn(this.state());
+    this._state.update(state => ({ ...this.state, ...state }));
   }
 
   // Common selector you could consider being private
