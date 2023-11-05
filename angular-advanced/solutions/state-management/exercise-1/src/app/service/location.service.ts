@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable, noop } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from '../model';
@@ -9,6 +10,7 @@ import { Coordinate } from '../model';
 export class LocationService {
 
   readonly location$: Observable<Coordinate>;
+  readonly location: Signal<Coordinate | undefined>;
 
   constructor() {
 
@@ -28,6 +30,7 @@ export class LocationService {
       }),
       shareReplay({ bufferSize: 1, refCount: true })
     );
+    this.location = toSignal(this.location$, { initialValue: undefined });
   }
 
   getDistance(p1: Coordinate, p2: Coordinate) {
