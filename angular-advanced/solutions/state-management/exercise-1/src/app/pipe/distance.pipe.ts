@@ -10,13 +10,11 @@ import { LocationService } from '../service';
 
 export class DistancePipe implements PipeTransform {
 
-  #location?: Coordinate;
-
   constructor(private service: LocationService) {
-    service.location$.subscribe(location => this.#location = location);
   }
 
   transform(value: Coordinate): `${number}m` | 'Unknown location' {
-    return this.#location ? `${this.service.getDistance(value, this.#location)}m` : 'Unknown location';
+    const location = this.service.location();
+    return location ? `${this.service.getDistance(value, location)}m` : 'Unknown location';
   }
 }

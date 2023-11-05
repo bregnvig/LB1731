@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
 import { Observable, noop } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from '../model';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
 
-  readonly location$: Observable<Coordinate>;
+  readonly location: Signal<Coordinate | undefined>;
 
   constructor() {
 
-    this.location$ = new Observable<GeolocationPosition>(observer => {
+    this.location = toSignal(new Observable<GeolocationPosition>(observer => {
       const watchId = window.navigator.geolocation.watchPosition(position => {
         console.log('Looking for geolocation...');
         observer.next(position);
@@ -26,8 +27,7 @@ export class LocationService {
           lng: position.coords.longitude
         };
       }),
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
+    ));
   }
 
   getDistance(p1: Coordinate, p2: Coordinate) {

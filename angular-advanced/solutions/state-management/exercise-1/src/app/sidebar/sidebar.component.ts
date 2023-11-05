@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Signal, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
@@ -20,7 +20,7 @@ export class SidebarComponent {
   @Output() edit = new EventEmitter<Playground>();
 
   selectedPlayground: Playground | undefined;
-  location$: Observable<Coordinate> = inject(LocationService).location$;
+  location: Signal<Coordinate | undefined> = inject(LocationService).location;
 
   selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
