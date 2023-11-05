@@ -24,7 +24,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       zip: this.fb.control(
         '',
         {
-          validators: Validators.pattern(/^[1-9][0-9]{3}$/),
+          validators: [Validators.required, Validators.pattern(/^[1-9][0-9]{3}$/)],
           asyncValidators: isValidZip(this.service)
         },
       ),
@@ -32,13 +32,13 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
     }, {
       validators: (zipAndCity: FormGroup<{ zip: AbstractControl<string>, city: AbstractControl<string>; }>): null | ValidationErrors => {
         const { zip, city } = zipAndCity.controls;
-        console.table({
-          value: JSON.stringify(zipAndCity.value),
-          zipValid: zip.valid,
-          zipInvalid: zip.invalid,
-          zipValue: zip.value,
-          cityValid: city.valid
-        });
+        // console.table({
+        //   value: JSON.stringify(zipAndCity.value),
+        //   zipValid: zip.valid,
+        //   zipInvalid: zip.invalid,
+        //   zipValue: zip.value,
+        //   cityValid: city.valid
+        // });
         return zip.valid && zip.value && !city.value ? { required: 'city' } : null;
       },
     } as AbstractControlOptions)
@@ -58,11 +58,16 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       catchError(() => of(null)),
     ).subscribe(city => {
       console.log('Found the city', city);
-      // this.zipAndCityControl.controls.city.patchValue(city);
+      this.zipAndCityControl.controls.city.patchValue(city);
     });
   }
 
   get zipAndCityControl() {
     return this.fg.controls.zipAndCity;
+  }
+
+  log() {
+    console.log(this.fg.getRawValue());
+    console.log(this.fg.controls.zipAndCity.controls.city.value);
   }
 }
