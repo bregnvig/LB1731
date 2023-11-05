@@ -8,13 +8,13 @@
           (click)="selectPlayground(playground)">
           <div class="d-flex flex-column justify-content-between">
             <h6 class="mb-1">{{playground.name}}
-              <span class="badge bg-primary badge-pill">{{playground.position | distance}}</span>
+              <span class="badge bg-secondary badge-pill">{{playground.position | distance}}</span>
             </h6>
             <small>{{playground.description | defaultDescription}}</small>
           </div>
           <div class="d-none d-sm-block">
             <div class="btn-group">
-              <button class="btn btn-sm btn-secondary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
+              <button class="btn btn-sm btn-primary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
                 <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
               </button>
             </div>
