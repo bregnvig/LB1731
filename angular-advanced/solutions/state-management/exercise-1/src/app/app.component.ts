@@ -1,15 +1,15 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Component, Signal, computed } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
-import { LocationService, PlaygroundService } from './service';
+import { PlaygroundStore } from './playground-store.service';
+import { LocationService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { withLength } from './utils/rxjs-utils';
-import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-root',
@@ -19,33 +19,33 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppComponent {
 
-  playgrounds$: Observable<Playground[]> | undefined;
-  playground$ = new Subject<Playground>();
+  playgrounds: Signal<Playground[]>;
+  playground = this.store.playground;
   location$: Observable<Coordinate> = this.locationService.location$;
   center$: Observable<Center>;
-  markers$: Observable<Marker[]> | undefined;
+  markers: Signal<Marker[] | undefined>;
 
   constructor(
-    private service: PlaygroundService,
+    private store: PlaygroundStore,
     private modal: NgbModal,
     private locationService: LocationService,
   ) {
-    this.markers$ = combineLatest([
-      locationService.location$,
-      this.playground$.pipe(map(p => ({ ...p.position, message: p.name })), startWith(undefined)),
-    ]);
+    this.markers = computed(() => {
+      const playground = this.store.playground();
+      return [
+        this.locationService.location(),
+        playground ? ({ ...playground.position, message: playground.name }) : undefined
+      ];
+    });
 
     const getDistance = locationService.getDistance;
-    const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
-    this.playgrounds$ = combineLatest([
-      this.service.list().pipe(withLength()),
-      locationService.location$.pipe(distinctUntilChanged(compareLocations)),
-    ]).pipe(
-      map(([playgrounds, location]) =>
-        playgrounds
-          .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
-      )
-    );
+    this.store.getPlaygrounds();
+    this.playgrounds = computed(() => {
+      const location = this.locationService.location();
+      return location
+        ? this.store.playgrounds().sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+        : this.store.playgrounds();
+    });
     this.center$ = locationService.location$.pipe(
       startWith({ lat: 56.360029, lng: 10.746635 }),
       map(location => ({ ...location, zoom: 12 }))
@@ -53,7 +53,12 @@ export class AppComponent {
   }
 
   async edit(playground: Playground) {
-    EditPlaygroundModalComponent.open(this.modal, playground);
+    this.setPlayground(playground);
+    this.modal.open(EditPlaygroundModalComponent);
+  }
+
+  setPlayground({ id }: Playground) {
+    this.store.selectedId(id);
   }
 
 }

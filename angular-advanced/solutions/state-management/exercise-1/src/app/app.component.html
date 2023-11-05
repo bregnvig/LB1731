@@ -1,9 +1,9 @@
 <main class="vw-100 vh-100">
-  <leaflet [center]="center$ | async" [markers]="markers$ | async"></leaflet>
+  <leaflet [center]="center$ | async" [markers]="markers()"></leaflet>
 </main>
 <loop-sidebar
-  [playgrounds]="playgrounds$ | async"
+  [playgrounds]="playgrounds()"
   (edit)="edit($event)"
-  (selected)="playground$.next($event)">
+  (selected)="setPlayground($event)">
 </loop-sidebar>
-<loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+<loop-footer *ngIf="playground()" [playground]="playground()"></loop-footer>
