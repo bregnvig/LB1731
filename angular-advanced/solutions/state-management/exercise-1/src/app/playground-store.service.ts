@@ -34,7 +34,7 @@ export class PlaygroundStore {
     const id = this.state().id;
     id && this.service.update(id, playground).pipe(
       first()
-    ).subscribe(playground => this.setState(state => ({ playgrounds: state.playgrounds.map(p => p.id === id ? playground : p) })));
+    ).subscribe(() => this.loadPlaygrounds());
   }
 
   selectedId(id: string) {
