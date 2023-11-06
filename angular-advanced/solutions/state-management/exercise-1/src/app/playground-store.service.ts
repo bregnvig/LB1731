@@ -12,12 +12,10 @@ const initialState: PlaygroundState = {
   playgrounds: []
 };
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PlaygroundStore {
 
-  _state = signal(initialState);
+  private _state = signal(initialState);
 
   constructor(private service: PlaygroundService) { }
 
@@ -26,12 +24,10 @@ export class PlaygroundStore {
   }
 
   // This would be the actions and also effects
-  getPlaygrounds(): void {
+  loadPlaygrounds(): void {
     this.service.list().pipe(
       first(),
-    ).subscribe(playgrounds => {
-      this.setState(() => ({ playgrounds }));
-    });
+    ).subscribe(playgrounds => this.setState(() => ({ playgrounds })));
   }
 
   updatePlayground(playground: Partial<Playground>): void {
@@ -53,14 +49,13 @@ export class PlaygroundStore {
     fn: (state: PlaygroundState) => E
   ): void {
     const state = fn(this.state());
-    this._state.update(state => ({ ...this.state, ...state }));
+    this._state.set(({ ...this.state(), ...state }));
   }
 
-  // Common selector you could consider being private
+  // Common selector you could consider this being private
   select<T>(selector: (state: PlaygroundState) => T): Signal<T> {
     return computed(() => selector(this._state()));
   }
-
 
   // This would be the facade
   get playgrounds(): Signal<Playground[]> {
@@ -70,7 +65,4 @@ export class PlaygroundStore {
   get playground(): Signal<Playground | undefined> {
     return this.select(state => state.playgrounds.find(p => p.id === state.id));
   }
-
-
-
 }

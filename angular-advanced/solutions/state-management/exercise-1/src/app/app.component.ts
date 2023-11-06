@@ -1,12 +1,10 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, Signal, computed } from '@angular/core';
+import { Component, Injector, Signal, computed } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
-import { Coordinate, Playground } from './model';
+import { Playground } from './model';
 import { PlaygroundStore } from './playground-store.service';
 import { LocationService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -16,20 +14,23 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   standalone: true,
   templateUrl: './app.component.html',
   imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf],
+  providers: [PlaygroundStore],
 })
 export class AppComponent {
 
   playgrounds: Signal<Playground[]>;
   playground = this.store.playground;
-  location$: Observable<Coordinate> = this.locationService.location$;
-  center$: Observable<Center>;
+  center: Signal<Center>;
   markers: Signal<Marker[] | undefined>;
 
   constructor(
     private store: PlaygroundStore,
     private modal: NgbModal,
+    private injector: Injector,
     private locationService: LocationService,
   ) {
+    this.store.loadPlaygrounds();
+
     this.markers = computed(() => {
       const playground = this.store.playground();
       return [
@@ -39,22 +40,18 @@ export class AppComponent {
     });
 
     const getDistance = locationService.getDistance;
-    this.store.getPlaygrounds();
     this.playgrounds = computed(() => {
       const location = this.locationService.location();
       return location
         ? this.store.playgrounds().sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
         : this.store.playgrounds();
     });
-    this.center$ = locationService.location$.pipe(
-      startWith({ lat: 56.360029, lng: 10.746635 }),
-      map(location => ({ ...location, zoom: 12 }))
-    );
+    this.center = computed(() => locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
   }
 
-  async edit(playground: Playground) {
+  edit(playground: Playground) {
     this.setPlayground(playground);
-    this.modal.open(EditPlaygroundModalComponent);
+    this.modal.open(EditPlaygroundModalComponent, { injector: this.injector });
   }
 
   setPlayground({ id }: Playground) {

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as localForage from "localforage";
 import { Observable, from, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
 localForage.config({ driver: localForage.INDEXEDDB, name: 'state-management', version: 1.0, size: 4980736, storeName: 'state-management-store' });
@@ -29,7 +29,7 @@ export class PlaygroundService {
       map(playgrounds => playgrounds.find(playground => playground.id === id))
     );
   }
-  
+
   create(playground: Playground): Observable<Playground> {
     return this.list().pipe(
       map(playgrounds => [...playgrounds, playground]),

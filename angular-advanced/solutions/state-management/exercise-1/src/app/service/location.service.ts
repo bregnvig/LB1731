@@ -18,7 +18,7 @@ export class LocationService {
       const watchId = window.navigator.geolocation.watchPosition(position => {
         console.log('Looking for geolocation...');
         observer.next(position);
-        console.log('Got for geolocation...');
+        console.log('Got geolocation...');
       }, noop);
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
