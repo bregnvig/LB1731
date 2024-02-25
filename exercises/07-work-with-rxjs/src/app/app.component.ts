@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
 import { Center, LeafletModule } from './leaflet';
@@ -11,7 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [LeafletModule, SidebarComponent, NgIf, FooterComponent]
+  imports: [LeafletModule, SidebarComponent, FooterComponent]
 })
 export class AppComponent {
 
