@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
-import { filter, map, pairwise, ReplaySubject, startWith, Subscription } from 'rxjs';
+import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
 import { MarkerFactory } from './marker-factory';
