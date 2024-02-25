@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, map, shareReplay, switchMap } from 'rxjs';
@@ -15,13 +15,14 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
       <leaflet [center]="center" [markers]="markers$ | async"></leaflet>
     </main>
     <app-sidebar [playgrounds]="appPlaygrounds" [selectedPlayground]="playground" (selected)="playgroundSelected($event)"></app-sidebar>
-    <app-footer *ngIf="playground" [playground]="playground"></app-footer>
+    @if(playground) {
+      <app-footer [playground]="playground"></app-footer>
+    }
   `,
   standalone: true,
   imports: [
     LeafletModule,
     SidebarComponent,
-    NgIf,
     FooterComponent,
     AsyncPipe,
   ],

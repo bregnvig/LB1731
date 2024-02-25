@@ -5,4 +5,6 @@
   </div>
 </main>
 <app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
-<app-footer *ngIf="playground" [playground]="playground"></app-footer>
+@if(playground) {
+  <app-footer [playground]="playground"></app-footer>
+}
