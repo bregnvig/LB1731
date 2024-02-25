@@ -5,18 +5,18 @@ import { FactoryProvidedParentComponent } from './factory-provided-parent/factor
 
 
 const routes: Routes = [
-    {
-        path: 'no-provider',
-        component: NonProvidedComponent
-    },
-    {
-        path: 'provided',
-        component: ProvidedParentComponent
-    },
-    {
-        path: 'factory',
-        component: FactoryProvidedParentComponent
-    }
-]
+  {
+    path: 'no-provider',
+    component: NonProvidedComponent
+  },
+  {
+    path: 'provided',
+    component: ProvidedParentComponent
+  },
+  {
+    path: 'factory',
+    component: FactoryProvidedParentComponent
+  }
+];
 
-export const servicesRouting = RouterModule.forChild(routes);
+export const ServicesRouting = routes;

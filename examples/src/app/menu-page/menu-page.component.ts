@@ -1,13 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { Menu, MenuItems } from './menu.model';
 import { MenuComponent } from './menu/menu.component';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'examples-menu-page',
-    templateUrl: './menu-page.component.html',
-    standalone: true,
-    imports: [NgFor, MenuComponent],
+  selector: 'examples-menu-page',
+  templateUrl: './menu-page.component.html',
+  standalone: true,
+  imports: [NgFor, MenuComponent],
 })
 export class MenuPageComponent {
 
@@ -18,8 +18,8 @@ export class MenuPageComponent {
     { routerLink: '/components/property', title: 'Property' },
     { routerLink: '/components/event', title: 'Event' },
     { routerLink: '/components/twoway', title: 'Two way' },
-    { routerLink: '/components/ng-if', title: '*ngIf' },
-    { routerLink: '/components/ng-for', title: '*ngFor' },
+    { routerLink: '/components/ng-if', title: 'if statement' },
+    { routerLink: '/components/ng-for', title: 'for loop' },
   ];
 
   private inputOutput: MenuItems = [

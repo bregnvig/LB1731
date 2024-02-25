@@ -1,12 +1,27 @@
 <h2>*ngIf</h2>
 <button class="btn btn-primary" (click)="toggle()">Toggle</button>
 <article class="mt-3">
-  <p *ngIf="show else myElse">
-    ngIf works!
-    <app-inner></app-inner>
-  </p>
-  <ng-template #myElse>
-    <div>The <code>else</code> template could go here</div>
-  </ng-template>
+  <div class="row g-5">
+    <div class="col-auto">
+      <p *ngIf="show else myElse">
+        ngIf works!
+        <app-inner></app-inner>
+      </p>
+      <ng-template #myElse>
+        <div>The <code>else</code> template could go here</div>
+      </ng-template>
+    </div>
+    <div class="col-auto">
+      @if(show) {
+        <p>
+          ngIf works!
+          <app-inner></app-inner>
+        </p>
+
+      } @else  {
+        <div>The <code>else</code> template could go here</div>
+      }
+    </div>
+  </div>
 
 </article>

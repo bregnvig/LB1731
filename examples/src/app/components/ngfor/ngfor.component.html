@@ -1,5 +1,17 @@
 <h2>*ngFor</h2>
 <input class="form-control" type="text" #i (keyup.enter)="addInput(i.value)" autofocus>
-<ul class="mt-3 list-group">
-  <li class="list-group-item" *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
-</ul>
+<div class="row g-5">
+  <div class="col-auto">
+    <ul class="mt-3 list-group">
+      <li class="list-group-item" *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
+    </ul>
+  </div>
+  <div class="col-auto">
+    <ul class="mt-3 list-group">
+      @for (item of items; track item) {
+        <li class="list-group-item">{{item}}</li>
+      }
+    </ul>
+  </div>
+
+</div>
