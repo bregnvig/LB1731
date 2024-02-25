@@ -1,6 +1,0 @@
-<h1 *ngIf="service.user.isLoggedIn">Welcome {{service.user.name}}</h1>
-<ng-container *ngIf="!service.user.isLoggedIn">
-  <h1>Welcome stranger!</h1>
-  <p style="text-align: center">Please register to log in</p>
-  <p style="text-align: center"><button class="btn btn-primary" (click)="gotoRegistration()">{{'Register' | exclamation}}</button></p>
-</ng-container>

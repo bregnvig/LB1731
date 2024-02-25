@@ -5,7 +5,7 @@ import { Observable, of, timer } from 'rxjs';
 import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class F1SimpleService {
 
   constructor(private http: HttpClient) { }
@@ -15,7 +15,7 @@ export class F1SimpleService {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class F1BetterService {
 
   private drivers$: Observable<Driver[]>;
@@ -31,7 +31,7 @@ export class F1BetterService {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class F1CachedService {
 
   private drivers$: Observable<Driver[]>;
@@ -47,7 +47,7 @@ export class F1CachedService {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class F1AutoRefreshService {
 
   private drivers$: Observable<Driver[]>;
@@ -64,7 +64,7 @@ export class F1AutoRefreshService {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class F1LocalStorageCache {
   private request$: Observable<Driver[]>;
 

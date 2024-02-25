@@ -25,7 +25,7 @@ export const AppRouting: Routes = [
   },
   {
     path: 'async',
-    loadChildren: () => import('../app/async/async.module').then(m => m.AsyncModule)
+    loadChildren: () => import('../app/async/async.routing').then(m => m.AsyncRouting)
   },
   {
     path: 'pipes',

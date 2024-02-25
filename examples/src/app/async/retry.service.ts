@@ -6,7 +6,7 @@ import { retry } from 'rxjs/operators';
 import { Driver } from './driver';
 import { F1BetterService } from './f1.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RetryService {
 
   readonly drivers$: Observable<Driver[]>;
