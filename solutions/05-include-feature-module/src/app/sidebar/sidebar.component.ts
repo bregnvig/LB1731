@@ -1,13 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Playground } from '../shared';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss'],
-    standalone: true,
-    imports: [NgFor]
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
+  standalone: true,
 })
 export class SidebarComponent {
   @Input() playgrounds?: Playground[];
