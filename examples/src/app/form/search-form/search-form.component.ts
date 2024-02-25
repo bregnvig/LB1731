@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 
 
 
 @Component({
-  selector: 'app-search-form',
-  templateUrl: './search-form.component.html',
+    selector: 'app-search-form',
+    templateUrl: './search-form.component.html',
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule],
 })
 export class SearchFormComponent implements OnInit {
 

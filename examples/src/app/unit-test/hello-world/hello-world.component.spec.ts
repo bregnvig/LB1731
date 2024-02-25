@@ -14,25 +14,25 @@ describe('HelloWorldComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HelloWorldComponent, ExclamationPipe],
-      providers: [
+    declarations: [HelloWorldComponent, ExclamationPipe],
+    providers: [
         {
-          provide: UserService,
-          useValue: {
-            user: {
-              isLoggedIn: false,
-              name: null,
+            provide: UserService,
+            useValue: {
+                user: {
+                    isLoggedIn: false,
+                    name: null,
+                }
             }
-          }
         },
         {
-          provide: Router,
-          useValue: {
-            navigate: jasmine.createSpy('navigate')
-          }
+            provide: Router,
+            useValue: {
+                navigate: jasmine.createSpy('navigate')
+            }
         }
-      ]
-    })
+    ]
+})
       .compileComponents();
   }));
 

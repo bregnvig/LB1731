@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { RandomService } from './../random.service';
 
 @Component({
-  selector: 'app-provided',
-  template: '{{service.random}}'
+    selector: 'app-provided',
+    template: '{{service.random}}',
+    standalone: true
 })
 export class ProvidedComponent {
 

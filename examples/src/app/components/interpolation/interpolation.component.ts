@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-interpolation',
-  templateUrl: './interpolation.component.html',
-  styleUrls: ['./interpolation.component.css']
+    selector: 'app-interpolation',
+    templateUrl: './interpolation.component.html',
+    styleUrls: ['./interpolation.component.css'],
+    standalone: true
 })
 export class InterpolationComponent {
 

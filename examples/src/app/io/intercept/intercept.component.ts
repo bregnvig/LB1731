@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-intercept-child',
-  template: '<p>{{value}}</p>'
+    selector: 'app-intercept-child',
+    template: '<p>{{value}}</p>',
+    standalone: true
 })
 export class InterceptChildComponent {
   private _value?: string;
@@ -18,12 +20,14 @@ export class InterceptChildComponent {
 }
 
 @Component({
-  selector: 'app-intercept',
-  template: `
+    selector: 'app-intercept',
+    template: `
     <h2>Parent -> child intercept</h2>
     <app-intercept-child [value]="fromProperty"></app-intercept-child>
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
+    standalone: true,
+    imports: [InterceptChildComponent, FormsModule],
 })
 export class InterceptComponent {
 

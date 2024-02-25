@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-ngfor',
-  templateUrl: './ngfor.component.html',
+    selector: 'app-ngfor',
+    templateUrl: './ngfor.component.html',
+    standalone: true,
+    imports: [NgFor],
 })
 export class NgforComponent {
 

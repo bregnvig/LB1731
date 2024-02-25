@@ -12,14 +12,11 @@ import { ProvidedParentComponent } from './provided-parent/provided-parent.compo
 import { FactoryProvidedParentComponent } from './factory-provided-parent/factory-provided-parent.component';
 
 @NgModule({
-    declarations: [
-        NonProvidedComponent,
+    imports: [CommonModule, FormsModule, servicesRouting, NonProvidedComponent,
         ProvidedComponent,
         FactoryProvidedComponent,
         ProvidedParentComponent,
-        FactoryProvidedParentComponent
-    ],
-    imports: [CommonModule, FormsModule, servicesRouting],
+        FactoryProvidedParentComponent],
     providers: [
         LoggerService,
         {

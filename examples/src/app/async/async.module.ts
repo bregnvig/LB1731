@@ -23,9 +23,7 @@ import { RetryService } from './retry.service';
 import { CatchErrorComponent } from './catch-error/catch-error.component';
 
 @NgModule({
-    imports: [CommonModule, HttpClientModule, FormsModule, asyncRouting],
-    declarations: [
-        SimpleHttpServiceComponent,
+    imports: [CommonModule, HttpClientModule, FormsModule, asyncRouting, SimpleHttpServiceComponent,
         BetterAsyncServiceComponent,
         CachedAsyncServiceComponent,
         AutoRefreshComponent,
@@ -36,12 +34,12 @@ import { CatchErrorComponent } from './catch-error/catch-error.component';
         RetryWhenComponent,
         CatchErrorComponent],
     providers: [
-        F1SimpleService, 
-        F1BetterService, 
-        F1CachedService, 
-        F1AutoRefreshService, 
+        F1SimpleService,
+        F1BetterService,
+        F1CachedService,
+        F1AutoRefreshService,
         F1LocalStorageCache,
-        SharedTimerService, 
+        SharedTimerService,
         RetryService
     ]
 })

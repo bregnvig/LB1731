@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-property',
-  templateUrl: './property.component.html',
+    selector: 'app-property',
+    templateUrl: './property.component.html',
+    standalone: true,
 })
 export class PropertyComponent {
 

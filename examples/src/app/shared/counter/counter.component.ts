@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { CounterService } from '../counter.service';
 
 @Component({
-  selector: 'app-counter',
-  templateUrl: './counter.component.html',
+    selector: 'app-counter',
+    templateUrl: './counter.component.html',
+    standalone: true,
 })
 export class CounterComponent {
 

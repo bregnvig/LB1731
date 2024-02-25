@@ -1,10 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
+import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwatch.component';
 
 @Component({
-  selector: 'app-viewchild',
-  templateUrl: './viewchild.component.html',
+    selector: 'app-viewchild',
+    templateUrl: './viewchild.component.html',
+    standalone: true,
+    imports: [StopwatchComponent_1],
 })
 export class ViewchildComponent {
 

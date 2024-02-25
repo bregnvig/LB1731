@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[rotate180]'
+    selector: '[rotate180]',
+    standalone: true
 })
 export class Rotate180 {
 
@@ -11,7 +12,8 @@ export class Rotate180 {
 }
 
 @Directive({
-  selector: '[rotateFlyover]'
+    selector: '[rotateFlyover]',
+    standalone: true
 })
 export class RotateFlyover {
 
@@ -29,7 +31,8 @@ export class RotateFlyover {
 }
 
 @Directive({
-  selector: '[rotateFlyover2]'
+    selector: '[rotateFlyover2]',
+    standalone: true
 })
 export class RotateFlyover2 {
 
@@ -50,7 +53,8 @@ export class RotateFlyover2 {
 
 
 @Directive({
-  selector: '[rotateFlyover3]'
+    selector: '[rotateFlyover3]',
+    standalone: true
 })
 export class RotateFlyover3 {
 

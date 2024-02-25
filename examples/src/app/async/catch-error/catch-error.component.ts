@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Driver } from '../driver';
 import { F1LocalStorageCache } from '../f1.service';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-catch-error',
-  templateUrl: './catch-error.component.html',
+    selector: 'app-catch-error',
+    templateUrl: './catch-error.component.html',
+    standalone: true,
+    imports: [NgFor],
 })
 export class CatchErrorComponent implements OnInit {
   drivers?: Driver[];

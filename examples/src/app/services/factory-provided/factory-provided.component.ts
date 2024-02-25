@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { RandomService, RANDOM_FACTORY } from '../random.service';
 
 @Component({
-  selector: 'app-factory-provided',
-  template: '{{service.random}}',
+    selector: 'app-factory-provided',
+    template: '{{service.random}}',
+    standalone: true,
 })
 export class FactoryProvidedComponent {
 

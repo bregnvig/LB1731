@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-event',
-  template: `
+    selector: 'app-event',
+    template: `
     <h2>(event)</h2>
     <ul class="list-group">
       <li class="list-group-item"><button class="btn btn-primary"(click)="count()">Clicked {{counter}} times</button></li>
@@ -11,7 +11,8 @@ import { Component } from '@angular/core';
         <p>{{isDown ? 'Key is down' : 'Key is up!'}}</p>
       </li>
     </ul>
-  `
+  `,
+    standalone: true
 })
 export class EventComponent {
 

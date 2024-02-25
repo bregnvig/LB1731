@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { Driver } from '../driver';
 import { F1CachedService } from '../f1.service';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-cached-async-service',
-  templateUrl: './cached-async-service.component.html',
+    selector: 'app-cached-async-service',
+    templateUrl: './cached-async-service.component.html',
+    standalone: true,
+    imports: [NgFor],
 })
 export class CachedAsyncServiceComponent implements OnInit {
 

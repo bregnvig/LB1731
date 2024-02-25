@@ -3,10 +3,13 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { SharedTimerService } from '../timer.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-ref-count',
-  templateUrl: './ref-count.component.html',
+    selector: 'app-ref-count',
+    templateUrl: './ref-count.component.html',
+    standalone: true,
+    imports: [DatePipe],
 })
 export class RefCountComponent implements OnDestroy {
 

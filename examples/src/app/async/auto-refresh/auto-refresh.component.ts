@@ -2,11 +2,14 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Driver } from '../driver';
 import { F1AutoRefreshService } from '../f1.service';
+import { NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'app-auto-refresh',
-  templateUrl: './auto-refresh.component.html',
+    selector: 'app-auto-refresh',
+    templateUrl: './auto-refresh.component.html',
+    standalone: true,
+    imports: [NgFor],
 })
 export class AutoRefreshComponent implements OnDestroy {
 

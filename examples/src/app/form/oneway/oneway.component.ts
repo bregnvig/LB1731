@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { Person } from './../person';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
-  selector: 'app-oneway',
-  templateUrl: './oneway.component.html',
+    selector: 'app-oneway',
+    templateUrl: './oneway.component.html',
+    standalone: true,
+    imports: [FormsModule, NgFor],
 })
 export class OnewayComponent {
   colors = ["Red", "Green", "Blue"];

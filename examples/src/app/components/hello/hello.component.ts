@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-hello',
-  template: `
+    selector: 'app-hello',
+    template: `
     <h2>
       {{title}}
     </h2>
   `,
-  styles: [
-    `h2 {
+    styles: [
+        `h2 {
       color: darkred !important;
     } `
-  ]
+    ],
+    standalone: true
 })
 export class HelloComponent implements OnInit {
 

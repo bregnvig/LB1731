@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Driver } from '../driver';
 import { F1SimpleService } from '../f1.service';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-simple-http-service',
-  template: `
+    selector: 'app-simple-http-service',
+    template: `
     <h2>Simple HTTP Service</h2>
     <ul class="list-group">
       <li *ngFor="let driver of drivers" class="list-group-item">
@@ -13,6 +14,8 @@ import { F1SimpleService } from '../f1.service';
       </li>
     </ul>
   `,
+    standalone: true,
+    imports: [NgFor],
 })
 export class SimpleHttpServiceComponent implements OnInit {
 

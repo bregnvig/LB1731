@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-io-event-child',
-  template: `
+    selector: 'app-io-event-child',
+    template: `
     <div class="form-check">
       <input class="form-check-input" name="interval" type="radio" (click)="update('weekly')">
       <label class="form-check-label" for="flexCheckDefault">Weekly</label>
@@ -11,8 +11,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
       <input class="form-check-input" name="interval" type="radio" (click)="update('monthly')">
       <label class="form-check-label" for="flexCheckDefault">Monthly</label>
     </div>
-  `
-
+  `,
+    standalone: true
 })
 export class IOEventChildComponent {
   @Output() interval = new EventEmitter<string>();
@@ -23,14 +23,16 @@ export class IOEventChildComponent {
 }
 
 @Component({
-  selector: 'app-io-event',
-  template: `
+    selector: 'app-io-event',
+    template: `
     <h2>Child -> parent</h2>
     <app-io-event-child (interval)="interval = $event"></app-io-event-child>
     <p>
       Chosen newsletter {{interval}}
     </p>
   `,
+    standalone: true,
+    imports: [IOEventChildComponent],
 })
 export class IOEventComponent {
 

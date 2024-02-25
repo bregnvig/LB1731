@@ -3,9 +3,12 @@ import { interval, Observable } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
 @Component({
-  selector: 'app-interval',
-  templateUrl: './interval.component.html',
+    selector: 'app-interval',
+    templateUrl: './interval.component.html',
+    standalone: true,
+    imports: [AsyncPipe],
 })
 export class IntervalComponent implements OnInit {
 

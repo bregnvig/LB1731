@@ -1,8 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 
 @Component({
-  selector: 'app-stopwatch',
-  template: '{{seconds}}',
+    selector: 'app-stopwatch',
+    template: '{{seconds}}',
+    standalone: true,
 })
 export class StopwatchComponent implements OnDestroy {
 

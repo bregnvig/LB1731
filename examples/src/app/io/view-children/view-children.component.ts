@@ -1,10 +1,14 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
+import { NgFor } from '@angular/common';
+import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwatch.component';
 
 @Component({
-  selector: 'app-view-children',
-  templateUrl: './view-children.component.html',
+    selector: 'app-view-children',
+    templateUrl: './view-children.component.html',
+    standalone: true,
+    imports: [StopwatchComponent_1, NgFor],
 })
 export class ViewChildrenComponent {
   @ViewChildren(StopwatchComponent) stopwatches?: QueryList<StopwatchComponent>;
