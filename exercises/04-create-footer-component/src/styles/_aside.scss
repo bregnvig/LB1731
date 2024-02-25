@@ -4,21 +4,21 @@ aside {
   top: 20px;
   max-height: calc(100vh - 40px);
   width: 350px;
+  overflow: auto;
   z-index: 501;
   border-radius: 6px;
-  overflow-y: auto;
   transition: 0.43s ease-in-out;
   > nav {
-    height: inherit;
-    overflow-x: hidden;
+    max-height: calc(100vh - 86px);
+    overflow: auto;
   }
   @media screen and (max-width: 599px) {
     border-radius: 0;
-    top: calc(100vh - 16px);
+    top: calc(100vh - 20px);
     right: 0;
     width: 100%;
-    height: calc(50vh + 16px);
-    border-top: 16px solid darkorange;
+    height: calc(50vh + 20px);
+    border-top: 8px solid black;
     margin: 0;
     transition: 0.43s ease-in-out;
     &:focus {

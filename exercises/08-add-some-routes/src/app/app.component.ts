@@ -1,14 +1,19 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Center, Marker } from './leaflet';
+import { FooterComponent } from './footer/footer.component';
+import { Center, LeafletModule, Marker } from './leaflet';
 import { LocationService } from './shared';
 import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [LeafletModule, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
