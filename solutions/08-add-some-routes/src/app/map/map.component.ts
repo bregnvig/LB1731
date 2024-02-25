@@ -1,9 +1,12 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, map, shareReplay, switchMap } from 'rxjs';
-import { Center, Marker } from '../leaflet';
+import { FooterComponent } from '../footer/footer.component';
+import { Center, LeafletModule, Marker } from '../leaflet';
 import { LocationService, Playground } from '../shared';
 import { PlaygroundService } from '../shared/playground.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +17,14 @@ import { PlaygroundService } from '../shared/playground.service';
     <app-sidebar [playgrounds]="appPlaygrounds" [selectedPlayground]="playground" (selected)="playgroundSelected($event)"></app-sidebar>
     <app-footer *ngIf="playground" [playground]="playground"></app-footer>
   `,
+  standalone: true,
+  imports: [
+    LeafletModule,
+    SidebarComponent,
+    NgIf,
+    FooterComponent,
+    AsyncPipe,
+  ],
 })
 export class MapComponent {
 
