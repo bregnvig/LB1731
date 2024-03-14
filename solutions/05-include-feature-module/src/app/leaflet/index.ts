@@ -1,2 +1,3 @@
-export * from './center'
-export * from './marker'
+export * from './center';
+export * from './leaflet.module';
+export * from './marker';

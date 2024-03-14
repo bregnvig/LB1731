@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
-import { Center } from './leaflet';
-import { LeafletModule } from './leaflet/leaflet.module';
 import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 import { Playground } from './shared/playground';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { Center, LeafletModule } from './leaflet';
 
 @Component({
   selector: 'app-root',
