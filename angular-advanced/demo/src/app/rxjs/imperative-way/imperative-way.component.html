@@ -12,7 +12,7 @@
           <input type="text" placeholder="Filter playgrounds" class="col" autofocus [(ngModel)]="term" (ngModelChange)="filterPlaygrounds()">
         </div>
       </li>
-      @for (p of playgrounds; track trackById($index, p)) {
+      @for (p of playgrounds; track p.id) {
         <li class="list-group-item d-flex">
           <ngb-highlight [term]="term" [result]="p.name"></ngb-highlight>
           <span class="ms-2 badge bg-primary">{{getDistance(p)}}</span>
