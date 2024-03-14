@@ -5,11 +5,16 @@ import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { withLength } from './utils/rxjs-utils';
+import { FooterComponent } from './footer/footer.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
