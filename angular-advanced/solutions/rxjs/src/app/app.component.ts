@@ -1,20 +1,20 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, interval, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-import { Center, Marker } from './leaflet';
+import { FooterComponent } from './footer/footer.component';
+import { Center, LeafletComponent, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
-import { withLength } from './utils/rxjs-utils';
-import { FooterComponent } from './footer/footer.component';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { withLength } from './utils/rxjs-utils';
 
 @Component({
-    selector: 'loop-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    standalone: true,
-    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe]
+  selector: 'loop-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [LeafletComponent, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
