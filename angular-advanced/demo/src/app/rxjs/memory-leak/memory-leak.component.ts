@@ -14,7 +14,9 @@ let creation = 0;
       }
     </ul>
     <!-- <ul>
-    <li *ngFor="let no of nos$ | async">{{no}}</li>
+      @for(no of nos$ | async; track no) {
+      <li>{{no}}</li>
+      }
     </ul> -->
     `,
 })

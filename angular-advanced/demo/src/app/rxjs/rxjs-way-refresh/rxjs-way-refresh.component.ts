@@ -15,7 +15,6 @@ export class RxJSWayRefreshComponent implements OnInit {
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new Subject<void>();
   location$ = this.locationService.location$;
-  trackById = (i: number, playground: Playground): string => playground.id;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) { }
 

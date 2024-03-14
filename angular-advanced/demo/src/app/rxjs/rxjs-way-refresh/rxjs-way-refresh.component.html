@@ -12,7 +12,7 @@
         </div>
       </li>
       @if (playgrounds$ | async; as playgrounds) {
-        @for (p of playgrounds; track trackById($index, p)) {
+        @for (p of playgrounds; track p.id) {
           <li class="list-group-item d-flex">
             <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
             <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
