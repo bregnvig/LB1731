@@ -9,9 +9,11 @@
 <div class="row mt-2">
   <div class="col">
     <ul class="list-group">
-      <li *ngFor="let item of filtered$ |async" class="list-group-item">
-        <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
-      </li>
+      @for (item of filtered$ |async; track item) {
+        <li class="list-group-item">
+          <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
+        </li>
+      }
     </ul>
   </div>
 </div>

@@ -6,11 +6,13 @@ import { Playground } from 'src/app/shared';
   selector: 'loop-fancy-playground-details',
   template: `
     <h5>{{title}}</h5>
-    <div *ngIf="options" style="height: 300px;"
-      leaflet 
-      [leafletOptions]="options">
-    </div>
-  `,
+    @if (options) {
+      <div style="height: 300px;"
+        leaflet
+        [leafletOptions]="options">
+      </div>
+    }
+    `,
   styles: [
   ],
 })

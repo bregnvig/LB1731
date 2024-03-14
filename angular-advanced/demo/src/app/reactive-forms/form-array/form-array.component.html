@@ -4,17 +4,19 @@
     <input #email type="email" class="form-control col" id="email" (keydown.enter)="addEmail(email.value)">
   </div>
   <hr>
-  <h5>Form array content</h5>
-  <div class="form-group flex-wrap" formArrayName="emailAddresses">
-    <div *ngFor="let _ of fg.controls.emailAddresses.controls; index as i" class="col-12  input-group mb-2">
-      <span class="input-group-text">{{i}}</span>
-      <input
-        type="text"
-        class="form-control"
-        [formControlName]="i">
+    <h5>Form array content</h5>
+    <div class="form-group flex-wrap" formArrayName="emailAddresses">
+      @for (_ of fg.controls.emailAddresses.controls; track _; let i = $index) {
+        <div class="col-12  input-group mb-2">
+          <span class="input-group-text">{{i}}</span>
+          <input
+            type="text"
+            class="form-control"
+            [formControlName]="i">
+        </div>
+      }
     </div>
-  </div>
-  <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
-  </div>
-</form>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    </div>
+  </form>

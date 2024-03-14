@@ -1,11 +1,11 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, signal, untracked } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-playgrounds-untracked',
   standalone: true,
-  imports: [NgFor, JsonPipe, NgbAlert],
+  imports: [JsonPipe, NgbAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div>

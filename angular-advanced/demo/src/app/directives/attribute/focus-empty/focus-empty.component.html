@@ -24,45 +24,47 @@
     <div class="col d-flex flex-column mt-3">
       <code class="fs-6">
         <pre>
-&lt;form <strong>focusEmpty</strong> [formGroup]="fg" (ngSubmit)="submit()" class="col-auto"&gt;
-    &lt;div class="form-group row"&gt;
-        &lt;div class="col"&gt;
-            &lt;label class="form-label"&gt;First name&lt;/label&gt;
-            <strong>&lt;input class="form-control" type="text" formControlName="first"&gt;</strong>
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group row"&gt;
-        &lt;div class="col"&gt;
-            &lt;label class="form-label"&gt;Last name&lt;/label&gt;
-            <strong>&lt;input class="form-control" type="text" formControlName="last"&gt;</strong>
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="form-group row"&gt;
-        &lt;div class="col"&gt;
-            &lt;label class="form-label"&gt;Age&lt;/label&gt;
-            <strong>&lt;input class="form-control" type="number" formControlName="age"&gt;</strong>
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;button class="btn btn-primary"&gt;Submit&lt;/button&gt;
-&lt;/form&gt;
+          &lt;form <strong>focusEmpty</strong> [formGroup]="fg" (ngSubmit)="submit()" class="col-auto"&gt;
+          &lt;div class="form-group row"&gt;
+          &lt;div class="col"&gt;
+          &lt;label class="form-label"&gt;First name&lt;/label&gt;
+          <strong>&lt;input class="form-control" type="text" formControlName="first"&gt;</strong>
+          &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group row"&gt;
+          &lt;div class="col"&gt;
+          &lt;label class="form-label"&gt;Last name&lt;/label&gt;
+          <strong>&lt;input class="form-control" type="text" formControlName="last"&gt;</strong>
+          &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class="form-group row"&gt;
+          &lt;div class="col"&gt;
+          &lt;label class="form-label"&gt;Age&lt;/label&gt;
+          <strong>&lt;input class="form-control" type="number" formControlName="age"&gt;</strong>
+          &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;button class="btn btn-primary"&gt;Submit&lt;/button&gt;
+          &lt;/form&gt;
         </pre>
       </code>
       <code>
-            <pre class="fs-5">
-&#64;Directive(&#123; selector: '<strong>form[focusEmpty]</strong>' &#125;)
-  export class FocusEmptyDirective &#123;
-  
-    constructor(<strong>elementRef: ElementRef</strong>) &#123;&#125;
-  
-    <strong>&#64;HostListener('submit')</strong>
-    onFormSubmit() &#123;
-      <span [class.fw-bolder]="submitted">const emptyControl = this.elementRef.nativeElement.querySelector('input.ng-invalid:not([value]):not([value=""])');
-      emptyControl && emptyControl.focus();</span>
-    &#125;
-  &#125;
+        <pre class="fs-5">
+          &#64;Directive(&#123; selector: '<strong>form[focusEmpty]</strong>' &#125;)
+          export class FocusEmptyDirective &#123;
+
+          constructor(<strong>elementRef: ElementRef</strong>) &#123;&#125;
+
+          <strong>&#64;HostListener('submit')</strong>
+          onFormSubmit() &#123;
+          <span [class.fw-bolder]="submitted">const emptyControl = this.elementRef.nativeElement.querySelector('input.ng-invalid:not([value]):not([value=""])');
+          emptyControl && emptyControl.focus();</span>
+          &#125;
+          &#125;
         </pre>
       </code>
-      <ngb-alert *ngIf="submitted" class="col" type="success">Submitted! 🥳</ngb-alert>    
+      @if (submitted) {
+        <ngb-alert class="col" type="success">Submitted! 🥳</ngb-alert>
+      }
     </div>
   </div>
 </article>

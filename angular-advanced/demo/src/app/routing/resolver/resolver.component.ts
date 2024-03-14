@@ -7,14 +7,16 @@ import { Playground } from 'src/app/shared';
 @Component({
   selector: 'loop-resolver',
   template: `
-    <div class="card" *ngIf="playground$ | async as playground">
-      <div class="card-body">
-        <h5 class="card-title">{{playground?.name}}</h5>
-        <p class="card-text">{{playground?.description}}</p>
-        <p class="card-text">{{playground?.addressDescription}}</p>
+    @if (playground$ | async; as playground) {
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{playground?.name}}</h5>
+          <p class="card-text">{{playground?.description}}</p>
+          <p class="card-text">{{playground?.addressDescription}}</p>
+        </div>
       </div>
-    </div>  
-  `,
+    }
+    `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResolverComponent {
