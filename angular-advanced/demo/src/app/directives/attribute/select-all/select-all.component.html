@@ -21,12 +21,12 @@
       </code>
       <code>
       <pre class="fs-5">
-@Directive(&#123; selector: '[<strong>selectAll</strong>]' &#125;)
+&#64;Directive(&#123; selector: '[<strong>selectAll</strong>]' &#125;)
 export class SelectAllDirective &#123;
 
   constructor(<strong>private elementRef: ElementRef</strong>) &#123; &#125;
 
-  <span [class.fw-bolder]="hasFocus">@HostListener('focus')</span>
+  <span [class.fw-bolder]="hasFocus">&#64;HostListener('focus')</span>
   onFocus(value: string) &#123;
     <span [class.fw-bolder]="hasFocus">this.elementRef.nativeElement.select();</span>
   &#125;

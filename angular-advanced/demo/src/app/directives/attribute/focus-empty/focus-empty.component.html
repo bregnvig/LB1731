@@ -49,12 +49,12 @@
       </code>
       <code>
             <pre class="fs-5">
-@Directive(&#123; selector: '<strong>form[focusEmpty]</strong>' &#125;)
+&#64;Directive(&#123; selector: '<strong>form[focusEmpty]</strong>' &#125;)
   export class FocusEmptyDirective &#123;
   
     constructor(<strong>elementRef: ElementRef</strong>) &#123;&#125;
   
-    <strong>@HostListener('submit')</strong>
+    <strong>&#64;HostListener('submit')</strong>
     onFormSubmit() &#123;
       <span [class.fw-bolder]="submitted">const emptyControl = this.elementRef.nativeElement.querySelector('input.ng-invalid:not([value]):not([value=""])');
       emptyControl && emptyControl.focus();</span>
