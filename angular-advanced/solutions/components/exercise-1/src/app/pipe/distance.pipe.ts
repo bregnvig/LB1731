@@ -9,7 +9,7 @@ export class DistancePipe implements PipeTransform {
 
   constructor(private locationService: LocationService) { }
 
-  transform(value: Coordinate, location: Coordinate | null): number | string {
+  transform(value: Coordinate, location: Coordinate | null | undefined): number | string {
     return location ? this.locationService.getDistance(location, value) : 'Ukendt';
   }
 

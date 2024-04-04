@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { combineLatest, merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Observable, Subject, combineLatest, merge } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
@@ -23,6 +23,7 @@ export class AppComponent {
   markers$: Observable<Marker> | undefined;
   location$ = this.locationService.location$;
   component = FooterComponent;
+  filterFn = (term: string, playground: Playground) => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase());
 
   constructor(private service: PlaygroundService, private locationService: LocationService) {
   }
@@ -41,12 +42,9 @@ export class AppComponent {
     this.playgrounds$ = combineLatest([
       this.service.playgrounds$.pipe(withLength()),
       this.locationService.location$.pipe(distinctUntilChanged(compareLocations)),
-      this.sidebar.filterChanged.pipe(startWith('')),
     ]).pipe(
-      map(([playgrounds, location, filter]) =>
-        playgrounds
-          .filter(p => p.name.includes(filter))
-          .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+      map(([playgrounds, location]) =>
+        playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
     );
   }

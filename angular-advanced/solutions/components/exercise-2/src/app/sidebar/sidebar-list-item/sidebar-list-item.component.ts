@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Coordinate, Playground } from 'src/app/model';
 
 @Component({
@@ -10,6 +9,6 @@ import { Coordinate, Playground } from 'src/app/model';
 export class SidebarListItemComponent {
 
   @Input() playground!: Playground;
-  @Input() selected?: Playground;
-  @Input() location$?: Observable<Coordinate>;
+  @Input() selected = false;
+  @Input() location?: Coordinate | null;
 }

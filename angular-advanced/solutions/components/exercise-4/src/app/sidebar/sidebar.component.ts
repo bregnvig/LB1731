@@ -1,28 +1,31 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, Observable } from 'rxjs';
+import { Observable, debounceTime, map } from 'rxjs';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
 
 @Component({
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
 
-  @Input() items: any[] | null = [];
+  @Input({ required: true }) items: any[] | null = [];
   @Input() itemTemplate?: TemplateRef<any>;
   @Output() selected = new EventEmitter<any>();
-  @Output() filterChanged = new EventEmitter<string>();
+  @Input({ required: true }) filterFn?: (term: string, item: any) => boolean;
 
   selectedItem?: any;
   filterControl = new FormControl<string>('');
   location$: Observable<Coordinate> = this.locationService.location$;
+  filtered$: Observable<any[]>;
 
   constructor(private locationService: LocationService) {
-    this.filterControl.valueChanges.pipe(
-      debounceTime(0)
-    ).subscribe(value => this.filterChanged.emit(value ?? ''));
+    this.filtered$ = this.filterControl.valueChanges.pipe(
+      debounceTime(0),
+      map(term => (this.items ?? []).filter(item => this.filterFn?.(term ?? '', item)))
+    );
   }
 
   selectItem(item: any): void {
