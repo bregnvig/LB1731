@@ -1,12 +1,19 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable, debounceTime, map } from 'rxjs';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
+import { NgFor, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    standalone: true,
+    imports: [
+        ReactiveFormsModule,
+        NgFor,
+        NgTemplateOutlet,
+    ],
 })
 export class SidebarComponent {
 

@@ -7,40 +7,36 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DynamicIoModule } from 'ng-dynamic-component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
-import { LeafletModule } from './leaflet';
+
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
-import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
 
 library.add(fas, far);
 
-@NgModule({
-  declarations: [
-    AppComponent,
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    declarations: [AppComponent],
+    imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgbModule,
+    FontAwesomeModule,
     SidebarComponent,
     FooterComponent,
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
     SidebarListItemComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NgbModule,
-    LeafletModule,
-    FontAwesomeModule,
-    DynamicIoModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+],
+    providers: [],
+    bootstrap: [AppComponent]
+} */)
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library

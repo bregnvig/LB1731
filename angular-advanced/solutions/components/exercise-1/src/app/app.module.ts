@@ -10,35 +10,33 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
-import { LeafletModule } from './leaflet';
+
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
 
 library.add(fas, far);
 
-@NgModule({
-  declarations: [
-    AppComponent,
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    declarations: [AppComponent],
+    imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgbModule,
+    FontAwesomeModule,
     SidebarComponent,
     FooterComponent,
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
     SidebarListItemComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NgbModule,
-    LeafletModule,
-    FontAwesomeModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+],
+    providers: [],
+    bootstrap: [AppComponent]
+} */)
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library

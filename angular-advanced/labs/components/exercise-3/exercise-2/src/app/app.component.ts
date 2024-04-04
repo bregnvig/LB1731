@@ -1,16 +1,22 @@
+import { AsyncPipe, NgComponentOutlet, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { ComponentOutletInjectorDirective, DynamicIoDirective } from 'ng-dynamic-component';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
+import { LeafletModule } from "./leaflet/leaflet.module";
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [SidebarComponent, NgIf, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 
