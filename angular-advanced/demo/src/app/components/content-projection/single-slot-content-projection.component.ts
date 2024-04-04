@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -17,10 +17,5 @@ import { PlaygroundService } from 'src/app/shared';
 })
 export class SingleSlotContentProjectionComponent {
 
-  playgrounds$ = this.service.playgrounds$;
-
-  constructor(private service: PlaygroundService) { }
-
-
-
+  playgrounds$ = inject(PlaygroundService).playgrounds$;
 }
