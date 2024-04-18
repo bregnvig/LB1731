@@ -1,41 +1,41 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, noop, Observable, Subject } from 'rxjs';
+import { Observable, Subject, combineLatest, noop } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
-import { Center, Marker } from './leaflet';
+import { FooterComponent } from './footer/footer.component';
+import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
-import { withLength } from './utils/rxjs-utils';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { truthy, withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [LeafletModule, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();
   location$: Observable<Coordinate> = this.locationService.location$;
-  center: Center = new Center(56.360029, 10.746635);
-  markers$: Observable<Marker> | undefined;
+  center: Center = { lat: 56.360029, lng: 10.746635 };
+  markers$: Observable<Marker[]>;
 
   constructor(
     private service: PlaygroundService,
     private locationService: LocationService,
     private modal: NgbModal,
   ) {
-  }
-
-  ngOnInit() {
-    this.locationService.location$.subscribe(location => {
-      this.center = new Center(location.lat, location.lng, 12);
-    });
-    this.markers$ = merge(
-      this.locationService.location$.pipe(map(location => new Marker('me', location.lat, location.lng))),
-      this.playground$.pipe(map(p => new Marker('playground', p.position.lat, p.position.lng, p.name))),
-    );
+    this.locationService.location$.subscribe(location => this.center = { ...location, zoom: 12 });
+    this.markers$ = combineLatest([
+      this.locationService.location$,
+      this.playground$.pipe(truthy(), map(p => p.position)),
+    ]);
 
     const getDistance = this.locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
