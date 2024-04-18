@@ -3,13 +3,14 @@ import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/c
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicIoModule } from 'ng-dynamic-component';
-import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
+import { AppRoutes } from './app/app.routing';
 import { environment } from './environments/environment';
 
 library.add(fas);
@@ -20,7 +21,8 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, ReactiveFormsModule, AppRoutingModule, NgbModule, FontAwesomeModule, DynamicIoModule),
+    provideRouter(AppRoutes),
+    importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule, FontAwesomeModule, DynamicIoModule),
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: APP_INITIALIZER,
