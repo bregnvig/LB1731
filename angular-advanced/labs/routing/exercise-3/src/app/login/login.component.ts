@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [ReactiveFormsModule]
 })
 export class LoginComponent {
 
-  fg = this.fb.group({
+  fg = this.fb.nonNullable.group({
     email: [sessionStorage.getItem('email'), [Validators.required, Validators.email]],
     password: ['somestring', Validators.required],
   });
-
-  private returnUrl = this.route.snapshot.params['returnUrl'];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class LoginComponent {
     if (this.fg.valid) {
       this.authService.login(email!, password!).subscribe(value => {
         if (value) {
-          this.returnUrl ? this.router.navigateByUrl(this.returnUrl) : this.router.navigate(['/']);
+          this.router.navigate([this.route.snapshot.params['returnUrl'] || '/']);
         }
       });
     }
