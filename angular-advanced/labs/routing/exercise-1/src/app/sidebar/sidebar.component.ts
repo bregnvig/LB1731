@@ -6,7 +6,7 @@ import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
 import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
 import { DistancePipe } from '../pipe/distance.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'loop-sidebar',
@@ -15,13 +15,12 @@ import { NgFor, AsyncPipe } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgFor,
-        FontAwesomeModule,
-        AsyncPipe,
-        DistancePipe,
-        HumanizeDistancePipe,
-        DefaultDescriptionPipe,
-    ],
+    FontAwesomeModule,
+    AsyncPipe,
+    DistancePipe,
+    HumanizeDistancePipe,
+    DefaultDescriptionPipe
+],
 })
 export class SidebarComponent {
 

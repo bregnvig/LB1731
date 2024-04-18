@@ -3,4 +3,6 @@
   [playgrounds]="playgrounds$ |async"
   (edit)="edit($event)"
   (selected)="playground$.next($event)" />
-<loop-footer *ngIf="playground$ | async as playground" [playground]="playground" />
+@if (playground$ | async; as playground) {
+  <loop-footer [playground]="playground" />
+}

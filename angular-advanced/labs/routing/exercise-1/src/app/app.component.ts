@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, combineLatest, noop } from 'rxjs';
@@ -16,7 +16,7 @@ import { truthy, withLength } from './utils/rxjs-utils';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [LeafletModule, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
+  imports: [LeafletModule, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
