@@ -4,7 +4,7 @@
     <ul class="list-group mt-3">
       @if (playgrounds$ | async; as playgrounds) {
         @for (p of playgrounds; track trackById($index, p)) {
-          <a class="list-group-item" [routerLink]="[p.id]" queryParamsHandling="merge">
+          <a class="list-group-item" [routerLink]="[p.id]"  queryParamsHandling="merge">
             {{p.name}}
           </a>
         }

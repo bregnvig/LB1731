@@ -3,10 +3,10 @@
     <a ngbNavLink routerLink="recap/monospace" routerLinkActive="active">Recap</a>
   </li>
   <li ngbNavItem="matrix">
-    <a ngbNavLink routerLink="matrix" routerLinkActive="active">Matrix</a>
+    <a ngbNavLink [routerLink]="['matrix', {tags: ['fruits', 'vegetables']}]" routerLinkActive="active">Matrix</a>
   </li>
   <li ngbNavItem="query">
-    <a ngbNavLink routerLink="query" routerLinkActive="active">Query</a>
+    <a ngbNavLink routerLink="query" [queryParams]="{tags: ['fruits', 'vegetables']}" routerLinkActive="active">Query</a>
   </li>
   <li ngbNavItem="resolver">
     <a ngbNavLink routerLink="resolve/legeplads.1" routerLinkActive="active">Resolver</a>
