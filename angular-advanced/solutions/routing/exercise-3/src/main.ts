@@ -29,6 +29,4 @@ bootstrapApplication(AppComponent, {
       deps: [FaIconLibrary]
     },
   ]
-}).then(() => {
-
 }).catch(err => console.error(err));
