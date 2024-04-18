@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   standalone: true,
-  imports: [LeafletModule, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
+  imports: [LeafletModule, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class MapComponent {
 
