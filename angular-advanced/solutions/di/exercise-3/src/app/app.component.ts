@@ -12,8 +12,12 @@ import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `
+    <leaflet [center]="center" [markers]="markers$"></leaflet>
+    <loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)"></loop-sidebar>
+    @if (playground$ | async; as playground) {
+      <loop-footer [playground]="playground"></loop-footer>
+    }`,
   standalone: true,
   imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
