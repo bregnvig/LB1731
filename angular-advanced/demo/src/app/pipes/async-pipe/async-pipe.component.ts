@@ -6,13 +6,17 @@ import { map, tap } from 'rxjs/operators';
 @Component({
   selector: 'loop-async-pipe',
   template: `
-    <p *ngIf="date$ | async as now">  
-      {{now | date: 'HH:mm:ss'}}
-    </p>
-    <p *ngIf="date$ | async as now">  
-      {{now | date: 'HH:mm:ss'}}
-    </p>
-  `,
+    @if (date$ | async; as now) {
+      <p>
+        {{now | date: 'HH:mm:ss'}}
+      </p>
+    }
+    @if (date$ | async; as now) {
+      <p>
+        {{now | date: 'HH:mm:ss'}}
+      </p>
+    }
+    `,
   // template: `{{date  | date: 'HH:mm:ss'}}`,
   providers: [DatePipe]
 })

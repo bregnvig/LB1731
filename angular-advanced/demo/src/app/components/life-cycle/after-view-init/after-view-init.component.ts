@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-after-view-init',
@@ -8,7 +8,7 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
 
-  @ViewChild(NgbAccordion, { static: true }) accordion!: NgbAccordion;
+  @ViewChild(NgbAccordionDirective, { static: true }) accordion!: NgbAccordionDirective;
 
   constructor() { }
 

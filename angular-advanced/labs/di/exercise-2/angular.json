@@ -92,13 +92,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rxjs:build:production"
+              "buildTarget": "rxjs:build:production"
             },
             "development": {
-              "browserTarget": "rxjs:build:development"
+              "buildTarget": "rxjs:build:development"
             },
             "aarhus": {
-              "browserTarget": "rxjs:build:aarhus"
+              "buildTarget": "rxjs:build:aarhus"
             }
           },
           "defaultConfiguration": "development"
@@ -106,7 +106,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rxjs:build"
+            "buildTarget": "rxjs:build"
           }
         },
         "test": {

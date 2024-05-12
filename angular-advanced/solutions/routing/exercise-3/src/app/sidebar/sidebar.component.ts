@@ -1,8 +1,13 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Observable, debounceTime } from 'rxjs';
 import { Coordinate, Playground } from '../model';
+import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
+import { DistancePipe } from '../pipe/distance.pipe';
+import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
 import { LocationService } from '../service';
 
 @Component({
@@ -10,6 +15,16 @@ import { LocationService } from '../service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    FontAwesomeModule,
+    AsyncPipe,
+    DistancePipe,
+    HumanizeDistancePipe,
+    DefaultDescriptionPipe,
+  ],
 })
 export class SidebarComponent implements OnInit {
 
@@ -26,7 +41,9 @@ export class SidebarComponent implements OnInit {
     this.filterControl.valueChanges.pipe(
       debounceTime(300)
     ).subscribe(filter => this.router.navigate([], {
-      queryParams: { filter }
+      queryParams: { filter },
+      relativeTo: this.route,
+      replaceUrl: true,
     }));
   }
 

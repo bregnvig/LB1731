@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { CommonFilterListComponent } from './common-filter-list/common-filter-list.component';
@@ -10,7 +10,11 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
     <h5>Using event emitter</h5>
     <loop-common-filter-list [items]="playgrounds$ | async" [itemTemplateRef]="playgroundInfo"></loop-common-filter-list>
     <h5 class="mt-5">Using filter function</h5>
-    <loop-common-list-filter-filter-fn class="mt-3" [items]="playgrounds$ | async" [filterFn]="filterFn" [itemTemplateRef]="playgroundInfo"></loop-common-list-filter-filter-fn>
+    <loop-common-list-filter-filter-fn 
+      class="mt-3" 
+      [items]="playgrounds$ | async" 
+      [filterFn]="filterFn" 
+      [itemTemplateRef]="playgroundInfo"/>
     <ng-template #playgroundInfo let-playground>
       <h6>{{playground.name}}</h6>
       <small>{{playground.description}}</small>
@@ -21,8 +25,7 @@ export class TemplateOutletComponent implements OnInit {
 
   @ViewChild(CommonFilterListComponent, { static: true }) filterComponent!: CommonFilterListComponent;
   playgrounds$!: Observable<Playground[]>;
-  filterFn = (term: string, playgrounds: Playground[]) =>
-    playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
+  filterFn = (term: string, playground: Playground) => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase());
 
   constructor(public service: PlaygroundService) { }
 

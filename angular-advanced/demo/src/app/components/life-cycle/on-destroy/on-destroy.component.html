@@ -4,10 +4,14 @@
   </div>
 </div>
 <article class="row">
-  <section class="col-6" *ngIf="show">
-    <loop-on-destroy-random></loop-on-destroy-random>
-  </section>
-  <section class="col-6" *ngIf="show">
-    <loop-on-destroy-random></loop-on-destroy-random>
-  </section>
+  @if (show) {
+    <section class="col-6">
+      <loop-on-destroy-random></loop-on-destroy-random>
+    </section>
+  }
+  @if (show) {
+    <section class="col-6">
+      <loop-on-destroy-random></loop-on-destroy-random>
+    </section>
+  }
 </article>

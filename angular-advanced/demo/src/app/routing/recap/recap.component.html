@@ -10,14 +10,20 @@
   <div class="col-auto"><button class="btn btn-primary" (click)="goto(3)">Show 3</button></div>
 </div>
 <ul class="list-group">
-  <li *ngIf="showRow(1)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-primary">This is first row!</li>
-  <li *ngIf="showRow(2)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-secondary">This is second row!</li>
-  <li *ngIf="showRow(3)" [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-success">This is third row!</li>
+  @if (showRow(1)) {
+    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-primary">This is first row!</li>
+  }
+  @if (showRow(2)) {
+    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-secondary">This is second row!</li>
+  }
+  @if (showRow(3)) {
+    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-success">This is third row!</li>
+  }
 </ul>
 <div class="row form-group mt-3">
-  <div class="col-auto"><a class="btn btn-secondary" routerLink="../none">No transform</a></div>
-  <div class="col-auto"><a class="btn btn-secondary text-lowercase" routerLink="../lowercase">Lowercase</a></div>
-  <div class="col-auto"><a class="btn btn-secondary text-uppercase" routerLink="../uppercase">Uppercase</a></div>
-  <div class="col-auto"><a class="btn btn-secondary" routerLink="../capitalize">Capitalize</a></div>
-  <div class="col-auto"><a class="btn btn-secondary text-monospace" routerLink="../monospace">Mono space</a></div>
+  <div class="col-auto"><a class="btn btn-outline-secondary" routerLink="../none" routerLinkActive="active">No transform</a></div>
+  <div class="col-auto"><a class="btn btn-outline-secondary text-lowercase" routerLink="../lowercase" routerLinkActive="active">Lowercase</a></div>
+  <div class="col-auto"><a class="btn btn-outline-secondary text-uppercase" routerLink="../uppercase" routerLinkActive="active">Uppercase</a></div>
+  <div class="col-auto"><a class="btn btn-outline-secondary" routerLink="../capitalize" routerLinkActive="active">Capitalize</a></div>
+  <div class="col-auto"><a class="btn btn-outline-secondary text-monospace" routerLink="../monospace" routerLinkActive="active">Mono space</a></div>
 </div>

@@ -4,13 +4,12 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-type Transform = 'lowercase' | 'uppercase' | 'capitalized';
+type Transform = 'lowercase' | 'uppercase' | 'capitalized' | 'monospace';
 
 @UntilDestroy()
 @Component({
   selector: 'loop-recap',
   templateUrl: './recap.component.html',
-  styleUrls: ['./recap.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecapComponent implements OnInit, OnDestroy {
@@ -34,7 +33,7 @@ export class RecapComponent implements OnInit, OnDestroy {
 
     this.transform$ = this.route.params.pipe(
       map<Params, Transform>(params => params['transform']),
-      map(transform => `text-${transform}`)
+      map(transform => transform === 'monospace' ? 'font-monospace' : `text-${transform}`)
     );
     this.route.params.pipe(
       map<Params, number | undefined>(params => params['row'] && parseInt(params['row'])),

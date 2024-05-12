@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from 'src/app/shared';
@@ -33,7 +33,7 @@ const code = {
 @Component({
   selector: 'loop-playgrounds-equality',
   standalone: true,
-  imports: [NgFor, NgbAlert],
+  imports: [NgbAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
   <div class="d-flex">
@@ -54,11 +54,13 @@ const code = {
       </ngb-alert>
     </div>
   </div>
-    <ul class="mt-3 list-group">
-      <li *ngFor="let playground of playgrounds()" class="list-group-item">  
+  <ul class="mt-3 list-group">
+    @for (playground of playgrounds(); track playground) {
+      <li class="list-group-item">
         {{playground.name}}
       </li>
-    </ul>
+    }
+  </ul>
   `,
 })
 export class PlaygroundsEqualityComponent {

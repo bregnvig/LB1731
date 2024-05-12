@@ -1,7 +1,7 @@
 <!-- <div class="row">
-  <div class="col">
-    Showing {{(playgrounds$ | async)?.length}} playgrounds
-  </div>
+<div class="col">
+  Showing {{(playgrounds$ | async)?.length}} playgrounds
+</div>
 </div> -->
 <article class="row w-100">
   <div class="col">
@@ -11,12 +11,14 @@
           <input type="text" placeholder="Filter playgrounds" class="col" autofocus [formControl]="filterControl">
         </div>
       </li>
-      <ng-container  *ngIf="playgrounds$ | async as playgrounds" >
-        <li class="list-group-item d-flex" *ngFor="let p of playgrounds; trackBy: trackById">
-          <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
-          <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
-        </li>
-      </ng-container>
+      @if (playgrounds$ | async; as playgrounds) {
+        @for (p of playgrounds; track p.id) {
+          <li class="list-group-item d-flex">
+            <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
+            <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
+          </li>
+        }
+      }
     </ul>
   </div>
 </article>

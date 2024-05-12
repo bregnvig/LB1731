@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Component, Input, TemplateRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 
@@ -8,22 +8,20 @@ import { debounceTime, map, startWith } from 'rxjs/operators';
   templateUrl: './common-list-filter-filter-fn.component.html',
   styleUrls: ['./common-list-filter-filter-fn.component.scss']
 })
-export class CommonListFilterFilterFnComponent implements OnInit {
+export class CommonListFilterFilterFnComponent {
 
   @Input() items!: any[] | null;
   @Input() itemTemplateRef: TemplateRef<any> | undefined;
-  @Input() filterFn!: (term: string, items: any[]) => any[];
+  @Input() filterFn!: (term: string, item: any) => boolean;
 
-  filtered$!: Observable<any[]>;
-  filterControl = new UntypedFormControl();
+  filtered$: Observable<any[]>;
+  filterControl = new FormControl<string>('');
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
     this.filtered$ = this.filterControl.valueChanges.pipe(
-      startWith(''),
+      startWith(this.filterControl.value),
       debounceTime(300),
-      map(term => this.filterFn(term, this.items || []))
+      map(term => (this.items ?? []).filter(item => this.filterFn(term ?? '', item)))
     );
   }
 

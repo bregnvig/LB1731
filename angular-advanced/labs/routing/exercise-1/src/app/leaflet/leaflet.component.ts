@@ -1,109 +1,64 @@
-
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { control, latLng, LatLng, Map, map, Marker as LeafletMarker, TileLayer, tileLayer } from 'leaflet';
-import { Observable, Subscription } from 'rxjs';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
+import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
 import { MarkerFactory } from './marker-factory';
+
+const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
 
 /* tslint:disable:component-selector-name */
 /* tslint:disable:component-selector-prefix */
 @Component({
   selector: 'leaflet',
-  templateUrl: './leaflet.component.html',
-  styleUrls: ['./leaflet.component.css']
+  template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId"></div>',
 })
 export class LeafletComponent implements AfterViewInit, OnDestroy {
 
-  @Output() zoomed = new EventEmitter<number | undefined>();
+  @Input() mapId = 'leafletMap';
 
-  baseMaps: { [name: string]: TileLayer; };
-
-  private map: Map | undefined;
-  private _zoom = 8;
-  private _center: LatLng | undefined;
-
-  private _markers$: Observable<Marker> | undefined;
-  private namedMarkers: { [key: string]: LeafletMarker | undefined; } = {};
   private subscriptions: Subscription[] = [];
+  private center$ = new ReplaySubject<Center | undefined>(1);
+  private markers$ = new ReplaySubject<Marker[] | undefined>(1);
 
+  @Input() set markers(value: (Marker | undefined)[] | undefined | null) {
+    this.markers$.next(value ?? undefined);
+  }
 
-  constructor() {
-    this.baseMaps = {
-      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })
-    };
+  @Input() set center(center: Center | undefined) {
+    this.center$.next(center);
   }
 
   ngAfterViewInit() {
-    this.map = map('playgroundsMap', {
+    const _map = mapContructor(this.mapId, {
       zoomControl: false,
-      center: this._center,
-      zoom: this._zoom,
+      center: undefined,
+      zoom: 7,
       minZoom: 4,
       maxZoom: 19,
-      layers: [this.baseMaps['OpenStreetMap']],
+      layers: [tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      })]
     });
-
-    control.zoom({ position: 'topleft' }).addTo(this.map);
-    control.scale().addTo(this.map);
-    this.map.on('zoomend', () => this.zoomed.emit(this.map?.getZoom()));
-    this.subscribe();
+    control.zoom({ position: 'topleft' }).addTo(_map);
+    control.scale().addTo(_map);
+    this.subscriptions.push(
+      this.center$.pipe(map(center => center?.zoom), filter(zoom => !!zoom)).subscribe(zoom => _map.setZoom(zoom!)),
+      this.center$.pipe(filter(center => !!center)).subscribe(center => _map.setView(latLng(center!.lat, center!.lng))),
+      this.markers$.pipe(
+        startWith([]),
+        map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
+        map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
+        pairwise(),
+      ).subscribe(([previous, current]) => {
+        previous?.forEach(m => m && _map.removeLayer(m));
+        current?.forEach(m => m && m.addTo(_map));
+      })
+    );
   }
 
-  ngOnDestroy() {
-    (this.subscriptions || []).forEach(s => s.unsubscribe());
-    this.map?.off();
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
-  @Input()
-  set center(center: Center) {
-    console.log('Updating center', center, this._zoom);
-    this._center = center && latLng(center.latitude, center.longitude);
-    if (center && center.zoom) {
-      this._zoom = center.zoom;
-    }
-    if (this.map && center) {
-      this.map.setView(this._center, this._zoom);
-    }
-  }
-
-  @Input() set markers(value: Observable<Marker> | undefined) {
-    this._markers$ = value;
-    this.subscribe();
-  }
-
-  @Input()
-  set zoom(zoom: number) {
-    console.log('Setting zoom', zoom);
-    this._zoom = zoom;
-    this.map && this.map.setZoom(zoom, {});
-  }
-
-  private subscribe() {
-    if (this._markers$ && this.map) {
-      this.subscriptions.push(this._markers$.subscribe(marker => this.addMarker(marker)));
-    }
-  }
-
-  private addMarker(marker: Marker): LeafletMarker | undefined {
-
-    this.removeMarker(marker.name);
-    if (marker.hasPosition && this.map) {
-      const position = latLng(marker.latitude, marker.longitude);
-      console.log('Adding marker', position);
-      this.namedMarkers[marker.name] = MarkerFactory.newMarker(position, false, marker.message).addTo(this.map);
-      return this.namedMarkers[marker.name]!;
-    }
-    return;
-  }
-
-  private removeMarker(name: string): void {
-    if (this.namedMarkers[name] && this.map) {
-      console.log('Removing marker', name, this.namedMarkers[name]!.getLatLng());
-      this.map.removeLayer(this.namedMarkers[name]!);
-      this.namedMarkers[name] = undefined;
-    }
-  }
 }

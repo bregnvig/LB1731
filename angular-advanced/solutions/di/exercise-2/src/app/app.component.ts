@@ -1,15 +1,26 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { FooterComponent } from './footer/footer.component';
 import { Center, Marker } from './leaflet';
+import { LeafletModule } from "./leaflet/leaflet.module";
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
   selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <leaflet [center]="center" [markers]="markers$"></leaflet>
+    <loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)"></loop-sidebar>
+    @if (playground$ | async; as playground) {
+      <loop-footer [playground]="playground"></loop-footer>
+    }
+  `,
+  standalone: true,
+  imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

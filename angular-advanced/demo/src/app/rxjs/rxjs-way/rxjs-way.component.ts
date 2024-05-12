@@ -13,7 +13,6 @@ export class RxJSWayComponent implements OnInit {
   filterControl = new FormControl<string>('', { nonNullable: true });
   playgrounds$: Observable<Playground[]> | undefined;
   location$ = this.locationService.location$;
-  trackById = (i: number, playground: Playground): string => playground.id;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) { }
 

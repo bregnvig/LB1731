@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Playground } from '../model';
 import { PlaygroundService } from '../service';
+import { EditPlaygroundControlComponent } from '../edit-playground-control/edit-playground-control.component';
 
 @Component({
-  selector: 'loop-edit-playground-modal',
-  templateUrl: './edit-playground-modal.component.html',
-  styleUrls: ['./edit-playground-modal.component.scss']
+    selector: 'loop-edit-playground-modal',
+    templateUrl: './edit-playground-modal.component.html',
+    styleUrls: ['./edit-playground-modal.component.scss'],
+    standalone: true,
+    imports: [EditPlaygroundControlComponent, ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {
 

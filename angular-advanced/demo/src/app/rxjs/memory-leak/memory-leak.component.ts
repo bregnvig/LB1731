@@ -9,12 +9,16 @@ let creation = 0;
   template: `
     <button type="button" class="btn btn-primary" (click)="go()">Start</button>
     <ul>
-      <li *ngFor="let no of nos">{{no}}</li>
+      @for (no of nos; track no) {
+        <li>{{no}}</li>
+      }
     </ul>
     <!-- <ul>
-      <li *ngFor="let no of nos$ | async">{{no}}</li>
+      @for(no of nos$ | async; track no) {
+      <li>{{no}}</li>
+      }
     </ul> -->
-  `,
+    `,
 })
 export class MemoryLeakComponent {
 

@@ -1,9 +1,11 @@
 <ul class="list-group">
-  <li *ngFor="let playground of playgrounds$ | async"
-    class="list-group-item">
-    <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
-    <ng-template #popoverContent>
-      <ng-template [ngComponentOutlet]="component" [ndcDynamicInputs]="{ playground }"></ng-template>
-    </ng-template>
-  </li>
+  @for (playground of playgrounds$ | async; track playground) {
+    <li
+      class="list-group-item">
+      <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
+      <ng-template #popoverContent>
+        <ng-template [ngComponentOutlet]="component" [ndcDynamicInputs]="{ playground }"></ng-template>
+      </ng-template>
+    </li>
+  }
 </ul>
