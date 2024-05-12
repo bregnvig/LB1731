@@ -1,10 +1,12 @@
-<leaflet [center]="center" [markers]="markers$"></leaflet>
-<loop-sidebar 
-  [playgrounds]="playgrounds$ |async" 
+<leaflet [center]="center" [markers]="markers$ | async"></leaflet>
+<loop-sidebar
+  [playgrounds]="playgrounds$ |async"
   (edit)="edit($event)"
   (selected)="playground$.next($event)">
 </loop-sidebar>
-<loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+@if (playground$ | async; as playground) {
+<loop-footer [playground]="playground"></loop-footer>
+}
 <div class="mt-3 mx-4 py-3 px-4 roles">
   <div class="row g-3">
     <div class="form-check col-6">
@@ -19,5 +21,5 @@
         Admin
       </label>
     </div>
-</div>
+  </div>
 </div>
