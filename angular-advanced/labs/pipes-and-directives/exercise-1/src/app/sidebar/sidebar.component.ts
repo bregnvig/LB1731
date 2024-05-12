@@ -2,11 +2,20 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
+import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    standalone: true,
+    imports: [
+    FaIconComponent,
+    AsyncPipe,
+    DefaultDescriptionPipe
+],
 })
 export class SidebarComponent {
 
