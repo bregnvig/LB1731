@@ -2,11 +2,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
+import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
+import { DistancePipe } from '../pipe/distance.pipe';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    standalone: true,
+    imports: [
+    FaIconComponent,
+    AsyncPipe,
+    DistancePipe,
+    DefaultDescriptionPipe
+],
 })
 export class SidebarComponent {
 
