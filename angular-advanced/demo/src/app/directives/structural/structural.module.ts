@@ -10,6 +10,7 @@ import { CollapseStateComponent } from './ng-for/collapse-state/collapse-state.c
 import { NgForComponent } from './ng-for/ng-for.component';
 import { NgIfComponent } from './ng-if/ng-if.component';
 import { NgSwitchComponent } from './ng-switch/ng-switch.component';
+import { PerformanceComponent } from './performace/performance.component';
 import { StructuralComponent } from './structural/structural.component';
 
 
@@ -23,6 +24,7 @@ import { StructuralComponent } from './structural/structural.component';
     NgSwitchComponent,
     IsInRoleComponent,
     IsInRoleDirective,
+    PerformanceComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,10 @@ import { StructuralComponent } from './structural/structural.component';
             path: 'is-in-role',
             component: IsInRoleComponent
           },
+          // {
+          //   path: 'performance',
+          //   component: PerformanceComponent
+          // },
           {
             path: '**',
             redirectTo: 'ng-if'

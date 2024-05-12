@@ -25,6 +25,6 @@ export class BuiltinAttributeComponent extends AbstractSubscribeUnsubscribeDirec
   private index = 0;
 
   ngOnInit() {
-    interval(1000).pipe(this.takeUntilDestroyed()).subscribe(() => (this.index = this.index + 1 === this.states.length ? 0 : this.index + 1));
+    interval(5000).pipe(this.takeUntilDestroyed()).subscribe(() => (this.index = this.index + 1 === this.states.length ? 0 : this.index + 1));
   }
 }

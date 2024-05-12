@@ -29,6 +29,36 @@
         </pre>
       </code>
     </div>
+  </div>  
+  <h5 class="mb-3">Using the new &commat;if</h5>
+  <div class="row">
+    @if(!blueControl.value) {
+      <div class="col-auto">
+        <div class="box red"></div>
+      </div>
+    } @else {
+      <div class="col-auto">
+        <div class="box blue"></div>
+      </div>
+    }
+    <div class="col">
+      <code>
+        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+&commat;if(!blueControl.value) &#123;
+  &lt;div class=&quot;col-auto&quot;&gt;
+    &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&#125;
+        </pre>
+        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+&commat;else &#123;          
+&lt;div class=&quot;col-auto&quot;&gt;
+  &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&#125;
+        </pre>
+      </code>
+    </div>
   </div>
   <h5 class="mb-3">Using else</h5>
   <div class="row">
