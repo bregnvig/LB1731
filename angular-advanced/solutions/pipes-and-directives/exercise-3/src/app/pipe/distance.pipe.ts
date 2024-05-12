@@ -5,8 +5,9 @@ import { LocationService } from '../service';
 
 const distanceKeyFn = (a: Coordinate, b: Coordinate) => `${a.lat}${a.lng}${b.lat}${b.lng}`;
 @Pipe({
-  name: 'distance',
-  pure: false,
+    name: 'distance',
+    pure: false,
+    standalone: true,
 })
 export class DistancePipe implements PipeTransform, OnDestroy {
 

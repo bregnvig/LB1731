@@ -14,15 +14,22 @@ import { SelectAllTextDirective } from './directive/select-all-text.directive';
 import { EditPlaygroundControlComponent } from './edit-playground-control/edit-playground-control.component';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
-import { LeafletModule } from './leaflet';
+
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 library.add(fas, far);
 
-@NgModule({
-  declarations: [
-    AppComponent,
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    declarations: [AppComponent],
+    imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgbModule,
+    FontAwesomeModule,
+    DynamicIoModule,
     SidebarComponent,
     FooterComponent,
     DistancePipe,
@@ -32,19 +39,10 @@ library.add(fas, far);
     EditPlaygroundControlComponent,
     SelectAllTextDirective,
     FocusDirective,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    NgbModule,
-    LeafletModule,
-    FontAwesomeModule,
-    DynamicIoModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+],
+    providers: [],
+    bootstrap: [AppComponent]
+} */)
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library
