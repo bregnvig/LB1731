@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.locationService.location$.subscribe(location => ({ ...location, zoom: 12 }));
+    this.locationService.location$.subscribe(location => this.center = { ...location, zoom: 12 });
     this.markers$ = combineLatest([
       this.locationService.location$,
       this.playground$.pipe(map(p => p.position)),
