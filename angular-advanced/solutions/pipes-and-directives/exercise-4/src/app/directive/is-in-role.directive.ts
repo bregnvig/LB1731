@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthService, Role } from '../service';
 
 @Directive({
-  selector: '[loopIsInRole]'
+    selector: '[loopIsInRole]',
+    standalone: true
 })
 export class IsInRoleDirective implements OnDestroy {
 

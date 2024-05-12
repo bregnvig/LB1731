@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[loopFocus]'
+    selector: '[loopFocus]',
+    standalone: true
 })
 export class FocusDirective implements OnInit {
 

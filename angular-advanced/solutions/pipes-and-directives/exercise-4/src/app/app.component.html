@@ -1,4 +1,4 @@
-<leaflet [center]="center" [markers]="markers$"></leaflet>
+<leaflet [center]="center" [markers]="markers$ | async"></leaflet>
 <loop-sidebar
   [playgrounds]="playgrounds$ |async"
   (edit)="edit($event)"
