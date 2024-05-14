@@ -10,7 +10,7 @@
   <button class="btn btn-primary mb-3" (click)="simulate()">Lets simulate new backend call...</button>
   <ul class="list-group">
     <ng-container *ngIf="trackByControl.value; else noTrackBy">
-      <loop-collapse-state *ngFor="let cardNo of numberOfCards; trackBy: trackByIndexFn; first as isFirst; last as isLast; index as i; count as count; odd as odd" [index]="cardNo.index">
+      <loop-collapse-state *ngFor="let cardNo of numberOfCards; trackBy: trackByIndexFn; first as isFirst; last as isLast; index as i; count as count; odd as odd" [index]="cardNo.orderNo">
         <div class="card my-2">
           <div class="card-body">
             <p>{{i + 1}} of {{count}}</p>
@@ -22,7 +22,7 @@
       </loop-collapse-state>
     </ng-container>
     <ng-template #noTrackBy>
-      <loop-collapse-state *ngFor="let cardNo of numberOfCards; first as isFirst; last as isLast; index as i; count as count; odd as odd" [index]="cardNo.index">
+      <loop-collapse-state *ngFor="let cardNo of numberOfCards; first as isFirst; last as isLast; index as i; count as count; odd as odd" [index]="cardNo.orderNo">
         <div class="card my-2">
           <div class="card-body">
             <p>{{i + 1}} of {{count}}</p>

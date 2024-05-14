@@ -9,15 +9,15 @@ import { FormControl } from '@angular/forms';
 export class NgForComponent {
 
   numberOfCards = this.createArray();
+  trackByIndexFn = (_: number, item: { orderNo: number; }) => item.orderNo;
   trackByControl = new FormControl<boolean>(true);
 
-  trackByIndexFn = (_: number, o: { index: number; }) => o.index;
 
   simulate() {
     this.numberOfCards = this.createArray();
   }
 
   createArray() {
-    return Array.from({ length: 2500 }, (_, index) => ({ index }));
+    return Array.from({ length: 2500 }, (_, index) => ({ orderNo: index }));
   }
 }
