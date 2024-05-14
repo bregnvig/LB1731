@@ -9,6 +9,11 @@ export class MyFirstImpureComponent {
 
   myFirst = 'pipe';
 
+  usingAMethod(value: string) {
+    console.log('In a method');
+    return `Using method ${value}`;
+  }
+
   noop() {
   }
 }
