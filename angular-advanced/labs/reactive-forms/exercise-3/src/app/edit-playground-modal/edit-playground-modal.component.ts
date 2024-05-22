@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -13,9 +13,11 @@ type PlaygroupControls = {
 };
 
 @Component({
-  selector: 'loop-edit-playground-modal',
-  templateUrl: './edit-playground-modal.component.html',
-  styleUrls: ['./edit-playground-modal.component.scss']
+    selector: 'loop-edit-playground-modal',
+    templateUrl: './edit-playground-modal.component.html',
+    styleUrls: ['./edit-playground-modal.component.scss'],
+    standalone: true,
+    imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
@@ -32,13 +34,16 @@ export class EditPlaygroundModalComponent implements OnInit {
   );
 
   fg: FormGroup<PlaygroupControls> = this.fb.group({
-    name: this.fb.control('', Validators.required, this.validateUniqueName),
+    name: this.fb.control('', {
+      validators: Validators.required,
+      asyncValidators: this.validateUniqueName
+    }),
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup<PlaygroupControls>): null | ValidationErrors => {
-      const { description, addressDescription } = fg.controls;
-      return (description?.value || addressDescription?.value) ? null : { requiredOr: ['description', 'addressDescription'] };
+    validators: (fg: AbstractControl<Omit<Playground, 'id' | 'position'>>): null | ValidationErrors => {
+      const { description, addressDescription } = fg.value;
+      return (description || addressDescription) ? null : { requiredOr: ['description', 'addressDescription'] };
     }
   } as AbstractControlOptions);
 
@@ -48,7 +53,7 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.fg.reset(this.playground || {});
-  }
+  };
 
   initialize(playground: Playground) {
     this.playground = playground;
