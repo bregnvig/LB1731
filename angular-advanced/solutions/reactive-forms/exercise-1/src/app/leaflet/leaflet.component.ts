@@ -25,8 +25,8 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
     this.markers$.next(value ?? undefined);
   }
 
-  @Input() set center(center: Center | undefined) {
-    this.center$.next(center);
+  @Input() set center(center: Center | undefined | null) {
+    this.center$.next(center ?? undefined);
   }
 
   ngAfterViewInit() {

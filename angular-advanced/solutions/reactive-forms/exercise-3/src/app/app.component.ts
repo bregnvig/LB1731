@@ -14,7 +14,6 @@ import { withLength } from './utils/rxjs-utils';
 @Component({
   selector: 'loop-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
@@ -23,9 +22,8 @@ export class AppComponent {
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();
   location$: Observable<Coordinate> = this.locationService.location$;
-  center: Center = { lat: 56.360029, lng: 10.746635 };
+  center$: Observable<Center> = this.locationService.location$;
   markers$: Observable<Marker[]> | undefined;
-  footerComponent = FooterComponent;
 
   constructor(
     private service: PlaygroundService,
@@ -36,11 +34,6 @@ export class AppComponent {
       locationService.location$,
       this.playground$.pipe(map(p => p.position)),
     ]);
-  }
-
-  ngOnInit() {
-    this.locationService.location$.subscribe(location => this.center = location);
-
     const getDistance = this.locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
