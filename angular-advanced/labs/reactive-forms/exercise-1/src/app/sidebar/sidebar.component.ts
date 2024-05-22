@@ -4,9 +4,10 @@ import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class SidebarComponent {
 
