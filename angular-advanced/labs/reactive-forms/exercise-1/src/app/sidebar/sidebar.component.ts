@@ -1,13 +1,17 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
+import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from '../pipe';
 import { LocationService } from '../service';
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+  selector: 'loop-sidebar',
+  templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FaIconComponent, DefaultDescriptionPipe, HumanizeDistancePipe, AsyncPipe, DistancePipe],
+  standalone: true,
 })
 export class SidebarComponent {
 

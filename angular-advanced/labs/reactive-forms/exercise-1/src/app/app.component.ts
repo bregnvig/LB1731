@@ -5,7 +5,7 @@ import { Observable, Subject, combineLatest, noop } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
-import { Center, Marker } from './leaflet';
+import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -15,7 +15,7 @@ import { withLength } from './utils/rxjs-utils';
   selector: 'loop-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [SidebarComponent, FooterComponent, AsyncPipe, Lea]
+  imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 
