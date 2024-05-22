@@ -28,7 +28,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
           asyncValidators: isValidZip(this.service)
         },
       ),
-      city: this.fb.control({ value: '', disabled: true }),
+      city: this.fb.control({ value: '', disabled: false }),
     }, {
       validators: (zipAndCity: FormGroup<{ zip: AbstractControl<string>, city: AbstractControl<string>; }>): null | ValidationErrors => {
         const { zip, city } = zipAndCity.controls;
@@ -57,8 +57,8 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       switchMap(({ status, zip }) => status === 'VALID' && zip ? this.service.getCityName(zip) : of(null)),
       catchError(() => of(null)),
     ).subscribe(city => {
-      console.log('Found the city', city);
-      this.zipAndCityControl.controls.city.patchValue(city);
+      // console.log('Found the city', city);
+      // this.zipAndCityControl.controls.city.patchValue(city);
     });
   }
 
@@ -67,7 +67,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
   }
 
   log() {
-    console.log(this.fg.getRawValue());
-    console.log(this.fg.controls.zipAndCity.controls.city.value);
+    // console.log(this.fg.getRawValue());
+    console.log(this.fg.value);
   }
 }
