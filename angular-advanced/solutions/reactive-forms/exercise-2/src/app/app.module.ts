@@ -12,35 +12,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
 import { FooterComponent } from './footer/footer.component';
-import { LeafletModule } from './leaflet';
+
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from './pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 library.add(fas, far);
 
-@NgModule({
-  declarations: [
-    AppComponent,
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    declarations: [AppComponent],
+    imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgbModule,
+    FontAwesomeModule,
+    DynamicIoModule,
     SidebarComponent,
     FooterComponent,
     DistancePipe,
     HumanizeDistancePipe,
     DefaultDescriptionPipe,
     EditPlaygroundModalComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NgbModule,
-    LeafletModule,
-    FontAwesomeModule,
-    DynamicIoModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+],
+    providers: [],
+    bootstrap: [AppComponent]
+} */)
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add multiple icons to the library

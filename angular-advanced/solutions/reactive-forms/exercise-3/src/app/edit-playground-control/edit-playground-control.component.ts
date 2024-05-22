@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
 
 type PlaygroupControls = {
   name: FormControl<string | null>,
@@ -8,8 +8,8 @@ type PlaygroupControls = {
 };
 
 @Component({
-  selector: 'loop-edit-playground-control',
-  template: `
+    selector: 'loop-edit-playground-control',
+    template: `
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
@@ -25,13 +25,15 @@ type PlaygroupControls = {
       </div>    
     </form>
   `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditPlaygroundControlComponent),
-      multi: true
-    }
-  ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EditPlaygroundControlComponent),
+            multi: true
+        }
+    ],
+    standalone: true,
+    imports: [ReactiveFormsModule],
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
