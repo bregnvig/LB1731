@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
@@ -15,6 +16,7 @@ const isValidZip = (service: DawaService): AsyncValidatorFn => (control: Abstrac
 @Component({
   selector: 'loop-validators',
   templateUrl: './validators.component.html',
+  providers: [AsyncPipe],
 })
 export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
@@ -67,7 +69,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
   }
 
   log() {
-    // console.log(this.fg.getRawValue());
-    console.log(this.fg.value);
+    console.log(this.fg.getRawValue());
+    // console.log(this.fg.value);
   }
 }
