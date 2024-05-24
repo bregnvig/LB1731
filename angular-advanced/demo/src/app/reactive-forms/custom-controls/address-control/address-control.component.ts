@@ -40,9 +40,9 @@ export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirecti
 
   ngOnInit(): void {
     this.fg.valueChanges.pipe(
-      map(value => Object.entries(value).filter(([, value]) => value).reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})),
+      map(value => Object.fromEntries(Object.entries(value).filter(([, value]) => value))),
       this.takeUntilDestroyed(),
-    ).subscribe(value => this.propagateChange?.(Object.keys(value).length ? value : undefined));
+    ).subscribe(value => this.propagateChange?.(Object.keys(value).length ? value : null));
   }
 
   onBlur() {
