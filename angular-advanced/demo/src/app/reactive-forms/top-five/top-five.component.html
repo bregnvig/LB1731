@@ -5,7 +5,7 @@
   </div>
   <div class="form-group">
     <label for="email">Email address</label>
-    <input #emailFormControl placeholder="E-mail" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" type="email" class="form-control col-6" id="email" formControlName="email">
+    <input #emailFormControl placeholder="E-mail" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" type="email" class="form-control col-6" id="email" [formControl]="fg.controls.email">
   </div>
 </form>
 <div class="row">
