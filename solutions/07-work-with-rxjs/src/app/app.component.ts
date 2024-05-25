@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Center, LeafletModule, Marker } from '@loopme/leaflet';
 import { Observable, map } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
-import { Center, LeafletModule, Marker } from './leaflet';
 import { LocationService } from './shared';
 import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';

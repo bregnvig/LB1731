@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { Center, LeafletModule } from '@loopme/leaflet';
 import { FooterComponent } from './footer/footer.component';
-import { Center, LeafletModule } from './leaflet';
 import { Playground } from './shared/playground';
 import { PlaygroundService } from './shared/playground.service';
 import { SidebarComponent } from './sidebar/sidebar.component';

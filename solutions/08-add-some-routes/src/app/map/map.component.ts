@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Center, LeafletModule, Marker } from '@loopme/leaflet';
 import { Observable, combineLatest, map, shareReplay, switchMap } from 'rxjs';
 import { FooterComponent } from '../footer/footer.component';
-import { Center, LeafletModule, Marker } from '../leaflet';
 import { LocationService, Playground } from '../shared';
 import { PlaygroundService } from '../shared/playground.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
