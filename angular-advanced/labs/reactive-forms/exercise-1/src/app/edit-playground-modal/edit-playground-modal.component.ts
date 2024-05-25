@@ -11,9 +11,10 @@ type PlaygroupControls = {
 
 
 @Component({
-  selector: 'loop-edit-playground-modal',
-  templateUrl: './edit-playground-modal.component.html',
-  styleUrls: ['./edit-playground-modal.component.scss']
+    selector: 'loop-edit-playground-modal',
+    templateUrl: './edit-playground-modal.component.html',
+    styleUrls: ['./edit-playground-modal.component.scss'],
+    standalone: true
 })
 export class EditPlaygroundModalComponent {
 

@@ -46,7 +46,7 @@ export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirecti
   }
 
   onBlur() {
-    this.propagateTouched!();
+    this.propagateTouched?.();
   }
 
   writeValue(address: Partial<Address>): void {

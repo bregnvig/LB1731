@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -13,9 +13,11 @@ type PlaygroupControls = {
 };
 
 @Component({
-  selector: 'loop-edit-playground-modal',
-  templateUrl: './edit-playground-modal.component.html',
-  styleUrls: ['./edit-playground-modal.component.scss']
+    selector: 'loop-edit-playground-modal',
+    templateUrl: './edit-playground-modal.component.html',
+    styleUrls: ['./edit-playground-modal.component.scss'],
+    standalone: true,
+    imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
