@@ -13,11 +13,11 @@ type PlaygroupControls = {
 };
 
 @Component({
-    selector: 'loop-edit-playground-modal',
-    templateUrl: './edit-playground-modal.component.html',
-    styleUrls: ['./edit-playground-modal.component.scss'],
-    standalone: true,
-    imports: [ReactiveFormsModule]
+  selector: 'loop-edit-playground-modal',
+  templateUrl: './edit-playground-modal.component.html',
+  styleUrls: ['./edit-playground-modal.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
