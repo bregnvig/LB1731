@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
+import { Center, LeafletModule } from '@loopme/leaflet';
 import { FooterComponent } from './footer/footer.component';
 import { MOCK_PLAYGROUNDS } from './shared/mock-playgrounds';
 import { Playground } from './shared/playground';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { Center, LeafletModule } from './leaflet';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [LeafletModule, SidebarComponent, FooterComponent]
 })

@@ -6,6 +6,8 @@ import { Center } from './center';
 import { Marker } from './marker';
 import { MarkerFactory } from './marker-factory';
 
+const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
+
 /* tslint:disable:component-selector-name */
 /* tslint:disable:component-selector-prefix */
 @UntilDestroy({ arrayName: 'subscribtions' })
@@ -21,7 +23,7 @@ export class LeafletComponent implements AfterViewInit {
   private center$ = new ReplaySubject<Center | undefined>(1);
   private markers$ = new ReplaySubject<Marker[] | undefined>(1);
 
-  @Input() set markers(value: Marker[] | undefined | null) {
+  @Input() set markers(value: (Marker | undefined)[] | undefined | null) {
     this.markers$.next(value ?? undefined);
   }
 
@@ -47,11 +49,12 @@ export class LeafletComponent implements AfterViewInit {
       this.center$.pipe(filter(center => !!center)).subscribe(center => _map.setView(latLng(center!.lat, center!.lng))),
       this.markers$.pipe(
         startWith([]),
-        map(markers => markers?.map(m => MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
+        map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
+        map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
         pairwise(),
       ).subscribe(([previous, current]) => {
-        previous?.forEach(m => _map.removeLayer(m));
-        current?.forEach(m => m.addTo(_map));
+        previous?.forEach(m => m && _map.removeLayer(m));
+        current?.forEach(m => m && m.addTo(_map));
       })
     );
   }
