@@ -1,5 +1,5 @@
 <h2>Search form standalone</h2>
 <div class="form-group">
   <input type="text" class="form-control" [formControl]="searchControl" placeholder="Fancy search"><br>
-  <input type="text" class="form-control" [formControl]="searchControl2" placeholder="Backend overload">
+  <input type="text" class="form-control" ngModel (ngModelChange)="ngModelSaerch($event)" placeholder="Backend overload">
 </div>

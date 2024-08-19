@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-hello',
-    template: `
+  selector: 'app-hello',
+  template: `
     <h2>
       {{title}}
     </h2>
   `,
-    styles: [
-        `h2 {
-      color: darkred !important;
-    } `
-    ],
-    standalone: true
+  styles: `
+  h2 {
+      color: orange !important;
+    } 
+  `,
+  standalone: true
 })
 export class HelloComponent implements OnInit {
 
@@ -23,7 +23,11 @@ export class HelloComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'Hello world!';
+    // this.title = 'Hello world!';
+  }
+
+  doSomething() {
+    this.title.length;
   }
 
 }
