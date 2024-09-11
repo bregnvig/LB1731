@@ -1,6 +1,7 @@
-import { Directive, OnDestroy } from "@angular/core";
-import { Observable, OperatorFunction, Subject, Subscriber, Subscription, UnaryFunction, fromEvent, pipe } from "rxjs";
-import { filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
+import { DestroyRef, Directive, inject, OnDestroy } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { fromEvent, merge, Observable, of, OperatorFunction, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
+import { catchError, filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
 
 export function useCacheOnError(localStorageKey: string) {
   return function <T>(source: Observable<T>): Observable<T> {
@@ -79,3 +80,58 @@ export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy
   }
 
 }
+
+/**
+ * Example using the `takeUntilDestroyed` method from rxjs-interop
+ */
+@Directive()
+export abstract class AbstractSubscribeUnsubscribeInteropDirective {
+
+  protected readonly subscriptions: Subscription[] = [];
+  protected destroyRef = inject(DestroyRef);
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => (this.subscriptions || []).forEach(s => s.unsubscribe()));
+  }
+
+
+  takeUntilDestroyed<T>(): UnaryFunction<Observable<T>, Observable<T>> {
+    // When using `takeUntilDestroyed` outside of an injection context, you need to pass the `DestroyRef` explicitly
+    return takeUntilDestroyed(this.destroyRef);
+  }
+
+  // Example usage
+  // interval(1000).pipe(this.takeUntilDestroyed()).subscribe(console.log);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const useCacheAndRetryWhenOnline = (cacheKey: string) => <T>(source: Observable<T>): Observable<T> => {
+  return source.pipe(
+    catchError((error) => {
+      if (!window.navigator.onLine && !localStorage.getItem(cacheKey)) {
+          throw error;
+      }
+      // Needs better error handling if the cache is corrupted
+      const cachedData = JSON.parse(localStorage.getItem(cacheKey)!) as T;
+      return merge(of(cachedData), fromEvent(window, 'online').pipe(
+        switchMap(() => useCacheAndRetryWhenOnline(cacheKey)(source))
+      ));
+    }),
+    tap(data => localStorage.setItem(cacheKey, JSON.stringify(data))),
+  )
+};

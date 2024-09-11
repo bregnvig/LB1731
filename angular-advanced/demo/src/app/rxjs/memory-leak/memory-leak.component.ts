@@ -28,11 +28,12 @@ export class MemoryLeakComponent {
   nos$: Observable<number[]> | undefined;
 
   go() {
-    this.nos$ = interval(1).pipe(scan((acc, no) => {
+    this.nos$ = interval(500).pipe(scan((acc, no) => {
+      console.log(`Creation ${this.instanceNo}`, no);
       acc.push(no);
       return acc;
     }, [] as number[]));
-    interval(1).subscribe(no => {
+    interval(500).subscribe(no => {
       console.log(`Creation ${this.instanceNo}`, no);
       this.nos.push(no);
     });

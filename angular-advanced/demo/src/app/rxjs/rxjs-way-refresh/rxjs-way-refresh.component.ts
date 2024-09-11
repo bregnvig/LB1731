@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { Observable, Subject, combineLatest, interval, merge } from 'rxjs';
-import { debounceTime, map, repeat, startWith, switchMap, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, exhaustMap, map, repeat, startWith, switchMap, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -31,6 +31,14 @@ export class RxJSWayRefreshComponent implements OnInit {
 
     const playgroundsSwitchmap$ = refresh$.pipe(
       switchMap(() => this.service.playgrounds$),
+    );
+
+    const playgroundsExhaustMap$ = refresh$.pipe(
+      exhaustMap(() => this.service.playgrounds$),
+    );
+
+    const playgroundsConcatMap$ = refresh$.pipe(
+      concatMap(() => this.service.playgrounds$),
     );
 
     const filteredPlaygrounds$ = combineLatest([
