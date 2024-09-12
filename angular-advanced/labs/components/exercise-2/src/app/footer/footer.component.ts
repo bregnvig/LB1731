@@ -12,6 +12,7 @@ import { Playground } from '../model';
       <p>{{playground!.description}}</p>
     </footer>
   `,
+  standalone: true,
 })
 export class FooterComponent {
 
