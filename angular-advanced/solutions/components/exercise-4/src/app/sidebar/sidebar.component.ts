@@ -1,34 +1,39 @@
+import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, debounceTime, map } from 'rxjs';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
-import { NgFor, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [ReactiveFormsModule, NgFor, NgTemplateOutlet]
+  selector: 'loop-sidebar',
+  templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, NgTemplateOutlet, AsyncPipe]
 })
 export class SidebarComponent {
 
-  @Input({ required: true }) items: any[] | null = [];
   @Input() itemTemplate?: TemplateRef<any>;
   @Output() selected = new EventEmitter<any>();
-  @Input({ required: true }) filterFn?: (term: string, item: any) => boolean;
+  @Input({ required: true }) filterFn?: ((term: string) => any[]) | null;
 
   selectedItem?: any;
   filterControl = new FormControl<string>('');
   location$: Observable<Coordinate> = this.locationService.location$;
-  filtered$: Observable<any[]>;
+  filtered$?: Observable<any[]>;
 
   constructor(private locationService: LocationService) {
-    this.filtered$ = this.filterControl.valueChanges.pipe(
-      debounceTime(0),
-      map(term => (this.items ?? []).filter(item => this.filterFn?.(term ?? '', item)))
-    );
+  }
+
+  ngOnChanges(): void {
+    const filterFn = this.filterFn;
+
+    filterFn && (this.filtered$ = this.filterControl.valueChanges.pipe(
+      startWith(this.filterControl.value),
+      debounceTime(300),
+      map(term => filterFn(term ?? ''))
+    ));
   }
 
   selectItem(item: any): void {

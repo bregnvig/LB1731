@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="list-group">
-      <ng-container  *ngFor="let item of items" 
+      <ng-container  *ngFor="let item of filtered$ | async" 
         [ngTemplateOutlet]="itemTemplate ?? defaultTemplate" 
         [ngTemplateOutletContext]="{$implicit: item}">
       </ng-container>

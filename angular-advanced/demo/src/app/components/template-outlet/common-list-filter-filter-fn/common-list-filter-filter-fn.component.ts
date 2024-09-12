@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, OnChanges, TemplateRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
@@ -8,21 +8,22 @@ import { debounceTime, map, startWith } from 'rxjs/operators';
   templateUrl: './common-list-filter-filter-fn.component.html',
   styleUrls: ['./common-list-filter-filter-fn.component.scss']
 })
-export class CommonListFilterFilterFnComponent {
+export class CommonListFilterFilterFnComponent implements OnChanges {
 
-  @Input() items!: any[] | null;
   @Input() itemTemplateRef: TemplateRef<any> | undefined;
-  @Input() filterFn!: (term: string, item: any) => boolean;
+  @Input() filterFn?: (term: string) => any[];
 
-  filtered$: Observable<any[]>;
-  filterControl = new FormControl<string>('');
+  filtered$?: Observable<any[]>;
+  filterControl = new FormControl<string>('', { nonNullable: true });
 
-  constructor() {
-    this.filtered$ = this.filterControl.valueChanges.pipe(
+  ngOnChanges(): void {
+    const filterFn = this.filterFn;
+
+    filterFn && (this.filtered$ = this.filterControl.valueChanges.pipe(
       startWith(this.filterControl.value),
       debounceTime(300),
-      map(term => (this.items ?? []).filter(item => this.filterFn(term ?? '', item)))
-    );
+      map(term => filterFn(term))
+    ));
   }
 
 }

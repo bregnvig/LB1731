@@ -30,12 +30,9 @@ export class AppComponent {
   markers$: Observable<Marker> | undefined;
   location$ = this.locationService.location$;
   component = FooterComponent;
-  filterFn = (term: string, playground: Playground) => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase());
+  filterFn$: Observable<(term: string) => Playground[]>;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) {
-  }
-
-  ngOnInit() {
     this.locationService.location$.subscribe(location => {
       this.center = new Center(location.lat, location.lng, 12);
     });
@@ -53,6 +50,9 @@ export class AppComponent {
       map(([playgrounds, location]) =>
         playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       )
+    );
+    this.filterFn$ = this.playgrounds$.pipe(
+      map(playgrounds => (term: string) => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())))
     );
   }
 

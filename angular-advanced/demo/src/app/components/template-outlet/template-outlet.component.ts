@@ -12,7 +12,6 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
     <h5 class="mt-5">Using filter function</h5>
     <loop-common-list-filter-filter-fn 
       class="mt-3" 
-      [items]="playgrounds$ | async" 
       [filterFn]="filterFn" 
       [itemTemplateRef]="playgroundInfo"/>
     <ng-template #playgroundInfo let-playground>
@@ -25,7 +24,7 @@ export class TemplateOutletComponent implements OnInit {
 
   @ViewChild(CommonFilterListComponent, { static: true }) filterComponent!: CommonFilterListComponent;
   playgrounds$!: Observable<Playground[]>;
-  filterFn = (term: string, playground: Playground) => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase());
+  filterFn?: (term: string) => Playground[];
 
   constructor(public service: PlaygroundService) { }
 
@@ -39,6 +38,9 @@ export class TemplateOutletComponent implements OnInit {
     ]).pipe(
       map(([playgrounds, term]) => playgrounds.filter(p => term.test(p.name)))
     );
+    this.playgrounds$.subscribe(playgrounds => {
+      this.filterFn = (term: string) => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
+    });
   }
 
 }
