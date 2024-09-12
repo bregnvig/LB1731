@@ -7,7 +7,7 @@
   </loop-sidebar-list-item>
 </ng-template>
 
-<loop-sidebar [items]="playgrounds$ |async" [filterFn]="filterFn" [itemTemplate]="playgroundTemplate"></loop-sidebar>
+<loop-sidebar [filterFn]="filterFn$ | async" [itemTemplate]="playgroundTemplate"></loop-sidebar>
 <ng-template
   *ngIf="playground$ | async as playground"
   [ngComponentOutlet]="component"
