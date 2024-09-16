@@ -2,6 +2,31 @@
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
+  describe("Always", () => {
+    let service: AuthService;
+
+    beforeEach(() => {
+      service = new AuthService();
+    });
+
+    it("should throw when calling login with nullish email or password", () => {
+      // Arrange
+      const email = undefined as any as string
+      const password = undefined as any as string
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be non-nullish strings');
+    });
+
+    it("should throw when calling login with empty string email or password", () => {
+      // Arrange
+      const email = '';
+      const password = '';
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be truthy strings');
+    });
+
+  });
+
   describe('Initially', () => {
     let service: AuthService;
   

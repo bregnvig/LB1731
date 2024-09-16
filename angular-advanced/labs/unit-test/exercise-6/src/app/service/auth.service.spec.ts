@@ -12,12 +12,19 @@ describe('AuthService', () => {
     });
 
     it("should throw when calling login with nullish email or password", () => {
-      const undefinedAsString = undefined as any as string;
-      expect(() => service.login(undefinedAsString, undefinedAsString)).toThrow('email and password must be non-nullish strings');
+      // Arrange
+      const email = undefined as any as string
+      const password = undefined as any as string
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be non-nullish strings');
     });
 
     it("should throw when calling login with empty string email or password", () => {
-      expect(() => service.login('', '')).toThrow('email and password must be non-empty strings');
+      // Arrange
+      const email = '';
+      const password = '';
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be truthy strings');
     });
 
   });
@@ -30,6 +37,7 @@ describe('AuthService', () => {
     });
 
     it("should not be logged in", done => {
+      // Assert
       service.isLoggedIn$.pipe(first()).subscribe({
         next: isLoggedIn => {
           expect(isLoggedIn).toEqual(false);
@@ -52,9 +60,15 @@ describe('AuthService', () => {
     });
 
     it("should throw on login", done => {
-      service.login('email@email.com', 'password').subscribe({
+      // Arrange
+      const email = 'email@email.com';
+      const password = 'password';
+      const login$ = service.login(email, password);
+      // Act
+      login$.subscribe({
         next: isLoggedIn => done(`Received unexpected next: ${isLoggedIn}`),
         error: error => {
+          // Assert
           expect(error).toEqual('Already logged in');
           done();
         },
@@ -73,8 +87,14 @@ describe('AuthService', () => {
     });
 
     it("should login with email & password", (done) => {
-      service.login('email@email.com', 'password').subscribe({
+      // Arrange
+      const email = 'email@email.com';
+      const password = 'password';
+      const login$ = service.login(email, password);
+      // Act
+      login$.subscribe({
         next: isLoggedIn => {
+          // Assert
           expect(isLoggedIn).toEqual(true);
           done();
         },
@@ -83,9 +103,12 @@ describe('AuthService', () => {
     });
 
     it("should call '/api/login'", (done) => {
+      // Arrange
       const email = 'email@email.com';
       const password = 'password';
-      service.login(email, password).subscribe({
+      const login$ = service.login(email, password);
+      // Act
+      login$.subscribe({
         next: () => {
           expect(httpClientMock.post).toHaveBeenCalledWith('/api/login', { email, password });
           done();

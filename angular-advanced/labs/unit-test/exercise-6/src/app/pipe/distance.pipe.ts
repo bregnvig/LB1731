@@ -1,13 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Coordinate } from '../model';
-import { LocationService } from '../service';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { LocationService } from '../service/location.service';
+import { Coordinate } from '../model/coordinate';
 
 @Pipe({
-  name: 'distance'
+  name: 'distance',
+  standalone: true,
 })
 export class DistancePipe implements PipeTransform {
 
-  constructor(private locationService: LocationService) { }
+  private locationService = inject(LocationService);
 
   transform(value: Coordinate, location: Coordinate | null): number | string {
     return location ? this.locationService.getDistance(location, value) : 'Ukendt';
