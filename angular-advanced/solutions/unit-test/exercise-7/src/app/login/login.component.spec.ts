@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { firstValueFrom, of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 import { LoginComponent } from './login.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 describe('LoginComponent', () => {
@@ -14,13 +15,11 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        HttpClientTestingModule,
+    imports: [ReactiveFormsModule,
         RouterTestingModule,
-        LoginComponent,
-      ],
-    }).compileComponents();
+        LoginComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {
