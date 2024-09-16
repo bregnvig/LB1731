@@ -1,10 +1,11 @@
+import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
   
   beforeEach(() => {
-    service = new AuthService();
+    service = TestBed.inject(AuthService);
   });
 
   it("should login with email & password", () => {
