@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, first, map, Observable, shareReplay, switchMap } from 'rxjs';
-import { AuthUser } from '../model';
-import { isNullOrUndefined } from '../utils';
+import { AuthUser } from '../model/auth-user';
+import { isNullOrUndefined } from '../utils/object-utils';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
       throw 'email and password must be non-nullish strings';
     }
     if ([email, password].some(value => value === '')) {
-      throw 'email and password must be non-empty strings';
+      throw 'email and password must be truthy strings';
     }
 
     return this.isLoggedIn$.pipe(
