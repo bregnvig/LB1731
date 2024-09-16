@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, first, map, Observable, shareReplay, switchMap } from 'rxjs';
-import { AuthUser } from '../model';
-import { isNullOrUndefined } from '../utils';
+import { isNullOrUndefined } from '../utils/object-utils';
+import { AuthUser } from '../model/auth-user';
 
 @Injectable({
   providedIn: 'root'

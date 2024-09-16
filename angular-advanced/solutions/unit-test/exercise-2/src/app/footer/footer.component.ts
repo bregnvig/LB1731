@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Playground } from '../model';
-
-
+import { Playground } from '../model/playground';
 
 @Component({
   selector: 'loop-footer',
@@ -12,9 +10,11 @@ import { Playground } from '../model';
       <p>{{playground!.description}}</p>
     </footer>
   `,
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
 
   @Input() playground: Playground | undefined;
+  
 }

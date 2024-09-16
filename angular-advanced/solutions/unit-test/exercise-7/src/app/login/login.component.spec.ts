@@ -1,7 +1,7 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { firstValueFrom, of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
@@ -13,19 +13,9 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-    imports: [ReactiveFormsModule,
-        RouterTestingModule,
-        LoginComponent],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-}).compileComponents();
-  });
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.configureTestingModule({ providers: [provideRouter([]), provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()] }).createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should login with email & password from form', () => {
@@ -47,21 +37,20 @@ describe('LoginComponent', () => {
     const authSpy = jest.spyOn(authService, 'login');
     component.fg.patchValue({ email, password });
     component.login();
-    
+
     expect(authSpy).toHaveBeenCalledTimes(0);
   });
-  
-  
-  it('should navigate to root after successful login',() => {
+
+
+  it('should navigate to root after successful login', () => {
     const email = `email@email.com`;
     const password = 'pword';
     const authService = TestBed.inject(AuthService)
     authService.login = (...args: any[]) => of(true);
 
     const router = TestBed.inject(Router);
-    // We only fake navigate to avoid "Navigation triggered outside Angular zone" warning
-    const routerSpy = jest.spyOn(router, 'navigate').mockImplementation(() => firstValueFrom(of(true))); 
-    
+    const routerSpy = jest.spyOn(router, 'navigate').mockImplementation(() => firstValueFrom(of(true)));
+
     component.fg.patchValue({ email, password });
     component.login();
 
