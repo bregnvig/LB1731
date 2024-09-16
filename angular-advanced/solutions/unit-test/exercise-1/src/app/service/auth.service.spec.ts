@@ -1,22 +1,26 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
-
+  
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     service = TestBed.inject(AuthService);
   });
 
   it("should login with email & password", () => {
-    service.login('email@email.com', 'password');
-    expect(service.isLoggedIn).toBe(true);
+    // Arrange
+    const email = 'email@email.com';
+    const password = 'password';
+    // Act
+    service.login(email, password);
+    // Assert
+    expect(service.isLoggedIn).toEqual(true);
   })
 
   it("should not be logged in initially", () => {
+    // Assert
     expect(service.isLoggedIn).toBe(false);
   })
-  
+
 });
