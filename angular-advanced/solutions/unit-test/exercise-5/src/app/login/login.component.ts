@@ -27,6 +27,8 @@ export class LoginComponent {
           this.router.navigate(['/'])
         }
       });
+    } else {
+      throw 'Invalid form';
     }
   }
 

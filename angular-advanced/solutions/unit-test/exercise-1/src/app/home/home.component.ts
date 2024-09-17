@@ -4,7 +4,7 @@ import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators'
 import { withLength } from '../utils/rxjs-utils';
 import { LeafletComponent } from '../leaflet/leaflet.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { FooterComponent } from '../footer/footer.component';
+import { FooterComponentModule } from '../footer/footer.component';
 import { Marker } from '../leaflet/marker';
 import { Center } from '../leaflet/center';
 import { Coordinate } from '../model/coordinate';
@@ -23,7 +23,7 @@ import { AsyncPipe } from '@angular/common';
     }
   `,
   standalone: true,
-  imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe],
+  imports: [LeafletComponent, SidebarComponent, FooterComponentModule, AsyncPipe],
 })
 export class HomeComponent implements OnInit {
 

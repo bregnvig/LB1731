@@ -46,9 +46,9 @@ describe('LoginComponent', () => {
 
     // Act
     component.fg.patchValue({ email, password });
-    component.login();
     
     // Assert
+    expect(() => component.login()).toThrow();
     expect(authSpy).toHaveBeenCalledTimes(0);
   });
   
