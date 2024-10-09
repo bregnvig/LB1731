@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'humanizeDistance'
+  name: 'humanizeDistance',
+  standalone: true,
 })
 export class HumanizeDistancePipe implements PipeTransform {
 

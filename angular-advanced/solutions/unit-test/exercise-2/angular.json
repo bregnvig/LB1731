@@ -21,12 +21,13 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/unit-test",
+            "outputPath": {
+              "base": "dist/unit-test"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -39,7 +40,14 @@
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js"
-            ]          },
+            ],
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "."
+              ]
+            }
+          },
           "configurations": {
             "production": {
               "budgets": [
@@ -63,9 +71,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -74,24 +80,24 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "unit-test:build:production"
+              "buildTarget": "unit-test:build:production"
             },
             "development": {
-              "browserTarget": "unit-test:build:development"
+              "buildTarget": "unit-test:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "unit-test:build"
+            "buildTarget": "unit-test:build"
           }
         },
         "test": {
@@ -112,6 +118,5 @@
         }
       }
     }
-  },
-  "defaultProject": "unit-test"
+  }
 }

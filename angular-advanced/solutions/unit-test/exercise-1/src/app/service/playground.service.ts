@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Playground } from '../model';
+import { Playground } from '../model/playground';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaygroundService {
 
-  playgrounds$: Observable<Playground[]>;
+  playgrounds$: Observable<Playground[]> = inject(HttpClient).get<Playground[]>('assets/copenhagen.json');
 
-  constructor(http: HttpClient) {
-    this.playgrounds$ = http.get<Playground[]>('assets/copenhagen.json');
-  }
 }
+  

@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-import { Center, Marker } from '../leaflet';
-import { Coordinate, Playground } from '../model';
-import { LocationService, PlaygroundService } from '../service';
 import { withLength } from '../utils/rxjs-utils';
+import { LeafletComponent } from '../leaflet/leaflet.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { FooterComponentModule } from '../footer/footer.component';
+import { Marker } from '../leaflet/marker';
+import { Center } from '../leaflet/center';
+import { Coordinate } from '../model/coordinate';
+import { Playground } from '../model/playground';
+import { LocationService } from '../service/location.service';
+import { PlaygroundService } from '../service/playground.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  template: `
+    <leaflet [center]="center" [markers]="markers$"></leaflet>
+    <loop-sidebar [playgrounds]="playgrounds$ | async" (selected)="playground$.next($event)"></loop-sidebar>
+    @if(playground$ | async; as playground) {
+      <loop-footer [playground]="playground"></loop-footer>
+    }
+  `,
+  standalone: true,
+  imports: [LeafletComponent, SidebarComponent, FooterComponentModule, AsyncPipe],
 })
 export class HomeComponent implements OnInit {
 
