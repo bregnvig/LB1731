@@ -19,11 +19,13 @@ export class CommonListFilterFilterFnComponent implements OnChanges {
   ngOnChanges(): void {
     const filterFn = this.filterFn;
 
-    filterFn && (this.filtered$ = this.filterControl.valueChanges.pipe(
-      startWith(this.filterControl.value),
-      debounceTime(300),
-      map(term => filterFn(term))
-    ));
+    if (filterFn) {
+      this.filtered$ = this.filterControl.valueChanges.pipe(
+        startWith(this.filterControl.value),
+        debounceTime(300),
+        map(term => filterFn(term))
+      );
+    }
   }
 
 }

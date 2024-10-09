@@ -7,17 +7,21 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
 @Component({
   selector: 'loop-template-outlet',
   template: `
-    <h5>Using event emitter</h5>
-    <loop-common-filter-list [items]="playgrounds$ | async" [itemTemplateRef]="playgroundInfo"></loop-common-filter-list>
     <h5 class="mt-5">Using filter function</h5>
     <loop-common-list-filter-filter-fn 
-      class="mt-3" 
-      [filterFn]="filterFn" 
-      [itemTemplateRef]="playgroundInfo"/>
+    class="mt-3" 
+    [filterFn]="filterFn" 
+    [itemTemplateRef]="playgroundInfo"/>
+    
     <ng-template #playgroundInfo let-playground>
       <h6>{{playground.name}}</h6>
       <small>{{playground.description}}</small>
     </ng-template>
+
+    <hr class="my-3">
+
+    <h5>Using event emitter</h5>
+    <loop-common-filter-list [items]="playgrounds$ | async" property="name"/>
   `,
 })
 export class TemplateOutletComponent implements OnInit {
@@ -29,6 +33,8 @@ export class TemplateOutletComponent implements OnInit {
   constructor(public service: PlaygroundService) { }
 
   ngOnInit(): void {
+
+    /** Releated to the event emitter solution */
     this.playgrounds$ = combineLatest([
       this.service.playgrounds$,
       this.filterComponent.filter.pipe(
@@ -38,7 +44,9 @@ export class TemplateOutletComponent implements OnInit {
     ]).pipe(
       map(([playgrounds, term]) => playgrounds.filter(p => term.test(p.name)))
     );
-    this.playgrounds$.subscribe(playgrounds => {
+
+    /** Related to the filterFn solution */
+    this.service.playgrounds$.subscribe(playgrounds => {
       this.filterFn = (term: string) => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
     });
   }

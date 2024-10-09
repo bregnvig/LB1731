@@ -12,8 +12,8 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
       </div>
       <div class="mt-3 col-12 d-flex flex-column">
         <h5>Dynamic</h5>
-        @for (no of watchNos; track no; let i = $index) {
-          <span>{{i + 1}}. <loop-stop-watch></loop-stop-watch></span>
+        @for (no of watchNos; track no) {
+          <span>{{$index + 1}}. <loop-stop-watch></loop-stop-watch></span>
         }
         <div class="mt-3">
           <button type="button" class="btn btn-outline-primary" (click)="watchNos.push(watchNos.length)">Add stopwatch</button>
