@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,25 +13,14 @@ import { AppComponent } from './app.component';
 
 library.add(fas, far);
 
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    // QuicklinkModule,
-  ],
-  providers: [
-    // {
-    //   provide: PLAYGROUND_SERVICE_URL,
-    //   useValue: 'assets/aarhus.json',
-    // }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        NgbModule], providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   constructor(library: FaIconLibrary) {
     registerLocaleData(localeDa);
