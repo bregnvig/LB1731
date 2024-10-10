@@ -17,7 +17,6 @@ import { map, tap } from 'rxjs/operators';
       </p>
     }
     `,
-  // template: `{{date  | date: 'HH:mm:ss'}}`,
 })
 export class AsyncPipeComponent implements OnInit {
 

@@ -8,14 +8,16 @@ import { Component } from '@angular/core';
 export class KeyValueComponent {
 
   myObject = {
-    a: 'A is the first letter',
     b: 'B is the second',
+    a: 'A is the first letter',
   };
 
   myMap = new Map<string, string>([
+    ['c', 'C is the third'],
     ['a', 'A is the first letter'],
     ['b', 'B is the second'],
   ]);
 
 
+  originalOrder = () => 0;
 }
