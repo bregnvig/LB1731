@@ -3,19 +3,19 @@
     <div class="col">
 
       <div class="row">
-        <div class="form-check col-4">
+        <div class="form-check col-auto">
           <input class="form-check-input" [formControl]="roleControl" type="radio" value="anonymous" id="anonymous">
           <label class="form-check-label" for="anonymous">
             Anonymous
           </label>
         </div>
-        <div class="form-check col-4">
+        <div class="form-check col-auto">
           <input class="form-check-input" [formControl]="roleControl" type="radio" value="user" id="user">
           <label class="form-check-label" for="user">
             User
           </label>
         </div>
-        <div class="form-check col-4">
+        <div class="form-check col-auto">
           <input class="form-check-input" [formControl]="roleControl" type="radio" value="admin" id="admin">
           <label class="form-check-label" for="admin">
             Admin
@@ -24,12 +24,10 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'anonymous'; role as r">I have acces to role anonymous. My role is {{r}}</p></div>
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'user'; role as r">I have acces to role user. My role is {{r}}</p></div>
-    <div class="col-4"><p class="mt-2" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I have acces to role admin. My role is {{r}}</p></div>  
+    <h5 class="my-4" *loopIsInRole="'anonymous'; role as r">I have acces to role anonymous. My role is {{r}}</h5>
+    <h5 class="my-4" *loopIsInRole="'user'; role as r">I have acces to role user. My role is {{r}}</h5>
+    <h5 class="my-4" *loopIsInRole="'admin'; role as r; else iWishIWasAdmin">I have acces to role admin. My role is {{r}}</h5>
     <ng-template #iWishIWasAdmin>
-      I wish I was an admin😭
+      <h5>I wish I was an admin😭</h5>
     </ng-template>
-  </div>
 </article>
