@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Coordinate, Playground } from '../model';
@@ -8,12 +7,12 @@ import { DefaultDescriptionPipe, DistancePipe } from '../pipe';
   selector: 'loop-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
-  imports: [AsyncPipe, FaIconComponent, DefaultDescriptionPipe, DistancePipe],
+  imports: [FaIconComponent, DefaultDescriptionPipe, DistancePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | undefined = [];
+  @Input({ required: true }) playgrounds: Playground[] | undefined;
   @Input() selectedPlayground: Playground | undefined;
   @Input() location: Coordinate | undefined;
 
