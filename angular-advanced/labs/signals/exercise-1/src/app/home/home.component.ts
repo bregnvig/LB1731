@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -29,7 +28,6 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
   imports: [
     LeafletModule,
     SidebarComponent,
-    AsyncPipe,
     FooterComponent,
   ],
 })
@@ -72,15 +70,18 @@ export class HomeComponent {
       takeUntilDestroyed(),
     ).subscribe(playgrounds => this.playgrounds = playgrounds);
     playground$.pipe(
-      map(playground => playground?.position ?? {lat: 56.360029, lng: 10.746635}),
+      map(playground => playground?.position ?? { lat: 56.360029, lng: 10.746635 }),
       takeUntilDestroyed(),
-    ).subscribe(position => this.center = {...position, zoom: 16});
+    ).subscribe(position => this.center = { ...position, zoom: 16 });
     combineLatest([
       locationService.location$,
       playground$.pipe(
-        map(p => p ? ({...p.position, message: p.name}) : undefined),
-        startWith(undefined)),
-    ]).subscribe(markers => this.markers = markers);
+        map(p => p ? ({ ...p.position, message: p.name }) : undefined),
+        startWith(undefined),
+      ),
+    ]).pipe(
+      takeUntilDestroyed(),
+    ).subscribe(markers => this.markers = markers);
   }
 
   selected(playground: Playground) {
