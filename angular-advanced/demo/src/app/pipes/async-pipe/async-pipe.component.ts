@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'loop-async-pipe',
@@ -21,8 +21,9 @@ import { map, tap } from 'rxjs/operators';
 export class AsyncPipeComponent implements OnInit {
 
   date$ = timer(0, 1000).pipe(
-    map(() => new Date()), tap(_ => console.log(formatDate(_, 'HH:mm:ss', this.localeId))),
-    // shareReplay({ bufferSize: 1, refCount: true })
+    map(() => new Date()),
+    tap(_ => console.log(formatDate(_, 'HH:mm:ss', this.localeId))),
+    shareReplay({ bufferSize: 1, refCount: true })
   );
   // date: Date | undefined;
 

@@ -1,6 +1,7 @@
 import { DestroyRef, Pipe, PipeTransform, inject } from '@angular/core';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const distanceKeyFn = (a: Coordinate, b: Coordinate) => `${a.lat}${a.lng}${b.lat}${b.lng}`;
 @Pipe({
@@ -15,8 +16,9 @@ export class DistancePipe implements PipeTransform {
   private lastKnownLocation?: Coordinate;
 
   constructor(private locationService: LocationService) {
-    const subscription = locationService.location$.subscribe(location => this.lastKnownLocation = location);
-    inject(DestroyRef).onDestroy(() => subscription.unsubscribe());
+    locationService.location$.pipe(
+      takeUntilDestroyed()
+    ).subscribe(location => this.lastKnownLocation = location);
   }
 
   transform(value: Coordinate): `${number}m` | 'Unknown location' {
