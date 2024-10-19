@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rxjs": {
+    "signals": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/rxjs"
+              "base": "dist/signals"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -86,10 +86,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rxjs:build:production"
+              "buildTarget": "signals:build:production"
             },
             "development": {
-              "buildTarget": "rxjs:build:development"
+              "buildTarget": "signals:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +97,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "rxjs:build"
+            "buildTarget": "signals:build"
           }
         },
         "test": {
