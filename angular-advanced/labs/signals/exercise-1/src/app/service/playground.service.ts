@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Playground } from '../model';
+import { shareLatest } from '../utils/rxjs-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class PlaygroundService {
   constructor(http: HttpClient) {
     this.playgrounds$ = timer(3000).pipe(
       switchMap(() => http.get<Playground[]>('/assets/copenhagen.json')),
+      shareLatest(),
     );
 
     // this.playgrounds$ = http.get<Playground[]>('/assets/copenhagen.json');
