@@ -1,29 +1,21 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Coordinate, Playground } from '../model';
-import { DefaultDescriptionPipe, DistancePipe } from "../pipe";
-import { LocationService } from '../service';
+import { DefaultDescriptionPipe, DistancePipe } from '../pipe';
 
 @Component({
   selector: 'loop-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
-  imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [FaIconComponent, DefaultDescriptionPipe, DistancePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
+  @Input({ required: true }) playgrounds: Playground[] | undefined;
+  @Input() selectedPlayground: Playground | undefined;
+  @Input() location: Coordinate | undefined;
+
   @Output() selected = new EventEmitter<Playground>();
-
-  selectedPlayground: Playground | undefined;
-  location = inject(LocationService).location;
-
-  selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
-    this.selected.emit(playground);
-  }
 
 }
