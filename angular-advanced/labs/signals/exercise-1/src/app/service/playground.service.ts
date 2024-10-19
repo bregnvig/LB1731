@@ -17,9 +17,6 @@ export class PlaygroundService {
       switchMap(() => http.get<Playground[]>('/assets/copenhagen.json')),
       shareLatest(),
     );
-
-    // this.playgrounds$ = http.get<Playground[]>('/assets/copenhagen.json');
-
   }
 
   getById(id: string): Observable<Playground | undefined> {
