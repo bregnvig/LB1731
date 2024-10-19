@@ -66,9 +66,9 @@ export class HomeComponent {
     ).subscribe(location => this.location = location);
 
     playground$.pipe(
-      map(playground => playground?.position ?? { lat: 56.360029, lng: 10.746635 }),
+      map(playground => playground?.position ?? { lat: 56.360029, lng: 10.746635, zoom: 9 }),
       takeUntilDestroyed(),
-    ).subscribe(position => this.center = { ...position, zoom: 16 });
+    ).subscribe(position => this.center = { zoom: 16, ...position });
 
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     const getDistance = locationService.getDistance;
