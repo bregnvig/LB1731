@@ -1,26 +1,27 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      <ng-container *ngIf="location$ | async; else loading">
-        <a *ngFor="let playground of playgrounds"
-          class="list-group-item d-flex list-group-item-action justify-content-between"
-          [class.active]="playground === selectedPlayground"
-          (click)="selectPlayground(playground)">
-          <div class="d-flex flex-column justify-content-between">
-            <h6 class="mb-1">{{playground.name}}
-              <span class="badge bg-primary badge-pill">{{playground.position | distance}}</span>
-            </h6>
-            <small>{{playground.description | defaultDescription}}</small>
-          </div>
-        </a>
-      </ng-container>
+      @if (location) {
+        @for (playground of playgrounds; track playground.id) {
+          <a
+            class="list-group-item d-flex list-group-item-action justify-content-between"
+            [class.active]="playground === selectedPlayground"
+            (click)="selected.emit(playground)">
+            <div class="d-flex flex-column">
+              <h6 class="mb-1">{{ playground.name }}</h6>
+              <small>{{ playground.description | defaultDescription }}</small>
+            </div>
+            <div>
+              <span class="badge bg-primary badge-pill">{{ playground.position | distance: location }}</span>
+            </div>
+          </a>
+        }
+      } @else {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Determining your location</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      }
     </div>
   </nav>
 </aside>
-
-<ng-template #loading>
-  <div class="list-group-item d-flex justify-content-between">
-    <span>Determining your location</span>
-    <fa-icon size="lg" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
-  </div>
-</ng-template>
