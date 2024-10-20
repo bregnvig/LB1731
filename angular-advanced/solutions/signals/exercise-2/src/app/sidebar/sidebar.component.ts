@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Coordinate, Playground } from '../model';
 import { DefaultDescriptionPipe, DistancePipe } from '../pipe';
@@ -12,10 +12,10 @@ import { DefaultDescriptionPipe, DistancePipe } from '../pipe';
 })
 export class SidebarComponent {
 
-  @Input({ required: true }) playgrounds: Playground[] | undefined;
-  @Input() selectedPlayground: Playground | undefined;
-  @Input() location: Coordinate | undefined;
+  playgrounds = input.required<Playground[] | undefined>();
+  selectedPlayground = input<Playground | undefined>();
+  location = input<Coordinate | undefined>(undefined);
 
-  @Output() selected = new EventEmitter<Playground>();
+  selected = output<Playground>();
 
 }

@@ -1,11 +1,11 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      @if (location) {
-        @for (playground of playgrounds; track playground.id) {
+      @if (location(); as location) {
+        @for (playground of playgrounds(); track playground.id) {
           <button
             class="list-group-item d-flex list-group-item-action justify-content-between"
-            [class.active]="playground === selectedPlayground"
+            [class.active]="playground === selectedPlayground()"
             (click)="selected.emit(playground)">
             <div class="d-flex flex-column">
               <h6 class="mb-1">{{ playground.name }}</h6>
