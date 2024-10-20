@@ -3,18 +3,7 @@
     <div class="list-group">
       @if (location(); as location) {
         @for (playground of playgrounds(); track playground.id) {
-          <button
-            class="list-group-item d-flex list-group-item-action justify-content-between"
-            [class.active]="playground === selectedPlayground()"
-            (click)="selected.emit(playground)">
-            <div class="d-flex flex-column">
-              <h6 class="mb-1">{{ playground.name }}</h6>
-              <small>{{ playground.description | defaultDescription }}</small>
-            </div>
-            <div>
-              <span class="badge bg-primary badge-pill">{{ playground.position | distance: location }}</span>
-            </div>
-          </button>
+          <loop-sidebar-list-item [playground]="playground" [location]="location" [active]="playground === selectedPlayground()" (click)="selected.emit(playground)"/>
         }
       } @else {
         <div class="list-group-item d-flex justify-content-between">
