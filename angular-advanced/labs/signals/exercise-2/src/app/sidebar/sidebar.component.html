@@ -1,0 +1,27 @@
+<aside tabindex="1">
+  <nav>
+    <div class="list-group">
+      @if (location) {
+        @for (playground of playgrounds; track playground.id) {
+          <button
+            class="list-group-item d-flex list-group-item-action justify-content-between"
+            [class.active]="playground === selectedPlayground"
+            (click)="selected.emit(playground)">
+            <div class="d-flex flex-column">
+              <h6 class="mb-1">{{ playground.name }}</h6>
+              <small>{{ playground.description | defaultDescription }}</small>
+            </div>
+            <div>
+              <span class="badge bg-primary badge-pill">{{ playground.position | distance: location }}</span>
+            </div>
+          </button>
+        }
+      } @else {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Determining your location</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      }
+    </div>
+  </nav>
+</aside>
