@@ -23,7 +23,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/signals",
+            "outputPath": {
+              "base": "dist/signals"
+            },
             "index": "src/index.html",
             "polyfills": [
               "zone.js",
@@ -47,6 +49,7 @@
               "includePaths": [
                 "."
               ]
+            }
           },
           "configurations": {
             "production": {
