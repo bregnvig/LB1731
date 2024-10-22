@@ -1,7 +1,7 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      @for (playground of playgrounds; track playground) {
+      @for (playground of playgrounds; track playground.id) {
         <a
           class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
           [class.active]="playground === selectedPlayground"
