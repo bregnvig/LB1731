@@ -1,7 +1,6 @@
 <leaflet [center]="center" [markers]="markers$ | async" />
 <loop-sidebar
   [playgrounds]="playgrounds$ |async"
-  [selectedPlayground]="playground$ | async"
   (edit)="edit($event)" />
 @if (playground$ | async; as playground) {
   <loop-footer [playground]="playground" />

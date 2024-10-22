@@ -7,7 +7,7 @@
       @for (playground of playgrounds; track playground.id) {
         <a
           class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
-          [class.active]="playground.id === selectedPlayground?.id"
+          routerLinkActive="active"
           [routerLink]="['/', playground.id]"
           >
           <div class="d-flex flex-column justify-content-between">
