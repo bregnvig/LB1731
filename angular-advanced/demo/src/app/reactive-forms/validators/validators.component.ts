@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
-import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { DawaService } from './dawa.service';
 
@@ -26,7 +26,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       zip: this.fb.control(
         '',
         {
-          validators: [Validators.required, Validators.pattern(/^[1-9][0-9]{3}$/)],
+          validators: [Validators.pattern(/^[1-9][0-9]{3}$/)],
           asyncValidators: isValidZip(this.service)
         },
       ),
@@ -45,6 +45,9 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
       },
     } as AbstractControlOptions)
   });
+  status$ = this.fg.statusChanges.pipe(
+    startWith(this.fg.status)
+  );
 
   constructor(private fb: FormBuilder, private service: DawaService) {
     super();
