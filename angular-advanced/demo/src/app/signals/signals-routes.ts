@@ -4,6 +4,7 @@ import { PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent } from ".
 import { SignalsComponent } from "./signals.component";
 import { PlaygroundsEqualityComponent } from "./equality/playgrounds-equality.component";
 import { PlaygroundsUntrackedComponent } from "./untracked";
+import { InputsComponent } from "./inputs/inputs.component";
 
 export const SignalsRoutes: Routes = [
   {
@@ -33,6 +34,10 @@ export const SignalsRoutes: Routes = [
       {
         path: 'untracked',
         component: PlaygroundsUntrackedComponent
+      },
+      {
+        path: 'inputs',
+        component: InputsComponent,
       },
       {
         path: '**',

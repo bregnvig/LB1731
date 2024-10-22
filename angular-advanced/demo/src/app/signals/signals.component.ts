@@ -26,6 +26,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="untracked">
         <a ngbNavLink routerLink="untracked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Untracked</a>
     </li>
+    <li ngbNavItem="inputs">
+        <a ngbNavLink routerLink="inputs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inputs</a>
+    </li>
   </ul>
   <router-outlet></router-outlet>
   `,
