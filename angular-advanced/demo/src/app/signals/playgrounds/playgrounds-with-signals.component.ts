@@ -3,21 +3,13 @@ import { Component, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, timer } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
+import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
   selector: 'loop-playgrounds-with-signals',
   standalone: true,
-  imports: [],
-  template: `
-    <ul class="list-group">
-      @for (playground of playgrounds(); track playground.id) {
-        <li class="list-group-item">
-          {{playground.name}}
-        </li>
-      }
-    </ul>`,
-  styles: [
-  ]
+  imports: [SharedPlaygroundUlComponent],
+  template: `<loop-shared-playground-ul [playgrounds]="playgrounds()"/>`,
 })
 export class PlaygroundsWithSignalsComponent {
 

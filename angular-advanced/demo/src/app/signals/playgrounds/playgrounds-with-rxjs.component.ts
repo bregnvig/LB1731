@@ -2,20 +2,15 @@
 import { Component } from '@angular/core';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
+import { SharedPlaygroundUlComponent } from 'src/app/shared/component/shared-playground-ul.component';
 
 @Component({
   selector: 'loop-playgrounds-with-rxjs',
   standalone: true,
-  imports: [],
+  imports: [SharedPlaygroundUlComponent],
   template: `
     <button type="button" class="btn btn-primary" (click)="subscription.unsubscribe()">Unsubscribe</button>
-    <ul class="mt-3 list-group">
-      @for (playground of playgrounds; track playground.id) {
-        <li class="list-group-item">
-          {{playground.name}}
-        </li>
-      }
-    </ul>
+    <loop-shared-playground-ul class="mt-3" [playgrounds]="playgrounds"/>
     `,
   styles: [
   ]

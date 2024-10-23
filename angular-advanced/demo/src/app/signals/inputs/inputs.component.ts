@@ -7,11 +7,12 @@ import { getRandomPlayground, LocationService, Playground } from 'src/app/shared
 import { AnnotationInputComponent } from './annotation-input.component';
 import { SignalInputComponent } from "./signal-input.component";
 import { toObservable } from '@angular/core/rxjs-interop';
+import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
   selector: 'loop-inputs',
   standalone: true,
-  imports: [JsonPipe, NgbAlert, LeafletModule, AnnotationInputComponent, SignalInputComponent],
+  imports: [JsonPipe, NgbAlert, LeafletModule, AnnotationInputComponent, SignalInputComponent, SharedPlaygroundUlComponent],
   template: `
     <div class="container">
       <button type="button" class="btn btn-primary" (click)="addPlayground()">Add playground</button>
@@ -26,7 +27,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
         <loop-annonation-input [playgrounds]="playgrounds()" [distance]="distance()"></loop-annonation-input>
       </div>
     
-      <small><pre>{{playgrounds() | json}}</pre></small>
+      <loop-shared-playground-ul class="mt-5" [playgrounds]="playgrounds()"/>
     </div>
   `
 })

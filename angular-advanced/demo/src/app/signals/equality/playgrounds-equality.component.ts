@@ -2,6 +2,7 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from 'src/app/shared';
+import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 const initialPlaygrounds: Playground[] = [
   { id: '1', name: 'Playground 1', position: { lat: 52.520008, lng: 13.404954, } },
@@ -33,7 +34,7 @@ const code = {
 @Component({
   selector: 'loop-playgrounds-equality',
   standalone: true,
-  imports: [NgbAlert],
+  imports: [NgbAlert, SharedPlaygroundUlComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
@@ -55,14 +56,7 @@ const code = {
           </ngb-alert>
         </div>
       </div>
-      <h6 class="mt-3">Playgrounds</h6>
-      <ul class="mt-3 list-group">
-        @for (playground of playgrounds(); track playground) {
-          <li class="list-group-item">
-            {{playground.name}}
-          </li>
-        }
-      </ul>
+      <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
     </div>
   `,
 })
