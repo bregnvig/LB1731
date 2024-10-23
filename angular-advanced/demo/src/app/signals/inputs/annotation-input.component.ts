@@ -17,7 +17,7 @@ export class AnnotationInputComponent {
 
   @Input({ required: true }) playgrounds!: Playground[];
 
-  // // Option1 - using setter
+  // // Option1 - using setter (be vary that we actually don't know if we have playgrounds set yet)
   // @Input({ transform: (value: number | undefined) => typeof value === 'number' ? `${value} meters` : value }) set distance(value: string | undefined) { 
   //   this.text = this.getText(); 
   // };
@@ -26,7 +26,7 @@ export class AnnotationInputComponent {
   @Input({ transform: (value: number | undefined) => typeof value === 'number' ? `${value} meters` : value }) distance?: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.distance?.currentValue !== changes.distance?.previousValue) {
+    if (this.playgrounds?.length && changes.distance?.currentValue !== changes.distance?.previousValue) {
       this.text = this.distance && this.getText();
     }
   }
