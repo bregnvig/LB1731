@@ -9,7 +9,7 @@ import { Playground } from 'src/app/shared';
   standalone: true,
   imports: [JsonPipe, NgbAlert, LeafletModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `@if(distance) { {{text}} } @else { No distance provided }`
+  template: `@if(distance) { <span [innerHTML]="text"></span> } @else { No distance provided }`
 })
 export class AnnotationInputComponent {
 
@@ -33,6 +33,6 @@ export class AnnotationInputComponent {
 
   private getText(): string | undefined {
     const [first, second] = this.playgrounds;
-    return `Distance between ${first?.name} and ${second?.name}: ${this.distance}`;
+    return `Distance between ${first?.name} and ${second?.name}: <strong>${this.distance}</strong>`;
   }
 }

@@ -1,10 +1,11 @@
 import { Routes } from "@angular/router";
-import { LocationWithRxjsComponent, LocationWithSignalsComponent } from "./location";
-import { PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent } from "./playgrounds";
-import { SignalsComponent } from "./signals.component";
 import { PlaygroundsEqualityComponent } from "./equality/playgrounds-equality.component";
-import { PlaygroundsUntrackedComponent } from "./untracked";
+import { InfiniteLoopComponent } from "./infinite-loop/infinite-loop.component";
 import { InputsComponent } from "./inputs/inputs.component";
+import { LocationComponent } from "./location/location.component";
+import { PlaygroundsComponent } from "./playgrounds/playgrounds.component";
+import { SignalsComponent } from "./signals.component";
+import { PlaygroundsUntrackedComponent } from "./untracked";
 
 export const SignalsRoutes: Routes = [
   {
@@ -12,20 +13,12 @@ export const SignalsRoutes: Routes = [
     component: SignalsComponent,
     children: [
       {
-        path: 'playgrounds-rxjs',
-        component: PlaygroundsWithRxjsComponent
+        path: 'playgrounds',
+        component: PlaygroundsComponent,
       },
       {
-        path: 'playgrounds-signals',
-        component: PlaygroundsWithSignalsComponent
-      },
-      {
-        path: 'location-rxjs',
-        component: LocationWithRxjsComponent
-      },
-      {
-        path: 'location-signals',
-        component: LocationWithSignalsComponent
+        path: 'location',
+        component: LocationComponent,
       },
       {
         path: 'equality',
@@ -38,6 +31,10 @@ export const SignalsRoutes: Routes = [
       {
         path: 'inputs',
         component: InputsComponent,
+      },
+      {
+        path: 'infinite-loop',
+        component: InfiniteLoopComponent,
       },
       {
         path: '**',

@@ -8,17 +8,11 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
   imports: [RouterLink, RouterLinkActive, RouterOutlet, NgbNav, NgbNavLink, NgbNavItem],
   template: `
   <ul ngbNav class="nav-tabs mb-3">
-    <li ngbNavItem="playgrounds-rxjs">
-        <a ngbNavLink routerLink="playgrounds-rxjs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds RxJS</a>
+    <li ngbNavItem="playgrounds">
+        <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
     </li>
-    <li ngbNavItem="playgrounds-signals">
-        <a ngbNavLink routerLink="playgrounds-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds Signals</a>
-    </li>
-    <li ngbNavItem="location-rxjs">
-        <a ngbNavLink routerLink="location-rxjs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location RxJS</a>
-    </li>
-    <li ngbNavItem="location-signals">
-        <a ngbNavLink routerLink="location-signals" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location Signals</a>
+    <li ngbNavItem="location">
+        <a ngbNavLink routerLink="location" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location RxJS</a>
     </li>
     <li ngbNavItem="equality">
         <a ngbNavLink routerLink="equality" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Equality</a>
@@ -28,6 +22,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     </li>
     <li ngbNavItem="inputs">
         <a ngbNavLink routerLink="inputs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inputs</a>
+    </li>
+    <li ngbNavItem="infinite-loop">
+        <a ngbNavLink routerLink="infinite-loop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Infinite loop</a>
     </li>
   </ul>
   <router-outlet></router-outlet>

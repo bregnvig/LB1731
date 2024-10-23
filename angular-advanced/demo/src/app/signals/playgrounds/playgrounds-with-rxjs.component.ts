@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { Subscription, interval, switchMap } from 'rxjs';
+import { Subscription, switchMap, timer } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -10,7 +10,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
   template: `
     <button type="button" class="btn btn-primary" (click)="subscription.unsubscribe()">Unsubscribe</button>
     <ul class="mt-3 list-group">
-      @for (playground of playgrounds; track playground) {
+      @for (playground of playgrounds; track playground.id) {
         <li class="list-group-item">
           {{playground.name}}
         </li>
@@ -26,7 +26,7 @@ export class PlaygroundsWithRxjsComponent {
   subscription: Subscription;
 
   constructor(service: PlaygroundService) {
-    this.subscription = interval(1000).pipe(
+    this.subscription = timer(0, 1000).pipe(
       switchMap(() => service.playgrounds$)
     ).subscribe(playgrounds => this.playgrounds = playgrounds);
   }

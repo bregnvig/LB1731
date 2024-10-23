@@ -1,4 +1,4 @@
-import { registerLocaleData } from '@angular/common';
+import { IMAGE_CONFIG, NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
 import { NgModule } from '@angular/core';
@@ -13,14 +13,22 @@ import { AppComponent } from './app.component';
 
 library.add(fas, far);
 
-@NgModule({ declarations: [
-        AppComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        NgbModule], providers: [
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    NgOptimizedImage,
+    AppRoutingModule,
+    NgbModule
+  ],
+  providers: [
+    { provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true, disableImageLazyLoadWarning: true } },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AppModule {
   constructor(library: FaIconLibrary) {
     registerLocaleData(localeDa);
