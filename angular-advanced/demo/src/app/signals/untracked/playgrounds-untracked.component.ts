@@ -14,13 +14,13 @@ import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat
         <div class="col">
           <button type="button" class="btn btn-primary" (click)="updateLocation()">updateLocation</button>
           <ngb-alert type="info" class="mt-3" [dismissible]="false">
-            location: {{location() | json}}
+            {{location() | json}}
           </ngb-alert>
         </div>
         <div class="col">
           <button type="button" class="btn btn-primary" (click)="updateUser()">updateUser</button>
           <ngb-alert type="info" class="mt-3" [dismissible]="false">
-            user: {{user() | json}}
+            {{user() | json}}
           </ngb-alert>
         </div>
       </div>
@@ -41,7 +41,8 @@ export class PlaygroundsUntrackedComponent {
 
   constructor() {
     effect(() => {
-      const user = untracked(() => this.user());
+      const user = untracked(() => this.user()); // Here we use untracked to avoid tracking the user signal
+      
       const http = { post: console.log };
       http.post(`api/location/${user.id}`, this.location());
       this.posts.update(posts => [...posts, `api/location/${user.id}, ${JSON.stringify(this.location())}`]);

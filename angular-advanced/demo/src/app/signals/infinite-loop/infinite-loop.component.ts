@@ -9,7 +9,7 @@ import { getRandomPlayground, Playground } from 'src/app/shared';
   imports: [JsonPipe, NgbAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="container mt-5">
+    <div class="container">
       <button class="btn btn-primary mb-3" (click)="addRandomPlayground()">Add Random Playground</button>
       <ul class="list-group">
         @for (playground of playgrounds(); track playground.id) {
@@ -40,6 +40,7 @@ export class InfiniteLoopComponent {
       console.log('Adding new playground:', newPlaygroundValue);
       const updatedPlaygrounds = [...currentPlaygrounds, newPlaygroundValue];
       this.playgrounds.set(updatedPlaygrounds);
+      // this.newPlayground.set(null); // Uncomment this line to stop the infinite loop
     }
 
   },

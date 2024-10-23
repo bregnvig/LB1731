@@ -36,31 +36,33 @@ const code = {
   imports: [NgbAlert],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <div class="d-flex">
-    <div>
-      <button type="button" class="btn btn-primary" (click)="setInitialPlaygrounds()">setInitialPlaygrounds</button>
-      <ngb-alert type="info" class="mt-3" [dismissible]="false">
-        <pre class="m-0">
-          <code [innerHTML]="code.initialPlaygrounds"></code>
-        </pre>
-      </ngb-alert>
+  <div class="container">
+    <div class="d-flex">
+      <div>
+        <button type="button" class="btn btn-primary" (click)="setInitialPlaygrounds()">setInitialPlaygrounds</button>
+        <ngb-alert type="info" class="mt-3" [dismissible]="false">
+          <pre class="m-0">
+            <code [innerHTML]="code.initialPlaygrounds"></code>
+          </pre>
+        </ngb-alert>
+      </div>
+      <div class="ms-5">
+        <button type="button" class="btn btn-primary" (click)="setModifiedPlaygrounds()">setModifiedPlaygrounds</button>
+        <ngb-alert type="info" class="mt-3" [dismissible]="false">
+          <pre class="m-0">
+            <code [innerHTML]="code.modifiedPlaygrounds"></code>
+          </pre>
+        </ngb-alert>
+      </div>
     </div>
-    <div class="ms-5">
-      <button type="button" class="btn btn-primary" (click)="setModifiedPlaygrounds()">setModifiedPlaygrounds</button>
-      <ngb-alert type="info" class="mt-3" [dismissible]="false">
-        <pre class="m-0">
-          <code [innerHTML]="code.modifiedPlaygrounds"></code>
-        </pre>
-      </ngb-alert>
-    </div>
+    <ul class="mt-3 list-group">
+      @for (playground of playgrounds(); track playground) {
+        <li class="list-group-item">
+          {{playground.name}}
+        </li>
+      }
+    </ul>
   </div>
-  <ul class="mt-3 list-group">
-    @for (playground of playgrounds(); track playground) {
-      <li class="list-group-item">
-        {{playground.name}}
-      </li>
-    }
-  </ul>
   `,
 })
 export class PlaygroundsEqualityComponent {
