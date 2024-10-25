@@ -3,25 +3,17 @@ import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/cor
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { getRandomPlayground, Playground } from 'src/app/shared';
+import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
   selector: 'loop-infinite-loop',
   standalone: true,
-  imports: [JsonPipe, NgbAlert, FaIconComponent],
+  imports: [JsonPipe, NgbAlert, FaIconComponent, SharedPlaygroundUlComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
       <button class="btn btn-primary mb-3" (click)="addRandomPlayground()">Add Random Playground</button>
-      <ul class="list-group">
-        @for (playground of playgrounds(); track playground.id) {
-          <li class="list-group-item">
-            <strong>{{ playground.name }}</strong> - {{ playground.addressDescription || 'No address available' }}
-            <br>
-            <small>Coordinates: {{ playground.position.lat }}, {{ playground.position.lng }}</small><br>
-            <em>{{ playground.description || 'No description available' }}</em>
-          </li>
-        }
-      </ul>
+      <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
     </div>
   `,
 })
