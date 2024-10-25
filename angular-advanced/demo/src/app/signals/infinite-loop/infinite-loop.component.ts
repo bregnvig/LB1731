@@ -1,12 +1,13 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
+import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { getRandomPlayground, Playground } from 'src/app/shared';
 
 @Component({
   selector: 'loop-infinite-loop',
   standalone: true,
-  imports: [JsonPipe, NgbAlert],
+  imports: [JsonPipe, NgbAlert, FaIconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
@@ -26,19 +27,18 @@ import { getRandomPlayground, Playground } from 'src/app/shared';
 })
 export class InfiniteLoopComponent {
   playgrounds = signal<Playground[]>([getRandomPlayground(), getRandomPlayground()]);
-  newPlayground = signal<Playground | null>(null, { equal: (a, b) => false });
+  newPlayground = signal<Playground | null>(null);
 
   infiniteLoopEffect = effect(() => {
-    const currentPlaygrounds = this.playgrounds();
     const newPlaygroundValue = this.newPlayground();
 
-    if(currentPlaygrounds.length > 100) {
+    if(this.playgrounds().length > 50000) {
       console.log('Reached 100 playgrounds. Stopped before crashing the browser.');
       return;
     }
     if (newPlaygroundValue) {
       console.log('Adding new playground:', newPlaygroundValue);
-      const updatedPlaygrounds = [...currentPlaygrounds, newPlaygroundValue];
+      const updatedPlaygrounds = [...this.playgrounds(), newPlaygroundValue];
       this.playgrounds.set(updatedPlaygrounds);
       // this.newPlayground.set(null); // Uncomment this line to stop the infinite loop
     }

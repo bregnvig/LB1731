@@ -19,4 +19,9 @@ import { SharedPlaygroundLiComponent } from "./shared-playground-li.component";
 })
 export class SharedPlaygroundUlComponent {
   playgrounds = input.required<Playground[]>();
+
+  ngOnChanges() {
+    console.log('SharedPlaygroundUlComponent', this.playgrounds());
+  }
+
 }

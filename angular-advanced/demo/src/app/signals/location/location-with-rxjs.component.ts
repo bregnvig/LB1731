@@ -13,7 +13,8 @@ import { createOptions } from './create-options';
   standalone: true,
   imports: [JsonPipe, NgbAlert, LeafletModule],
   template: `
-    <button type="button" class="btn btn-primary" (click)="subscription.unsubscribe()">Unsubscribe</button>
+    <button type="button" class="btn btn-primary" (click)="subscribe()">Subscribe</button>
+    <button type="button" class="ms-3 btn btn-primary" (click)="subscription?.unsubscribe()">Unsubscribe</button>
     <ngb-alert type="info" class="mt-3" [dismissible]="false">
       <code><pre class="text-white mb-0">{{location | json}}</pre></code>
     </ngb-alert>
@@ -27,12 +28,15 @@ import { createOptions } from './create-options';
 })
 export class LocationWithRxjsComponent {
 
-  subscription: Subscription;
+  subscription?: Subscription;
   location?: Coordinate;
   options?: MapOptions;
 
-  constructor(service: LocationService) {
-    this.subscription = service.location$.subscribe(location => {
+  constructor(private service: LocationService) {
+  }
+
+  subscribe(): void {
+    this.subscription = this.service.location$.subscribe(location => {
       this.location = location;
       this.options = createOptions(location);
     });

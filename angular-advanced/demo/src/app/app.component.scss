@@ -6,18 +6,3 @@ img {
 ul {
   background-color: #464543;
 }
-
-img.angular-logo:hover {
-  -webkit-animation: rainbow 1.5s steps(36) infinite;
-  animation: rainbow 1.5s steps(36) infinite;
-}
-
-@-webkit-keyframes rainbow {
-  from { -webkit-filter:hue-rotate(10deg); }
-  to { -webkit-filter:hue-rotate(360deg); }
-}
-
-@keyframes rainbow {
-  from { -webkit-filter:hue-rotate(10deg); filter:hue-rotate(10deg); }
-  to { -webkit-filter:hue-rotate(360deg); filter:hue-rotate(360deg); }
-}

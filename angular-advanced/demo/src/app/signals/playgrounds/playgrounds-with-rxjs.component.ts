@@ -9,7 +9,8 @@ import { SharedPlaygroundUlComponent } from 'src/app/shared/component/shared-pla
   standalone: true,
   imports: [SharedPlaygroundUlComponent],
   template: `
-    <button type="button" class="btn btn-primary" (click)="subscription.unsubscribe()">Unsubscribe</button>
+    <button type="button" class="btn btn-primary" (click)="subscribe()">Subscribe</button>
+    <button type="button" class="ms-3 btn btn-primary" (click)="subscription?.unsubscribe()">Unsubscribe</button>
     <loop-shared-playground-ul class="mt-3" [playgrounds]="playgrounds"/>
     `,
   styles: [
@@ -18,11 +19,14 @@ import { SharedPlaygroundUlComponent } from 'src/app/shared/component/shared-pla
 export class PlaygroundsWithRxjsComponent {
 
   playgrounds: Playground[] = [];
-  subscription: Subscription;
+  subscription?: Subscription;
 
-  constructor(service: PlaygroundService) {
+  constructor(private service: PlaygroundService) {
+  }
+
+  subscribe(): void {
     this.subscription = timer(0, 1000).pipe(
-      switchMap(() => service.playgrounds$)
+      switchMap(() => this.service.playgrounds$)
     ).subscribe(playgrounds => this.playgrounds = playgrounds);
   }
 }
