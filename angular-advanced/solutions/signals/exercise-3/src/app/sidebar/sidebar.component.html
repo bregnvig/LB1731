@@ -1,0 +1,16 @@
+<aside tabindex="1">
+  <nav>
+    <div class="list-group">
+      @if (location(); as location) {
+        @for (playground of playgrounds(); track playground.id) {
+          <loop-sidebar-list-item [playground]="playground" [location]="location" [active]="playground === selectedPlayground()" (click)="selectedPlayground.set(playground)"/>
+        }
+      } @else {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Determining your location</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      }
+    </div>
+  </nav>
+</aside>
