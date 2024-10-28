@@ -1,6 +1,9 @@
 <ng-template #playground let-p>
   <h5 class="text-truncate">{{p.name}}</h5>
-  <p [style.height.px]="100">{{p.description}}</p>
+  <div [style.height.px]="100">
+    <p>{{p.description}}</p>
+    <p>{{p.addressDescription}}</p>
+  </div>
 </ng-template>
 @if(active(); as playgrounds) {
 <loop-pagination [items]="playgrounds" [template]="playground" [(page)]="page" />
