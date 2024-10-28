@@ -45,7 +45,7 @@ export class HomeComponent {
   location = signal<Coordinate | undefined>(undefined);
 
   constructor(
-    private router: Router,
+    router: Router,
     route: ActivatedRoute,
     service: PlaygroundService,
     locationService: LocationService,
@@ -92,7 +92,7 @@ export class HomeComponent {
     effect(() => localStorage.setItem('playground', JSON.stringify(this.playgrounds())));
     effect(() => {
       const playground = this.playground();
-      playground && this.router.navigate([playground.id]);
+      playground && router.navigate([playground.id]);
     });
   }
 }
