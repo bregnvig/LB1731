@@ -14,7 +14,7 @@ import { debounceTime, filter } from 'rxjs';
           <div class="card-text">
             <ng-container [ngTemplateOutlet]="template()" [ngTemplateOutletContext]="{$implicit: items()[page()]}"]></ng-container>
           </div>
-          <div class="row justify-content-between">
+          <div class="row">
             <div class="col-auto">
               <div class="btn-group">
                 <button class="btn btn-sm" [disabled]="firstElement()" (click)="firstPage()">
@@ -26,8 +26,8 @@ import { debounceTime, filter } from 'rxjs';
               </div>
 
             </div>
-            <div class="col d-flex flex-column">
-              <input class="form-control" type="number" placeholder="page" [formControl]="control"/>
+            <div class="col-auto d-flex flex-column">
+              <input class="form-control" maxlength="4" type="number" placeholder="page" [formControl]="control"/>
               <small class="text-muted">{{page() + 1}} of {{items().length}}</small>
             </div>
             <div class="col-auto">
@@ -61,7 +61,7 @@ export class PaginationComponent {
   constructor() {
     this.control.valueChanges.pipe(
       debounceTime(300),
-      filter(page => page > 0 && page < this.items().length),
+      filter(page => page > 0 && page <= this.items().length),
       takeUntilDestroyed()
     ).subscribe(page => this.page.set(page - 1));
     effect(() => this.control.patchValue(this.page() + 1, { emitEvent: false }));
