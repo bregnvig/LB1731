@@ -23,6 +23,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="inputs">
         <a ngbNavLink routerLink="inputs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inputs</a>
     </li>
+    <li ngbNavItem="model">
+        <a ngbNavLink routerLink="model" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Model</a>
+    </li>
     <li ngbNavItem="infinite-loop">
         <a ngbNavLink routerLink="infinite-loop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Infinite loop</a>
     </li>

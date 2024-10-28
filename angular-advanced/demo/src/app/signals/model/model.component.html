@@ -1,0 +1,21 @@
+<ng-template #playground let-p>
+  <h5 class="text-truncate">{{p.name}}</h5>
+  <p [style.height.px]="100">{{p.description}}</p>
+</ng-template>
+@if(active(); as playgrounds) {
+<loop-pagination [items]="playgrounds" [template]="playground" [(page)]="page" />
+}
+<div class="mt-3 btn-group">
+  <button type="button" class="btn btn--outline-primary" [class.active]="copenhagen === active" (click)="useCopenhagen()">
+    Use Copenhagen
+  </button>
+  <button type="button" class="btn btn--outline-primary" [class.active]="aarhus === active" (click)="useAarhus()">
+    Use Aarhus
+  </button>
+</div>
+<div class="mt-3" style="height: 500px;"
+  leaflet
+  [leafletOptions]="options"
+  [leafletLayer]="marker()"
+  [leafletCenter]="center()">
+</div>
