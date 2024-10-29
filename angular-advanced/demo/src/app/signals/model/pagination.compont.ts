@@ -27,7 +27,7 @@ import { debounceTime, filter } from 'rxjs';
 
             </div>
             <div class="col-auto d-flex flex-column">
-              <input class="form-control" maxlength="4" type="number" placeholder="page" [formControl]="control"/>
+              <input class="form-control" type="number" placeholder="page" [formControl]="control"/>
               <small class="text-muted">{{page() + 1}} of {{items().length}}</small>
             </div>
             <div class="col-auto">
@@ -85,10 +85,4 @@ export class PaginationComponent {
   prevPage() {
     this.page.update(current => Math.max(0, current - 1));
   }
-
-  change(event: Event) {
-    const data = (event as InputEvent).data;
-    data && this.page.set(parseInt(data));
-  }
-
 }
