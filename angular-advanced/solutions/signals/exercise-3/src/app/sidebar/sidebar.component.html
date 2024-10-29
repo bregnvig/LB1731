@@ -1,13 +1,15 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      @if (location(); as location) {
-        @for (playground of playgrounds(); track playground.id) {
-          <loop-sidebar-list-item [playground]="playground" [location]="location" [active]="playground === selectedPlayground()" (click)="selectedPlayground.set(playground)"/>
-        }
-      } @else {
+      @for (playground of playgrounds(); track playground.id) {
+        <loop-sidebar-list-item 
+          [playground]="playground" 
+          [location]="location()" 
+          [active]="playground === selectedPlayground()" 
+          (click)="selected.emit(playground)"/>
+      } @empty {
         <div class="list-group-item d-flex justify-content-between">
-          <span>Determining your location</span>
+          <span>Loading playgrounds</span>
           <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
         </div>
       }
