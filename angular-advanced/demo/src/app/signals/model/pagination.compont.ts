@@ -7,44 +7,7 @@ import { debounceTime, filter } from 'rxjs';
 
 @Component({
   selector: 'loop-pagination',
-  template: `
-    <div class="card">
-      <div class="card-body">
-        <div class="card-text">
-          <div class="card-text">
-            <ng-container [ngTemplateOutlet]="template()" [ngTemplateOutletContext]="{$implicit: items()[page()]}"]></ng-container>
-          </div>
-          <div class="row">
-            <div class="col-auto">
-              <div class="btn-group">
-                <button class="btn btn-sm" [disabled]="firstElement()" (click)="firstPage()">
-                  <fa-icon [icon]="['fas', 'backward-fast']"/>
-                </button>
-                <button class="btn btn-sm" [disabled]="firstElement()" (click)="prevPage()">
-                  <fa-icon [icon]="['fas', 'backward']"/>
-                </button>
-              </div>
-
-            </div>
-            <div class="col-auto d-flex flex-column">
-              <input class="form-control" type="number" placeholder="page" [formControl]="control"/>
-              <small class="text-muted">{{page() + 1}} of {{items().length}}</small>
-            </div>
-            <div class="col-auto">
-              <div class="btn-group">
-                <button class="btn btn-sm"  [disabled]="lastElement()" (click)="nextPage()">
-                  <fa-icon [icon]="['fas', 'forward']"/>
-                </button>
-                <button class="btn btn-sm"  [disabled]="lastElement()" (click)="lastPage()">
-                  <fa-icon [icon]="['fas', 'forward-fast']"/>
-                </button>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: 'pagination.compont.html',
   standalone: true,
   imports: [ReactiveFormsModule, NgTemplateOutlet, FaIconComponent]
 })
