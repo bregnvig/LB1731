@@ -8,12 +8,6 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
   imports: [RouterLink, RouterLinkActive, RouterOutlet, NgbNav, NgbNavLink, NgbNavItem],
   template: `
   <ul ngbNav class="nav-tabs mb-3">
-    <li ngbNavItem="playgrounds">
-        <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
-    </li>
-    <li ngbNavItem="location">
-        <a ngbNavLink routerLink="location" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location RxJS</a>
-    </li>
     <li ngbNavItem="equality">
         <a ngbNavLink routerLink="equality" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Equality</a>
     </li>
@@ -28,6 +22,12 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     </li>
     <li ngbNavItem="infinite-loop">
         <a ngbNavLink routerLink="infinite-loop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Infinite loop</a>
+    </li>
+    <li ngbNavItem="location">
+        <a ngbNavLink routerLink="location" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Location RxJS</a>
+    </li>
+    <li ngbNavItem="playgrounds">
+        <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
     </li>
   </ul>
   <router-outlet></router-outlet>
