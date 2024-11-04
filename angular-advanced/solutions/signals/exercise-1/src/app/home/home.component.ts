@@ -1,6 +1,7 @@
 import { Component, effect, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { combineLatest, distinctUntilChanged, map, startWith, switchMap } from 'rxjs';
 import { FooterComponent } from 'src/app/footer/footer.component';
 import { Center, LeafletModule, Marker } from 'src/app/leaflet';
@@ -8,7 +9,6 @@ import { Coordinate, Playground } from 'src/app/model';
 import { LocationService, PlaygroundService } from 'src/app/service';
 import { SidebarComponent } from 'src/app/sidebar/sidebar.component';
 import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'loop-home',
@@ -39,7 +39,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 export class HomeComponent {
 
-  playgrounds = signal<Playground[] | undefined>(localStorage.getItem('playground') ? JSON.parse(localStorage.getItem('playground') ?? '[]') : undefined);
+  playgrounds = signal<Playground[] | undefined>(JSON.parse(localStorage.getItem('playground') ?? '[]'));
   playground = signal<Playground | undefined>(undefined);
   center = signal<Center | undefined>(undefined);
   markers = signal<Marker[]>([]);

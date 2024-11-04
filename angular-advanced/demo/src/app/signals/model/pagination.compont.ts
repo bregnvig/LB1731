@@ -28,6 +28,10 @@ export class PaginationComponent {
       takeUntilDestroyed()
     ).subscribe(page => this.page.set(page - 1));
     effect(() => this.control.patchValue(this.page() + 1, { emitEvent: false }));
+
+  }
+
+  ngOnInit() {
   }
 
   firstElement = computed(() => this.page() === 0);
