@@ -20,7 +20,7 @@
     "@angular/router": "^18.2.10",
     "@ng-bootstrap/ng-bootstrap": "^17.0.0",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.2.0",
+    "bootstrap": "^5.3.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
