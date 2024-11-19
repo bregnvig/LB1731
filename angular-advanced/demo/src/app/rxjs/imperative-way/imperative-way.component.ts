@@ -42,7 +42,7 @@ export class ImperativeWayComponent implements OnInit, OnDestroy {
     console.log('Filtering by', term);
     this.playgrounds = this.fetchedPlaygrounds.filter(p => p.name.toLocaleLowerCase().includes(term));
     // Lets say I forgot to call this here
-    this.sortPlaygrounds();
+    // this.sortPlaygrounds();
   }
 
   getDistance(playground: Playground): string | undefined {

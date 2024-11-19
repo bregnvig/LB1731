@@ -1,10 +1,10 @@
 import { DestroyRef, Directive, inject, OnDestroy } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { fromEvent, merge, Observable, of, OperatorFunction, pipe, Subject, Subscriber, Subscription, UnaryFunction } from "rxjs";
-import { catchError, filter, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
+import { fromEvent, merge, Observable, of, OperatorFunction, pipe, Subject, Subscriber, Subscription, throwError, UnaryFunction } from "rxjs";
+import { catchError, filter, retry, shareReplay, switchMap, takeUntil, tap } from "rxjs/operators";
 
 export function useCacheOnError(localStorageKey: string) {
-  return function <T>(source: Observable<T>): Observable<T> {
+  return function <T>(sourceObservable: Observable<T>): Observable<T> {
     let innerSubscription: Subscription;
     const subscribeForCacheAndRetry = function (innerSource: Observable<T>, subscriber: Subscriber<T>) {
       innerSubscription?.unsubscribe(); // If we are here again, lets unsubscribe
@@ -17,7 +17,7 @@ export function useCacheOnError(localStorageKey: string) {
           console.log('Problems fetching data', error);
           localStorage.getItem(localStorageKey) && subscriber.next(JSON.parse(localStorage.getItem(localStorageKey)!));
           !window.navigator.onLine && subscribeForCacheAndRetry(fromEvent(window, 'online').pipe(
-            switchMap(() => source),
+            switchMap(() => sourceObservable),
           ), subscriber);
           window.navigator.onLine && !localStorage.getItem(localStorageKey) && subscriber.error(error);
         },
@@ -27,8 +27,8 @@ export function useCacheOnError(localStorageKey: string) {
       });
     };
 
-    return new Observable(subscriber => {
-      subscribeForCacheAndRetry(source, subscriber);
+    return new Observable(observer => {
+      subscribeForCacheAndRetry(sourceObservable, observer);
       return () => {
         console.log(`Unsubscribing from source`);
         innerSubscription?.unsubscribe();
@@ -55,8 +55,13 @@ export const shareLatest = <T>() => pipe(shareReplay<T>({ bufferSize: 1, refCoun
 export const truthy = <T>() => pipe(filter(x => !!x) as OperatorFunction<T | nullish | '', T>);
 export const falsy = <T>() => pipe(filter(x => !x) as OperatorFunction<T | nullish, T extends number ? (nullish | 0) : T extends string ? (nullish | '') : nullish>);
 export const truthyWithGuard = <T>() => pipe(filter(x => !!x) as OperatorFunction<T | undefined | null | '', T>);
-
-
+export const retryWhenOnline = <T>() => pipe(
+  retry<T>({
+    delay: (error) => window.navigator.onLine
+      ? throwError(() => error)
+      : fromEvent(window, 'online')
+  })
+);
 @Directive()
 export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy {
 
@@ -105,26 +110,11 @@ export abstract class AbstractSubscribeUnsubscribeInteropDirective {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const useCacheAndRetryWhenOnline = (cacheKey: string) => <T>(source: Observable<T>): Observable<T> => {
   return source.pipe(
     catchError((error) => {
       if (!window.navigator.onLine && !localStorage.getItem(cacheKey)) {
-          throw error;
+        throw error;
       }
       // Needs better error handling if the cache is corrupted
       const cachedData = JSON.parse(localStorage.getItem(cacheKey)!) as T;
@@ -133,5 +123,5 @@ export const useCacheAndRetryWhenOnline = (cacheKey: string) => <T>(source: Obse
       ));
     }),
     tap(data => localStorage.setItem(cacheKey, JSON.stringify(data))),
-  )
+  );
 };

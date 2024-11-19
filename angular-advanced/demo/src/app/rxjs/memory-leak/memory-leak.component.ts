@@ -13,11 +13,11 @@ let creation = 0;
         <li>{{no}}</li>
       }
     </ul>
-    <!-- <ul>
+    <ul>
       @for(no of nos$ | async; track no) {
       <li>{{no}}</li>
       }
-    </ul> -->
+    </ul>
     `,
 })
 export class MemoryLeakComponent {
@@ -33,9 +33,9 @@ export class MemoryLeakComponent {
       acc.push(no);
       return acc;
     }, [] as number[]));
-    interval(500).subscribe(no => {
-      console.log(`Creation ${this.instanceNo}`, no);
-      this.nos.push(no);
-    });
+    // interval(500).subscribe(no => {
+    //   console.log(`Creation ${this.instanceNo}`, no);
+    //   this.nos.push(no);
+    // });
   }
 }
