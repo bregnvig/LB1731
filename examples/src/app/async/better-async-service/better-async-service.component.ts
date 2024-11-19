@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { Driver } from '../driver';
 import { F1BetterService } from '../f1.service';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-better-async-service',
-    templateUrl: './better-async-service.component.html',
-    providers: [F1BetterService],
-    standalone: true,
-    imports: [NgFor]
+  selector: 'app-better-async-service',
+  templateUrl: './better-async-service.component.html',
+  providers: [F1BetterService],
+  standalone: true,
 })
 export class BetterAsyncServiceComponent implements OnInit {
 

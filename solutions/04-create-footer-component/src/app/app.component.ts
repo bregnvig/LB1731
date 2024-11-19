@@ -16,7 +16,7 @@ export class AppComponent {
   playground?: Playground;
 
   playgroundSelected(playground: Playground) {
-    console.log(playground);
+    console.log(playground.name, playground);
     this.playground = playground;
   }
 }

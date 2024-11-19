@@ -36,8 +36,12 @@ export class F1CachedService {
 
   private drivers$: Observable<Driver[]>;
 
-  constructor(service: F1BetterService) {
+  // We could of course have used the F1BetterService
+  // This is just to show that we can have multiple 
+  // operators in a pipe
+  constructor(service: F1SimpleService) {
     this.drivers$ = service.getDrivers().pipe(
+      map(response => response.MRData.DriverTable.Drivers),
       shareReplay(1),
     );
   }
