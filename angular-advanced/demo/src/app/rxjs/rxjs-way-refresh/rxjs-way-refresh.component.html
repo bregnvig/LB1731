@@ -1,8 +1,16 @@
+@let location = location$ | async;
 <div class="row">
   <div class="col-auto btn-group">
     <button class="btn btn-primary" (click)="refresh$.next()">Refresh</button>
   </div>
 </div>
+@if(!location) {
+  <div class="row">
+    <div class="col-auto">
+      <fa-icon [icon]="['fas', 'spinner']" animation="spin"/> Getting location
+    </div>
+  </div>
+}
 <article class="row w-100">
   <div class="col">
     <ul class="list-group mt-3">
@@ -15,7 +23,7 @@
         @for (p of playgrounds; track p.id) {
           <li class="list-group-item d-flex">
             <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
-            <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
+            <span class="ms-2 badge bg-primary">{{p | distance:(location)}}</span>
           </li>
         }
       }

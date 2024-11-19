@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
-import { Observable, Subject, combineLatest, interval, merge } from 'rxjs';
-import { concatMap, debounceTime, exhaustMap, map, repeat, startWith, switchMap, tap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
+import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, mergeMap, repeat, startWith, switchMap, tap } from 'rxjs/operators';
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
@@ -11,7 +11,7 @@ import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 })
 export class RxJSWayRefreshComponent implements OnInit {
 
-  filterControl = new UntypedFormControl();
+  filterControl = new FormControl<string>('', { nonNullable: true });
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new Subject<void>();
   location$ = this.locationService.location$;
@@ -21,7 +21,8 @@ export class RxJSWayRefreshComponent implements OnInit {
   ngOnInit(): void {
     const refresh$ = merge(
       this.refresh$,
-      interval(10000),
+      // interval(10000),
+      of(true)
     );
 
     // Using two different style by design
@@ -41,12 +42,17 @@ export class RxJSWayRefreshComponent implements OnInit {
       concatMap(() => this.service.playgrounds$),
     );
 
+    const playgroundsMergeMap$ = refresh$.pipe(
+      mergeMap(() => this.service.playgrounds$),
+    );
+
     const filteredPlaygrounds$ = combineLatest([
-      playgroundsDelay$,
+      playgroundsExhaustMap$,
       this.filterControl.valueChanges.pipe(
         debounceTime(400),
+        distinctUntilChanged(),
         startWith(''),
-        map((term: string) => new RegExp(term, 'i'))
+        map(term => new RegExp(term, 'i'))
       )
     ]).pipe(
       tap(_ => console.log(_)),
