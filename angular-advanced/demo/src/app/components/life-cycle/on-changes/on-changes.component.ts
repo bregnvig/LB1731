@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'loop-on-changes',
   templateUrl: './on-changes.component.html',
-  styleUrls: ['./on-changes.component.scss']
 })
 export class OnChangesComponent {
 
-  control = new UntypedFormControl();
+  control = new FormControl<string>('', { nonNullable: true });
   items1: string[] = ['D', 'C', 'B', 'A'];
   items2: string[] = ['D', 'C', 'B', 'A'];
 

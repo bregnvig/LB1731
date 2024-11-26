@@ -26,7 +26,6 @@ export class PopoverContentComponent {
     // viewContainerRef.clear();
 
     const componentRef = viewContainerRef.createComponent<SimplePlaygroundDetailsComponent>(this.popoverService.popoverComponent);
-    // const componentRef = viewContainerRef.createComponent<SimplePlaygroundDetailsComponent>(this.popoverService.popoverComponent);
     componentRef.instance.playground = value;
   }
 }

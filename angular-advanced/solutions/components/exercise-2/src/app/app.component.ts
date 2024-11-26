@@ -15,7 +15,7 @@ import { withLength } from './utils/rxjs-utils';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletModule, NgComponentOutlet, DynamicIoModule]
+  imports: [SidebarComponent, NgIf, AsyncPipe, LeafletModule, NgComponentOutlet, DynamicIoModule]
 })
 export class AppComponent {
 

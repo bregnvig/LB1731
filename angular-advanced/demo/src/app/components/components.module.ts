@@ -33,6 +33,7 @@ import { NonTemplateOutletComponent } from './template-outlet/non-template-outle
 import { TemplateOutletComponent } from './template-outlet/template-outlet.component';
 import { ViewChildComponent } from './view-child/view-child.component';
 import { ViewChildrenComponent } from './view-children/view-children.component';
+import { PlaygroundListItemSingleSlotComponent } from './content-projection/playground-list-item/playground-list-item-single-slot.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     CommonListFilterFilterFnComponent,
     ObservableEventsComponent,
     SingleSlotContentProjectionComponent,
+    PlaygroundListItemSingleSlotComponent,
   ],
   imports: [
     CommonModule,

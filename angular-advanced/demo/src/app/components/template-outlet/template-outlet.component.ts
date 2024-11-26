@@ -7,21 +7,27 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
 @Component({
   selector: 'loop-template-outlet',
   template: `
+    <ng-template #playgroundInfo let-playground>
+      <h6>{{playground.name}}</h6>
+      <small>{{playground.description}}</small>
+    </ng-template>
+    <ng-template #fancyInfo let-playground>
+      <loop-fancy-playground-details [playground]="playground" />
+    </ng-template>
+
     <h5 class="mt-5">Using filter function</h5>
     <loop-common-list-filter-filter-fn 
     class="mt-3" 
     [filterFn]="filterFn" 
     [itemTemplateRef]="playgroundInfo"/>
     
-    <ng-template #playgroundInfo let-playground>
-      <h6>{{playground.name}}</h6>
-      <small>{{playground.description}}</small>
-    </ng-template>
 
     <hr class="my-3">
 
     <h5>Using event emitter</h5>
-    <loop-common-filter-list [items]="playgrounds$ | async" property="name"/>
+    <loop-common-filter-list 
+      [items]="playgrounds$ | async" 
+      property="name" />
   `,
 })
 export class TemplateOutletComponent implements OnInit {

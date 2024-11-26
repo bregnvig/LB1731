@@ -10,9 +10,16 @@
   <div class="col">
     <ul class="list-group">
       @for (item of filtered$ |async; track item) {
-        <li class="list-group-item">
-          <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
-        </li>
+        @defer (on viewport) {
+          <li class="list-group-item">
+            <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
+          </li>
+        } @placeholder (minimum 200ms) {
+          <div class="d-flex">
+            <img class="rainbow me-3" style="user-select: none;" loading="eager" [style.z-index]="1000" height="200" src="assets/angular.png">
+            <p>Loading</p>
+          </div>
+        }
       }
     </ul>
   </div>

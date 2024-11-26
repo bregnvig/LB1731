@@ -21,7 +21,7 @@ export class FancyPlaygroundDetailsComponent {
   title: string | undefined;
   options: MapOptions | undefined;
 
-  @Input()
+  @Input({ required: true })
   set playground(value: Playground) {
     this.title = value.name;
     this.options = {
