@@ -1,4 +1,5 @@
-<a
+@if(playground) {
+<li
   class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
   [class.active]="selected">
   <div class="d-flex flex-column justify-content-between">
@@ -10,4 +11,5 @@
   <div>
     <ng-content select="button"></ng-content>
   </div>
-</a>
+</li>
+}

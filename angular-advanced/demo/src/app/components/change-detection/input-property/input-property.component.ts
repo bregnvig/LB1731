@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { No } from '../change-detection.component';
 
 @Component({
@@ -8,9 +8,10 @@ import { No } from '../change-detection.component';
       input-property component <span class="badge bg-success">{{no?.value}}</span>
     </p>
   `,
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class InputPropertyComponent {
 
-  @Input() no: No | undefined;
+  @Input() no?: No;
 
 }

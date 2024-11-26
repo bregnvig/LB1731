@@ -17,8 +17,8 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
 
     <h5 class="mt-5">Using filter function</h5>
     <loop-common-list-filter-filter-fn 
-    class="mt-3" 
-    [filterFn]="filterFn" 
+      class="mt-3" 
+      [filterFn]="filterFn" 
     [itemTemplateRef]="playgroundInfo"/>
     
 

@@ -7,13 +7,13 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
     <div class="row flex-wrap">
       <div class="mt-3 col-12">
         <h5>Hardcoded</h5>
-        <loop-stop-watch #watch1></loop-stop-watch>
-        <loop-stop-watch #watch2></loop-stop-watch>
+        <loop-stop-watch #watch1/>
+        <loop-stop-watch #watch2/>
       </div>
       <div class="mt-3 col-12 d-flex flex-column">
         <h5>Dynamic</h5>
         @for (no of watchNos; track no) {
-          <span>{{$index + 1}}. <loop-stop-watch></loop-stop-watch></span>
+          <span>{{$index + 1}}. <loop-stop-watch/></span>
         }
         <div class="mt-3">
           <button type="button" class="btn btn-outline-primary" (click)="watchNos.push(watchNos.length)">Add stopwatch</button>

@@ -13,7 +13,7 @@ export interface No {
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  @ViewChild('outside', { static: true }) div!: ElementRef;
+  @ViewChild('outside', { static: true }) div!: ElementRef<HTMLDivElement>;
   no: No = { value: 0 };
 
   constructor(private zone: NgZone) {
@@ -21,7 +21,7 @@ export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirect
   }
 
   ngOnInit(): void {
-    this.zone.runOutsideAngular(() => this.div.nativeElement.addEventListener('mousemove', this.mouseMove.bind(this)));
+    this.zone.runOutsideAngular(() => this.div.nativeElement.addEventListener('mousemove', event => this.mouseMove(event)));
   }
 
   mouseMove(event: MouseEvent) {

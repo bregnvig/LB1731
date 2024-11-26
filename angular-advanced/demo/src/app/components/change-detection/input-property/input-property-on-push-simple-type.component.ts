@@ -11,5 +11,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class InputPropertyOnPushSimpleTypeComponent {
 
-  @Input() no: number | undefined;
+  @Input() no?: number;
 }
