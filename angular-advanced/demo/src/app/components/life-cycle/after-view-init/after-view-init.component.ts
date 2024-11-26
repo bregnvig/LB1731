@@ -8,7 +8,7 @@ import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
 
-  @ViewChild(NgbAccordionDirective, { static: true }) accordion!: NgbAccordionDirective;
+  @ViewChild(NgbAccordionDirective) accordion!: NgbAccordionDirective;
 
   constructor() { }
 

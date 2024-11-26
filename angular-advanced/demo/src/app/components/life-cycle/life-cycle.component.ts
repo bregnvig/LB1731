@@ -12,14 +12,14 @@ export class LifeCycleComponent implements OnInit {
   playgrounds?: Playground[];
 
   constructor(private service: PlaygroundService) {
-    // service.playgrounds$.pipe(
-    //   takeUntilDestroyed()
-    // ).subscribe(playgrounds => this.playgrounds = playgrounds);
+    service.playgrounds$.pipe(
+      takeUntilDestroyed()
+    ).subscribe(playgrounds => this.playgrounds = playgrounds);
   }
 
   ngOnInit(): void {
-    this.service.playgrounds$.pipe(
-      takeUntilDestroyed()
-    ).subscribe(playgrounds => this.playgrounds = playgrounds);
+    // this.service.playgrounds$.pipe(
+    //   takeUntilDestroyed()
+    // ).subscribe(playgrounds => this.playgrounds = playgrounds);
   }
 }
