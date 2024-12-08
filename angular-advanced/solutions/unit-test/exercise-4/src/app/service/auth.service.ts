@@ -10,7 +10,7 @@ import { isNullOrUndefined } from '../utils/object-utils';
 export class AuthService {
 
   private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
+  isLoggedIn$: Observable<boolean> =  this._isLoggedIn$.asObservable()
 
 
   constructor(private httpClient: HttpClient) { }

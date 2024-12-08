@@ -1,6 +1,32 @@
+
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
+  describe("Always", () => {
+    let service: AuthService;
+
+    beforeEach(() => {
+      service = new AuthService();
+    });
+
+    it("should throw when calling login with nullish email or password", () => {
+      // Arrange
+      const email = undefined as any as string
+      const password = undefined as any as string
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be non-nullish strings');
+    });
+
+    it("should throw when calling login with empty string email or password", () => {
+      // Arrange
+      const email = '';
+      const password = '';
+      // Assert
+      expect(() => service.login(email, password)).toThrow('email and password must be truthy strings');
+    });
+
+  });
+
   describe('Initially', () => {
     let service: AuthService;
   
@@ -9,7 +35,6 @@ describe('AuthService', () => {
     });
   
     it("should be logged out", () => {
-      // Assert
       expect(service.isLoggedIn).toBe(false);
     })
 
@@ -19,12 +44,11 @@ describe('AuthService', () => {
     let service: AuthService;
 
     beforeEach(() => {
-      service = new AuthService();
-      service.login('email@email.com', 'password');
+        service = new AuthService();
+        service.login('email@email.com', 'password');
     });
   
     it("should throw on login", () => {
-      // Assert
       expect(() => service.login('anotheremail@email.com', 'password')).toThrow();
     })
   })
@@ -37,15 +61,10 @@ describe('AuthService', () => {
     });
   
     it("should login with email & password", () => {
-      // Arrange
-      const email = 'email@email.com';
-      const password = 'password';
-      // Act
-      service.login(email, password);
-      // Assert
+      service.login('email@email.com', 'password');
       expect(service.isLoggedIn).toBe(true);
     })
 
   })
-
+  
 });
