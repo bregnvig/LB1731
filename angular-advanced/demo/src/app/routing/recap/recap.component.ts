@@ -50,6 +50,6 @@ export class RecapComponent implements OnInit, OnDestroy {
   }
 
   goto(row?: number | undefined) {
-    this.router.navigate([{ row }], { relativeTo: this.route });
+    this.router.navigate([row ? { row } : {}], { relativeTo: this.route });
   }
 }
