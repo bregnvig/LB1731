@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { CommonFilterListComponent } from './common-filter-list/common-filter-list.component';
 
@@ -19,42 +19,21 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
     <loop-common-list-filter-filter-fn 
       class="mt-3" 
       [filterFn]="filterFn" 
-    [itemTemplateRef]="playgroundInfo"/>
-    
-
-    <hr class="my-3">
-
-    <h5>Using event emitter</h5>
-    <loop-common-filter-list 
-      [items]="playgrounds$ | async" 
-      property="name" />
+      [itemTemplateRef]="playgroundInfo"/>
   `,
 })
 export class TemplateOutletComponent implements OnInit {
 
   @ViewChild(CommonFilterListComponent, { static: true }) filterComponent!: CommonFilterListComponent;
   playgrounds$!: Observable<Playground[]>;
-  filterFn?: (term: string) => Playground[];
+  filterFn?: (term: string) => Observable<Playground[]>;
 
   constructor(public service: PlaygroundService) { }
 
   ngOnInit(): void {
-
-    /** Releated to the event emitter solution */
-    this.playgrounds$ = combineLatest([
-      this.service.playgrounds$,
-      this.filterComponent.filter.pipe(
-        startWith(''),
-        map(term => new RegExp(term, 'i'))
-      )
-    ]).pipe(
-      map(([playgrounds, term]) => playgrounds.filter(p => term.test(p.name)))
+    this.filterFn = (term: string) => this.service.playgrounds$.pipe(
+      map(playgrounds => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())))
     );
-
-    /** Related to the filterFn solution */
-    this.service.playgrounds$.subscribe(playgrounds => {
-      this.filterFn = (term: string) => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
-    });
   }
 
 }
