@@ -5,10 +5,9 @@ import { Playground } from './shared/playground';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [SidebarComponent, FooterComponent]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [SidebarComponent, FooterComponent]
 })
 export class AppComponent {
 
