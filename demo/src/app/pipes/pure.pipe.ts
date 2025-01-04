@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'pure',
-    standalone: true
+  name: 'pure',
 })
 export class PurePipe implements PipeTransform {
   constructor() {
@@ -17,9 +16,8 @@ export class PurePipe implements PipeTransform {
 }
 
 @Pipe({
-    name: 'impure',
-    pure: false,
-    standalone: true
+  name: 'impure',
+  pure: false,
 })
 export class ImpurePipe implements PipeTransform {
 
