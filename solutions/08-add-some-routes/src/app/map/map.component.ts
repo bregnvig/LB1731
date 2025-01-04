@@ -19,7 +19,6 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
       <app-footer [playground]="playground"></app-footer>
     }
   `,
-  standalone: true,
   imports: [
     LeafletModule,
     SidebarComponent,

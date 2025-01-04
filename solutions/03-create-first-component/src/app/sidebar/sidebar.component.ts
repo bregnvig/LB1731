@@ -6,7 +6,6 @@ import { Playground } from '../shared/playground';
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  standalone: true,
 })
 export class SidebarComponent {
   playgrounds: Playground[] = MOCK_PLAYGROUNDS;

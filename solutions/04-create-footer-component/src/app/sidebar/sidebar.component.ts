@@ -4,7 +4,6 @@ import { Playground } from '../shared';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  standalone: true,
 })
 export class SidebarComponent {
   @Input() playgrounds?: Playground[];
