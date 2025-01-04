@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 
 @Component({
-    selector: 'app-bindings-attribute',
-    templateUrl: './bindings-attribute.component.html',
-    styleUrls: ['./bindings-attribute.component.css'],
-    standalone: true,
-    imports: [FormsModule, RotateFlyover3],
+  selector: 'app-bindings-attribute',
+  templateUrl: './bindings-attribute.component.html',
+  styleUrls: ['./bindings-attribute.component.css'],
+  imports: [FormsModule, RotateFlyover3],
 })
 export class BindingsAttributeComponent {
 

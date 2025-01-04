@@ -10,7 +10,6 @@ import { F1BetterService } from '../f1.service';
   templateUrl: './better-async-service.component.html',
   providers: [F1BetterService],
   imports: [DriverListItemComponent],
-  standalone: true,
 })
 export class BetterAsyncServiceComponent implements OnInit {
 

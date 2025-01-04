@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-case-study',
-    templateUrl: './case-study.component.html',
-    styleUrls: ['./case-study.component.css'],
-    standalone: true,
-    imports: [NgIf]
+  selector: 'app-case-study',
+  templateUrl: './case-study.component.html',
+  styleUrls: ['./case-study.component.css'],
+  imports: [NgIf]
 })
 export class CaseStudyComponent {
 
-   show = true;
+  show = true;
 
-   toggle() {
+  toggle() {
     this.show = !this.show;
   }
 

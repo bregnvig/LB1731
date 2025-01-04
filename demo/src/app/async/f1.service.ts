@@ -63,7 +63,7 @@ export class F1CachedService {
   // operators in a pipe
   constructor(service: F1SimpleService) {
     this.drivers$ = service.getDrivers().pipe(
-      map(response => response.MRData.DriverTable.Drivers),
+      map(response => response.map(mapper)),
       shareReplay(1),
     );
   }

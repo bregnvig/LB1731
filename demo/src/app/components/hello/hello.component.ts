@@ -12,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
       color: orange !important;
     } 
   `,
-  standalone: true
 })
 export class HelloComponent implements OnInit {
 
