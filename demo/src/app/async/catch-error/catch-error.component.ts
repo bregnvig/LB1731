@@ -1,12 +1,13 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Driver } from '../driver';
+import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1LocalStorageCache } from '../f1.service';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-catch-error',
-    templateUrl: './catch-error.component.html',
-    imports: [NgFor]
+  selector: 'app-catch-error',
+  templateUrl: './catch-error.component.html',
+  imports: [DriverListItemComponent]
 })
 export class CatchErrorComponent implements OnInit {
   drivers?: Driver[];

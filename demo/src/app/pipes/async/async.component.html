@@ -1,6 +1,6 @@
 <h2>Async pipe</h2>
 <ul class="list-group">
-  <li *ngFor="let driver of drivers$ | async" class="list-group-item">
-    {{driver.givenName}} {{driver.familyName}}
-  </li>
+  @for(driver of drivers$ | async; track driver.driverNumber) {
+    <app-driver-list-item [driver]="driver"/>
+  }
 </ul>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Driver } from '../driver';
+import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1CachedService } from '../f1.service';
-import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-cached-async-service',
-    templateUrl: './cached-async-service.component.html',
-    imports: [NgFor]
+  selector: 'app-cached-async-service',
+  templateUrl: './cached-async-service.component.html',
+  imports: [DriverListItemComponent]
 })
 export class CachedAsyncServiceComponent implements OnInit {
 

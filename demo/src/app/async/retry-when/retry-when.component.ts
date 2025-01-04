@@ -1,11 +1,12 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Driver } from '../driver';
+import { DriverListItemComponent } from "../driver-list-item.component";
 import { RetryService } from '../retry.service';
-import { NgFor } from '@angular/common';
 @Component({
-    selector: 'app-retry-when',
-    templateUrl: './retry-when.component.html',
-    imports: [NgFor]
+  selector: 'app-retry-when',
+  templateUrl: './retry-when.component.html',
+  imports: [DriverListItemComponent]
 })
 export class RetryWhenComponent implements OnInit {
 

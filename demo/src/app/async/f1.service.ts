@@ -5,13 +5,35 @@ import { Observable, of, timer } from 'rxjs';
 import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
+export interface OpenF1Driver {
+  session_key: number;
+  meeting_key: number;
+  broadcast_name: string;
+  country_code: string;
+  first_name: string;
+  full_name: string;
+  headshot_url: string;
+  last_name: string;
+  driver_number: number;
+  team_colour: string;
+  team_name: string;
+  name_acronym: string;
+}
+
+const mapper = (response: OpenF1Driver): Driver => ({
+  driverNumber: response.driver_number.toString(),
+  firstName: response.first_name ?? response.full_name,
+  photoURL: response.headshot_url,
+  lastName: response.last_name,
+});
+
 @Injectable({ providedIn: 'root' })
 export class F1SimpleService {
 
   constructor(private http: HttpClient) { }
 
   getDrivers(): Observable<any> {
-    return this.http.get(`http://ergast.com/api/f1/2022/drivers.json`);
+    return this.http.get(`https://api.openf1.org/v1/drivers?session_key=latest`);
   }
 }
 
@@ -22,7 +44,7 @@ export class F1BetterService {
 
   constructor(service: F1SimpleService) {
     this.drivers$ = service.getDrivers().pipe(
-      map(response => response.MRData.DriverTable.Drivers),
+      map(response => response.map(mapper)),
     );
   }
 

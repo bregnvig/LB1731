@@ -1,14 +1,15 @@
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DriverListItemComponent } from "../../async/driver-list-item.component";
 import { Driver } from './../../async/driver';
 import { F1BetterService, F1SimpleService } from './../../async/f1.service';
-import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-async',
-    templateUrl: './async.component.html',
-    providers: [F1SimpleService, F1BetterService],
-    imports: [NgFor, AsyncPipe]
+  selector: 'app-async',
+  templateUrl: './async.component.html',
+  providers: [F1SimpleService, F1BetterService],
+  imports: [AsyncPipe, DriverListItemComponent]
 })
 export class AsyncComponent implements OnInit {
 

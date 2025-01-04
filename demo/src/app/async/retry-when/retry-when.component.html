@@ -1,6 +1,6 @@
 <h2>Retry when Service</h2>
 <ul class="list-group">
-  <li *ngFor="let driver of drivers" class="list-group-item">
-    {{driver.givenName}} {{driver.familyName}}
-  </li>
+  @for(driver of drivers; track driver.driverNumber) {
+    <app-driver-list-item [driver]="driver"/>
+  }
 </ul>
