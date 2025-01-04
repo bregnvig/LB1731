@@ -7,10 +7,9 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-search-form',
-  templateUrl: './search-form.component.html',
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+    selector: 'app-search-form',
+    templateUrl: './search-form.component.html',
+    imports: [FormsModule, ReactiveFormsModule]
 })
 export class SearchFormComponent implements OnInit {
 

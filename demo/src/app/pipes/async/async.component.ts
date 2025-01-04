@@ -8,7 +8,6 @@ import { NgFor, AsyncPipe } from '@angular/common';
     selector: 'app-async',
     templateUrl: './async.component.html',
     providers: [F1SimpleService, F1BetterService],
-    standalone: true,
     imports: [NgFor, AsyncPipe]
 })
 export class AsyncComponent implements OnInit {

@@ -4,8 +4,7 @@ import { FactoryProvidedComponent } from '../factory-provided/factory-provided.c
 @Component({
     selector: 'app-factory-provided-parent',
     templateUrl: './factory-provided-parent.component.html',
-    standalone: true,
-    imports: [FactoryProvidedComponent],
+    imports: [FactoryProvidedComponent]
 })
 export class FactoryProvidedParentComponent {
 

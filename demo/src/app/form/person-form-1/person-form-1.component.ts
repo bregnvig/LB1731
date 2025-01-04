@@ -6,10 +6,9 @@ import { Person } from './../person';
 
 
 @Component({
-  selector: 'app-person-form-1',
-  templateUrl: './person-form-1.component.html',
-  standalone: true,
-  imports: [FormsModule, NgFor, JsonPipe]
+    selector: 'app-person-form-1',
+    templateUrl: './person-form-1.component.html',
+    imports: [FormsModule, NgFor, JsonPipe]
 })
 export class PersonForm1Component {
 

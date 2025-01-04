@@ -11,8 +11,7 @@ import { NgFor, AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
-    standalone: true,
-    imports: [NgFor, AsyncPipe],
+    imports: [NgFor, AsyncPipe]
 })
 export class ErrorComponent implements OnInit {
 

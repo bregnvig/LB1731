@@ -20,14 +20,13 @@ export class InterceptChildComponent {
 }
 
 @Component({
-  selector: 'app-intercept',
-  template: `
+    selector: 'app-intercept',
+    template: `
     <h2>Parent -> child intercept</h2>
     <app-intercept-child [value]="fromProperty"></app-intercept-child>
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
-  standalone: true,
-  imports: [InterceptChildComponent, FormsModule],
+    imports: [InterceptChildComponent, FormsModule]
 })
 export class InterceptComponent {
 

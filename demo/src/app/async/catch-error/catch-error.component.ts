@@ -6,8 +6,7 @@ import { NgFor } from '@angular/common';
 @Component({
     selector: 'app-catch-error',
     templateUrl: './catch-error.component.html',
-    standalone: true,
-    imports: [NgFor],
+    imports: [NgFor]
 })
 export class CatchErrorComponent implements OnInit {
   drivers?: Driver[];

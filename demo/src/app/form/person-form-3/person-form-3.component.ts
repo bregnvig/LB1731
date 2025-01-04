@@ -6,12 +6,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-person-form-3',
     templateUrl: './person-form-3.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         NgFor,
         JsonPipe,
-    ],
+    ]
 })
 export class PersonForm3Component {
 

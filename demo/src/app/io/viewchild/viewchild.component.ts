@@ -6,8 +6,7 @@ import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwat
 @Component({
     selector: 'app-viewchild',
     templateUrl: './viewchild.component.html',
-    standalone: true,
-    imports: [StopwatchComponent_1],
+    imports: [StopwatchComponent_1]
 })
 export class ViewchildComponent {
 

@@ -7,8 +7,7 @@ import { NgFor } from '@angular/common';
 @Component({
     selector: 'app-cached-async-service',
     templateUrl: './cached-async-service.component.html',
-    standalone: true,
-    imports: [NgFor],
+    imports: [NgFor]
 })
 export class CachedAsyncServiceComponent implements OnInit {
 

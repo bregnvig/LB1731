@@ -8,8 +8,7 @@ import { DatePipe } from '@angular/common';
 @Component({
     selector: 'app-ref-count',
     templateUrl: './ref-count.component.html',
-    standalone: true,
-    imports: [DatePipe],
+    imports: [DatePipe]
 })
 export class RefCountComponent implements OnDestroy {
 

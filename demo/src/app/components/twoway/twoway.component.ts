@@ -8,8 +8,7 @@ import { FormsModule } from '@angular/forms';
     <h3>{{myTitle}}</h3>
     <input class="form-control" [(ngModel)]="myTitle" autofocus>
   `,
-    standalone: true,
-    imports: [FormsModule],
+    imports: [FormsModule]
 })
 export class TwowayComponent {
 

@@ -4,8 +4,7 @@ import { PhonePipe } from '../phone.pipe';
 @Component({
     selector: 'app-phone',
     templateUrl: './phone.component.html',
-    standalone: true,
-    imports: [PhonePipe],
+    imports: [PhonePipe]
 })
 export class PhoneComponent implements OnInit {
 

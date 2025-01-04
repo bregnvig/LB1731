@@ -9,7 +9,6 @@ import { DatePipe } from '@angular/common';
     selector: 'app-wrap-api',
     templateUrl: './wrap-api.component.html',
     providers: [TimerService],
-    standalone: true,
     imports: [DatePipe]
 })
 export class WrapApiComponent implements OnDestroy, OnInit {

@@ -21,8 +21,7 @@ export class DirectlyChildComponent {
     <app-directly-child value1="My value" [value2]="fromProperty"></app-directly-child>
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
-    standalone: true,
-    imports: [DirectlyChildComponent, FormsModule],
+    imports: [DirectlyChildComponent, FormsModule]
 })
 export class DirectlyComponent {
 

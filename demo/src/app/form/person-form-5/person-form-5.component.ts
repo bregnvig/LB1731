@@ -5,8 +5,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-person-form-5',
     templateUrl: './person-form-5.component.html',
-    standalone: true,
-    imports: [FormsModule, NgFor],
+    imports: [FormsModule, NgFor]
 })
 export class PersonForm5Component {
 

@@ -4,8 +4,7 @@ import { ProvidedComponent } from '../provided/provided.component';
 @Component({
     selector: 'app-provided-parent',
     templateUrl: './provided-parent.component.html',
-    standalone: true,
-    imports: [ProvidedComponent],
+    imports: [ProvidedComponent]
 })
 export class ProvidedParentComponent {
 

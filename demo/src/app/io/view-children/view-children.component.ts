@@ -7,8 +7,7 @@ import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwat
 @Component({
     selector: 'app-view-children',
     templateUrl: './view-children.component.html',
-    standalone: true,
-    imports: [StopwatchComponent_1, NgFor],
+    imports: [StopwatchComponent_1, NgFor]
 })
 export class ViewChildrenComponent {
   @ViewChildren(StopwatchComponent) stopwatches?: QueryList<StopwatchComponent>;

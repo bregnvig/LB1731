@@ -7,7 +7,6 @@ import { NgFor } from '@angular/common';
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css'],
-    standalone: true,
     imports: [RouterLink, RouterLinkActive, NgFor]
 })
 export class OrderComponent implements OnInit, OnDestroy {

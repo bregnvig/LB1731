@@ -7,8 +7,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-interval',
     templateUrl: './interval.component.html',
-    standalone: true,
-    imports: [AsyncPipe],
+    imports: [AsyncPipe]
 })
 export class IntervalComponent implements OnInit {
 

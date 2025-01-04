@@ -4,10 +4,9 @@ import { Menu, MenuItems } from './menu.model';
 import { MenuComponent } from './menu/menu.component';
 
 @Component({
-  selector: 'examples-menu-page',
-  templateUrl: './menu-page.component.html',
-  standalone: true,
-  imports: [NgFor, MenuComponent],
+    selector: 'examples-menu-page',
+    templateUrl: './menu-page.component.html',
+    imports: [NgFor, MenuComponent]
 })
 export class MenuPageComponent {
 

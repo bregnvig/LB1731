@@ -8,8 +8,7 @@ import { NgFor } from '@angular/common';
 @Component({
     selector: 'app-auto-refresh',
     templateUrl: './auto-refresh.component.html',
-    standalone: true,
-    imports: [NgFor],
+    imports: [NgFor]
 })
 export class AutoRefreshComponent implements OnDestroy {
 

@@ -6,7 +6,6 @@ import { NgFor } from '@angular/common';
     selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css'],
-    standalone: true,
     imports: [NgFor, RouterOutlet]
 })
 export class OrdersComponent implements OnInit {

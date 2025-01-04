@@ -31,8 +31,7 @@ export class IOEventChildComponent {
       Chosen newsletter {{interval}}
     </p>
   `,
-    standalone: true,
-    imports: [IOEventChildComponent],
+    imports: [IOEventChildComponent]
 })
 export class IOEventComponent {
 

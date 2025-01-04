@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-build-in',
     templateUrl: './build-in.component.html',
-    standalone: true,
     imports: [
         FormsModule,
         UpperCasePipe,
@@ -13,7 +12,7 @@ import { FormsModule } from '@angular/forms';
         JsonPipe,
         CurrencyPipe,
         DatePipe,
-    ],
+    ]
 })
 export class BuildInComponent implements OnInit {
 

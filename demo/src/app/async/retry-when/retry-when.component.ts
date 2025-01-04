@@ -5,8 +5,7 @@ import { NgFor } from '@angular/common';
 @Component({
     selector: 'app-retry-when',
     templateUrl: './retry-when.component.html',
-    standalone: true,
-    imports: [NgFor],
+    imports: [NgFor]
 })
 export class RetryWhenComponent implements OnInit {
 

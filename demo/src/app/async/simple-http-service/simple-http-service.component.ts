@@ -14,8 +14,7 @@ import { NgFor } from '@angular/common';
       </li>
     </ul>
   `,
-    standalone: true,
-    imports: [NgFor],
+    imports: [NgFor]
 })
 export class SimpleHttpServiceComponent implements OnInit {
 
