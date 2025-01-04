@@ -13,6 +13,7 @@ const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
 @UntilDestroy({ arrayName: 'subscribtions' })
 @Component({
   selector: 'leaflet',
+  standalone: false,
   template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId"></div>',
 })
 export class LeafletComponent implements AfterViewInit {
@@ -27,8 +28,8 @@ export class LeafletComponent implements AfterViewInit {
     this.markers$.next(value ?? undefined);
   }
 
-  @Input() set center(center: Center | undefined | null) {
-    this.center$.next(center ?? undefined);
+  @Input() set center(center: Center | undefined) {
+    this.center$.next(center);
   }
 
   ngAfterViewInit() {
