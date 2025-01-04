@@ -12,7 +12,6 @@ import { Playground } from '../shared';
       </footer>
   }
   `,
-  standalone: true,
 })
 export class FooterComponent {
 

@@ -8,7 +8,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true,
   imports: [LeafletModule, SidebarComponent, FooterComponent]
 })
 export class AppComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -16,14 +16,11 @@ import { F1SimpleService } from '../f1.service';
   `,
   imports: [DriverListItemComponent]
 })
-export class SimpleHttpServiceComponent implements OnInit {
+export class SimpleHttpServiceComponent {
 
   drivers?: Driver[];
 
   constructor(private service: F1SimpleService) {
-  }
-
-  ngOnInit() {
     this.service.getDrivers().subscribe(response => this.drivers = response.map((driver: any) => ({
       driverNumber: driver.driver_number.toString(),
       firstName: driver.first_name,
@@ -31,4 +28,5 @@ export class SimpleHttpServiceComponent implements OnInit {
       lastName: driver.last_name,
     })));
   }
+
 }
