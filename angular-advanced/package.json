@@ -1,7 +1,10 @@
 {
     "name": "angular-advanced",
     "workspaces": [
+      "./demo/*",
       "./solutions/*",
-      "./solutions/**/*"
+      "./solutions/**/*",
+      "./labs/*",
+      "./labs/**/*"
     ]
   }
