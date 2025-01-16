@@ -11,9 +11,9 @@ import { map, shareReplay, tap } from 'rxjs/operators';
         {{now | date: 'HH:mm:ss'}}
       </p>
     }
-    @if (date$ | async; as now) {
+    @if (date) {
       <p>
-        {{now | date: 'HH:mm:ss'}}
+        {{date | date: 'HH:mm:ss'}}
       </p>
     }
     `,
@@ -25,12 +25,12 @@ export class AsyncPipeComponent implements OnInit {
     tap(_ => console.log(formatDate(_, 'HH:mm:ss', this.localeId))),
     shareReplay({ bufferSize: 1, refCount: true })
   );
-  // date: Date | undefined;
+  date: Date | undefined;
 
   constructor(@Inject(LOCALE_ID) private localeId: string) { }
 
   ngOnInit(): void {
-    // this.date$.subscribe(date => this.date = date);
+    this.date$.subscribe(date => this.date = date);
   }
 
 }

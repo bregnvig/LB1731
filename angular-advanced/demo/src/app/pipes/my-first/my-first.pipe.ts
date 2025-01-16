@@ -5,7 +5,7 @@ import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
 })
 export class MyFirstPipe implements PipeTransform, OnDestroy {
 
-  transform(value: string): string {
+  transform(value: string): `My first ${string}` {
     console.log(`Pure ${value}`);
     return `My first ${value}`;
   }
