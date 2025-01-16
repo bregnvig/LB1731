@@ -33,8 +33,7 @@ interface PlaygroundForm {
             multi: true
         }
     ],
-    standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
