@@ -12,14 +12,13 @@ import { IsInRoleDirective } from '../directive/is-in-role.directive';
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
-    standalone: true,
     imports: [
         IsInRoleDirective,
         FaIconComponent,
         AsyncPipe,
         DistancePipe,
         DefaultDescriptionPipe,
-    ],
+    ]
 })
 export class SidebarComponent {
 
