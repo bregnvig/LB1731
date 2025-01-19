@@ -11,13 +11,12 @@ import { AsyncPipe } from '@angular/common';
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
-    standalone: true,
     imports: [
-    FaIconComponent,
-    AsyncPipe,
-    DistancePipe,
-    DefaultDescriptionPipe
-],
+        FaIconComponent,
+        AsyncPipe,
+        DistancePipe,
+        DefaultDescriptionPipe
+    ]
 })
 export class SidebarComponent {
 
