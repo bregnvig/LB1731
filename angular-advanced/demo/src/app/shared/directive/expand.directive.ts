@@ -1,26 +1,22 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({ selector: '[loopExpand]' })
 export class ExpandDirective {
 
-  #expand = true;
-
   constructor(private ref: ElementRef) { }
 
-  @Input() set loopExpand(expand: boolean | '') {
-    this.#expand = typeof expand === 'boolean' ? expand : true;
-  }
+  @Input({ transform: booleanAttribute }) loopExpand = false;
 
   @HostBinding('style.transition') transition = 'all .2s';
 
   @HostBinding('style.width.px') width?: number;
 
   @HostListener('focus') onFocus() {
-    this.#expand && (this.width = this.ref.nativeElement.offsetWidth + 160);
+    this.loopExpand && (this.width = this.ref.nativeElement.offsetWidth + 160);
   }
 
   @HostListener('blur') onBlur() {
-    this.#expand && (this.width = this.ref.nativeElement.offsetWidth - 160);
+    this.loopExpand && (this.width = this.ref.nativeElement.offsetWidth - 160);
   }
 
 }

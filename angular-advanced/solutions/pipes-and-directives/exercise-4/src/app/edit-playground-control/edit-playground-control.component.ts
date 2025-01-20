@@ -35,12 +35,11 @@ interface PlaygroundForm {
             multi: true
         }
     ],
-    standalone: true,
     imports: [
         ReactiveFormsModule,
         SelectAllTextDirective,
         FocusDirective,
-    ],
+    ]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
