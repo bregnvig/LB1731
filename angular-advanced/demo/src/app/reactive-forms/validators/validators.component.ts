@@ -2,12 +2,13 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
-import { catchError, debounceTime, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { DawaService } from './dawa.service';
 
 const isValidZip = (service: DawaService): AsyncValidatorFn => (control: AbstractControl<string>): Observable<null | ValidationErrors> =>
   !control.errors && control.value && service.getCityName(control.value).pipe(
+    tap(_ => console.log('Async', _)),
     map(() => null),
     catchError(() => of({ nonExistingZip: true }))
   ) || of(null);
@@ -34,6 +35,7 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
     }, {
       validators: (zipAndCity: FormGroup<{ zip: AbstractControl<string>, city: AbstractControl<string>; }>): null | ValidationErrors => {
         const { zip, city } = zipAndCity.controls;
+
         // console.table({
         //   value: JSON.stringify(zipAndCity.value),
         //   zipValid: zip.valid,
@@ -41,7 +43,9 @@ export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective i
         //   zipValue: zip.value,
         //   cityValid: city.valid
         // });
-        return zip.valid && zip.value && !city.value ? { required: 'city' } : null;
+        const result = zip.valid && zip.value && !city.value ? { required: 'city' } : null;
+        console.log('Group validator', result);
+        return result;
       },
     } as AbstractControlOptions)
   });

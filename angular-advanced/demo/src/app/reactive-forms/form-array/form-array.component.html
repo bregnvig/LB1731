@@ -6,13 +6,13 @@
   <hr>
     <h5>Form array content</h5>
     <div class="form-group flex-wrap" formArrayName="emailAddresses">
-      @for (_ of fg.controls.emailAddresses.controls; track _; let i = $index) {
+      @for (_ of fg.controls.emailAddresses.controls; track $index) {
         <div class="col-12  input-group mb-2">
-          <span class="input-group-text">{{i}}</span>
+          <span class="input-group-text">{{$index}}</span>
           <input
             type="text"
             class="form-control"
-            [formControlName]="i">
+            [formControlName]="$index">
         </div>
       }
     </div>

@@ -31,7 +31,7 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
     });
     this.subscriptions.push(
       this.fg.valueChanges.subscribe(value => console.log(value)),
-      this.fg.controls.isCompany!.valueChanges.subscribe(isCompany => isCompany ? this.fg.controls.homeAddress?.disable() : this.fg.controls.homeAddress?.enable()),
+      this.fg.controls.isCompany.valueChanges.subscribe(isCompany => isCompany ? this.fg.controls.homeAddress?.disable() : this.fg.controls.homeAddress?.enable()),
     );
   }
 

@@ -1,5 +1,6 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Playground } from '../model';
 
 type PlaygroupControls = {
   name: FormControl<string | null>,
@@ -8,8 +9,8 @@ type PlaygroupControls = {
 };
 
 @Component({
-    selector: 'loop-edit-playground-control',
-    template: `
+  selector: 'loop-edit-playground-control',
+  template: `
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
@@ -25,14 +26,19 @@ type PlaygroupControls = {
       </div>    
     </form>
   `,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EditPlaygroundControlComponent),
-            multi: true
-        }
-    ],
-    imports: [ReactiveFormsModule]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditPlaygroundControlComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => EditPlaygroundControlComponent),
+      multi: true
+    }
+  ],
+  imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
@@ -44,7 +50,7 @@ export class EditPlaygroundControlComponent implements OnInit {
     description: this.fb.control(''),
     addressDescription: this.fb.control(''),
   }, {
-    validators: (fg: FormGroup): null | ValidationErrors => fg.get('description')?.value || fg.get('addressDescription')?.value ? null : { requiredOr: ['description', 'addressDescription'] }
+    validators: (fg: AbstractControl<Omit<Playground, 'id' | 'position'>>): null | ValidationErrors => fg.value.description || fg.value.addressDescription ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
 
@@ -72,6 +78,9 @@ export class EditPlaygroundControlComponent implements OnInit {
 
   setDisabledState(isDisabled: boolean): void {
     isDisabled ? this.fg.disable() : this.fg.enable();
+  }
+  validate(): null | ValidationErrors {
+    return this.fg.valid ? null : { invalid: true };
   }
 
 }
