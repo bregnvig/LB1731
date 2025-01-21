@@ -17,8 +17,8 @@ export class DistancePipe implements PipeTransform {
     ).subscribe(location => this.location = location);
   }
 
-  transform(value: Coordinate): `${number}m` | 'Unknown location' {
-    return this.location
+  transform(value: Coordinate | undefined | null): `${number}m` | 'Unknown location' {
+    return this.location && value
       ? `${this.locationService.getDistance(this.location, value)}m`
       : 'Unknown location';
   }

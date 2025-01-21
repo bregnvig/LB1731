@@ -14,6 +14,7 @@
         <div class="card my-2">
           <div class="card-body">
             <p>{{i + 1}} of {{count}}</p>
+            <p> Updated at: {{ cardNo.timestamp | date: 'HH.mm.ss'  }}</p>
             <p>{{odd ? 'Odd' : 'Even'}} row</p>
             <p *ngIf="isFirst">First element</p>
             <p *ngIf="isLast">Last element</p>

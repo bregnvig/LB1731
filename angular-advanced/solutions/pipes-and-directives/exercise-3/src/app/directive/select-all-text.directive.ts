@@ -1,8 +1,8 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-    selector: '[loopSelectAllText]',
-    standalone: true
+  selector: '[loopSelectAllText]',
+  standalone: true
 })
 export class SelectAllTextDirective {
 

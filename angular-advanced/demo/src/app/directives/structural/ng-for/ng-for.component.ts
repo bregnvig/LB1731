@@ -18,6 +18,6 @@ export class NgForComponent {
   }
 
   createArray() {
-    return Array.from({ length: 2500 }, (_, index) => ({ orderNo: index }));
+    return Array.from({ length: 2500 }, (_, index) => ({ orderNo: index, timestamp: new Date() }));
   }
 }
