@@ -7,11 +7,10 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from '../p
 import { LocationService } from '../service';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FaIconComponent, DefaultDescriptionPipe, HumanizeDistancePipe, AsyncPipe, DistancePipe],
-  standalone: true,
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [FaIconComponent, DefaultDescriptionPipe, HumanizeDistancePipe, AsyncPipe, DistancePipe]
 })
 export class SidebarComponent {
 
