@@ -5,7 +5,7 @@ import { Observable, of, timer } from 'rxjs';
 import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Driver } from './driver';
 
-export interface OpenF1Driver {
+interface OpenF1Driver {
   session_key: number;
   meeting_key: number;
   broadcast_name: string;
@@ -63,7 +63,7 @@ export class F1CachedService {
   // operators in a pipe
   constructor(service: F1SimpleService) {
     this.drivers$ = service.getDrivers().pipe(
-      map(response => response.map(mapper)),
+      map((response: OpenF1Driver[]) => response.map(mapper)),
       shareReplay(1),
     );
   }

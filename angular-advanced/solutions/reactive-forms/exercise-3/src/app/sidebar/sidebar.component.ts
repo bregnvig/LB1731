@@ -12,14 +12,13 @@ import { AsyncPipe } from '@angular/common';
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-    FontAwesomeModule,
-    AsyncPipe,
-    DistancePipe,
-    HumanizeDistancePipe,
-    DefaultDescriptionPipe
-],
+        FontAwesomeModule,
+        AsyncPipe,
+        DistancePipe,
+        HumanizeDistancePipe,
+        DefaultDescriptionPipe
+    ]
 })
 export class SidebarComponent {
 

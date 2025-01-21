@@ -8,7 +8,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [LeafletModule, SidebarComponent, FooterComponent]
+  imports: [LeafletModule, SidebarComponent, FooterComponent],
+  standalone: true,
 })
 export class AppComponent {
 
@@ -16,7 +17,7 @@ export class AppComponent {
   playground?: Playground;
   center: Center = {
     lat: 56.360029,
-    lng: 10.746635
+    lng: 10.746635,
   };
 
   playgroundSelected(playground: Playground) {

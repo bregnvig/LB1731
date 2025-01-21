@@ -6,7 +6,7 @@ import { Playground } from '../shared';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
-  @Input() playgrounds?: Playground[];
+  @Input({ required: true }) playgrounds?: Playground[];
   @Output() selected = new EventEmitter<Playground>();
 
   selectedPlayground?: Playground;
