@@ -23,7 +23,7 @@ export class PlaygroundsWithRxjsComponent {
   }
 
   subscribe(): void {
-    this.subscription = timer(0, 1000).pipe(
+    this.subscription = timer(0, 5000).pipe(
       switchMap(() => this.service.playgrounds$)
     ).subscribe(playgrounds => this.playgrounds = playgrounds);
   }

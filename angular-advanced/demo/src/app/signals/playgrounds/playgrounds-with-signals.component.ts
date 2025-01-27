@@ -15,7 +15,7 @@ export class PlaygroundsWithSignalsComponent {
   playgrounds: Signal<Playground[]>;
 
   constructor(service: PlaygroundService) {
-    this.playgrounds = toSignal(timer(0, 1000).pipe(
+    this.playgrounds = toSignal(timer(0, 5000).pipe(
       switchMap(() => service.playgrounds$)
     ), { initialValue: [] });
   }
