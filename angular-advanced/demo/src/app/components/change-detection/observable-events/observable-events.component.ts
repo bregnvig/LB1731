@@ -2,15 +2,16 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 import { Observable, interval, map } from 'rxjs';
 
 @Component({
-  selector: 'loop-observable-events',
-  template: `
+    selector: 'loop-observable-events',
+    template: `
     <p>
       Observable events: <span class="badge bg-warning">{{no}}</span>
       <button class="btn btn-sm btn-primary mx-3" type="button" (click)="start()">Start</button>
       <button class="btn btn-sm btn-primary" type="button" [disabled]="!running" (click)="noop()">Update UI</button>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ObservableEventsComponent {
 

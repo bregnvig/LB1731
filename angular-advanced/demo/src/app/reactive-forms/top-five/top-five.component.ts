@@ -3,9 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
-  selector: 'loop-top-five',
-  templateUrl: './top-five.component.html',
-  styleUrls: ['./top-five.component.scss']
+    selector: 'loop-top-five',
+    templateUrl: './top-five.component.html',
+    styleUrls: ['./top-five.component.scss'],
+    standalone: false
 })
 export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 

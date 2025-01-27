@@ -32,14 +32,14 @@ if [ "$1" == "install" ] || [ "$1" == "i" ]; then
     echo '{
   "name": "angular-advanced",
   "workspaces": [
-    "./demo/*",
+    "./demo",
     "./solutions/*",
     "./solutions/**/*",
     "./labs/*",
     "./labs/**/*"
   ]
 }' > package.json
-    npm install
+    npm install --force
     rm package.json package-lock.json
   fi
 fi

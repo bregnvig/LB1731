@@ -3,12 +3,13 @@ import { interval, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'loop-on-destroy-random',
-  template: `
+    selector: 'loop-on-destroy-random',
+    template: `
     <p>
       {{no}}
     </p>
   `,
+    standalone: false
 })
 export class OnDestroyRandomComponent implements OnInit, OnDestroy {
 

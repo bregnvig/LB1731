@@ -8,14 +8,15 @@ import { Playground } from 'src/app/shared';
 import { LocationService, PlaygroundService } from 'src/app/shared/service';
 
 @Component({
-  selector: 'loop-matrix-params',
-  templateUrl: './matrix-params.component.html',
-  styleUrls: ['./matrix-params.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'loop-matrix-params',
+    templateUrl: './matrix-params.component.html',
+    styleUrls: ['./matrix-params.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MatrixParamsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  filterControl = new FormControl(this.route.snapshot.params.term);
+  filterControl = new FormControl(this.route.snapshot.params['term']);
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new BehaviorSubject<void>(undefined);
   location$ = this.locationService.location$;
@@ -39,7 +40,7 @@ export class MatrixParamsComponent extends AbstractSubscribeUnsubscribeDirective
     );
 
     const matrixParams = this.route.params.pipe(
-      map(params => params.term),
+      map(params => params['term']),
       map(term => new RegExp(term || '', 'i')),
     );
 

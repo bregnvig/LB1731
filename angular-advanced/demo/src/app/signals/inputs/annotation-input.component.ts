@@ -1,13 +1,8 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, SimpleChanges } from '@angular/core';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from 'src/app/shared';
 
 @Component({
   selector: 'loop-annonation-input',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert, LeafletModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `@if(distance) { <span [innerHTML]="text"></span> } @else { No distance provided }`
 })
@@ -21,12 +16,12 @@ export class AnnotationInputComponent {
   // @Input({ transform: (value: number | undefined) => typeof value === 'number' ? `${value} meters` : value }) set distance(value: string | undefined) { 
   //   this.text = this.getText(); 
   // };
-  
+
   // Option2 - using ngOnChanges
   @Input({ transform: (value: number | undefined) => typeof value === 'number' ? `${value} meters` : value }) distance?: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.playgrounds?.length && changes.distance?.currentValue !== changes.distance?.previousValue) {
+    if (this.playgrounds?.length && changes['distance']?.currentValue !== changes['distance']?.previousValue) {
       this.text = this.distance && this.getText();
     }
   }

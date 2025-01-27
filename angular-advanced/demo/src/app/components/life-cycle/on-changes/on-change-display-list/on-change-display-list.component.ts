@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'loop-on-change-display-list',
-  template: `
+    selector: 'loop-on-change-display-list',
+    template: `
     <table class="table">
       @for (item of items; track item) {
         <tr>
@@ -11,7 +11,8 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
       }
     </table>
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class OnChangeDisplayListComponent implements OnChanges {
 

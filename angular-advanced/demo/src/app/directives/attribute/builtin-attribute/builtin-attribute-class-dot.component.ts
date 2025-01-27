@@ -4,9 +4,10 @@ import { BuiltinAttributeComponent } from './builtin-attribute.component';
 type LigthState = 'red' | 'yellow' | 'green';
 
 @Component({
-  selector: 'loop-builtin-attribute-class-dot',
-  templateUrl: './builtin-attribute-class-dot.component.html',
-  styleUrls: ['./builtin-attribute.component.scss']
+    selector: 'loop-builtin-attribute-class-dot',
+    templateUrl: './builtin-attribute-class-dot.component.html',
+    styleUrls: ['./builtin-attribute.component.scss'],
+    standalone: false
 })
 export class BuiltinAttributeClassDotComponent extends BuiltinAttributeComponent {
 }

@@ -3,9 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-imperative-way',
-  templateUrl: './imperative-way.component.html',
-  styleUrls: ['./imperative-way.component.scss']
+    selector: 'loop-imperative-way',
+    templateUrl: './imperative-way.component.html',
+    styleUrls: ['./imperative-way.component.scss'],
+    standalone: false
 })
 export class ImperativeWayComponent implements OnInit, OnDestroy {
 

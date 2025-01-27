@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-single-slot-content-projection',
-  template: `
+    selector: 'loop-single-slot-content-projection',
+    template: `
     <ul class="list-group">
       @for (playground of playgrounds$ | async; track playground) {
         <loop-playground-list-item-single-slot [playground]="playground">
@@ -15,6 +15,7 @@ import { PlaygroundService } from 'src/app/shared';
       }
     </ul>
     `,
+    standalone: false
 })
 export class SingleSlotContentProjectionComponent {
 

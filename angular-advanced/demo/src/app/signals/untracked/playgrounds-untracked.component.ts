@@ -4,11 +4,10 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat/falso';
 
 @Component({
-  selector: 'loop-playgrounds-untracked',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'loop-playgrounds-untracked',
+    imports: [JsonPipe, NgbAlert],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div class="container">
       <div class="row gx-5">
         <div class="col">
@@ -31,7 +30,7 @@ import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat
         }
       </ul>
     </div>
-  `,
+  `
 })
 export class PlaygroundsUntrackedComponent {
   user = signal({ id: randSequence(), name: randFullName() });

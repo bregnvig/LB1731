@@ -5,9 +5,10 @@ import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, mergeMa
 import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-rxjs-way-refresh',
-  templateUrl: './rxjs-way-refresh.component.html',
-  styleUrls: ['./rxjs-way-refresh.component.scss']
+    selector: 'loop-rxjs-way-refresh',
+    templateUrl: './rxjs-way-refresh.component.html',
+    styleUrls: ['./rxjs-way-refresh.component.scss'],
+    standalone: false
 })
 export class RxJSWayRefreshComponent implements OnInit {
 

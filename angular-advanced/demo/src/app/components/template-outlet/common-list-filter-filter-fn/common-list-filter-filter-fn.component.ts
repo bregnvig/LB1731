@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'loop-common-list-filter-filter-fn',
-  templateUrl: './common-list-filter-filter-fn.component.html',
-  styleUrls: ['./common-list-filter-filter-fn.component.scss']
+    selector: 'loop-common-list-filter-filter-fn',
+    templateUrl: './common-list-filter-filter-fn.component.html',
+    styleUrls: ['./common-list-filter-filter-fn.component.scss'],
+    standalone: false
 })
 export class CommonListFilterFilterFnComponent implements OnChanges {
 

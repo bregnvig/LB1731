@@ -5,13 +5,13 @@ import { PopoverService } from '../popover.service';
 import { SimplePlaygroundDetailsComponent } from '../simple-playground-details/simple-playground-details.component';
 
 @Component({
-  selector: 'loop-popover-content',
-  template: `
+    selector: 'loop-popover-content',
+    template: `
     <ng-template dynamicHost></ng-template>
   `,
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styles: [],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PopoverContentComponent {
 

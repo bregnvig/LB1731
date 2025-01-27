@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -11,8 +10,7 @@ import { PaginationComponent } from './pagination.compont';
 @Component({
   selector: 'loop-model',
   templateUrl: './model.component.html',
-  standalone: true,
-  imports: [PaginationComponent, LeafletModule, JsonPipe]
+  imports: [PaginationComponent, LeafletModule]
 })
 
 export class ModelComponent {

@@ -15,9 +15,10 @@ const isValidZip = (service: DawaService): AsyncValidatorFn => (control: Abstrac
 
 
 @Component({
-  selector: 'loop-validators',
-  templateUrl: './validators.component.html',
-  providers: [AsyncPipe],
+    selector: 'loop-validators',
+    templateUrl: './validators.component.html',
+    providers: [AsyncPipe],
+    standalone: false
 })
 export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 

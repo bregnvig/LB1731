@@ -43,7 +43,7 @@ export const SignalsRoutes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'playgrounds-rxjs'
+        redirectTo: 'equality'
       }
     ]
   }

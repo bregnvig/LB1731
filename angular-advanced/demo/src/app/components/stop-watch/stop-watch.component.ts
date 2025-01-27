@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { interval, map, Observable, of, startWith } from 'rxjs';
 
 @Component({
-  selector: 'loop-stop-watch',
-  template: `
+    selector: 'loop-stop-watch',
+    template: `
     {{(seconds$ | async)}} seconds
   `,
+    standalone: false
 })
 export class StopWatchComponent implements OnInit {
 

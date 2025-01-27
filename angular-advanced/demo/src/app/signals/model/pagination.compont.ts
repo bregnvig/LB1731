@@ -6,10 +6,9 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { debounceTime, filter } from 'rxjs';
 
 @Component({
-  selector: 'loop-pagination',
-  templateUrl: 'pagination.compont.html',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgTemplateOutlet, FaIconComponent]
+    selector: 'loop-pagination',
+    templateUrl: 'pagination.compont.html',
+    imports: [ReactiveFormsModule, NgTemplateOutlet, FaIconComponent]
 })
 
 export class PaginationComponent {

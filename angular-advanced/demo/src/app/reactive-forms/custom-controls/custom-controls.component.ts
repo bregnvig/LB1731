@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
-  selector: 'loop-custom-controls',
-  templateUrl: './custom-controls.component.html',
+    selector: 'loop-custom-controls',
+    templateUrl: './custom-controls.component.html',
+    standalone: false
 })
 export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
@@ -12,10 +13,10 @@ export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirecti
     isCompany: this.fb.control(false),
     name: this.fb.control(null, Validators.required),
     homeAddress: this.fb.control(null, Validators.required),
-    workAddress: this.fb.control(null),
+    workAddress: this.fb.control<{} | null>(null),
   });
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     super();
   }
 

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'loop-performance',
-  template: `
+    selector: 'loop-performance',
+    template: `
 <article>
   <div class="form-group row">
     <div class="col">
@@ -30,7 +30,8 @@ import { FormControl } from '@angular/forms';
   </div>
   }
 </article>    
-`
+`,
+    standalone: false
 })
 
 export class PerformanceComponent implements OnInit {

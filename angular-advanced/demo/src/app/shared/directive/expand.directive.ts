@@ -1,6 +1,9 @@
 import { booleanAttribute, Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
 
-@Directive({ selector: '[loopExpand]' })
+@Directive({
+    selector: '[loopExpand]',
+    standalone: false
+})
 export class ExpandDirective {
 
   constructor(private ref: ElementRef) { }

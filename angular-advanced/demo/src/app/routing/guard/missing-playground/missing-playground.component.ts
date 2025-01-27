@@ -3,8 +3,8 @@ import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'loop-missing-playground',
-  template: `
+    selector: 'loop-missing-playground',
+    template: `
     <h3>Playground with id: {{id}} is gone 😰</h3>
     <p>You must accept that it is gone!</p>
     <div class="row form-group">
@@ -21,6 +21,7 @@ import { ActivatedRoute } from '@angular/router';
       </div>
     </div>
   `,
+    standalone: false
 })
 export class MissingPlaygroundComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class MissingPlaygroundComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params.id;
+    this.id = this.route.snapshot.params['id'];
   }
 
 }
