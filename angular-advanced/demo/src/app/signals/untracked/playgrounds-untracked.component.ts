@@ -2,10 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, signal, untracked } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat/falso';
+import { PlaygroundsUntrackedUserComponent } from './playgrounds-untracked-user.component';
 
 @Component({
     selector: 'loop-playgrounds-untracked',
-    imports: [JsonPipe, NgbAlert],
+    imports: [JsonPipe, NgbAlert, PlaygroundsUntrackedUserComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div class="container">
@@ -18,9 +19,7 @@ import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat
         </div>
         <div class="col">
           <button type="button" class="btn btn-primary" (click)="updateUser()">updateUser</button>
-          <ngb-alert type="info" class="mt-3" [dismissible]="false">
-            {{user() | json}}
-          </ngb-alert>
+          <loop-playgrounds-untracked-user [user]="user()"/>
         </div>
       </div>
       <h6 class="mt-3">Posts</h6>

@@ -6,14 +6,14 @@ import { SharedPlaygroundLiComponent } from "./shared-playground-li.component";
     selector: 'loop-shared-playground-ul',
     imports: [SharedPlaygroundLiComponent],
     template: `
-    <ul class="list-group">
-      @for (playground of playgrounds(); track playground.id) {
-        <loop-shared-playground-li [playground]="playground"/>
-      }
-    </ul>
-  `,
+      <ul class="list-group">
+        @for (playground of playgrounds(); track playground.id) {
+          <loop-shared-playground-li [playground]="playground"/>
+        }
+      </ul>
+    `,
     host: {
-        class: 'list-group-item'
+      class: 'list-group-item'
     }
 })
 export class SharedPlaygroundUlComponent {
