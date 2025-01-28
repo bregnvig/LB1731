@@ -4,7 +4,7 @@ import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playg
 import { SharedPlaygroundLiComponent } from 'src/app/shared/component/shared-playground-li.component';
 
 @Component({
-  selector: 'loop-infinite-loop',
+  selector: 'loop-linked-signal',
   imports: [SharedPlaygroundUlComponent, SharedPlaygroundLiComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
