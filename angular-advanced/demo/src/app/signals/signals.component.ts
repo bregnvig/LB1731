@@ -28,6 +28,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="playgrounds">
         <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
     </li>
+    <li ngbNavItem="linked">
+        <a ngbNavLink routerLink="linked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">linked</a>
+    </li>
   </ul>
   <router-outlet></router-outlet>
   `
