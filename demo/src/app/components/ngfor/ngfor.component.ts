@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-ngfor',
-    templateUrl: './ngfor.component.html',
-    imports: [NgFor]
+  selector: 'app-ngfor',
+  templateUrl: './ngfor.component.html',
+  imports: [NgFor]
 })
 export class NgforComponent {
 
@@ -14,6 +14,7 @@ export class NgforComponent {
 
   addInput(input: string) {
     this.items.push(input);
+    this.items.sort();
   }
 
 }
