@@ -7,6 +7,7 @@ import { ModelComponent } from "./model/model.component";
 import { PlaygroundsComponent } from "./playgrounds/playgrounds.component";
 import { SignalsComponent } from "./signals.component";
 import { PlaygroundsUntrackedComponent } from "./untracked";
+import { LinkedSignalComponent } from "./linked-signal/linked-signal.component";
 
 export const SignalsRoutes: Routes = [
   {
@@ -42,8 +43,12 @@ export const SignalsRoutes: Routes = [
         component: InfiniteLoopComponent,
       },
       {
+        path: 'linked',
+        component: LinkedSignalComponent,
+      },
+      {
         path: '**',
-        redirectTo: 'playgrounds-rxjs'
+        redirectTo: 'equality'
       }
     ]
   }

@@ -1,13 +1,8 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from 'src/app/shared';
 
 @Component({
   selector: 'loop-signal-input',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert, LeafletModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `@if(distance()) { <span [innerHTML]="text()"></span> } @else { No distance provided }`
 })

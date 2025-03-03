@@ -5,9 +5,10 @@ import { Coordinate, LocationService, Playground } from 'src/app/shared';
 import { AarhusPlaygroundService } from '../service/playground.service';
 
 @Component({
-  selector: 'loop-with-di',
-  templateUrl: '../without-di/without-di.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'loop-with-di',
+    templateUrl: '../without-di/without-di.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WithDIComponent implements OnInit {
 

@@ -1,18 +1,13 @@
-import { JsonPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { randNearbyGPSCoordinate, randSequence, randAnimal } from '@ngneat/falso';
+import { randNearbyGPSCoordinate } from '@ngneat/falso';
 import { getRandomPlayground, LocationService, Playground } from 'src/app/shared';
+import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 import { AnnotationInputComponent } from './annotation-input.component';
 import { SignalInputComponent } from "./signal-input.component";
-import { toObservable } from '@angular/core/rxjs-interop';
-import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
   selector: 'loop-inputs',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert, LeafletModule, AnnotationInputComponent, SignalInputComponent, SharedPlaygroundUlComponent],
+  imports: [AnnotationInputComponent, SignalInputComponent, SharedPlaygroundUlComponent],
   template: `
     <div class="container">
       <button type="button" class="btn btn-primary" (click)="addPlayground()">Add playground</button>

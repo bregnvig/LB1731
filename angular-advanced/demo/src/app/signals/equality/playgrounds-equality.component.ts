@@ -1,21 +1,19 @@
 
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap, timer } from 'rxjs';
-import { Playground, PlaygroundService } from 'src/app/shared';
+import { PlaygroundService } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
-  selector: 'loop-playgrounds-equality',
-  standalone: true,
-  imports: [NgbAlert, SharedPlaygroundUlComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'loop-playgrounds-equality',
+    imports: [SharedPlaygroundUlComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div class="container">
       <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
     </div>
-  `,
+  `
 })
 export class PlaygroundsEqualityComponent {
 

@@ -11,8 +11,8 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'loop-home',
-  template: `
+    selector: 'loop-home',
+    template: `
     <main class="vw-100 vh-100">
       @if (!playgrounds) {
         <fa-icon class="position-absolute top-50 start-50 translate-middle text-muted" [style.z-index]="1000" [icon]="['fas', 'spinner']" animation="spin-pulse" [size]="'3x'"/>
@@ -28,13 +28,12 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <loop-footer [playground]="playground"/>
     }
   `,
-  standalone: true,
-  imports: [
-    LeafletModule,
-    SidebarComponent,
-    FooterComponent,
-    FaIconComponent,
-  ],
+    imports: [
+        LeafletModule,
+        SidebarComponent,
+        FooterComponent,
+        FaIconComponent,
+    ],
 })
 
 export class HomeComponent {

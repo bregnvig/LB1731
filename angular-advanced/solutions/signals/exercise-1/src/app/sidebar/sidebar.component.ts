@@ -4,11 +4,10 @@ import { Coordinate, Playground } from '../model';
 import { DefaultDescriptionPipe, DistancePipe } from '../pipe';
 
 @Component({
-  selector: 'loop-sidebar',
-  standalone: true,
-  templateUrl: './sidebar.component.html',
-  imports: [FaIconComponent, DefaultDescriptionPipe, DistancePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    imports: [FaIconComponent, DefaultDescriptionPipe, DistancePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
 

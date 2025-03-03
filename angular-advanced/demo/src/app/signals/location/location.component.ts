@@ -6,10 +6,9 @@ import { LocationWithSignalsComponent } from "./location-with-signals.component"
 import { LocationWithRxjsComponent } from "./location-with-rxjs.component";
 
 @Component({
-  selector: 'loop-location',
-  standalone: true,
-  imports: [LocationWithSignalsComponent, LocationWithRxjsComponent],
-  template: `
+    selector: 'loop-location',
+    imports: [LocationWithSignalsComponent, LocationWithRxjsComponent],
+    template: `
     <div class="container">
       <div class="row gx-5">
         <div class="col">
@@ -31,7 +30,6 @@ import { LocationWithRxjsComponent } from "./location-with-rxjs.component";
       </div>
     </div>
   `,
-  styles: [
-  ]
+    styles: []
 })
 export class LocationComponent { }

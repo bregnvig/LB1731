@@ -4,8 +4,8 @@ import { timer } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'loop-async-pipe',
-  template: `
+    selector: 'loop-async-pipe',
+    template: `
     @if (date$ | async; as now) {
       <p>
         {{now | date: 'HH:mm:ss'}}
@@ -17,6 +17,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
       </p>
     }
     `,
+    standalone: false
 })
 export class AsyncPipeComponent implements OnInit {
 

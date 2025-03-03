@@ -5,21 +5,22 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { Address } from '../address.model';
 
 @Component({
-  selector: 'loop-address-control',
-  templateUrl: './address-control.component.html',
-  styleUrls: ['./address-control.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AddressControlComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => AddressControlComponent),
-      multi: true
-    }
-  ],
+    selector: 'loop-address-control',
+    templateUrl: './address-control.component.html',
+    styleUrls: ['./address-control.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => AddressControlComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => AddressControlComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class AddressControlComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit, ControlValueAccessor, Validator {
 

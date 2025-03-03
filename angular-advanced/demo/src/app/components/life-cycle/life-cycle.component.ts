@@ -3,9 +3,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-life-cycle',
-  templateUrl: './life-cycle.component.html',
-  styleUrls: ['./life-cycle.component.scss']
+    selector: 'loop-life-cycle',
+    templateUrl: './life-cycle.component.html',
+    styleUrls: ['./life-cycle.component.scss'],
+    standalone: false
 })
 export class LifeCycleComponent implements OnInit {
 

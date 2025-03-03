@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'loop-on-changes',
-  templateUrl: './on-changes.component.html',
+    selector: 'loop-on-changes',
+    templateUrl: './on-changes.component.html',
+    standalone: false
 })
 export class OnChangesComponent {
 

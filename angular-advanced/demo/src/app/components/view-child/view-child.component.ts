@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
-  selector: 'loop-view-child',
-  templateUrl: './view-child.component.html',
-  styleUrls: ['./view-child.component.scss']
+    selector: 'loop-view-child',
+    templateUrl: './view-child.component.html',
+    styleUrls: ['./view-child.component.scss'],
+    standalone: false
 })
 export class ViewChildComponent implements OnInit, AfterViewInit {
 

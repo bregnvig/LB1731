@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-content-projection',
-  template: `
+    selector: 'loop-content-projection',
+    template: `
     <ul class="list-group">
       @for (playground of playgrounds$ | async; track playground) {
         <loop-playground-list-item [playground]="playground">
@@ -18,6 +18,7 @@ import { PlaygroundService } from 'src/app/shared';
     }
     </ul>
     `,
+    standalone: false
 })
 export class ContentProjectionComponent {
 

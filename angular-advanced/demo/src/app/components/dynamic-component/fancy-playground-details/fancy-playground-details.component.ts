@@ -3,8 +3,8 @@ import { icon, latLng, MapOptions, marker, tileLayer } from 'leaflet';
 import { Playground } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-fancy-playground-details',
-  template: `
+    selector: 'loop-fancy-playground-details',
+    template: `
     <h5>{{title}}</h5>
     @if (options) {
       <div style="height: 300px;"
@@ -13,8 +13,8 @@ import { Playground } from 'src/app/shared';
       </div>
     }
     `,
-  styles: [
-  ],
+    styles: [],
+    standalone: false
 })
 export class FancyPlaygroundDetailsComponent {
 

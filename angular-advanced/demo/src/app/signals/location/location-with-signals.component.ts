@@ -7,10 +7,9 @@ import { LocationService } from 'src/app/shared';
 import { createOptions } from './create-options';
 
 @Component({
-  selector: 'loop-location-with-signals',
-  standalone: true,
-  imports: [NgbAlert, JsonPipe, LeafletModule],
-  template: `
+    selector: 'loop-location-with-signals',
+    imports: [NgbAlert, JsonPipe, LeafletModule],
+    template: `
     <ngb-alert type="info" class="mt-3" [dismissible]="false">
       <code><pre class="text-white mb-0">{{location() | json}}</pre></code>
     </ngb-alert>
@@ -19,7 +18,7 @@ import { createOptions } from './create-options';
         leaflet
         [leafletOptions]="options">
       </div>
-    }`,
+    }`
 })
 export class LocationWithSignalsComponent {
 

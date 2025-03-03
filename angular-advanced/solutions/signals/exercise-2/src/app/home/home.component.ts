@@ -28,13 +28,12 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <loop-footer [playground]="playground()"/>
     }
   `,
-  standalone: true,
-  imports: [
-    LeafletModule,
-    SidebarComponent,
-    FooterComponent,
-    FaIconComponent,
-  ],
+    imports: [
+        LeafletModule,
+        SidebarComponent,
+        FooterComponent,
+        FaIconComponent,
+    ],
 })
 
 export class HomeComponent {

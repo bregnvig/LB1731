@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'loop-key-value',
-  templateUrl: './key-value.component.html',
-  styleUrls: ['./key-value.component.scss']
+    selector: 'loop-key-value',
+    templateUrl: './key-value.component.html',
+    styleUrls: ['./key-value.component.scss'],
+    standalone: false
 })
 export class KeyValueComponent {
 

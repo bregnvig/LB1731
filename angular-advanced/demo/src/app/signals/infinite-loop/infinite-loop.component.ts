@@ -1,21 +1,17 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
-import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { getRandomPlayground, Playground } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
   selector: 'loop-infinite-loop',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert, FaIconComponent, SharedPlaygroundUlComponent],
+  imports: [SharedPlaygroundUlComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
       <button class="btn btn-primary mb-3" (click)="addRandomPlayground()">Add Random Playground</button>
       <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
     </div>
-  `,
+  `
 })
 export class InfiniteLoopComponent {
   playgrounds = signal<Playground[]>([getRandomPlayground(), getRandomPlayground()]);
@@ -24,7 +20,7 @@ export class InfiniteLoopComponent {
   infiniteLoopEffect = effect(() => {
     const newPlaygroundValue = this.newPlayground();
 
-    if(this.playgrounds().length > 50000) {
+    if (this.playgrounds().length > 50000) {
       console.log('Reached 100 playgrounds. Stopped before crashing the browser.');
       return;
     }

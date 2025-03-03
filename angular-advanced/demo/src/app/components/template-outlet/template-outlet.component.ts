@@ -5,8 +5,8 @@ import { Playground, PlaygroundService } from 'src/app/shared';
 import { CommonFilterListComponent } from './common-filter-list/common-filter-list.component';
 
 @Component({
-  selector: 'loop-template-outlet',
-  template: `
+    selector: 'loop-template-outlet',
+    template: `
     <ng-template #playgroundInfo let-playground>
       <h6>{{playground.name}}</h6>
       <small>{{playground.description}}</small>
@@ -21,6 +21,7 @@ import { CommonFilterListComponent } from './common-filter-list/common-filter-li
       [filterFn]="filterFn" 
       [itemTemplateRef]="playgroundInfo"/>
   `,
+    standalone: false
 })
 export class TemplateOutletComponent implements OnInit {
 

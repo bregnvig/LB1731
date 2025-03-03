@@ -56,7 +56,7 @@ import { RoutingComponent } from './routing.component';
             path: 'resolve/:id',
             component: ResolverComponent,
             resolve: {
-              playground: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params.id)
+              playground: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params['id'])
             }
           },
           {
@@ -78,14 +78,14 @@ import { RoutingComponent } from './routing.component';
                   // PlaygroundGuardService,
                   // (route: ActivatedRouteSnapshot) => {
                   //   const router = inject(Router);
-                  //   return inject(PlaygroundService).getById(route.params.id).pipe(
-                  //     map(playground => !!playground || router.createUrlTree(['routing', 'guard', 'missing', { id: route.params.id }]))
+                  //   return inject(PlaygroundService).getById(route.params['id']).pipe(
+                  //     map(playground => !!playground || router.createUrlTree(['routing', 'guard', 'missing', { id: route.params['id'] }]))
                   //   );
                   // }
                 ],
                 resolve: {
                   playground: PlaygroundResolverService,
-                  p: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params.id).pipe(first()),
+                  p: (route: ActivatedRouteSnapshot) => inject(PlaygroundService).getById(route.params['id']).pipe(first()),
                 }
               },
             ]

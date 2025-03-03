@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Playground } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-simple-playground-details',
-  template: `
+    selector: 'loop-simple-playground-details',
+    template: `
     <p>{{playground?.description}}, {{playground?.addressDescription}}</p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SimplePlaygroundDetailsComponent {
 

@@ -5,8 +5,8 @@ import { scan } from 'rxjs/operators';
 let creation = 0;
 
 @Component({
-  selector: 'loop-memory-leak',
-  template: `
+    selector: 'loop-memory-leak',
+    template: `
     <button type="button" class="btn btn-primary" (click)="go()">Start</button>
     <ul>
       @for (no of nos; track no) {
@@ -19,6 +19,7 @@ let creation = 0;
       }
     </ul>
     `,
+    standalone: false
 })
 export class MemoryLeakComponent {
 

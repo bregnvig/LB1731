@@ -3,7 +3,8 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { Role, UserService } from './user.service';
 
 @Directive({
-  selector: '[loopIsInRole]'
+    selector: '[loopIsInRole]',
+    standalone: false
 })
 export class IsInRoleDirective extends AbstractSubscribeUnsubscribeDirective {
 

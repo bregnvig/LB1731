@@ -6,8 +6,8 @@ import { AbstractSubscribeUnsubscribeDirective, truthy } from 'src/app/rxjs/rxjs
 import { Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-playground-details',
-  template: `
+    selector: 'loop-playground-details',
+    template: `
     @if (playground$ |async; as playground) {
       <div class="card">
         <div class="card-body">
@@ -18,8 +18,9 @@ import { Playground, PlaygroundService } from 'src/app/shared';
       </div>
     }
     `,
-  styleUrls: ['./playground-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./playground-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PlaygroundDetailsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
@@ -31,12 +32,12 @@ export class PlaygroundDetailsComponent extends AbstractSubscribeUnsubscribeDire
 
   ngOnInit(): void {
     const matrixPlayground$ = this.route.params.pipe(
-      map(params => params.playgroundId),
+      map(params => params['playgroundId']),
       truthy(),
       switchMap(playgroundId => this.service.getById(playgroundId))
     );
     const queryPlayground$ = this.route.queryParams.pipe(
-      map(params => params.playgroundId),
+      map(params => params['playgroundId']),
       truthy(),
       switchMap(playgroundId => this.service.getById(playgroundId))
     );

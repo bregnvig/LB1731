@@ -8,14 +8,15 @@ import { Playground } from 'src/app/shared';
 import { LocationService, PlaygroundService } from 'src/app/shared/service';
 
 @Component({
-  selector: 'loop-query-params',
-  templateUrl: './query-params.component.html',
-  styleUrls: ['./query-params.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'loop-query-params',
+    templateUrl: './query-params.component.html',
+    styleUrls: ['./query-params.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class QueryParamsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  filterControl = new FormControl(this.route.snapshot.params.term);
+  filterControl = new FormControl(this.route.snapshot.params['term']);
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new BehaviorSubject<void>(undefined);
   location$ = this.locationService.location$;
@@ -39,7 +40,7 @@ export class QueryParamsComponent extends AbstractSubscribeUnsubscribeDirective 
     );
 
     const queryParams$ = this.route.queryParams.pipe(
-      map(params => params.term),
+      map(params => params['term']),
       map(term => new RegExp(term || '', 'i'))
     );
 

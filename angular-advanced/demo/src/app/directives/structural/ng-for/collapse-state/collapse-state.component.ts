@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'loop-collapse-state',
-  templateUrl: './collapse-state.component.html',
-  styleUrls: ['./collapse-state.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'loop-collapse-state',
+    templateUrl: './collapse-state.component.html',
+    styleUrls: ['./collapse-state.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CollapseStateComponent {
 

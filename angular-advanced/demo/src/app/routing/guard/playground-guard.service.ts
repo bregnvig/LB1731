@@ -15,8 +15,8 @@ export class PlaygroundGuardService  {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    return this.service.getById(route.params.id).pipe(
-      map(playground => !!playground || this.router.createUrlTree(['routing', 'guard', 'missing', { id: route.params.id }]))
+    return this.service.getById(route.params['id']).pipe(
+      map(playground => !!playground || this.router.createUrlTree(['routing', 'guard', 'missing', { id: route.params['id'] }]))
     );
   }
 

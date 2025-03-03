@@ -7,9 +7,10 @@ export interface No {
 }
 
 @Component({
-  selector: 'loop-change-detection',
-  templateUrl: './change-detection.component.html',
-  styleUrls: ['./change-detection.component.scss'],
+    selector: 'loop-change-detection',
+    templateUrl: './change-detection.component.html',
+    styleUrls: ['./change-detection.component.scss'],
+    standalone: false
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 

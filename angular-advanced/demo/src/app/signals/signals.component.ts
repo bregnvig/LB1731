@@ -3,10 +3,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'loop-signals',
-  standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, NgbNav, NgbNavLink, NgbNavItem],
-  template: `
+    selector: 'loop-signals',
+    imports: [RouterLink, RouterLinkActive, RouterOutlet, NgbNav, NgbNavLink, NgbNavItem],
+    template: `
   <ul ngbNav class="nav-tabs mb-3">
     <li ngbNavItem="equality">
         <a ngbNavLink routerLink="equality" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Equality</a>
@@ -29,9 +28,12 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="playgrounds">
         <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
     </li>
+    <li ngbNavItem="linked">
+        <a ngbNavLink routerLink="linked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">linked</a>
+    </li>
   </ul>
   <router-outlet></router-outlet>
-  `,
+  `
 })
 export class SignalsComponent {
 }

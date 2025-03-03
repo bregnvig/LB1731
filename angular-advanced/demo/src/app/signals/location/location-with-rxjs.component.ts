@@ -9,10 +9,9 @@ import { createOptions } from './create-options';
 
 
 @Component({
-  selector: 'loop-location-with-rxjs',
-  standalone: true,
-  imports: [JsonPipe, NgbAlert, LeafletModule],
-  template: `
+    selector: 'loop-location-with-rxjs',
+    imports: [JsonPipe, NgbAlert, LeafletModule],
+    template: `
     <button type="button" class="btn btn-primary" (click)="subscribe()">Subscribe</button>
     <button type="button" class="ms-3 btn btn-primary" (click)="subscription?.unsubscribe()">Unsubscribe</button>
     <ngb-alert type="info" class="mt-3" [dismissible]="false">

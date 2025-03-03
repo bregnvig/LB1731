@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 import { Playground } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-resolver',
-  template: `
+    selector: 'loop-resolver',
+    template: `
     @if (playground$ | async; as playground) {
       <div class="card">
         <div class="card-body">
@@ -17,11 +17,12 @@ import { Playground } from 'src/app/shared';
       </div>
     }
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ResolverComponent {
 
-  playground$: Observable<Playground | undefined> = this.route.data.pipe(map(data => data.playground));
+  playground$: Observable<Playground | undefined> = this.route.data.pipe(map(data => data['playground']));
 
   constructor(private route: ActivatedRoute) { }
 

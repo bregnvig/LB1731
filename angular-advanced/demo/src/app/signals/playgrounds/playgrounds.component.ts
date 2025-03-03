@@ -6,10 +6,9 @@ import { PlaygroundsWithRxjsComponent } from "./playgrounds-with-rxjs.component"
 import { PlaygroundsWithSignalsComponent } from "./playgrounds-with-signals.component";
 
 @Component({
-  selector: 'loop-playgrounds',
-  standalone: true,
-  imports: [PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent],
-  template: `
+    selector: 'loop-playgrounds',
+    imports: [PlaygroundsWithRxjsComponent, PlaygroundsWithSignalsComponent],
+    template: `
     <div class="container">
       <div class="row gx-5">
         <div class="col">
@@ -23,7 +22,6 @@ import { PlaygroundsWithSignalsComponent } from "./playgrounds-with-signals.comp
       </div>
     </div>
   `,
-  styles: [
-  ]
+    styles: []
 })
 export class PlaygroundsComponent { }

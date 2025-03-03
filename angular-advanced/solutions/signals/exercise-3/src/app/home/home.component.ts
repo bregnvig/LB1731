@@ -27,13 +27,12 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       <loop-footer [playground]="playground()"/>
     }
   `,
-  standalone: true,
-  imports: [
-    LeafletModule,
-    SidebarComponent,
-    FooterComponent,
-    FaIconComponent,
-  ],
+    imports: [
+        LeafletModule,
+        SidebarComponent,
+        FooterComponent,
+        FaIconComponent,
+    ],
 })
 
 export class HomeComponent {

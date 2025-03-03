@@ -4,9 +4,10 @@ import { debounceTime } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
-  selector: 'loop-form-array',
-  templateUrl: './form-array.component.html',
-  styleUrls: ['./form-array.component.scss']
+    selector: 'loop-form-array',
+    templateUrl: './form-array.component.html',
+    styleUrls: ['./form-array.component.scss'],
+    standalone: false
 })
 export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 

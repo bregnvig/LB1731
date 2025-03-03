@@ -1,8 +1,9 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'myFirstImpure',
-  pure: false
+    name: 'myFirstImpure',
+    pure: false,
+    standalone: false
 })
 export class MyFirstImpurePipe implements PipeTransform, OnDestroy {
 

@@ -4,9 +4,10 @@ import { map } from 'rxjs/operators';
 import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
-  selector: 'loop-with-injector',
-  templateUrl: '../without-di/without-di.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'loop-with-injector',
+    templateUrl: '../without-di/without-di.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class WithInjectorComponent implements OnInit {
 

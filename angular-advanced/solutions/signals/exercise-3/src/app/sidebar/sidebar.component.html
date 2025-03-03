@@ -6,7 +6,7 @@
           [playground]="playground" 
           [location]="location()" 
           [active]="playground === selectedPlayground()" 
-          (click)="selected.emit(playground)"/>
+          (click)="selectedPlayground.set(playground)"/>
       } @empty {
         <div class="list-group-item d-flex justify-content-between">
           <span>Loading playgrounds</span>

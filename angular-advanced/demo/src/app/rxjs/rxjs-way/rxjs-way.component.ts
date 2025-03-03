@@ -4,9 +4,10 @@ import { combineLatest, debounceTime, map, Observable, startWith } from "rxjs";
 import { LocationService, Playground, PlaygroundService } from "src/app/shared";
 
 @Component({
-  selector: 'loop-rxjs-way',
-  templateUrl: './rxjs-way.component.html',
-  styleUrls: ['./rxjs-way.component.scss']
+    selector: 'loop-rxjs-way',
+    templateUrl: './rxjs-way.component.html',
+    styleUrls: ['./rxjs-way.component.scss'],
+    standalone: false
 })
 export class RxJSWayComponent implements OnInit {
 

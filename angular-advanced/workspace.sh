@@ -2,9 +2,12 @@
 
 # if no args display help
 if [ "$1" == "" ]; then
-  echo "Usage: workspace.sh [install | i] [-a]"
-  echo "  install | i: installs workspace packages"
-  echo "  -a: installs npm packages in all subdirectories that contain a package.json file"
+  echo "Usage: workspace.sh [command] [subdir]"
+  echo "Commands:"
+  echo "  install, i  Install npm packages in the root directory"
+  echo "  install -a  Install npm packages in all subdirectories that contain a package.json file"
+  echo "  install [subdir]  Install npm packages in the labs/[subdir] and solutions/[subdir] directories"
+  echo "  help, h  Display this help message"
   exit 0
 fi
 
@@ -27,19 +30,33 @@ if [ "$1" == "install" ] || [ "$1" == "i" ]; then
     done < <(find . -type f -name "package.json" -not -path "*/node_modules/*")
 
     echo "All npm installs complete!"
+  # if second arg is not empty
+  elif [ "$2" != "" ]; then
+    # Assume the second arg is a subdir to labs & solutions and run npm install all subdirs that contain a package.json file in labs/$2/** and solutions/$2/**
+    set -e  # Exit immediately on error
+
+    # Find all package.json files outside of node_modules, and iterate over them
+    while IFS= read -r package_json; do
+      dir="$(dirname "$package_json")"
+      echo "Installing packages in $dir"
+      (
+        cd "$dir" && npm install
+      )
+    done < <(find labs/"$2" solutions/"$2" -type f -name "package.json" -not -path "*/node_modules/*")
+
   else
     # creates a package.json file with workspaces and installs packages in the root directory and then removes the package.json & package-lock.json files
     echo '{
   "name": "angular-advanced",
   "workspaces": [
-    "./demo/*",
+    "./demo",
     "./solutions/*",
     "./solutions/**/*",
     "./labs/*",
     "./labs/**/*"
   ]
 }' > package.json
-    npm install
+    npm install --force
     rm package.json package-lock.json
   fi
 fi

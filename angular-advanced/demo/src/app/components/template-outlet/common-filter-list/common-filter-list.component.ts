@@ -3,10 +3,11 @@ import { UntypedFormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
-  selector: 'loop-common-filter-list',
-  templateUrl: './common-filter-list.component.html',
-  styleUrls: ['./common-filter-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'loop-common-filter-list',
+    templateUrl: './common-filter-list.component.html',
+    styleUrls: ['./common-filter-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CommonFilterListComponent implements OnInit {
 

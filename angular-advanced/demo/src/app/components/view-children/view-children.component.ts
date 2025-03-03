@@ -2,8 +2,8 @@ import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
-  selector: 'loop-view-children',
-  template: `
+    selector: 'loop-view-children',
+    template: `
     <div class="row flex-wrap">
       <div class="mt-3 col-12">
         <h5>Hardcoded</h5>
@@ -21,6 +21,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
       </div>
     </div>
     `,
+    standalone: false
 })
 export class ViewChildrenComponent implements AfterViewInit {
 
