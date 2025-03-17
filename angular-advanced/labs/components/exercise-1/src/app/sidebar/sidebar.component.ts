@@ -14,17 +14,7 @@ import { LocationService } from '../service';
         <nav>
           <div class="container my-3">
             <div class="list-group">
-              @for (playground of playgrounds; track playground.id) {
-                <li class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
-                    [class.active]="playground === selectedPlayground"
-                    (click)="selectPlayground(playground)">
-                  <div class="d-flex flex-column justify-content-between">
-                    <h6 class="mb-1">{{playground.name}}
-                      <span class="badge bg-primary badge-pill">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
-                    </h6>
-                    <small>{{playground.description | defaultDescription}}</small>
-                  </div>
-                </li>
+            @for (playground of playgrounds(); track playground.id) {
               }
             </div>
           </div>
@@ -40,8 +30,8 @@ import { LocationService } from '../service';
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
-  @Output() selected = new EventEmitter<Playground>();
+  playgrounds = input<Playground[] | null>([]);
+  selected = output<Playground>();
 
   selectedPlayground?: Playground;
   location$: Observable<Coordinate> = this.locationService.location$;

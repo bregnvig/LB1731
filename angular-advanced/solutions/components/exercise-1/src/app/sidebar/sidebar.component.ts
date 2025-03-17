@@ -1,13 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
-import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
-import { DistancePipe } from '../pipe/distance.pipe';
-import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
 import { LocationService } from '../service';
 import { SidebarListItemComponent } from "./sidebar-list-item.component";
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'loop-sidebar',
@@ -16,7 +13,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <nav>
         <div class="container my-3">
           <div class="list-group">
-            @for (playground of playgrounds; track playground.id) {
+            @for (playground of playgrounds(); track playground.id) {
               <loop-sidebar-list-item [playground]="playground" [selected]="playground === selectedPlayground" [location]="location$ | async">
                 <button class="btn btn-sm btn-secondary" (click)="selectPlayground(playground)">
                   <fa-icon [icon]="['fas', 'check']"></fa-icon> 
@@ -36,8 +33,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
-  @Output() selected = new EventEmitter<Playground>();
+  playgrounds = input<Playground[] | null>([]);
+  selected = output<Playground>();
 
   selectedPlayground?: Playground;
   location$: Observable<Coordinate> = this.locationService.location$;
