@@ -14,11 +14,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
-  selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [SidebarListItemComponent, FaIconComponent, SidebarComponent, NgIf, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective, AsyncPipe, LeafletModule]
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [SidebarListItemComponent, FaIconComponent, SidebarComponent, NgIf, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

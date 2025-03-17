@@ -9,7 +9,6 @@ import { DistancePipe } from '../../pipe/distance.pipe';
     templateUrl: './sidebar-list-item.component.html',
     styleUrls: ['./sidebar-list-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe]
 })
 export class SidebarListItemComponent {

@@ -8,7 +8,6 @@ import { DistancePipe } from '../../pipe/distance.pipe';
     selector: 'loop-sidebar-list-item',
     templateUrl: './sidebar-list-item.component.html',
     styleUrls: ['./sidebar-list-item.component.scss'],
-    standalone: true,
     imports: [DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe]
 })
 export class SidebarListItemComponent {

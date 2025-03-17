@@ -10,14 +10,13 @@ import { NgFor, AsyncPipe } from '@angular/common';
 @Component({
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
-    standalone: true,
     imports: [
         NgFor,
         AsyncPipe,
         DistancePipe,
         HumanizeDistancePipe,
         DefaultDescriptionPipe,
-    ],
+    ]
 })
 export class SidebarComponent {
 

@@ -11,11 +11,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
-  selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletModule]
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 
