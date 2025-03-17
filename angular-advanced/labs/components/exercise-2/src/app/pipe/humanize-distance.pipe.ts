@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'humanizeDistance',
-  standalone: true,
+    name: 'humanizeDistance',
+    standalone: true
 })
 export class HumanizeDistancePipe implements PipeTransform {
 
@@ -13,7 +13,7 @@ export class HumanizeDistancePipe implements PipeTransform {
     if (value <= 750) {
       return `${value} m`;
     } else if (value <= 1500) {
-      return 'Quite a walk';
+      return 'Quite a walk'
     }
     return 'Get a cab!';
   }
