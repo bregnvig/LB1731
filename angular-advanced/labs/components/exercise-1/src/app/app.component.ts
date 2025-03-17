@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -13,10 +13,12 @@ import { withLength } from './utils/rxjs-utils';
     selector: 'loop-root',
     template: `
       <leaflet [center]="center" [markers]="markers$"></leaflet>
-      <loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)"></loop-sidebar>
-      <loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+      <loop-sidebar [playgrounds]="playgrounds$ | async" (selected)="playground$.next($event)"></loop-sidebar>
+      @if (playground$ | async; as playground) {
+        <loop-footer [playground]="playground"/>
+      }
     `,
-    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletComponent]
+    imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletComponent]
 })
 export class AppComponent {
 
