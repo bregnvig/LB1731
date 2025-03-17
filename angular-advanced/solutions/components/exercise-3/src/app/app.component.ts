@@ -1,27 +1,37 @@
-import { AsyncPipe, NgComponentOutlet, NgIf } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ComponentOutletInjectorDirective, DynamicIoDirective } from 'ng-dynamic-component';
-import { Observable, Subject, combineLatest, merge } from 'rxjs';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
+import { Component } from '@angular/core';
+import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
-import { Center, Marker } from './leaflet';
-import { LeafletModule } from "./leaflet/leaflet.module";
+import { Center, LeafletComponent, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
-import { SidebarListItemComponent } from './sidebar/sidebar-list-item/sidebar-list-item.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
+import { DynamicIoModule } from 'ng-dynamic-component';
+import { SidebarListItemComponent } from './sidebar/sidebar-list-item.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'loop-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [SidebarListItemComponent, FaIconComponent, SidebarComponent, NgIf, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective, AsyncPipe, LeafletModule]
+    template: `
+      <leaflet [center]="center" [markers]="markers$"></leaflet>
+      <ng-template #playgroundTemplate let-playground>
+        <loop-sidebar-list-item [playground]="playground" [location]="location$ | async" [selected]="(playground$ | async) === playground">
+          <button class="btn btn-sm btn-secondary" (click)="playground$.next(playground)">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+          </button>
+        </loop-sidebar-list-item>
+      </ng-template>
+
+      <loop-sidebar [filterFn]="filterFn$ | async" [itemTemplate]="playgroundTemplate"></loop-sidebar>
+      @if (playground$ | async; as playground) {
+        <ng-template [ngComponentOutlet]="component" [ndcDynamicInputs]="{ playground }"/>
+      }
+    `,
+    imports: [SidebarComponent, SidebarListItemComponent, AsyncPipe, LeafletComponent, NgComponentOutlet, DynamicIoModule, FaIconComponent]
 })
 export class AppComponent {
-
-  @ViewChild(SidebarComponent, { static: true }) sidebar!: SidebarComponent;
 
   playgrounds$: Observable<Playground[]> | undefined;
   playground$ = new Subject<Playground>();

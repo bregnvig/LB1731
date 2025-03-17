@@ -1,43 +1,59 @@
-import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, TemplateRef } from '@angular/core';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { Component, input, OnInit, output, TemplateRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, debounceTime, map, startWith } from 'rxjs';
+import { DynamicIoModule } from 'ng-dynamic-component';
+import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    imports: [
-        ReactiveFormsModule,
-        NgFor,
-        NgTemplateOutlet,
-        AsyncPipe,
-    ]
+  selector: 'loop-sidebar',
+  template: `
+    <ng-template #defaultTemplate let-item>
+      <li class="list-group-item">{{item}}</li>
+    </ng-template>
+    <aside tabindex="1">
+      <nav>
+        <div class="container my-3">
+          <div class="row">
+            <div class="col">
+              <input id="filter" [formControl]="filterControl" autofocus type="text" class="form-control form-control-lg">
+            </div>
+          </div>
+          <div class="list-group">
+            @for (item of filtered$ | async; track item) {
+              <ng-container [ngTemplateOutlet]="itemTemplate() ?? defaultTemplate" [ngTemplateOutletContext]="{$implicit: item}"/>
+            }
+          </div>
+        </div>
+      </nav>
+    </aside>
+  `,
+  imports: [
+    AsyncPipe,
+    ReactiveFormsModule,
+    NgTemplateOutlet,
+    DynamicIoModule,
+  ],
 })
-export class SidebarComponent implements OnChanges {
+export class SidebarComponent {
 
-  @Input() itemTemplate?: TemplateRef<any>;
-  @Output() selected = new EventEmitter<any>();
-  @Input({ required: true }) filterFn?: ((term: string) => any[]) | null;
+  itemTemplate = input<TemplateRef<any>>();
+  filterFn = input.required<((term: string) => any[]) | null>();
+  selected = output<any>();
 
   selectedItem?: any;
   filterControl = new FormControl<string>('');
   location$: Observable<Coordinate> = this.locationService.location$;
-  filtered$?: Observable<any[]>;
+  filtered$?: Observable<any[]> = combineLatest([
+    toObservable(this.filterFn),
+    this.filterControl.valueChanges.pipe(startWith(this.filterControl.value), debounceTime(300))
+  ]).pipe(
+    map(([filterFn, term]) => filterFn && filterFn(term ?? '') || [])
+  );
 
-  constructor(private locationService: LocationService) {
-  }
-
-  ngOnChanges(): void {
-    const filterFn = this.filterFn;
-
-    filterFn && (this.filtered$ = this.filterControl.valueChanges.pipe(
-      startWith(this.filterControl.value),
-      debounceTime(300),
-      map(term => filterFn(term ?? ''))
-    ));
-  }
+  constructor(private locationService: LocationService) { }
 
   selectItem(item: any): void {
     this.selectedItem = item;
