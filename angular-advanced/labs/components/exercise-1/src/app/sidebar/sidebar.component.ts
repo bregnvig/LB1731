@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
@@ -14,7 +14,17 @@ import { LocationService } from '../service';
         <nav>
           <div class="container my-3">
             <div class="list-group">
-            @for (playground of playgrounds(); track playground.id) {
+              @for (playground of playgrounds(); track playground.id) {
+                <li class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
+                    [class.active]="playground === selectedPlayground"
+                    (click)="selectPlayground(playground)">
+                  <div class="d-flex flex-column justify-content-between">
+                    <h6 class="mb-1">{{playground.name}}
+                      <span class="badge bg-primary badge-pill">{{playground.position | distance: (location$ | async) | humanizeDistance}}</span>
+                    </h6>
+                    <small>{{playground.description | defaultDescription}}</small>
+                  </div>
+                </li>
               }
             </div>
           </div>
