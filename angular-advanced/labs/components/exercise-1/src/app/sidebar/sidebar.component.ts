@@ -1,11 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
 import { DistancePipe } from '../pipe/distance.pipe';
 import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
-import { LocationService } from '../service'; 
+import { LocationService } from '../service';
 
 @Component({
     selector: 'loop-sidebar',
