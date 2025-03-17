@@ -1,19 +1,25 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
-import { Center, LeafletModule, Marker } from './leaflet';
+import { Center, LeafletComponent, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
+import { DynamicIoModule } from 'ng-dynamic-component';
 
 @Component({
     selector: 'loop-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletModule]
+    template: `
+      <leaflet [center]="center" [markers]="markers$"></leaflet>
+      <loop-sidebar [playgrounds]="playgrounds$ | async" (selected)="playground$.next($event)"></loop-sidebar>
+      @if (playground$ | async; as playground) {
+        <ng-template [ngComponentOutlet]="component" [ndcDynamicInputs]="{ playground }"/>
+      }
+    `,
+    imports: [SidebarComponent, AsyncPipe, LeafletComponent, NgComponentOutlet, DynamicIoModule]
 })
 export class AppComponent {
 
@@ -21,6 +27,7 @@ export class AppComponent {
   playground$ = new Subject<Playground>();
   center: Center = new Center(56.360029, 10.746635);
   markers$: Observable<Marker> | undefined;
+  
   component = FooterComponent;
 
   constructor(private service: PlaygroundService, private locationService: LocationService) {

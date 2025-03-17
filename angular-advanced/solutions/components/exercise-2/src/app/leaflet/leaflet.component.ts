@@ -9,14 +9,19 @@ import { MarkerFactory } from './marker-factory';
 /* tslint:disable:component-selector-name */
 /* tslint:disable:component-selector-prefix */
 @Component({
-    selector: 'leaflet',
-    templateUrl: './leaflet.component.html',
-    styleUrls: ['./leaflet.component.css'],
-    standalone: false
+  selector: 'leaflet',
+  template: `<div class="leaflet-100" id="playgroundsMap"></div>`,
+  styles: `
+    .leaflet-100 {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+  `,
 })
 export class LeafletComponent implements AfterViewInit, OnDestroy {
 
-  baseMaps: { [name: string]: TileLayer };
+  baseMaps: { [name: string]: TileLayer } = { OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }) };
 
   private map: Map | undefined;
   private _zoom = 8;
@@ -25,16 +30,6 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   private _markers$: Observable<Marker> | undefined;
   private namedMarkers: { [key: string]: LeafletMarker | undefined } = {};
   private subscriptions: Subscription[] = [];
-
-
-
-  constructor() {
-    this.baseMaps = {
-      OpenStreetMap: tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })
-    };
-  }
 
   ngAfterViewInit() {
     this.map = map('playgroundsMap', {
