@@ -16,7 +16,7 @@ export class BetterAsyncServiceComponent {
   drivers?: Driver[];
 
   constructor(private service: F1BetterService) {
-    this.service.getDrivers().subscribe(drivers => this.drivers = drivers);
+    service.getDrivers().subscribe(drivers => this.drivers = drivers);
   }
 
   addSubscription() {
