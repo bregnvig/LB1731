@@ -7,15 +7,14 @@ import { LocationService } from '../service';
 import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.component';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  standalone: true,
-  imports: [
-    NgFor,
-    SidebarListItemComponent,
-    FaIconComponent,
-    AsyncPipe,
-  ],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    imports: [
+        NgFor,
+        SidebarListItemComponent,
+        FaIconComponent,
+        AsyncPipe,
+    ]
 })
 export class SidebarComponent {
 

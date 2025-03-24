@@ -29,6 +29,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": ["leaflet"],
             "assets": [
               "src/favicon.ico",
               "src/assets"

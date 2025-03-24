@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
@@ -8,11 +8,10 @@ import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  selector: 'loop-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [LeafletComponent, SidebarComponent, NgIf, FooterComponent, AsyncPipe]
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
 
