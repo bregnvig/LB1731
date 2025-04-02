@@ -9,9 +9,8 @@ import { Coordinate } from '../model/coordinate';
 import { Playground } from '../model/playground';
 
 @Component({
-  selector: 'loop-sidebar',
-  standalone: true,
-  template: `
+    selector: 'loop-sidebar',
+    template: `
     <aside tabindex="1">
       <nav>
         <div class="list-group">
@@ -31,8 +30,8 @@ import { Playground } from '../model/playground';
       </nav>
     </aside>
   `,
-  imports: [DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe, AsyncPipe],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    imports: [DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe, AsyncPipe],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
 
