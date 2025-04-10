@@ -14,16 +14,15 @@ import { PlaygroundService } from '../service/playground.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-home',
-  template: `
+    selector: 'app-home',
+    template: `
     <leaflet [center]="center" [markers]="markers$"></leaflet>
     <loop-sidebar [playgrounds]="playgrounds$ | async" (selected)="playground$.next($event)"></loop-sidebar>
     @if(playground$ | async; as playground) {
       <loop-footer [playground]="playground"></loop-footer>
     }
   `,
-  standalone: true,
-  imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe],
+    imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class HomeComponent implements OnInit {
 
