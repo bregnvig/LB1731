@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,11 +21,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule, FontAwesomeModule, DynamicIoModule),
     provideHttpClient(withInterceptorsFromDi()),
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: (library: FaIconLibrary) => () => library.addIconPacks(fas),
-      deps: [FaIconLibrary]
-    },
+    provideAppInitializer(() => {
+        const initializerFn = ((library: FaIconLibrary) => () => library.addIconPacks(fas))(inject(FaIconLibrary));
+        return initializerFn();
+      }),
   ]
 }).catch(err => console.error(err));
