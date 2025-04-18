@@ -8,10 +8,10 @@ type Transform = 'lowercase' | 'uppercase' | 'capitalized' | 'monospace';
 
 @UntilDestroy()
 @Component({
-    selector: 'loop-recap',
-    templateUrl: './recap.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'loop-recap',
+  templateUrl: './recap.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class RecapComponent implements OnInit, OnDestroy {
 

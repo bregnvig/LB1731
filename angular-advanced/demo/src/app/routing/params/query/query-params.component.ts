@@ -8,15 +8,15 @@ import { Playground } from 'src/app/shared';
 import { LocationService, PlaygroundService } from 'src/app/shared/service';
 
 @Component({
-    selector: 'loop-query-params',
-    templateUrl: './query-params.component.html',
-    styleUrls: ['./query-params.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'loop-query-params',
+  templateUrl: './query-params.component.html',
+  styleUrls: ['./query-params.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class QueryParamsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  filterControl = new FormControl(this.route.snapshot.params['term']);
+  filterControl = new FormControl(this.route.snapshot.queryParams['term'] ?? '');
   playgrounds$: Observable<Playground[]> | undefined;
   refresh$ = new BehaviorSubject<void>(undefined);
   location$ = this.locationService.location$;
@@ -34,7 +34,12 @@ export class QueryParamsComponent extends AbstractSubscribeUnsubscribeDirective 
   ngOnInit(): void {
 
     this.subscriptions.push(
-      this.filterControl.valueChanges.subscribe(term => this.router.navigate([], { queryParams: { term }, relativeTo: this.route })),
+      this.filterControl.valueChanges.subscribe(term => this.router.navigate([], { queryParams: { term }, relativeTo: this.route })),      // this.filterControl.valueChanges.subscribe(term => this.router.navigate([], {
+      //   queryParams: { term },
+      //   queryParamsHandling: 'merge',
+      //   replaceUrl: true,
+      //   relativeTo: this.route
+      // })),
       this.route.url.subscribe(params => console.log('Params url', this.router.url)),
       this.route.queryParams.subscribe(params => console.log('Params query', params)),
     );
