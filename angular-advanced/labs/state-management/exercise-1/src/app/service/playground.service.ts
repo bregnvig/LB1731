@@ -40,6 +40,9 @@ export class PlaygroundService {
   }
 
   update(id: string, playground: Partial<Playground>): Observable<Playground> {
+    if (/[13579]$/.test(id)) {
+      throw new Error(`${playground.name} is readonly and cannot be changed`);
+    }
     return this.list().pipe(
       map(playgrounds => playgrounds.map(p => p.id === id ? { ...p, ...playground } : p)),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
