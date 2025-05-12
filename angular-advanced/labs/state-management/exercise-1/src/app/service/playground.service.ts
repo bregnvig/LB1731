@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import * as localForage from "localforage";
 import { from, Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
 
@@ -19,6 +19,7 @@ export class PlaygroundService {
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)
       )),
+      delay(3000) // Simulate network delay
     );
   }
 

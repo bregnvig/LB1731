@@ -1,11 +1,13 @@
 <main class="vw-100 vh-100">
-  <leaflet [center]="center$ | async" [markers]="markers$ | async"></leaflet>
+  <leaflet [center]="center$ | async" [markers]="markers$ | async"/>
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds$ | async"
   (edit)="edit($event)"
-  (selected)="playground$.next($event)">
-</loop-sidebar>
+  (selected)="playground$.next($event)"/>
 @if (playground$ | async; as playground) {
-  <loop-footer [playground]="playground"></loop-footer>
+  <loop-footer [playground]="playground"/>
+}
+@if(error) {
+  <app-error [error]="error" (dismiss)="error = undefined"/>
 }
