@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'loop-root',
     templateUrl: './app.component.html',
-    imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf]
+    imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

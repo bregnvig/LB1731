@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { LocationService } from '../service';
 @Component({
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
-    imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe],
+    imports: [AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
