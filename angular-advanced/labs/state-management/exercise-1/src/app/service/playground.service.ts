@@ -1,23 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as localForage from "localforage";
-import { Observable, from, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
-localForage.config({ driver: localForage.INDEXEDDB, name: 'state-management', version: 1.0, size: 4980736, storeName: 'state-management-store' });
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlaygroundService {
 
-  constructor(private http: HttpClient) {
-  }
+  #http = inject(HttpClient);
 
   list(): Observable<Playground[]> {
     return from(localForage.getItem<Playground[]>('playgrounds')).pipe(
-      switchMap(playgrounds => playgrounds ? of(playgrounds) : this.http.get<Playground[]>('assets/copenhagen.json')),
+      switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/copenhagen.json')),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)
       )),
