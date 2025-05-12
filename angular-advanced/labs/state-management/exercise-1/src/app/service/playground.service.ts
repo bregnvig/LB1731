@@ -53,6 +53,9 @@ export class PlaygroundService {
   }
 
   delete(id: string): Observable<void> {
+    if (/[13579]$/.test(id)) {
+      throw new Error(`Playground is readonly and cannot be deleted`);
+    }
     return this.list().pipe(
       map(playgrounds => playgrounds.filter(p => p.id !== id)),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
