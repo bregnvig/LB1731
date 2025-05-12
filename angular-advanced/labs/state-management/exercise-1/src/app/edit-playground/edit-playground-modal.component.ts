@@ -8,10 +8,9 @@ import { PlaygroundService } from '../service';
 import { EditPlaygroundControlComponent } from './edit-playground-control.component';
 
 @Component({
-  selector: 'loop-edit-playground-modal',
-  standalone: true,
-  imports: [ReactiveFormsModule, EditPlaygroundControlComponent],
-  template: `
+    selector: 'loop-edit-playground-modal',
+    imports: [ReactiveFormsModule, EditPlaygroundControlComponent],
+    template: `
     <div>
       <div class="modal-header">
         <h5 class="modal-title">{{playground.name}}</h5>
@@ -25,7 +24,7 @@ import { EditPlaygroundControlComponent } from './edit-playground-control.compon
         <button type="button" [disabled]="editControl.invalid" class="btn btn-primary" (click)="save()">OK</button>
       </div>
     </div>
-  `,
+  `
 })
 export class EditPlaygroundModalComponent implements OnInit {
 

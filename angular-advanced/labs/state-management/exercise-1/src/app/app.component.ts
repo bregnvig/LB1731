@@ -12,10 +12,9 @@ import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'loop-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf],
+    selector: 'loop-root',
+    templateUrl: './app.component.html',
+    imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf]
 })
 export class AppComponent {
 

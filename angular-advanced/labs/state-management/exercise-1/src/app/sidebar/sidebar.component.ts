@@ -7,11 +7,10 @@ import { DefaultDescriptionPipe, DistancePipe } from "../pipe";
 import { LocationService } from '../service';
 
 @Component({
-  selector: 'loop-sidebar',
-  standalone: true,
-  templateUrl: './sidebar.component.html',
-  imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    imports: [NgFor, NgIf, AsyncPipe, FontAwesomeModule, DefaultDescriptionPipe, DistancePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
 

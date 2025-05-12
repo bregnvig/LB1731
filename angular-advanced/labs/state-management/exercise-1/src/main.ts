@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode } from '@angular/core';
+import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
 
 import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -25,12 +25,10 @@ const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => {
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeFontAwesomeFactory,
-      deps: [FaIconLibrary],
-      multi: true,
-    }
+    provideAppInitializer(() => {
+        const initializerFn = (initializeFontAwesomeFactory)(inject(FaIconLibrary));
+        return initializerFn();
+      })
   ]
 })
   .catch(err => console.error(err));
