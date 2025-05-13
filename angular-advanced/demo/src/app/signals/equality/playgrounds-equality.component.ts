@@ -6,10 +6,10 @@ import { PlaygroundService } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 
 @Component({
-    selector: 'loop-playgrounds-equality',
-    imports: [SharedPlaygroundUlComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+  selector: 'loop-playgrounds-equality',
+  imports: [SharedPlaygroundUlComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <div class="container">
       <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
     </div>

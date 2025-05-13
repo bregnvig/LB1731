@@ -31,9 +31,7 @@ export class InfiniteLoopComponent {
       // this.newPlayground.set(null); // Uncomment this line to stop the infinite loop
     }
 
-  },
-    { allowSignalWrites: true }
-  );
+  });
 
   addRandomPlayground(): void {
     this.newPlayground.set(getRandomPlayground());
