@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'loop-locale',
-    template: `
-    <loop-default-locale></loop-default-locale><br>
-    <loop-da-locale></loop-da-locale>
+  selector: 'loop-locale',
+  template: `
+    <loop-default-locale/><br>
+    <loop-da-locale/>
   `,
-    standalone: false
+  standalone: false
 })
-export class LocaleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class LocaleComponent {
 
 }
