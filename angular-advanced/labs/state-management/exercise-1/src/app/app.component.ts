@@ -1,21 +1,21 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
+import { ErrorComponent } from "./error.component";
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
-import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'loop-root',
-  standalone: true,
   templateUrl: './app.component.html',
-  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, NgIf],
+  imports: [FooterComponent, SidebarComponent, AsyncPipe, LeafletModule, ErrorComponent]
 })
 export class AppComponent {
 
@@ -24,6 +24,7 @@ export class AppComponent {
   location$: Observable<Coordinate> = this.locationService.location$;
   center$: Observable<Center>;
   markers$: Observable<Marker[]> | undefined;
+  error: any;
 
   constructor(
     private service: PlaygroundService,

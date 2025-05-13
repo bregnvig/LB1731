@@ -2,10 +2,9 @@ import { Component, forwardRef, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'loop-edit-playground-control',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  template: `
+    selector: 'loop-edit-playground-control',
+    imports: [ReactiveFormsModule],
+    template: `
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
@@ -21,13 +20,13 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Reac
       </div>    
     </form>
   `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditPlaygroundControlComponent),
-      multi: true
-    }
-  ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EditPlaygroundControlComponent),
+            multi: true
+        }
+    ]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
