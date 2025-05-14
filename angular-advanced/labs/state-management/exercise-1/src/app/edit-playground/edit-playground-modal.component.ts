@@ -55,7 +55,10 @@ export class EditPlaygroundModalComponent implements OnInit {
   }
 
   save() {
-    this.service.update(this.playground.id, { ...this.playground, ...this.editControl.value }).subscribe(() => this.modal.close());
+    this.service.update(this.playground.id, { ...this.playground, ...this.editControl.value }).subscribe({
+      next: () => this.modal.close(),
+      error: (error) => this.modal.dismiss(error)
+    });
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import * as localForage from "localforage";
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
@@ -12,14 +12,15 @@ import { Playground } from '../model';
 export class PlaygroundService {
 
   #http = inject(HttpClient);
-
-  list(): Observable<Playground[]> {
-    return from(localForage.getItem<Playground[]>('playgrounds')).pipe(
+  #list = from(localForage.getItem<Playground[]>('playgrounds')).pipe(
       switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/copenhagen.json')),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)
-      )),
-      delay(3000) // Simulate network delay
+      )))
+
+  list(): Observable<Playground[]> {
+    return this.#list.pipe(
+      delay(2000) // Simulate network delay
     );
   }
 
@@ -40,10 +41,8 @@ export class PlaygroundService {
   }
 
   update(id: string, playground: Partial<Playground>): Observable<Playground> {
-    if (/[13579]$/.test(id)) {
-      throw new Error(`${playground.name} is readonly and cannot be changed`);
-    }
-    return this.list().pipe(
+    if (/[13579]$/.test(id)) return throwError(() => `Playground is readonly and cannot be changed`);
+    return this.#list.pipe(
       map(playgrounds => playgrounds.map(p => p.id === id ? { ...p, ...playground } : p)),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)
@@ -53,10 +52,8 @@ export class PlaygroundService {
   }
 
   delete(id: string): Observable<void> {
-    if (/[13579]$/.test(id)) {
-      throw new Error(`Playground is readonly and cannot be deleted`);
-    }
-    return this.list().pipe(
+    if (/[13579]$/.test(id)) return throwError(() => `Playground is readonly and cannot be deleted`);
+    return this.#list.pipe(
       map(playgrounds => playgrounds.filter(p => p.id !== id)),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)

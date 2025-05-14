@@ -54,7 +54,7 @@ export class AppComponent {
   }
 
   async edit(playground: Playground) {
-    EditPlaygroundModalComponent.open(this.modal, playground);
+    EditPlaygroundModalComponent.open(this.modal, playground).catch(error => this.error = error);
   }
 
 }
