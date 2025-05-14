@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
+import { distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
 import { FooterComponent } from "./footer/footer.component";
@@ -24,7 +24,9 @@ export class AppComponent {
   location$: Observable<Coordinate> = this.locationService.location$;
   center$: Observable<Center>;
   markers$: Observable<Marker[]> | undefined;
+  #reload = new BehaviorSubject<void>(undefined);
   error: any;
+  loading = true;
 
   constructor(
     private service: PlaygroundService,
@@ -39,13 +41,14 @@ export class AppComponent {
     const getDistance = locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds$ = combineLatest([
-      this.service.list().pipe(withLength()),
+      this.#reload.pipe(switchMap(()  => this.service.list().pipe(withLength()))),
       locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
         playgrounds
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
-      )
+      ),
+      tap(() => this.loading = false),
     );
     this.center$ = locationService.location$.pipe(
       startWith({ lat: 56.360029, lng: 10.746635 }),
@@ -54,7 +57,12 @@ export class AppComponent {
   }
 
   async edit(playground: Playground) {
-    EditPlaygroundModalComponent.open(this.modal, playground).catch(error => this.error = error);
+    EditPlaygroundModalComponent.open(this.modal, playground)
+      .then(() => {
+        this.#reload.next();
+        this.loading = true;
+    })
+      .catch(error => this.error = error);
   }
 
 }

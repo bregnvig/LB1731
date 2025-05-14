@@ -18,7 +18,7 @@
             </div>
             <div class="d-none d-sm-block">
               <div class="btn-group">
-                <button class="btn btn-sm btn-secondary">
+                <button class="btn btn-sm btn-secondary" (click)="$event.stopPropagation(); $event.preventDefault()">
                   <fa-icon [icon]="['fas', 'trash']" [fixedWidth]="true"/>
                 </button>
                 <button class="btn btn-sm btn-secondary" (click)="edit.emit(playground); $event.stopPropagation(); $event.preventDefault()">

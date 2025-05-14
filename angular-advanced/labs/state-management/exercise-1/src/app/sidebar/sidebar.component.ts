@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Playground } from '../model';
 import { DefaultDescriptionPipe, DistancePipe } from "../pipe";
 import { LocationService } from '../service';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'loop-sidebar',
@@ -15,13 +15,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class SidebarComponent {
 
   playgrounds = input<Playground[] | null>([]);
+  loading = input<boolean>(false);
   selected = output<Playground>();
   edit = output<Playground>();
 
   selectedPlayground: Playground | undefined;
   location = toSignal(inject(LocationService).location$);
 
-  loading = computed(() => !this.playgrounds()?.length || !this.location());
   filterControl = new FormControl<string>('');
   filteredPlaygrounds: Signal<Playground[] | undefined>;
 

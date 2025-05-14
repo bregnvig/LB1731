@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import * as localForage from "localforage";
-import { from, Observable, of, throwError } from 'rxjs';
+import { defer, from, Observable, of, throwError } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { Playground } from '../model';
 
@@ -12,7 +12,7 @@ import { Playground } from '../model';
 export class PlaygroundService {
 
   #http = inject(HttpClient);
-  #list = from(localForage.getItem<Playground[]>('playgrounds')).pipe(
+  #list = defer(() => localForage.getItem<Playground[]>('playgrounds')).pipe(
       switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/copenhagen.json')),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
         map(() => playgrounds)

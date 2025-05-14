@@ -3,6 +3,7 @@
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds$ | async"
+  [loading]="loading"
   (edit)="edit($event)"
   (selected)="playground$.next($event)"/>
 @if (playground$ | async; as playground) {
