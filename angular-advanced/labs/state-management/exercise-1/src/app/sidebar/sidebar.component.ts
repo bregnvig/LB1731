@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, model, output, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -16,10 +16,9 @@ export class SidebarComponent {
 
   playgrounds = input<Playground[] | null>([]);
   loading = input<boolean>(false);
-  selected = output<Playground>();
   edit = output<Playground>();
 
-  selectedPlayground: Playground | undefined;
+  selected = model<Playground | undefined>();
   location = toSignal(inject(LocationService).location$);
 
   filterControl = new FormControl<string>('');
@@ -33,8 +32,7 @@ export class SidebarComponent {
   }
 
   selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
-    this.selected.emit(playground);
+    this.selected.set(playground);
   }
 
 }
