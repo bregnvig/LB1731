@@ -1,11 +1,11 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, model, output } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-error',
   template: `
     <div class="position-fixed top-0 start-0 vh-100 vw-100 d-flex flex-column justify-content-center align-items-center">
-      <ngb-alert type="danger" (closed)="dismiss.emit()">
+      <ngb-alert type="danger" (closed)="error.set(undefined)">
       <h1>Error</h1>
       <p>{{error() ?? 'Something went wrong. Please try again later.'}}</p>
       </ngb-alert>
@@ -20,6 +20,5 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
   imports: [NgbAlert]
 })
 export class ErrorComponent {
-  error = input<any>();
-  dismiss = output<void>();
+  error = model<any>();
 }

@@ -1,7 +1,7 @@
 import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, firstValueFrom } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
@@ -50,12 +50,13 @@ export class AppComponent {
   }
 
   async edit(playground: Playground) {
-    EditPlaygroundModalComponent.open(this.#modal, playground)
+    EditPlaygroundModalComponent.open(this.#modal, playground, this.playgrounds())
+      .then(playground => firstValueFrom(this.#service.update(playground.id, playground)))
       .then(() => {
         this.#reload.next();
         this.loading.set(true);
       })
-      .catch(error => this.error = error);
+      .catch(error => this.error.set(error));
   }
 
 }
