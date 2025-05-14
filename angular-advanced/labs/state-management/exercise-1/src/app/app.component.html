@@ -3,12 +3,12 @@
 </main>
 <loop-sidebar
   [playgrounds]="playgrounds()"
-  [loading]="loading"
+  [loading]="loading()"
   (edit)="edit($event)"
   [(selected)]="playground"/>
 @if (playground(); as playground) {
   <loop-footer [playground]="playground"/>
 }
-@if(error) {
-  <app-error [error]="error" (dismiss)="error = undefined"/>
+@if(error()) {
+  <app-error [error]="error" (dismiss)="error.set(undefined)"/>
 }

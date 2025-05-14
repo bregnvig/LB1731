@@ -29,8 +29,8 @@ export class AppComponent {
   playground = signal<Playground | undefined>(undefined);
   center: Signal<Center>;
   markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
-  error: any;
-  loading = true;
+  error = signal<any>(undefined);
+  loading = signal(true);
 
   constructor(
   ) {
@@ -44,7 +44,7 @@ export class AppComponent {
         playgrounds
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       ),
-      tap(() => this.loading = false),
+      tap(() => this.loading.set(false)),
     ), { initialValue: [] });
     this.center = computed(() => this.#locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
   }
@@ -53,7 +53,7 @@ export class AppComponent {
     EditPlaygroundModalComponent.open(this.#modal, playground)
       .then(() => {
         this.#reload.next();
-        this.loading = true;
+        this.loading.set(true);
       })
       .catch(error => this.error = error);
   }
