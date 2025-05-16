@@ -1,13 +1,11 @@
 import { Component, computed, inject, linkedSignal, Signal, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, firstValueFrom } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
-import { Coordinate, Playground } from './model';
+import { Playground } from './model';
 import { NetworkErrorsComponent } from './network-errors.component';
 import { LocationService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -26,36 +24,26 @@ export class AppComponent {
   #modal = inject(NgbModal);
   #locationService = inject(LocationService);
 
-  playgrounds: Signal<Playground[]>;
-  playground = signal<Playground | undefined>(undefined);
-  center: Signal<Center>;
-  markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
-  #storeError = toSignal(this.#store.error);
-  error = linkedSignal<any>(() => this.#storeError());
-  loading = toSignal(this.#store.loading, { requireSync: true });
-
-  constructor(
-  ) {
+  playgrounds = computed(() => {
+    const playgrounds = this.#store.playgrounds();
+    const location = this.#locationService.location();
     const getDistance = this.#locationService.getDistance;
-    const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
-    this.playgrounds = toSignal(combineLatest([
-      this.#store.playgrounds,
-      this.#locationService.location$.pipe(distinctUntilChanged(compareLocations)),
-    ]).pipe(
-      map(([playgrounds, location]) =>
-        playgrounds
-          .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
-      ),
-    ), { initialValue: [] });
-    this.center = computed(() => this.#locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
-  }
+    return location && playgrounds
+      ? playgrounds.sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
+      : playgrounds ?? [];
+  });
+  playground = signal<Playground | undefined>(undefined);
+  center: Signal<Center> = computed(() => this.#locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
+  markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
+  error = linkedSignal<any>(() => this.#store.error());
+  loading = this.#store.loading;
 
-  async edit(playground: Playground) {
+  edit(playground: Playground) {
     EditPlaygroundModalComponent.open(this.#modal, playground, this.playgrounds())
       .then(playground => firstValueFrom(this.#store.update(playground)))
       .catch(error => this.error.set(error));
   }
-  async delete(playground: Playground) {
+  delete(playground: Playground) {
     firstValueFrom(this.#store.delete(playground.id))
       .catch(error => this.error.set(error));
   }
