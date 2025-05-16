@@ -14,7 +14,7 @@ export class PlaygroundService {
 
   #http = inject(HttpClient);
   #list = defer(() => localForage.getItem<Playground[]>('playgrounds')).pipe(
-    switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/copenhagen.json')),
+    switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/aarhus.json')),
     switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
       map(() => playgrounds),
     )));

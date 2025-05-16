@@ -32,7 +32,7 @@ export class SidebarComponent {
   }
 
   selectPlayground(playground: Playground): void {
-    this.selected.set(playground);
+    this.selected.set(this.selected() !== playground ? playground : undefined);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Playground } from './model';
 
 interface NetworkErrorsState {
   read: boolean;
@@ -15,8 +16,8 @@ export const getNetworkErrorsState = () => {
 @Component({
   selector: 'loop-network-errors',
   template: `
-    <div class="position-fixed bottom-0 start-0 p-3 d-flex flex-column">
-      <h6>Simulate Network Errors</h6>
+    <div class="position-fixed p-3 d-flex flex-column rounded" [class.with-playground]="playground()">
+      <h6 class="text-white">Simulate Network Errors</h6>
       <form [formGroup]="form" class="btn-group" role="group">
         <input formControlName="read" type="checkbox" class="btn-check" id="readCheck" autocomplete="off">
         <label class="btn btn-primary" for="readCheck">Read</label>
@@ -33,12 +34,22 @@ export const getNetworkErrorsState = () => {
   ],
   styles: `
     .position-fixed {
+      background-color: rgba(0,0,0,0.5);
       z-index: 2000;
+      left: 4px;
+      bottom: 4px;
+      transition: transform 0.5s ease-in-out;
+      &.with-playground {
+        transform: translateY(-122px);
+      }
     }
   `
 })
 
 export class NetworkErrorsComponent {
+
+  playground = input<Playground>();
+
   #fb = inject(FormBuilder);
   state = getNetworkErrorsState();
   form = this.#fb.group({

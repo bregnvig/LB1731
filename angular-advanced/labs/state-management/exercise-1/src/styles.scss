@@ -40,6 +40,9 @@ aside {
   form {
     margin-bottom: 0;
   }
+  a.list-group-item {
+    cursor: pointer;
+  }
 
   > nav {
     max-height: calc(100vh - 86px);
