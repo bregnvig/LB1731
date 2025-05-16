@@ -10,7 +10,7 @@ import { EditPlaygroundControlComponent } from './edit-playground-control.compon
   template: `
     <div>
       <div class="modal-header">
-        <h5 class="modal-title">{{playground.name}}</h5>
+        <h5 class="modal-title">{{ playground.name }}</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
       </div>
       <div class="modal-body">
@@ -18,10 +18,10 @@ import { EditPlaygroundControlComponent } from './edit-playground-control.compon
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Luk</button>
-        <button type="button" [disabled]="editControl.invalid" class="btn btn-primary" (click)="modal.close(editControl.value)">OK</button>
+        <button type="button" [disabled]="editControl.invalid" class="btn btn-primary" (click)="close()">OK</button>
       </div>
     </div>
-  `
+  `,
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
@@ -31,8 +31,8 @@ export class EditPlaygroundModalComponent implements OnInit {
     return ref.result;
   }
 
-  private validateUniqueName = (control: AbstractControl): ValidationErrors | null => this.playgrounds.some(p => p.name === control.value?.name && p.id !== this.playground.id)
-    ? { nonUnique: true } : null;
+  private validateUniqueName = (control: AbstractControl): ValidationErrors | null => this.playgrounds?.some(p => p.name === control.value?.name && p.id !== this.playground.id)
+    ? {nonUnique: true} : null;
 
   editControl = new FormControl<Playground | null>(null, this.validateUniqueName);
   playground!: Playground;
@@ -42,12 +42,15 @@ export class EditPlaygroundModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.editControl.reset(this.playground);
-    this.editControl.valueChanges.subscribe(_ => console.log(_));
   }
 
   initialize(playground: Playground, playgrounds: Playground[]): void {
     this.playground = playground;
     this.playgrounds = playgrounds;
+  }
+
+  close() {
+    this.modal.close({...this.playground, ...this.editControl.value});
   }
 
 }

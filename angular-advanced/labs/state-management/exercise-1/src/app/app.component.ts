@@ -1,13 +1,14 @@
 import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, combineLatest, firstValueFrom, of } from 'rxjs';
 import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
 import { FooterComponent } from "./footer/footer.component";
 import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
+import { NetworkErrorsComponent } from './network-errors.component';
 import { LocationService, PlaygroundService } from './service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { isTruthy } from './utils';
@@ -16,7 +17,7 @@ import { withLength } from './utils/rxjs-utils';
 @Component({
   selector: 'loop-root',
   templateUrl: './app.component.html',
-  imports: [FooterComponent, SidebarComponent, LeafletModule, ErrorComponent]
+  imports: [FooterComponent, SidebarComponent, LeafletModule, ErrorComponent, NetworkErrorsComponent],
 })
 export class AppComponent {
 
@@ -42,7 +43,7 @@ export class AppComponent {
         withLength(),
         catchError(error => {
           this.error.set(error);
-          throw error;
+          return of([]);
         }),
       ),
       this.#locationService.location$.pipe(distinctUntilChanged(compareLocations)),

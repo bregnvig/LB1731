@@ -6,8 +6,9 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
   template: `
     <div class="position-fixed top-0 start-0 vh-100 vw-100 d-flex flex-column justify-content-center align-items-center">
       <ngb-alert type="danger" (closed)="error.set(undefined)">
-      <h1>Error</h1>
-      <p>{{error() ?? 'Something went wrong. Please try again later.'}}</p>
+      <h1>Oh dear 🫨</h1>
+        @let _error = error();
+      <p>{{_error?.message ?? _error ?? 'Something went wrong. Please try again later.'}}</p>
       </ngb-alert>
     </div>
   `,
