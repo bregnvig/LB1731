@@ -17,6 +17,7 @@ export class SidebarComponent {
   playgrounds = input<Playground[] | null>([]);
   loading = input<boolean>(false);
   edit = output<Playground>();
+  delete = output<Playground>();
 
   selected = model<Playground | undefined>();
   location = toSignal(inject(LocationService).location$);

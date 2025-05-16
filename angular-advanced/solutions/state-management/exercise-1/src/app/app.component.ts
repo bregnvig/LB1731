@@ -66,5 +66,13 @@ export class AppComponent {
       })
       .catch(error => this.error.set(error));
   }
+  async delete(playground: Playground) {
+    firstValueFrom(this.#service.delete(playground.id))
+      .then(() => {
+        this.#reload.next();
+        this.loading.set(true);
+      })
+      .catch(error => this.error.set(error));
+  }
 
 }

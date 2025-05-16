@@ -6,6 +6,7 @@
   [playgrounds]="playgrounds()"
   [loading]="loading()"
   (edit)="edit($event)"
+  (delete)="delete($event)"
   [(selected)]="playground" />
 @if (playground(); as playground) {
   <loop-footer [playground]="playground" />
