@@ -2,7 +2,7 @@ import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, firstValueFrom } from 'rxjs';
-import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
 import { FooterComponent } from "./footer/footer.component";
@@ -37,7 +37,14 @@ export class AppComponent {
     const getDistance = this.#locationService.getDistance;
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds = toSignal(combineLatest([
-      this.#reload.pipe(switchMap(() => this.#service.list().pipe(withLength()))),
+      this.#reload.pipe(
+        switchMap(() => this.#service.list()),
+        withLength(),
+        catchError(error => {
+          this.error.set(error);
+          throw error;
+        }),
+      ),
       this.#locationService.location$.pipe(distinctUntilChanged(compareLocations)),
     ]).pipe(
       map(([playgrounds, location]) =>
