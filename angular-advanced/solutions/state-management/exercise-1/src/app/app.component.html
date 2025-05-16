@@ -1,9 +1,0 @@
-<main class="vw-100 vh-100">
-  <leaflet [center]="center()" [markers]="markers()"></leaflet>
-</main>
-<loop-sidebar
-  [playgrounds]="playgrounds()"
-  (edit)="edit($event)"
-  (selected)="setPlayground($event)">
-</loop-sidebar>
-<loop-footer *ngIf="playground()" [playground]="playground()"></loop-footer>
