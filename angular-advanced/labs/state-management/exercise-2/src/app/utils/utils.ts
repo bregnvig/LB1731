@@ -1,0 +1,1 @@
+export const isTruthy = <T>(a: T | undefined | null | '' | 0 | false): a is T => !!a;
