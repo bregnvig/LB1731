@@ -4,6 +4,7 @@ import { LocalStateComponent } from "./local-state.component";
 import { GlobalStateListenerService, StateListenerService } from "./state-listener/state-listener.service";
 import { StateManagementComponent } from "./state-management.component";
 import { UrlStateChildRouteComponent, UrlStateComponent } from "./url-state.component";
+import { FormStateComponent } from "./form-state.component";
 
 export const StateManagementRoutes: Routes = [
   {
@@ -44,10 +45,10 @@ export const StateManagementRoutes: Routes = [
           }
         ]
       },
-      // {
-      //   path: 'forms',
-      //   component: FormsComponent,
-      // },
+      {
+        path: 'form',
+        component: FormStateComponent,
+      },
       // {
       //   path: 'store',
       //   component: StoreComponent,

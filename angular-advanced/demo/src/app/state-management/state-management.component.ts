@@ -15,6 +15,8 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
       <li ngbNavItem="url">
         <a ngbNavLink routerLink="url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">URL state</a>
       </li>
+      <li ngbNavItem="form">
+        <a ngbNavLink routerLink="form" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Form state</a>
     </ul>
     <router-outlet></router-outlet>
   `,
