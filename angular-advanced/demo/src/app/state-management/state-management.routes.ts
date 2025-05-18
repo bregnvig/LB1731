@@ -1,8 +1,9 @@
 import { Routes } from "@angular/router";
-import { StateManagementComponent } from "./state-management.component";
 import { GlobalStateComponent } from "./global-state.component";
 import { LocalStateComponent } from "./local-state.component";
 import { GlobalStateListenerService, StateListenerService } from "./state-listener/state-listener.service";
+import { StateManagementComponent } from "./state-management.component";
+import { UrlStateChildRouteComponent, UrlStateComponent } from "./url-state.component";
 
 export const StateManagementRoutes: Routes = [
   {
@@ -17,28 +18,39 @@ export const StateManagementRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'global-state',
+        redirectTo: 'global',
         pathMatch: 'full'
       },
       {
-        path: 'global-state',
+        path: 'global',
         component: GlobalStateComponent,
       },
       {
-        path: 'local-state',
+        path: 'local',
         component: LocalStateComponent,
       },
-      // {
-      //   path: 'store',
-      //   component: StoreComponent,
-      // },
-      // {
-      //   path: 'url',
-      //   component: UrlComponent,
-      // },
+      {
+        path: 'url',
+        component: UrlStateComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'child-route/123',
+            pathMatch: 'full'
+          },
+          {
+            path: 'child-route/:id',
+            component: UrlStateChildRouteComponent,
+          }
+        ]
+      },
       // {
       //   path: 'forms',
       //   component: FormsComponent,
+      // },
+      // {
+      //   path: 'store',
+      //   component: StoreComponent,
       // },
       // {
       //   path: 'service-and-store',  // service & store relationship slide 15
