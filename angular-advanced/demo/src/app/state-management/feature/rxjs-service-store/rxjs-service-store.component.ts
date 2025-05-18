@@ -9,17 +9,17 @@ import { RxjsPlaygroundStore } from "./rxjs-playground.store";
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="d-flex">
+    <form class="d-flex">
       <div class="input-group mb-3">
         <span class="input-group-text">Name</span>
-        <input type="text" [(ngModel)]="name" class="form-control">
+        <input type="text" name="name" [(ngModel)]="name" class="form-control">
         <span class="input-group-text">Description</span>
-        <input type="text" [(ngModel)]="description" class="form-control">
+        <input type="text" name="description" [(ngModel)]="description" class="form-control">
       </div>
       <div>
-        <button class="btn btn-primary" (click)="save()">Save</button>
+        <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
       </div>
-    </div>
+    </form>
   `,
 })
 export class RxjsItemComponent implements OnInit {
