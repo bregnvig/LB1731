@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import "scss/variables";
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "scss/bootswatch";
+@forward "node_modules/bootstrap/scss/bootstrap";
 
 @font-face {
   font-family: "Lato";
@@ -19,8 +17,6 @@ body {
   height: 100vh;
   width: 100vw;
 }
-/* Importing Bootstrap SCSS file. */
-@import "node_modules/bootstrap/scss/bootstrap";
 
 aside {
   position: fixed;
@@ -34,13 +30,16 @@ aside {
   overflow: auto;
   z-index: 501;
   transition: 0.43s ease-in-out;
+
   form {
     margin-bottom: 0;
   }
+
   > nav {
     max-height: calc(100vh - 86px);
     overflow: auto;
   }
+
   @media screen and (max-width: 599px) {
     border-radius: 0;
     top: calc(100vh - 20px);
@@ -50,6 +49,7 @@ aside {
     border-top: 18px solid black;
     margin: 0;
     transition: 0.43s ease-in-out;
+
     &:focus {
       border-top-color: orange;
       transform: translateY(-50vh);
@@ -66,13 +66,16 @@ footer {
   padding-left: 8px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 500;
+
   @media screen and (max-width: 599px) {
     h3 {
       font-size: 1.5rem !important;
     }
+
     p {
       font-size: 1rem;
     }
+
     bottom: 20px;
   }
 }

@@ -4,11 +4,13 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { randFullName, randLatitude, randLongitude, randSequence } from '@ngneat/falso';
 import { PlaygroundsUntrackedUserComponent } from './playgrounds-untracked-user.component';
 
+const http = { post: console.log };
+
 @Component({
-    selector: 'loop-playgrounds-untracked',
-    imports: [JsonPipe, NgbAlert, PlaygroundsUntrackedUserComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
+  selector: 'loop-playgrounds-untracked',
+  imports: [JsonPipe, NgbAlert, PlaygroundsUntrackedUserComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <div class="container">
       <div class="row gx-5">
         <div class="col">
@@ -40,11 +42,10 @@ export class PlaygroundsUntrackedComponent {
   constructor() {
     effect(() => {
       const user = untracked(() => this.user()); // Here we use untracked to avoid tracking the user signal
-      
-      const http = { post: console.log };
+
       http.post(`api/location/${user.id}`, this.location());
       this.posts.update(posts => [...posts, `api/location/${user.id}, ${JSON.stringify(this.location())}`]);
-    }, { allowSignalWrites: true });
+    });
   }
 
   updateUser(): void {

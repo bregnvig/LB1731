@@ -1,33 +1,40 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      <ng-container *ngIf="location$ | async; else loading">
-        <a *ngFor="let playground of playgrounds"
-          class="list-group-item d-flex list-group-item-action justify-content-between"
-          [class.active]="playground === selectedPlayground"
-          (click)="selectPlayground(playground)">
-          <div class="d-flex flex-column justify-content-between">
-            <h6 class="mb-1">{{playground.name}}
-              <span class="badge bg-secondary badge-pill">{{playground.position | distance}}</span>
-            </h6>
-            <small>{{playground.description | defaultDescription}}</small>
-          </div>
-          <div class="d-none d-sm-block">
-            <div class="btn-group">
-              <button class="btn btn-sm btn-primary" (click)="edit.next(playground); $event.stopPropagation(); $event.preventDefault()">
-                <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
-              </button>
+      @if (!loading()) {
+        <li class="list-group-item p-0">
+          <input type="text" class="form-control border-0 rounded-0" placeholder="Filter playgrounds" [formControl]="filterControl">
+        </li>
+        @for (playground of filteredPlaygrounds(); track playground.id) {
+          <a
+            class="list-group-item d-flex list-group-item-action justify-content-between"
+            [class.active]="playground === selected()"
+            (click)="selectPlayground(playground)">
+            <div class="d-flex flex-column justify-content-between">
+              <h6 class="mb-1">{{playground.name}}
+                <span class="badge bg-secondary badge-pill">{{playground.position | distance}}</span>
+              </h6>
+              <small>{{playground.description | defaultDescription}}</small>
             </div>
-          </div>
-        </a>
-      </ng-container>
+            <div class="d-none d-sm-block">
+              <div class="btn-group">
+                <button class="btn btn-sm btn-secondary" (click)="$event.stopPropagation(); $event.preventDefault()">
+                  <fa-icon [icon]="['fas', 'trash']" [fixedWidth]="true"/>
+                </button>
+                <button class="btn btn-sm btn-secondary" (click)="edit.emit(playground); $event.stopPropagation(); $event.preventDefault()">
+                  <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"/>
+                </button>
+              </div>
+            </div>
+          </a>
+        }
+      } @else {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Loading</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      }
     </div>
   </nav>
 </aside>
 
-<ng-template #loading>
-  <div class="list-group-item d-flex justify-content-between">
-    <span>Determining your location</span>
-    <fa-icon size="lg" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
-  </div>
-</ng-template>

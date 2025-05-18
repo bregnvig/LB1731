@@ -11,7 +11,6 @@ import { AsyncPipe } from '@angular/common';
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [AsyncPipe, DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe]
 })
 export class SidebarComponent {

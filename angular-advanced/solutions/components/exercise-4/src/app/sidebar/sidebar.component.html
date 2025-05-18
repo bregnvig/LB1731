@@ -9,10 +9,11 @@
       </div>
     </div>
     <div class="list-group">
-      <ng-container  *ngFor="let item of filtered$ | async" 
-        [ngTemplateOutlet]="itemTemplate ?? defaultTemplate" 
-        [ngTemplateOutletContext]="{$implicit: item}">
-      </ng-container>
+      @for(item of filtered$ | async; track $index) {
+        <ng-container
+          [ngTemplateOutlet]="itemTemplate ?? defaultTemplate" 
+          [ngTemplateOutletContext]="{$implicit: item}"/>
+      }
     </div>
   </nav>
 </aside>

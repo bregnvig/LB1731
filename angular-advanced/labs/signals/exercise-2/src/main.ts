@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, enableProdMode } from '@angular/core';
+import { enableProdMode, inject, provideAppInitializer } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -25,11 +25,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
     provideRouter(AppRoutes),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeFontAwesomeFactory,
-      deps: [FaIconLibrary],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+        const initializerFn = (initializeFontAwesomeFactory)(inject(FaIconLibrary));
+        return initializerFn();
+      }),
   ],
 }).catch(err => console.error(err));

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
@@ -9,8 +9,7 @@ import { LocationService } from '../service';
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgTemplateOutlet, AsyncPipe]
+  imports: [ReactiveFormsModule, NgTemplateOutlet, AsyncPipe]
 })
 export class SidebarComponent {
 

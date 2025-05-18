@@ -11,15 +11,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
-  selector: 'loop-root',
-  template: `
+    selector: 'loop-root',
+    template: `
     <leaflet [center]="center" [markers]="markers$"></leaflet>
     <loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)"></loop-sidebar>
     @if (playground$ | async; as playground) {
       <loop-footer [playground]="playground"></loop-footer>
     }`,
-  standalone: true,
-  imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
+    imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

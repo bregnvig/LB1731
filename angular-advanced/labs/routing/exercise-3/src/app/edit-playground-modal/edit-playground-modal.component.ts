@@ -11,7 +11,6 @@ import { EditPlaygroundControlComponent } from '../edit-playground-control/edit-
     selector: 'loop-edit-playground-modal',
     templateUrl: './edit-playground-modal.component.html',
     styleUrls: ['./edit-playground-modal.component.scss'],
-    standalone: true,
     imports: [EditPlaygroundControlComponent, ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {

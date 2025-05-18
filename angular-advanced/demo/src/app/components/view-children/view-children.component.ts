@@ -2,8 +2,8 @@ import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
-    selector: 'loop-view-children',
-    template: `
+  selector: 'loop-view-children',
+  template: `
     <div class="row flex-wrap">
       <div class="mt-3 col-12">
         <h5>Hardcoded</h5>
@@ -21,7 +21,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
       </div>
     </div>
     `,
-    standalone: false
+  standalone: false
 })
 export class ViewChildrenComponent implements AfterViewInit {
 
@@ -32,6 +32,7 @@ export class ViewChildrenComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.watches.forEach(w => w.start());
     this.dynamicWatches.forEach(w => w.start());
+    console.log('Hardcoded', this.watches.length);
     console.log('No of stopwatches', this.dynamicWatches.length);
 
     this.dynamicWatches.changes.subscribe(list => list.last.start());

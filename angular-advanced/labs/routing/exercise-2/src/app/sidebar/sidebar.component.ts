@@ -10,20 +10,19 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    FontAwesomeModule,
-    AsyncPipe,
-    DistancePipe,
-    HumanizeDistancePipe,
-    DefaultDescriptionPipe
-  ],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        RouterLink,
+        RouterLinkActive,
+        FontAwesomeModule,
+        AsyncPipe,
+        DistancePipe,
+        HumanizeDistancePipe,
+        DefaultDescriptionPipe
+    ]
 })
 export class SidebarComponent {
 

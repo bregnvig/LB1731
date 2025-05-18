@@ -27,8 +27,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Vali
             multi: true
         }
     ],
-    standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 

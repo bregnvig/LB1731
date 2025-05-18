@@ -13,11 +13,10 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
 
 @Component({
-  selector: 'loop-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
-  standalone: true,
-  imports: [LeafletModule, SidebarComponent, FooterComponent, AsyncPipe]
+    selector: 'loop-map',
+    templateUrl: './map.component.html',
+    styleUrls: ['./map.component.scss'],
+    imports: [LeafletModule, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class MapComponent {
 

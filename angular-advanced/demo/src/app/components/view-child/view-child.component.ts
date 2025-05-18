@@ -2,18 +2,18 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
-    selector: 'loop-view-child',
-    templateUrl: './view-child.component.html',
-    styleUrls: ['./view-child.component.scss'],
-    standalone: false
+  selector: 'loop-view-child',
+  templateUrl: './view-child.component.html',
+  styleUrls: ['./view-child.component.scss'],
+  standalone: false
 })
 export class ViewChildComponent implements OnInit, AfterViewInit {
 
   @ViewChild(StopWatchComponent, { static: true }) stopWatch!: StopWatchComponent;
-  running = false;
+  running = true;
 
   ngOnInit() {
-    // this.start();
+    this.start();
   }
 
   ngAfterViewInit() {

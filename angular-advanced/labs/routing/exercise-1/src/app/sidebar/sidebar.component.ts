@@ -13,14 +13,13 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-    FontAwesomeModule,
-    AsyncPipe,
-    DistancePipe,
-    HumanizeDistancePipe,
-    DefaultDescriptionPipe
-],
+        FontAwesomeModule,
+        AsyncPipe,
+        DistancePipe,
+        HumanizeDistancePipe,
+        DefaultDescriptionPipe
+    ]
 })
 export class SidebarComponent {
 

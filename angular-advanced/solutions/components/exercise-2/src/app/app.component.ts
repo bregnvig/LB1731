@@ -14,8 +14,7 @@ import { withLength } from './utils/rxjs-utils';
   selector: 'loop-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [SidebarComponent, NgIf, AsyncPipe, LeafletModule, NgComponentOutlet, DynamicIoModule]
+  imports: [SidebarComponent, AsyncPipe, LeafletModule, NgComponentOutlet, DynamicIoModule]
 })
 export class AppComponent {
 

@@ -2,15 +2,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { firstValueFrom, of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 import { LoginComponent } from './login.component';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()]
     });
@@ -57,12 +57,13 @@ describe('LoginComponent', () => {
     // Arrange
     const email = `email@email.com`;
     const password = 'pword';
-    const authService = TestBed.inject(AuthService)
-    authService.login = (...args: any[]) => of(true);
+    const authService = TestBed.inject(AuthService);
+    authService.login = jest.fn().mockReturnValue(of(true));
 
     const router = TestBed.inject(Router);
-    // We only fake navigate to avoid "Navigation triggered outside Angular zone" warning
-    const routerSpy = jest.spyOn(router, 'navigate').mockImplementation(() => firstValueFrom(of(true))); 
+
+    // We spy on the router's navigate method to check if it was called with the correct arguments
+    const routerSpy = jest.spyOn(router, 'navigate'); 
     
     // Act
     component.fg.patchValue({ email, password });

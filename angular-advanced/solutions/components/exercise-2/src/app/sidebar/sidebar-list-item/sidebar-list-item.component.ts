@@ -5,11 +5,10 @@ import { Coordinate, Playground } from 'src/app/model';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from 'src/app/pipe';
 
 @Component({
-  selector: 'loop-sidebar-list-item',
-  templateUrl: './sidebar-list-item.component.html',
-  styleUrls: ['./sidebar-list-item.component.scss'],
-  standalone: true,
-  imports: [DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe, AsyncPipe]
+    selector: 'loop-sidebar-list-item',
+    templateUrl: './sidebar-list-item.component.html',
+    styleUrls: ['./sidebar-list-item.component.scss'],
+    imports: [DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe, AsyncPipe]
 })
 export class SidebarListItemComponent {
 

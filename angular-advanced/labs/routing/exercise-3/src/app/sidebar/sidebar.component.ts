@@ -14,15 +14,14 @@ import { AsyncPipe } from '@angular/common';
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-    RouterLink,
-    FontAwesomeModule,
-    AsyncPipe,
-    DistancePipe,
-    HumanizeDistancePipe,
-    DefaultDescriptionPipe
-],
+        RouterLink,
+        FontAwesomeModule,
+        AsyncPipe,
+        DistancePipe,
+        HumanizeDistancePipe,
+        DefaultDescriptionPipe
+    ]
 })
 export class SidebarComponent {
 

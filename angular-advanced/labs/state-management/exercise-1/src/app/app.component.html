@@ -1,9 +1,15 @@
+<loop-network-errors [playground]="playground()"/>
 <main class="vw-100 vh-100">
-  <leaflet [center]="center$ | async" [markers]="markers$ | async"></leaflet>
+  <leaflet [center]="center()" [markers]="markers()" />
 </main>
 <loop-sidebar
-  [playgrounds]="playgrounds$ | async"
+  [playgrounds]="playgrounds()"
+  [loading]="loading()"
   (edit)="edit($event)"
-  (selected)="playground$.next($event)">
-</loop-sidebar>
-<loop-footer *ngIf="playground$ | async as playground" [playground]="playground"></loop-footer>
+  [(selected)]="playground" />
+@if (playground(); as playground) {
+  <loop-footer [playground]="playground" />
+}
+@if(error()) {
+  <app-error [(error)]="error" />
+}

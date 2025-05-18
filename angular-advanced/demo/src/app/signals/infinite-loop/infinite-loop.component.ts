@@ -21,7 +21,7 @@ export class InfiniteLoopComponent {
     const newPlaygroundValue = this.newPlayground();
 
     if (this.playgrounds().length > 50000) {
-      console.log('Reached 100 playgrounds. Stopped before crashing the browser.');
+      console.log('Reached 50000 playgrounds. Stopped before crashing the browser.');
       return;
     }
     if (newPlaygroundValue) {
@@ -31,9 +31,7 @@ export class InfiniteLoopComponent {
       // this.newPlayground.set(null); // Uncomment this line to stop the infinite loop
     }
 
-  },
-    { allowSignalWrites: true }
-  );
+  });
 
   addRandomPlayground(): void {
     this.newPlayground.set(getRandomPlayground());

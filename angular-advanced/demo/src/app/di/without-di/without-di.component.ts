@@ -4,10 +4,10 @@ import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/
 import { AarhusPlaygroundService } from '../service/playground.service';
 
 @Component({
-    selector: 'loop-without-di',
-    templateUrl: './without-di.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'loop-without-di',
+  templateUrl: './without-di.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class WithoutDIComponent implements OnInit {
 

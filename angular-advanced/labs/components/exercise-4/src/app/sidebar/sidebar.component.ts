@@ -6,15 +6,14 @@ import { Coordinate } from '../model';
 import { LocationService } from '../service';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgFor,
-    NgTemplateOutlet,
-    AsyncPipe,
-  ],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    imports: [
+        ReactiveFormsModule,
+        NgFor,
+        NgTemplateOutlet,
+        AsyncPipe,
+    ]
 })
 export class SidebarComponent implements OnChanges {
 

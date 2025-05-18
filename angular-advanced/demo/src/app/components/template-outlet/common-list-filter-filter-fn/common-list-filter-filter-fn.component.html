@@ -12,7 +12,7 @@
       @for (item of filtered$ |async; track item) {
         @defer (on viewport) {
           <li class="list-group-item">
-            <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item}"></ng-container>
+            <ng-container *ngTemplateOutlet="itemTemplateRef || defaultTemplate; context: {$implicit: item, b: 'B'}"></ng-container>
           </li>
         } @placeholder (minimum 200ms) {
           <div class="d-flex">

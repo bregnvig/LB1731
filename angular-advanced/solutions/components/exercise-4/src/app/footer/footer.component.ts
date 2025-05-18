@@ -1,18 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Playground } from '../model';
 
 
 
 @Component({
-    selector: 'loop-footer',
-    template: `
+  selector: 'loop-footer',
+  template: `
     <footer>
       <h3>{{playground!.name}}</h3>
       <p>{{playground!.addressDescription}}</p>
       <p>{{playground!.description}}</p>
     </footer>
   `,
-    standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
 

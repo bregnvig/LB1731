@@ -11,20 +11,19 @@ import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
 import { LocationService } from '../service';
 
 @Component({
-  selector: 'loop-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    RouterLink,
-    FontAwesomeModule,
-    AsyncPipe,
-    DistancePipe,
-    HumanizeDistancePipe,
-    DefaultDescriptionPipe,
-  ],
+    selector: 'loop-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        ReactiveFormsModule,
+        RouterLink,
+        FontAwesomeModule,
+        AsyncPipe,
+        DistancePipe,
+        HumanizeDistancePipe,
+        DefaultDescriptionPipe,
+    ]
 })
 export class SidebarComponent implements OnInit {
 

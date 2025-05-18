@@ -1,62 +1,56 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import * as localForage from "localforage";
-import { Observable, from, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
+import * as localForage from 'localforage';
+import { defer, from, Observable, of, throwError } from 'rxjs';
+import { delay, map, switchMap, tap } from 'rxjs/operators';
 import { Playground } from '../model';
+import { getNetworkErrorsState } from '../network-errors.component';
 
-localForage.config({ driver: localForage.INDEXEDDB, name: 'state-management', version: 1.0, size: 4980736, storeName: 'state-management-store' });
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlaygroundService {
 
-  constructor(private http: HttpClient) {
-  }
+  #http = inject(HttpClient);
+  #list = defer(() => localForage.getItem<Playground[]>('playgrounds')).pipe(
+    switchMap(playgrounds => playgrounds ? of(playgrounds) : this.#http.get<Playground[]>('assets/aarhus.json')),
+    switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
+      map(() => playgrounds),
+    )));
 
   list(): Observable<Playground[]> {
-    return from(localForage.getItem<Playground[]>('playgrounds')).pipe(
-      switchMap(playgrounds => playgrounds ? of(playgrounds) : this.http.get<Playground[]>('assets/copenhagen.json')),
-      switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-        map(() => playgrounds)
-      )),
-    );
-  }
-
-  get(id: string): Observable<Playground | undefined> {
-    return this.list().pipe(
-      map(playgrounds => playgrounds.find(playground => playground.id === id))
-    );
-  }
-
-  create(playground: Playground): Observable<Playground> {
-    return this.list().pipe(
-      map(playgrounds => [...playgrounds, playground]),
-      switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-        map(() => playgrounds)
-      )),
-      map(playgrounds => playgrounds.find(p => p.id === playground.id)!)
+    return this.#list.pipe(
+      delay(1000), // Simulate network delay
+      tap(() => {
+        if (getNetworkErrorsState().read) throw new Error('Network read error')
+      }),
     );
   }
 
   update(id: string, playground: Partial<Playground>): Observable<Playground> {
-    return this.list().pipe(
-      map(playgrounds => playgrounds.map(p => p.id === id ? { ...p, ...playground } : p)),
+    return this.#list.pipe(
+      map(playgrounds => playgrounds.map(p => p.id === id ? {...p, ...playground} : p)),
+      tap(() => {
+        if (getNetworkErrorsState().update) throw new Error('Network update error')
+      }),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-        map(() => playgrounds)
+        map(() => playgrounds),
       )),
-      map(playgrounds => playgrounds.find(p => p.id === id)!)
+      map(playgrounds => playgrounds.find(p => p.id === id)!),
     );
   }
 
   delete(id: string): Observable<void> {
-    return this.list().pipe(
+    return this.#list.pipe(
       map(playgrounds => playgrounds.filter(p => p.id !== id)),
+      tap(() => {
+        if (getNetworkErrorsState().delete) throw new Error('Network delete error')
+      }),
       switchMap(playgrounds => from(localForage.setItem('playgrounds', playgrounds)).pipe(
-        map(() => playgrounds)
+        map(() => playgrounds),
       )),
-      map(() => undefined)
+      map(() => undefined),
     );
   }
 

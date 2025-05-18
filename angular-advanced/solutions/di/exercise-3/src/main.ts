@@ -23,10 +23,14 @@ bootstrapApplication(AppComponent, {
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: (service: PlaygroundService) => () => timer(2000).pipe(switchMap(() => service.playgrounds$)),
+      useFactory: (service: PlaygroundService) => () => timer(10000).pipe(switchMap(() => service.playgrounds$)),
       deps: [PlaygroundService],
       multi: true,
     },
+    // provideAppInitializer(() => {
+    //   const service = inject(PlaygroundService);
+    //   return timer(2000).pipe(switchMap(() => service.playgrounds$));
+    // }),
     provideHttpClient(withInterceptorsFromDi())
   ]
 })
