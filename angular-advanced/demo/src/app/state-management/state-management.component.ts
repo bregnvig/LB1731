@@ -9,6 +9,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
       <li ngbNavItem="global-state">
         <a ngbNavLink routerLink="global-state" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Global state</a>
       </li>
+      <li ngbNavItem="local-state">
+        <a ngbNavLink routerLink="local-state" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Local state</a>
+      </li>
     </ul>
     <router-outlet></router-outlet>
   `,
