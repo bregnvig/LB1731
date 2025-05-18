@@ -24,6 +24,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
       <li ngbNavItem="signal-store">
         <a ngbNavLink routerLink="signal-store" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Signal service store</a>
       </li>
+      <li ngbNavItem="rxresource-store">
+        <a ngbNavLink routerLink="rxresource-store" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">RxResource service store</a>
+      </li>
     </ul>
     <router-outlet></router-outlet>
   `,

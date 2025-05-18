@@ -7,6 +7,7 @@ import { UrlStateChildRouteComponent, UrlStateComponent } from "./feature/url-st
 import { FormStateComponent } from "./feature/form-state.component";
 import { RxjsServiceStoreComponent } from "./feature/rxjs-service-store/rxjs-service-store.component";
 import { SignalServiceStoreComponent } from "./feature/signal-service-store/signal-service-store.component";
+import { RxresourceServiceStoreComponent } from "./feature/rxresource-service-store/rxresource-service-store.component";
 
 export const StateManagementRoutes: Routes = [
   {
@@ -59,10 +60,10 @@ export const StateManagementRoutes: Routes = [
         path: 'signal-store',
         component: SignalServiceStoreComponent,
       },
-      // {
-      //   path: 'rxresource-store',
-      //   component: RxResourceComponent,
-      // }
+      {
+        path: 'rxresource-store',
+        component: RxresourceServiceStoreComponent,
+      }
     ]
   }
 ]
