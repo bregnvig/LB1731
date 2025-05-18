@@ -13,6 +13,7 @@ export class RxjsPlaygroundStore {
   loading = new BehaviorSubject<boolean>(true);
 
   playgrounds = this.#reload.pipe(
+    tap(() => this.loading.next(true)),
     switchMap(() => this.#service.list()),
     catchError(error => {
       this.error.next(error);
@@ -24,10 +25,7 @@ export class RxjsPlaygroundStore {
 
   update(playground: Playground): Observable<Playground> {
     return this.#service.update(playground.id, playground).pipe(
-      tap(() => {
-        this.#reload.next();
-        this.loading.next(true);
-      })
+      tap(() => this.#reload.next()),
     );
   }
 } 

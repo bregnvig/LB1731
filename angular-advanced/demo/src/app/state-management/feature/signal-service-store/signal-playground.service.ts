@@ -6,7 +6,7 @@ import { Playground } from "src/app/shared";
 const simulatedDelay = 1500; // Simulated delay for the backend response
 
 @Injectable({ providedIn: 'root' })
-export class RxjsPlaygroundService {
+export class SignalPlaygroundService {
   #http = inject(HttpClient);
   simulatedBackendSave: Playground[] = [];
 
