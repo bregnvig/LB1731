@@ -46,6 +46,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'state-management',
+    loadChildren: () => import('./state-management/state-management.routes').then(m => m.StateManagementRoutes)
+  },
+  {
     path: '**',
     redirectTo: 'rxjs'
   }

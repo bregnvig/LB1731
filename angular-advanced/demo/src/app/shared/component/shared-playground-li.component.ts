@@ -3,7 +3,6 @@ import { Playground } from "../model";
 
 @Component({
   selector: 'loop-shared-playground-li',
-  standalone: true,
   template: `
     <strong>{{ playground().name }}</strong> - {{ playground().addressDescription || 'No address available' }}
     <br>
