@@ -23,7 +23,6 @@ export class RxjsPlaygroundStore {
   );
 
   update(playground: Playground): Observable<Playground> {
-    console.log('Updating playground:', playground.id);
     return this.#service.update(playground.id, playground).pipe(
       tap(() => {
         this.#reload.next();
