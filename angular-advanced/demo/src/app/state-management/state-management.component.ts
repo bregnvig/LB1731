@@ -17,6 +17,10 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
       </li>
       <li ngbNavItem="form">
         <a ngbNavLink routerLink="form" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Form state</a>
+      </li>
+      <li ngbNavItem="rxjs-store">
+        <a ngbNavLink routerLink="rxjs-store" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">RxJS service store</a>
+      </li>
     </ul>
     <router-outlet></router-outlet>
   `,

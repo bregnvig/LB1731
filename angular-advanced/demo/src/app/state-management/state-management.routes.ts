@@ -5,6 +5,7 @@ import { GlobalStateListenerService, StateListenerService } from "./shared/state
 import { StateManagementComponent } from "./state-management.component";
 import { UrlStateChildRouteComponent, UrlStateComponent } from "./feature/url-state.component";
 import { FormStateComponent } from "./feature/form-state.component";
+import { RxjsServiceStoreComponent } from "./feature/rxjs-service-store/rxjs-service-store.component";
 
 export const StateManagementRoutes: Routes = [
   {
@@ -49,20 +50,16 @@ export const StateManagementRoutes: Routes = [
         path: 'form',
         component: FormStateComponent,
       },
+      {
+        path: 'rxjs-store',
+        component: RxjsServiceStoreComponent,
+      },
       // {
-      //   path: 'store',
-      //   component: StoreComponent,
+      //   path: 'signal-store',
+      //   component: SignalServiceStoreComponent,
       // },
       // {
-      //   path: 'service-and-store',  // service & store relationship slide 15
-      //   component: ServiceAndStoreComponent,
-      // },
-      // {
-      //   path: 'store-with-signals',  // store with signals slide 19
-      //   component: ServiceAndStoreComponent,
-      // },
-      // {
-      //   path: 'store-with-rxresource', // store with rxresource slide 30
+      //   path: 'rxresource-store',
       //   component: RxResourceComponent,
       // }
     ]
