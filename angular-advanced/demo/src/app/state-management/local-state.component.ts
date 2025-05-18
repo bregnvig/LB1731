@@ -1,8 +1,8 @@
 import { JsonPipe } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { randMotorcycleManufacturer } from "@ngneat/falso";
-import { StateListenerComponent } from "./state-listener.component";
-import { provideLocalStateListener, StateListenerService } from "./state-listener.service";
+import { StateListenerComponent } from "./state-listener/state-listener.component";
+import { provideLocalStateListener, StateListenerService } from "./state-listener/state-listener.service";
 
 @Component({
   selector: 'loop-local-state',

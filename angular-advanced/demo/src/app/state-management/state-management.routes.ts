@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
 import { StateManagementComponent } from "./state-management.component";
-import { GlobalStateComponent } from "./global-local/global-state.component";
-import { LocalStateComponent } from "./global-local/local-state.component";
-import { GlobalStateListenerService, StateListenerService } from "./global-local/state-listener.service";
+import { GlobalStateComponent } from "./global-state.component";
+import { LocalStateComponent } from "./local-state.component";
+import { GlobalStateListenerService, StateListenerService } from "./state-listener/state-listener.service";
 
 export const StateManagementRoutes: Routes = [
   {

@@ -1,8 +1,8 @@
 import { JsonPipe } from "@angular/common";
 import { Component, inject, OnDestroy } from "@angular/core";
 import { randMotorcycleManufacturer } from "@ngneat/falso";
-import { StateListenerComponent } from "./state-listener.component";
-import { StateListenerService } from "./state-listener.service";
+import { StateListenerComponent } from "./state-listener/state-listener.component";
+import { StateListenerService } from "./state-listener/state-listener.service";
 
 
 @Component({
