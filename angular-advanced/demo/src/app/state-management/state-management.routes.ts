@@ -1,10 +1,10 @@
 import { Routes } from "@angular/router";
-import { GlobalStateComponent } from "./global-state.component";
-import { LocalStateComponent } from "./local-state.component";
-import { GlobalStateListenerService, StateListenerService } from "./state-listener/state-listener.service";
+import { GlobalStateComponent } from "./feature/global-state.component";
+import { LocalStateComponent } from "./feature/local-state.component";
+import { GlobalStateListenerService, StateListenerService } from "./shared/state-listener/state-listener.service";
 import { StateManagementComponent } from "./state-management.component";
-import { UrlStateChildRouteComponent, UrlStateComponent } from "./url-state.component";
-import { FormStateComponent } from "./form-state.component";
+import { UrlStateChildRouteComponent, UrlStateComponent } from "./feature/url-state.component";
+import { FormStateComponent } from "./feature/form-state.component";
 
 export const StateManagementRoutes: Routes = [
   {
@@ -13,7 +13,7 @@ export const StateManagementRoutes: Routes = [
     providers: [
       {
         provide: StateListenerService,
-        useClass: GlobalStateListenerService,
+        useClass: GlobalStateListenerService, // Technically, this is not a global state. But for the sake of this example we call it global state.
       }
     ],
     children: [

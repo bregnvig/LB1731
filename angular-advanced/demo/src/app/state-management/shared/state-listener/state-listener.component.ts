@@ -8,7 +8,7 @@ import { StateListenerService } from "./state-listener.service";
       <div>
         <p>Subscriber: {{ name() }}</p>
         <p>State: {{ state?.() | json }}</p>
-        <button [disabled]="isRegistered()" (click)="register()">Register</button>
+        <button class="btn btn-primary" [disabled]="isRegistered()" (click)="register()">Register</button>
   
       </div>
     `,
