@@ -36,7 +36,7 @@ export class RxjsServiceStoreItemComponent implements OnInit {
 
   save() {
     const { name, description } = this.playground();
-    this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description }).subscribe();
+    this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description });
   }
 }
 
@@ -63,8 +63,8 @@ export class RxjsServiceStoreItemComponent implements OnInit {
 export class RxjsServiceStoreListComponent {
   #store = inject(RxjsPlaygroundStore);
   playgrounds = this.#store.playgrounds;
-  loading = this.#store.loading;
-  error = this.#store.error;
+  loading = this.#store.playgroundsLoading;
+  error = this.#store.playgroundsError;
 }
 
 @Component({

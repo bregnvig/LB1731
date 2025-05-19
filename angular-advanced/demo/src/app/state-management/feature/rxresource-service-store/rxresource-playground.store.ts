@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, of, tap } from 'rxjs';
 import { Playground } from 'src/app/shared';
 import { RxresourcePlaygroundService } from './rxresource-playground.service';
 
@@ -8,20 +8,23 @@ import { RxresourcePlaygroundService } from './rxresource-playground.service';
 export class RxresourcePlaygroundStore {
 
   #service = inject(RxresourcePlaygroundService);
-  #resource = rxResource({
-    loader: () => this.#service.list()
-  });
-  #updateError = signal<any>(undefined);
-  error = computed(() => this.#resource.error() ?? this.#updateError());
-  loading = this.#resource.isLoading;
-  playgrounds = this.#resource.value.asReadonly();
+  #playgroundsResource = rxResource({ loader: () => this.#service.list() });
 
-  update(playground: Playground): Promise<Playground> {
-    return firstValueFrom(this.#service.update(playground.id, playground))
-      .then(playground => {
-        this.#resource.reload();
-        return playground;
-      });
+  #update = signal<Playground | undefined>(undefined);
+  #updateResource = rxResource({
+    request: () => this.#update(),
+    loader: ({ request: playground }) => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
+      tap(() => this.#playgroundsResource.reload())
+    )
+  });
+
+  readonly playgrounds = this.#playgroundsResource.value.asReadonly();
+  readonly playgroundsError = this.#playgroundsResource.error;
+  readonly playgroundsLoading = this.#playgroundsResource.isLoading;
+  readonly updateError = this.#updateResource.error;
+
+  update(playground: Playground) {
+    this.#update.set(playground);
   }
 }
 
