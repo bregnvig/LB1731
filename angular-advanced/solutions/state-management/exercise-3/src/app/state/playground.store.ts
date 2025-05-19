@@ -1,29 +1,40 @@
-import { inject } from "@angular/core";
+import { inject, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
-import { Observable, tap } from "rxjs";
+import { of } from "rxjs";
 import { Playground } from "../model";
 import { PlaygroundService } from "../service";
 
 export class PlaygroundStore {
 
   #service = inject(PlaygroundService);
-  #resource = rxResource({
+  #playgroundsResource = rxResource({
     loader: () => this.#service.list()
   });
+  #updateResource = rxResource({
+    request: () => this.#updatePlayground(),
+    loader: ({ request }) => request ? this.#service.update(request.id, request) : of(undefined)
+  });
 
-  playgrounds = this.#resource.value;
-  error = this.#resource.error;
-  loading = this.#resource.isLoading;
+  #deleteResource = rxResource({
+    request: () => this.#deletePlayground(),
+    loader: ({ request }) => request ? this.#service.delete(request) : of(undefined)
+  });
 
-  update(playground: Playground): Observable<Playground> {
-    return this.#service.update(playground.id, playground).pipe(
-      tap(() => this.#resource.reload())
-    );
+  playgrounds = this.#playgroundsResource.value;
+  playgroundsError = this.#playgroundsResource.error;
+  loading = this.#playgroundsResource.isLoading;
+
+  #updatePlayground = signal<Playground | null>(null);
+  #deletePlayground = signal<string | null>(null);
+
+  updateError = this.#updateResource.error;
+  deleteError = this.#deleteResource.error;
+
+  update(playground: Playground): void {
+    this.#updatePlayground.set(playground);
   }
 
-  delete(playgroundId: string): Observable<void> {
-    return this.#service.delete(playgroundId).pipe(
-      tap(() => this.#resource.reload())
-    );
+  delete(playgroundId: string): void {
+    this.#deletePlayground.set(playgroundId);
   }
 }

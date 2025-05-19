@@ -35,18 +35,16 @@ export class RxjsServiceStoreItemComponent implements OnInit {
   }
 
   save() {
-    const  { name, description } = this.playground();
+    const { name, description } = this.playground();
     this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description }).subscribe();
   }
 }
 
-//TODO: @let is not really so nice here.
 @Component({
   selector: 'loop-rxjs-service-store-list',
   standalone: true,
   imports: [AsyncPipe, CommonModule, RxjsServiceStoreItemComponent],
   template: `
-    @let ps = playgrounds | async;
     @if(loading | async) {
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -57,7 +55,7 @@ export class RxjsServiceStoreItemComponent implements OnInit {
         Error: {{ error | async }}
       </div>
     } 
-    @for (playground of ps; track playground) {
+    @for (playground of playgrounds | async; track playground) {
       <loop-rxjs-service-store-item [playground]="playground"/>
     }
   `,

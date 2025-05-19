@@ -1,9 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, firstValueFrom, Observable, of, ReplaySubject, shareReplay, switchMap, tap } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { firstValueFrom } from 'rxjs';
 import { Playground } from 'src/app/shared';
 import { RxresourcePlaygroundService } from './rxresource-playground.service';
-import { rxResource } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class RxresourcePlaygroundStore {
@@ -13,8 +12,8 @@ export class RxresourcePlaygroundStore {
     loader: () => this.#service.list()
   });
   #updateError = signal<any>(undefined);
-  error = computed(() => this.#resource.error() ?? this.#updateError())
-  loading = this.#resource.isLoading
+  error = computed(() => this.#resource.error() ?? this.#updateError());
+  loading = this.#resource.isLoading;
   playgrounds = this.#resource.value.asReadonly();
 
   update(playground: Playground): Promise<Playground> {
@@ -22,7 +21,7 @@ export class RxresourcePlaygroundStore {
       .then(playground => {
         this.#resource.reload();
         return playground;
-      })
+      });
   }
 }
 

@@ -54,7 +54,11 @@ export class AppComponent {
       ),
       tap(() => this.loading.set(false)),
     ), { initialValue: [] });
-    this.center = computed(() => this.#locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
+    this.center = computed(() => {
+      const playground = this.playground();
+      if (playground) return { ...playground.position, zoom: 14 };
+      return { lat: 56.360029, lng: 10.746635, zoom: 8, ...this.#locationService.location() };
+    });
   }
 
   async edit(playground: Playground) {

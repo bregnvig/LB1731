@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { Component, inject, input, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
@@ -35,12 +35,11 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
   }
 
   save() {
-    const  { name, description } = this.playground();
+    const { name, description } = this.playground();
     this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description });
   }
 }
 
-//TODO: @let is not really so nice here.
 @Component({
   selector: 'loop-rxresource-service-store-list',
   standalone: true,

@@ -20,7 +20,7 @@ import { provideLocalStateListener, StateListenerService } from "../shared/state
       <loop-state-listener [name]="name"/>
     }
   `,
-  providers: [provideLocalStateListener()],
+  providers: [provideLocalStateListener()], // TODO Provide here
   imports: [JsonPipe, StateListenerComponent],
 })
 export class LocalStateComponent {

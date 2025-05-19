@@ -8,7 +8,7 @@ export class PlaygroundStore {
 
   #service = inject(PlaygroundService);
   #reload = new BehaviorSubject<void>(undefined);
-  error = new ReplaySubject<any>();
+  playgroundsError = new ReplaySubject<any>();
   updateError = new ReplaySubject<any>();
   deleteError = new ReplaySubject<any>();
   loading = new BehaviorSubject<boolean>(true);
@@ -18,7 +18,7 @@ export class PlaygroundStore {
     switchMap(() => this.#service.list()),
     withLength(),
     catchError(error => {
-      this.error.next(error);
+      this.playgroundsError.next(error);
       return of([]);
     }),
     tap(() => this.loading.next(false)),
@@ -33,7 +33,7 @@ export class PlaygroundStore {
       }),
       catchError(error => {
         this.updateError.next(error);
-        return of(undefined);
+        throw error;
       }),
     );
   }
@@ -46,7 +46,7 @@ export class PlaygroundStore {
       }),
       catchError(error => {
         this.deleteError.next(error);
-        return of(undefined);
+        throw error;
       }),
     );
   }

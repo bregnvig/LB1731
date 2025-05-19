@@ -1,8 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'loop-url-state',
@@ -16,19 +15,16 @@ import { map } from 'rxjs';
           <a class="btn btn-primary" [routerLink]="[]" [queryParams]="{ a: randomStringFn(), b: randomStringFn() }" queryParamsHandling="merge">
             Navigate with query params
           </a>
-          <span class="ms-3" [innerText]="queryParamsInnerText"></span>
         </div>
         <div>
           <a class="btn btn-primary" [routerLink]="[{parentMatrixKey: randomStringFn()}]" queryParamsHandling="merge">
-            Navigate with path parameter and matrix param
+            Navigate with placeholder and matrix params
           </a>
-          <span class="ms-3">[routerLink]="['child-route', randomNumberFn()]" queryParamsHandling="merge"</span>
         </div>
         <div>
           <a class="btn btn-primary" [routerLink]="['child-route', randomNumberFn(), {childMatrixKey: randomStringFn()}]" queryParamsHandling="merge">
-            Navigate with child-route path parameter and matrix param
+            Navigate with child-route placeholder and matrix params
           </a>
-          <span class="ms-3">[routerLink]="['child-route', randomNumberFn()]" queryParamsHandling="merge"</span>
         </div>
       </div>
 

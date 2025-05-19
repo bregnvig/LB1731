@@ -30,7 +30,7 @@ export class AppComponent {
   playground = signal<Playground | undefined>(undefined);
   center: Signal<Center>;
   markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
-  #error = toSignal(this.#store.error);
+  #error = toSignal(this.#store.playgroundsError);
   #updateError = toSignal(this.#store.updateError);
   #deleteError = toSignal(this.#store.deleteError);
   error = computed<any>(() => this.#error() ?? this.#updateError() ?? this.#deleteError());
@@ -49,7 +49,11 @@ export class AppComponent {
           .sort((a: Playground, b: Playground) => getDistance(a.position, location) - getDistance(b.position, location))
       ),
     ), { initialValue: [] });
-    this.center = computed(() => this.#locationService.location() ?? { lat: 56.360029, lng: 10.746635 });
+    this.center = computed(() => {
+      const playground = this.playground();
+      if (playground) return { ...playground.position, zoom: 14 };
+      return { lat: 56.360029, lng: 10.746635, zoom: 8, ...this.#locationService.location() };
+    });
   }
 
   async edit(playground: Playground) {

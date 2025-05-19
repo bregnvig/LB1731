@@ -10,6 +10,4 @@
 @if (playground(); as playground) {
   <loop-footer [playground]="playground" />
 }
-@if(error()) {
-  <app-error [(error)]="error" />
-}
+<app-error [error]="error()" />
