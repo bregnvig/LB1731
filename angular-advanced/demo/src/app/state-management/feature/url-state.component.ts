@@ -1,7 +1,8 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'loop-url-state',
@@ -12,17 +13,17 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
       <h2>Change URL State</h2>
       <div class="d-flex flex-column gap-2">
         <div>
-          <a class="btn btn-primary" [routerLink]="[]" [queryParams]="{ a: randomStringFn(), b: randomStringFn() }" queryParamsHandling="merge">
+          <a class="btn btn-primary" [routerLink]="[]" [queryParams]="{ a: randomString(), b: randomString() }" queryParamsHandling="merge">
             Navigate with query params
           </a>
         </div>
         <div>
-          <a class="btn btn-primary" [routerLink]="[{parentMatrixKey: randomStringFn()}]" queryParamsHandling="merge">
+          <a class="btn btn-primary" [routerLink]="[{parentMatrixKey: randomString()}]" queryParamsHandling="merge">
             Navigate with placeholder and matrix params
           </a>
         </div>
         <div>
-          <a class="btn btn-primary" [routerLink]="['child-route', randomNumberFn(), {childMatrixKey: randomStringFn()}]" queryParamsHandling="merge">
+          <a class="btn btn-primary" [routerLink]="['child-route', randomNumber(), {childMatrixKey: randomString()}]" queryParamsHandling="merge">
             Navigate with child-route placeholder and matrix params
           </a>
         </div>
@@ -43,22 +44,15 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
 })
 export class UrlStateComponent {
   #activeRoute = inject(ActivatedRoute);
-  #router = inject(Router);
+  #timer = toSignal(timer(0, 500));
 
   params = toSignal(this.#activeRoute.params);
   queryParams = toSignal(this.#activeRoute.queryParams);
 
-  randomNumberFn = () => Math.floor(Math.random() * 100);
-  randomStringFn = () => Math.random().toString(36).substring(2, 7);
+  
+  randomNumber = computed(() => this.#timer() && Math.floor(Math.random() * 100));
+  randomString = computed(() => this.#timer() && Math.random().toString(36).substring(2, 7));
 
-  queryParamsInnerText = `[routerLink]=\"[]\" [queryParams]=\"{ a: randomStringFn(), b: randomStringFn() }\" queryParamsHandling=\"merge\"`;
-
-  navigateToChildWithMatrix() {
-    this.#router.navigate(['child-route', { matrixKey: 'matrixValue' }], {
-      relativeTo: this.#activeRoute,
-      queryParamsHandling: 'preserve',
-    });
-  }
 }
 
 @Component({
