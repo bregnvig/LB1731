@@ -13,18 +13,14 @@ export class RxjsPlaygroundStore {
 
   #update = new BehaviorSubject<Playground | undefined>(undefined);
   #updateSubscription = this.#update.pipe(
-    switchMap(playground => {
-      if (!playground) {
-        return of(null);
-      }
-      return this.#service.update(playground.id, playground).pipe(
+    switchMap(playground => !playground ? of(null) :  this.#service.update(playground.id, playground).pipe(
         tap(() => this.#reload.next()),
         catchError(error => {
           this.updateError.next(error);
           return of(null);
         })
-      );
-    }),
+      )
+    ),
     untilDestroyed(this),
   ).subscribe();
 

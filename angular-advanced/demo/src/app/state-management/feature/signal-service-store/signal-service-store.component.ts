@@ -63,8 +63,8 @@ export class SignalItemComponent implements OnInit {
 export class SignalListComponent {
   #store = inject(SignalPlaygroundStore);
   playgrounds = this.#store.playgrounds;
-  loading = this.#store.loading;
-  error = this.#store.error;
+  loading = this.#store.playgroundsLoading;
+  error = this.#store.playgroundsError;
 }
 
 @Component({
