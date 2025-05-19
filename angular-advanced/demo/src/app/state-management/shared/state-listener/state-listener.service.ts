@@ -33,10 +33,6 @@ export class StateListenerService {
 export class GlobalStateListenerService extends StateListenerService {
 }
 
-export const provideLocalStateListener = () => ({
-    provide: StateListenerService,
-    useClass: LocalStateListenerService,
-});
 @Injectable()
 export class LocalStateListenerService extends StateListenerService {
 }

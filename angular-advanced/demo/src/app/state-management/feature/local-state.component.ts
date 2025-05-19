@@ -2,7 +2,7 @@ import { JsonPipe } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { randMotorcycleManufacturer } from "@ngneat/falso";
 import { StateListenerComponent } from "../shared/state-listener/state-listener.component";
-import { provideLocalStateListener, StateListenerService } from "../shared/state-listener/state-listener.service";
+import { LocalStateListenerService, StateListenerService } from "../shared/state-listener/state-listener.service";
 
 @Component({
   selector: 'loop-local-state',
@@ -20,7 +20,12 @@ import { provideLocalStateListener, StateListenerService } from "../shared/state
       <loop-state-listener [name]="name"/>
     }
   `,
-  providers: [provideLocalStateListener()], // TODO Provide here
+  providers: [
+    {
+      provide: StateListenerService,
+      useClass: LocalStateListenerService,
+    }
+  ],
   imports: [JsonPipe, StateListenerComponent],
 })
 export class LocalStateComponent {
