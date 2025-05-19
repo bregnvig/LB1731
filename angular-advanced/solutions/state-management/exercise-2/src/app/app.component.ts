@@ -1,4 +1,4 @@
-import { Component, computed, inject, linkedSignal, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, firstValueFrom } from 'rxjs';
@@ -30,8 +30,10 @@ export class AppComponent {
   playground = signal<Playground | undefined>(undefined);
   center: Signal<Center>;
   markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
-  #storeError = toSignal(this.#store.error);
-  error = linkedSignal<any>(() => this.#storeError());
+  #error = toSignal(this.#store.error);
+  #updateError = toSignal(this.#store.updateError);
+  #deleteError = toSignal(this.#store.deleteError);
+  error = computed<any>(() => this.#error() ?? this.#updateError() ?? this.#deleteError());
   loading = toSignal(this.#store.loading, { requireSync: true });
 
   constructor(
@@ -52,12 +54,10 @@ export class AppComponent {
 
   async edit(playground: Playground) {
     EditPlaygroundModalComponent.open(this.#modal, playground, this.playgrounds())
-      .then(playground => firstValueFrom(this.#store.update(playground)))
-      .catch(error => this.error.set(error));
+      .then(playground => firstValueFrom(this.#store.update(playground)));
   }
   async delete(playground: Playground) {
-    firstValueFrom(this.#store.delete(playground.id))
-      .catch(error => this.error.set(error));
+    firstValueFrom(this.#store.delete(playground.id));
   }
 
 }
