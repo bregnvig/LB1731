@@ -11,14 +11,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   imports: [ReactiveFormsModule, JsonPipe],
   template: `
     <div>
-      <h2>Filter working with URL</h2>
-      <div class="input-group mb-3 w-25">
-        <span class="input-group-text">Filter</span>
-        <input [formControl]="filter" type="text" class="form-control" placeholder="filter" aria-label="filter">
-      </div>
-
-      <hr>
-
       <h2>Reactive Form State</h2>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="d-flex align-items-baseline">
@@ -40,8 +32,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
       </form>
 
-      <hr />
-
       <h2>Form State</h2>
       <p><strong>Value:</strong></p>
       <pre>{{ form.value | json }}</pre>
@@ -50,6 +40,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
       <p><strong>Invalid:</strong> {{ form.invalid }}</p>
       <p><strong>Dirty:</strong> {{ form.dirty }}</p>
       <p><strong>Touched:</strong> {{ form.touched }}</p>
+
+      <hr>
+
+      <h2>Filter working with URL</h2>
+      <div class="input-group mb-3 w-25">
+        <span class="input-group-text">Filter</span>
+        <input [formControl]="filter" type="text" class="form-control" placeholder="filter" aria-label="filter">
+      </div>
 
     </div>
   `,
@@ -64,6 +62,7 @@ export class FormStateComponent {
     this.filter.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
       this.#router.navigate([{ filter: value }], { queryParamsHandling: 'merge', relativeTo: this.#activeRoute });
     });
+    //TODO: listen to route changes and filter playgrounds below
   }
 
   form = inject(FormBuilder).group({
