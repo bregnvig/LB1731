@@ -7,14 +7,24 @@ import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
 @Component({
   selector: 'loop-rxresource-service-store-item',
   standalone: true,
+  styles: `
+    @keyframes pulseHighlight {
+      0% { background-color: #fff3cd; }     /* Bootstrap warning bg */
+      100% { background-color: transparent; }
+    }
+
+    .update-effect {
+      animation: pulseHighlight 1s ease-out;
+    }
+  `,
   imports: [CommonModule, FormsModule],
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
         <span class="input-group-text">Name</span>
-        <input type="text" name="name" [(ngModel)]="name" class="form-control">
+        <input type="text" name="name" [(ngModel)]="name" class="form-control" [class.update-effect]="saved">
         <span class="input-group-text">Description</span>
-        <input type="text" name="description" [(ngModel)]="description" class="form-control">
+        <input type="text" name="description" [(ngModel)]="description" [class.update-effect]="saved" class="form-control">
       </div>
       <div>
         <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
@@ -25,6 +35,8 @@ import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
 export class RxresourceServiceStoreItemComponent implements OnInit {
   #store = inject(RxresourcePlaygroundStore);
   playground = input.required<Playground>();
+
+  saved = false;
 
   name?: string;
   description?: string;
@@ -37,6 +49,7 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
   save() {
     const { name, description } = this.playground();
     this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description });
+    this.saved = true;
   }
 }
 

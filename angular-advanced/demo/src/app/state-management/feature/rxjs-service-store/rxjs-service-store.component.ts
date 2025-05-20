@@ -36,7 +36,7 @@ export class RxjsServiceStoreItemComponent implements OnInit {
 
   save() {
     const { name, description } = this.playground();
-    this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description });
+    this.#store.update({ ...this.playground(), name: this.name || name, description: this.description || description }).subscribe();
   }
 }
 

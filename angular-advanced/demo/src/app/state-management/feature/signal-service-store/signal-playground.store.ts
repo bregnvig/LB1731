@@ -16,21 +16,16 @@ export class SignalPlaygroundStore {
   playgrounds: Signal<Playground[]> = toSignal(this.#refresh.pipe(
     tap(() => this.loading.set(true)),
     switchMap(() => this.#service.list()),
-    shareReplay(1),
+    tap(() => this.error.set(undefined)),
+    catchError(error => { this.error.set(error); return of([]) }),
     tap(() => this.loading.set(false)),
-    catchError(error => {
-     this.error.set(error);
-     throw error
-    }),
+    shareReplay(1),
   ), { initialValue: [] });
   
   update(playground: Playground): Promise<void> {
     return firstValueFrom(this.#service.update(playground).pipe(
       tap(() => this.#refresh.next()),
-      catchError(error => {
-        this.updateError.set(error);
-        throw error
-      })
+      catchError(error => { this.updateError.set(error); throw error; })
     ))
   }
 }

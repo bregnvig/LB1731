@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, ReplaySubject, shareReplay, switchMap, tap } from 'rxjs';
 import { Playground } from 'src/app/shared';
 import { RxjsPlaygroundService } from './rxjs-playground.service';
 
@@ -17,9 +17,10 @@ export class RxjsPlaygroundStore {
   readonly playgrounds = this.#refresh.pipe(
     tap(() => this.loading.next(true)),
     switchMap(() => this.#service.list()),
-    catchError(error => { this.error.next(error); throw error; }),
+    tap(() => this.error.next(undefined)),
+    catchError(error => { this.error.next(error); return of([]) }),
     tap(() => this.loading.next(false)),
-    shareReplay(1)
+    shareReplay(1),
   );
 
   update(playground: Playground): Observable<void> {
