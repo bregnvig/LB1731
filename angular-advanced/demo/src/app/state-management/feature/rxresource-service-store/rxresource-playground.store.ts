@@ -13,7 +13,7 @@ export class RxresourcePlaygroundStore {
   #update = signal<Playground | undefined>(undefined);
   #updateResource = rxResource({
     request: () => this.#update(),
-    loader: ({ request: playground }) => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
+    loader: ({ request: playground }) => !playground ? of(null) : this.#service.update(playground).pipe(
       tap(() => this.#playgroundsResource.reload())
     ),
   });

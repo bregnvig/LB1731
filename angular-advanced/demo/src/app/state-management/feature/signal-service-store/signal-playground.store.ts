@@ -11,7 +11,7 @@ export class SignalPlaygroundStore {
   #refresh = new BehaviorSubject<void>(undefined);
   #updatePayload = new BehaviorSubject<Playground | undefined>(undefined);
   #updatePlayground = toSignal(this.#updatePayload.pipe(
-    switchMap(playground => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
+    switchMap(playground => !playground ? of(null) : this.#service.update(playground).pipe(
       tap(() => this.#refresh.next()),
       catchError(error => {
         this.updateError.set(error);

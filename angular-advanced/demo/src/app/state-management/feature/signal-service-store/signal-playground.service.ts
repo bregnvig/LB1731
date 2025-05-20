@@ -21,9 +21,9 @@ export class SignalPlaygroundService {
     );
   }
 
-  update(id: string, playground: Playground): Observable<Playground> {
+  update(playground: Playground): Observable<Playground> {
     console.log('Updating playground:', playground.id);
-    this.simulatedBackendSave = this.simulatedBackendSave.map(p => p.id === id ? playground : p);
+    this.simulatedBackendSave = this.simulatedBackendSave.map(p => p.id === playground.id ? playground : p);
     return of(playground);
   }
 }
