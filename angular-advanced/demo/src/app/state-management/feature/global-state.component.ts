@@ -36,6 +36,6 @@ export class GlobalStateComponent implements OnDestroy {
   // We need cleanup every time like this if we insist on using global state.
   ngOnDestroy() {
     // Uncomment line below and navigate away and back to global-state route to see listeners cleared. 
-    this.#service.clear();
+    // this.#service.clear();
   }
 } 
