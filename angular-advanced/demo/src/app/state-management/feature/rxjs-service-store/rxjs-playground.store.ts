@@ -9,39 +9,31 @@ import { RxjsPlaygroundService } from './rxjs-playground.service';
 export class RxjsPlaygroundStore {
 
   #service = inject(RxjsPlaygroundService);
-  #reload = new BehaviorSubject<void>(undefined);
+  #refresh = new BehaviorSubject<void>(undefined);
 
-  #update = new BehaviorSubject<Playground | undefined>(undefined);
-  #updateSubscription = this.#update.pipe(
-    switchMap(playground => !playground ? of(null) :  this.#service.update(playground.id, playground).pipe(
-        tap(() => this.#reload.next()),
-        catchError(error => {
-          this.updateError.next(error);
-          return of(null);
-        })
-      )
-    ),
-    untilDestroyed(this),
-  ).subscribe();
-
-  readonly updateError = new ReplaySubject<any>();
-
-  readonly playgroundsLoading = new BehaviorSubject<boolean>(true);
-  readonly playgroundsError = new ReplaySubject<any>();
-  readonly playgrounds = this.#reload.pipe(
-    tap(() => this.playgroundsLoading.next(true)),
+  readonly updateError = new BehaviorSubject<Playground | undefined>(undefined);
+  readonly loading = new BehaviorSubject<boolean>(true);
+  readonly error = new ReplaySubject<any>();
+  readonly playgrounds = this.#refresh.pipe(
+    tap(() => this.loading.next(true)),
     switchMap(() => this.#service.list()),
     catchError(error => {
-      this.playgroundsError.next(error);
+      this.error.next(error);
       return of([]);
     }),
-    tap(() => this.playgroundsLoading.next(false)),
+    tap(() => this.loading.next(false)),
     shareReplay(1)
   );
 
 
   update(playground: Playground) {
-    this.#update.next(playground);
+    this.#service.update(playground.id, playground).pipe(
+      tap(() => this.#refresh.next()),
+      catchError(error => {
+        this.updateError.next(error);
+        return of(null);
+      })
+    ).subscribe();
   }
 }
 

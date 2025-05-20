@@ -63,8 +63,8 @@ export class RxjsServiceStoreItemComponent implements OnInit {
 export class RxjsServiceStoreListComponent {
   #store = inject(RxjsPlaygroundStore);
   playgrounds = this.#store.playgrounds;
-  loading = this.#store.playgroundsLoading;
-  error = this.#store.playgroundsError;
+  loading = this.#store.loading;
+  error = this.#store.error;
 }
 
 @Component({
