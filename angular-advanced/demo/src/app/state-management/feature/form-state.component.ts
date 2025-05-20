@@ -1,15 +1,25 @@
-import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'loop-reactive-form-state',
   standalone: true,
   imports: [ReactiveFormsModule, JsonPipe],
   template: `
     <div>
-      <h1>Reactive Form State Example</h1>
+      <h2>Filter working with URL</h2>
+      <div class="input-group mb-3 w-25">
+        <span class="input-group-text">Filter</span>
+        <input [formControl]="filter" type="text" class="form-control" placeholder="filter" aria-label="filter">
+      </div>
 
+      <hr>
+
+      <h2>Reactive Form State</h2>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="d-flex align-items-baseline">
           <div class="input-group mb-3 w-25">
@@ -45,9 +55,20 @@ import { JsonPipe } from '@angular/common';
   `,
 })
 export class FormStateComponent {
+  #activeRoute = inject(ActivatedRoute);
+  #router = inject(Router);
+
+  filter = new FormControl(this.#activeRoute.snapshot.params['filter']);
+
+  constructor() {
+    this.filter.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+      this.#router.navigate([{ filter: value }], { queryParamsHandling: 'merge', relativeTo: this.#activeRoute });
+    });
+  }
+
   form = inject(FormBuilder).group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]]
+    name: [this.#activeRoute.snapshot.params['name'], [Validators.required]],
+    email: [this.#activeRoute.snapshot.params['email'], [Validators.required, Validators.email]]
   })
 
   submit() {
