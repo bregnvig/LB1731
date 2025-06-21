@@ -39,6 +39,7 @@ export class AppComponent {
     const compareLocations = (a: Coordinate, b: Coordinate) => a?.lat === b?.lat && a?.lng === b?.lng;
     this.playgrounds = toSignal(combineLatest([
       this.#reload.pipe(
+        tap(() => this.loading.set(true)),
         switchMap(() => this.#service.list()),
         withLength(),
         catchError(error => {
@@ -64,18 +65,12 @@ export class AppComponent {
   async edit(playground: Playground) {
     EditPlaygroundModalComponent.open(this.#modal, playground, this.playgrounds())
       .then(playground => firstValueFrom(this.#service.update(playground.id, playground)))
-      .then(() => {
-        this.#reload.next();
-        this.loading.set(true);
-      })
+      .then(() => this.#reload.next())
       .catch(error => this.error.set(error));
   }
   async delete(playground: Playground) {
     firstValueFrom(this.#service.delete(playground.id))
-      .then(() => {
-        this.#reload.next();
-        this.loading.set(true);
-      })
+      .then(() => this.#reload.next())
       .catch(error => this.error.set(error));
   }
 
