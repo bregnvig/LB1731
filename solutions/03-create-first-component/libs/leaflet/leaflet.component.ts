@@ -27,6 +27,7 @@ export class LeafletComponent implements AfterViewInit {
       const map = this.#map();
       if (center && map) {
         map.setView(latLng(center!.lat, center!.lng));
+        center.zoom && map.setZoom(center.zoom);
       }
     });
     effect(() => {

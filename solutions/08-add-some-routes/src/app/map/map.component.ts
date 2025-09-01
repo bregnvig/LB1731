@@ -56,7 +56,7 @@ export class MapComponent {
     });
     this.center = computed(() => {
       const playground = this.playground();
-      return playground?.position ?? { lat: 56.360029, lng: 10.746635 };
+      return playground?.position ? { ...playground.position, zoom: 12 } : { lat: 56.360029, lng: 10.746635, zoom: 7 };
     });
   }
 
