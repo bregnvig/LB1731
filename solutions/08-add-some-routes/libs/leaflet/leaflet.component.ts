@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, effect, input, signal } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { control, latLng, Map, map as mapContructor, tileLayer } from 'leaflet';
-import { map, pairwise, startWith } from 'rxjs';
+import { control, latLng, LayerGroup, layerGroup, Map, map as mapContructor, tileLayer } from 'leaflet';
 import { Center } from './center';
 import { Marker } from './marker';
 import { MarkerFactory } from './marker-factory';
@@ -21,6 +19,7 @@ export class LeafletComponent implements AfterViewInit {
   markers = input<(Marker | undefined)[] | undefined | null>(undefined);
   center = input.required<Center | undefined>();
   #map = signal<Map | undefined>(undefined);
+  #markerGroup: LayerGroup = layerGroup([]);
 
   constructor() {
     effect(() => {
@@ -30,20 +29,17 @@ export class LeafletComponent implements AfterViewInit {
         map.setView(latLng(center!.lat, center!.lng));
       }
     });
-    toObservable(this.markers).pipe(
-      startWith([]),
-      map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
-      map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
-      pairwise(),
-      takeUntilDestroyed(),
-    ).subscribe(([previous, current]) => {
+    effect(() => {
       const map = this.#map();
+      const markers = this.markers() ?? [];
       if (map) {
-        previous?.forEach(m => m && map.removeLayer(m));
-        current?.forEach(m => m && m.addTo(map));
+        this.#markerGroup.clearLayers();
+        markers
+          .filter(isMarker)
+          .map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))
+          .forEach(layer => this.#markerGroup.addLayer(layer!));
       }
     });
-
   }
 
   ngAfterViewInit() {
@@ -53,13 +49,15 @@ export class LeafletComponent implements AfterViewInit {
       zoom: 7,
       minZoom: 4,
       maxZoom: 19,
-      layers: [tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })]
+      layers: [
+        tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }),
+      ]
     });
     control.zoom({ position: 'topleft' }).addTo(_map);
     control.scale().addTo(_map);
+    this.#markerGroup.addTo(_map);
     this.#map.set(_map);
   }
-
 }

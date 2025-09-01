@@ -1,4 +1,4 @@
-import { httpRe } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, shareReplay } from "rxjs";
 import { Playground } from "./playground";
@@ -8,16 +8,16 @@ import { Playground } from "./playground";
 })
 export class PlaygroundService {
 
-  #playgrounds$: httpResource;
+  playgrounds$: Observable<Playground[]>;
 
-  constructor() {
-    httpResrource;
-    this.#playgrounds$ = http.get<Playground[]>(`assets/copenhagen.json`).pipe(
+  constructor(http: HttpClient) {
+    this.playgrounds$ = http.get<Playground[]>(`assets/copenhagen.json`).pipe(
       shareReplay(1)
     );
   }
 
   getPlaygrounds(): Observable<Playground[]> {
-    return this.#playgrounds$;
+    return this.playgrounds$;
   }
+
 }

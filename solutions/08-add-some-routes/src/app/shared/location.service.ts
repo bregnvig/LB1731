@@ -1,31 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { noop } from 'rxjs';
 import { Coordinate } from './coordinate';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class LocationService {
 
-  private location$: Observable<Coordinate>;
+  #current = signal<Coordinate | undefined>(undefined);
+  current = this.#current.asReadonly();
 
   constructor() {
-    this.location$ = new Observable((subscriber: Subscriber<GeolocationPosition>) => {
-      const watchId = window.navigator.geolocation.watchPosition(
-        position => subscriber.next(position),
-        error => subscriber.error(error)
-      );
-      return () => window.navigator.geolocation.clearWatch(watchId);
-    }).pipe(
-      map((position: GeolocationPosition) => ({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      })),
-      shareReplay({ bufferSize: 1, refCount: true })
+    const watchId = window.navigator.geolocation.watchPosition(
+      position => this.#current.set({ lat: position.coords.latitude, lng: position.coords.longitude }),
+      error => noop,
     );
-  }
-
-  get current(): Observable<Coordinate> {
-    return this.location$;
+    inject(DestroyRef).onDestroy(() => window.navigator.geolocation.clearWatch(watchId));
   }
 
   getDistance(p1: Coordinate, p2: Coordinate) {

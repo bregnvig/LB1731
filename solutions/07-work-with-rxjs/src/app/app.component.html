@@ -1,7 +1,7 @@
 <main class="vh-100 d-flex justify-content-center align-items-center">
-  <leaflet [center]="center" [markers]="markers$ | async"></leaflet>
+  <leaflet [center]="center" [markers]="markers()"></leaflet>
 </main>
-<app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
+<app-sidebar [playgrounds]="appPlaygrounds()" (selected)="playgroundSelected($event)"></app-sidebar>
 @if(playground) {
   <app-footer [playground]="playground"></app-footer>
 }
