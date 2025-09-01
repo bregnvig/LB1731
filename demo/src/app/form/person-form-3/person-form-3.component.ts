@@ -1,16 +1,15 @@
 import { Person } from './../person';
 import { Component, OnInit } from '@angular/core';
-import { NgFor, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-person-form-3',
     templateUrl: './person-form-3.component.html',
     imports: [
-        FormsModule,
-        NgFor,
-        JsonPipe,
-    ]
+    FormsModule,
+    JsonPipe
+]
 })
 export class PersonForm3Component {
 

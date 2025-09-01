@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
-import { NgFor } from '@angular/common';
+
 
 
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css'],
-    imports: [RouterLink, RouterLinkActive, NgFor]
+    imports: [RouterLink, RouterLinkActive]
 })
 export class OrderComponent implements OnInit, OnDestroy {
 

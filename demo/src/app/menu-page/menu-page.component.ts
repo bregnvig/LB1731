@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Menu, MenuItems } from './menu.model';
 import { MenuComponent } from './menu/menu.component';
@@ -6,7 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 @Component({
     selector: 'examples-menu-page',
     templateUrl: './menu-page.component.html',
-    imports: [NgFor, MenuComponent]
+    imports: [MenuComponent]
 })
 export class MenuPageComponent {
 

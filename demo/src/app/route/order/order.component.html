@@ -4,11 +4,13 @@
 <nav>
   <a routerLink=".." class="btn btn-link" routerLinkActive="btn-primary" [routerLinkActiveOptions]="{exact: exact}">Orders</a>
   <a>About</a>
-  <a>Contact</a> 
+  <a>Contact</a>
 </nav>
 
 <nav style="margin: 10px 0">
-  <a *ngFor="let orderId of [1,2,3]" [routerLink]="['..', orderId, data]" routerLinkActive="active">Order {{orderId}}</a>
+  @for (orderId of [1,2,3]; track orderId) {
+    <a [routerLink]="['..', orderId, data]" routerLinkActive="active">Order {{orderId}}</a>
+  }
 </nav>
 <p>
   This is order no {{orderNo}}

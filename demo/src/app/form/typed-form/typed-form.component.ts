@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Person } from '../person';
@@ -9,9 +9,8 @@ export type TypedForm<T> = { [P in keyof T]?: AbstractControl<T[P] | null> };
     selector: 'app-typed-form',
     templateUrl: './typed-form.component.html',
     imports: [
-        ReactiveFormsModule,
-        NgFor,
-    ]
+    ReactiveFormsModule
+]
 })
 export class TypedFormComponent {
 

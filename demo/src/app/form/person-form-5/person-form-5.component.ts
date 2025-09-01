@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-person-form-5',
     templateUrl: './person-form-5.component.html',
-    imports: [FormsModule, NgFor]
+    imports: [FormsModule]
 })
 export class PersonForm5Component {
 

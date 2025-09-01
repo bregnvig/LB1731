@@ -1,30 +1,32 @@
 <h2>ngForm</h2>
-    <div class="row">
-      <div class="col alert alert-info">
-        {{diagnostic}}
-      </div>
+<div class="row">
+  <div class="col alert alert-info">
+    {{diagnostic}}
+  </div>
+</div>
+<div class="container">
+  <h3>Person form</h3>
+  <form #myForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
     </div>
-    <div class="container">
-      <h3>Person form</h3>
-      <form #myForm="ngForm">
-        <div class="form-group">
-          <label for="firstName">First name</label>
-          <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last name</label>
-          <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName"><br>
-        </div>
-        <div class="form-group">
-          <label for="favoriteColor">Favorite color</label>
-          <select class="form-control" id="favoriteColor" [(ngModel)]="model.favoriteColor" name="favoriteColor">
-              <option *ngFor="let color of colors" [value]="color">{{color}}</option>
-            </select>
-        </div>
-        <div class="form-group mb-3">
-          <label for="height">Height</label>
-          <input type="number" min=100 max=220 class="form-control" id="height" [(ngModel)]="model.height" name="height">
-        </div>
-        <button type="submit" [disabled]="myForm.form.invalid" class="btn btn-default ">Submit</button>
-      </form>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName"><br>
     </div>
+    <div class="form-group">
+      <label for="favoriteColor">Favorite color</label>
+      <select class="form-control" id="favoriteColor" [(ngModel)]="model.favoriteColor" name="favoriteColor">
+        @for (color of colors; track color) {
+          <option [value]="color">{{color}}</option>
+        }
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="height">Height</label>
+      <input type="number" min=100 max=220 class="form-control" id="height" [(ngModel)]="model.height" name="height">
+    </div>
+    <button type="submit" [disabled]="myForm.form.invalid" class="btn btn-default ">Submit</button>
+  </form>
+</div>

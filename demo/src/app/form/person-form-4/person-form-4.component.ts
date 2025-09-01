@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Person } from './../person';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-person-form-4',
     templateUrl: './person-form-4.component.html',
-    imports: [FormsModule, NgFor]
+    imports: [FormsModule]
 })
 export class PersonForm4Component {
 
