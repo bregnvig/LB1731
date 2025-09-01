@@ -14,7 +14,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ESNext",
     "module": "ESNext",
@@ -27,7 +27,9 @@
       "dom"
     ],
     "paths": {
-      "@loopme/leaflet": ["libs/leaflet/index.ts"],
+      "@loopme/leaflet": [
+        "libs/leaflet/index.ts"
+      ]
     }
   },
   "angularCompilerOptions": {
