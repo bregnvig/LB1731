@@ -11,7 +11,7 @@ export class PlaygroundService {
   playgrounds$: Observable<Playground[]>;
 
   constructor(http: HttpClient) {
-    this.playgrounds$ = http.get<Playground[]>(`assets/copenhagen.json`).pipe(
+    this.playgrounds$ = http.get<Playground[]>(`copenhagen.json`).pipe(
       shareReplay(1)
     );
   }
