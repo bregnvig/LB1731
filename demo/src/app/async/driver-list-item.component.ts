@@ -6,7 +6,7 @@ import { Driver } from './driver';
   template: `
   @if(driver) {
     <li class="list-group-item">
-      <img [src]="driver.photoURL?? 'assets/user-regular.svg'" height="40" width="40" class="me-3"> 
+      <img [src]="driver.photoURL?? 'user-regular.svg'" height="40" width="40" class="me-3"> 
       {{driver.firstName}} {{driver.lastName}}
     </li>
   }
