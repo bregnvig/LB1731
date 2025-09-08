@@ -1,0 +1,7 @@
+<main class="vh-100 d-flex justify-content-center align-items-center">
+  <leaflet [center]="center"/>
+</main>
+<app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)"></app-sidebar>
+@if(playground) {
+  <app-footer [playground]="playground"></app-footer>
+}

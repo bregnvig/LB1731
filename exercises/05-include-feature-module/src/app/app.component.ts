@@ -5,9 +5,9 @@ import { Playground } from './shared/playground';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  imports: [SidebarComponent, FooterComponent]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    imports: [SidebarComponent, FooterComponent]
 })
 export class AppComponent {
 
@@ -15,7 +15,7 @@ export class AppComponent {
   playground?: Playground;
 
   playgroundSelected(playground: Playground) {
-    console.log(playground);
+    console.log(playground.name, playground);
     this.playground = playground;
   }
 }
