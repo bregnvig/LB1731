@@ -2,7 +2,7 @@ import { Component, computed, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Center, LeafletModule, Marker } from '@loopme/leaflet';
-import { map, shareReplay, switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { FooterComponent } from '../footer/footer.component';
 import { LocationService, Playground } from '../shared';
 import { PlaygroundService } from '../shared/playground.service';
@@ -15,8 +15,8 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
       <leaflet [center]="center()" [markers]="markers()"></leaflet>
     </main>
     <app-sidebar [playgrounds]="appPlaygrounds()" [selectedPlayground]="playground()" (selected)="playgroundSelected($event)"/>
-    @if(playground(); as playground) {
-      <app-footer [playground]="playground"/>
+    @if(playground(); as p) {
+      <app-footer [playground]="p"/>
     }
   `,
   imports: [
@@ -44,7 +44,6 @@ export class MapComponent {
       route.params.pipe(
         map(params => params['id']),
         switchMap(id => service.find(id)),
-        shareReplay(1),
       ));
     this.markers = computed(() => {
       const current = locationService.current();

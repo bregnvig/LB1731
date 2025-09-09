@@ -27,7 +27,7 @@
     "leaflet": "^1.9.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^20.2.1",

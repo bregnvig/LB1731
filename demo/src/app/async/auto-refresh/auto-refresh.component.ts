@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subscription } from 'rxjs';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -10,22 +11,18 @@ import { F1AutoRefreshService } from '../f1.service';
   templateUrl: './auto-refresh.component.html',
   imports: [DriverListItemComponent]
 })
-export class AutoRefreshComponent implements OnDestroy {
+export class AutoRefreshComponent {
 
   drivers?: Driver[];
 
-  private subscription: Subscription;
-
   constructor(private service: F1AutoRefreshService) {
     // Should unsubscribe this, ellse we'll have a memory leak'
-    this.subscription = service.getDrivers().subscribe(drivers => {
+    service.getDrivers().pipe(
+      takeUntilDestroyed()
+    ).subscribe(drivers => {
       console.log('Updating drivers array with new drivers');
       this.drivers = drivers;
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   addSubscribtion() {

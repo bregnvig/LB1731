@@ -40,16 +40,16 @@ export class F1SimpleService {
 @Injectable({ providedIn: 'root' })
 export class F1BetterService {
 
-  private drivers$: Observable<Driver[]>;
+  #drivers$: Observable<Driver[]>;
 
   constructor(service: F1SimpleService) {
-    this.drivers$ = service.getDrivers().pipe(
-      map(response => response.map(mapper)),
+    this.#drivers$ = service.getDrivers().pipe(
+      map((response: OpenF1Driver[]) => response.map(mapper)),
     );
   }
 
   getDrivers(): Observable<Driver[]> {
-    return this.drivers$;
+    return this.#drivers$;
   }
 }
 

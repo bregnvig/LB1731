@@ -17,6 +17,6 @@ export class TemplateDriverFormComponent {
   model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
   logValue(value: any) {
-    console.log('Value', value);
+    console.log('Value', { ...this.model, ...value, });
   }
 }
