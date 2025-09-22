@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css'],
-    imports: [NgFor, RouterOutlet]
+    imports: [RouterOutlet]
 })
 export class OrdersComponent implements OnInit {
 

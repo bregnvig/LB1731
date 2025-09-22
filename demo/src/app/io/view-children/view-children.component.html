@@ -12,21 +12,23 @@
 
 <hr>
 
-<p *ngFor="let i of [0,2,3]">
-  Loop {{i}}
-  <app-stopwatch></app-stopwatch>
-</p>
+  @for (i of [0,2,3]; track i) {
+    <p>
+      Loop {{i}}
+      <app-stopwatch></app-stopwatch>
+    </p>
+  }
 
-<hr>
+  <hr>
 
-<h3 class="row g-3">
-  <app-stopwatch class="col-auto" #stop1></app-stopwatch>
-  <app-stopwatch class="col-auto" #stop2></app-stopwatch>
-  <app-stopwatch class="col-auto" #stop3></app-stopwatch>
-</h3>
+    <h3 class="row g-3">
+      <app-stopwatch class="col-auto" #stop1></app-stopwatch>
+      <app-stopwatch class="col-auto" #stop2></app-stopwatch>
+      <app-stopwatch class="col-auto" #stop3></app-stopwatch>
+    </h3>
 
-<div>
-  <button class="btn btn-success" (click)="startString()">Start</button>
-  <button class="btn btn-default" (click)="stopString()">Stop</button>
-  <button class="btn btn-danger" (click)="resetString()">Reset</button>
-</div>
+    <div>
+      <button class="btn btn-success" (click)="startString()">Start</button>
+      <button class="btn btn-default" (click)="stopString()">Stop</button>
+      <button class="btn btn-danger" (click)="resetString()">Reset</button>
+    </div>

@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-directly-child',
-  template: '<p>{{value1}}</p> <p>{{value2}}</p>',
+  template: '<p>{{value1()}}</p> <p>{{value2()}}</p>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DirectlyChildComponent {
-  @Input() value1?: string;
-  @Input() value2?: string;
+  value1 = input.required<string>();
+  value2 = input<string>();
 
 }
 

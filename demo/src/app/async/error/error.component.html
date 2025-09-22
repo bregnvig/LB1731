@@ -3,7 +3,9 @@
   It took {{elapsed}} ms
 </p>
 <ul class="list-group">
-  <li *ngFor="let postNummer of zipCodes$ | async" class="list-group-item">
-    {{postNummer.nr}} - {{postNummer.navn}}
-  </li>
+  @for (postNummer of zipCodes$ | async; track postNummer) {
+    <li class="list-group-item">
+      {{postNummer.nr}} - {{postNummer.navn}}
+    </li>
+  }
 </ul>

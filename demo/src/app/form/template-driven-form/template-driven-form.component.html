@@ -1,0 +1,35 @@
+<h2>Person form two way binding</h2>
+<div class="alert alert-info">
+  {{model | json}}
+</div>
+<div class="container">
+  <h3>Person form</h3>
+  <form #form="ngForm" class="row g-3" (ngSubmit)="logValue(form.value)">
+    <div class="col-12">
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName ">
+    </div>
+    <div class="col-12">
+      <label for="lastName">Last name</label>
+      <input #lastName="ngModel" type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName">
+    </div>
+    <ngb-alert type="danger" [hidden]="lastName.valid || lastName.untouched" [dismissible]="false">
+      Last name is required
+    </ngb-alert>
+    <div class="col-12">
+      <label for="favoriteColor">Favorite color</label>
+      <select class="form-control" id="favoriteColor" [(ngModel)]="model.favoriteColor" name="favoriteColor">
+        @for (color of colors; track color) {
+          <option [value]="color">{{color}}</option>
+        }
+      </select>
+    </div>
+    <div class="col-12 mb-3">
+      <label for="height">Height</label>
+      <input type="text" class="form-control" id="height" max="230" [(ngModel)]="model.height" name="height" min="65">
+    </div>
+    <div>
+      <button type=" submit " class="btn btn-primary ">Submit</button>
+    </div>
+  </form>
+</div>

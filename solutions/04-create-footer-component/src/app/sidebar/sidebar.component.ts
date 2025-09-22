@@ -1,18 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Playground } from '../shared';
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+  template: `
+    <aside class="shadow" tabindex="1">
+      <nav>
+        <ul class="list-group">
+          @for(playground of playgrounds(); track playground.id) {
+            <li [class.active]="playground.id === selectedPlayground()?.id" (click)="selectPlayground(playground)" class="list-group-item list-group-item-action" role="button">
+              <h4>{{playground.name}}</h4>
+              <p class="m-0">{{playground.description}}</p>
+            </li>
+          }
+        </ul>
+      </nav>
+    </aside>
+  `,
 })
 export class SidebarComponent {
-  @Input({ required: true }) playgrounds?: Playground[];
-  @Output() selected = new EventEmitter<Playground>();
+  playgrounds = input.required<Playground[]>();
+  selected = output<Playground>();
 
-  selectedPlayground?: Playground;
+  selectedPlayground = signal<Playground | undefined>(undefined);
 
   selectPlayground(playground: Playground) {
-    this.selectedPlayground = playground;
+    this.selectedPlayground.set(playground);
     this.selected.emit(playground);
   }
 }

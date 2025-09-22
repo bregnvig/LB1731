@@ -1,47 +1,31 @@
 import { inject, Injectable, signal, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, catchError, of, shareReplay, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, firstValueFrom, of, shareReplay, switchMap, tap } from 'rxjs';
 import { Playground } from 'src/app/shared';
 import { SignalPlaygroundService } from './signal-playground.service';
 
 @Injectable()
 export class SignalPlaygroundStore {
-
+  
   #service = inject(SignalPlaygroundService);
   #refresh = new BehaviorSubject<void>(undefined);
-  #updatePayload = new BehaviorSubject<Playground | undefined>(undefined);
-  #updatePlayground = toSignal(this.#updatePayload.pipe(
-    switchMap(playground => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
-      tap(() => this.#refresh.next()),
-      catchError(error => {
-        this.updateError.set(error);
-        return of(null);
-      })
-    )
-    ),
-  ))
+  error = signal<any>(undefined);
   updateError = signal<any>(undefined);
-
-  playgroundsError = signal<any>(undefined);
-  playgroundsLoading = signal<boolean>(false);
-  playgrounds: Signal<Playground[]> = toSignal(
-    this.#refresh.pipe(
-      tap(() => this.playgroundsLoading.set(true)),
-      switchMap(() => this.#service.list()),
-      shareReplay(1),
-      tap(() => this.playgroundsLoading.set(false)),
-      catchError(error => {
-        this.playgroundsError.set(error);
-        throw error;
-      }),
-    ),
-    { initialValue: [] }
-  );
-
-  update(playground: Playground) {
-    this.#updatePayload.next(playground);
+  loading = signal<boolean>(false);
+  
+  playgrounds: Signal<Playground[]> = toSignal(this.#refresh.pipe(
+    tap(() => this.loading.set(true)),
+    switchMap(() => this.#service.list()),
+    tap(() => this.error.set(undefined)),
+    catchError(error => { this.error.set(error); return of([]) }),
+    tap(() => this.loading.set(false)),
+    shareReplay(1),
+  ), { initialValue: [] });
+  
+  update(playground: Playground): Promise<void> {
+    return firstValueFrom(this.#service.update(playground).pipe(
+      tap(() => this.#refresh.next()),
+      catchError(error => { this.updateError.set(error); throw error; })
+    ))
   }
-
-
 }
-

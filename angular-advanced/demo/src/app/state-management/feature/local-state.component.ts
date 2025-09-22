@@ -34,6 +34,10 @@ export class LocalStateComponent {
   listeners = this.#service.listeners;
   names = Array.from(new Array(5)).map((_, i) => `component-${++i}`);
 
+  constructor() {
+    console.log('LocalStateComponent constructor');
+  }
+
   updateState() {
     this.#service.setState({ key: randMotorcycleManufacturer() });
   }

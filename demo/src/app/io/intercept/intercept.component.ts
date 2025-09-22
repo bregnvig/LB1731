@@ -1,21 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-intercept-child',
-  template: '<p>{{value}}</p>',
+  template: `
+  <p>{{value()}}</p>
+  <p>Is nice - {{isNice()}}</p>
+  `,
 })
 export class InterceptChildComponent {
-  private _value?: string;
 
-  @Input({ required: true })
-  set value(value: string | undefined) {
-    this._value = value?.toUpperCase();
-  }
+  value = input.required<string, string>({
+    transform: value => value.toUpperCase()
+  });
 
-  get value() {
-    return this._value;
-  }
+  isNice = input<boolean, boolean | string>(true, {
+    transform: booleanAttribute
+  });
+
 }
 
 @Component({

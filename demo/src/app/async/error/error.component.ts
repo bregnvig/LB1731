@@ -6,12 +6,12 @@ import { catchError, finalize } from 'rxjs/operators';
 
 
 import { HttpClient } from '@angular/common/http';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-error',
     templateUrl: './error.component.html',
-    imports: [NgFor, AsyncPipe]
+    imports: [AsyncPipe]
 })
 export class ErrorComponent implements OnInit {
 

@@ -1,19 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Playground } from '../shared';
 
 @Component({
   selector: 'app-footer',
   template: `
-    @if(playground) {
+    @if(playground(); as p) {
       <footer>
-        <h3>{{playground.name}}</h3>
-        <p>{{playground.description}}</p>
-        <p>{{playground.addressDescription}}</p>
+        <h3>{{p.name}}</h3>
+        <p>{{p.description}}</p>
+        <p>{{p.addressDescription}}</p>
       </footer>
   }
   `,
 })
 export class FooterComponent {
 
-  @Input() playground?: Playground;
+  playground = input.required<Playground | undefined>();
 }

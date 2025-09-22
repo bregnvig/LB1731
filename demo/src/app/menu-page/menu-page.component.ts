@@ -1,12 +1,12 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Menu, MenuItems } from './menu.model';
 import { MenuComponent } from './menu/menu.component';
 
 @Component({
-    selector: 'examples-menu-page',
-    templateUrl: './menu-page.component.html',
-    imports: [NgFor, MenuComponent]
+  selector: 'examples-menu-page',
+  templateUrl: './menu-page.component.html',
+  imports: [MenuComponent]
 })
 export class MenuPageComponent {
 
@@ -64,13 +64,8 @@ export class MenuPageComponent {
   ];
 
   private forms: MenuItems = [
-    { routerLink: '/form/person4', title: 'Person form ngForm template reference variable' },
-    { routerLink: '/form/person1', title: 'Person form two way binding' },
-    { routerLink: '/form/oneway', title: 'Person form one way binding' },
-    { routerLink: '/form/person5', title: 'Person form ngForm no domain model' },
-    { routerLink: '/form/person3', title: 'Person form Error message' },
-    { routerLink: '/form/person2', title: 'Person form CSS classes' },
-    { routerLink: '/form/model-driven', title: 'Model driven person form' },
+    { routerLink: '/form/template-driven', title: 'Template driven form' },
+    { routerLink: '/form/model-driven', title: 'Model driven form' },
     { routerLink: '/form/search', title: 'Search stand alone    ' },
   ];
 

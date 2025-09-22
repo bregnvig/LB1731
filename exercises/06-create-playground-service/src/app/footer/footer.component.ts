@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Playground } from '../shared';
 
 @Component({
   selector: 'app-footer',
   template: `
-    @if(playground) {
+    @if(playground(); as playground) {
       <footer>
         <h3>{{playground.name}}</h3>
         <p>{{playground.description}}</p>
@@ -15,5 +15,5 @@ import { Playground } from '../shared';
 })
 export class FooterComponent {
 
-  @Input() playground?: Playground;
+  playground = input.required<Playground>();
 }

@@ -18,12 +18,12 @@ import { timer } from 'rxjs';
           </a>
         </div>
         <div>
-          <a class="btn btn-primary" [routerLink]="[{parentMatrixKey: randomString()}]" queryParamsHandling="merge">
+          <a class="btn btn-primary" [routerLink]="[{matrixKey: randomString()}]" queryParamsHandling="merge">
             Navigate with placeholder and matrix params
           </a>
         </div>
         <div>
-          <a class="btn btn-primary" [routerLink]="['child-route', randomNumber(), {childMatrixKey: randomString()}]" queryParamsHandling="merge">
+          <a class="btn btn-primary" [routerLink]="['child-route', randomNumber(), {matrixKey: randomString()}]" queryParamsHandling="merge">
             Navigate with child-route placeholder and matrix params
           </a>
         </div>
