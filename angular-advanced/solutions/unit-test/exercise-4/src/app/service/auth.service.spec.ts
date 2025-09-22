@@ -1,5 +1,6 @@
 import { firstValueFrom, of } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { vi } from 'vitest';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -36,16 +37,10 @@ describe('AuthService', () => {
       service = new AuthService({} as any); // Dummy
     });
 
-    it("should not be logged in", done => {
+    it("should not be logged in", async () => {
       // Assert
-      service.isLoggedIn$.pipe(first()).subscribe({
-        next: isLoggedIn => {
-          expect(isLoggedIn).toEqual(false);
-          done();
-        },
-        error: error => done(error),
-
-      });
+      const isLoggedIn = await firstValueFrom(service.isLoggedIn$.pipe(first()));
+      expect(isLoggedIn).toEqual(false);
     });
 
   });
@@ -54,25 +49,18 @@ describe('AuthService', () => {
     let service: AuthService;
 
     beforeEach(async () => {
-      const httpClientMock = { post: jest.fn().mockReturnValue(of({ authenticated: true })) };
+      const httpClientMock = { post: vi.fn().mockReturnValue(of({ authenticated: true })) };
       service = new AuthService(httpClientMock as any);
       await firstValueFrom(service.login('email@email.com', 'password').pipe(first()));
     });
 
-    it("should throw on login", done => {
+    it("should throw on login", async () => {
       // Arrange
       const email = 'email@email.com';
       const password = 'password';
-      const login$ = service.login(email, password);
-      // Act
-      login$.subscribe({
-        next: isLoggedIn => done(`Received unexpected next: ${isLoggedIn}`),
-        error: error => {
-          // Assert
-          expect(error).toEqual('Already logged in');
-          done();
-        },
-      });
+
+      // Act & Assert
+      await expect(firstValueFrom(service.login(email, password))).rejects.toEqual('Already logged in');
     });
 
   });
@@ -82,39 +70,32 @@ describe('AuthService', () => {
     let httpClientMock: any;
 
     beforeEach(() => {
-      httpClientMock = { post: jest.fn().mockReturnValue(of({ authenticated: true })) };
+      httpClientMock = { post: vi.fn().mockReturnValue(of({ authenticated: true })) };
       service = new AuthService(httpClientMock as any);
     });
 
-    it("should login with email & password", (done) => {
+    it("should login with email & password", async () => {
       // Arrange
       const email = 'email@email.com';
       const password = 'password';
-      const login$ = service.login(email, password);
+
       // Act
-      login$.subscribe({
-        next: isLoggedIn => {
-          // Assert
-          expect(isLoggedIn).toEqual(true);
-          done();
-        },
-        error: error => done(error),
-      });
+      const isLoggedIn = await firstValueFrom(service.login(email, password));
+
+      // Assert
+      expect(isLoggedIn).toEqual(true);
     });
 
-    it("should call '/api/login'", (done) => {
+    it("should call '/api/login'", async () => {
       // Arrange
       const email = 'email@email.com';
       const password = 'password';
-      const login$ = service.login(email, password);
+
       // Act
-      login$.subscribe({
-        next: () => {
-          expect(httpClientMock.post).toHaveBeenCalledWith('/api/login', { email, password });
-          done();
-        },
-        error: error => done(error),
-      });
+      await firstValueFrom(service.login(email, password));
+
+      // Assert
+      expect(httpClientMock.post).toHaveBeenCalledWith('/api/login', { email, password });
     });
 
   });
