@@ -26,7 +26,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@ng-bootstrap/ng-bootstrap": "^19.0.1",
-    "@ngneat/falso": "^7.3.0",
+    "@ngneat/falso": "^8.0.2",
     "@ngneat/until-destroy": "^10.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.6",
