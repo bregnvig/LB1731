@@ -8,12 +8,12 @@ import { RxresourcePlaygroundService } from './rxresource-playground.service';
 export class RxresourcePlaygroundStore {
 
   #service = inject(RxresourcePlaygroundService);
-  #playgroundsResource = rxResource({ loader: () => this.#service.list(), defaultValue: [] });
+  #playgroundsResource = rxResource({ stream: () => this.#service.list(), defaultValue: [] });
 
   #update = signal<Playground | undefined>(undefined);
   #updateResource = rxResource({
-    request: () => this.#update(),
-    loader: ({ request: playground }) => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
+    params: () => this.#update(),
+    stream: ({ params: playground }) => !playground ? of(null) : this.#service.update(playground.id, playground).pipe(
       tap(() => this.#playgroundsResource.reload())
     ),
   });
