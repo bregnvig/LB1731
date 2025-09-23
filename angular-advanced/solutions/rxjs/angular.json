@@ -43,7 +43,12 @@
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import", "color-functions", "global-builtin"]
+              }
+            }
           },
           "configurations": {
             "production": {
