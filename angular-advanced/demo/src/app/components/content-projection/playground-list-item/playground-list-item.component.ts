@@ -11,7 +11,7 @@ import { Playground } from 'src/app/shared';
       </div>
       <div>
         <div class="btn-group">
-          <ng-content select="button, a" />
+          <ng-content select="button,a" />
         </div>
       </div>
     </li>

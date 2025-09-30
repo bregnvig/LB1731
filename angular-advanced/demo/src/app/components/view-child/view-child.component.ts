@@ -12,6 +12,10 @@ export class ViewChildComponent implements OnInit, AfterViewInit {
   stopWatch = viewChild.required(StopWatchComponent);
   running = true;
 
+  // constructor() {
+  //   this.start();
+  // }
+
   ngOnInit() {
     this.start();
   }

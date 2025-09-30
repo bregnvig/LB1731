@@ -1,7 +1,6 @@
-@if(playground()) {
-<li
+<a
   class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
-  [class.active]="selected()">
+  [class.active]="playground() === selected()">
   <div class="d-flex flex-column justify-content-between">
     <h6 class="mb-1">{{playground().name}}
       <span class="badge bg-primary badge-pill">{{playground().position | distance: location() | humanizeDistance}}</span>
@@ -9,7 +8,6 @@
     <small>{{playground().description | defaultDescription}}</small>
   </div>
   <div>
-    <ng-content select="button" />
+    <ng-content select="button"></ng-content>
   </div>
-</li>
-}
+</a>

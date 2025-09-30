@@ -111,7 +111,7 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
           },
           {
             path: 'view-container',
-            component: DynamicComponentComponent,
+            component: DynamicViewContainerRefComponentComponent,
           },
           {
             path: 'ng-dynamic-component',

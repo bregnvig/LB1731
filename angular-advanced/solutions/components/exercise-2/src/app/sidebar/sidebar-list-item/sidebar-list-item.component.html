@@ -3,7 +3,7 @@
   [class.active]="playground() === selected()">
   <div class="d-flex flex-column justify-content-between">
     <h6 class="mb-1">{{playground().name}}
-      <span class="badge bg-primary badge-pill">{{playground().position | distance: (location$() | async) | humanizeDistance}}</span>
+      <span class="badge bg-primary badge-pill">{{playground().position | distance: location() | humanizeDistance}}</span>
     </h6>
     <small>{{playground().description | defaultDescription}}</small>
   </div>

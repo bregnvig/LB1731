@@ -7,10 +7,10 @@ export interface No {
 }
 
 @Component({
-    selector: 'loop-change-detection',
-    templateUrl: './change-detection.component.html',
-    styleUrls: ['./change-detection.component.scss'],
-    standalone: false
+  selector: 'loop-change-detection',
+  templateUrl: './change-detection.component.html',
+  styleUrls: ['./change-detection.component.scss'],
+  standalone: false
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
@@ -30,6 +30,6 @@ export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirect
   }
 
   startCounter() {
-    timer(0, 1000).pipe(this.takeUntilDestroyed()).subscribe(no => this.no.value = no);
+    timer(0, 1000).pipe(this.takeUntilDestroyed()).subscribe(x => this.no.value = x);
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, interval, map } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class ObservableEventsComponent {
   no$?: Observable<number>;
   running = false;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   start(): void {
 

@@ -1,20 +1,19 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Playground } from '../model';
 
-
-
 @Component({
   selector: 'loop-footer',
   template: `
+  @if(playground(); as p) {
     <footer>
-      <h3>{{playground()!.name}}</h3>
-      <p>{{playground()!.addressDescription}}</p>
-      <p>{{playground()!.description}}</p>
+      <h3>{{p.name}}</h3>
+      <p>{{p.addressDescription}}</p>
+      <p>{{p.description}}</p>
     </footer>
+  }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
-
   playground = input<Playground>();
 }

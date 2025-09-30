@@ -1,4 +1,4 @@
-import { Component, effect, EventEmitter, input, Output } from '@angular/core';
+import { Component, effect, EventEmitter, input, output, Output } from '@angular/core';
 import { icon, latLng, MapOptions, marker, tileLayer } from 'leaflet';
 import { Playground } from 'src/app/shared';
 
@@ -13,10 +13,10 @@ import { Playground } from 'src/app/shared';
       </div>
     <p class="mt-3 mb-0">
       <button class="btn btn-sm btn-secondary">
-        <fa-icon size="2x" [icon]="['far', 'thumbs-up']" (click)="vote.emit('up')"/>
+        <fa-icon size="2x" [icon]="['far', 'thumbs-up']" (click)="emit('up')"/>
       </button>
       <button class="ms-2 btn btn-sm btn-secondary">
-        <fa-icon size="2x" [icon]="['far', 'thumbs-down']" (click)="vote.emit('down')"/>
+        <fa-icon size="2x" [icon]="['far', 'thumbs-down']" (click)="emit('down')"/>
       </button>
     </p>
     }
@@ -50,6 +50,13 @@ export class FancyPlaygroundDetailsComponent {
         center: latLng(value.position.lat, value.position.lng),
       };
     });
+  }
+
+  modernVote = output<'up' | 'down'>();
+
+  emit(vote: 'up' | 'down') {
+    this.vote.emit(vote);
+    this.modernVote.emit(vote);
   }
 
 }

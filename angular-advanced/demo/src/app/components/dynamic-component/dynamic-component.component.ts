@@ -11,7 +11,7 @@ import { PopoverService } from './popover.service';
           class="list-group-item list-group-item-action">
           <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
           <ng-template #popoverContent>
-            <ng-container *ngComponentOutlet="popover; inputs:{playground: playground}" />
+            <ng-container *ngComponentOutlet="popover; inputs:{playground}" />
           </ng-template>
       </button>
       }

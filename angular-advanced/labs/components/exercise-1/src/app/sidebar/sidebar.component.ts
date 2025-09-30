@@ -1,21 +1,19 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
-import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
-import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
-import { DistancePipe } from '../pipe/distance.pipe';
-import { AsyncPipe } from '@angular/common';
+import { SidebarListItemComponent } from "./sidebar-list-item.component";
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    imports: [
-        AsyncPipe,
-        DistancePipe,
-        HumanizeDistancePipe,
-        DefaultDescriptionPipe,
-    ]
+  selector: 'loop-sidebar',
+  templateUrl: './sidebar.component.html',
+  imports: [
+    AsyncPipe,
+    SidebarListItemComponent,
+    FaIconComponent
+  ]
 })
 export class SidebarComponent {
 

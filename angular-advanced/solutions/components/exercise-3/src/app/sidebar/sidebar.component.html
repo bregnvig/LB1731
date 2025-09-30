@@ -2,7 +2,7 @@
   <nav>
     <div class="list-group">
       @for (playground of playgrounds(); track playground.id) {
-        <loop-sidebar-list-item [playground]="playground" [selected]="selectedPlayground" [location$]="location$">
+        <loop-sidebar-list-item [playground]="playground" [selected]="selectedPlayground()" [location]="location()">
           <button class="btn btn-sm btn-secondary" (click)="selectPlayground(playground)">
             <fa-icon [icon]="['fas', 'check']"></fa-icon>
           </button>
