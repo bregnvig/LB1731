@@ -10,6 +10,6 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from 'src/
 export class SidebarListItemComponent {
 
   playground = input.required<Playground>();
-  selected = input<Playground>();
+  selected = input<boolean>();
   location = input<Coordinate | null>();
 }
