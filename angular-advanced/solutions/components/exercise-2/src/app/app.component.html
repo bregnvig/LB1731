@@ -1,7 +1,5 @@
 <leaflet [center]="center" [markers]="markers$" />
 <loop-sidebar [playgrounds]="playgrounds$ |async" (selected)="playground$.next($event)" />
 @if(playground$ | async; as playground) {
-<ng-template
-  [ngComponentOutlet]="component"
-  [ndcDynamicInputs]="{ playground }" />
+  <ng-container *ngComponentOutlet="component; inputs: { playground }" />
 }

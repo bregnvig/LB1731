@@ -1,6 +1,5 @@
-import { AsyncPipe, NgComponentOutlet, NgIf } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { Component } from '@angular/core';
-import { DynamicIoModule } from 'ng-dynamic-component';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
@@ -14,7 +13,7 @@ import { withLength } from './utils/rxjs-utils';
   selector: 'loop-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [SidebarComponent, AsyncPipe, LeafletModule, NgComponentOutlet, DynamicIoModule]
+  imports: [SidebarComponent, AsyncPipe, LeafletModule, NgComponentOutlet]
 })
 export class AppComponent {
 

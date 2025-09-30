@@ -1,7 +1,6 @@
-import { AsyncPipe, NgComponentOutlet, NgIf } from '@angular/common';
+import { AsyncPipe, NgComponentOutlet } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ComponentOutletInjectorDirective, DynamicIoDirective } from 'ng-dynamic-component';
 import { Observable, Subject, combineLatest, merge } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
@@ -14,10 +13,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { withLength } from './utils/rxjs-utils';
 
 @Component({
-    selector: 'loop-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [SidebarListItemComponent, FaIconComponent, SidebarComponent, NgIf, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective, AsyncPipe, LeafletModule]
+  selector: 'loop-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [SidebarListItemComponent, FaIconComponent, SidebarComponent, NgComponentOutlet, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

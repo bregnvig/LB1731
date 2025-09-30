@@ -8,8 +8,6 @@
 </ng-template>
 
 <loop-sidebar [filterFn]="filterFn$ | async" [itemTemplate]="playgroundTemplate"></loop-sidebar>
-<ng-template
-  *ngIf="playground$ | async as playground"
-  [ngComponentOutlet]="component"
-  [ndcDynamicInputs]="{ playground }">
-</ng-template>
+@if(playground$ | async; as playground) {
+  <ng-container *ngComponentOutlet="component; inputs: { playground }" />
+}

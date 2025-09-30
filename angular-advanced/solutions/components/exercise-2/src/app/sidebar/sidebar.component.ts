@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
@@ -7,14 +7,13 @@ import { LocationService } from '../service';
 import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.component';
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    imports: [
-        NgFor,
-        SidebarListItemComponent,
-        FaIconComponent,
-        AsyncPipe,
-    ]
+  selector: 'loop-sidebar',
+  templateUrl: './sidebar.component.html',
+  imports: [
+    NgFor,
+    SidebarListItemComponent,
+    FaIconComponent,
+  ]
 })
 export class SidebarComponent {
 

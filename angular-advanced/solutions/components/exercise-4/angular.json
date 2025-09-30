@@ -37,7 +37,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss", 
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
@@ -45,7 +45,11 @@
             ],
             "stylePreprocessorOptions": {
               "sass": {
-                "silenceDeprecations": ["import", "color-functions", "global-builtin"]
+                "silenceDeprecations": [
+                  "import",
+                  "color-functions",
+                  "global-builtin"
+                ]
               }
             }
           },
@@ -72,9 +76,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
