@@ -1,32 +1,28 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { Observable } from 'rxjs';
+import { Component, input, output, signal } from '@angular/core';
 import { Coordinate, Playground } from '../model';
-import { LocationService } from '../service';
-import { SidebarListItemComponent } from "./sidebar-list-item.component";
+import { DefaultDescriptionPipe } from "../pipe/default-description.pipe";
+import { DistancePipe } from "../pipe/distance.pipe";
+import { HumanizeDistancePipe } from "../pipe/humanize-distance.pipe";
 
 @Component({
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   imports: [
-    AsyncPipe,
-    SidebarListItemComponent,
-    FaIconComponent
-  ]
+    DistancePipe,
+    HumanizeDistancePipe,
+    DefaultDescriptionPipe
+  ],
 })
 export class SidebarComponent {
 
   playgrounds = input<Playground[] | null>([]);
   selected = output<Playground>();
+  location = input<Coordinate | null>();
 
-  selectedPlayground?: Playground;
-  location$: Observable<Coordinate> = this.locationService.location$;
-
-  constructor(private locationService: LocationService) { }
+  selectedPlayground = signal<Playground | undefined>(undefined);
 
   selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
+    this.selectedPlayground.set(playground);
     this.selected.emit(playground);
   }
 

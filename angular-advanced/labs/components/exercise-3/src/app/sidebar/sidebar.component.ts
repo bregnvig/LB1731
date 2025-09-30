@@ -1,8 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
-import { LocationService } from '../service';
 import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.component';
 
 @Component({
@@ -11,20 +9,18 @@ import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.
   imports: [
     SidebarListItemComponent,
     FaIconComponent,
-  ]
+  ],
 })
 export class SidebarComponent {
 
   playgrounds = input<Playground[] | null>([]);
   selected = output<Playground>();
+  location = input<Coordinate | null>();
 
-  selectedPlayground?: Playground;
-  location$: Observable<Coordinate> = this.locationService.location$;
-
-  constructor(private locationService: LocationService) { }
+  selectedPlayground = signal<Playground | undefined>(undefined);
 
   selectPlayground(playground: Playground): void {
-    this.selectedPlayground = playground;
+    this.selectedPlayground.set(playground);
     this.selected.emit(playground);
   }
 
