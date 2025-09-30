@@ -1,18 +1,13 @@
-<ng-template #defaultTemplate let-item>
-  <li class="list-group-item">{{item}}</li>
-</ng-template>
 <aside tabindex="1">
   <nav>
-    <div class="row">
-      <div class="col">
-        <input id="filter" [formControl]="filterControl" autofocus type="text" class="form-control form-control-lg">
-      </div>
-    </div>
     <div class="list-group">
-      <ng-container  *ngFor="let item of filtered$ | async" 
-        [ngTemplateOutlet]="itemTemplate ?? defaultTemplate" 
-        [ngTemplateOutletContext]="{$implicit: item}">
-      </ng-container>
+      @for (playground of playgrounds; track playground.id) {
+        <loop-sidebar-list-item [playground]="playground" [selected]="selectedPlayground" [location$]="location$">
+          <button class="btn btn-sm btn-secondary" (click)="selectPlayground(playground)">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+          </button>
+        </loop-sidebar-list-item>
+      }
     </div>
   </nav>
 </aside>

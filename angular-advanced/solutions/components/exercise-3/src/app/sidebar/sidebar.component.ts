@@ -1,47 +1,31 @@
-import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, TemplateRef } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, debounceTime, map, startWith } from 'rxjs';
-import { Coordinate } from '../model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { Observable } from 'rxjs';
+import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
+import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.component';
 
 @Component({
-    selector: 'loop-sidebar',
-    templateUrl: './sidebar.component.html',
-    imports: [
-        ReactiveFormsModule,
-        NgFor,
-        NgTemplateOutlet,
-        AsyncPipe,
-    ]
+  selector: 'loop-sidebar',
+  templateUrl: './sidebar.component.html',
+  imports: [
+    SidebarListItemComponent,
+    FaIconComponent,
+  ]
 })
-export class SidebarComponent implements OnChanges {
+export class SidebarComponent {
 
-  @Input() itemTemplate?: TemplateRef<any>;
-  @Output() selected = new EventEmitter<any>();
-  @Input({ required: true }) filterFn?: ((term: string) => any[]) | null;
+  @Input() playgrounds: Playground[] | null = [];
+  @Output() selected = new EventEmitter<Playground>();
 
-  selectedItem?: any;
-  filterControl = new FormControl<string>('');
+  selectedPlayground?: Playground;
   location$: Observable<Coordinate> = this.locationService.location$;
-  filtered$?: Observable<any[]>;
 
-  constructor(private locationService: LocationService) {
-  }
+  constructor(private locationService: LocationService) { }
 
-  ngOnChanges(): void {
-    const filterFn = this.filterFn;
-
-    filterFn && (this.filtered$ = this.filterControl.valueChanges.pipe(
-      startWith(this.filterControl.value),
-      debounceTime(300),
-      map(term => filterFn(term ?? ''))
-    ));
-  }
-
-  selectItem(item: any): void {
-    this.selectedItem = item;
-    this.selected.emit(item);
+  selectPlayground(playground: Playground): void {
+    this.selectedPlayground = playground;
+    this.selected.emit(playground);
   }
 
 }

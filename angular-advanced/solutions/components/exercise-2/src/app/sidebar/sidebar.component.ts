@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
@@ -10,7 +9,6 @@ import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   imports: [
-    NgFor,
     SidebarListItemComponent,
     FaIconComponent,
   ]
