@@ -1,13 +1,15 @@
-<a
+@if(playground()) {
+<li
   class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
-  [class.active]="selected">
+  [class.active]="selected()">
   <div class="d-flex flex-column justify-content-between">
-    <h6 class="mb-1">{{playground.name}}
-      <span class="badge bg-primary badge-pill">{{playground.position | distance: location | humanizeDistance}}</span>
+    <h6 class="mb-1">{{playground().name}}
+      <span class="badge bg-primary badge-pill">{{playground().position | distance: location() | humanizeDistance}}</span>
     </h6>
-    <small>{{playground.description | defaultDescription}}</small>
+    <small>{{playground().description | defaultDescription}}</small>
   </div>
   <div>
-    <ng-content select="button"></ng-content>
+    <ng-content select="button" />
   </div>
-</a>
+</li>
+}

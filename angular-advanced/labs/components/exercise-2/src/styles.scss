@@ -1,9 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import "scss/variables";
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import "scss/bootswatch";
+@import 'scss/variables';
+@import 'bootstrap/scss/bootstrap';
 
 @font-face {
   font-family: 'Lato';

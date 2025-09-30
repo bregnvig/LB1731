@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { withLength } from './utils/rxjs-utils';
     selector: 'loop-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports: [SidebarComponent, NgIf, FooterComponent, AsyncPipe, LeafletModule]
+    imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 

@@ -32,7 +32,7 @@ bootstrapApplication(AppComponent, {
       provide: APP_INITIALIZER,
       useFactory: (library: FaIconLibrary) => library.addIconPacks(fas, far),
       deps: [FaIconLibrary],
-    },
+    }
   ]
 })
   .catch(err => console.error(err));
