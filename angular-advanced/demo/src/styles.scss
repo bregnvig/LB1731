@@ -28,6 +28,18 @@ h5 {
   text-transform: uppercase;
 }
 
+.pointer, [role="button"] {
+  cursor: pointer;
+}
+
+fa-icon[role="button"] {
+  &:hover {
+    opacity: 1;
+  }
+
+  opacity: 0.6;
+}
+
 input.ng-invalid.ng-touched {
   border-left: 3px solid darkred;
 }
@@ -38,11 +50,23 @@ img.rainbow-hover:hover, img.rainbow {
 }
 
 @-webkit-keyframes rainbow {
-  from { -webkit-filter:hue-rotate(10deg); }
-  to { -webkit-filter:hue-rotate(360deg); }
+  from {
+    -webkit-filter: hue-rotate(10deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
 }
 
 @keyframes rainbow {
-  from { -webkit-filter:hue-rotate(10deg); filter:hue-rotate(10deg); }
-  to { -webkit-filter:hue-rotate(360deg); filter:hue-rotate(360deg); }
+  from {
+    -webkit-filter: hue-rotate(10deg);
+    filter: hue-rotate(10deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
 }

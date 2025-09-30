@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, viewChild } from '@angular/core';
 import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,9 +7,9 @@ import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./after-view-init.component.scss'],
     standalone: false
 })
-export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
+export class AfterViewInitComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(NgbAccordionDirective) accordion!: NgbAccordionDirective;
+  accordion = viewChild.required(NgbAccordionDirective);
 
   constructor() { }
 
@@ -18,7 +18,7 @@ export class AfterViewInitComponent implements OnInit, AfterViewInitComponent {
   }
 
   ngAfterViewInit(): void {
-    this.accordion.expand('simple');
+    this.accordion().expand('simple');
   }
 
 }

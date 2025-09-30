@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { No } from '../change-detection.component';
 
 @Component({
   selector: 'loop-input-property-on-push-by-reference',
   template: `
     <p>
-      input-property-on-push component <span class="badge bg-warning me-3">{{no?.value}}</span>
+      input-property-on-push component <span class="badge bg-warning me-3">{{no()?.value}}</span>
       <button class="btn btn-sm btn-primary" (click)="noop()">Update UI</button>
     </p>
   `,
@@ -14,7 +14,7 @@ import { No } from '../change-detection.component';
 })
 export class InputPropertyOnPushByReferenceComponent {
 
-  @Input() no: No | undefined;
+  no = input<No>();
 
   noop() {
     console.log('Force change detection');

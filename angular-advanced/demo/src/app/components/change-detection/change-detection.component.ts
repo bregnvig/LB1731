@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, viewChild } from '@angular/core';
 import { timer } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
@@ -14,7 +14,7 @@ export interface No {
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
-  @ViewChild('outside', { static: true }) div!: ElementRef<HTMLDivElement>;
+  div = viewChild.required<ElementRef<HTMLDivElement>>('outside');
   no: No = { value: 0 };
 
   constructor(private zone: NgZone) {
@@ -22,7 +22,7 @@ export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirect
   }
 
   ngOnInit(): void {
-    this.zone.runOutsideAngular(() => this.div.nativeElement.addEventListener('mousemove', event => this.mouseMove(event)));
+    this.zone.runOutsideAngular(() => this.div().nativeElement.addEventListener('mousemove', event => this.mouseMove(event)));
   }
 
   mouseMove(event: MouseEvent) {

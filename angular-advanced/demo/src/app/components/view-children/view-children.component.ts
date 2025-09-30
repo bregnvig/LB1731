@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, effect, viewChildren } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
@@ -26,16 +26,22 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 export class ViewChildrenComponent implements AfterViewInit {
 
   watchNos: number[] = [0, 1, 2, 3, 4];
-  @ViewChildren('watch1, watch2') watches!: QueryList<StopWatchComponent>;
-  @ViewChildren(StopWatchComponent) dynamicWatches!: QueryList<StopWatchComponent>;
+  watches = viewChildren<StopWatchComponent>('watch1, watch2');
+  dynamicWatches = viewChildren(StopWatchComponent);
+
+  constructor() {
+    effect(() => {
+      this.dynamicWatches()?.filter(({ isRunning }) => !isRunning).forEach(w => w.start());
+    });
+
+  }
 
   ngAfterViewInit(): void {
-    this.watches.forEach(w => w.start());
-    this.dynamicWatches.forEach(w => w.start());
-    console.log('Hardcoded', this.watches.length);
-    console.log('No of stopwatches', this.dynamicWatches.length);
+    console.log('Hardcoded', this.watches().length);
+    console.log('No of stopwatches', this.dynamicWatches().length);
+    this.watches().forEach(w => w.start());
 
-    this.dynamicWatches.changes.subscribe(list => list.last.start());
+    // Note: viewChildren signals automatically update, no need for changes subscription
   }
 
   addWatch() {

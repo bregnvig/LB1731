@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
     selector: 'loop-on-change-display-list',
     template: `
     <table class="table">
-      @for (item of items; track item) {
+      @for (item of items(); track item) {
         <tr>
           <td>{{item}}</td>
         </tr>
@@ -14,14 +14,13 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } f
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export class OnChangeDisplayListComponent implements OnChanges {
+export class OnChangeDisplayListComponent {
 
-  @Input() items: string[] | undefined;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('On changes has been executed', changes);
-
-    changes['items'] && (this.items = this.items?.map(i => i.toUpperCase())?.sort());
-  }
+  inputItems = input<string[]>();
+  items = computed(() => {
+    const items = this.inputItems();
+    console.log('Input changed:', items);
+    return items?.map(i => i.toUpperCase())?.sort();
+  });
 
 }

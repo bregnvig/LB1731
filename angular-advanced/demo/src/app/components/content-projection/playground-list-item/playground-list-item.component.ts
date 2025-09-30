@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Playground } from 'src/app/shared';
 
 @Component({
@@ -6,7 +6,7 @@ import { Playground } from 'src/app/shared';
   template: `
     <li class="list-group-item d-flex">
       <div class="flex-item d-flex flex-column">
-        <span class="flex-item">{{playground?.name}}</span>
+        <span class="flex-item">{{playground()?.name}}</span>
         <small><ng-content/></small>
       </div>
       <div>
@@ -22,6 +22,6 @@ import { Playground } from 'src/app/shared';
 })
 export class PlaygroundListItemComponent {
 
-  @Input() playground: Playground | undefined;
+  playground = input<Playground>();
 
 }

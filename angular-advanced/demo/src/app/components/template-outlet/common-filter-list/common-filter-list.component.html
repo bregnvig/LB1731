@@ -1,5 +1,5 @@
 <ng-template #defaultTemplate let-item>
-  {{property ? item[property] : item}}
+  {{property() ? item[property()!] : item}}
 </ng-template>
 <div class="form-group row">
   <div class="col">
@@ -9,10 +9,10 @@
 <div class="row mt-2">
   <div class="col">
     <ul class="list-group">
-      @for (item of items; track item) {
+      @for (item of items(); track item) {
         <li class="list-group-item">
           <ng-container
-            [ngTemplateOutlet]="itemTemplateRef || defaultTemplate"
+            [ngTemplateOutlet]="itemTemplateRef() || defaultTemplate"
             [ngTemplateOutletContext]="{$implicit: item}">
           </ng-container>
         </li>

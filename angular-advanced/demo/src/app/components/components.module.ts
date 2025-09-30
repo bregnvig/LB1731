@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { SharedModule } from '../shared/shared.module';
@@ -18,12 +19,9 @@ import { PlaygroundListItemSingleSlotComponent } from './content-projection/play
 import { PlaygroundListItemComponent } from './content-projection/playground-list-item/playground-list-item.component';
 import { SingleSlotContentProjectionComponent } from './content-projection/single-slot-content-projection.component';
 import { DynamicComponentComponent } from './dynamic-component/dynamic-component.component';
-import { DynamicHostDirective } from './dynamic-component/dynamic-host.directive';
+import { DynamicViewContainerRefComponentComponent } from './dynamic-component/dynamic-view-container-ref-component.component';
 import { FancyPlaygroundDetailsComponent } from './dynamic-component/fancy-playground-details/fancy-playground-details.component';
-import { FancyPopoverService } from './dynamic-component/fancy-popover.service';
 import { NgDynamicComponentComponent } from './dynamic-component/ng-dynamic-component.component';
-import { PopoverContentComponent } from './dynamic-component/popover-content/popover-content.component';
-import { PopoverService } from './dynamic-component/popover.service';
 import { SimplePlaygroundDetailsComponent } from './dynamic-component/simple-playground-details/simple-playground-details.component';
 import { AfterViewInitComponent } from './life-cycle/after-view-init/after-view-init.component';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
@@ -54,11 +52,9 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     ViewChildrenComponent,
     ContentProjectionComponent,
     PlaygroundListItemComponent,
-    DynamicHostDirective,
     DynamicComponentComponent,
     SimplePlaygroundDetailsComponent,
     FancyPlaygroundDetailsComponent,
-    PopoverContentComponent,
     NgDynamicComponentComponent,
     TemplateOutletComponent,
     CommonFilterListComponent,
@@ -73,6 +69,8 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     PlaygroundListItemSingleSlotComponent,
     WrappedInsideOnPushComponent,
     ObservableEventsDefaultComponent,
+    StopWatchComponent,
+    DynamicViewContainerRefComponentComponent,
   ],
   imports: [
     CommonModule,
@@ -81,6 +79,7 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
     NgbModule,
     SharedModule,
     DynamicIoModule,
+    FontAwesomeModule,
     RouterModule.forChild([
       {
         path: '',
@@ -111,6 +110,10 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
             component: DynamicComponentComponent,
           },
           {
+            path: 'view-container',
+            component: DynamicComponentComponent,
+          },
+          {
             path: 'ng-dynamic-component',
             component: NgDynamicComponentComponent,
           },
@@ -134,11 +137,11 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
       }
     ])
   ],
-  providers: [
-    {
-      provide: PopoverService,
-      useClass: FancyPopoverService,
-    }
-  ]
+  // providers: [
+  //   {
+  //     provide: PopoverService,
+  //     useClass: FancyPopoverService,
+  //   }
+  // ]
 })
 export class ComponentsModule { }

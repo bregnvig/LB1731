@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
     selector: 'loop-input-property-on-push-simple-type',
     template: `
     <p>
-      input-property-on-push-simple-type component <span class="badge bg-success">{{no}}</span>!
+      input-property-on-push-simple-type component <span class="badge bg-success">{{no()}}</span>!
     </p>
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,5 +12,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class InputPropertyOnPushSimpleTypeComponent {
 
-  @Input() no?: number;
+  no = input<number>();
 }

@@ -1,22 +1,22 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, input, OnInit, output, TemplateRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
-    selector: 'loop-common-filter-list',
-    templateUrl: './common-filter-list.component.html',
-    styleUrls: ['./common-filter-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'loop-common-filter-list',
+  templateUrl: './common-filter-list.component.html',
+  styleUrls: ['./common-filter-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CommonFilterListComponent implements OnInit {
 
-  @Input() items: any[] | null = null;
-  @Input() property?: string;
-  @Input() itemTemplateRef: TemplateRef<any> | undefined;
-  @Output() filter = new EventEmitter<string>();
+  items = input<any[] | null>(null);
+  property = input<string>();
+  itemTemplateRef = input<TemplateRef<any>>();
+  filter = output<string>();
 
-  filterControl = new UntypedFormControl();
+  filterControl = new FormControl<string>('', { nonNullable: true });
 
   constructor() { }
 
