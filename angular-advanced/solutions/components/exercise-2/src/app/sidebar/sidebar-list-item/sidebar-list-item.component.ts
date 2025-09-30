@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from 'src/app/model';
 import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from 'src/app/pipe';
@@ -12,7 +12,7 @@ import { DefaultDescriptionPipe, DistancePipe, HumanizeDistancePipe } from 'src/
 })
 export class SidebarListItemComponent {
 
-  @Input() playground!: Playground;
-  @Input() selected?: Playground;
-  @Input() location$?: Observable<Coordinate>;
+  playground = input.required<Playground>();
+  selected = input<Playground>();
+  location$ = input<Observable<Coordinate>>();
 }

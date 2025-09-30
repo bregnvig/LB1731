@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
@@ -15,8 +15,8 @@ import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
-  @Output() selected = new EventEmitter<Playground>();
+  playgrounds = input<Playground[] | null>([]);
+  selected = output<Playground>();
 
   selectedPlayground?: Playground;
   location$: Observable<Coordinate> = this.locationService.location$;

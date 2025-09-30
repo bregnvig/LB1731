@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Playground } from '../model';
 
 
@@ -7,14 +7,14 @@ import { Playground } from '../model';
   selector: 'loop-footer',
   template: `
     <footer>
-      <h3>{{playground!.name}}</h3>
-      <p>{{playground!.addressDescription}}</p>
-      <p>{{playground!.description}}</p>
+      <h3>{{playground()!.name}}</h3>
+      <p>{{playground()!.addressDescription}}</p>
+      <p>{{playground()!.description}}</p>
     </footer>
   `,
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
 
-  @Input() playground: Playground | undefined;
+  playground = input<Playground>();
 }
