@@ -2,8 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "scss/variables";
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import "scss/bootswatch";
+@import 'bootstrap/scss/bootstrap';
 
 @font-face {
   font-family: 'Lato';

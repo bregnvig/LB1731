@@ -1,8 +1,8 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
+      @for (playground of playgrounds(); track playground.name) {
       <li
-        *ngFor="let playground of playgrounds"
         class="flex-item list-group-item d-flex list-group-item-action justify-content-between"
         [class.active]="playground === selectedPlayground"
         (click)="selectPlayground(playground)">
@@ -13,6 +13,7 @@
           <small>{{playground.description | defaultDescription}}</small>
         </div>
       </li>
+      }
     </div>
   </nav>
 </aside>

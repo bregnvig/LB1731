@@ -37,7 +37,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss", 
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
@@ -48,7 +48,12 @@
                 "."
               ],
               "sass": {
-                "silenceDeprecations": ["mixed-decls", "color-functions", "global-builtin", "import"]
+                "silenceDeprecations": [
+                  "mixed-decls",
+                  "color-functions",
+                  "global-builtin",
+                  "import"
+                ]
               }
             }
           },
@@ -75,9 +80,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
