@@ -71,26 +71,23 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
   standalone: true,
   imports: [CommonModule, RxresourceServiceStoreItemComponent],
   template: `
-    @if(loading()) {
+    @if(store.playgroundsLoading()) {
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     }
-    @if(error()) {
+    @if(store.playgroundsError()) {
       <div class="alert alert-danger" role="alert">
-        Error: {{ error() }}
+        Error: {{ store.playgroundsError() }}
       </div>
     }
-    @for (playground of playgrounds(); track playground.id) {
+    @for (playground of store.playgrounds(); track playground.id) {
       <loop-rxresource-service-store-item [playground]="playground"/>
     }
   `,
 })
 export class RxresourceServiceStoreListComponent {
-  #store = inject(RxresourcePlaygroundStore);
-  playgrounds = this.#store.playgrounds;
-  loading = this.#store.playgroundsLoading;
-  error = this.#store.playgroundsError;
+  store = inject(RxresourcePlaygroundStore);
 }
 
 @Component({
