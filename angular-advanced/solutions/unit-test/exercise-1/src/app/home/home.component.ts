@@ -4,7 +4,6 @@ import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators'
 import { withLength } from '../utils/rxjs-utils';
 import { LeafletComponent } from '../leaflet/leaflet.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { FooterComponentModule } from '../footer/footer.component';
 import { Marker } from '../leaflet/marker';
 import { Center } from '../leaflet/center';
 import { Coordinate } from '../model/coordinate';
@@ -12,6 +11,7 @@ import { Playground } from '../model/playground';
 import { LocationService } from '../service/location.service';
 import { PlaygroundService } from '../service/playground.service';
 import { AsyncPipe } from '@angular/common';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
     selector: 'app-home',
@@ -22,7 +22,7 @@ import { AsyncPipe } from '@angular/common';
       <loop-footer [playground]="playground"></loop-footer>
     }
   `,
-    imports: [LeafletComponent, SidebarComponent, FooterComponentModule, AsyncPipe]
+    imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class HomeComponent implements OnInit {
 

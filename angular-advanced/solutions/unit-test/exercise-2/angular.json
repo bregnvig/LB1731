@@ -41,12 +41,12 @@
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js"
             ],
-            "browser": "src/main.ts",
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "."
-              ]
-            }
+              "sass": {
+                "silenceDeprecations": ["import", "color-functions", "global-builtin"]
+              }
+            },
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {

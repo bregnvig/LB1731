@@ -10,7 +10,6 @@ import { Playground } from '../model/playground';
       <p>{{playground!.description}}</p>
     </footer>
   `,
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
