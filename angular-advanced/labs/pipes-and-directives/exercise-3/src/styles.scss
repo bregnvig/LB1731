@@ -4,7 +4,7 @@
 @use "scss/font";
 
 /* Importing Bootstrap SCSS file. */
-@forward 'node_modules/bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 
 body {

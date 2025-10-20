@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@forward 'node_modules/bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
 @font-face {
   font-family: 'Lato';
