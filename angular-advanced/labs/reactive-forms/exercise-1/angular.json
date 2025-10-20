@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rxjs": {
+    "reactive-forms": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/rxjs"
+              "base": "dist/reactive-forms"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -87,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rxjs:build:production"
+              "buildTarget": "reactive-forms:build:production"
             },
             "development": {
-              "buildTarget": "rxjs:build:development"
+              "buildTarget": "reactive-forms:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "rxjs:build"
+            "buildTarget": "reactive-forms:build"
           }
         }
       }
