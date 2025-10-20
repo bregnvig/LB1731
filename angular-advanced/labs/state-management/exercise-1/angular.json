@@ -45,9 +45,9 @@
             ],
             "browser": "src/main.ts",
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "."
-              ]
+              "sass": {
+                "silenceDeprecations": ["import", "color-functions", "global-builtin"]
+              }
             }
           },
           "configurations": {
@@ -98,7 +98,6 @@
           "options": {
             "buildTarget": "rxjs:build"
           }
-        },
         }
       }
     }

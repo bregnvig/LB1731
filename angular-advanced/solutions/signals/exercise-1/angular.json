@@ -102,7 +102,6 @@
           "options": {
             "buildTarget": "signals:build"
           }
-        },
         }
       }
     }
