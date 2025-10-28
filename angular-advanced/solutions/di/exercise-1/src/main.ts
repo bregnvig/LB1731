@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, importProvidersFrom, inject } from '@angular/core';
 
 
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -19,8 +19,10 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule),
     {
       provide: PlaygroundService,
-      useFactory: (http: HttpClient) => environment.location === 'copenhagen' ? new PlaygroundService(http) : new AarhusPlaygroundService(http),
-      deps: [HttpClient]
+      useFactory: () => {
+        const http = inject(HttpClient);
+        return environment.location === 'copenhagen' ? new PlaygroundService(http) : new AarhusPlaygroundService(http);
+      },
     },
     provideHttpClient(withInterceptorsFromDi())
   ]

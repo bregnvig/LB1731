@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, enableProdMode, importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
 
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -21,16 +21,16 @@ bootstrapApplication(AppComponent, {
       provide: PLAYGROUND_URL,
       useValue: environment.playgroundsURL,
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (service: PlaygroundService) => () => timer(10000).pipe(switchMap(() => service.playgrounds$)),
-      deps: [PlaygroundService],
-      multi: true,
-    },
-    // provideAppInitializer(() => {
-    //   const service = inject(PlaygroundService);
-    //   return timer(2000).pipe(switchMap(() => service.playgrounds$));
-    // }),
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (service: PlaygroundService) => () => timer(10000).pipe(switchMap(() => service.playgrounds$)),
+    //   deps: [PlaygroundService],
+    //   multi: true,
+    // },
+    provideAppInitializer(() => {
+      const service = inject(PlaygroundService);
+      return timer(2000).pipe(switchMap(() => service.playgrounds$));
+    }),
     provideHttpClient(withInterceptorsFromDi())
   ]
 })

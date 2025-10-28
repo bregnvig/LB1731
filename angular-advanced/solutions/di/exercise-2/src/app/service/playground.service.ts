@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Playground } from '../model';
 
@@ -10,9 +10,6 @@ export const PLAYGROUND_URL = new InjectionToken<string>('Playground URL');
 })
 export class PlaygroundService {
 
-  playgrounds$: Observable<Playground[]>;
+  readonly playgrounds$: Observable<Playground[]> = inject(HttpClient).get<Playground[]>(inject(PLAYGROUND_URL));
 
-  constructor(http: HttpClient, @Inject(PLAYGROUND_URL) url: string) {
-    this.playgrounds$ = http.get<Playground[]>(url);
-  }
 }

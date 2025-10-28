@@ -7,6 +7,7 @@ import { DIComponent } from './di.component';
 import { DaLocaleComponent } from './locale/da-locale.component';
 import { DefaultLocaleComponent } from './locale/default-locale.component';
 import { LocaleComponent } from './locale/locale.component';
+import { RouteProvidedService } from './provided-on-route';
 import { RandomListComponent } from './random-list/random-list.component';
 import { RandomWrapperComponent } from './random-list/random-wrapper.component';
 import { RandomComponent } from './random/random.component';
@@ -63,6 +64,11 @@ import { WithoutDIComponent } from './without-di/without-di.component';
           {
             path: 'locale',
             component: LocaleComponent,
+          },
+          {
+            path: 'lazy',
+            providers: [RouteProvidedService],
+            loadComponent: () => import('./provided-on-route/lazy-loaded.component').then(c => c.LazyLoadedComponent),
           },
           {
             path: '**',

@@ -1,4 +1,4 @@
-import { Component, Host, Optional, Self, SkipSelf } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RandomService } from '../service/random.service';
 
 @Component({
@@ -13,11 +13,8 @@ import { RandomService } from '../service/random.service';
 })
 export class RandomComponent {
 
-  constructor(
-    @Self() public service: RandomService,
-    @SkipSelf() public rootService: RandomService,
-    @Host() @SkipSelf() @Optional() public hostService?: RandomService,
-  ) { }
-
+  service = inject(RandomService, { self: true });
+  rootService = inject(RandomService, { skipSelf: true });
+  hostService = inject(RandomService, { host: true, skipSelf: true, optional: true });
 
 }
