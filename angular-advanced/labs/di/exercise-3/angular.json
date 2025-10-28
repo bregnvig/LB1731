@@ -28,17 +28,20 @@
             },
             "index": "src/index.html",
             "polyfills": [
-              "src/polyfills.ts"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["leaflet"],
+            "allowedCommonJsDependencies": [
+              "leaflet"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss", 
+              "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
@@ -47,7 +50,11 @@
             "browser": "src/main.ts",
             "stylePreprocessorOptions": {
               "sass": {
-                "silenceDeprecations": ["import", "color-functions", "global-builtin"]
+                "silenceDeprecations": [
+                  "import",
+                  "color-functions",
+                  "global-builtin"
+                ]
               }
             }
           },
@@ -89,7 +96,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.aarhus.ts"
                 }
-              ]              
+              ]
             }
           },
           "defaultConfiguration": "production"
