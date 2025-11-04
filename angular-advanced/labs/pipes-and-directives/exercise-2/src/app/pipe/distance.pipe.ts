@@ -1,28 +1,26 @@
-import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
 
 @Pipe({
-    name: 'distance',
-    standalone: true
+  name: 'distance',
+  standalone: true
 })
-export class DistancePipe implements PipeTransform, OnDestroy {
+export class DistancePipe implements PipeTransform {
 
-  private location?: Coordinate;
-  private subscription: Subscription;
+  #locationService = inject(LocationService);
+  #location?: Coordinate;
 
-  constructor(private locationService: LocationService) {
-    this.subscription = locationService.location$.subscribe(location => this.location = location);
+  constructor() {
+    this.#locationService.location$.pipe(
+      takeUntilDestroyed()
+    ).subscribe(location => this.#location = location);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  transform(value: Coordinate): `${number}m` | 'Unknown location' {
-    return this.location
-      ? `${this.locationService.getDistance(this.location, value)}m`
+  transform(value: Coordinate | undefined | null): `${number}m` | 'Unknown location' {
+    return this.#location && value
+      ? `${this.#locationService.getDistance(this.#location, value)}m`
       : 'Unknown location';
   }
 

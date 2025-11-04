@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
@@ -20,14 +20,14 @@ import { AsyncPipe } from '@angular/common';
 })
 export class SidebarComponent {
 
-  @Input() playgrounds: Playground[] | null = [];
-  @Output() selected = new EventEmitter<Playground>();
-  @Output() edit = new EventEmitter<Playground>();
+  #locationService = inject(LocationService);
+
+  playgrounds = input<Playground[] | null>([]);
+  selected = output<Playground>();
+  edit = output<Playground>();
 
   selectedPlayground: Playground | undefined;
-  location$: Observable<Coordinate> = this.locationService.location$;
-
-  constructor(private locationService: LocationService) { }
+  location$: Observable<Coordinate> = this.#locationService.location$;
 
   selectPlayground(playground: Playground): void {
     this.selectedPlayground = playground;
