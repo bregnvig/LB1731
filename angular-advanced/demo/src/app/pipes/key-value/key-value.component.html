@@ -2,7 +2,7 @@
   <h5>My object</h5>
   <div class="row mt-3">
     <div class="col">
-      @for (entry of myObject | keyvalue: originalOrder; track entry) {
+      @for (entry of myObject | keyvalue; track entry) {
         <p>
           {{entry.key | uppercase}}: {{entry.value}}
         </p>

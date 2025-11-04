@@ -12,7 +12,7 @@ import { RouteProvidedService } from './route-provided.service';
     {
       provide: LOCALE_ID,
       useValue: 'da',
-    }
+    },
   ]
 })
 

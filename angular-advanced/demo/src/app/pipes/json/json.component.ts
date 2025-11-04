@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'loop-json',
-    templateUrl: './json.component.html',
-    styleUrls: ['./json.component.scss'],
-    standalone: false
+  selector: 'loop-json',
+  templateUrl: './json.component.html',
+  standalone: false
 })
-export class JsonComponent implements OnInit {
+export class JsonComponent {
 
   login: any = {};
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
