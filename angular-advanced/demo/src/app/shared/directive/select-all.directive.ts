@@ -1,17 +1,18 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
-    selector: '[selectAll]',
-    standalone: false
+  selector: '[selectAll]',
+  standalone: false,
+  host: {
+    '(focus)': 'onFocus()'
+  }
 })
 export class SelectAllDirective {
 
-  constructor(private elementRef: ElementRef) {
-  }
+  #elementRef = inject(ElementRef);
 
-  @HostListener('focus')
   onFocus() {
-    this.elementRef.nativeElement.select();
+    this.#elementRef.nativeElement.select();
   }
 
 }

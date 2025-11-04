@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, forwardRef, inject, OnInit } from '@angular/core';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { FocusDirective } from '../directive/focus.directive';
 import { SelectAllTextDirective } from '../directive/select-all-text.directive';
 
@@ -10,8 +10,8 @@ interface PlaygroundForm {
 }
 
 @Component({
-    selector: 'loop-edit-playground-control',
-    template: `
+  selector: 'loop-edit-playground-control',
+  template: `
     <form [formGroup]="fg">
       <div>
         <label class="form-label" for="name">Name</label>
@@ -27,42 +27,41 @@ interface PlaygroundForm {
       </div>    
     </form>
   `,
-    styleUrls: ['./edit-playground-control.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EditPlaygroundControlComponent),
-            multi: true
-        }
-    ],
-    imports: [
-        ReactiveFormsModule,
-        SelectAllTextDirective,
-        FocusDirective,
-    ]
+  styleUrls: ['./edit-playground-control.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditPlaygroundControlComponent),
+      multi: true
+    }
+  ],
+  imports: [
+    ReactiveFormsModule,
+    SelectAllTextDirective,
+    FocusDirective,
+  ]
 })
 export class EditPlaygroundControlComponent implements OnInit {
 
-  private propagateChange: ((_: any) => any) | undefined;
-  private propagateTouched: (() => void) | undefined;
+  #fb = inject(FormBuilder);
+  #propagateChange: ((_: any) => any) | undefined;
+  #propagateTouched: (() => void) | undefined;
 
-  fg = this.fb.group<PlaygroundForm>({
-    name: this.fb.control('', Validators.required),
-    description: this.fb.control(''),
-    addressDescription: this.fb.control(''),
+  fg = this.#fb.group<PlaygroundForm>({
+    name: this.#fb.control('', Validators.required),
+    description: this.#fb.control(''),
+    addressDescription: this.#fb.control(''),
   }, {
     validators: (fg: FormGroup<PlaygroundForm>): null | ValidationErrors =>
       fg.controls['description']?.value || fg.controls['addressDescription']?.value ? null : { requiredOr: ['description', 'addressDescription'] }
   } as AbstractControlOptions);
 
-  constructor(private fb: FormBuilder) { }
-
   ngOnInit(): void {
-    this.fg.valueChanges.subscribe(value => this.propagateChange && this.propagateChange(value));
+    this.fg.valueChanges.subscribe(value => this.#propagateChange && this.#propagateChange(value));
   }
 
   onBlur() {
-    this.propagateTouched!();
+    this.#propagateTouched!();
   }
 
   writeValue(address: Partial<any>): void {
@@ -70,11 +69,11 @@ export class EditPlaygroundControlComponent implements OnInit {
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.#propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouched = fn;
+    this.#propagateTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
