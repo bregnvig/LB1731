@@ -1,36 +1,27 @@
-import { DestroyRef, Pipe, PipeTransform, inject } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-const distanceKeyFn = (a: Coordinate, b: Coordinate) => `${a.lat}${a.lng}${b.lat}${b.lng}`;
 @Pipe({
   name: 'distance',
   pure: false,
-  standalone: true,
 })
 export class DistancePipe implements PipeTransform {
 
-  private distanceKey?: string;
-  private distance: number | 'Unknown location' = 'Unknown location';
-  private lastKnownLocation?: Coordinate;
+  #locationService = inject(LocationService);
+  #location?: Coordinate;
 
-  constructor(private locationService: LocationService) {
-    locationService.location$.pipe(
+  constructor() {
+    this.#locationService.location$.pipe(
       takeUntilDestroyed()
-    ).subscribe(location => this.lastKnownLocation = location);
+    ).subscribe(location => this.#location = location);
   }
 
-  transform(value: Coordinate): `${number}m` | 'Unknown location' {
-    if (this.lastKnownLocation) {
-      const key = distanceKeyFn(this.lastKnownLocation, value);
-      if (key !== this.distanceKey) {
-        this.distanceKey = key;
-        this.distance = this.locationService.getDistance(this.lastKnownLocation, value);
-      }
-
-    }
-    return typeof this.distance === 'number' ? `${this.distance}m` : 'Unknown location';
+  transform(value: Coordinate | undefined | null): `${number}m` | 'Unknown location' {
+    return this.#location && value
+      ? `${this.#locationService.getDistance(this.#location, value)}m`
+      : 'Unknown location';
   }
 
 }

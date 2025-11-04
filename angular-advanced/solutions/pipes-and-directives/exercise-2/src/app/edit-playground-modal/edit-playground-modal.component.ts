@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -15,22 +15,23 @@ import { EditPlaygroundControlComponent } from '../edit-playground-control/edit-
 })
 export class EditPlaygroundModalComponent implements OnInit {
 
+  modal = inject(NgbActiveModal);
+  #service = inject(PlaygroundService);
+
   static open(modal: NgbModal, playground: Playground): Promise<Playground> {
     const ref = modal.open(EditPlaygroundModalComponent);
     (ref.componentInstance as EditPlaygroundModalComponent).initialize(playground);
     return ref.result;
   }
 
-  private validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.service.playgrounds$.pipe(
+  #validateUniqueName = (control: AbstractControl): Observable<null | ValidationErrors> => this.#service.playgrounds$.pipe(
     first(),
     map(playgrounds => playgrounds.some(p => p.name === control.value?.name && p.id !== this.playground.id)),
     map(nonUnique => nonUnique ? { nonUnique } : null),
   );
 
-  editControl = new FormControl<Playground | null>(null, { asyncValidators: this.validateUniqueName });
+  editControl = new FormControl<Playground | null>(null, { asyncValidators: this.#validateUniqueName });
   playground!: Playground;
-
-  constructor(public modal: NgbActiveModal, private service: PlaygroundService) { }
 
   ngOnInit(): void {
     this.editControl.reset(this.playground);
