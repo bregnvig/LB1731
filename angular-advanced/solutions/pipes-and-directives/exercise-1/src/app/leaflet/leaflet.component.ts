@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, effect, input, OnDestroy } from '@angular/core';
 import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
 import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
@@ -11,27 +11,30 @@ const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
 /* tslint:disable:component-selector-prefix */
 @Component({
     selector: 'leaflet',
-    template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId"></div>',
+    template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId()"></div>',
     standalone: false
 })
 export class LeafletComponent implements AfterViewInit, OnDestroy {
 
-  @Input() mapId = 'leafletMap';
+  mapId = input('leafletMap');
+  markers = input<(Marker | undefined)[] | undefined | null>();
+  center = input<Center | undefined>();
 
-  private subscriptions: Subscription[] = [];
-  private center$ = new ReplaySubject<Center | undefined>(1);
-  private markers$ = new ReplaySubject<Marker[] | undefined>(1);
+  #subscriptions: Subscription[] = [];
+  #center$ = new ReplaySubject<Center | undefined>(1);
+  #markers$ = new ReplaySubject<Marker[] | undefined>(1);
 
-  @Input() set markers(value: (Marker | undefined)[] | undefined | null) {
-    this.markers$.next(value ?? undefined);
-  }
-
-  @Input() set center(center: Center | undefined) {
-    this.center$.next(center);
+  constructor() {
+    effect(() => {
+      this.#markers$.next(this.markers() ?? undefined);
+    });
+    effect(() => {
+      this.#center$.next(this.center());
+    });
   }
 
   ngAfterViewInit() {
-    const _map = mapContructor(this.mapId, {
+    const _map = mapContructor(this.mapId(), {
       zoomControl: false,
       center: undefined,
       zoom: 7,
@@ -43,10 +46,10 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
     });
     control.zoom({ position: 'topleft' }).addTo(_map);
     control.scale().addTo(_map);
-    this.subscriptions.push(
-      this.center$.pipe(map(center => center?.zoom), filter(zoom => !!zoom)).subscribe(zoom => _map.setZoom(zoom!)),
-      this.center$.pipe(filter(center => !!center)).subscribe(center => _map.setView(latLng(center!.lat, center!.lng))),
-      this.markers$.pipe(
+    this.#subscriptions.push(
+      this.#center$.pipe(map(center => center?.zoom), filter(zoom => !!zoom)).subscribe(zoom => _map.setZoom(zoom!)),
+      this.#center$.pipe(filter(center => !!center)).subscribe(center => _map.setView(latLng(center!.lat, center!.lng))),
+      this.#markers$.pipe(
         startWith([]),
         map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
         map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
@@ -59,7 +62,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.#subscriptions.forEach(s => s.unsubscribe());
   }
 
 }

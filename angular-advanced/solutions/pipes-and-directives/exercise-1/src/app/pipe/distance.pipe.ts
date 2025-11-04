@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Coordinate } from '../model';
 import { LocationService } from '../service';
@@ -9,17 +9,18 @@ import { LocationService } from '../service';
 })
 export class DistancePipe implements PipeTransform {
 
-  private location?: Coordinate;
+  #locationService = inject(LocationService);
+  #location?: Coordinate;
 
-  constructor(private locationService: LocationService) {
-    locationService.location$.pipe(
+  constructor() {
+    this.#locationService.location$.pipe(
       takeUntilDestroyed()
-    ).subscribe(location => this.location = location);
+    ).subscribe(location => this.#location = location);
   }
 
   transform(value: Coordinate | undefined | null): `${number}m` | 'Unknown location' {
-    return this.location && value
-      ? `${this.locationService.getDistance(this.location, value)}m`
+    return this.#location && value
+      ? `${this.#locationService.getDistance(this.#location, value)}m`
       : 'Unknown location';
   }
 
