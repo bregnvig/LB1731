@@ -1,17 +1,17 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[loopSelectAllText]',
-  standalone: true
+  host: {
+    '(focus)': 'onFocus()'
+  }
 })
 export class SelectAllTextDirective {
 
-  constructor(private elementRef: ElementRef<HTMLInputElement>) {
-  }
+  #elementRef = inject(ElementRef<HTMLInputElement>);
 
-  @HostListener('focus', ['$event.target.value'])
-  onFocus(value: string) {
-    this.elementRef.nativeElement.select();
+  onFocus() {
+    this.#elementRef.nativeElement.select();
   }
 
 }
