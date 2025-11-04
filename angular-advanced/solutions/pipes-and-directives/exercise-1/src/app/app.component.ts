@@ -1,22 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { combineLatest, merge, noop, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { combineLatest, noop, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { EditPlaygroundModalComponent } from './edit-playground-modal/edit-playground-modal.component';
+import { FooterComponent } from './footer/footer.component';
 import { Center, LeafletModule, Marker } from './leaflet';
 import { Coordinate, Playground } from './model';
 import { AuthService, LocationService, PlaygroundService, Role } from './service';
-import { withLength } from './utils/rxjs-utils';
-import { FooterComponent } from './footer/footer.component';
-import { AsyncPipe } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { withLength } from './utils/rxjs-utils';
 
 @Component({
-    selector: 'loop-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [SidebarComponent, FooterComponent, ReactiveFormsModule, AsyncPipe, LeafletModule]
+  selector: 'loop-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [SidebarComponent, FooterComponent, ReactiveFormsModule, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
 
@@ -39,7 +39,7 @@ export class AppComponent {
     this.locationService.location$.subscribe(location => this.center = { ...location, zoom: 12 });
     this.markers$ = combineLatest([
       this.locationService.location$,
-      this.playground$.pipe(map(p => p.position)),
+      this.playground$.pipe(map(p => p.position), startWith(undefined)),
     ]);
 
     const getDistance = this.locationService.getDistance;
