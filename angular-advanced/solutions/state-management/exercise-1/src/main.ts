@@ -1,4 +1,4 @@
-import { enableProdMode, inject, provideAppInitializer, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { enableProdMode, inject, provideAppInitializer, provideZonelessChangeDetection } from '@angular/core';
 
 import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -24,7 +24,7 @@ const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => {
 //   .catch(err => console.error(err));
 bootstrapApplication(AppComponent, {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
     provideHttpClient(),
     provideAppInitializer(() => {
       const initializerFn = (initializeFontAwesomeFactory)(inject(FaIconLibrary));

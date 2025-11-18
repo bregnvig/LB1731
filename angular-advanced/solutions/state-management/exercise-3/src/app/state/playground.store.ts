@@ -8,17 +8,17 @@ export class PlaygroundStore {
 
   #service = inject(PlaygroundService);
   #playgroundsResource = rxResource({
-    loader: () => this.#service.list()
+    stream: () => this.#service.list()
   });
   #updateResource = rxResource({
-    request: () => this.#updatePlayground(),
-    loader: ({ request }) => request ? this.#service.update(request.id, request).pipe(
+    params: () => this.#updatePlayground(),
+    stream: ({ params }) => params ? this.#service.update(params.id, params).pipe(
       tap(() => this.#playgroundsResource.reload())
     ) : of(undefined)
   });
   #deleteResource = rxResource({
-    request: () => this.#deletePlayground(),
-    loader: ({ request }) => request ? this.#service.delete(request).pipe(
+    params: () => this.#deletePlayground(),
+    stream: ({ params }) => params ? this.#service.delete(params).pipe(
       tap(() => this.#playgroundsResource.reload())
     ) : of(undefined)
   });
