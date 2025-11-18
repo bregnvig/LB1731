@@ -5,7 +5,6 @@ import { LocationService } from '../service';
 
 @Pipe({
   name: 'distance',
-  standalone: true
 })
 export class DistancePipe implements PipeTransform {
 
