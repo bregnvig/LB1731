@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Menu } from '../menu.model';
 import { RouterLinkActive, RouterLink } from '@angular/router';
 
@@ -12,6 +12,6 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 })
 export class MenuComponent {
 
-  @Input() menuss!: Menu;
+  menuss = input.required<Menu>();
 
 }

@@ -1,71 +1,51 @@
-import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
+import { Directive, computed, input, signal } from '@angular/core';
 
 @Directive({
   selector: '[rotate180]',
-})
-export class Rotate180 {
-
-  constructor() {
-    inject(ElementRef).nativeElement.style = "transform: rotate(180deg)";
+  host: {
+    'style.transform': '"rotate(180deg)"'
   }
-}
+})
+export class Rotate180 {}
 
 @Directive({
   selector: '[rotateFlyover]',
+  host: {
+    '[style.transform]': 'transform()',
+    '(mouseover)': 'isHovered.set(true)',
+    '(mouseout)': 'isHovered.set(false)'
+  }
 })
 export class RotateFlyover {
-
-  #el = inject(ElementRef);
-
-  private rotateText(deg: number) {
-    this.#el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
-  }
-  @HostListener('mouseover') rotate() {
-    this.rotateText(180);
-  }
-  @HostListener('mouseout') reset() {
-    this.rotateText(0);
-  }
+  protected isHovered = signal(false);
+  protected transform = computed(() => `rotate(${this.isHovered() ? 180 : 0}deg)`);
 }
 
 @Directive({
   selector: '[rotateFlyover2]',
+  host: {
+    '[style.transform]': 'transform()',
+    '(mouseover)': 'isHovered.set(true)',
+    '(mouseout)': 'isHovered.set(false)'
+  }
 })
 export class RotateFlyover2 {
-
-  #el = inject(ElementRef);
-
-  @Input('rotateFlyover2') angle: number = 0;
-
-  private rotateText(deg: number) {
-    this.#el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
-  }
-  @HostListener('mouseover') rotate() {
-    this.rotateText(this.angle);
-  }
-  @HostListener('mouseout') reset() {
-    this.rotateText(0);
-  }
+  angle = input(0, { alias: 'rotateFlyover2' });
+  protected isHovered = signal(false);
+  protected transform = computed(() => `rotate(${this.isHovered() ? this.angle() : 0}deg)`);
 }
-
 
 @Directive({
   selector: '[rotateFlyover3]',
+  host: {
+    '[style.transform]': 'transform()',
+    '(mouseover)': 'isHovered.set(true)',
+    '(mouseout)': 'isHovered.set(false)'
+  }
 })
 export class RotateFlyover3 {
-
-  #el = inject(ElementRef);
-
-  @Input('rotateFlyover3') angle: number = 0;
-  @Input() defaultAngle: number = 0;
-
-  private rotateText(deg: number) {
-    this.#el.nativeElement.style = `transform: rotate(${deg}deg)`;
-  }
-  @HostListener('mouseover') rotate() {
-    this.rotateText(this.angle || this.defaultAngle);
-  }
-  @HostListener('mouseout') reset() {
-    this.rotateText(0);
-  }
+  angle = input(0, { alias: 'rotateFlyover3' });
+  defaultAngle = input(0);
+  protected isHovered = signal(false);
+  protected transform = computed(() => `rotate(${this.isHovered() ? (this.angle() || this.defaultAngle()) : 0}deg)`);
 }

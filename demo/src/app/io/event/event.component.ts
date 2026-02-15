@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-io-event-child',
@@ -14,7 +14,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   `,
 })
 export class IOEventChildComponent {
-  @Output() interval = new EventEmitter<string>();
+  interval = output<string>();
 
   update(value: string) {
     this.interval.emit(value);
