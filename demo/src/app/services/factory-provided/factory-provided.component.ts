@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { RandomService, RANDOM_FACTORY } from '../random.service';
+import { Component, inject } from '@angular/core';
+import { RandomService } from '../random.service';
 
 @Component({
   selector: 'app-factory-provided',
@@ -7,11 +7,6 @@ import { RandomService, RANDOM_FACTORY } from '../random.service';
 })
 export class FactoryProvidedComponent {
 
-  service: RandomService;
-
-  constructor(@Inject(RANDOM_FACTORY) service: () => RandomService) {
-    this.service = service();
-  }
-
+  service = inject(RandomService);
 
 }

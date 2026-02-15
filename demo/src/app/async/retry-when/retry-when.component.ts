@@ -1,5 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { RetryService } from '../retry.service';
@@ -10,12 +9,15 @@ import { RetryService } from '../retry.service';
 })
 export class RetryWhenComponent implements OnInit {
 
-  drivers?: Driver[];
+  drivers = signal<Driver[] | undefined>(undefined);
 
   constructor(private service: RetryService) { }
 
   ngOnInit() {
-    this.service.drivers$.subscribe(drivers => this.drivers = drivers, console.error);
+    this.service.drivers$.subscribe({
+      next: drivers => this.drivers.set(drivers),
+      error: console.error
+    });
   }
 
 }

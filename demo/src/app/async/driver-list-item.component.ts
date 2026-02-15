@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Driver } from './driver';
 
 @Component({
   selector: 'app-driver-list-item',
   template: `
-  @if(driver) {
+  @if(driver(); as driver) {
+
     <li class="list-group-item">
       <img [src]="driver.photoURL?? 'user-regular.svg'" height="40" width="40" class="me-3"> 
       {{driver.firstName}} {{driver.lastName}}
@@ -14,5 +15,5 @@ import { Driver } from './driver';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DriverListItemComponent {
-  @Input({ required: true }) driver?: Driver;
+  driver = input.required<Driver>();
 }

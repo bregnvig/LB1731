@@ -1,8 +1,7 @@
-import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-import { SimpleHttpServiceComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, AutoRefreshComponent, RefCountComponent, WrapApiComponent, ErrorComponent, IntervalComponent, RetryWhenComponent } from './index';
 import { CatchErrorComponent } from './catch-error/catch-error.component';
+import { AutoRefreshComponent, BetterAsyncServiceComponent, CachedAsyncServiceComponent, ErrorComponent, IntervalComponent, RefCountComponent, RetryWhenComponent, SimpleHttpServiceComponent } from './index';
 
 const routes: Routes = [
   {
@@ -32,10 +31,6 @@ const routes: Routes = [
   {
     path: 'interval',
     component: IntervalComponent
-  },
-  {
-    path: 'wrap',
-    component: WrapApiComponent
   },
   {
     path: 'refCount',

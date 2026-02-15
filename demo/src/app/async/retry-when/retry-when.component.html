@@ -1,6 +1,6 @@
 <h2>Retry when Service</h2>
 <ul class="list-group">
-  @for(driver of drivers; track driver.driverNumber) {
+  @for(driver of drivers(); track driver.driverNumber) {
     <app-driver-list-item [driver]="driver"/>
   }
 </ul>

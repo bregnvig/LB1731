@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
-import { NgOptimizedImage } from '@angular/common';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1BetterService } from '../f1.service';
@@ -13,10 +12,10 @@ import { F1BetterService } from '../f1.service';
 })
 export class BetterAsyncServiceComponent {
 
-  drivers?: Driver[];
+  drivers = signal<Driver[] | undefined>(undefined);
 
   constructor(private service: F1BetterService) {
-    service.getDrivers().subscribe(drivers => this.drivers = drivers);
+    service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 
   addSubscription() {

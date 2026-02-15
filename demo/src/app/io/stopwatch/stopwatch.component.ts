@@ -1,12 +1,12 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, signal } from '@angular/core';
 
 @Component({
   selector: 'app-stopwatch',
-  template: '{{seconds}}',
+  template: '{{seconds()}}',
 })
 export class StopwatchComponent implements OnDestroy {
 
-  seconds: number = 0;
+  seconds = signal<number>(0);
   #intervalNo?: number;
 
   ngOnDestroy() {
@@ -17,7 +17,7 @@ export class StopwatchComponent implements OnDestroy {
   start() {
     this.#intervalNo = window.setInterval(() => {
       console.log(this.seconds);
-      this.seconds += 1;
+      this.seconds.update(s => s + 1);
     }, 1000);
   }
 
@@ -27,7 +27,7 @@ export class StopwatchComponent implements OnDestroy {
 
   reset() {
     this.stop();
-    this.seconds = 0;
+    this.seconds.set(0);
   }
 
 }

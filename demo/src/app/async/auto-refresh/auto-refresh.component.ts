@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subscription } from 'rxjs';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1AutoRefreshService } from '../f1.service';
@@ -13,7 +12,7 @@ import { F1AutoRefreshService } from '../f1.service';
 })
 export class AutoRefreshComponent {
 
-  drivers?: Driver[];
+  drivers = signal<Driver[] | undefined>(undefined);
 
   constructor(private service: F1AutoRefreshService) {
     // Should unsubscribe this, ellse we'll have a memory leak'
@@ -21,7 +20,7 @@ export class AutoRefreshComponent {
       takeUntilDestroyed()
     ).subscribe(drivers => {
       console.log('Updating drivers array with new drivers');
-      this.drivers = drivers;
+      this.drivers.set(drivers);
     });
   }
 

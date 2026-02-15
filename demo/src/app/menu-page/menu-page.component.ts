@@ -45,7 +45,6 @@ export class MenuPageComponent {
     { routerLink: '/async/retry', title: 'Retry when service' },
     { routerLink: '/async/autoRefresh', title: 'Auto refresh service' },
     { routerLink: '/async/interval', title: 'Interval (RxJS)' },
-    { routerLink: '/async/wrap', title: 'Wrap API (RxJS)' },
     { routerLink: '/async/refCount', title: 'Ref count (RxJS)' },
     { routerLink: '/async/error', title: 'Errors (RxJS)    ' },
   ];

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1SimpleService } from '../f1.service';
@@ -9,7 +8,7 @@ import { F1SimpleService } from '../f1.service';
   template: `
     <h2>Simple HTTP Service</h2>
     <ul class="list-group">
-      @for(driver of drivers; track driver.driverNumber) {
+      @for(driver of drivers(); track driver.driverNumber) {
         <app-driver-list-item [driver]="driver"/>
       }
     </ul>
@@ -18,15 +17,15 @@ import { F1SimpleService } from '../f1.service';
 })
 export class SimpleHttpServiceComponent {
 
-  drivers?: Driver[];
+  drivers = signal<Driver[] | undefined>(undefined);
 
   constructor(private service: F1SimpleService) {
-    this.service.getDrivers().subscribe(response => this.drivers = response.map((driver: any) => ({
+    this.service.getDrivers().subscribe(response => this.drivers.set(response.map((driver: any) => ({
       driverNumber: driver.driver_number.toString(),
       firstName: driver.first_name,
       photoURL: driver.headshot_url,
       lastName: driver.last_name,
-    })));
+    }))));
   }
 
 }

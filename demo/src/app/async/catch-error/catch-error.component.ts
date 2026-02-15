@@ -1,5 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1LocalStorageCache } from '../f1.service';
@@ -10,14 +9,14 @@ import { F1LocalStorageCache } from '../f1.service';
   imports: [DriverListItemComponent]
 })
 export class CatchErrorComponent implements OnInit {
-  drivers?: Driver[];
+  drivers = signal<Driver[] | undefined>(undefined);
 
   constructor(private service: F1LocalStorageCache) {
   }
 
   ngOnInit() {
     this.service.getDrivers().subscribe(drivers => {
-      this.drivers = drivers;
+      this.drivers.set(drivers);
     });
   }
 
