@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 
@@ -11,7 +11,9 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class OrderComponent implements OnInit, OnDestroy {
 
-  orderNo: number = this.route.snapshot.params['id'];
+  #route = inject(ActivatedRoute);
+
+  orderNo: number = this.#route.snapshot.params['id'];
   exact = false;
 
   data = {
@@ -20,7 +22,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
     console.log('Order constructed');
   }
 
@@ -29,11 +31,11 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.#route.params.subscribe(params => {
       console.log(params);
       this.orderNo = params['id'];
     });
-    this.route.queryParams.subscribe((data: any) => {
+    this.#route.queryParams.subscribe((data: any) => {
       // console.log('Query params', data);
 
     });

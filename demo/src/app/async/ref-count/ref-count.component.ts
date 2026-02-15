@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -19,13 +19,15 @@ export class RefCountComponent implements OnDestroy {
   date2?: Date;
 
 
-  constructor(private service: SharedTimerService) { }
+  #service = inject(SharedTimerService);
+
+  constructor() { }
 
   start1() {
-    this.subscription1 = this.service.timer.subscribe(date => this.date1 = date);
+    this.subscription1 = this.#service.timer.subscribe(date => this.date1 = date);
   }
   start2() {
-    this.subscription2 = this.service.timer.subscribe(date => this.date2 = date);
+    this.subscription2 = this.#service.timer.subscribe(date => this.date2 = date);
   }
 
   stop1() {

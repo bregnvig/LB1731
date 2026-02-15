@@ -1,12 +1,12 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
 
 @Directive({
   selector: '[rotate180]',
 })
 export class Rotate180 {
 
-  constructor(el: ElementRef) {
-    el.nativeElement.style = "transform: rotate(180deg)";
+  constructor() {
+    inject(ElementRef).nativeElement.style = "transform: rotate(180deg)";
   }
 }
 
@@ -15,10 +15,10 @@ export class Rotate180 {
 })
 export class RotateFlyover {
 
-  constructor(private el: ElementRef) { }
+  #el = inject(ElementRef);
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
+    this.#el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
   }
   @HostListener('mouseover') rotate() {
     this.rotateText(180);
@@ -33,12 +33,12 @@ export class RotateFlyover {
 })
 export class RotateFlyover2 {
 
-  constructor(private el: ElementRef) { }
+  #el = inject(ElementRef);
 
   @Input('rotateFlyover2') angle: number = 0;
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
+    this.#el.nativeElement.style = `transform: rotate(${deg || 0}deg)`;
   }
   @HostListener('mouseover') rotate() {
     this.rotateText(this.angle);
@@ -54,13 +54,13 @@ export class RotateFlyover2 {
 })
 export class RotateFlyover3 {
 
-  constructor(private el: ElementRef) { }
+  #el = inject(ElementRef);
 
   @Input('rotateFlyover3') angle: number = 0;
   @Input() defaultAngle: number = 0;
 
   private rotateText(deg: number) {
-    this.el.nativeElement.style = `transform: rotate(${deg}deg)`;
+    this.#el.nativeElement.style = `transform: rotate(${deg}deg)`;
   }
   @HostListener('mouseover') rotate() {
     this.rotateText(this.angle || this.defaultAngle);

@@ -1,7 +1,7 @@
 
 import { fromEvent, Observable, throwError } from 'rxjs';
 
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { retry } from 'rxjs/operators';
 import { Driver } from './driver';
 import { F1BetterService } from './f1.service';
@@ -11,8 +11,8 @@ export class RetryService {
 
   readonly drivers$: Observable<Driver[]>;
 
-  constructor(service: F1BetterService) {
-    this.drivers$ = service.getDrivers().pipe(
+  constructor() {
+    this.drivers$ = inject(F1BetterService).getDrivers().pipe(
       retry({
         delay: () => {
           if (!window.navigator.onLine) {

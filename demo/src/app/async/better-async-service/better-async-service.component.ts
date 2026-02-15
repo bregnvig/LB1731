@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -13,9 +13,10 @@ import { F1BetterService } from '../f1.service';
 export class BetterAsyncServiceComponent {
 
   drivers = signal<Driver[] | undefined>(undefined);
+  service = inject(F1BetterService);
 
-  constructor(private service: F1BetterService) {
-    service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
+  constructor() {
+    this.service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 
   addSubscription() {

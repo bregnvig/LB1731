@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -13,10 +13,11 @@ import { F1AutoRefreshService } from '../f1.service';
 export class AutoRefreshComponent {
 
   drivers = signal<Driver[] | undefined>(undefined);
+  service = inject(F1AutoRefreshService);
 
-  constructor(private service: F1AutoRefreshService) {
+  constructor() {
     // Should unsubscribe this, ellse we'll have a memory leak'
-    service.getDrivers().pipe(
+    this.service.getDrivers().pipe(
       takeUntilDestroyed()
     ).subscribe(drivers => {
       console.log('Updating drivers array with new drivers');

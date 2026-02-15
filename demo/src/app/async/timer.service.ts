@@ -7,10 +7,10 @@ import { shareReplay } from 'rxjs/operators';
 @Injectable()
 export class TimerService {
 
-  private timer$: Observable<Date>;
+  #timer$: Observable<Date>;
 
   constructor() {
-    this.timer$ = new Observable(observer => {
+    this.#timer$ = new Observable(observer => {
       const intervalId = window.setInterval(() => {
         observer.next(new Date());
       }, 1000);
@@ -32,22 +32,22 @@ export class TimerService {
   }
 
   get timer(): Observable<Date> {
-    return this.timer$;
+    return this.#timer$;
   }
 }
 
 @Injectable()
 export class SharedTimerService {
 
-  private timer$: Observable<Date>;
+  #timer$: Observable<Date>;
 
   constructor() {
-    this.timer$ = new TimerService().timer.pipe(
+    this.#timer$ = new TimerService().timer.pipe(
       shareReplay({ bufferSize: 1, refCount: true })
     );
   }
 
   get timer(): Observable<Date> {
-    return this.timer$;
+    return this.#timer$;
   }
 }

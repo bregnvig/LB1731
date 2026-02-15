@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -12,8 +12,9 @@ import { F1CachedService } from '../f1.service';
 export class CachedAsyncServiceComponent {
 
   drivers = signal<Driver[] | undefined>(undefined);
+  service = inject(F1CachedService);
 
-  constructor(private service: F1CachedService) {
+  constructor() {
     this.service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 

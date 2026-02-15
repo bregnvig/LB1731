@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NonProvidedService } from '../non-provided.service';
 
 @Component({
@@ -7,7 +7,9 @@ import { NonProvidedService } from '../non-provided.service';
 })
 export class NonProvidedComponent {
 
-  constructor(private service: NonProvidedService) {
+  #service = inject(NonProvidedService);
+
+  constructor() {
 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1LocalStorageCache } from '../f1.service';
@@ -10,8 +10,9 @@ import { F1LocalStorageCache } from '../f1.service';
 })
 export class CatchErrorComponent implements OnInit {
   drivers = signal<Driver[] | undefined>(undefined);
+  service = inject(F1LocalStorageCache);
 
-  constructor(private service: F1LocalStorageCache) {
+  constructor() {
   }
 
   ngOnInit() {

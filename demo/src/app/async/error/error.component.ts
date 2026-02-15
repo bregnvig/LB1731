@@ -1,7 +1,7 @@
 
 import { Observable, throwError } from 'rxjs';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { catchError, finalize } from 'rxjs/operators';
 
 
@@ -18,7 +18,9 @@ export class ErrorComponent implements OnInit {
   zipCodes$!: Observable<any>;
   elapsed: number = 0;
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
+
+  constructor() { }
 
   ngOnInit() {
     const start: number = Date.now();

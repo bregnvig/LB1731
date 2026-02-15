@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RandomService } from './../random.service';
 
 @Component({
@@ -7,5 +7,5 @@ import { RandomService } from './../random.service';
 })
 export class ProvidedComponent {
 
-  constructor(public service: RandomService) { }
+  service = inject(RandomService);
 }

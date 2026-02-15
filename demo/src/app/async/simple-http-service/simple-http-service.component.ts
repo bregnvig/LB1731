@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1SimpleService } from '../f1.service';
@@ -18,9 +18,10 @@ import { F1SimpleService } from '../f1.service';
 export class SimpleHttpServiceComponent {
 
   drivers = signal<Driver[] | undefined>(undefined);
+  #service = inject(F1SimpleService);
 
-  constructor(private service: F1SimpleService) {
-    this.service.getDrivers().subscribe(response => this.drivers.set(response.map((driver: any) => ({
+  constructor() {
+    this.#service.getDrivers().subscribe(response => this.drivers.set(response.map((driver: any) => ({
       driverNumber: driver.driver_number.toString(),
       firstName: driver.first_name,
       photoURL: driver.headshot_url,

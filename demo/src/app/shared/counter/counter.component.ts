@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CounterService } from '../counter.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { CounterService } from '../counter.service';
 })
 export class CounterComponent {
 
-  constructor(public counterService: CounterService) { }
+  counterService = inject(CounterService);
 
   increment() {
     this.counterService.increment();
