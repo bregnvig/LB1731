@@ -70,7 +70,10 @@ export class AppComponent {
   }
   async delete(playground: Playground) {
     firstValueFrom(this.#service.delete(playground.id))
-      .then(() => this.#reload.next())
+      .then(() => {
+        this.#reload.next();
+        this.error.set(undefined);
+      })
       .catch(error => this.error.set(error));
   }
 

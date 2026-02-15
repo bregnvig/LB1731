@@ -1,4 +1,4 @@
-import { inject, signal } from "@angular/core";
+import { computed, inject, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { of, tap } from "rxjs";
 import { Playground } from "../model";
@@ -10,6 +10,7 @@ export class PlaygroundStore {
   #playgroundsResource = rxResource({
     stream: () => this.#service.list()
   });
+
   #updateResource = rxResource({
     params: () => this.#updatePlayground(),
     stream: ({ params }) => params ? this.#service.update(params.id, params).pipe(
@@ -23,14 +24,13 @@ export class PlaygroundStore {
     ) : of(undefined)
   });
 
-  readonly playgrounds = this.#playgroundsResource.value.asReadonly();
-  readonly playgroundsError = this.#playgroundsResource.error;
-  readonly loading = this.#playgroundsResource.isLoading;
+  readonly playgroundsResource = this.#playgroundsResource.asReadonly();
   readonly updateError = this.#updateResource.error;
   readonly deleteError = this.#deleteResource.error;
+  readonly errors = computed(() => this.updateError() ?? this.deleteError() ?? this.#playgroundsResource.error());
 
   #updatePlayground = signal<Playground | null>(null);
-  #deletePlayground = signal<string | null>(null);
+  #deletePlayground = signal<string | null>(null, { equal: () => false });
 
   update(playground: Playground): void {
     this.#updatePlayground.set(playground);

@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { BehaviorSubject, catchError, Observable, of, ReplaySubject, shareReplay, switchMap, tap } from "rxjs";
+import { BehaviorSubject, catchError, merge, Observable, of, ReplaySubject, shareReplay, switchMap, tap } from "rxjs";
 import { Playground } from "../model";
 import { PlaygroundService } from "../service";
 import { withLength } from "../utils";
@@ -11,6 +11,7 @@ export class PlaygroundStore {
   playgroundsError = new ReplaySubject<any>();
   updateError = new ReplaySubject<any>();
   deleteError = new ReplaySubject<any>();
+  errors = merge(this.playgroundsError, this.deleteError, this.updateError);
   loading = new BehaviorSubject<boolean>(true);
 
   playgrounds = this.#reload.pipe(

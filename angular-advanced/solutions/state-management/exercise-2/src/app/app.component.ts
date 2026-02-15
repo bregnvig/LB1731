@@ -30,10 +30,7 @@ export class AppComponent {
   playground = signal<Playground | undefined>(undefined);
   center: Signal<Center>;
   markers: Signal<Marker[]> = computed(() => [this.#locationService.location(), this.playground()?.position].filter(isTruthy));
-  #error = toSignal(this.#store.playgroundsError);
-  #updateError = toSignal(this.#store.updateError);
-  #deleteError = toSignal(this.#store.deleteError);
-  error = computed<any>(() => this.#error() ?? this.#updateError() ?? this.#deleteError());
+  error = toSignal(this.#store.errors);
   loading = toSignal(this.#store.loading, { requireSync: true });
 
   constructor(
