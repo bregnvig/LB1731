@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
 })
 export class PropertyComponent {
 
-  showRed = false;
-  show = false;
+  protected showRed = false;
+  protected show = false;
 
-  toggleRed() {
+  protected toggleRed() {
     this.showRed = !this.showRed;
   }
-  toggleShow() {
+  protected toggleShow() {
     this.show = !this.show;
   }
 

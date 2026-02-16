@@ -7,19 +7,19 @@ import { Component } from '@angular/core';
 })
 export class InterpolationComponent {
 
-  propertyString = 'My property string!';
-  propertyNumber = 17;
-  propertyObject = {
+  protected propertyString = 'My property string!';
+  protected propertyNumber = 17;
+  protected propertyObject = {
     property: 'My object property'
   };
-  propertyNull?: any = null;
-  isCreating = false;
+  protected propertyNull?: any = null;
+  protected isCreating = false;
 
-  simpleMethod() {
+  protected simpleMethod() {
     return 'Simple method';
   }
 
-  parameterMethod(string: string) {
+  protected parameterMethod(string: string) {
     return `Hello ${string}`;
   }
 

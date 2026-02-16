@@ -12,12 +12,12 @@ import { F1AutoRefreshService } from '../f1.service';
 })
 export class AutoRefreshComponent {
 
-  drivers = signal<Driver[] | undefined>(undefined);
-  service = inject(F1AutoRefreshService);
+  protected drivers = signal<Driver[] | undefined>(undefined);
+  #service = inject(F1AutoRefreshService);
 
   constructor() {
     // Should unsubscribe this, ellse we'll have a memory leak'
-    this.service.getDrivers().pipe(
+    this.#service.getDrivers().pipe(
       takeUntilDestroyed()
     ).subscribe(drivers => {
       console.log('Updating drivers array with new drivers');
@@ -25,8 +25,8 @@ export class AutoRefreshComponent {
     });
   }
 
-  addSubscribtion() {
-    this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
+  protected addSubscribtion() {
+    this.#service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 
 }

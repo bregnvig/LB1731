@@ -13,10 +13,10 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   #route = inject(ActivatedRoute);
 
-  orderNo: number = this.#route.snapshot.params['id'];
-  exact = false;
+  protected orderNo: number = this.#route.snapshot.params['id'];
+  protected exact = false;
 
-  data = {
+  protected data = {
     foo: 'bar'
   };
 
@@ -42,7 +42,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     // this.orderNo = this.activatedRoute.snapshot.params['id'];
   }
 
-  toggle() {
+  protected toggle() {
     this.exact = !this.exact;
   }
 }

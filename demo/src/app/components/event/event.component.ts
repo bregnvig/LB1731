@@ -15,18 +15,18 @@ import { Component } from '@angular/core';
 })
 export class EventComponent {
 
-  counter = 0;
-  isDown = false;
+  protected counter = 0;
+  protected isDown = false;
 
-  count() {
+  protected count() {
     this.counter += 1;
   }
 
-  up() {
+  protected up() {
     this.isDown = false;
   }
 
-  down() {
+  protected down() {
     this.isDown = true;
   }
 

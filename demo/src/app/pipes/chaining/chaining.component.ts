@@ -12,7 +12,7 @@ import { UpperCasePipe, LowerCasePipe, DatePipe } from '@angular/common';
 })
 export class ChainingComponent implements OnInit {
 
-  today = new Date();
+  protected today = new Date();
 
   constructor() { }
 

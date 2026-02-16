@@ -15,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelloComponent implements OnInit {
 
-  title: string;
+  protected title: string;
 
   constructor() {
     this.title = 'Hello world!';
@@ -25,7 +25,7 @@ export class HelloComponent implements OnInit {
     // this.title = 'Hello world!';
   }
 
-  doSomething() {
+  #doSomething() {
     this.title.length;
   }
 

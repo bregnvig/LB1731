@@ -24,7 +24,7 @@ export class DirectlyChildComponent {
 })
 export class DirectlyComponent {
 
-  fromProperty = 'Dynamic property';
+  protected fromProperty = 'Dynamic property';
 
 }
 

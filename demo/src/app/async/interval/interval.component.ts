@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class IntervalComponent implements OnInit {
 
-  number$!: Observable<number>;
+  protected number$!: Observable<number>;
 
   ngOnInit() {
     this.number$ = interval(1000).pipe(take(10));

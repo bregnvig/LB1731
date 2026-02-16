@@ -11,6 +11,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class BindingsAttributeComponent {
 
-  angle: number = 0;
+  protected angle: number = 0;
 
 }

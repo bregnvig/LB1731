@@ -12,35 +12,35 @@ import { DatePipe } from '@angular/common';
 })
 export class RefCountComponent implements OnDestroy {
 
-  subscription1?: Subscription;
-  date1?: Date;
+  #subscription1?: Subscription;
+  protected date1?: Date;
 
-  subscription2?: Subscription;
-  date2?: Date;
+  #subscription2?: Subscription;
+  protected date2?: Date;
 
 
   #service = inject(SharedTimerService);
 
   constructor() { }
 
-  start1() {
-    this.subscription1 = this.#service.timer.subscribe(date => this.date1 = date);
+  protected start1() {
+    this.#subscription1 = this.#service.timer.subscribe(date => this.date1 = date);
   }
-  start2() {
-    this.subscription2 = this.#service.timer.subscribe(date => this.date2 = date);
-  }
-
-  stop1() {
-    this.subscription1?.unsubscribe();
+  protected start2() {
+    this.#subscription2 = this.#service.timer.subscribe(date => this.date2 = date);
   }
 
-  stop2() {
-    this.subscription2?.unsubscribe();
+  protected stop1() {
+    this.#subscription1?.unsubscribe();
+  }
+
+  protected stop2() {
+    this.#subscription2?.unsubscribe();
   }
 
   ngOnDestroy() {
-    this.subscription2?.unsubscribe();
-    this.subscription1?.unsubscribe();
+    this.#subscription2?.unsubscribe();
+    this.#subscription1?.unsubscribe();
   }
 
 }

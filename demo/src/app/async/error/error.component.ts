@@ -15,8 +15,8 @@ import { AsyncPipe } from '@angular/common';
 })
 export class ErrorComponent implements OnInit {
 
-  zipCodes$!: Observable<any>;
-  elapsed: number = 0;
+  protected zipCodes$!: Observable<any>;
+  protected elapsed: number = 0;
 
   private http = inject(HttpClient);
 

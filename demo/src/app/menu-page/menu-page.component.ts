@@ -68,7 +68,7 @@ export class MenuPageComponent {
     { routerLink: '/form/search', title: 'Search stand alone    ' },
   ];
 
-  menues: Menu[] = [
+  protected menues: Menu[] = [
     {
       title: 'Components',
       items: this.componets,

@@ -12,15 +12,15 @@ import { F1BetterService } from '../f1.service';
 })
 export class BetterAsyncServiceComponent {
 
-  drivers = signal<Driver[] | undefined>(undefined);
-  service = inject(F1BetterService);
+  protected drivers = signal<Driver[] | undefined>(undefined);
+  #service = inject(F1BetterService);
 
   constructor() {
-    this.service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
+    this.#service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 
-  addSubscription() {
-    this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
+  protected addSubscription() {
+    this.#service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 
 }

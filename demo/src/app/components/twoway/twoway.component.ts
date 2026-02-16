@@ -12,6 +12,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class TwowayComponent {
 
-  myTitle = 'Two way binding!!!';
+  protected myTitle = 'Two way binding!!!';
 
 }

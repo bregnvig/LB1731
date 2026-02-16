@@ -9,9 +9,9 @@ import { NgIf } from '@angular/common';
 })
 export class NgifComponent {
 
-  show = true;
+  protected show = true;
 
-  toggle() {
+  protected toggle() {
     this.show = !this.show;
   }
 

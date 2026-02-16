@@ -31,5 +31,5 @@ export class InterceptChildComponent {
 })
 export class InterceptComponent {
 
-  fromProperty = 'From property';
+  protected fromProperty = 'From property';
 }

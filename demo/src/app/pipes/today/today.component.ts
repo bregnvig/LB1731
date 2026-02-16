@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 })
 export class TodayComponent implements OnInit {
 
-  today = new Date();
+  protected today = new Date();
 
   constructor() { }
 

@@ -7,9 +7,9 @@ import { CounterService } from '../counter.service';
 })
 export class CounterComponent {
 
-  counterService = inject(CounterService);
+  protected counterService = inject(CounterService);
 
-  increment() {
+  protected increment() {
     this.counterService.increment();
   }
 

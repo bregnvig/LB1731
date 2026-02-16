@@ -13,27 +13,27 @@ export class ViewChildrenComponent {
   @ViewChildren(StopwatchComponent) stopwatches?: QueryList<StopwatchComponent>;
   @ViewChildren('stop1,stop2,stop3') stopwatchesString?: QueryList<StopwatchComponent>;
 
-  start() {
+  protected start() {
     this.stopwatches?.forEach((child) => child.start());
   }
 
-  stop() {
+  protected stop() {
     this.stopwatches?.forEach((child) => child.stop());
   }
 
-  reset() {
+  protected reset() {
     this.stopwatches?.forEach((child) => child.reset());
   }
 
-  startString() {
+  protected startString() {
     this.stopwatchesString?.forEach((child) => child.start());
   }
 
-  stopString() {
+  protected stopString() {
     this.stopwatchesString?.forEach((child) => child.stop());
   }
 
-  resetString() {
+  protected resetString() {
     this.stopwatchesString?.forEach((child) => child.reset());
   }
 

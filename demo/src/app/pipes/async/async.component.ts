@@ -13,7 +13,7 @@ import { F1BetterService, F1SimpleService } from './../../async/f1.service';
 })
 export class AsyncComponent implements OnInit {
 
-  drivers$!: Observable<Driver[]>;
+  protected drivers$!: Observable<Driver[]>;
 
   constructor(private service: F1BetterService) { }
 

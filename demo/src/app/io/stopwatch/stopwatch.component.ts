@@ -6,7 +6,7 @@ import { Component, OnDestroy, signal } from '@angular/core';
 })
 export class StopwatchComponent implements OnDestroy {
 
-  seconds = signal<number>(0);
+  protected seconds = signal<number>(0);
   #intervalNo?: number;
 
   ngOnDestroy() {
@@ -16,7 +16,7 @@ export class StopwatchComponent implements OnDestroy {
 
   start() {
     this.#intervalNo = window.setInterval(() => {
-      console.log(this.seconds);
+      console.log(this.seconds());
       this.seconds.update(s => s + 1);
     }, 1000);
   }

@@ -8,7 +8,7 @@ import { PurePipe, ImpurePipe } from '../pure.pipe';
 })
 export class PureComponent {
 
-  noop() {
+  protected noop() {
   }
 
 }

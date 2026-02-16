@@ -17,7 +17,7 @@ import { F1SimpleService } from '../f1.service';
 })
 export class SimpleHttpServiceComponent {
 
-  drivers = signal<Driver[] | undefined>(undefined);
+  protected drivers = signal<Driver[] | undefined>(undefined);
   #service = inject(F1SimpleService);
 
   constructor() {

@@ -9,9 +9,9 @@ import { Unless } from '../unless.directive';
 })
 export class UnlessComponent {
 
-  show = true;
+  protected show = true;
 
-  toggle() {
+  protected toggle() {
     this.show = !this.show;
   }
 

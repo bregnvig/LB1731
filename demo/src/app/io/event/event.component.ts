@@ -34,6 +34,6 @@ export class IOEventChildComponent {
 })
 export class IOEventComponent {
 
-  interval?: string;
+  protected interval?: string;
 
 }

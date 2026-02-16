@@ -16,10 +16,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class BuildInComponent implements OnInit {
 
-  today = new Date();
-  format = 'G';
-  name = 'Angular';
-  object = {
+  protected today = new Date();
+  protected format = 'G';
+  protected name = 'Angular';
+  protected object = {
     a: 'b',
     b: 'c',
     c: 42

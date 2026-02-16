@@ -13,17 +13,17 @@ export class ViewchildComponent {
   @ViewChild(StopwatchComponent, { static: true })
   stopwatch!: StopwatchComponent;
 
-  start() {
+  protected start() {
     console.log('Started!');
     this.stopwatch.start();
   }
 
-  stop() {
+  protected stop() {
     console.log('Stopped!');
     this.stopwatch.stop();
   }
 
-  reset() {
+  protected reset() {
     this.stopwatch.reset();
   }
 

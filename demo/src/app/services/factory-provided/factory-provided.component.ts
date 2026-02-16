@@ -7,6 +7,6 @@ import { RandomService } from '../random.service';
 })
 export class FactoryProvidedComponent {
 
-  service = inject(RandomService);
+  protected service = inject(RandomService);
 
 }

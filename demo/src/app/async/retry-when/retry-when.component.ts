@@ -9,7 +9,7 @@ import { RetryService } from '../retry.service';
 })
 export class RetryWhenComponent implements OnInit {
 
-  drivers = signal<Driver[] | undefined>(undefined);
+  protected drivers = signal<Driver[] | undefined>(undefined);
   #service = inject(RetryService);
 
   constructor() { }

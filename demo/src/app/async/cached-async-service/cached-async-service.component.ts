@@ -11,14 +11,14 @@ import { F1CachedService } from '../f1.service';
 })
 export class CachedAsyncServiceComponent {
 
-  drivers = signal<Driver[] | undefined>(undefined);
-  service = inject(F1CachedService);
+  protected drivers = signal<Driver[] | undefined>(undefined);
+  #service = inject(F1CachedService);
 
   constructor() {
-    this.service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
+    this.#service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 
-  addSubscribtion() {
-    this.service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
+  protected addSubscribtion() {
+    this.#service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 }

@@ -13,10 +13,10 @@ import { Person } from './../person';
 })
 export class TemplateDriverFormComponent {
 
-  colors = ["Red", "Green", "Blue"];
-  model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+  protected colors = ["Red", "Green", "Blue"];
+  protected model = new Person('Flemming', 'Bregnvig', "Blue", 182);
 
-  logValue(value: any) {
+  protected logValue(value: any) {
     console.log('Value', { ...this.model, ...value, });
   }
 }

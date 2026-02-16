@@ -13,8 +13,8 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 })
 export class SearchFormComponent implements OnInit {
 
-  searchControl = new FormControl<string>('');
-  searchControl2 = new FormControl<string>('');
+  protected searchControl = new FormControl<string>('');
+  #searchControl2 = new FormControl<string>('');
 
   ngOnInit() {
     this.searchControl
@@ -27,7 +27,7 @@ export class SearchFormComponent implements OnInit {
 
   }
 
-  ngModelSaerch(value: string) {
+  protected ngModelSaerch(value: string) {
     console.log('Do something with this 2', value);
   }
 
