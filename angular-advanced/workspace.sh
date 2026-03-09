@@ -108,15 +108,29 @@ upgrade_bootstrap() {
   if [[ -d "$dir" && -f "$dir/package.json" ]]; then
     echo "Upgrading bootstrap and related packages in $dir"
 
+    # Detect Angular major version for version-aware upgrades
+    local ng_major
+    ng_major=$(grep -o '"@angular/core":\s*"[^"]*"' "$dir/package.json" | grep -o '[0-9]\+' | head -1)
+
     # Build list of packages to upgrade
     local packages=()
 
     if grep -q "@ng-bootstrap/ng-bootstrap" "$dir/package.json"; then
-      packages+=("@ng-bootstrap/ng-bootstrap@latest")
+      # ng-bootstrap v20 requires Angular 21+, v19 supports Angular 20
+      if [[ "$ng_major" -ge 21 ]] 2>/dev/null; then
+        packages+=("@ng-bootstrap/ng-bootstrap@latest")
+      else
+        packages+=("@ng-bootstrap/ng-bootstrap@19")
+      fi
     fi
 
     if grep -q "@fortawesome/angular-fontawesome" "$dir/package.json"; then
-      packages+=("@fortawesome/angular-fontawesome@latest")
+      # angular-fontawesome v4 requires Angular 21+, v3 supports Angular 20
+      if [[ "$ng_major" -ge 21 ]] 2>/dev/null; then
+        packages+=("@fortawesome/angular-fontawesome@latest")
+      else
+        packages+=("@fortawesome/angular-fontawesome@3")
+      fi
     fi
 
     if grep -q '"bootstrap"' "$dir/package.json"; then
@@ -143,9 +157,9 @@ upgrade_with_install() {
       smart_install "$dir"
       upgrade_bootstrap "$dir"
       echo "Upgrading Angular core packages in $dir"
-      (cd "$dir" && ng update @angular/cli @angular/core --force --allow-dirty)
+      (cd "$dir" && npx ng update @angular/cli @angular/core --force --allow-dirty)
       echo "Upgrading third-party Angular packages in $dir"
-      (cd "$dir" && ng update --all --force --allow-dirty 2>/dev/null || echo "Some packages couldn't be auto-upgraded (this is normal)")
+      (cd "$dir" && npx ng update --all --force --allow-dirty 2>/dev/null || echo "Some packages couldn't be auto-upgraded (this is normal)")
     else
       echo "Skipping $dir (not found or no package.json)"
     fi
@@ -293,10 +307,10 @@ case "$command" in
     case "$target" in
       "-a"|"all")
         directories=($(get_all_directories))
-        run_in_directories "ng update @angular/cli @angular/core --force --allow-dirty" "${directories[@]}"
+        run_in_directories "npx ng update @angular/cli @angular/core --force --allow-dirty" "${directories[@]}"
         ;;
       "demo")
-        run_in_directories "ng update @angular/cli @angular/core --force --allow-dirty" "demo"
+        run_in_directories "npx ng update @angular/cli @angular/core --force --allow-dirty" "demo"
         ;;
       "")
         echo "Error: Target required for update command"
@@ -309,7 +323,7 @@ case "$command" in
           echo "Error: Course '$target' not found"
           exit 1
         fi
-        run_in_directories "ng update @angular/cli @angular/core --force --allow-dirty" "${directories[@]}"
+        run_in_directories "npx ng update @angular/cli @angular/core --force --allow-dirty" "${directories[@]}"
         ;;
     esac
     ;;
