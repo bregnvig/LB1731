@@ -5,13 +5,13 @@ import { LocationService } from '../service';
 import { DefaultDescriptionPipe } from '../pipe/default-description.pipe';
 import { HumanizeDistancePipe } from '../pipe/humanize-distance.pipe';
 import { DistancePipe } from '../pipe/distance.pipe';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'loop-sidebar',
     templateUrl: './sidebar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgFor, AsyncPipe, DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe]
+    imports: [AsyncPipe, DistancePipe, HumanizeDistancePipe, DefaultDescriptionPipe]
 })
 export class SidebarComponent {
 

@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { Component, effect, inject, input, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
@@ -18,7 +18,7 @@ import { RxjsPlaygroundStore } from "./rxjs-playground.store";
       animation: scalePulse 0.3s ease-out;
     }
   `,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -69,7 +69,7 @@ export class RxjsServiceStoreItemComponent implements OnInit {
 @Component({
   selector: 'loop-rxjs-service-store-list',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, RxjsServiceStoreItemComponent],
+  imports: [AsyncPipe, RxjsServiceStoreItemComponent],
   template: `
     @if(loading | async) {
       <div class="spinner-border" role="status">
@@ -96,7 +96,7 @@ export class RxjsServiceStoreListComponent {
 @Component({
   selector: 'loop-rxjs-service-store',
   standalone: true,
-  imports: [CommonModule, RxjsServiceStoreListComponent],
+  imports: [RxjsServiceStoreListComponent],
   providers: [RxjsPlaygroundStore],
   template: `
     <h1>Playgrounds</h1>

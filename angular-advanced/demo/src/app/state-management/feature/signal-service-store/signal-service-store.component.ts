@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, effect, inject, input, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
@@ -18,7 +18,7 @@ import { SignalPlaygroundStore } from "./signal-playground.store";
       animation: scalePulse 0.3s ease-out;
     }
   `,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -69,7 +69,7 @@ export class SignalItemComponent implements OnInit {
 @Component({
   selector: 'loop-signal-service-store-list',
   standalone: true,
-  imports: [CommonModule, SignalItemComponent],
+  imports: [SignalItemComponent],
   template: `
     @if(loading()) {
       <div class="spinner-border" role="status">
@@ -96,7 +96,7 @@ export class SignalListComponent {
 @Component({
   selector: 'loop-signal-service-store',
   standalone: true,
-  imports: [CommonModule, SignalListComponent],
+  imports: [SignalListComponent],
   providers: [SignalPlaygroundStore],
   template: `
     <h1>Playgrounds</h1>

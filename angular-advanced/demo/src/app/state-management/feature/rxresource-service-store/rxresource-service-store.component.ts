@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, effect, inject, input, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
@@ -18,7 +18,7 @@ import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
       animation: scalePulse 0.3s ease-out;
     }
   `,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -69,7 +69,7 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
 @Component({
   selector: 'loop-rxresource-service-store-list',
   standalone: true,
-  imports: [CommonModule, RxresourceServiceStoreItemComponent],
+  imports: [RxresourceServiceStoreItemComponent],
   template: `
     @if(store.playgroundsLoading()) {
       <div class="spinner-border" role="status">
@@ -93,7 +93,7 @@ export class RxresourceServiceStoreListComponent {
 @Component({
   selector: 'loop-rxresource-service-store',
   standalone: true,
-  imports: [CommonModule, RxresourceServiceStoreListComponent],
+  imports: [RxresourceServiceStoreListComponent],
   providers: [RxresourcePlaygroundStore],
   template: `
     <h1>Playgrounds</h1>
