@@ -16,4 +16,8 @@ export class NgforComponent {
     this.items.push(`${this.items.length + 1}. ${input}`);
   }
 
+  protected reverse() {
+    this.items = [...this.items.reverse()];
+  }
+
 }

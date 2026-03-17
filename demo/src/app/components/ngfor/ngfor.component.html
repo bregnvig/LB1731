@@ -1,7 +1,10 @@
 <h2>&#64;for & *ngFor</h2>
-<div class="row g-5">
+<div class="row g-3">
   <div class="col-12">
     <input class="form-control" type="text" #i (keyup.enter)="addInput(i.value)" autofocus>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" (click)="reverse()">Sort</button>
   </div>
   <div class="col-auto">
     <code><pre>&#64;for - Up to 70% faster</pre></code>

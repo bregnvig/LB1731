@@ -10,8 +10,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class InnerComponent implements OnInit, OnDestroy {
 
-  constructor() { }
-
   ngOnInit() {
     console.log('Constructed');
   }

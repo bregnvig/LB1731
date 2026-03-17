@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Center, LeafletModule } from '@loopme/leaflet';
 import { FooterComponent } from './footer/footer.component';
 import { Playground } from './shared/playground';
@@ -19,7 +19,8 @@ export class AppComponent {
     lng: 10.746635
   };
 
-  constructor(service: PlaygroundService) {
+  constructor() {
+    const service = inject(PlaygroundService);
     this.appPlaygrounds = service.getPlaygrounds();
   }
 

@@ -14,7 +14,7 @@ export class InterceptChildComponent {
     transform: value => value.toUpperCase()
   });
 
-  isNice = input<boolean, boolean | string>(true, {
+  isNice = input<boolean, boolean | string>(false, {
     transform: booleanAttribute
   });
 
@@ -24,7 +24,7 @@ export class InterceptChildComponent {
   selector: 'app-intercept',
   template: `
     <h2>Parent -> child intercept</h2>
-    <app-intercept-child [value]="fromProperty"></app-intercept-child>
+    <app-intercept-child [value]="fromProperty" isNice></app-intercept-child>
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
   imports: [InterceptChildComponent, FormsModule]
