@@ -5,10 +5,9 @@ import { debounceTime, map, startWith } from 'rxjs/operators';
 import { PlaygroundService } from 'src/app/shared';
 
 @Component({
-    selector: 'loop-non-template-outlet',
-    templateUrl: './non-template-outlet.component.html',
-    styleUrls: ['./non-template-outlet.component.scss'],
-    standalone: false
+  selector: 'loop-non-template-outlet',
+  templateUrl: './non-template-outlet.component.html',
+  standalone: false
 })
 export class NonTemplateOutletComponent implements OnInit {
 

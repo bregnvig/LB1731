@@ -17,6 +17,12 @@ import { PopoverService } from './popover.service';
       }
     </div>
     `,
+  providers: [
+    // {
+    //   provide: PopoverService,
+    //   useClass: FancyPopoverService,
+    // }
+  ],
   standalone: false
 })
 export class DynamicViewContainerRefComponentComponent {

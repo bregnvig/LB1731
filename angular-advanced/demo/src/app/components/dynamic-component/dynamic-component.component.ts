@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { PlaygroundService } from 'src/app/shared';
 import { PopoverService } from './popover.service';
 
@@ -6,7 +7,7 @@ import { PopoverService } from './popover.service';
   selector: 'loop-dynamic-component',
   template: `
     <div class="list-group list-group-action">
-      @for (playground of playgrounds$ | async; track playground) {
+      @for (playground of playgrounds(); track playground.id) {
         <button 
           class="list-group-item list-group-item-action">
           <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
@@ -21,6 +22,6 @@ import { PopoverService } from './popover.service';
 })
 export class DynamicComponentComponent {
 
-  playgrounds$ = inject(PlaygroundService).playgrounds$;
+  playgrounds = toSignal(inject(PlaygroundService).playgrounds$);
   popover = inject(PopoverService).popoverComponent;
 }

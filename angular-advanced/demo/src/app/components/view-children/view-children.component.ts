@@ -39,9 +39,6 @@ export class ViewChildrenComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     console.log('Hardcoded', this.watches().length);
     console.log('No of stopwatches', this.dynamicWatches().length);
-    this.watches().forEach(w => w.start());
-
-    // Note: viewChildren signals automatically update, no need for changes subscription
   }
 
   addWatch() {
