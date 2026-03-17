@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, enableProdMode, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
+    provideZoneChangeDetection(),importProvidersFrom(
       BrowserModule,
       ReactiveFormsModule,
       NgbModule,

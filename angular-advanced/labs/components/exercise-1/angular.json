@@ -21,7 +21,7 @@
       "prefix": "loop",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
             "outputPath": "dist/components",
             "index": "src/index.html",
@@ -45,15 +45,11 @@
               "node_modules/leaflet/dist/leaflet.js"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "."
-              ],
               "sass": {
                 "silenceDeprecations": [
-                  "mixed-decls",
+                  "import",
                   "color-functions",
-                  "global-builtin",
-                  "import"
+                  "global-builtin"
                 ]
               }
             }
@@ -90,7 +86,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "components:build:production"
@@ -102,7 +98,7 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "components:build"
           }
