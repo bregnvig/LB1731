@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../service/auth.service';

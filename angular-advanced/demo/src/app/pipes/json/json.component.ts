@@ -2,7 +2,39 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'loop-json',
-  templateUrl: './json.component.html',
+  template: `
+    <article class="w-100">
+      <div class="row">
+        <div class="col">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" name="email" [(ngModel)]="login.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password" autocomplete [(ngModel)]="login.password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" name="rememberMe" [(ngModel)]="login.rememberMe" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <ngb-alert type="info" [dismissible]="false">
+            <code>
+    <pre class="text-white fw-bolder mb-0">{{login | json}}</pre>
+            </code>
+          </ngb-alert>
+        </div>
+      </div>
+    </article>
+  `,
   standalone: false
 })
 export class JsonComponent {

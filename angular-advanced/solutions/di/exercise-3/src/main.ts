@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, enableProdMode, importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
+import { APP_INITIALIZER, enableProdMode, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -16,7 +16,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule),
+    provideZoneChangeDetection(),importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule),
     {
       provide: PLAYGROUND_URL,
       useValue: environment.playgroundsURL,
