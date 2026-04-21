@@ -137,11 +137,11 @@ import { ViewChildrenComponent } from './view-children/view-children.component';
       }
     ])
   ],
-  // providers: [
-  //   {
-  //     provide: PopoverService,
-  //     useClass: FancyPopoverService,
-  //   }
-  // ]
+  providers: [
+    // {
+    //   provide: PopoverService,
+    //   useClass: FancyPopoverService,
+    // }
+  ]
 })
 export class ComponentsModule { }
