@@ -1,7 +1,12 @@
 <aside tabindex="1">
   <nav>
     <div class="list-group">
-      @if (!loading()) {
+      @if (loading()) {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Loading</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      } @else {
         <li class="list-group-item p-0">
           <input type="text" class="form-control border-0 rounded-0" placeholder="Filter playgrounds" [formControl]="filterControl">
         </li>
@@ -28,11 +33,6 @@
             </div>
           </a>
         }
-      } @else {
-        <div class="list-group-item d-flex justify-content-between">
-          <span>Loading</span>
-          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
-        </div>
       }
     </div>
   </nav>

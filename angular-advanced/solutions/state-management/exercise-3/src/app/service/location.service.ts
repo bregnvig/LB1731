@@ -1,8 +1,10 @@
 import { Injectable, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable, noop } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 import { Coordinate } from '../model';
+
+const AARHUS: Coordinate = { lat: 56.1629, lng: 10.2039 };
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,7 @@ export class LocationService {
           lng: position.coords.longitude
         };
       }),
+      startWith(AARHUS),
       shareReplay({ bufferSize: 1, refCount: true })
     );
     this.location = toSignal(this.location$, { initialValue: undefined });
