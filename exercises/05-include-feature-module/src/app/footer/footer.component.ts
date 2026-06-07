@@ -4,16 +4,16 @@ import { Playground } from '../shared';
 @Component({
   selector: 'app-footer',
   template: `
-    @if(playground(); as playground) {
+    @if(playground(); as p) {
       <footer>
-        <h3>{{playground.name}}</h3>
-        <p>{{playground.description}}</p>
-        <p>{{playground.addressDescription}}</p>
+        <h3>{{p.name}}</h3>
+        <p>{{p.description}}</p>
+        <p>{{p.addressDescription}}</p>
       </footer>
   }
   `,
 })
 export class FooterComponent {
 
-  playground = input.required<Playground>();
+  playground = input.required<Playground | undefined>();
 }

@@ -1,5 +1,6 @@
-cp -R ./solutions/03-create-first-component ./exercises/04-create-footer-component
-cp -R ./solutions/04-create-footer-component ./exercises/05-include-feature-module
-cp -R ./solutions/05-include-feature-module ./exercises/06-create-playground-service
-cp -R ./solutions/06-create-playground-service ./exercises/07-work-with-async
-cp -R ./solutions/07-work-with-async ./exercises/08-add-some-routes
+# Copy contents of the source directory (including hidden files) directly into the target directory
+cp -R ./solutions/03-create-first-component/. ./exercises/04-create-footer-component
+cp -R ./solutions/04-create-footer-component/. ./exercises/05-include-feature-module
+cp -R ./solutions/05-include-feature-module/. ./exercises/06-create-playground-service
+cp -R ./solutions/06-create-playground-service/. ./exercises/07-work-with-async
+cp -R ./solutions/07-work-with-async/. ./exercises/08-add-some-routes
