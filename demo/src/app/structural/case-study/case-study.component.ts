@@ -4,7 +4,6 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-case-study',
   templateUrl: './case-study.component.html',
-  styleUrls: ['./case-study.component.css'],
   imports: [NgIf]
 })
 export class CaseStudyComponent {

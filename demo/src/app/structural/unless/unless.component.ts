@@ -4,7 +4,6 @@ import { Unless } from '../unless.directive';
 @Component({
   selector: 'app-unless',
   templateUrl: './unless.component.html',
-  styleUrls: ['./unless.component.css'],
   imports: [Unless]
 })
 export class UnlessComponent {

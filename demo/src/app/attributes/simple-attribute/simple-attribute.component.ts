@@ -5,7 +5,6 @@ import { Rotate180 } from '../rotate.directive';
 @Component({
     selector: 'app-simple-attribute',
     templateUrl: './simple-attribute.component.html',
-    styleUrls: ['./simple-attribute.component.css'],
     imports: [Rotate180]
 })
 export class SimpleAttributeComponent {

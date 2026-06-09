@@ -6,7 +6,6 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 @Component({
     selector: 'examples-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLinkActive, RouterLink]
 })
