@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+import { StopwatchComponent } from '../stopwatch/stopwatch.component';
+
+@Component({
+    selector: 'app-local',
+    template: `
+    <h2>Template reference variable</h2>
+    <h3>
+    <app-stopwatch #stopwatch />
+    </h3>
+    <div>
+    <button class="btn btn-success me-3" (click)="stopwatch.start()">Start</button>
+    <button class="btn btn-default me-3" (click)="stopwatch.stop()">Stop</button>
+    <button class="btn btn-danger" (click)="stopwatch.reset()">Reset</button>
+    </div>
+    `,
+    imports: [StopwatchComponent]
+})
+export class ReferenceComponent {
+}

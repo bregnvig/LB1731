@@ -10,14 +10,13 @@ import { FormsModule } from '@angular/forms';
 export class DirectlyChildComponent {
   value1 = input.required<string>();
   value2 = input<string>();
-
 }
 
 @Component({
   selector: 'app-directly',
   template: `
     <h2>Parent -> child directly</h2>
-    <app-directly-child value1="My value" [value2]="fromProperty"></app-directly-child>
+    <app-directly-child value1="My value" [value2]="fromProperty" />
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
   imports: [DirectlyChildComponent, FormsModule]

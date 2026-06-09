@@ -25,7 +25,7 @@ export class MenuPageComponent {
     { routerLink: '/io/directly', title: 'Parent -> child directly' },
     { routerLink: '/io/intercept', title: 'Parent -> child intercept' },
     { routerLink: '/io/event', title: 'Child  -> parent' },
-    { routerLink: '/io/local', title: 'Local reference variable' },
+    { routerLink: '/io/reference', title: 'Template reference variable' },
     { routerLink: '/io/viewchild', title: '@ViewChild' },
     { routerLink: '/io/viewchildren', title: '@ViewChildren    ' },
   ];

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InnerComponent } from '../inner/inner.component';
+import { InnerComponent } from "../inner";
 
 @Component({
   selector: 'app-outer',
@@ -8,7 +8,7 @@ import { InnerComponent } from '../inner/inner.component';
     <p>I'm outer</p>
     <app-inner />
   `,
-  imports: [InnerComponent]
+  imports: [InnerComponent],
 })
 export class OuterComponent {
 

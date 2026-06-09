@@ -1,17 +1,19 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 
 @Component({
   selector: 'app-stopwatch',
   template: '{{seconds()}}',
 })
-export class StopwatchComponent implements OnDestroy {
+export class StopwatchComponent {
 
   protected seconds = signal<number>(0);
   #intervalNo?: number;
 
-  ngOnDestroy() {
-    console.log('Destroyed');
-    this.stop();
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      console.log('Destroyed');
+      this.stop();
+    });
   }
 
   start() {

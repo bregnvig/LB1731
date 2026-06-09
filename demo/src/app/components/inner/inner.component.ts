@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 
 @Component({
   selector: 'app-inner',
@@ -8,14 +8,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   </p>
  `,
 })
-export class InnerComponent implements OnInit, OnDestroy {
+export class InnerComponent {
 
-  ngOnInit() {
+  constructor() {
     console.log('Constructed');
-  }
-
-  ngOnDestroy() {
-    console.log('Destroyed!!');
+    inject(DestroyRef).onDestroy(() => console.log('Destroyed!!'));
   }
 
 }
