@@ -7,7 +7,7 @@
       @if(show) {
         <p>
           &#64;if works!
-          <app-inner></app-inner>
+          <app-inner/>
         </p>
       } @else  {
         <div>The <code>else</code> template could go here</div>
@@ -17,7 +17,7 @@
       <code><pre>*ngIf (Will be removed in v22)</pre></code>
       <p *ngIf="show else myElse">
         ngIf works!
-        <app-inner></app-inner>
+        <app-inner/>
       </p>
       <ng-template #myElse>
         <div>The <code>else</code> template could go here</div>
