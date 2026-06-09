@@ -2,7 +2,17 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-property',
-  templateUrl: './property.component.html',
+  template: `
+    <h2>[property]</h2>
+    <ul class="list-group">
+      <li class="list-group-item" [class.list-group-item-danger]="showRed">My red</li>
+      <li class="list-group-item"><span [hidden]="show">My hidden</span> </li>
+    </ul>
+    <div class="mt-3">
+      <button class="btn btn-primary me-3" (click)="toggleRed()">Toggle red</button>
+      <button class="btn btn-primary" (click)="toggleShow()">Toggle show</button>
+    </div>
+  `,
 })
 export class PropertyComponent {
 

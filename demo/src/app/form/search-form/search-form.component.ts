@@ -8,7 +8,13 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-search-form',
-    templateUrl: './search-form.component.html',
+    template: `
+      <h2>Search form standalone</h2>
+      <div class="form-group">
+        <input type="text" class="form-control" [formControl]="searchControl" placeholder="Fancy search"><br>
+        <input type="text" class="form-control" ngModel (ngModelChange)="ngModelSaerch($event)" placeholder="Backend overload">
+      </div>
+    `,
     imports: [FormsModule, ReactiveFormsModule]
 })
 export class SearchFormComponent implements OnInit {

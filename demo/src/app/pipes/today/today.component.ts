@@ -3,7 +3,15 @@ import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-today',
-    templateUrl: './today.component.html',
+    template: `
+      <h2>Today</h2>
+      <p>
+        Today is {{today}}
+      </p>
+      <p>
+        Today is {{today | date}}
+      </p>
+    `,
     imports: [DatePipe]
 })
 export class TodayComponent implements OnInit {

@@ -3,7 +3,11 @@ import { CounterService } from '../counter.service';
 
 @Component({
   selector: 'app-counter',
-  templateUrl: './counter.component.html',
+  template: `
+    <h2>Provided</h2>
+    <p>{{counterService.count}}</p>
+    <button class="btn btn-primary" type="button" (click)="increment()">Tæl op</button>
+  `,
 })
 export class CounterComponent {
 

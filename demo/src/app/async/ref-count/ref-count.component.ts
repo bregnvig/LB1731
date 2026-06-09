@@ -7,7 +7,19 @@ import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-ref-count',
-    templateUrl: './ref-count.component.html',
+    template: `
+      <h2>Ref count</h2>
+      <div class="row g-3">
+        <span class="col">{{date1 | date:'HH:mm:ss'}}</span>
+        <button class="col-auto btn btn-primary me-3" (click)="start1()">Start timer</button>
+        <button class="col-auto btn btn-primary" (click)="stop1()">Stop timer</button>
+      </div>
+      <div class="row g-3 mt-3">
+        <span class="col">{{date2 | date:'HH:mm:ss'}}</span>
+        <button class="col-auto btn btn-primary me-3" (click)="start2()">Start timer</button>
+        <button class="col-auto btn btn-primary" (click)="stop2()">Stop timer</button>
+      </div>
+    `,
     imports: [DatePipe]
 })
 export class RefCountComponent implements OnDestroy {

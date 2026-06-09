@@ -7,7 +7,17 @@ import { F1AutoRefreshService } from '../f1.service';
 
 @Component({
   selector: 'app-auto-refresh',
-  templateUrl: './auto-refresh.component.html',
+  template: `
+    <h2>Auto refresh service - with memory leak</h2>
+    <div>
+      <button class="btn btn-primary pane fixed-size" (click)="addSubscribtion()">Add subscribe</button>
+    </div>
+    <ul class="mt-3 list-group">
+      @for(driver of drivers(); track driver.driverNumber) {
+        <app-driver-list-item [driver]="driver"/>
+      }
+    </ul>
+  `,
   imports: [DriverListItemComponent]
 })
 export class AutoRefreshComponent {

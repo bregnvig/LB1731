@@ -4,7 +4,14 @@ import { DriverListItemComponent } from "../driver-list-item.component";
 import { RetryService } from '../retry.service';
 @Component({
   selector: 'app-retry-when',
-  templateUrl: './retry-when.component.html',
+  template: `
+    <h2>Retry when Service</h2>
+    <ul class="list-group">
+      @for(driver of drivers(); track driver.driverNumber) {
+        <app-driver-list-item [driver]="driver"/>
+      }
+    </ul>
+  `,
   imports: [DriverListItemComponent]
 })
 export class RetryWhenComponent implements OnInit {

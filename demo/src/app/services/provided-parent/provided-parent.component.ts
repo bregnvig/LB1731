@@ -4,7 +4,12 @@ import { RandomService } from '../random.service';
 
 @Component({
   selector: 'app-provided-parent',
-  templateUrl: './provided-parent.component.html',
+  template: `
+    <h2>Provided</h2>
+    <p><app-provided/></p>
+    <p><app-provided/></p>
+    <p><app-provided/></p>
+  `,
   imports: [ProvidedComponent],
   providers: [RandomService]
 })

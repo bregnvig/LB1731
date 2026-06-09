@@ -5,7 +5,15 @@ import { MenuComponent } from './menu/menu.component';
 
 @Component({
   selector: 'examples-menu-page',
-  templateUrl: './menu-page.component.html',
+  template: `
+    <div class="container">
+      <main class="row g-3 row-cols-12 row-cols-md-2 row-cols-lg-3">
+        @for (menu of menues; track menu) {
+          <examples-menu [menuss]="menu"></examples-menu>
+        }
+      </main>
+    </div>
+  `,
   imports: [MenuComponent]
 })
 export class MenuPageComponent {

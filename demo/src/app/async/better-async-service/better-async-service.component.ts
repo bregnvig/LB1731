@@ -7,7 +7,17 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-better-async-service',
-  templateUrl: './better-async-service.component.html',
+  template: `
+    <h2>Better async service</h2>
+    <div>
+      <button class="btn btn-primary pane fixed-size" (click)="addSubscription()">Add subscribe</button>
+    </div>
+    <ul class="mt-3 list-group">
+      @for(driver of drivers(); track driver.driverNumber) {
+        <app-driver-list-item [driver]="driver"/>
+      }
+    </ul>
+  `,
   providers: [F1BetterService],
   imports: [DriverListItemComponent],
 })

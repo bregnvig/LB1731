@@ -4,7 +4,16 @@ import { RandomService } from '../random.service';
 
 @Component({
   selector: 'app-factory-provided-parent',
-  templateUrl: './factory-provided-parent.component.html',
+  template: `
+    <h2>Factory provided</h2>
+    <div class="pane-container center-content">
+      <div class="pane fixed-size">
+        <p><app-factory-provided/></p>
+        <p><app-factory-provided/></p>
+        <p><app-factory-provided/></p>
+      </div>
+    </div>
+  `,
   imports: [FactoryProvidedComponent],
   providers: [
     {

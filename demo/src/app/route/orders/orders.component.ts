@@ -4,7 +4,19 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-orders',
-    templateUrl: './orders.component.html',
+    template: `
+      <h1>Routes & navigation</h1>
+      <div class="pane-container center-content">
+        <div class="pane fixed-size">
+          <nav>
+            @for (orderId of [1,2,3]; track orderId) {
+              <button class="btn btn-link" (click)="gotoOrder(orderId)">Order {{orderId}}</button>
+            }
+          </nav>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    `,
     styleUrls: ['./orders.component.css'],
     imports: [RouterOutlet]
 })

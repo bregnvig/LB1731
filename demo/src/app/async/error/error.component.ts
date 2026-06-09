@@ -10,7 +10,19 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-error',
-    templateUrl: './error.component.html',
+    template: `
+      <h2>Errors</h2>
+      <p>
+        It took {{elapsed}} ms
+      </p>
+      <ul class="list-group">
+        @for (postNummer of zipCodes$ | async; track postNummer) {
+          <li class="list-group-item">
+            {{postNummer.nr}} - {{postNummer.navn}}
+          </li>
+        }
+      </ul>
+    `,
     imports: [AsyncPipe]
 })
 export class ErrorComponent implements OnInit {

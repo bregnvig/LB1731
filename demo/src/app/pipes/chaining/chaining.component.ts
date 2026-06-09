@@ -3,7 +3,15 @@ import { UpperCasePipe, LowerCasePipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-chaining',
-    templateUrl: './chaining.component.html',
+    template: `
+      <h2>Chaining</h2>
+      <p>
+        date & uppercase {{today | date:'mediumDate' | uppercase}}
+      </p>
+      <p>
+        date & lowercase {{today | date | lowercase}}
+      </p>
+    `,
     imports: [
         UpperCasePipe,
         LowerCasePipe,

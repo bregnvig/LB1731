@@ -6,7 +6,10 @@ import { take } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'app-interval',
-    templateUrl: './interval.component.html',
+    template: `
+      <h2>Interval</h2>
+      <p>{{number$ | async}}</p>
+    `,
     imports: [AsyncPipe]
 })
 export class IntervalComponent implements OnInit {

@@ -7,7 +7,14 @@ import { F1BetterService, F1SimpleService } from './../../async/f1.service';
 
 @Component({
   selector: 'app-async',
-  templateUrl: './async.component.html',
+  template: `
+    <h2>Async pipe</h2>
+    <ul class="list-group">
+      @for(driver of drivers$ | async; track driver.driverNumber) {
+        <app-driver-list-item [driver]="driver"/>
+      }
+    </ul>
+  `,
   providers: [F1SimpleService, F1BetterService],
   imports: [AsyncPipe, DriverListItemComponent]
 })

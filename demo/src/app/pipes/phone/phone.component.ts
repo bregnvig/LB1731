@@ -3,7 +3,15 @@ import { PhonePipe } from '../phone.pipe';
 
 @Component({
     selector: 'app-phone',
-    templateUrl: './phone.component.html',
+    template: `
+      <h2>Phone no</h2>
+      <p>
+        Without prefix {{'28712234' | phone }}
+      </p>
+      <p>
+        With prefix {{'28712234' | phone:'+45' }}
+      </p>
+    `,
     imports: [PhonePipe]
 })
 export class PhoneComponent implements OnInit {

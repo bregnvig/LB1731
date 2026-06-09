@@ -6,7 +6,17 @@ import { F1CachedService } from '../f1.service';
 
 @Component({
   selector: 'app-cached-async-service',
-  templateUrl: './cached-async-service.component.html',
+  template: `
+    <h2>Cached async service</h2>
+    <div>
+      <button class="btn btn-primary fixed-size" (click)="addSubscribtion()">Add subscribe</button>
+    </div>
+    <ul class="mt-3 list-group">
+      @for(driver of drivers(); track driver.driverNumber) {
+        <app-driver-list-item [driver]="driver"/>
+      }
+    </ul>
+  `,
   imports: [DriverListItemComponent]
 })
 export class CachedAsyncServiceComponent {
