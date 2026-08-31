@@ -3,6 +3,32 @@
 All notable changes to the **Angular Foundation** slide deck and its companion
 demo project (`~/repo/LB1731/demo`) are documented here.
 
+## [2026.10] - 2026-08-31
+
+### Slides
+
+- **New: Signal forms section** (5 slides, at the end of the Forms section
+  before Routing). Covers the v22 `@angular/forms/signals` API: the model as a
+  plain `signal`, `form()` deriving the field tree from the model's shape,
+  validation rules (`required`/`min`/`max`) declared against typed paths, the
+  `[formRoot]`/`[formField]` directives, and field state as signals. Closes
+  with a comparison of template driven vs. reactive vs. signal forms.
+
+### Demo
+
+- **New: `/form/signal`** - a signal forms example laid out identically to the
+  template-driven and model-driven forms so the three can be compared. Uses
+  `form()`, `required`/`min`/`max`, `[formField]` and `submit()`.
+- The shared `Person` class has an optional `height`, which signal forms cannot
+  bind directly, so the component declares its own `PersonModel` with every
+  field present. `Person` is unchanged for the other two forms.
+
+### Tooling
+
+- Added `serve.mjs`: `npm start` serves the deck with live reload, so saving a
+  slide refreshes the browser. The reload snippet is added to the response
+  only - `index.html` on disk stays byte-identical for slides.com re-import.
+
 ## [2026.09] - 2026-08-31
 
 Synchronisation pass between the slides (`index.html`) and the demo code.

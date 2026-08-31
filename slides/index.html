@@ -2561,7 +2561,98 @@ export class NgForm { ... }</code></pre></div></div></section><section data-id="
 	<p>Wonderful when creating custom controls(Not part of Angular foundation)</p>
 	</li>
 </ul></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 340px; top: 622.5px;" data-name="text-7e4ebb" data-block-id="6c1fa94c06e30f0066d548666306ee76"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; transition-duration: 0.6s; transition-delay: 3s;" data-animation-type="scale-up"><p><span style="font-size:1.4em"><strong>My advice? Just do it!🚀</strong></span></p></div></div></section></section><section class="stack" data-id="d2c0620eb763ae0e6b2ec896392c69e2"><section data-id="60c07928c1133c0ec146b7796842e206"><div class="sl-block" data-block-type="text" style="width: 1075px; left: 102px; top: 194px; height: auto;" data-block-id="3c80a386e11809edaa03ef5fed4538e2"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;"><h1>Routes &amp; navigation</h1></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 340px; top: 622.5px;" data-name="text-7e4ebb" data-block-id="6c1fa94c06e30f0066d548666306ee76"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12; transition-duration: 0.6s; transition-delay: 3s;" data-animation-type="scale-up"><p><span style="font-size:1.4em"><strong>My advice? Just do it!🚀</strong></span></p></div></div></section>
+<section data-id="c7b2e6c37423cbb9483a4afd72d74cc8"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 108px; height: auto;" data-block-id="7f20b665ed81e1a408cde70afa1271dd"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Signal forms🚦</h2></div></div>
+<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 216px; height: auto;" data-block-id="9435e5cdd6b7587c6206060839080f0c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;"><ul>
+	<li>
+	<p>New in v22 - and no longer experimental</p>
+	</li>
+	<li>
+	<p>The model is just a <code>signal</code> - no <code>FormGroup</code>, no <code>FormBuilder</code></p>
+	</li>
+	<li>
+	<p>The form is derived from the shape of your model</p>
+	</li>
+	<li>
+	<p>Validation is declared as rules against the model - checked at compile time</p>
+	</li>
+	<li>
+	<p>Import from <code>&#64;angular/forms/signals</code></p>
+	</li>
+</ul></div></div>
+</section>
+<section data-id="e922b6253205c946b4503946b83ef40b"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="3da87fd956e39f18258b01cf0082548a"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The model &amp; the form</h2></div></div>
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="9-14|17|18-21">interface PersonModel {
+  firstName: string;
+  lastName: string;
+  favoriteColor: string;
+  height: number;
+}
+
+export class SignalFormComponent {
+
+  #model = signal&lt;PersonModel&gt;({
+    firstName: 'Flemming',
+    lastName: 'Bregnvig',
+    favoriteColor: 'Blue',
+    height: 182,
+  });
+
+  protected fg = form(this.#model, (person) =&gt; {
+    required(person.firstName);
+    required(person.lastName);
+    min(person.height, 100);
+    max(person.height, 220);
+  });
+
+}</code></pre></div></div>
+</section>
+<section data-id="f484f2c1b30275e2c39e182964f5b120"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="a5d849620a69aedb22aa923647cbbc93"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The template</h2></div></div>
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="39e64b66ee7b6fd33dccf710b8af78e9"><div class="sl-block-content" style="z-index: 11;"><pre class="xml" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1|4,8|10">&lt;form [formRoot]="fg" (submit)="onSubmit()"&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="firstName"&gt;First name&lt;/label&gt;
+    &lt;input id="firstName" [formField]="fg.firstName"&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="height"&gt;Height&lt;/label&gt;
+    &lt;input type="number" id="height" [formField]="fg.height"&gt;
+  &lt;/div&gt;
+  &lt;button type="submit" [disabled]="fg().invalid()"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 560px; height: auto;" data-block-id="ed84bf6a8d117867b01678995257e191"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p><code>[formField]</code> binds one field - the field tree knows its own type</p></div></div>
+</section>
+<section data-id="3e77555172a175c407090a0ef695c2bb"><div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 60px; height: auto;" data-block-id="061b37979934b0043f8b04aa308c9906"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Field state is signals all the way down</h2></div></div>
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>fg().value()      // the whole model
+fg.firstName().value()    // one field's value
+
+fg().valid()      // is the form valid?
+fg().invalid()
+fg().touched()
+fg().dirty()
+fg().errors()     // typed validation errors
+
+fg.height().errors()      // errors for a single field</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 520px; height: auto;" data-block-id="da857783128ff62b880952fa64891075"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p>Everything is a <code>Signal</code>, so the template just reads it - no <code>valueChanges</code> subscription</p></div></div>
+</section>
+<section data-id="0e287ad8142dbbcef6c0ebaa574b7bce"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 108px; height: auto;" data-block-id="1b3247714794c6a83e64614d66013ea7"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Which should i choose?</h2></div></div>
+<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 216px; height: auto;" data-block-id="faba86b102130646e2da3ffea1eb2cfd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;"><ul>
+	<li>
+	<p>Template driven - state lives in the template</p>
+	</li>
+	<li>
+	<p>Reactive - state lives in a <code>FormGroup</code> you build by hand</p>
+	</li>
+	<li>
+	<p>Signal forms - state <em>is</em> your model, the form is derived from it</p>
+	</li>
+	<li>
+	<p>Signal forms fit a zoneless, signal based application🚀</p>
+	</li>
+	<li>
+	<p>Reactive forms are not going anywhere - but new code can start here</p>
+	</li>
+</ul></div></div>
+</section></section><section class="stack" data-id="d2c0620eb763ae0e6b2ec896392c69e2"><section data-id="60c07928c1133c0ec146b7796842e206"><div class="sl-block" data-block-type="text" style="width: 1075px; left: 102px; top: 194px; height: auto;" data-block-id="3c80a386e11809edaa03ef5fed4538e2"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10;"><h1>Routes &amp; navigation</h1></div></div>
 <div class="sl-block" data-block-type="text" style="width: 1075px; left: 102px; top: 258px; height: auto;" data-block-id="0460b57c0549c5f2c5b2d389b9310ffa"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Subtitle" style="z-index: 11;"><h2>screen navigation with Angular</h2></div></div>
 <div class="sl-block" data-block-type="image" style="width: 254.8px; height: 254.8px; left: 945.2px; top: 393.2px; min-width: 1px; min-height: 1px;" data-name="image-b68bf3" data-block-id="2bddd2e246dc38ce0d2a93b58cfabc3c"><div class="sl-block-content" style="z-index: 12;" data-inline-svg="false"><img class="" data-natural-width="495" data-natural-height="495" data-lazy-loaded="" data-src="angular-foundation/14b75624bb0fc30be2c6ff0bc649aafa.svg"></div></div></section><section data-id="25a8663aee42a8b4395ee39bb2ec81bd"><div class="sl-block" data-block-type="text" style="width: 512px; left: 64px; top: 108px; height: auto;" data-block-id="6209bdd7a18d59815510bc0c319eb3db"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Why do we have routing?</h2></div></div>
 <div class="sl-block" data-block-type="text" style="width: 512px; left: 64px; top: 216px; height: auto;" data-block-id="ca8dce9910ed4b877d73da85f3af2e9d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin urna odio, aliquam vulputate faucibus id, elementum lobortis felis. Mauris urna dolor, placerat ac sagittis quis." style="text-align: left; z-index: 11;">
