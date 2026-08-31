@@ -55,3 +55,6 @@ Thumbs.db
 # Angular Advanced workspace files
 angular-advanced/package.json
 angular-advanced/package-lock.json
+
+# Angular Foundation slides - exported PDF is a build artifact
+slides/*.pdf

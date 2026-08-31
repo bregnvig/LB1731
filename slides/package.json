@@ -1,0 +1,14 @@
+{
+  "name": "slides-angular-foundation",
+  "version": "2026.9.0",
+  "private": true,
+  "type": "module",
+  "description": "Angular Foundation slide deck (slides.com export) and its PDF exporter",
+  "scripts": {
+    "pdf": "node export-pdf.mjs",
+    "pdf:fragments": "node export-pdf.mjs --fragments"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.9.0"
+  }
+}
