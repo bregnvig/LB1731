@@ -9,7 +9,7 @@ import { F1CachedService } from '../f1.service';
   template: `
     <h2>Cached async service</h2>
     <div>
-      <button class="btn btn-primary fixed-size" (click)="addSubscribtion()">Add subscribe</button>
+      <button class="btn btn-primary fixed-size" (click)="addSubscription()">Add subscribe</button>
     </div>
     <ul class="mt-3 list-group">
       @for(driver of drivers(); track driver.driverNumber) {
@@ -28,7 +28,7 @@ export class CachedAsyncServiceComponent {
     this.#service.getDrivers().subscribe(drivers => this.drivers.set(drivers));
   }
 
-  protected addSubscribtion() {
+  protected addSubscription() {
     this.#service.getDrivers().subscribe(drivers => console.log(`Found ${drivers.length} drivers`));
   }
 }

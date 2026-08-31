@@ -26,10 +26,10 @@
     </div>
     <div class="col-12 mb-3">
       <label for="height">Height</label>
-      <input type="text" class="form-control" id="height" max="230" [(ngModel)]="model.height" name="height" min="65">
+      <input type="number" class="form-control" id="height" min="100" [(ngModel)]="model.height" name="height" max="220">
     </div>
     <div>
-      <button type=" submit " class="btn btn-primary ">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
 </div>

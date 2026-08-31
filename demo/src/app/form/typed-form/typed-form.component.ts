@@ -21,7 +21,7 @@ export class TypedFormComponent {
     firstName: this.#fb.control<string>(this.#model.firstName, [Validators.required]),
     lastName: this.#fb.control(this.#model.lastName, [Validators.required]),
     favoriteColor: this.#fb.control(this.#model.favoriteColor),
-    height: this.#fb.control(this.#model.height, [Validators.min(100), Validators.max(200)])
+    height: this.#fb.control(this.#model.height, [Validators.min(100), Validators.max(220)])
   });
 
   constructor() { }

@@ -1,12 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
-import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwatch.component';
 
 @Component({
     selector: 'app-viewchild',
     template: `
-      <h2>&#64;ViewChild</h2>
+      <h2>viewChild</h2>
       <h3>
         <app-stopwatch/>
       </h3>
@@ -16,25 +15,24 @@ import { StopwatchComponent as StopwatchComponent_1 } from '../stopwatch/stopwat
         <button class="btn btn-danger" (click)="reset()">Reset</button>
       </div>
     `,
-    imports: [StopwatchComponent_1]
+    imports: [StopwatchComponent]
 })
 export class ViewchildComponent {
 
-  @ViewChild(StopwatchComponent, { static: true })
-  stopwatch!: StopwatchComponent;
+  readonly stopwatch = viewChild.required(StopwatchComponent);
 
   protected start() {
     console.log('Started!');
-    this.stopwatch.start();
+    this.stopwatch().start();
   }
 
   protected stop() {
     console.log('Stopped!');
-    this.stopwatch.stop();
+    this.stopwatch().stop();
   }
 
   protected reset() {
-    this.stopwatch.reset();
+    this.stopwatch().reset();
   }
 
 }

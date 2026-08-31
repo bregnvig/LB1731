@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
       <h2>Search form standalone</h2>
       <div class="form-group">
         <input type="text" class="form-control" [formControl]="searchControl" placeholder="Fancy search"><br>
-        <input type="text" class="form-control" ngModel (ngModelChange)="ngModelSaerch($event)" placeholder="Backend overload">
+        <input type="text" class="form-control" ngModel (ngModelChange)="ngModelSearch($event)" placeholder="Backend overload">
       </div>
     `,
     imports: [FormsModule, ReactiveFormsModule]
@@ -33,7 +33,7 @@ export class SearchFormComponent implements OnInit {
 
   }
 
-  protected ngModelSaerch(value: string) {
+  protected ngModelSearch(value: string) {
     console.log('Do something with this 2', value);
   }
 
