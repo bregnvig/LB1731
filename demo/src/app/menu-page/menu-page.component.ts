@@ -73,6 +73,7 @@ export class MenuPageComponent {
   private forms: MenuItems = [
     { routerLink: '/form/template-driven', title: 'Template driven form' },
     { routerLink: '/form/model-driven', title: 'Model driven form' },
+    { routerLink: '/form/signal', title: 'Signal form' },
     { routerLink: '/form/search', title: 'Search stand alone    ' },
   ];
 

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { SearchFormComponent, TemplateDriverFormComponent, TypedFormComponent } from './';
+import { SearchFormComponent, SignalFormComponent, TemplateDriverFormComponent, TypedFormComponent } from './';
 
 const routes: Routes = [
   {
@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'model-driven',
     component: TypedFormComponent,
+  },
+  {
+    path: 'signal',
+    component: SignalFormComponent,
   },
   {
     path: 'search',
