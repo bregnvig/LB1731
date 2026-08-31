@@ -14,6 +14,67 @@
 
 
 
+
+		<!-- Brighter, bolder syntax highlighting for code blocks.
+		     Kept here rather than in lib/offline-v2.css so it survives a
+		     slides.com re-export. -->
+		<style>
+			.reveal pre code {
+				color: #f8f8f2;
+				font-weight: 500;
+			}
+			.reveal pre code .hljs-keyword,
+			.reveal pre code .hljs-literal,
+			.reveal pre code .hljs-selector-tag {
+				color: #c792ea;
+				font-weight: 700;
+			}
+			.reveal pre code .hljs-string,
+			.reveal pre code .hljs-subst,
+			.reveal pre code .hljs-addition {
+				color: #c3e88d;
+				font-weight: 600;
+			}
+			.reveal pre code .hljs-number,
+			.reveal pre code .hljs-built_in,
+			.reveal pre code .hljs-params {
+				color: #f78c6c;
+				font-weight: 600;
+			}
+			.reveal pre code .hljs-title,
+			.reveal pre code .hljs-section,
+			.reveal pre code .hljs-type,
+			.reveal pre code .hljs-class {
+				color: #82aaff;
+				font-weight: 700;
+			}
+			.reveal pre code .hljs-meta {
+				color: #ffcb6b;
+				font-weight: 700;
+			}
+			.reveal pre code .hljs-tag,
+			.reveal pre code .hljs-name {
+				color: #ff9cac;
+				font-weight: 600;
+			}
+			.reveal pre code .hljs-attr,
+			.reveal pre code .hljs-attribute,
+			.reveal pre code .hljs-variable {
+				color: #ffcb6b;
+				font-weight: 500;
+			}
+			/* Comments stay quieter than the code, but readable. */
+			.reveal pre code .hljs-comment,
+			.reveal pre code .hljs-quote {
+				color: #8d9bb5;
+				font-weight: 400;
+				font-style: italic;
+			}
+			/* Dimmed lines when data-line-numbers highlights a subset. */
+			.reveal pre code .highlight-line-dimmed {
+				opacity: 0.4;
+			}
+		</style>
 	</head>
 	<body class="reveal-viewport theme-font-overpass2 theme-color-black-orange">
 		<div class="reveal">
