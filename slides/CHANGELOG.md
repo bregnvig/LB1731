@@ -19,9 +19,13 @@ demo project (`~/repo/LB1731/demo`) are documented here.
 - **New: `/form/signal`** - a signal forms example laid out identically to the
   template-driven and model-driven forms so the three can be compared. Uses
   `form()`, `required`/`min`/`max`, `[formField]` and `submit()`.
-- The shared `Person` class has an optional `height`, which signal forms cannot
-  bind directly, so the component declares its own `PersonModel` with every
-  field present. `Person` is unchanged for the other two forms.
+- The shared `Person` class declares `height?: number | null`, which signal
+  forms cannot bind (a field must be both present and non-nullable). The model
+  type is derived from `Person` rather than restated:
+  `type PersonModel = { [K in keyof Person]-?: NonNullable<Person[K]> }`, where
+  `-?` removes the `?` (as `Required<T>` does) and `NonNullable<>` removes the
+  `| null`. `Person` itself is unchanged, so the other two forms are unaffected,
+  and the signal form follows `Person` if it changes.
 
 ### Tooling
 

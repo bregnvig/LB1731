@@ -2582,12 +2582,9 @@ export class NgForm { ... }</code></pre></div></div></section><section data-id="
 </ul></div></div>
 </section>
 <section data-id="e922b6253205c946b4503946b83ef40b"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="3da87fd956e39f18258b01cf0082548a"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The model &amp; the form</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="9-14|17|18-21">interface PersonModel {
-  firstName: string;
-  lastName: string;
-  favoriteColor: string;
-  height: number;
-}
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1-3|7-13|15-20">type PersonModel = {
+  [K in keyof Person]-?: NonNullable&lt;Person[K]&gt;
+};
 
 export class SignalFormComponent {
 
@@ -2596,6 +2593,7 @@ export class SignalFormComponent {
     lastName: 'Bregnvig',
     favoriteColor: 'Blue',
     height: 182,
+    shoeSize: 42,
   });
 
   protected fg = form(this.#model, (person) =&gt; {
