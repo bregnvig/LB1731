@@ -70,6 +70,12 @@
 				font-weight: 600;
 				font-style: italic;
 			}
+			/* Function calls highlight.js leaves unclassified (see the script
+			   near </body>) - e.g. the signal-forms rule names. */
+			.reveal pre code .sf-fn {
+				color: #4fd6ff;
+				font-weight: 700;
+			}
 			/* Dimmed lines when data-line-numbers highlights a subset. */
 			.reveal pre code .highlight-line-dimmed {
 				opacity: 0.4;
@@ -3062,5 +3068,51 @@ form.height().errors()</code></pre></div></div>
 		
 
 
+
+		<script>
+			// highlight.js leaves standalone calls such as `required(person.x);`
+			// unclassified, so the signal-forms rule names render as plain body
+			// text. Tag them once highlighting is done so they pick up a colour.
+			(() => {
+				const FNS = /\b(required|min|max|minLength|maxLength|email|pattern|disabled|hidden|readonly|validate|validateAsync|validateTree|apply|applyEach|applyWhen|schema|submit)(?=\s*\()/g;
+				const tag = () => {
+					document.querySelectorAll('.reveal pre code').forEach((code) => {
+						const walker = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
+						const targets = [];
+						while (walker.nextNode()) {
+							const node = walker.currentNode;
+							// Skip text already inside a highlight token span. The line
+							// wrappers (hljs-ln / hljs-ln-line / hljs-ln-code) are layout,
+							// not tokens, so they must not disqualify a node.
+							if (node.parentElement.closest('span[class^="hljs-"]')) continue;
+							if (FNS.test(node.textContent)) targets.push(node);
+							FNS.lastIndex = 0;
+						}
+						targets.forEach((node) => {
+							const frag = document.createDocumentFragment();
+							let last = 0;
+							const text = node.textContent;
+							text.replace(FNS, (name, _g, offset) => {
+								if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
+								const span = document.createElement('span');
+								span.className = 'sf-fn';
+								span.textContent = name;
+								frag.appendChild(span);
+								last = offset + name.length;
+								return name;
+							});
+							if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+							node.parentNode.replaceChild(frag, node);
+						});
+					});
+				};
+				if (window.Reveal && Reveal.on) {
+					Reveal.on('ready', tag);
+					Reveal.on('slidechanged', tag);
+				} else {
+					window.addEventListener('load', () => setTimeout(tag, 500));
+				}
+			})();
+		</script>
 	</body>
 </html>
