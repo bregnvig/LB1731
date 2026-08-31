@@ -1,11 +1,12 @@
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Person } from '../person';
 
 @Component({
   selector: 'app-typed-form',
   templateUrl: './typed-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ReactiveFormsModule
   ]

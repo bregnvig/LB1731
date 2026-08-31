@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Menu, MenuItems } from './menu.model';
 import { MenuComponent } from './menu/menu.component';
 
@@ -14,6 +14,7 @@ import { MenuComponent } from './menu/menu.component';
       </main>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MenuComponent]
 })
 export class MenuPageComponent {

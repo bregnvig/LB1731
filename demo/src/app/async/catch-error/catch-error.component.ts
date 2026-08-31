@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { F1LocalStorageCache } from '../f1.service';
@@ -16,6 +16,7 @@ import { F1LocalStorageCache } from '../f1.service';
       }
     </ul>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [DriverListItemComponent]
 })
 export class CatchErrorComponent implements OnInit {

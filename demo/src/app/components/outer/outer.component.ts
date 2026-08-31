@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { InnerComponent } from "../inner";
 
 @Component({
@@ -8,6 +8,7 @@ import { InnerComponent } from "../inner";
     <p>I'm outer</p>
     <app-inner />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [InnerComponent],
 })
 export class OuterComponent {

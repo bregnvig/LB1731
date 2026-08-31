@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-interpolation',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h2>&#123; &#123; interpolation &#125; &#125;</h2>
     <ul class="list-group">

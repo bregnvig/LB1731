@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
         Today is {{today | date}}
       </p>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [DatePipe]
 })
 export class TodayComponent implements OnInit {

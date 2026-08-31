@@ -1,4 +1,4 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -19,6 +19,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
     </ul>
   `,
   providers: [F1BetterService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [DriverListItemComponent],
 })
 export class BetterAsyncServiceComponent {

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-event',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h2>(event)</h2>
     <ul class="list-group">

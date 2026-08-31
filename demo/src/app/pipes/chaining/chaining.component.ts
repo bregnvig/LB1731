@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UpperCasePipe, LowerCasePipe, DatePipe } from '@angular/common';
 
 @Component({
@@ -12,6 +12,7 @@ import { UpperCasePipe, LowerCasePipe, DatePipe } from '@angular/common';
         date & lowercase {{today | date | lowercase}}
       </p>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         UpperCasePipe,
         LowerCasePipe,

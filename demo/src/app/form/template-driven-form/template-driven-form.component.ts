@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Person } from './../person';
@@ -9,6 +9,7 @@ import { Person } from './../person';
 @Component({
   selector: 'app-template-driven-form',
   templateUrl: './template-driven-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, JsonPipe, NgbAlert]
 })
 export class TemplateDriverFormComponent {

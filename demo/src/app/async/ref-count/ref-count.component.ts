@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
         <button class="col-auto btn btn-primary" (click)="stop2()">Stop timer</button>
       </div>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [DatePipe]
 })
 export class RefCountComponent implements OnDestroy {

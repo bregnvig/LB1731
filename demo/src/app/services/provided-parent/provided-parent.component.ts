@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ProvidedComponent } from '../provided/provided.component';
 import { RandomService } from '../random.service';
 
@@ -11,6 +11,7 @@ import { RandomService } from '../random.service';
     <p><app-provided/></p>
   `,
   imports: [ProvidedComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [RandomService]
 })
 export class ProvidedParentComponent {

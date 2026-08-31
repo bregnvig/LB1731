@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
 
 
@@ -18,6 +18,7 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
       </div>
     `,
     styleUrls: ['./orders.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterOutlet]
 })
 export class OrdersComponent implements OnInit {
