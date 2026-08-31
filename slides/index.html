@@ -2582,21 +2582,21 @@ export class NgForm { ... }</code></pre></div></div></section><section data-id="
 </ul></div></div>
 </section>
 <section data-id="e922b6253205c946b4503946b83ef40b"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="3da87fd956e39f18258b01cf0082548a"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The model &amp; the form</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1-3|7-13|15-20">type PersonModel = {
-  [K in keyof Person]-?: NonNullable&lt;Person[K]&gt;
-};
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1-8|12-13|15-20">export class Person {
+  constructor(
+    public firstName: string,
+    public lastName: string,
+    public favoriteColor: string,
+    public height: number | null,
+    public shoeSize = 42) { }
+}
 
 export class SignalFormComponent {
 
-  #model = signal&lt;PersonModel&gt;({
-    firstName: 'Flemming',
-    lastName: 'Bregnvig',
-    favoriteColor: 'Blue',
-    height: 182,
-    shoeSize: 42,
-  });
+  #model = signal&lt;Person&gt;(
+    new Person('Flemming', 'Bregnvig', 'Blue', 182));
 
-  protected fg = form(this.#model, (person) =&gt; {
+  protected form = form(this.#model, (person) =&gt; {
     required(person.firstName);
     required(person.lastName);
     min(person.height, 100);
@@ -2606,30 +2606,30 @@ export class SignalFormComponent {
 }</code></pre></div></div>
 </section>
 <section data-id="f484f2c1b30275e2c39e182964f5b120"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="a5d849620a69aedb22aa923647cbbc93"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The template</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="39e64b66ee7b6fd33dccf710b8af78e9"><div class="sl-block-content" style="z-index: 11;"><pre class="xml" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1|4,8|10">&lt;form [formRoot]="fg" (submit)="onSubmit()"&gt;
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="39e64b66ee7b6fd33dccf710b8af78e9"><div class="sl-block-content" style="z-index: 11;"><pre class="xml" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1|4,8|10">&lt;form [formRoot]="form" (submit)="onSubmit()"&gt;
   &lt;div class="form-group"&gt;
     &lt;label for="firstName"&gt;First name&lt;/label&gt;
-    &lt;input id="firstName" [formField]="fg.firstName"&gt;
+    &lt;input id="firstName" [formField]="form.firstName"&gt;
   &lt;/div&gt;
   &lt;div class="form-group"&gt;
     &lt;label for="height"&gt;Height&lt;/label&gt;
-    &lt;input type="number" id="height" [formField]="fg.height"&gt;
+    &lt;input type="number" id="height" [formField]="form.height"&gt;
   &lt;/div&gt;
-  &lt;button type="submit" [disabled]="fg().invalid()"&gt;Submit&lt;/button&gt;
+  &lt;button type="submit" [disabled]="form().invalid()"&gt;Submit&lt;/button&gt;
 &lt;/form&gt;</code></pre></div></div>
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 560px; height: auto;" data-block-id="ed84bf6a8d117867b01678995257e191"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p><code>[formField]</code> binds one field - the field tree knows its own type</p></div></div>
 </section>
 <section data-id="3e77555172a175c407090a0ef695c2bb"><div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 60px; height: auto;" data-block-id="061b37979934b0043f8b04aa308c9906"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Field state is signals all the way down</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>fg().value()      // the whole model
-fg.firstName().value()    // one field's value
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>form().value()      // the whole model
+form.firstName().value()    // one field's value
 
-fg().valid()      // is the form valid?
-fg().invalid()
-fg().touched()
-fg().dirty()
-fg().errors()     // typed validation errors
+form().valid()      // is the form valid?
+form().invalid()
+form().touched()
+form().dirty()
+form().errors()     // typed validation errors
 
-fg.height().errors()      // errors for a single field</code></pre></div></div>
+form.height().errors()      // errors for a single field</code></pre></div></div>
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 520px; height: auto;" data-block-id="da857783128ff62b880952fa64891075"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p>Everything is a <code>Signal</code>, so the template just reads it - no <code>valueChanges</code> subscription</p></div></div>
 </section>
 <section data-id="0e287ad8142dbbcef6c0ebaa574b7bce"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 108px; height: auto;" data-block-id="1b3247714794c6a83e64614d66013ea7"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Which should i choose?</h2></div></div>
