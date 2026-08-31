@@ -63,11 +63,11 @@
 				color: #ffcb6b;
 				font-weight: 500;
 			}
-			/* Comments stay quieter than the code, but readable. */
+			/* Comments read as section headers, not as faded noise. */
 			.reveal pre code .hljs-comment,
 			.reveal pre code .hljs-quote {
-				color: #8d9bb5;
-				font-weight: 400;
+				color: #7fdbca;
+				font-weight: 600;
 				font-style: italic;
 			}
 			/* Dimmed lines when data-line-numbers highlights a subset. */
@@ -1066,7 +1066,7 @@ drwdrwdr-- 1 flemming flemming 15086 Sep  7 14:00 i18n
 })
 export class OuterComponent { ... }</code></pre></div></div>
 <div class="sl-block" data-block-type="text" data-name="text-e958fc" data-block-id="cec685f7aea6addcd703e0a6cd932c1c" style="height: auto; width: 795px; left: 64px; top: 576px;"><div class="sl-block-content" data-placeholder-tag="p" style="z-index: 12;"><p style="text-align:left">Prior to v17 <span style="color:#FF8C00"><code>standalone: true</code></span> was required to make component standalone. Use <span style="color:#FF8C00"><code>standalone: false</code></span>, if the component is not standalone</p></div></div></section><section data-id="29ac24b86aa316d14672f2d6c42595bc"><div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 108px; height: auto;" data-block-id="216bb2c319f68055b238834d9b06a254"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Databinding interpolation</h2></div></div>
-<div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 150px; height: auto;" data-block-id="60993e47ed7a8e750e8ddda4b8b9e8b9" data-name="text-de22d0"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;"><pre>Use <span style="color:#FF8C00">{{ VALUE }}</span> to write to the screen</pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 150px; height: auto;" data-block-id="60993e47ed7a8e750e8ddda4b8b9e8b9" data-name="text-de22d0"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre>Use <span style="color:#FF8C00">{{ VALUE }}</span> to write to the screen</pre></div></div>
 <div class="sl-block" data-block-type="code" data-name="code-b776fd" data-block-id="70a088f95a999bb935ae31d7fa718d54" style="width: 1047.12px; height: auto; left: 64px; top: 255px;"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 12;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px; tab-size: 4;"><code data-line-numbers="">&lt;ul&gt;
   &lt;li&gt;Property string: {{myString}}&lt;/li&gt;
   &lt;li&gt;Property number: {{myNumber}}&lt;/li&gt;
@@ -1079,7 +1079,7 @@ export class OuterComponent { ... }</code></pre></div></div>
   &lt;li&gt;Simple expressions: {{isCreating ? 'Create': 'Update'}}&lt;/li&gt;
   &lt;!--&lt;li&gt;New object - will fail {{new Date()}}&lt;/li&gt;--&gt;
 &lt;/ul&gt;</code></pre></div></div></section><section data-id="82d972079ad015feeb9b976d9ce9c2de"><div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 108px; height: auto;" data-block-id="0a5e540274c83f3c1d994611a1246473"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Databinding PROPERTY</h2></div></div>
-<div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 150px; height: auto;" data-name="text-de22d0" data-block-id="603cbacbc69b5aae44effab47a467670"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;"><pre>Use <span style="color:#FF8C00">[PROPERTY]</span> to SET PROPERTIES</pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 843px; left: 64px; top: 150px; height: auto;" data-name="text-de22d0" data-block-id="603cbacbc69b5aae44effab47a467670"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre>Use <span style="color:#FF8C00">[PROPERTY]</span> to SET PROPERTIES</pre></div></div>
 <div class="sl-block" data-block-type="code" data-name="code-b776fd" style="width: 1047.12px; height: auto; left: 64px; top: 253px;" data-block-id="23887d4f6bd987741b54b3b7459b8c7c"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 12;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px;"><code data-line-numbers="">&lt;ul&gt;
   &lt;li&gt;&lt;span [class.red]="showRed"&gt;My red&lt;/span&gt;&lt;/li&gt;
   &lt;li&gt;&lt;span [hidden]="hide"&gt;My hidden&lt;/span&gt; &lt;/li&gt;
@@ -2643,7 +2643,7 @@ export class NgForm { ... }</code></pre></div></div></section><section data-id="
 </ul></div></div>
 </section>
 <section data-id="e922b6253205c946b4503946b83ef40b"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="3da87fd956e39f18258b01cf0082548a"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The model &amp; the form</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1-8|12-13|15-20">export class Person {
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="7ca470d37639d73494a03d2671a5f6aa"><div class="sl-block-content" style="z-index: 11;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre class="typescript" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1-8|12-13|15-20">export class Person {
   constructor(
     public firstName: string,
     public lastName: string,
@@ -2667,7 +2667,7 @@ export class SignalFormComponent {
 }</code></pre></div></div>
 </section>
 <section data-id="f484f2c1b30275e2c39e182964f5b120"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 60px; height: auto;" data-block-id="a5d849620a69aedb22aa923647cbbc93"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>The template</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="39e64b66ee7b6fd33dccf710b8af78e9"><div class="sl-block-content" style="z-index: 11;"><pre class="xml" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1|4,8|10">&lt;form [formRoot]="form" (submit)="onSubmit()"&gt;
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="39e64b66ee7b6fd33dccf710b8af78e9"><div class="sl-block-content" style="z-index: 11;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre class="xml" style="font-size: 17px; line-height: 20px; tab-size: 4;"><code data-line-numbers="1|4,8|10">&lt;form [formRoot]="form" (submit)="onSubmit()"&gt;
   &lt;div class="form-group"&gt;
     &lt;label for="firstName"&gt;First name&lt;/label&gt;
     &lt;input id="firstName" [formField]="form.firstName"&gt;
@@ -2681,7 +2681,7 @@ export class SignalFormComponent {
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 560px; height: auto;" data-block-id="ed84bf6a8d117867b01678995257e191"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p><code>[formField]</code> binds one field - the field tree knows its own type</p></div></div>
 </section>
 <section data-id="3e77555172a175c407090a0ef695c2bb"><div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 60px; height: auto;" data-block-id="061b37979934b0043f8b04aa308c9906"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Field state is signals all the way down</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>// The value - the whole model, or one field
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>// The value - the whole model, or one field
 form().value()
 form.firstName().value()
 
@@ -2694,7 +2694,7 @@ form().errors()
 form().touched()
 form().dirty()
 
-// All of it works per field too
+// Every field exposes the same API
 form.height().invalid()
 form.height().errors()</code></pre></div></div>
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 585px; height: auto;" data-block-id="da857783128ff62b880952fa64891075"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p>Everything is a <code>Signal</code>, so the template just reads it - no <code>valueChanges</code> subscription</p></div></div>
@@ -2734,7 +2734,7 @@ form.height().errors()</code></pre></div></div>
 <p> </p>
 </div></div></section><section data-id="a3400a5fdcc138294c5f2cb7e465bf87"><div class="sl-block" data-block-type="text" style="width: 512px; left: 64px; top: 108px; height: auto;" data-block-id="6f7be6a860b8a91552902ce3a265623e"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>A single route</h2></div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 64px; top: 179.5px;" data-name="text-430eca" data-block-id="4e2b6247cd5e48b136a0ab809e529d3b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;"><p style="text-align: left;">A route describes a the relationship between the URL and a component</p></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 326px;" data-name="text-01d9cc" data-block-id="639e714351a5361a10a4a33ca70e0a7f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><pre style="text-align:left">https://loopme.dk/<span style="color:#00ff00">orders</span></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 326px;" data-name="text-01d9cc" data-block-id="639e714351a5361a10a4a33ca70e0a7f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre style="text-align:left">https://loopme.dk/<span style="color:#00ff00">orders</span></pre></div></div>
 <div class="sl-block" data-block-type="code" style="width: 500px; height: auto; left: 76px; top: 402px;" data-name="code-3a22ec" data-block-id="e991f488a937fda2d616b74e153423a7"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 13;" data-code-autoheight="true"><pre class="typescript" style="font-size: 24px; line-height: 29px;"><code data-line-numbers="">{
   path: 'orders',
   component: OrdersComponent
@@ -2873,7 +2873,7 @@ form.height().errors()</code></pre></div></div>
     importProvidersFrom(BrowserModule, NgbModule)]
 })
   .catch(err =&gt; console.error(err));</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 64px; top: 398px;" data-name="text-bf7175" data-block-id="ff7aa7fb07f37c28096fbfcd20304ac2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;"><pre>main.ts</pre></div></div></section><section data-id="d43db4d9dd7eebc2054f6bdebda1a37f"><div class="sl-block" data-block-type="text" style="width: 694px; left: 64px; top: 108px; height: auto;" data-block-id="467a82c1f11fb30c788b0dd7fe3522e6"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Navigating in the component</h2></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 64px; top: 398px;" data-name="text-bf7175" data-block-id="ff7aa7fb07f37c28096fbfcd20304ac2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre>main.ts</pre></div></div></section><section data-id="d43db4d9dd7eebc2054f6bdebda1a37f"><div class="sl-block" data-block-type="text" style="width: 694px; left: 64px; top: 108px; height: auto;" data-block-id="467a82c1f11fb30c788b0dd7fe3522e6"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Navigating in the component</h2></div></div>
 <div class="sl-block" data-block-type="code" style="width: 742px; height: auto; left: 64px; top: 183px;" data-name="code-1a66ea" data-block-id="847ac07924c35d917b7015cd47410764"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 11;" data-code-autoheight="true"><pre class="typescript" style="font-size: 24px; line-height: 29px;"><code data-line-numbers="2,4">export class OrdersComponent {
   #router = inject(Router);
 
@@ -2891,21 +2891,21 @@ form.height().errors()</code></pre></div></div>
 </ul></div></div></section><section data-id="89967bd8162d7403f56285df744e83a7"><div class="sl-block" data-block-type="text" style="width: 656px; left: 64px; top: 108px; height: auto;" data-block-id="a07357018aea4f601a9d4d430029dce0"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Link parameter array examples</h2></div></div>
 <div class="sl-block sl-block-group" data-block-type="group" data-name="group-a6937d" data-block-id="f5e9684feadb732af0790806d6c24274" style="height: auto;"><div class="sl-block-content sl-block-group-content" style="transform-origin: 380px 219px; z-index: 11;">
 <div class="sl-block" data-block-type="code" style="width: 500px; height: auto; left: 80px; top: 178px;" data-name="code-734105" data-block-id="27de5e484eccf877e86f009f70227301"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 12;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px;"><code>&lt;a routerLink="/orders"&gt;Orders&lt;/a&gt;</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 226px;" data-name="text-875b38" data-block-id="556a082c614f9d194c0df50237ef2dd0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;"><pre style="text-align:left"><strong>/orders</strong></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 600px; left: 80px; top: 226px;" data-name="text-875b38" data-block-id="556a082c614f9d194c0df50237ef2dd0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre style="text-align:left"><strong>/orders</strong></pre></div></div>
 </div></div>
 <div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-block-id="345274f7827816e738380e8ebc1ce483" data-name="group-2cdf32"><div class="sl-block-content sl-block-group-content" style="transform-origin: 652px 615px; z-index: 14;">
 <div class="sl-block" data-block-type="code" style="width: 1144px; height: auto; left: 80px; top: 544px;" data-origin-id="27de5e484eccf877e86f009f70227301" data-block-id="23a290ea9411012dae97f70930cb64cb" data-name="code-24850f"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 15;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px;"><code>&lt;a [routerLink]="['/orders', {rows: 50, offset: 0, query: 'Tårn'}, order.id]"&gt;
   Search
 &lt;/a&gt;</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 745px; left: 80px; top: 652px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="c1517de988549249abdbfea23a34eb60" data-name="text-a0168f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;"><pre style="text-align:left"><strong>/orders;rows=50;offset=0;query=Tårn/17</strong></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 745px; left: 80px; top: 652px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="c1517de988549249abdbfea23a34eb60" data-name="text-a0168f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre style="text-align:left"><strong>/orders;rows=50;offset=0;query=Tårn/17</strong></pre></div></div>
 </div></div>
 <div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-block-id="9ab423ae351458af76c42cafbb84e439" data-name="group-e7c6b9"><div class="sl-block-content sl-block-group-content" style="transform-origin: 448.5px 341px; z-index: 17;">
 <div class="sl-block" data-block-type="code" style="width: 737px; height: auto; left: 80px; top: 300px;" data-origin-id="27de5e484eccf877e86f009f70227301" data-block-id="98b567548dc0ecfae109b8d6d8922e42" data-name="code-677e14"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 18;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px;"><code>&lt;a [routerLink]="['/orders', order.id]"&gt;Order&lt;/a&gt;</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 627.234px; left: 80px; top: 348px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="f7629ca3a96dfb5e6749cfe9fb38cc6f" data-name="text-f51712"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;"><pre style="text-align:left"><strong>/orders/1</strong></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 627.234px; left: 80px; top: 348px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="f7629ca3a96dfb5e6749cfe9fb38cc6f" data-name="text-f51712"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre style="text-align:left"><strong>/orders/1</strong></pre></div></div>
 </div></div>
 <div class="sl-block sl-block-group" data-block-type="group" style="height: auto;" data-block-id="ae785fb20edb22aa526b21541222d778" data-name="group-764298"><div class="sl-block-content sl-block-group-content" style="transform-origin: 652px 463px; z-index: 20;">
 <div class="sl-block" data-block-type="code" style="width: 1144px; height: auto; left: 80px; top: 422px;" data-origin-id="27de5e484eccf877e86f009f70227301" data-block-id="ee014f4d4132f1a3422ff11e835bc537" data-name="code-41c113"><div class="sl-block-content notranslate" data-highlight-theme="a11y-dark" data-code-frame="none" style="z-index: 21;" data-code-autoheight="true"><pre class="xml" style="font-size: 24px; line-height: 29px;"><code>&lt;a [routerLink]="['/orders', {rows: 50, offset: 0, query: 'Tårn'}]"&gt;Search&lt;/a&gt;</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="height: auto; width: 609.051px; left: 80px; top: 470px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="5d3ed5161ad9102ad656f474caded858" data-name="text-9097be"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 22;"><pre style="text-align:left"><strong>/orders;rows=50;offset=0;query=Tårn</strong></pre></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 609.051px; left: 80px; top: 470px;" data-origin-id="556a082c614f9d194c0df50237ef2dd0" data-block-id="5d3ed5161ad9102ad656f474caded858" data-name="text-9097be"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 22;" data-highlight-theme="a11y-dark" data-code-frame="none"><pre style="text-align:left"><strong>/orders;rows=50;offset=0;query=Tårn</strong></pre></div></div>
 </div></div></section><section data-id="79f298616ec39e1fd3324bd804838da8"><div class="sl-block" data-block-type="text" style="width: 512px; left: 64px; top: 108px; height: auto;" data-block-id="9194cc433e98d481ce5a6610ace53b1b"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Reading parameters</h2></div></div>
 <div class="sl-block" data-block-type="text" style="width: 512px; left: 64px; top: 216px; height: auto;" data-block-id="bc7a99655f78c46aca0b1319c7c287cc"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin urna odio, aliquam vulputate faucibus id, elementum lobortis felis. Mauris urna dolor, placerat ac sagittis quis." style="text-align: left; z-index: 11;"><ul>
 	<li>
