@@ -2620,17 +2620,23 @@ export class SignalFormComponent {
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 560px; height: auto;" data-block-id="ed84bf6a8d117867b01678995257e191"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p><code>[formField]</code> binds one field - the field tree knows its own type</p></div></div>
 </section>
 <section data-id="3e77555172a175c407090a0ef695c2bb"><div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 60px; height: auto;" data-block-id="061b37979934b0043f8b04aa308c9906"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Field state is signals all the way down</h2></div></div>
-<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>form().value()      // the whole model
-form.firstName().value()    // one field's value
+<div class="sl-block" data-block-type="code" style="width: 1050px; left: 64px; top: 150px; height: auto;" data-block-id="9bb1443ce7e288a2928b24f7346148ab"><div class="sl-block-content" style="z-index: 11;"><pre class="typescript" style="font-size: 18px; line-height: 22px; tab-size: 4;"><code>// The value - the whole model, or one field
+form().value()
+form.firstName().value()
 
-form().valid()      // is the form valid?
+// Validity
+form().valid()
 form().invalid()
+form().errors()
+
+// Has the user been here yet?
 form().touched()
 form().dirty()
-form().errors()     // typed validation errors
 
-form.height().errors()      // errors for a single field</code></pre></div></div>
-<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 520px; height: auto;" data-block-id="da857783128ff62b880952fa64891075"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p>Everything is a <code>Signal</code>, so the template just reads it - no <code>valueChanges</code> subscription</p></div></div>
+// All of it works per field too
+form.height().invalid()
+form.height().errors()</code></pre></div></div>
+<div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 585px; height: auto;" data-block-id="da857783128ff62b880952fa64891075"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 12;"><p>Everything is a <code>Signal</code>, so the template just reads it - no <code>valueChanges</code> subscription</p></div></div>
 </section>
 <section data-id="0e287ad8142dbbcef6c0ebaa574b7bce"><div class="sl-block" data-block-type="text" style="width: 900px; left: 64px; top: 108px; height: auto;" data-block-id="1b3247714794c6a83e64614d66013ea7"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="text-align: left; z-index: 10;"><h2>Which should i choose?</h2></div></div>
 <div class="sl-block" data-block-type="text" style="width: 1050px; left: 64px; top: 216px; height: auto;" data-block-id="faba86b102130646e2da3ffea1eb2cfd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Title Text" style="text-align: left; z-index: 11;"><ul>
