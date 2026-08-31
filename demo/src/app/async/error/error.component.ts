@@ -1,7 +1,7 @@
 
 import { Observable, throwError } from 'rxjs';
 
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { catchError, finalize } from 'rxjs/operators';
 
 
@@ -23,7 +23,6 @@ import { AsyncPipe } from '@angular/common';
         }
       </ul>
     `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [AsyncPipe]
 })
 export class ErrorComponent implements OnInit {

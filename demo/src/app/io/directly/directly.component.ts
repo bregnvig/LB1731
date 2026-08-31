@@ -19,7 +19,6 @@ export class DirectlyChildComponent {
     <app-directly-child value1="My value" [value2]="fromProperty" />
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [DirectlyChildComponent, FormsModule]
 })
 export class DirectlyComponent {

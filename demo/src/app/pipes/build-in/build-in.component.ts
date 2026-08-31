@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UpperCasePipe, LowerCasePipe, JsonPipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-build-in',
     templateUrl: './build-in.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         FormsModule,
         UpperCasePipe,

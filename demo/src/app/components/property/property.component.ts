@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-property',
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h2>[property]</h2>
     <ul class="list-group">

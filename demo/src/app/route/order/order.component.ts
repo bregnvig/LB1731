@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 
@@ -7,7 +7,6 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink, RouterLinkActive]
 })
 export class OrderComponent implements OnInit, OnDestroy {

@@ -1,9 +1,8 @@
-import { booleanAttribute, Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { booleanAttribute, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-intercept-child',
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
   <p>{{value()}}</p>
   <p>Is nice - {{isNice()}}</p>
@@ -28,7 +27,6 @@ export class InterceptChildComponent {
     <app-intercept-child [value]="fromProperty" isNice></app-intercept-child>
     <input class="form-control" [(ngModel)]="fromProperty">
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [InterceptChildComponent, FormsModule]
 })
 export class InterceptComponent {

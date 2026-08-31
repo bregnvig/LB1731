@@ -1,4 +1,4 @@
-import { Component, viewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
 
@@ -15,7 +15,6 @@ import { StopwatchComponent } from '../stopwatch';
         <button class="btn btn-danger" (click)="reset()">Reset</button>
       </div>
     `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [StopwatchComponent]
 })
 export class ViewchildComponent {

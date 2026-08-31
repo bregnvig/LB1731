@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hello',
@@ -7,7 +7,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
       {{title}}
     </h2>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
   h2 {
       color: orange !important;

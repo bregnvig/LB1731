@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhonePipe } from '../phone.pipe';
 
 @Component({
@@ -12,7 +12,6 @@ import { PhonePipe } from '../phone.pipe';
         With prefix {{'28712234' | phone:'+45' }}
       </p>
     `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [PhonePipe]
 })
 export class PhoneComponent implements OnInit {

@@ -1,10 +1,9 @@
 import { NgFor } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ngfor',
   templateUrl: './ngfor.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgFor]
 })
 export class NgforComponent {

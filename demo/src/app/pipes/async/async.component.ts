@@ -1,5 +1,5 @@
 import { AsyncPipe, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DriverListItemComponent } from "../../async/driver-list-item.component";
 import { Driver } from './../../async/driver';
@@ -16,7 +16,6 @@ import { F1BetterService, F1SimpleService } from './../../async/f1.service';
     </ul>
   `,
   providers: [F1SimpleService, F1BetterService],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AsyncPipe, DriverListItemComponent]
 })
 export class AsyncComponent implements OnInit {

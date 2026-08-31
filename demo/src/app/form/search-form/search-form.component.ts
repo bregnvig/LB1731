@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
@@ -15,7 +15,6 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
         <input type="text" class="form-control" ngModel (ngModelChange)="ngModelSearch($event)" placeholder="Backend overload">
       </div>
     `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [FormsModule, ReactiveFormsModule]
 })
 export class SearchFormComponent implements OnInit {

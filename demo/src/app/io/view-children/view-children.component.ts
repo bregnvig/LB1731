@@ -1,11 +1,10 @@
-import { Component, viewChildren, ChangeDetectionStrategy } from '@angular/core';
+import { Component, viewChildren } from '@angular/core';
 
 import { StopwatchComponent } from '../stopwatch';
 
 @Component({
     selector: 'app-view-children',
     templateUrl: './view-children.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [StopwatchComponent]
 })
 export class ViewChildrenComponent {

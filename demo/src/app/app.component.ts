@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -22,7 +22,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       <img height="250" width="250" class="fixed-bottom d-none d-md-block " ngSrc="angular.png" routerLink="/menu" priority="1">
     `,
     styleUrls: ['./app.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink, RouterOutlet, NgOptimizedImage]
 })
 export class AppComponent {

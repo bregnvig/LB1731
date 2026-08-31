@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FactoryProvidedComponent } from '../factory-provided/factory-provided.component';
 import { RandomService } from '../random.service';
 
@@ -15,7 +15,6 @@ import { RandomService } from '../random.service';
     </div>
   `,
   imports: [FactoryProvidedComponent],
-  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: RandomService,

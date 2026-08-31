@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
 import { RetryService } from '../retry.service';
@@ -12,7 +12,6 @@ import { RetryService } from '../retry.service';
       }
     </ul>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [DriverListItemComponent]
 })
 export class RetryWhenComponent implements OnInit {

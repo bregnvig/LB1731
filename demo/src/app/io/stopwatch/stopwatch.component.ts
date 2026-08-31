@@ -1,8 +1,7 @@
-import { Component, DestroyRef, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 
 @Component({
   selector: 'app-stopwatch',
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: '{{seconds()}}',
 })
 export class StopwatchComponent {

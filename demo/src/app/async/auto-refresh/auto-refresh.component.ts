@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Driver } from '../driver';
 import { DriverListItemComponent } from "../driver-list-item.component";
@@ -18,7 +18,6 @@ import { F1AutoRefreshService } from '../f1.service';
       }
     </ul>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [DriverListItemComponent]
 })
 export class AutoRefreshComponent {

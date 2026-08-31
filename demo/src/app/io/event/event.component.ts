@@ -1,8 +1,7 @@
-import { Component, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-io-event-child',
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="form-check">
       <input class="form-check-input" name="interval" type="radio" (click)="update('weekly')">
@@ -31,7 +30,6 @@ export class IOEventChildComponent {
       Chosen newsletter {{interval}}
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IOEventChildComponent]
 })
 export class IOEventComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PurePipe, ImpurePipe } from '../pure.pipe';
 
 @Component({
@@ -11,7 +11,6 @@ import { PurePipe, ImpurePipe } from '../pure.pipe';
       <p>{{'Impure pipe 2' | impure }}</p>
       <div style="background: orange; padding: 16px; border-radius: 4px" (mousemove)="noop()">Mouse over!</div>
     `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [PurePipe, ImpurePipe]
 })
 export class PureComponent {

@@ -1,8 +1,7 @@
-import { Component, DestroyRef, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 
 @Component({
   selector: 'app-inner',
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
   <p>
     I'm inner
