@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Angular Foundation slide deck (slides.com export) and its PDF exporter",
   "scripts": {
+    "start": "node serve.mjs",
+    "serve": "node serve.mjs",
     "pdf": "node export-pdf.mjs",
     "pdf:fragments": "node export-pdf.mjs --fragments"
   },
