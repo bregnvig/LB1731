@@ -70,8 +70,11 @@ Angular 21.2 / TypeScript 5.9.
 - **Lazy-loading slide**: same missing-comma fix.
 - **Reactive `FormGroup` slides**: missing semicolon, and `this.model` was
   referenced without ever being declared — added the `#model` field.
-- **Template-driven form slide**: `name="eight"` → `name="height"`, a typo that
-  silently produced the wrong form key.
+- ~~**Template-driven form slide**: `name="eight"` → `name="height"`~~ —
+  **reverted in 2026.10.** This is deliberate: the slide contrasts a reactive
+  `FormGroup` against the same form written template-driven, and `name="eight"`
+  is the runtime bug that the following slide's "Compile time errors vs.
+  runtime errors" point refers to. The demo has always used `name="height"`.
 - **TypeScript `private static` slide**: the closing line `Vat.VAT = 1.25;`
   contradicted the slide's own point about `private`. Now shown as a commented
   compile error with a differing value.
