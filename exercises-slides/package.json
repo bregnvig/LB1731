@@ -1,0 +1,16 @@
+{
+  "name": "exercises-slides-angular-foundation",
+  "version": "2026.9.0",
+  "private": true,
+  "type": "module",
+  "description": "Angular Foundation exercises deck (slides.com export), with a live-reload dev server and a PDF exporter",
+  "scripts": {
+    "start": "node serve.mjs",
+    "serve": "node serve.mjs",
+    "pdf": "node export-pdf.mjs",
+    "pdf:fragments": "node export-pdf.mjs --fragments"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.9.0"
+  }
+}

@@ -56,5 +56,6 @@ Thumbs.db
 angular-advanced/package.json
 angular-advanced/package-lock.json
 
-# Angular Foundation slides - exported PDF is a build artifact
+# Slide decks - exported PDFs are build artifacts
 slides/*.pdf
+exercises-slides/*.pdf
