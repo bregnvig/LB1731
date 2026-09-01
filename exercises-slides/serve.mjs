@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /**
- * Serve the slide deck locally with live reload.
+ * Serve the exercises deck locally with live reload.
+ *
+ * Defaults to port 3001 so it can run alongside the lecture deck in
+ * ../slides, which uses 3000.
  *
  * Watches index.html and the deck's assets, and reloads the browser whenever
  * one is saved, so you can edit a slide and see the result immediately.
@@ -12,7 +15,7 @@
  * export that has to stay byte-identical for re-import.
  *
  * Usage:
- *   npm start                    # serve on :3000 and open a browser
+ *   npm start                    # serve on :3001 and open a browser
  *   node serve.mjs --port 4000
  *   node serve.mjs --no-open     # don't launch a browser
  *   node serve.mjs --print       # open reveal's print-pdf view
@@ -31,7 +34,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 // ---------------------------------------------------------------- arguments
 
 function parseArgs(argv) {
-  const opts = { port: 3000, open: true, print: false };
+  const opts = { port: 3001, open: true, print: false };
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -58,7 +61,7 @@ function parseArgs(argv) {
 const HELP = `
 Serve the slide deck with live reload.
 
-  --port, -p <n>   Port to serve on          (default: 3000)
+  --port, -p <n>   Port to serve on          (default: 3001)
   --no-open        Don't open a browser
   --print          Open reveal's ?print-pdf view (what the PDF export renders)
   --help, -h       Show this message

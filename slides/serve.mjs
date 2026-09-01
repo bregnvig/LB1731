@@ -2,6 +2,9 @@
 /**
  * Serve the slide deck locally with live reload.
  *
+ * Uses port 3000; the exercises deck in ../exercises-slides defaults to 3001,
+ * so both can run at the same time.
+ *
  * Watches index.html and the deck's assets, and reloads the browser whenever
  * one is saved, so you can edit a slide and see the result immediately.
  *

@@ -10,7 +10,8 @@ documented here. The lecture deck has its own changelog in `../slides`.
 - Added `serve.mjs`: `npm start` serves the deck with live reload, so saving a
   slide refreshes the browser. The reload snippet is added to the HTTP response
   only - `index.html` on disk stays byte-identical for slides.com re-import.
-  Watches `index.html`, `foundation-labs/` and `lib/`.
+  Watches `index.html`, `foundation-labs/` and `lib/`. Defaults to port **3001**
+  so it can run alongside the lecture deck in `../slides`, which uses 3000.
 - Added `export-pdf.mjs`: `npm run pdf` renders the deck to
   `exercises-angular-foundation.pdf` by driving reveal's built-in `?print-pdf`
   mode in headless Chrome at the deck's own 1280x720 slide size.
