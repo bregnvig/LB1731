@@ -34,8 +34,8 @@ export class MenuPageComponent {
     { routerLink: '/io/intercept', title: 'Parent -> child intercept' },
     { routerLink: '/io/event', title: 'Child  -> parent' },
     { routerLink: '/io/reference', title: 'Template reference variable' },
-    { routerLink: '/io/viewchild', title: '@ViewChild' },
-    { routerLink: '/io/viewchildren', title: '@ViewChildren    ' },
+    { routerLink: '/io/viewchild', title: 'viewChild | @ViewChild' },
+    { routerLink: '/io/viewchildren', title: 'viewChildren | @ViewChildren    ' },
   ];
 
   private services: MenuItems = [
