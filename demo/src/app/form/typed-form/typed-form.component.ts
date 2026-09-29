@@ -13,7 +13,7 @@ import { Person } from '../person';
 export class TypedFormComponent {
 
   protected colors = ["Red", "Green", "Blue"];
-  #model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+  #model: Person = { firstName: 'Flemming', lastName: 'Bregnvig', favoriteColor: 'Blue', height: 182, shoeSize: 43 };
 
   #fb = inject(FormBuilder);
 

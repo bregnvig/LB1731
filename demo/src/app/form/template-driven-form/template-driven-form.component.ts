@@ -14,7 +14,7 @@ import { Person } from './../person';
 export class TemplateDriverFormComponent {
 
   protected colors = ["Red", "Green", "Blue"];
-  protected model = new Person('Flemming', 'Bregnvig', "Blue", 182);
+  protected model: Person = { firstName: 'Flemming', lastName: 'Bregnvig', favoriteColor: 'Blue', height: 182, shoeSize: 43 };
 
   protected logValue(value: any) {
     console.log('Value', { ...this.model, ...value, });

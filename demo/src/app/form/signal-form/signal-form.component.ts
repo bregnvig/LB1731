@@ -14,7 +14,7 @@ export class SignalFormComponent {
   // The model is a plain writable signal - no FormGroup, no FormBuilder.
   // Person can be bound directly: signal forms need every field to be present,
   // but they are happy with a nullable one, so `height: number | null` is fine.
-  #model = signal<Person>(new Person('Flemming', 'Bregnvig', 'Blue', 182));
+  #model = signal<Person>({ firstName: 'Flemming', lastName: 'Bregnvig', favoriteColor: 'Blue', height: 182, shoeSize: 43 });
 
   // form() derives a field tree from the model. The rules below are declared
   // against paths into that tree, so they are checked against the model's
