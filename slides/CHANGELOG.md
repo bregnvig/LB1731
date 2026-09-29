@@ -3,6 +3,26 @@
 All notable changes to the **Angular Foundation** slide deck and its companion
 demo project (`~/repo/LB1731/demo`) are documented here.
 
+## [2026.10.4] - 2026-09-29
+
+### Slides
+
+- **Signal forms "The template"**: the full form - first and last name in a
+  `fieldset`, favourite colour `select`, height, and Bootstrap classes -
+  laid out like the template driven and reactive examples.
+- **"Reading parameters"**: the line highlights now step through `#route`
+  and the `params` pipe (`4,7` then `4,7-9`).
+- **"The child component"** moved from the Input function slides to just
+  before "The child", next to the other parent/child interaction slides.
+- Stopwatch "child" slide: `clearInterval` instead of `window.clearInterval`.
+  This slide's fix (`#intervalNo?: number`, Sunburst) now comes from
+  slides.com itself.
+
+### Tooling
+
+- Fresh slides.com export (content version 57). The 24 images were renamed
+  again; their contents are unchanged.
+
 ## [2026.10.3] - 2026-09-29
 
 ### Slides
