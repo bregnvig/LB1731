@@ -3,6 +3,22 @@
 All notable changes to the **Angular Foundation** slide deck and its companion
 demo project (`~/repo/LB1731/demo`) are documented here.
 
+## [2026.10.2] - 2026-09-29
+
+### Slides
+
+- **Stopwatch "child" slide**: a "Notice the new writeable signal" note with
+  arrows to the `signal` and its `update()` call, shown on click. The code on
+  this slide is now the shorter version without the `DestroyRef` cleanup;
+  `#intervalNo?: number` keeps it compiling under `strict`, and it uses the
+  Sunburst theme like the rest of the deck.
+
+### Tooling
+
+- `index.html`, `lib/` and `angular-foundation/` are now a fresh slides.com
+  export (content version 28). slides.com renamed all 24 image files; their
+  contents are unchanged. `lib/` is slides.com's updated offline runtime.
+
 ## [2026.10.1] - 2026-09-29
 
 ### Fixed
