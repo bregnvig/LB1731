@@ -3,6 +3,19 @@
 All notable changes to the **Angular Foundation** slide deck and its companion
 demo project (`~/repo/LB1731/demo`) are documented here.
 
+## [2026.10.3] - 2026-09-29
+
+### Slides
+
+- **Forms section reorganised around v22.** A new divider slide, "since v22 -
+  What about signal forms?", opens the Signal forms slides. The original
+  comparison slide moves after them as "Which should i choose pre v22?", and
+  the signal forms comparison becomes "Which should i choose since v22?"
+  ("Not template driven"; "Consider signal forms for new code" is now the
+  closing point).
+- Stopwatch "child" slide: re-applied `#intervalNo?: number` and the Sunburst
+  theme, which the slides.com copy of the deck did not have.
+
 ## [2026.10.2] - 2026-09-29
 
 ### Slides
