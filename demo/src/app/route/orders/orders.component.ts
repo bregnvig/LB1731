@@ -13,7 +13,7 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
               <button class="btn btn-link" (click)="gotoOrder(orderId)">Order {{orderId}}</button>
             }
           </nav>
-          <router-outlet></router-outlet>
+          <router-outlet />
         </div>
       </div>
     `,

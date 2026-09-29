@@ -25,7 +25,7 @@ export class IOEventChildComponent {
   selector: 'app-io-event',
   template: `
     <h2>Child -> parent</h2>
-    <app-io-event-child (interval)="interval = $event"></app-io-event-child>
+    <app-io-event-child (interval)="interval = $event" />
     <p>
       Chosen newsletter {{interval}}
     </p>

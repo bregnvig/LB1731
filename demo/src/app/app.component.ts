@@ -17,7 +17,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         </div>
       </nav>
       <main class="container mt-4">
-        <router-outlet></router-outlet>
+        <router-outlet />
       </main>
       <img height="250" width="250" class="fixed-bottom d-none d-md-block " ngSrc="angular.png" routerLink="/menu" priority="1">
     `,

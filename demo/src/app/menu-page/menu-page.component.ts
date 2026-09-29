@@ -9,7 +9,7 @@ import { MenuComponent } from './menu/menu.component';
     <div class="container">
       <main class="row g-3 row-cols-12 row-cols-md-2 row-cols-lg-3">
         @for (menu of menues; track menu) {
-          <examples-menu [menuss]="menu"></examples-menu>
+          <examples-menu [menuss]="menu" />
         }
       </main>
     </div>
