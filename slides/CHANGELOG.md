@@ -3,6 +3,34 @@
 All notable changes to the **Angular Foundation** slide deck and its companion
 demo project (`~/repo/LB1731/demo`) are documented here.
 
+## [2026.10.1] - 2026-09-29
+
+### Fixed
+
+- **slides.com re-import works again.** `index.html` had been built on an older
+  slides.com export, and slides.com rejected it when it was dropped into a
+  fresh export. The slide content has been moved into the page wrapper of a
+  fresh export (2026-09-28).
+- Removed code-block attributes (`data-highlight-theme`, `data-code-frame`)
+  that had ended up on 8 text blocks.
+
+### Changed
+
+- All 134 code blocks use slides.com's built-in **Sunburst** theme (previously
+  `a11y-dark`, with `seti` on 9 blocks).
+- Removed the custom syntax-colour `<style>` and the signal-forms function
+  tagging `<script>` from `index.html`. slides.com refuses to import a deck
+  whose `index.html` contains elements it did not write. **Keep `index.html`
+  free of extra `<style>`/`<script>`, and base edits on a fresh export.**
+- `Person` is now an interface, matching the demo, and `shoeSize` is
+  required. The signal forms model slide shows the interface, and the model
+  driven forms slides (2) build the model as a `Person` object literal instead
+  of `new Person(...)`. The signal slide's line-highlight steps were updated
+  to match.
+- The 3 hand-written Signal forms code blocks now carry the attributes
+  slides.com gives its own code blocks (`notranslate`, `data-code-autoheight`,
+  `data-name`). Without them the importer dropped the code.
+
 ## [2026.10] - 2026-08-31
 
 ### Slides
