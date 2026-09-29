@@ -4,13 +4,13 @@
 </div>
 <div class="container">
   <h3>Person form</h3>
-  <form #form="ngForm" class="row g-3" (ngSubmit)="logValue(form.value)">
+  <form #form="ngForm" class="row g-3" (ngSubmit)="logValue($event)">
     <div class="col-12">
       <label for="firstName">First name</label>
       <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName ">
     </div>
     <div class="col-12">
-      <label for="lastName">Last name</label>
+      <label for="lastName">Las't name</label>
       <input #lastName="ngModel" type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName">
     </div>
     <ngb-alert type="danger" [hidden]="lastName.valid || lastName.untouched" [dismissible]="false">

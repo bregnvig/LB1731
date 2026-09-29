@@ -24,8 +24,6 @@ export class TypedFormComponent {
     height: this.#fb.control(this.#model.height, [Validators.min(100), Validators.max(220)])
   });
 
-  constructor() { }
-
   protected onSubmit() {
     this.fg.value;
     console.log('Value', { ...this.#model, ...this.fg.value });
