@@ -12,10 +12,10 @@ import { AsyncPipe } from '@angular/common';
       @for (playground of playgrounds$ | async; track playground) {
         <loop-playground-list-item [playground]="playground">
           <button class="btn btn-action btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name">
-            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+            <fa-icon [icon]="['fas', 'pen']" />
           </button>
           <a class="btn btn-action btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name">
-            <fa-icon [icon]="['fas', 'user']"></fa-icon>
+            <fa-icon [icon]="['fas', 'user']" />
           </a>
           <!-- <span>{{playground.description}}</span> -->
       </loop-playground-list-item>

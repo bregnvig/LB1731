@@ -10,7 +10,7 @@ import { Playground } from 'src/app/shared';
       </div>
       <div>
         <div class="btn-group">
-          <ng-content></ng-content>
+          <ng-content />
         </div>
       </div>
     </li>

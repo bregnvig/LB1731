@@ -13,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
         <loop-playground-list-item-single-slot [playground]="playground">
           <!-- <span>{{playground.description}}</span> -->
           <button class="btn btn-action btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name">
-            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+            <fa-icon [icon]="['fas', 'pen']" />
           </button>
         </loop-playground-list-item-single-slot>
       }

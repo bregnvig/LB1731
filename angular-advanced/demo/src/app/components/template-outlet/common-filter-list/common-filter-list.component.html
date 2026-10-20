@@ -13,8 +13,7 @@
         <li class="list-group-item">
           <ng-container
             [ngTemplateOutlet]="itemTemplateRef() || defaultTemplate"
-            [ngTemplateOutletContext]="{$implicit: item}">
-          </ng-container>
+            [ngTemplateOutletContext]="{$implicit: item}" />
         </li>
       }
     </ul>
