@@ -7,7 +7,17 @@ import { AfterViewInitComponent } from './after-view-init/after-view-init.compon
 
 @Component({
   selector: 'loop-life-cycle',
-  templateUrl: './life-cycle.component.html',
+  template: `
+    <h5>OnChanges</h5>
+    <loop-on-changes></loop-on-changes>
+    <hr>
+    <h5>OnDestroy</h5>
+    <loop-on-destroy></loop-on-destroy>
+    <hr>
+    <h5>AfterViewInit</h5>
+    <loop-after-view-init></loop-after-view-init>
+    <hr>
+    `,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [OnChangesComponent, OnDestroyComponent, AfterViewInitComponent]
 })

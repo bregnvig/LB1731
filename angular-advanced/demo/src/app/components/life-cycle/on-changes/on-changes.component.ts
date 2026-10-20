@@ -4,7 +4,21 @@ import { OnChangeDisplayListComponent } from './on-change-display-list/on-change
 
 @Component({
     selector: 'loop-on-changes',
-    templateUrl: './on-changes.component.html',
+    template: `
+      <div class="form-group row">
+        <div class="col">
+          <input id="text" type="text" placeholder="Skriv tekst" class="form-control" (keydown.enter)="add()" [formControl]="control">
+        </div>
+      </div>
+      <article class="row">
+        <section class="col-6">
+          <loop-on-change-display-list [inputItems]="items1" />
+        </section>
+        <section class="col-6">
+          <loop-on-change-display-list [inputItems]="items2" />
+        </section>
+      </article>
+      `,
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [FormsModule, ReactiveFormsModule, OnChangeDisplayListComponent]
 })

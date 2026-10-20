@@ -3,7 +3,21 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
   selector: 'loop-view-child',
-  templateUrl: './view-child.component.html',
+  template: `
+    <div class="row">
+      <div class="col">
+        <loop-stop-watch />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-auto">
+        <button class="btn btn-primary" [disabled]="running" (click)="start()">Start</button>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" [disabled]="!running" (click)="stop()">Stop</button>
+      </div>
+    </div>
+    `,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [StopWatchComponent]
 })
