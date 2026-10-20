@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
-import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionBody, NgbAccordionButton, NgbAccordionCollapse, NgbAccordionDirective, NgbAccordionHeader, NgbAccordionItem, NgbAccordionToggle, NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'loop-after-view-init',
     templateUrl: './after-view-init.component.html',
     styleUrls: ['./after-view-init.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgbAccordionDirective, NgbAccordionItem, NgbAccordionHeader, NgbAccordionToggle, NgbAccordionButton, NgbCollapse, NgbAccordionCollapse, NgbAccordionBody]
 })
 export class AfterViewInitComponent implements OnInit, AfterViewInit {
 

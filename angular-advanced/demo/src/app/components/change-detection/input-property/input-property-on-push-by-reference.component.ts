@@ -9,8 +9,7 @@ import { No } from '../change-detection.component';
       <button class="btn btn-sm btn-primary" (click)="noop()">Update UI</button>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPropertyOnPushByReferenceComponent {
 

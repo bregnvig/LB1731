@@ -1,6 +1,8 @@
 import { Component, effect, EventEmitter, input, output, Output, ChangeDetectionStrategy } from '@angular/core';
 import { icon, latLng, MapOptions, marker, tileLayer } from 'leaflet';
 import { Playground } from 'src/app/shared';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'loop-fancy-playground-details',
@@ -23,7 +25,7 @@ import { Playground } from 'src/app/shared';
     `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [LeafletModule, FaIconComponent]
 })
 export class FancyPlaygroundDetailsComponent {
 

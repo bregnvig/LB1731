@@ -17,8 +17,7 @@ import { Playground } from 'src/app/shared';
     </li>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaygroundListItemComponent {
 

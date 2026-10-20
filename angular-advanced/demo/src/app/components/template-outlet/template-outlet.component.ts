@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Playground, PlaygroundService } from 'src/app/shared';
+import { FancyPlaygroundDetailsComponent } from '../dynamic-component/fancy-playground-details/fancy-playground-details.component';
+import { CommonListFilterFilterFnComponent } from './common-list-filter-filter-fn/common-list-filter-filter-fn.component';
 
 @Component({
   selector: 'loop-template-outlet',
@@ -21,7 +23,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
       [itemTemplateRef]="playgroundInfo"/>
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [FancyPlaygroundDetailsComponent, CommonListFilterFilterFnComponent]
 })
 export class TemplateOutletComponent {
 

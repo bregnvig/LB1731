@@ -7,8 +7,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       input-property-on-push-simple-type component <span class="badge bg-success">{{no()}}</span>!
     </p>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPropertyOnPushSimpleTypeComponent {
 

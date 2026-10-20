@@ -1,5 +1,9 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { PlaygroundService } from 'src/app/shared';
+import { PlaygroundListItemSingleSlotComponent } from './playground-list-item/playground-list-item-single-slot.component';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'loop-single-slot-content-projection',
@@ -16,7 +20,7 @@ import { PlaygroundService } from 'src/app/shared';
     </ul>
     `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [PlaygroundListItemSingleSlotComponent, NgbPopover, FaIconComponent, AsyncPipe]
 })
 export class SingleSlotContentProjectionComponent {
 

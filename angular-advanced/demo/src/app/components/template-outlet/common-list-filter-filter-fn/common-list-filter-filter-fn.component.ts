@@ -1,14 +1,15 @@
 import { Component, effect, input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, startWith, switchMap } from 'rxjs/operators';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'loop-common-list-filter-filter-fn',
     templateUrl: './common-list-filter-filter-fn.component.html',
     styleUrls: ['./common-list-filter-filter-fn.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule, NgTemplateOutlet, AsyncPipe]
 })
 export class CommonListFilterFilterFnComponent {
 

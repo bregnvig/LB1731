@@ -10,8 +10,7 @@ import { Observable, interval, map } from 'rxjs';
       <button class="btn btn-sm btn-primary" type="button" [disabled]="!running" (click)="noop()">Update UI</button>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObservableEventsComponent {
 

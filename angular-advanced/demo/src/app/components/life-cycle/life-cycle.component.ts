@@ -1,13 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Playground, PlaygroundService } from 'src/app/shared';
+import { OnChangesComponent } from './on-changes/on-changes.component';
+import { OnDestroyComponent } from './on-destroy/on-destroy.component';
+import { AfterViewInitComponent } from './after-view-init/after-view-init.component';
 
 @Component({
   selector: 'loop-life-cycle',
   templateUrl: './life-cycle.component.html',
   styleUrls: ['./life-cycle.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [OnChangesComponent, OnDestroyComponent, AfterViewInitComponent]
 })
 export class LifeCycleComponent implements OnInit {
 

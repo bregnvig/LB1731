@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OnChangeDisplayListComponent } from './on-change-display-list/on-change-display-list.component';
 
 @Component({
     selector: 'loop-on-changes',
     templateUrl: './on-changes.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, ReactiveFormsModule, OnChangeDisplayListComponent]
 })
 export class OnChangesComponent {
 

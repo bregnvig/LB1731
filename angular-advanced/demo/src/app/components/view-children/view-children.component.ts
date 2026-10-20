@@ -22,7 +22,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
     </div>
     `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [StopWatchComponent]
 })
 export class ViewChildrenComponent implements AfterViewInit {
 

@@ -11,8 +11,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
       }
     </table>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OnChangeDisplayListComponent {
 

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, input, output, Output } from '@angular/core';
 import { Playground } from 'src/app/shared';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'loop-simple-playground-details',
@@ -11,7 +12,7 @@ import { Playground } from 'src/app/shared';
     </p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [FaIconComponent]
 })
 export class SimplePlaygroundDetailsComponent {
   playground = input<Playground>();

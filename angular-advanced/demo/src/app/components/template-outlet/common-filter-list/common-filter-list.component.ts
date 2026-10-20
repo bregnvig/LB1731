@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, input, OnInit, output, TemplateRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'loop-common-filter-list',
   templateUrl: './common-filter-list.component.html',
   styleUrls: ['./common-filter-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [FormsModule, ReactiveFormsModule, NgTemplateOutlet]
 })
 export class CommonFilterListComponent implements OnInit {
 

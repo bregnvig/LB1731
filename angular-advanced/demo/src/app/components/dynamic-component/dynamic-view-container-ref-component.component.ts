@@ -1,6 +1,8 @@
 import { Component, inject, inputBinding, outputBinding, viewChild, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { PopoverService } from './popover.service';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'loop-dynamic-view-container-ref-component',
@@ -18,13 +20,13 @@ import { PopoverService } from './popover.service';
     </div>
     `,
   providers: [
-    // {
-    //   provide: PopoverService,
-    //   useClass: FancyPopoverService,
-    // }
+  // {
+  //   provide: PopoverService,
+  //   useClass: FancyPopoverService,
+  // }
   ],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [NgbPopover, AsyncPipe]
 })
 export class DynamicViewContainerRefComponentComponent {
 

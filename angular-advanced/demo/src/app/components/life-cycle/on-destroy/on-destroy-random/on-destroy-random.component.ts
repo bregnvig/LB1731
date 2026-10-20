@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
       {{no}}
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class OnDestroyRandomComponent implements OnDestroy {
 

@@ -2,6 +2,9 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PlaygroundService } from 'src/app/shared';
 import { PopoverService } from './popover.service';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgComponentOutlet } from '@angular/common';
+import { ComponentOutletInjectorDirective } from 'ng-dynamic-component';
 
 @Component({
   selector: 'loop-dynamic-component',
@@ -19,7 +22,7 @@ import { PopoverService } from './popover.service';
     </div>
     `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [NgbPopover, NgComponentOutlet, ComponentOutletInjectorDirective]
 })
 export class DynamicComponentComponent {
 

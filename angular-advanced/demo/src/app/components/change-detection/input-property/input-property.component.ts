@@ -8,8 +8,7 @@ import { No } from '../change-detection.component';
       input-property component <span class="badge bg-success">{{no()?.value}}</span>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class InputPropertyComponent {
 

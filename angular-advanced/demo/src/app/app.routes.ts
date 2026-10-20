@@ -1,6 +1,6 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'rxjs',
     loadChildren: () => import('./rxjs/rxjs.module').then(m => m.RxJSModule)
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'components',
-    loadChildren: () => import('./components/components.module').then(m => m.ComponentsModule)
+    loadChildren: () => import('./components/components.routes').then(m => m.ComponentsRoutes)
   },
   {
     path: 'reactive-forms',
@@ -54,10 +54,3 @@ const routes: Routes = [
     redirectTo: 'rxjs'
   }
 ];
-
-export const AppRoutingModule = RouterModule.forRoot(
-  routes,
-  {
-    // preloadingStrategy: QuicklinkStrategy
-  }
-);

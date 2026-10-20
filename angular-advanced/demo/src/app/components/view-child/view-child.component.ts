@@ -6,7 +6,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
   templateUrl: './view-child.component.html',
   styleUrls: ['./view-child.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [StopWatchComponent]
 })
 export class ViewChildComponent implements OnInit, AfterViewInit {
 

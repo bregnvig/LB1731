@@ -1,5 +1,6 @@
 import { Component, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval, map, Observable, of, startWith } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'loop-stop-watch',
@@ -7,7 +8,7 @@ import { interval, map, Observable, of, startWith } from 'rxjs';
     {{(seconds$ | async)}} seconds
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [AsyncPipe]
 })
 export class StopWatchComponent implements OnInit {
 

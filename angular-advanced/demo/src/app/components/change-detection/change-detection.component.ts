@@ -1,6 +1,12 @@
 import { Component, ElementRef, NgZone, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { timer } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
+import { InputPropertyComponent } from './input-property/input-property.component';
+import { InputPropertyOnPushByReferenceComponent } from './input-property/input-property-on-push-by-reference.component';
+import { InputPropertyOnPushSimpleTypeComponent } from './input-property/input-property-on-push-simple-type.component';
+import { ObservableEventsComponent } from './observable-events/observable-events.component';
+import { ObservableEventsDefaultComponent } from './observable-events/observable-events-default.component';
+import { WrappedInsideOnPushComponent } from './observable-events/wrapped-inside-onpush.component';
 
 export interface No {
   value: number;
@@ -11,7 +17,7 @@ export interface No {
   templateUrl: './change-detection.component.html',
   styleUrls: ['./change-detection.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [InputPropertyComponent, InputPropertyOnPushByReferenceComponent, InputPropertyOnPushSimpleTypeComponent, ObservableEventsComponent, ObservableEventsDefaultComponent, WrappedInsideOnPushComponent]
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {
 
