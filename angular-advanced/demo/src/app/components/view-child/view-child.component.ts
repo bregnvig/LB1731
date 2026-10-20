@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, afterNextRender, viewChild } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
@@ -26,12 +26,13 @@ export class ViewChildComponent implements OnInit, AfterViewInit {
   stopWatch = viewChild.required(StopWatchComponent);
   running = true;
 
-  // constructor() {
-  //   this.start();
-  // }
+  constructor() {
+    // this.start();
+    afterNextRender(() => this.stopWatch()?.start());
+  }
 
   ngOnInit() {
-    this.start();
+    // this.start();
   }
 
   ngAfterViewInit() {
