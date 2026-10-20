@@ -21,7 +21,7 @@ export class CommonListFilterFilterFnComponent {
   #term = toSignal(this.filterControl.valueChanges.pipe(
     debounceTime(300),
   ), { initialValue: this.filterControl.value });
-  filtered = computed(() => {
+  items = computed(() => {
     const fn = this.filterFn();
     const term = this.#term();
     return fn?.(term) ?? [];
