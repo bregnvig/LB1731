@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^22.2.3",
     "@angular/router": "^22.2.3",
     "@asymmetrik/ngx-leaflet": "^18.0.1",
-    "@fortawesome/angular-fontawesome": "^4.0.0",
+    "@fortawesome/angular-fontawesome": "^5.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
@@ -32,7 +32,6 @@
     "bootstrap": "^5.3.8",
     "leaflet": "^1.9.3",
     "ng-dynamic-component": "^10.8.2",
-    "ngx-quicklink": "^0.4.9",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
