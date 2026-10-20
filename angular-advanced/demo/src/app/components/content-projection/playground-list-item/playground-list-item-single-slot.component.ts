@@ -15,7 +15,6 @@ import { Playground } from 'src/app/shared';
       </div>
     </li>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaygroundListItemSingleSlotComponent {

@@ -4,7 +4,6 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 @Component({
   selector: 'loop-view-child',
   templateUrl: './view-child.component.html',
-  styleUrls: ['./view-child.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [StopWatchComponent]
 })

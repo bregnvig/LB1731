@@ -23,7 +23,6 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     </p>
     }
     `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [LeafletModule, FaIconComponent]
 })

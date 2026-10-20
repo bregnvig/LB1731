@@ -8,7 +8,6 @@ import { AfterViewInitComponent } from './after-view-init/after-view-init.compon
 @Component({
   selector: 'loop-life-cycle',
   templateUrl: './life-cycle.component.html',
-  styleUrls: ['./life-cycle.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [OnChangesComponent, OnDestroyComponent, AfterViewInitComponent]
 })

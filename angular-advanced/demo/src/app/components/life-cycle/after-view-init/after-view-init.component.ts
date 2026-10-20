@@ -4,7 +4,6 @@ import { NgbAccordionBody, NgbAccordionButton, NgbAccordionCollapse, NgbAccordio
 @Component({
     selector: 'loop-after-view-init',
     templateUrl: './after-view-init.component.html',
-    styleUrls: ['./after-view-init.component.scss'],
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgbAccordionDirective, NgbAccordionItem, NgbAccordionHeader, NgbAccordionToggle, NgbAccordionButton, NgbCollapse, NgbAccordionCollapse, NgbAccordionBody]
 })
