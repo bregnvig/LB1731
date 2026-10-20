@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, LOCALE_ID } from '@angular/core';
+import { Component, inject, LOCALE_ID, ChangeDetectionStrategy } from '@angular/core';
 import { RouteProvidedService } from './route-provided.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { RouteProvidedService } from './route-provided.service';
   template: `
   {{service.time | date: 'medium'}}
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: LOCALE_ID,

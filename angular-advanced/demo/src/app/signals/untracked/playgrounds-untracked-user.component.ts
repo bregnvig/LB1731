@@ -5,6 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'loop-playgrounds-untracked-user',
   imports: [JsonPipe, NgbAlert],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ngb-alert type="info" class="mt-3" [dismissible]="false">
       {{user() | json}}

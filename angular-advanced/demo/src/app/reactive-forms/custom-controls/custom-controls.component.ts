@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
 @Component({
     selector: 'loop-custom-controls',
     templateUrl: './custom-controls.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomControlsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Playground, PlaygroundService } from 'src/app/shared';
@@ -20,6 +20,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
       [filterFn]="filterFn" 
       [itemTemplateRef]="playgroundInfo"/>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class TemplateOutletComponent {

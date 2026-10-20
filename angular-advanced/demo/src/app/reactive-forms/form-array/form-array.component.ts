@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
@@ -7,6 +7,7 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
     selector: 'loop-form-array',
     templateUrl: './form-array.component.html',
     styleUrls: ['./form-array.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FormArrayComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

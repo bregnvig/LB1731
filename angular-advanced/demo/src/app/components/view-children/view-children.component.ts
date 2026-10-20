@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, viewChildren } from '@angular/core';
+import { AfterViewInit, Component, effect, viewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
@@ -21,6 +21,7 @@ import { StopWatchComponent } from '../stop-watch/stop-watch.component';
       </div>
     </div>
     `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ViewChildrenComponent implements AfterViewInit {

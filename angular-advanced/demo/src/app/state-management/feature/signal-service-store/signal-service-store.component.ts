@@ -1,5 +1,5 @@
 
-import { Component, effect, inject, input, OnInit } from "@angular/core";
+import { Component, effect, inject, input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
 import { SignalPlaygroundStore } from "./signal-playground.store";
@@ -19,6 +19,7 @@ import { SignalPlaygroundStore } from "./signal-playground.store";
     }
   `,
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -70,6 +71,7 @@ export class SignalItemComponent implements OnInit {
   selector: 'loop-signal-service-store-list',
   standalone: true,
   imports: [SignalItemComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if(loading()) {
       <div class="spinner-border" role="status">
@@ -98,6 +100,7 @@ export class SignalListComponent {
   standalone: true,
   imports: [SignalListComponent],
   providers: [SignalPlaygroundStore],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h1>Playgrounds</h1>
     <loop-signal-service-store-list />

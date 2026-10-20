@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
@@ -8,6 +8,7 @@ type LigthState = 'red' | 'yellow' | 'green';
     selector: 'loop-builtin-attribute',
     templateUrl: './builtin-attribute.component.html',
     styleUrls: ['./builtin-attribute.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BuiltinAttributeComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

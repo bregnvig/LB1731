@@ -1,5 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import { Component, inject, OnDestroy } from "@angular/core";
+import { Component, inject, OnDestroy, ChangeDetectionStrategy } from "@angular/core";
 import { randMotorcycleManufacturer } from "@ngneat/falso";
 import { StateListenerComponent } from "../shared/state-listener/state-listener.component";
 import { StateListenerService } from "../shared/state-listener/state-listener.service";
@@ -21,6 +21,7 @@ import { StateListenerService } from "../shared/state-listener/state-listener.se
       <loop-state-listener [name]="name"/>
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [JsonPipe, StateListenerComponent],
 })
 export class GlobalStateComponent implements OnDestroy {

@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { createOptions } from './create-options';
 @Component({
     selector: 'loop-location-with-signals',
     imports: [NgbAlert, JsonPipe, LeafletModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: `
     <ngb-alert type="info" class="mt-3" [dismissible]="false">
       <code><pre class="text-white mb-0">{{location() | json}}</pre></code>

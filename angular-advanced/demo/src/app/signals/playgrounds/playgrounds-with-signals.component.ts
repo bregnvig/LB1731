@@ -1,5 +1,5 @@
 
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, timer } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
@@ -8,6 +8,7 @@ import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playg
 @Component({
     selector: 'loop-playgrounds-with-signals',
     imports: [SharedPlaygroundUlComponent],
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: `<loop-shared-playground-ul [playgrounds]="playgrounds()"/>`
 })
 export class PlaygroundsWithSignalsComponent {

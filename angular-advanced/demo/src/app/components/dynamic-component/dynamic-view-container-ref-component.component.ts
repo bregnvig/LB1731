@@ -1,4 +1,4 @@
-import { Component, inject, inputBinding, outputBinding, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, inputBinding, outputBinding, viewChild, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { PopoverService } from './popover.service';
 
@@ -23,6 +23,7 @@ import { PopoverService } from './popover.service';
     //   useClass: FancyPopoverService,
     // }
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class DynamicViewContainerRefComponentComponent {

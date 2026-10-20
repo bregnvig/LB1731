@@ -1,4 +1,4 @@
-import { Component, input } from "@angular/core";
+import { Component, input, ChangeDetectionStrategy } from "@angular/core";
 import { Playground } from "../model";
 
 @Component({
@@ -9,6 +9,7 @@ import { Playground } from "../model";
     <small>Coordinates: {{ playground().position.lat }}, {{ playground().position.lng }}</small><br>
     <em>{{ playground().description || 'No description available' }}</em>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'list-group-item'
   }

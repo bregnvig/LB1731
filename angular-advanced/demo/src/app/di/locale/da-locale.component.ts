@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'loop-da-locale',
@@ -9,6 +9,7 @@ import { Component, LOCALE_ID } from '@angular/core';
             useValue: 'da'
         }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DaLocaleComponent {

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { randNearbyGPSCoordinate } from '@ngneat/falso';
 import { getRandomPlayground, LocationService, Playground } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
@@ -8,6 +8,7 @@ import { SignalInputComponent } from "./signal-input.component";
 @Component({
   selector: 'loop-inputs',
   imports: [AnnotationInputComponent, SignalInputComponent, SharedPlaygroundUlComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="container">
       <button type="button" class="btn btn-primary" (click)="addPlayground()">Add playground</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Playground, PlaygroundService } from 'src/app/shared';
 
@@ -6,6 +6,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
   selector: 'loop-life-cycle',
   templateUrl: './life-cycle.component.html',
   styleUrls: ['./life-cycle.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class LifeCycleComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { PlaygroundService } from 'src/app/shared';
 @Component({
   selector: 'loop-non-template-outlet',
   templateUrl: './non-template-outlet.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NonTemplateOutletComponent implements OnInit {

@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, inject, LOCALE_ID } from '@angular/core';
+import { Component, inject, LOCALE_ID, ChangeDetectionStrategy } from '@angular/core';
 import { timer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -17,6 +17,7 @@ import { map, tap } from 'rxjs/operators';
       </p>
     }
     `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class AsyncPipeComponent {

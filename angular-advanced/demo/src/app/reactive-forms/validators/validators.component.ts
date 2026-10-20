@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
 import { catchError, debounceTime, map, startWith, switchMap, tap } from 'rxjs/operators';
@@ -18,6 +18,7 @@ const isValidZip = (service: DawaService): AsyncValidatorFn => (control: Abstrac
     selector: 'loop-validators',
     templateUrl: './validators.component.html',
     providers: [AsyncPipe],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ValidatorsComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

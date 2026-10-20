@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { combineLatest, debounceTime, map, Observable, startWith } from "rxjs";
 import { LocationService, Playground, PlaygroundService } from "src/app/shared";
@@ -7,6 +7,7 @@ import { LocationService, Playground, PlaygroundService } from "src/app/shared";
     selector: 'loop-rxjs-way',
     templateUrl: './rxjs-way.component.html',
     styleUrls: ['./rxjs-way.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RxJSWayComponent implements OnInit {

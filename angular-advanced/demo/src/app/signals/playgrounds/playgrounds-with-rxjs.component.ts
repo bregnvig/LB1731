@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription, switchMap, timer } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from 'src/app/shared/component/shared-playground-ul.component';
@@ -12,6 +12,7 @@ import { SharedPlaygroundUlComponent } from 'src/app/shared/component/shared-pla
     <button type="button" class="ms-3 btn btn-primary" (click)="subscription?.unsubscribe()">Unsubscribe</button>
     <loop-shared-playground-ul class="mt-3" [playgrounds]="playgrounds"/>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: []
 })
 export class PlaygroundsWithRxjsComponent {

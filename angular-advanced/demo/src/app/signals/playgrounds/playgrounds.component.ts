@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PlaygroundsWithRxjsComponent } from "./playgrounds-with-rxjs.component";
 import { PlaygroundsWithSignalsComponent } from "./playgrounds-with-signals.component";
 
@@ -20,6 +20,7 @@ import { PlaygroundsWithSignalsComponent } from "./playgrounds-with-signals.comp
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: []
 })
 export class PlaygroundsComponent { }

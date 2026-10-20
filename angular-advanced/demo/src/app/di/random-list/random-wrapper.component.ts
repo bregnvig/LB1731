@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RandomService } from '../service/random.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { RandomService } from '../service/random.service';
     </p>
   `,
   providers: [RandomService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class RandomWrapperComponent {

@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
     selector: 'loop-imperative-way',
     templateUrl: './imperative-way.component.html',
     styleUrls: ['./imperative-way.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ImperativeWayComponent implements OnInit, OnDestroy {

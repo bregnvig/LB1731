@@ -1,5 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import { Component, Signal, computed, inject, input } from "@angular/core";
+import { Component, Signal, computed, inject, input, ChangeDetectionStrategy } from "@angular/core";
 import { StateListenerService } from "./state-listener.service";
 
 @Component({
@@ -7,11 +7,12 @@ import { StateListenerService } from "./state-listener.service";
     template: `
       <div>
         <p>Subscriber: {{ name() }}</p>
-        <p>State: {{ state?.() | json }}</p>
+        <p>State: {{ $safeNavigationMigration(state?.()) | json }}</p>
         <button class="btn btn-primary" [disabled]="isRegistered()" (click)="register()">Register</button>
   
       </div>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [JsonPipe],
 })
 export class StateListenerComponent {

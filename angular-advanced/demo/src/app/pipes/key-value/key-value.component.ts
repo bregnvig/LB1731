@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'loop-key-value',
@@ -26,6 +26,7 @@ import { Component } from '@angular/core';
       </div>
     </article>
 `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class KeyValueComponent {

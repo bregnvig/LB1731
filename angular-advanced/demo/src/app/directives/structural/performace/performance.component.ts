@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -31,6 +31,7 @@ import { FormControl } from '@angular/forms';
   }
 </article>    
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

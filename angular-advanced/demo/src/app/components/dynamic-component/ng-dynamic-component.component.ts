@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { PopoverService } from './popover.service';
@@ -24,6 +24,7 @@ import { PopoverService } from './popover.service';
       }
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NgDynamicComponentComponent {

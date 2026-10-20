@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnInit, viewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { timer } from 'rxjs';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
@@ -10,6 +10,7 @@ export interface No {
   selector: 'loop-change-detection',
   templateUrl: './change-detection.component.html',
   styleUrls: ['./change-detection.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ChangeDetectionComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

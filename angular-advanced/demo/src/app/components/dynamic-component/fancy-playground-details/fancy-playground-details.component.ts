@@ -1,4 +1,4 @@
-import { Component, effect, EventEmitter, input, output, Output } from '@angular/core';
+import { Component, effect, EventEmitter, input, output, Output, ChangeDetectionStrategy } from '@angular/core';
 import { icon, latLng, MapOptions, marker, tileLayer } from 'leaflet';
 import { Playground } from 'src/app/shared';
 
@@ -22,6 +22,7 @@ import { Playground } from 'src/app/shared';
     }
     `,
   styles: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class FancyPlaygroundDetailsComponent {

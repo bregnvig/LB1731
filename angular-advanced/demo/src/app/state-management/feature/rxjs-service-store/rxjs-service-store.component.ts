@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, effect, inject, input, OnInit } from "@angular/core";
+import { Component, effect, inject, input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
 import { RxjsPlaygroundStore } from "./rxjs-playground.store";
@@ -19,6 +19,7 @@ import { RxjsPlaygroundStore } from "./rxjs-playground.store";
     }
   `,
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -70,6 +71,7 @@ export class RxjsServiceStoreItemComponent implements OnInit {
   selector: 'loop-rxjs-service-store-list',
   standalone: true,
   imports: [AsyncPipe, RxjsServiceStoreItemComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if(loading | async) {
       <div class="spinner-border" role="status">
@@ -98,6 +100,7 @@ export class RxjsServiceStoreListComponent {
   standalone: true,
   imports: [RxjsServiceStoreListComponent],
   providers: [RxjsPlaygroundStore],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h1>Playgrounds</h1>
     <loop-rxjs-service-store-list />

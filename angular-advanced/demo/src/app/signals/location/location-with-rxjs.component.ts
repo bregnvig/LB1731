@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { MapOptions } from 'leaflet';
@@ -11,6 +11,7 @@ import { createOptions } from './create-options';
 @Component({
     selector: 'loop-location-with-rxjs',
     imports: [JsonPipe, NgbAlert, LeafletModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: `
     <button type="button" class="btn btn-primary" (click)="subscribe()">Subscribe</button>
     <button type="button" class="ms-3 btn btn-primary" (click)="subscription?.unsubscribe()">Unsubscribe</button>

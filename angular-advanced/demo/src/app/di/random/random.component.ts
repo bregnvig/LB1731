@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RandomService } from '../service/random.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { RandomService } from '../service/random.service';
     {{hostService?.no || "I have no random host service 😢"}}
   `,
   providers: [RandomService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class RandomComponent {

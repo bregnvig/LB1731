@@ -9,7 +9,7 @@ import { Observable, interval, map } from 'rxjs';
       <button class="btn btn-sm btn-primary mx-3" type="button" (click)="start()">Start</button>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ObservableEventsDefaultComponent {

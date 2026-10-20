@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 import { Role, UserService } from '../user.service';
@@ -7,6 +7,7 @@ import { Role, UserService } from '../user.service';
     selector: 'loop-is-in-role',
     templateUrl: './is-in-role.component.html',
     styleUrls: ['./is-in-role.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class IsInRoleComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

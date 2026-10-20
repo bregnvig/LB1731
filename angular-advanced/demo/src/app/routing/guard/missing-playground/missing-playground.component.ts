@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -21,6 +21,7 @@ import { ActivatedRoute } from '@angular/router';
       </div>
     </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MissingPlaygroundComponent implements OnInit {

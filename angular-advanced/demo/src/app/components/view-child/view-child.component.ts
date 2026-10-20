@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, OnInit, viewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { StopWatchComponent } from '../stop-watch/stop-watch.component';
 
 @Component({
   selector: 'loop-view-child',
   templateUrl: './view-child.component.html',
   styleUrls: ['./view-child.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ViewChildComponent implements OnInit, AfterViewInit {

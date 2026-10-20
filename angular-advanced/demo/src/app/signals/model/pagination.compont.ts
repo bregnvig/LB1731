@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, effect, input, model, TemplateRef } from '@angular/core';
+import { Component, computed, effect, input, model, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -8,6 +8,7 @@ import { debounceTime, filter } from 'rxjs';
 @Component({
     selector: 'loop-pagination',
     templateUrl: 'pagination.compont.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, NgTemplateOutlet, FaIconComponent]
 })
 

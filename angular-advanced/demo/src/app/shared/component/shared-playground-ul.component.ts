@@ -1,4 +1,4 @@
-import { Component, effect, input } from "@angular/core";
+import { Component, effect, input, ChangeDetectionStrategy } from "@angular/core";
 import { Playground } from "../model";
 import { SharedPlaygroundLiComponent } from "./shared-playground-li.component";
 
@@ -12,6 +12,7 @@ import { SharedPlaygroundLiComponent } from "./shared-playground-li.component";
         }
       </ul>
     `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     class: 'list-group-item'
   }

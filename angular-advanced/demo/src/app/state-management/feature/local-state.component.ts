@@ -1,5 +1,5 @@
 import { JsonPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, ChangeDetectionStrategy } from "@angular/core";
 import { randMotorcycleManufacturer } from "@ngneat/falso";
 import { StateListenerComponent } from "../shared/state-listener/state-listener.component";
 import { LocalStateListenerService, StateListenerService } from "../shared/state-listener/state-listener.service";
@@ -26,6 +26,7 @@ import { LocalStateListenerService, StateListenerService } from "../shared/state
       useClass: LocalStateListenerService,
     }
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [JsonPipe, StateListenerComponent],
 })
 export class LocalStateComponent {

@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval, map, Observable, of, startWith } from 'rxjs';
 
 @Component({
@@ -6,6 +6,7 @@ import { interval, map, Observable, of, startWith } from 'rxjs';
   template: `
     {{(seconds$ | async)}} seconds
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class StopWatchComponent implements OnInit {

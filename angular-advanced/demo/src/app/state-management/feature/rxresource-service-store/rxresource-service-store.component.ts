@@ -1,5 +1,5 @@
 
-import { Component, effect, inject, input, OnInit } from "@angular/core";
+import { Component, effect, inject, input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Playground } from "src/app/shared";
 import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
@@ -19,6 +19,7 @@ import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
     }
   `,
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <form class="d-flex">
       <div class="input-group mb-3">
@@ -70,6 +71,7 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
   selector: 'loop-rxresource-service-store-list',
   standalone: true,
   imports: [RxresourceServiceStoreItemComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if(store.playgroundsLoading()) {
       <div class="spinner-border" role="status">
@@ -95,6 +97,7 @@ export class RxresourceServiceStoreListComponent {
   standalone: true,
   imports: [RxresourceServiceStoreListComponent],
   providers: [RxresourcePlaygroundStore],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h1>Playgrounds</h1>
     <loop-rxresource-service-store-list />

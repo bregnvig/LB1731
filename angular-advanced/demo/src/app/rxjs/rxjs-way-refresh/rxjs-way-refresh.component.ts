@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subject, combineLatest, merge, of } from 'rxjs';
 import { concatMap, debounceTime, distinctUntilChanged, exhaustMap, map, mergeMap, repeat, startWith, switchMap, tap } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { LocationService, Playground, PlaygroundService } from 'src/app/shared';
     selector: 'loop-rxjs-way-refresh',
     templateUrl: './rxjs-way-refresh.component.html',
     styleUrls: ['./rxjs-way-refresh.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RxJSWayRefreshComponent implements OnInit {

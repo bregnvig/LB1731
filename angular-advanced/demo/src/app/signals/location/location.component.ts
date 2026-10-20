@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription, interval, switchMap } from 'rxjs';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { LocationWithSignalsComponent } from "./location-with-signals.component";
@@ -30,6 +30,7 @@ import { LocationWithRxjsComponent } from "./location-with-rxjs.component";
       </div>
     </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     styles: []
 })
 export class LocationComponent { }

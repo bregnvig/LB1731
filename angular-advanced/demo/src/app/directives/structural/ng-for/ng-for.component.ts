@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'loop-ng-for',
     templateUrl: './ng-for.component.html',
     styleUrls: ['./ng-for.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NgForComponent {

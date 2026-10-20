@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'loop-focus-empty',
     templateUrl: './focus-empty.component.html',
     styleUrls: ['./focus-empty.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FocusEmptyComponent {

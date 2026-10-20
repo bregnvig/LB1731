@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { timer } from 'rxjs';
@@ -8,6 +8,7 @@ import { timer } from 'rxjs';
   selector: 'loop-url-state',
   standalone: true,
   imports: [JsonPipe, RouterOutlet, RouterLink],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div>
       <h2>Change URL State</h2>
@@ -59,6 +60,7 @@ export class UrlStateComponent {
   selector: 'loop-url-state-child-route',
   standalone: true,
   imports: [JsonPipe],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div>
       <p>Route Params: {{ params() | json }}</p>

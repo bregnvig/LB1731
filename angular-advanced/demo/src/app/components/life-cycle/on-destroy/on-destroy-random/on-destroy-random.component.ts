@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
       {{no}}
     </p>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class OnDestroyRandomComponent implements OnDestroy {

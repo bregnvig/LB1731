@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 
@@ -19,6 +19,7 @@ let creation = 0;
       }
     </ul>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class MemoryLeakComponent {

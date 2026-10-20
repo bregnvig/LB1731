@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 
@@ -6,6 +6,7 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
     selector: 'loop-top-five',
     templateUrl: './top-five.component.html',
     styleUrls: ['./top-five.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TopFiveComponent extends AbstractSubscribeUnsubscribeDirective implements OnInit {

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { icon, LatLng, marker } from 'leaflet';
@@ -10,6 +10,7 @@ import { PaginationComponent } from './pagination.compont';
 @Component({
   selector: 'loop-model',
   templateUrl: './model.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PaginationComponent, LeafletModule]
 })
 
