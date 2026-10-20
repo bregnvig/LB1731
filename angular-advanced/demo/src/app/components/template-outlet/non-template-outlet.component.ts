@@ -1,26 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
-import { PlaygroundService } from 'src/app/shared';
-import { AsyncPipe } from '@angular/common';
+import { Playground, PlaygroundService } from 'src/app/shared';
 
 @Component({
   selector: 'loop-non-template-outlet',
   templateUrl: './non-template-outlet.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, ReactiveFormsModule, AsyncPipe]
+  imports: [FormsModule, ReactiveFormsModule]
 })
-export class NonTemplateOutletComponent implements OnInit {
+export class NonTemplateOutletComponent {
 
-  playgrounds$ = this.service.playgrounds$;
+  playgrounds: Signal<Playground[]>;
   filterControl = new FormControl<string>('', { nonNullable: true });
-
-  constructor(private service: PlaygroundService) { }
-
-  ngOnInit(): void {
-    this.playgrounds$ = combineLatest([
-      this.service.playgrounds$,
+  constructor() {
+    const service = inject(PlaygroundService);
+    this.playgrounds = toSignal(combineLatest([
+      service.playgrounds$,
       this.filterControl.valueChanges.pipe(
         debounceTime(300),
         startWith(''),
@@ -28,6 +26,6 @@ export class NonTemplateOutletComponent implements OnInit {
       )
     ]).pipe(
       map(([playgrounds, term]) => playgrounds.filter(p => p.name.toLocaleLowerCase().includes(term)))
-    );
+    ), { initialValue: [] });
   }
 }

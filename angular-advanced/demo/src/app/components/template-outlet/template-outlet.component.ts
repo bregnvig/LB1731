@@ -1,6 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Playground, PlaygroundService } from 'src/app/shared';
 import { FancyPlaygroundDetailsComponent } from '../dynamic-component/fancy-playground-details/fancy-playground-details.component';
 import { CommonListFilterFilterFnComponent } from './common-list-filter-filter-fn/common-list-filter-filter-fn.component';
@@ -27,12 +26,8 @@ import { CommonListFilterFilterFnComponent } from './common-list-filter-filter-f
 })
 export class TemplateOutletComponent {
 
-  playgrounds$!: Observable<Playground[]>;
-  filterFn?: (term: string) => Observable<Playground[]>;
+  #playgrounds = toSignal(inject(PlaygroundService).playgrounds$, { initialValue: [] });
 
-  constructor(public service: PlaygroundService) {
-    this.filterFn = (term: string) => this.service.playgrounds$.pipe(
-      map(playgrounds => playgrounds.filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase())))
-    );
-  }
+  filterFn = (term: string): Playground[] => this.#playgrounds()
+    .filter(playground => playground.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()));
 }

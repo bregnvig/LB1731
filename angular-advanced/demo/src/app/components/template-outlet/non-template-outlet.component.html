@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col">
-    @if (playgrounds$ | async; as playgrounds) {
+    @if (playgrounds(); as playgrounds) {
       <ul class="list-group">
         @for (playground of playgrounds; track playground) {
           <li class="list-group-item">
