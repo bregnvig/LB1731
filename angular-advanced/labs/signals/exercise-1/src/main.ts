@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { enableProdMode, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -23,7 +23,7 @@ const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),provideHttpClient(),
+    provideZoneChangeDetection(),provideHttpClient(withXhr()),
     provideRouter(AppRoutes),
     provideAppInitializer(() => {
         const initializerFn = (initializeFontAwesomeFactory)(inject(FaIconLibrary));

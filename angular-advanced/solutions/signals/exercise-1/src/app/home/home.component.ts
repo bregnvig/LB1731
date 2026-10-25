@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -28,6 +28,7 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       <loop-footer [playground]="playground()"/>
     }
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         LeafletModule,
         SidebarComponent,
