@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
@@ -10,6 +10,7 @@ import { LocationService } from '../service';
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FaIconComponent,
     AsyncPipe,

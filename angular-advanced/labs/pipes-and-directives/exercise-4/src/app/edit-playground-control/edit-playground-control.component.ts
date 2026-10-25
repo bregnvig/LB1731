@@ -1,4 +1,4 @@
-import { Component, forwardRef, inject, OnInit } from '@angular/core';
+import { Component, forwardRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { FocusDirective } from '../directive/focus.directive';
 import { SelectAllTextDirective } from '../directive/select-all-text.directive';
@@ -35,6 +35,7 @@ interface PlaygroundForm {
       multi: true
     }
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     ReactiveFormsModule,
     SelectAllTextDirective,

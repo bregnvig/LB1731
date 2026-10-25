@@ -1,4 +1,4 @@
-import { Component, forwardRef, inject, OnInit } from '@angular/core';
+import { Component, forwardRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, ValidationErrors, Validators, ReactiveFormsModule } from '@angular/forms';
 
 interface PlaygroundForm {
@@ -33,6 +33,7 @@ interface PlaygroundForm {
             multi: true
         }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class EditPlaygroundControlComponent implements OnInit {
