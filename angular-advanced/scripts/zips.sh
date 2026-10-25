@@ -34,7 +34,7 @@ test_zips() {
 
   if [[ ! -f "$ZIP_MANIFEST" ]]; then
     rm -f "$current"
-    echo "Error: $ZIP_MANIFEST missing. Create it with: ./workspace.sh test-zips --bless"
+    echo "Error: $ZIP_MANIFEST missing. Create it with: adv test-zips --bless"
     return 1
   fi
 
@@ -45,6 +45,6 @@ test_zips() {
   fi
   rm -f "$current"
   echo "✗ Student zips differ from $ZIP_MANIFEST (- expected, + now)."
-  echo "  Intended? Review the diff, then: ./workspace.sh test-zips --bless"
+  echo "  Intended? Review the diff, then: adv test-zips --bless"
   return 1
 }

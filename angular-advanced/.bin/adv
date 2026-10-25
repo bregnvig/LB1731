@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
+# angular-advanced CLI. mise.toml puts .bin/ on PATH, so it runs from anywhere: adv help
 
 set -e  # Fail fast for module loading and arg parsing
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Commands use paths relative to angular-advanced/ (courses/..., demo, tests/...)
+ROOT="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+cd "$ROOT"
 
 # Source modules
 for module in utils verify zips; do
-  if [[ ! -f "$SCRIPT_DIR/scripts/$module.sh" ]]; then
+  if [[ ! -f "$ROOT/scripts/$module.sh" ]]; then
     echo "Error: Missing script module: scripts/$module.sh"
     exit 1
   fi
-  source "$SCRIPT_DIR/scripts/$module.sh"
+  source "$ROOT/scripts/$module.sh"
 done
 
 show_help() {
-  echo "Usage: workspace.sh [command] [target]"
+  echo "Usage: adv [command] [target]"
   echo ""
   echo "Commands:"
   echo "  install, i       Install npm packages (one package.json for everything)"
@@ -28,10 +31,10 @@ show_help() {
   echo "  [course]         Specific course (courses/[course]/step-*)"
   echo ""
   echo "Examples:"
-  echo "  ./workspace.sh install          # npm install in angular-advanced/"
-  echo "  ./workspace.sh verify all       # Verify all directories build and serve"
-  echo "  ./workspace.sh verify di        # Verify courses/di/step-*"
-  echo "  ./workspace.sh test-zips        # Students still get the same zips?"
+  echo "  adv install          # npm install in angular-advanced/"
+  echo "  adv verify all       # Verify all directories build and serve"
+  echo "  adv verify di        # Verify courses/di/step-*"
+  echo "  adv test-zips        # Students still get the same zips?"
 }
 
 # Resolve target to list of directories

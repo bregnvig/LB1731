@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Student zips: solutions.zip, demo.zip and labs.zip. Optional arg: output directory (default: here).
 # Students keep the layout the slides use (labs/<course>/exercise-N), so scripts/stage-course.sh copies
-# courses/<course>/step-N into that layout before zipping. ./workspace.sh test-zips checks the result.
+# courses/<course>/step-N into that layout before zipping. `adv test-zips` checks the result.
 set -e
 out="$(realpath "${1:-.}")"
 cd "$(dirname "$(realpath "$0")")"
