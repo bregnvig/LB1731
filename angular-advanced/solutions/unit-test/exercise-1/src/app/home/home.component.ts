@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { combineLatest, interval, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { withLength } from '../utils/rxjs-utils';
@@ -22,6 +22,7 @@ import { FooterComponent } from '../footer/footer.component';
       <loop-footer [playground]="playground"></loop-footer>
     }
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class HomeComponent implements OnInit {

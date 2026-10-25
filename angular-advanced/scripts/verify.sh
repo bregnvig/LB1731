@@ -25,6 +25,21 @@ verify_directory() {
     return 1
   fi
 
+  # Unit-test course: students only run `npm test`, and app-routes.ts imports the
+  # LoginComponent they create in exercise 4, so build/serve can't pass. Test instead.
+  if [[ "$dir" == */unit-test/* ]]; then
+    if (cd "$dir" && CI=true npx ng test --watch=false) >&2 2>&1; then
+      build_result="PASS"
+    elif [[ "$dir" == labs/unit-test/exercise-1 ]]; then
+      # Expected: step 1 of the exercise creates service/auth.service (ng g s service/auth)
+      build_result="XFAIL"
+    else
+      build_result="FAIL"
+    fi
+    echo "$dir|$install_result|$build_result|N/A"
+    return 0
+  fi
+
   # Step 2: Build
   if (cd "$dir" && npx ng build) >&2 2>&1; then
     build_result="PASS"
@@ -84,14 +99,14 @@ verify_directories() {
   echo "========================================="
   echo "VERIFICATION SUMMARY"
   echo "========================================="
-  printf "%-45s %-10s %-10s %-10s\n" "Directory" "Install" "Build" "Serve"
-  printf "%-45s %-10s %-10s %-10s\n" "---------" "-------" "-----" "-----"
+  printf "%-45s %-10s %-10s %-10s\n" "Directory" "Install" "Build/Test" "Serve"
+  printf "%-45s %-10s %-10s %-10s\n" "---------" "-------" "----------" "-----"
 
   local all_pass=true
   for result in "${results[@]}"; do
     IFS='|' read -r dir install build serve <<< "$result"
     printf "%-45s %-10s %-10s %-10s\n" "$dir" "$install" "$build" "$serve"
-    if [[ "$install" != "PASS" || "$build" != "PASS" || "$serve" != "PASS" ]]; then
+    if [[ "$install" != "PASS" || ! "$build" =~ ^(PASS|XFAIL)$ || ! "$serve" =~ ^(PASS|N/A)$ ]]; then
       all_pass=false
     fi
   done
