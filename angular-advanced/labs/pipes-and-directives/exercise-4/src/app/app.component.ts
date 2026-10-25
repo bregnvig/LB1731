@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest, noop, Observable, Subject } from 'rxjs';
@@ -16,6 +16,7 @@ import { withLength } from './utils/rxjs-utils';
   selector: 'loop-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [SidebarComponent, FooterComponent, ReactiveFormsModule, AsyncPipe, LeafletModule]
 })
 export class AppComponent {

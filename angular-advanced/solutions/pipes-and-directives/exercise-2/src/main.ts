@@ -1,6 +1,6 @@
 import { enableProdMode, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,7 +17,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),importProvidersFrom(BrowserModule, ReactiveFormsModule, NgbModule, FontAwesomeModule, DynamicIoModule),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideAppInitializer(() => {
         const initializerFn = ((library: FaIconLibrary) => () => library.addIconPacks(fas))(inject(FaIconLibrary));
         return initializerFn();

@@ -1,5 +1,5 @@
 
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinate, Playground } from '../model';
 import { LocationService } from '../service';
@@ -13,6 +13,7 @@ import { IsInRoleDirective } from "../directive/is-in-role.directive";
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FaIconComponent,
     AsyncPipe,
