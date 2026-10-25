@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, combineLatest, noop } from 'rxjs';
@@ -16,6 +16,7 @@ import { shareLatest, truthy, withLength } from '../utils/rxjs-utils';
     selector: 'loop-map',
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [LeafletModule, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class MapComponent {
