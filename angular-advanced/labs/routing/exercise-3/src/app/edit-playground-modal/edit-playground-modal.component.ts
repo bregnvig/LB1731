@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { EditPlaygroundControlComponent } from '../edit-playground-control/edit-
     selector: 'loop-edit-playground-modal',
     templateUrl: './edit-playground-modal.component.html',
     styleUrls: ['./edit-playground-modal.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [EditPlaygroundControlComponent, ReactiveFormsModule]
 })
 export class EditPlaygroundModalComponent implements OnInit {
