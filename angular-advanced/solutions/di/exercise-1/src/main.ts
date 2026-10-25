@@ -1,7 +1,7 @@
 import { enableProdMode, importProvidersFrom, inject, provideZoneChangeDetection } from '@angular/core';
 
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +24,7 @@ bootstrapApplication(AppComponent, {
         return environment.location === 'copenhagen' ? new PlaygroundService(http) : new AarhusPlaygroundService(http);
       },
     },
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi())
   ]
 })
   .catch(err => console.error(err));

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
@@ -18,6 +18,7 @@ import { withLength } from './utils/rxjs-utils';
     @if (playground$ | async; as playground) {
       <loop-footer [playground]="playground"></loop-footer>
     }`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
