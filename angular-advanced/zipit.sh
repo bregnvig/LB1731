@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 # Student zips: solutions.zip, demo.zip and labs.zip. Optional arg: output directory (default: here).
-# Students keep the layout the slides use (labs/<course>/exercise-N), so courses/<course>/{labs,solutions}
-# is copied into that layout before zipping. ./workspace.sh test-zips checks the result.
+# Students keep the layout the slides use (labs/<course>/exercise-N), so scripts/stage-course.sh copies
+# courses/<course>/step-N into that layout before zipping. ./workspace.sh test-zips checks the result.
 set -e
 out="$(realpath "${1:-.}")"
 cd "$(dirname "$(realpath "$0")")"
 
 stage=$(mktemp -d)
 trap 'rm -rf "$stage"' EXIT
-exclude=(--exclude node_modules --exclude dist --exclude .angular --exclude '*.sh')
 
 for course in courses/*/; do
   course=$(basename "$course")
-  for kind in labs solutions; do
-    mkdir -p "$stage/$kind"
-    rsync -a "${exclude[@]}" "courses/$course/$kind/" "$stage/$kind/$course/"
-  done
+  scripts/stage-course.sh "$course" "$stage/labs/$course" "$stage/solutions/$course"
 done
-rsync -a "${exclude[@]}" demo/ "$stage/demo/"
+rsync -a --exclude node_modules --exclude dist --exclude .angular --exclude '*.sh' demo/ "$stage/demo/"
 scripts/student-packages.sh "$stage"
 
 cd "$stage"

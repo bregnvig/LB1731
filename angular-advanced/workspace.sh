@@ -23,14 +23,14 @@ show_help() {
   echo "  help, h          Show this help"
   echo ""
   echo "Targets (verify):"
-  echo "  -a, all          All labs, solutions, and demo"
+  echo "  -a, all          All courses and demo"
   echo "  demo             Demo directory only"
-  echo "  [course]         Specific course (courses/[course]/labs and courses/[course]/solutions)"
+  echo "  [course]         Specific course (courses/[course]/step-*)"
   echo ""
   echo "Examples:"
   echo "  ./workspace.sh install          # npm install in angular-advanced/"
   echo "  ./workspace.sh verify all       # Verify all directories build and serve"
-  echo "  ./workspace.sh verify di        # Verify courses/di/labs and courses/di/solutions"
+  echo "  ./workspace.sh verify di        # Verify courses/di/step-*"
   echo "  ./workspace.sh test-zips        # Students still get the same zips?"
 }
 

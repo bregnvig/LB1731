@@ -4,7 +4,7 @@
 cd "$(dirname "$(realpath "$0")")/.."
 
 bad=()
-for dir in demo courses/*/{labs,solutions} courses/*/*/exercise-*; do
+for dir in demo courses/*/{labs,solutions,step-*}; do
   if [[ -f "$dir/package.json" ]] && jq -e 'keys | any(endswith("ependencies"))' "$dir/package.json" >/dev/null; then
     bad+=("$dir")
   fi

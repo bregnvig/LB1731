@@ -9,7 +9,7 @@
     "demo",
     "courses/*/labs",
     "courses/*/solutions",
-    "courses/*/*/exercise-*"
+    "courses/*/step-*"
   ],
   "dependencies": {
     "@angular/animations": "^22.2.3",

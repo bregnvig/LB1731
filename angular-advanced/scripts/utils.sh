@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-# Lab and solution directories of a course: courses/<course>/{labs,solutions}, either
-# the app itself (rxjs) or one exercise-* directory per exercise.
+# Project directories of a course: courses/<course>/step-N (lab N = step-N, solution N = step-(N+1)),
+# or labs/ and solutions/ for rxjs, which is one app.
 get_course_directories() {
   local course="$1" dir
-  for dir in courses/"$course"/{labs,solutions} courses/"$course"/{labs,solutions}/*/; do
-    dir="${dir%/}"
+  for dir in courses/"$course"/{labs,solutions,step-*}; do
     if [[ -f "$dir/package.json" ]]; then
       echo "$dir"
     fi
