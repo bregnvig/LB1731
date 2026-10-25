@@ -1,0 +1,17 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:656px;height:auto;z-index:10;text-align:left">
+    <h2>Simple example</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:204px;width:515px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">interface Engine {  effect: number;  torgue: number;  cylinders: number;} class AMG178 implements Engine {  effect = 503;  torgue = 700;  cylinders = 6;} class AMG139 implements Engine {  effect = 422;  torgue = 500;  cylinders = 4;}</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:720px;top:204px;width:500px;height:200px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="5-7">class NonDICar {   engine: Engine;   constructor() {    this.engine = new AMG139();  }} const car = new NonDICar();</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:720px;top:432px;width:500px;height:144px;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="3-4">class DICar {   constructor(public engine: Engine) {  }} const car = new DICar(new AMG178());</code></pre>
+  </div>
+  <aside class="notes">The point here is not the simple constructor. 
+
+The point here is that the client receives the "dependency"</aside>
+</section>

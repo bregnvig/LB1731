@@ -1,0 +1,23 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:816px;height:auto;z-index:10;text-align:left">
+    <h2>Resource Api - The RESOURCEREF</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:540px;width:813px;height:auto;z-index:11">
+    <p>Same interface, different creators. Let's take a look at that!</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:906px;height:auto;z-index:12;text-align:left">
+    <p>All resource functions</p>
+
+<p><span style="color:#FF8C00">rxResource()</span>, <span style="color:#FF8C00">httpResource()</span>, and <span style="color:#FF8C00">resource()</span>&nbsp;</p>
+
+<p>return a <span style="color:#FF8C00">ResourceRef</span>.</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:80px;top:392px;width:560px;height:auto;z-index:13;text-align:left">
+    <p>It’s a signal-based object that exposes:</p>
+
+<p><code><span style="color:#FF8C00">value()</span></code>, &nbsp;<code><span style="color:#FF8C00">isLoading()</span></code><span style="color:rgb(255, 255, 255)">, </span><span style="color:#FF8C00"><code>reload()</code></span><span style="color:rgb(255, 255, 255)">,</span>&nbsp; <code><span style="color:#FF8C00">error()</span></code><span style="color:rgb(255, 255, 255)">&nbsp;and much more.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:734.183px;top:256px;width:465.817px;height:208px;z-index:15">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// classconst user = resource(...); // template@if (user.isLoading()) {  &lt;spinner/&gt;} @else { user.value() }</code></pre>
+  </div>
+</section>

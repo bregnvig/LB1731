@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>The form control</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:648px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>A single control. Until we talk about custom controls this is often just an input of some type, a select, a checkbox or a radio button</li>
+	<li>Attach the control to the template using the <span style="color:#ff8c00">formControl</span>&nbsp;or <span style="color:#ff8c00">formControlName</span>&nbsp;directive&nbsp;</li>
+	<li>Validators work on this control only&nbsp;</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:481.5px;width:560px;height:auto;z-index:12">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-xml" data-line-numbers="6">&lt;input   id="name"   type="text"   class="form-control col-6"   placeholder="Name"   formControlName="name"&gt;</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:668.996px;top:481.5px;width:560px;height:auto;z-index:13">
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="6">&lt;input   id="name"   type="text"   class="form-control col-6"   placeholder="Name"   [formControl]="fg.controls.name"&gt;</code></pre>
+  </div>
+  <aside class="notes">If anyone in doubt in regards to formControl or formControlName, go back to the top 5 example.
+
+What to use? Name or control? Lets see how the name does only produce runtime errors, while control produces compile time errors. Historically you will have a lot of formControlName, but consider start using formControl. Or maybe not. I'm not sure I prefer the longer form. 
+</aside>
+</section>

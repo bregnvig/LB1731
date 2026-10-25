@@ -1,0 +1,15 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:778.287px;height:auto;z-index:10;text-align:left">
+    <h2>What about outputs? (3. party lib)</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:198px;width:512px;height:auto;z-index:11;text-align:left">
+    <p>It is possible, but it is not very simple 😥</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:282px;width:1013px;height:auto;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5-12">@for (playground of playgrounds(); track playground.id) { &lt;button class="list-group-item list-group-item-action"&gt;    &lt;span container="body" [ngbPopover]="popoverContent"&gt;{{playground.name}}&lt;/span&gt;     &lt;ng-template #popoverContent&gt;       &lt;ng-template           [ngComponentOutlet]="component"           [ndcDynamicInputs]="{ playground }"           [ndcDynamicOutputs]="{            vote: {              handler: $any(votePlaygrund), args: ['$event', playground]            }       }"/&gt;  	 &lt;/ng-template&gt;  &lt;/button&gt;}export class NgDynamicComponentComponent {  playgrounds = toSignal(inject(PlaygroundService).playgrounds$);  component = inject(PopoverService).popoverComponent;  votePlaygrund(vote: 'up' | 'down', playground: Playground) {    console.log(playground.name, vote);  }}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:64px;top:226px;width:512px;height:auto;z-index:12;text-align:left">
+    <p><span style="color:#A9A9A9"><span style="font-size:0.6em">And only supports @Output()</span></span></p>
+  </div>
+  <aside class="notes">Click text for animation</aside>
+</section>

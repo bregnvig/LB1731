@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2 style="color:rgb(255, 255, 255)">APP_INITIALIZER - BUILT-IN INJECTION TOKENS</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:387px;width:457px;height:144px;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2,3,5">[{  provide: APP_INITIALIZER,  useFactory: initializeApp,  deps: [HttpClient, TranslationService],  multi: true}]</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:105.747px;width:800px;height:auto;z-index:12">
+    <p style="text-align:left">Provide a factory function to be executed before the application is made available. <span style="color:#FFD700">Notice the factory function must return a function!</span></p>
+
+<p style="text-align:left">&nbsp;</p>
+
+<p style="text-align:left">If the function returns an observable initialization is not complete, until the observable is <span style="color:#FF8C00">complete</span>. <span style="color:#FF0000">Deprecated</span>&nbsp;- use <span style="color:#FF8C00"><code>provideAppInitializer</code></span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:80px;top:559px;width:1040px;height:108px;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">const initializeApp = (http: HttpClient, translate: TranslaterService): Observable&lt;void&gt; =&gt; function() {  return this.http.get('assets/translations.json').pipe(    tap(translation =&gt; translate.setTranslation(translation))  );}</code></pre>
+  </div>
+  <aside class="notes">Notice the multi.
+
+So either use first, if you are 100% sure the stream will complete, or use a promise</aside>
+</section>

@@ -18,6 +18,10 @@ interface BlockBase {
   locked?: boolean;
   animation?: Animation;
   fragment?: Fragment;
+  /** The whole block is a link (opens in a new tab). */
+  href?: string;
+  /** CSS declarations the model has no field for (rotation, font size, color…), kept verbatim. */
+  extraStyle?: string;
 }
 
 export type TextBlock = BlockBase & { type: 'text'; html: string; align?: 'left' | 'center' | 'right' | 'justify' };

@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>An example - using it</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:240px;top:452px;width:788px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="5">export class PlaygroundService {   playgrounds$: Observable&lt;Playground[]&gt;;   constructor(http: HttpClient, @Inject(PLAYGROUNDS_URL) url: string) {    this.playgrounds$ = http.get&lt;Playground[]&gt;(url);  }}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:240px;top:416px;width:600px;height:auto;z-index:12">
+    <h3 style="text-align:left">Before v14</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:240px;top:221px;width:788px;height:auto;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2">export class PlaygroundService {  playgrounds$ = inject(HttpClient).get&lt;Playground[]&gt;(inject(PLAYGROUND_URL));}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:246px;top:185px;width:600px;height:auto;z-index:14">
+    <h3 style="text-align:left">With v14</h3>
+  </div>
+  <aside class="notes">BTW - always prefer the v14+ variant</aside>
+</section>

@@ -1,0 +1,14 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:110px;width:713px;height:auto;z-index:10;text-align:left">
+    <h2>Injector considerations</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:216px;width:1176px;height:200px;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3,4">export class CalculateComponent implements OnInit {   // Will break when instantiated if CalculatorService not provided  #calculatorService = inject(CalculatorService);   addNumbers(a: number, b: number): number {    return this.calculatorService.addNumbers(a, b);  }  }</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:80px;top:432px;width:1176px;height:219px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3,5,7">export class CalculateComponent implements OnInit {   #injector = inject(Injector);    // Will break when called if CalculatorService not provided  addNumbers(a: number, b: number): number {     const calculatorService = this.#injector.get(CalculatorService);    return calculatorService.addNumbers(a, b);  }  }</code></pre>
+  </div>
+  <aside class="notes">
+
+talk abount failing fast and making deps explicit </aside>
+</section>

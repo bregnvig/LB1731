@@ -1,0 +1,10 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Using <span style="color:rgb(255, 140, 0); text-align:left">firstValueFrom</span>
+</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:143.5px;top:225.5px;width:993px;height:306px;z-index:13;border-width:4px">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">import { firstValueFrom } from 'rxjs'; @Component({...})export class AppComponent implements OnInit {  ...  async edit(playgroundId: string) {    try {      const playground = await firstValueFrom(this.service.getPlayground(id));      this.openEditDialog(item);    } catch (e) {      this.toast.error('Could not load playground');    }  }  ...}</code></pre>
+  </div>
+  <aside class="notes">For anything that’s a stream (keeps emitting), stick to Observables (e.g., async pipe or takeUntilDestroyed).</aside>
+</section>

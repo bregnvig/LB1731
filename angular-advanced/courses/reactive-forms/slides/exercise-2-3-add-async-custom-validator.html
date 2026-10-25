@@ -1,0 +1,16 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:932px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2.3 - Add async custom validator</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:217px;width:939px;height:auto;z-index:11;text-align:left">
+    <p style="color:rgb(255, 255, 255)">Continuing with the exercise, we should add our own async<span style="color:rgb(255, 255, 255)">&nbsp;custom </span>validator.</p>
+
+<p style="color:rgb(255, 255, 255)">So create an async validator, that makes sure that the playground name is unique. You will need to inject the <span style="color:#FF8C00">PlaygroundService</span> to get this to work.</p>
+
+<p style="color:rgb(255, 255, 255)">Return an observable of type <span style="color:rgb(255, 140, 0)">null</span> or <a href="https://angular.io/api/forms/ValidationErrors" target="_blank"><span style="color:#FF8C00">ValidationErrors</span></a></p>
+
+<p style="color:rgb(255, 255, 255)">You will need to compare the value of the name control with the existing playground names, but you must also make sure you are not comparing the controls value with the <span style="color:#FF8C00">playground</span> instance variable. I.e the playground you are currently editing.</p>
+
+<p style="color:rgb(255, 255, 255)">Try to edit a playground and reuse a name from another playground. Notice that the OK button is disabled when the name is not unique.</p>
+  </div>
+</section>

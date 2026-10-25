@@ -1,0 +1,16 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:194px;width:1076px;height:auto;z-index:10">
+    <h1>Lazy loading</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:257px;width:1076px;height:auto;z-index:11">
+    <h2>canLoad</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:74.02px;top:318.5px;width:1131.96px;height:297px;z-index:13">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-plaintext" data-line-numbers="6-9">@Injectable({  providedIn: 'root'})export class AuthGuard implements CanActivate, CanLoad {// ...  canLoad(route: Route, segments: UrlSegment[]): Observable&lt;boolean | UrlTree&gt; {    return this.authService.isLoggedIn$.pipe(      map(isLoggedIn =&gt; isLoggedIn || this.router.createUrlTree(['/login'])),    );  }}</code></pre>
+  </div>
+  <aside class="notes">speak about canLoad guard
+
+nothing wrong with the AuthGuard implementing CanActivate and CanLoad. If the goal is the same.
+
+providedIn 'root'</aside>
+</section>

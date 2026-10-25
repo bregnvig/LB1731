@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:216px;width:1143.96px;height:476.023px;z-index:10">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript">@Component({
+  selector: 'loop-playground',
+  template: `
+    &lt;div class="card" *ngIf="playground$ | async as playground"&gt;
+      ...
+    &lt;/div&gt;  
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ResolverComponent {
+
+  playground$: Observable&lt;Playground | undefined&gt; = this.route.data.pipe(
+  	map(data =&gt; data.playground)
+  );
+
+  constructor(private route: ActivatedRoute) { }
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:869px;height:auto;z-index:11;text-align:left">
+    <h2>Read data set by resolver</h2>
+  </div>
+  <aside class="notes">Same as reading matrix params</aside>
+</section>

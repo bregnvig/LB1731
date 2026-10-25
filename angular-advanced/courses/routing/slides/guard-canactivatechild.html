@@ -1,0 +1,17 @@
+<section>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:216px;width:1156.91px;height:383px;z-index:10">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-plaintext" data-line-numbers="8">export class CanActivateTermsOfUseAccepted implements CanActivateChild {  // ...   canActivateChild(    childRoute: ActivatedRouteSnapshot,     state: RouterStateSnapshot  ): Observable&lt;boolean&gt; {    return this.authService.acceptedTermsOfUse$;  } }</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:869px;height:auto;z-index:11;text-align:left">
+    <h2>Guard - CanActivateChild</h2>
+  </div>
+  <aside class="notes">Talk about loading children when terms of use are accepted
+
+Restrict access to a specific route (Might be some prerequisites need to be met).
+
+Avoid setting canActivate on all children.
+
+
+
+*syntax sugar*</aside>
+</section>

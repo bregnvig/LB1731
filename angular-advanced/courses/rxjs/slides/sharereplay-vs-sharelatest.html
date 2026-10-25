@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>shareReplay vs. shareLatest</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" data-auto-height style="left:268px;top:144px;width:744px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript">export const shareLatest = &lt;T&gt;() =&gt; pipe(shareReplay&lt;T&gt;({ 
+  bufferSize: 1, 
+  refCount: true 
+}));
+
+// Turn it into a multicast
+const playgrounds$ = this.service.playgrounds$.pipe(
+  shareLatest()
+);
+
+// Same thing using shareReplay
+const playgrounds$ = this.service.playgrounds$.pipe(
+  shareReplay({ 
+    bufferSize: 1, 
+    refCount: true 
+  })
+);</code></pre>
+  </div>
+  <aside class="notes">Instead of configuring shareReplay each time we use shareLatest() for consistent behavior.</aside>
+</section>

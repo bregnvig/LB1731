@@ -1,0 +1,24 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>Custom validators</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:208px;width:613px;height:auto;z-index:11">
+    <ul>
+	<li style="text-align:left">A pure function. Given the same input it produces the same output.</li>
+	<li style="text-align:left">I.e. no state is being changed.</li>
+	<li style="text-align:left">A single parameter. An abstract control.</li>
+	<li style="text-align:left">Returns either <span style="color:#FF8C00">null</span> or <a href="http://angular.io/api/forms/ValidationErrors" target="_blank">ValidationErrors</a>
+</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:26px;top:397.032px;width:1239px;height:322.968px;z-index:12">
+    <pre style="font-size: 17px; line-height: 20px;"><code class="language-typescript" data-line-numbers="11-14">        zipAndCity: this.fb.group({      zip: this.fb.control(        '',        {          validators: Validators.pattern(/^[1-9][0-9]{3}$/),          asyncValidators: isValidZip(this.service)        },      ),      city: this.fb.control({ value: '', disabled: true }),    }, {      validators: (zipAndCity: FormGroup&lt;ZipAndCityForm&gt;): null | ValidationErrors =&gt;       	zipAndCity.controls.zip.valid &amp;&amp; zipAndCity.controls.zip.value &amp;&amp; !zipAndCity.controls.city.value       	? { error: 'label.missing.city' }         : null    } as AbstractControlOptions)</code></pre>
+  </div>
+  <aside class="notes">Look at the example validators. 
+
+Notice that even though a validator function takes an abstract control, it is possible to make it more specific. Notice how you need to specify the type in the validator function
+
+This validator does several things.  
+
+If the zip control is valid and the zip control has a value, but no city has been filled out; return an error. Otherwise return null</aside>
+</section>

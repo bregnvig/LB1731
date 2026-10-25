@@ -1,0 +1,14 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1107.47px;height:auto;z-index:10;text-align:left">
+    <h2>Store using rxResource - as a readonly resource</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:173px;width:1021.93px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()export class PlaygroundStore {    #service = inject(PlaygroundService);  #resource = rxResource({  	loader: () =&gt; this.#service.list()  });  #updateError = signal&lt;any&gt;();  error = computed(() =&gt; this.#resource.error() ?? this.#updateError())  loading = this.#resource.isLoading  playgrounds = this.#resource.value.asReadonly();      update(playground: Playground): Promise&lt;void&gt; {    return firstValueFrom(this.#service.update(playground)      .then(() =&gt; this.#resource.reload())  }}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" data-animate="fade-in" data-animate-duration="1" data-animate-delay="3" style="left:629px;top:528px;width:600px;height:auto;z-index:13">
+    <p><span style="font-size:5.0em">🤯</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:64px;top:173px;width:1191.93px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()export class RxresourcePlaygroundStore {   #service = inject(RxresourcePlaygroundService);  #playgroundsResource = rxResource({ loader: () =&gt; this.#service.list(), defaultValue: [] });   #update = signal&lt;Playground | undefined&gt;(undefined);  #updateResource = rxResource({    params: () =&gt; this.#update(),    stream: ({ params: playground }) =&gt; !playground ? of(null) : this.#service.update(playground).pipe(      tap(() =&gt; this.#playgroundsResource.reload())    ),  });   readonly playgroundResource = this.#playgroundsResource.asReadonly();  readonly updateError = this.#updateResource.error;   update(playground: Playground) {    this.#update.set(playground);  }}</code></pre>
+  </div>
+</section>

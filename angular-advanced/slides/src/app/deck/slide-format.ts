@@ -16,16 +16,33 @@ function parseBorder(style: string): { border?: Border } {
   return { border: { width: Number(m[1]), style: m[2] as Border['style'], color: m[3].trim(), radius: radius ? Number(radius[1]) : 0 } };
 }
 
+// Declarations written by blockStyle(); everything else in a block's style is kept as extraStyle.
+const MODELED = new Set(['left', 'top', 'width', 'height', 'z-index', 'text-align', 'border', 'border-radius', '--svg-color']);
+
+function parseExtraStyle(style: string): { extraStyle?: string } {
+  // border-radius belongs to the modeled border only when the border shorthand is there too.
+  const modeled = /(?:^|;)\s*border:/.test(style) ? MODELED : new Set([...MODELED].filter(p => p !== 'border-radius'));
+  const extra = style.split(';').map(d => d.trim()).filter(d => d && !modeled.has(d.slice(0, d.indexOf(':')).trim()));
+  return extra.length ? { extraStyle: extra.join(';') } : {};
+}
+
+// Raw declarations of a style attribute. el.style would round lengths (115.6537px → 115.654px).
+function styleDecls(style: string): Map<string, string> {
+  return new Map(style.split(';').filter(d => d.includes(':')).map(d => [d.slice(0, d.indexOf(':')).trim(), d.slice(d.indexOf(':') + 1).trim()]));
+}
+
 function parseBlock(el: HTMLElement): Block {
   const d = (k: string) => el.getAttribute(`data-${k}`);
   const has = (k: string) => el.hasAttribute(`data-${k}`);
-  const st = el.style;
+  const st = styleDecls(el.getAttribute('style') ?? '');
   const base = {
     name: d('name') ?? '',
-    x: px(st.left), y: px(st.top), width: px(st.width),
-    height: st.height === 'auto' ? 'auto' as const : px(st.height),
-    z: Number(st.zIndex) || 0,
+    x: px(st.get('left') ?? ''), y: px(st.get('top') ?? ''), width: px(st.get('width') ?? ''),
+    height: st.get('height') === 'auto' ? 'auto' as const : px(st.get('height') ?? ''),
+    z: Number(st.get('z-index')) || 0,
     ...parseBorder(el.getAttribute('style') ?? ''),
+    ...parseExtraStyle(el.getAttribute('style') ?? ''),
+    ...(has('href') ? { href: d('href')! } : {}),
     ...(has('locked') ? { locked: true } : {}),
     ...(has('animate') ? { animation: {
       effect: d('animate') as Effect, duration: Number(d('animate-duration')), delay: Number(d('animate-delay')), on: d('animate-on'),
@@ -37,7 +54,7 @@ function parseBlock(el: HTMLElement): Block {
   };
   const inner = el.innerHTML.trim();
   switch (d('type')) {
-    case 'text': return { ...base, type: 'text', html: inner, ...(st.textAlign ? { align: st.textAlign as 'left' } : {}) };
+    case 'text': return { ...base, type: 'text', html: inner, ...(st.get('text-align') ? { align: st.get('text-align') as 'left' } : {}) };
     case 'code': {
       const pre = el.querySelector('pre')!, code = el.querySelector('code')!;
       return { ...base, type: 'code', code: code.textContent ?? '', lang: code.className.replace(/^language-/, ''),
@@ -52,7 +69,7 @@ function parseBlock(el: HTMLElement): Block {
     case 'image': {
       const img = el.querySelector('img')!;
       return { ...base, type: 'image', src: img.getAttribute('src') ?? '', alt: img.getAttribute('alt') ?? '', inlineSvg: has('inline-svg'),
-        svgColor: st.getPropertyValue('--svg-color').trim() || null, imgStyle: img.getAttribute('style') ?? '', keepRatio: has('keep-ratio') };
+        svgColor: st.get('--svg-color') || null, imgStyle: img.getAttribute('style') ?? '', keepRatio: has('keep-ratio') };
     }
     case 'group': return { ...base, type: 'group', children: childBlocks(el) };
     case 'drawing': return { ...base, type: 'drawing', svg: inner };
@@ -84,21 +101,25 @@ function blockAttrs(b: Block): string[] {
       ['dashed', b.dashed || null], ['start', b.start], ['end', b.end]); break;
     case 'image': a.push(['inline-svg', b.inlineSvg || null], ['keep-ratio', b.keepRatio || null]); break;
   }
-  a.push(['locked', b.locked || null]);
+  a.push(['href', b.href], ['locked', b.locked || null]);
   if (b.animation) a.push(['animate', b.animation.effect], ['animate-duration', b.animation.duration],
     ['animate-delay', b.animation.delay], ['animate-on', b.animation.on]);
   if (b.fragment?.index != null) a.push(['fragment-index', b.fragment.index]);
   return a.filter(([, v]) => v != null).map(([k, v]) => v === true ? `data-${k}` : `data-${k}="${escapeAttr(String(v))}"`);
 }
 
+// 4 decimals is far below a pixel and drops floating point noise like 348.60799999999995.
+const n4 = (n: number) => Number(n.toFixed(4));
+
 function blockStyle(b: Block): string {
-  const s = [`left:${b.x}px`, `top:${b.y}px`, `width:${b.width}px`, `height:${b.height === 'auto' ? 'auto' : `${b.height}px`}`, `z-index:${b.z}`];
+  const s = [`left:${n4(b.x)}px`, `top:${n4(b.y)}px`, `width:${n4(b.width)}px`, `height:${b.height === 'auto' ? 'auto' : `${n4(b.height)}px`}`, `z-index:${b.z}`];
   if (b.type === 'text' && b.align) s.push(`text-align:${b.align}`);
   if (b.border) {
     s.push(`border:${b.border.width}px ${b.border.style} ${b.border.color}`);
     if (b.border.radius) s.push(`border-radius:${b.border.radius}px`);
   }
   if (b.type === 'image' && b.svgColor) s.push(`--svg-color:${b.svgColor}`);
+  if (b.extraStyle) s.push(b.extraStyle);
   return s.join(';');
 }
 

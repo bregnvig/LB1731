@@ -1,0 +1,32 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Example using switchMap</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:247px;top:504px;width:600px;height:auto;z-index:11">
+    <h3 style="text-align:left">With switchMap</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:247px;top:556px;width:786px;height:90px;z-index:12">
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript">interval(1000).pipe(
+    switchMap(() =&gt; this.service.getSomething())
+).subscribe(something =&gt; this.something = something);
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:247px;top:144px;width:693px;height:auto;z-index:13">
+    <h3 style="text-align:left">Without switchMap - An anti pattern<span style="color:rgb(204, 204, 204)">🤬</span>
+</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:247px;top:199px;width:786px;height:159px;z-index:14">
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript">interval(1000).pipe(
+    map(() =&gt; this.service.getSomething())
+).subscribe(something$ =&gt; {
+  something$.subscribe(something =&gt; this.something = something)
+)
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-2" style="left:296px;top:395px;width:600px;height:auto;z-index:15">
+    <p><span><span>What to do with all these subscriptions?</span></span></p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="0" data-x2="138" data-y2="126" data-color="#ff0000" data-width="5" data-start="arrow" data-end="none" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-2" style="left:342px;top:269px;width:138px;height:126px;z-index:16"></div>
+  <div class="block" data-type="line" data-name="arrow-2" data-x1="0" data-y1="0" data-x2="16" data-y2="98.5" data-color="#ff0000" data-width="5" data-start="arrow" data-end="none" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-2" style="left:464px;top:296.5px;width:16px;height:98.5px;z-index:17"></div>
+  <aside class="notes">A classic example of using switchMap is when you use this.route.params.pipe(switchMap(({id} =&gt; this.service.getById(id)))</aside>
+</section>

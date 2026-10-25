@@ -1,0 +1,11 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1127px;height:auto;z-index:10;text-align:left">
+    <h2>An angular example - with DI</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:198px;width:1012px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4-6">@Component({})export class WithDIComponent {   #locationService = inject(LocationService);  playgrounds$ = inject(AarhusPlaygroundService).playgrounds$;  location$ = this.#locationService.location$; }</code></pre>
+  </div>
+  <aside class="notes">The great thing about doing it like this is that we automatically gets the types directly from the services
+
+Notice # - the real javascript private. Which is why we prefer this way now</aside>
+</section>

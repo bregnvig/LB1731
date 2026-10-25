@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>The RxJS way</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:101px;width:1120px;height:auto;z-index:11">
+    <pre style="font-size: 13px; line-height: 16px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Component({  selector: 'loop-rxjs-way',  templateUrl: './rxjs-way.component.html',  styleUrls: ['./rxjs-way.component.scss']})export class RxJSWayComponent implements OnInit {   filterControl = new FormControl&lt;string&gt;('', { nonNullable: true });  playgrounds$: Observable&lt;Playground[]&gt; | undefined;  location$ = this.locationService.location$;   constructor(private service: PlaygroundService, private locationService: LocationService) { }   ngOnInit(): void {    const playgrounds$ = combineLatest([      this.service.playgrounds$,      this.filterControl.valueChanges.pipe(        debounceTime(300),        startWith(''),        map(term =&gt; term.toLocaleLowerCase())      ),    ]).pipe(map(([playgrounds, term]) =&gt; playgrounds.filter(p =&gt; p.name.toLocaleLowerCase().includes(term))));    const getDistance = this.locationService.getDistance;    this.playgrounds$ = combineLatest([playgrounds$, this.locationService.location$]).pipe(      map(([playgrounds, location]) =&gt;        playgrounds.sort((a: Playground, b: Playground) =&gt; getDistance(a.position, location) - getDistance(b.position, location))      )    );  }}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:340px;top:668px;width:600px;height:auto;z-index:12">
+    <p><span style="font-size:0.7em">(We'll get back to these later)</span></p>
+  </div>
+  <aside class="notes">SHOW DEMO 
+
+Declarative because:
+- Reactive Data Flow with Observables
+- No Direct State Mutations
+- Event Handling via Streams
+
+</aside>
+</section>

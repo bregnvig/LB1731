@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Injectors - resumÈ</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:540px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>There is always a root level</li>
+	<li>Singleton within the scope of an injector</li>
+	<li>Lazy routes have it own injector,</li>
+	<li>Routes have their own injector (v15)</li>
+	<li>Components have their own injector</li>
+	<li>If the dependency can't be found in nearest injector, &nbsp;Angular walks up the injector tree all the way to the root. <span style="font-size:0.5em">(Not always true)</span>
+</li>
+	<li>If a dependency isn't found an error is thrown <span style="font-size:0.5em">(Not necessarily true either)</span>
+</li>
+</ul>
+  </div>
+  <aside class="notes">Ask if there are any place in their current project they could use levels</aside>
+</section>

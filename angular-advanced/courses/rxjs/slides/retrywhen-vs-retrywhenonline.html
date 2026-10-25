@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>retryWhen vs. retryWhenOnline</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" data-auto-height style="left:277.5px;top:173px;width:725px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript">// Retries failed requests when the user is back online
+export const retryWhenOnline = &lt;T&gt;() =&gt; pipe(
+  retry&lt;T&gt;({
+    delay: (error) =&gt; window.navigator.onLine
+      ? throwError(() =&gt; error)
+      : fromEvent(window, 'online')
+  })
+);
+
+const playgrounds$ = this.service.playgrounds$.pipe(
+  retryWhenOnline()
+);</code></pre>
+  </div>
+  <aside class="notes">Conditional Retry
+
+Abstracts away complexity of handling retries based on network status</aside>
+</section>

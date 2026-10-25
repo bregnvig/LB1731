@@ -68,6 +68,34 @@ describe('slide format', () => {
       ['title', 'answer', 'code-1', 'shape-1', 'arrow-1', 'image-1', 'group-1', 'text-1', 'drawing-1', 'table-1']);
   });
 
+  it('round-trips a block link and extra style (rotation, font size, color)', () => {
+    const html = `<section>
+  <div class="block" data-type="text" data-name="text-1" data-href="https://example.com/x?a=1&amp;b=2" style="left:960px;top:565px;width:300px;height:auto;z-index:14;transform:rotate(-45deg);font-size:30px;color:rgb(255, 140, 0)">
+    <p>Try it</p>
+  </div>
+</section>`;
+    const slide = parseSlide(file(html));
+    expect(slide.blocks[0]).toMatchObject({ href: 'https://example.com/x?a=1&b=2', extraStyle: 'transform:rotate(-45deg);font-size:30px;color:rgb(255, 140, 0)' });
+    expect(serializeSlide(slide).trim()).toBe(html);
+  });
+
+  it('keeps a border radius that comes with longhand border styles', () => {
+    const html = `<section>
+  <div class="block" data-type="text" data-name="text-1" style="left:0px;top:0px;width:10px;height:auto;z-index:1;border-style:solid;border-width:1px;border-radius:200px">
+    <p>x</p>
+  </div>
+</section>`;
+    expect(serializeSlide(parseSlide(file(html))).trim()).toBe(html);
+  });
+
+  it('writes positions without floating point noise', () => {
+    const slide = parseSlide(file(everyType));
+    slide.blocks[0] = { ...slide.blocks[0], x: 15.267999999999972, y: 348.60799999999995, width: 16.9643 };
+    const out = serializeSlide(slide);
+    expect(out).toContain('left:15.268px;top:348.608px;width:16.9643px');
+    expect(serializeSlide(parseSlide(file(out)))).toBe(out);
+  });
+
   it('keeps notes, auto-animate, path, hidden and etag', () => {
     const slide = parseSlide({ ...file(everyType), hidden: true });
     expect(slide).toMatchObject({ path: 'courses/rxjs/slides/demo.html', hidden: true, autoAnimate: true, etag: 'e' });

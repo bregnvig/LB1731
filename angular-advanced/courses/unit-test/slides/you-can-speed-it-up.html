@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>You Can Speed it up</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:246px;width:1076px;height:auto;z-index:11">
+    <h2>the testBed is not always needed</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:340px;top:372.5px;width:600px;height:auto;z-index:13">
+    <h1>-&gt;</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:340px;top:435.5px;width:600px;height:auto;z-index:14">
+    <p><span style="color:#00FF00">~ -40ms</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:75.76px;top:360px;width:488.48px;height:auto;z-index:15;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="4">describe('AuthService', () =&gt; {  let service: AuthService;  beforeEach(() =&gt; {    service = TestBed.inject(AuthService);  });});</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:740.26px;top:360px;width:439.48px;height:auto;z-index:16;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="4">describe('AuthService', () =&gt; {  let service: AuthService;  beforeEach(() =&gt; {    service = new AuthService();  });});</code></pre>
+  </div>
+  <aside class="notes">TestBed takes some time to start up. 
+Removing the TestBed from AUTHSERVICE STATE TEST improved the speed from 240ms to 200ms on average. 
+Why would you ever need the testbed in a service?
+ - Maybe if you have many dependencies injected in constructor. (TestBed injector handles param order).
+   - In this case you might have too many dependencies in your service.</aside>
+</section>

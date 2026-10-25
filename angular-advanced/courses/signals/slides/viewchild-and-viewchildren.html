@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:816px;height:auto;z-index:10;text-align:left">
+    <h2>@ViewChild and @ViewChildren</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:603px;width:813px;height:auto;z-index:11">
+    <p>No need for <span style="color:#FF8C00">ngAfterViewInit</span>&nbsp;anymore!<span style="color:rgb(255, 255, 255); text-align:left">&nbsp;🥳</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:192px;width:480px;height:auto;z-index:12;text-align:left">
+    <p>These have been fully "signalified"</p>
+
+<p>&nbsp;</p>
+
+<p>You can now access them directly as signals</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:272px;top:372px;width:988px;height:auto;z-index:13">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">playground = viewChild(PlaygroundComponent);sidebar = viewChild.required(SidebarComponent); effect(() =&gt; {  console.log('playground name:', this.playground()?.name, sidebar().selected);});</code></pre>
+  </div>
+</section>

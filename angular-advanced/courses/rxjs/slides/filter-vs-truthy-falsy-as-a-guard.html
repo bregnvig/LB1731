@@ -1,0 +1,20 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Filter vs. truthy / Falsy as a guard</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" data-auto-height style="left:80px;top:268.5px;width:960px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="">type nullish = null | undefined;export const truthy = &lt;T&gt;() =&gt; 	pipe(filter(x =&gt; !!x) as OperatorFunction&lt;T | nullish | '', T&gt;);export const falsy = &lt;T&gt;() =&gt; 	pipe(filter(x =&gt; !x) as OperatorFunction&lt;T | nullish, T extends number 		? (nullish | 0) 		: T extends string ? (nullish | '') : nullish&gt;); this.service.getPlayground(id).pipe(  truthy()).subscribe(playground =&gt; this.name = playground.name);</code></pre>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" data-animate="fade-in" data-animate-duration="2" data-animate-delay="0.6" style="left:648px;top:511.334px;width:313.841px;height:154.666px;z-index:12">
+    <div class="block" data-type="line" data-name="arrow-1" data-x1="151.68100000000004" data-y1="115.65365025466893" data-x2="0" data-y2="0" data-color="#ffffff" data-width="5" data-start="none" data-end="arrow" style="left:0px;top:0px;width:151.681px;height:115.6537px;z-index:13"></div>
+    <div class="block" data-type="text" data-name="text-1" style="left:75.841px;top:118.666px;width:238.166px;height:auto;z-index:14;text-align:left">
+      <p>Notice no <span style="color:#FF8C00">?</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:102px;top:85px;width:1076px;height:auto;z-index:15">
+    <h3>a TypeScript thing</h3>
+  </div>
+  <aside class="notes">Working with nullable or undefined values...
+
+truthy() and falsy() can also be used as type guards, filtering out null, undefined, or other falsy values safely. By leveraging TypeScript we're enhancing type safety. Like this we can safely access properties without needing null checks all the time! (Highlight that the elvis operator (?) is not needed anymore)</aside>
+</section>

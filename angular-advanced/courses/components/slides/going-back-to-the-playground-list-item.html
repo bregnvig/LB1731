@@ -1,0 +1,17 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:785.418px;height:auto;z-index:10;text-align:left">
+    <h2>Going back to the playground list item</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:64px;top:194.414px;width:743.438px;height:222px;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-xml" data-line-numbers="5">    &lt;li class="list-group-item d-flex"&gt;      &lt;span class="flex-item"&gt;{{playground?.name}}&lt;/span&gt;      &lt;div&gt;        &lt;div class="btn-group"&gt;          &lt;ng-content select="button" /&gt;        &lt;/div&gt;      &lt;/div&gt;    &lt;/li&gt;</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:64px;top:453.836px;width:1153.56px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-xml" data-line-numbers="4-6">&lt;ul class="list-group"&gt;  @for(playground of playgrounds$ | async; track playground.id) {    &lt;loop-playground-list-item [playground]="playground"&gt;      &lt;button class="btn btn-light btn-sm" [ngbPopover]="'Edit ' + playground.name"&gt;        &lt;fa-icon [icon]="['fas', 'pen']" /&gt;            &lt;/button&gt;    &lt;/loop-playground-list-item&gt;  }&lt;/ul&gt;</code></pre>
+  </div>
+  <aside class="notes">Show demo
+Add the select by HTML type. Button in this scenario. Show how adding an additional button shows both buttons
+
+Show how to also add a ng-content for a sub header.
+
+The select gives us context. Sometimes the ng-content catch all is enough, sometimes we would like some context</aside>
+</section>

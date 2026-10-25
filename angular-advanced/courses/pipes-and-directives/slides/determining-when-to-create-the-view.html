@@ -1,0 +1,11 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:867px;height:auto;z-index:10;text-align:left">
+    <h2>determining when to create the view</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:158px;width:896px;height:auto;z-index:12">
+    <pre style="font-size: 17px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="9,12-20">@Directive({  selector: '[loopIsInRole]'})export class IsInRoleDirective {   constructor(    private template: TemplateRef&lt;any&gt;,    private viewContainer: ViewContainerRef,    private authService: AuthService  ) { }   @Input()  set loopIsInRole(role: Role) {    const isInRole = this.authService.isInRole(role);    if (isInRole &amp;&amp; !this.viewContainer.length) {      this.viewContainer.createEmbeddedView(this.template);    } else if (!isInRole &amp;&amp; this.viewContainer.length) {      this.viewContainer.clear();    }  }}</code></pre>
+  </div>
+  <aside class="notes">We use a provided value to determine whether we should create the view.
+
+Mention that the set methods name is the same as the selector</aside>
+</section>

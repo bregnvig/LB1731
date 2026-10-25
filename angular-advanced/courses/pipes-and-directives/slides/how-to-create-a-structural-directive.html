@@ -1,0 +1,15 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:762px;height:auto;z-index:10;text-align:left">
+    <h2>How to create a structural directive!</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:360px;width:615px;height:auto;z-index:11;text-align:left">
+    <p>Not really a structural directive at this point<span style="color:rgb(204, 204, 204); text-align:center">😋</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-frame="macos" style="left:64px;top:194px;width:792px;height:121px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-bash" data-line-numbers="1,2">ng g d isInRole --skip-testsCREATE src/app/directives/structural/is-in-role.directive.ts (146 bytes)UPDATE src/app/directives/structural/structural.module.ts (1561 bytes)</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:80px;top:432px;width:1032px;height:262px;z-index:13">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="">import { Directive } from '@angular/core'; @Directive({  selector: '[loopIsInRole]'})export class IsInRoleDirective {  constructor() { }}</code></pre>
+  </div>
+  <aside class="notes">At this point the is just a directive. And it doesn't really do anything</aside>
+</section>

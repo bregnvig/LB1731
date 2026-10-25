@@ -1,0 +1,34 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>Async custom validators</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:208px;width:600px;height:auto;z-index:11">
+    <ul>
+	<li style="text-align:left">A simple function</li>
+	<li style="text-align:left">No state is being changed.</li>
+	<li style="text-align:left">A single parameter. An abstract control</li>
+	<li style="text-align:left">Returns either an observable or a promise of type <span style="color:#ff8c00">null</span> or <span style="color:#ff8c00">ValidationErrors</span>
+</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:404px;width:1120px;height:164px;z-index:12">
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="">(control: AbstractControl&lt;string&gt;): Observable&lt;null | ValidationErrors&gt; =&gt;  !control.errors &amp;&amp; control.value &amp;&amp; this.service.getCityName(control.value).pipe(    map(() =&gt; null),    catchError(() =&gt; of({ nonExistingZip: true }))  ) || of(null)</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:594px;width:600px;height:auto;z-index:13">
+    <ul>
+	<li>
+<a href="https://angular.io/api/forms/AbstractControl#statusChanges" target="_blank"><span style="color:#FF8C00">statusChanges</span></a> - the top 7 property on the abstract control. Mostly interesting, when using async validators&nbsp;</li>
+</ul>
+  </div>
+  <aside class="notes">You all know by now how much I love RxJS, so I wouldn't use a Promise :-p
+
+Go look at the code. - validators.component.ts 
+
+Consider using valueChanges to patch the city name! Then show you should disable it. Then show the value is gone. Then show the getRawValue
+
+Talk about the problem of just using Validators.pattern as the errors object is not very specific. This is mostly important, if you are creating a common form error message component.
+
+Talk about a control is not valid nor invalid, while an async validator is being executed. Talk about statusChanges. Look at filling out the city control by uncommeting the ngOnInit in ValidatorsComponent
+
+Talk about of again. Mention how we talked about it in Angular foundation, and that it seemed stupid</aside>
+</section>

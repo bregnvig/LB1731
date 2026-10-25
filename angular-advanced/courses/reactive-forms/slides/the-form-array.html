@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>The form array</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1056px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>An array of abstract controls. Any abstract control - but of the same type.</li>
+	<li>Attach the array to the template using the <a href="https://angular.io/api/forms/FormArrayName" target="_blank"><span style="color:#ff8c00">formArrayName</span></a>&nbsp;directive</li>
+	<li>Use <a href="https://angular.io/api/forms/FormArrayName" target="_blank"><span style="color:#ff8c00">formControlName</span></a>&nbsp;directive to attach the individual controls to the array</li>
+	<li>Form array validators has access to all the controls/values in the array. <span style="color:#ffffff">This enables validation across controls in the array.</span>
+</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:105.752px;top:470px;width:972.496px;height:auto;z-index:12">
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="1,6">  &lt;div formArrayName="emailAddresses" class="form-group flex-wrap"&gt;    @for(_ of emailAddressesControl.controls; track $index) {      &lt;input        type="text"        class="col-12 form-control mb-2"        [formControlName]="$index"&gt;    }  &lt;/div&gt;</code></pre>
+  </div>
+  <aside class="notes">Show example. Add email addresses, but also show what happens when you change the email in the array. Look at the source code, to show valueChanges.
+
+Try to change type in addEmail to number and see we get a compile error - in the template and in the component class
+
+If we need different types in the form array, we need to work with UntypedFormArray or FormArray&lt;any&gt;
+
+Each control in the array can have it's own validation
+
+I tend to use _, when I do not the variable in the ngFor for anything.</aside>
+</section>

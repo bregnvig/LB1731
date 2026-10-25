@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>Test structure</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:246px;width:1076px;height:auto;z-index:11">
+    <h2>Before/AFTER - Each/ALL</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:382.017px;top:360px;width:515.967px;height:auto;z-index:13;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="4-7,9-11">describe('AuthService',  () =&gt; {  let service: AuthService;    beforeEach(() =&gt; {    TestBed.configureTestingModule({});    service = TestBed.inject(AuthService);  });    afterAll(() =&gt; {    cleanUpDatabase(globalDb);  });});</code></pre>
+  </div>
+  <aside class="notes">Best practices:
+Aftereach should NEVER clean up state. It is not guaranteed to run, especially if you have multiple.
+State reset (if needed at all) should ALWAYS go in the beforeEach
+
+You should ask yourself: is resetting the state even necessary? 
+If so:
+jest.resetModules()
+Resets the module registry - the cache of all required modules. This is useful to isolate modules where local state might conflict between tests.</aside>
+</section>

@@ -1,0 +1,11 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:762px;height:auto;z-index:10;text-align:left">
+    <h2>An Attribute directive</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:239.925px;width:1192.21px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Directive({   selector: '[loopExpand]',  host: {    '[style.transition]': '"all .2s"',    '[style.width.px]': 'width()',    '(focus)': 'onFocus()',    '(blur)': 'onBlur()',  }  })export class ExpandDirective {   #ref = inject(ElementRef);  loopExpand = input&lt;boolean, boolean | string&gt;(false, { transform: booleanAttribute });  width = signal&lt;number | undefined&gt;(undefined);   onFocus() {    this.loopExpand() &amp;&amp; (this.width.set(this.#ref.nativeElement.offsetWidth + 160));  }   onBlur() {    this.loopExpand() &amp;&amp; (this.width.set(this.#ref.nativeElement.offsetWidth - 160));  }}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:194px;width:615px;height:auto;z-index:12;text-align:left">
+    <p>HostListener <span style="color:rgb(255, 255, 255)">Decorator</span></p>
+  </div>
+</section>

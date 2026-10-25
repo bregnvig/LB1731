@@ -1,0 +1,149 @@
+{
+  "title": "Signals",
+  "slides": [
+    {
+      "file": "signals.html"
+    },
+    {
+      "file": "what-is-change-detection.html"
+    },
+    {
+      "file": "change-detection.html"
+    },
+    {
+      "file": "angular-change-detection.html"
+    },
+    {
+      "file": "what-is-zone-js.html"
+    },
+    {
+      "file": "two-different-strategies.html"
+    },
+    {
+      "file": "default-change-detection.html"
+    },
+    {
+      "file": "onpush-change-detection.html"
+    },
+    {
+      "file": "signals-2.html"
+    },
+    {
+      "file": "signal-change-detection.html"
+    },
+    {
+      "file": "changing-the-ui.html"
+    },
+    {
+      "file": "what-is-in-a-view.html"
+    },
+    {
+      "file": "working-with-signals.html"
+    },
+    {
+      "file": "a-signal.html"
+    },
+    {
+      "file": "writeable-signals.html"
+    },
+    {
+      "file": "computed-signals.html"
+    },
+    {
+      "file": "signal-equality-functions.html"
+    },
+    {
+      "file": "effects.html"
+    },
+    {
+      "file": "reading-without-tracking-dependencies.html"
+    },
+    {
+      "file": "effect-cleanup.html"
+    },
+    {
+      "file": "exercise-1-getting-started.html"
+    },
+    {
+      "file": "exercise-1-use-signals-effects.html"
+    },
+    {
+      "file": "exercise-1-use-signals-effects-2.html"
+    },
+    {
+      "file": "signal-inputs.html"
+    },
+    {
+      "file": "signal-inputs-in-action.html"
+    },
+    {
+      "file": "signal-inputs-using-transformers.html"
+    },
+    {
+      "file": "signal-inputs-create-a-transformer.html"
+    },
+    {
+      "file": "function-based-outputs.html"
+    },
+    {
+      "file": "function-based-outputs-in-action.html"
+    },
+    {
+      "file": "exercise-2-using-input-output.html"
+    },
+    {
+      "file": "exercise-2-sidebar-list-item.html"
+    },
+    {
+      "file": "exercise-2-use-computed.html"
+    },
+    {
+      "file": "model-inputs.html"
+    },
+    {
+      "file": "exercise-3-use-two-way-data-binding.html"
+    },
+    {
+      "file": "from-observables-to-signals.html"
+    },
+    {
+      "file": "from-signals-to-observables.html"
+    },
+    {
+      "file": "what-else-has-been-migrated.html"
+    },
+    {
+      "file": "viewchild-and-viewchildren.html"
+    },
+    {
+      "file": "contentchild-and-contentchildren.html"
+    },
+    {
+      "file": "what-hasn-t-changed.html"
+    },
+    {
+      "file": "what-s-next.html"
+    },
+    {
+      "file": "resource-api-why-it-matters.html"
+    },
+    {
+      "file": "resource-api-the-resourceref.html"
+    },
+    {
+      "file": "resource-api-rxresource.html"
+    },
+    {
+      "file": "resource-api-httpresource.html"
+    },
+    {
+      "file": "resource-api-resource.html"
+    },
+    {
+      "file": "signals-observables.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

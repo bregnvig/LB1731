@@ -1,0 +1,151 @@
+{
+  "title": "Unit testing",
+  "slides": [
+    {
+      "file": "unit-testing.html"
+    },
+    {
+      "file": "reasons-to-test-your-code.html"
+    },
+    {
+      "file": "why-test-at-all.html"
+    },
+    {
+      "file": "you-are-already-testing.html"
+    },
+    {
+      "file": "automated-testing.html"
+    },
+    {
+      "file": "a-unit-test.html"
+    },
+    {
+      "file": "bad-tests.html"
+    },
+    {
+      "file": "a-unit.html"
+    },
+    {
+      "file": "a-unit-2.html"
+    },
+    {
+      "file": "karma.html"
+    },
+    {
+      "file": "jasmine.html"
+    },
+    {
+      "file": "vitest.html"
+    },
+    {
+      "file": "pros-cons.html"
+    },
+    {
+      "file": "from-karma-jasmine-to-vitest.html"
+    },
+    {
+      "file": "test-structure.html"
+    },
+    {
+      "file": "test-structure-2.html"
+    },
+    {
+      "file": "test-structure-3.html"
+    },
+    {
+      "file": "test-helpers.html"
+    },
+    {
+      "file": "test-helpers-2.html"
+    },
+    {
+      "file": "test-helpers-3.html"
+    },
+    {
+      "file": "test-helpers-4.html"
+    },
+    {
+      "file": "test-doubles.html"
+    },
+    {
+      "file": "test-doubles-2.html"
+    },
+    {
+      "file": "test-doubles-3.html"
+    },
+    {
+      "file": "test-doubles-4.html"
+    },
+    {
+      "file": "test-doubles-5.html"
+    },
+    {
+      "file": "test-driven-development-tdd.html"
+    },
+    {
+      "file": "exercise-1-authservice-test.html"
+    },
+    {
+      "file": "tobe-or-not-tobe.html"
+    },
+    {
+      "file": "you-can-speed-it-up.html"
+    },
+    {
+      "file": "a-suite-within-a-suite.html"
+    },
+    {
+      "file": "exercise-2-authservice-new-service-suite.html"
+    },
+    {
+      "file": "seperate-your-suites-as-you-do-your-test.html"
+    },
+    {
+      "file": "execution-order.html"
+    },
+    {
+      "file": "the-unhappy-path.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-3-authservice-the-unhappy-path.html",
+      "hidden": true
+    },
+    {
+      "file": "but-a-wait.html"
+    },
+    {
+      "file": "testing-asynchronous-code.html"
+    },
+    {
+      "file": "exercise-3-asynchronous-changes.html"
+    },
+    {
+      "file": "testing-a-component.html"
+    },
+    {
+      "file": "exercise-4-logincomponent.html"
+    },
+    {
+      "file": "test-management.html"
+    },
+    {
+      "file": "test-management-2.html"
+    },
+    {
+      "file": "test-management-3.html"
+    },
+    {
+      "file": "isolation.html"
+    },
+    {
+      "file": "what-not-to-test.html"
+    },
+    {
+      "file": "costs.html"
+    },
+    {
+      "file": "you-got-any-questions.html"
+    }
+  ]
+}

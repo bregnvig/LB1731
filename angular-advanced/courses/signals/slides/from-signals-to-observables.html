@@ -1,0 +1,24 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
+    <h2>From Signals to observables</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:582.756px;top:248.5px;width:682.403px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4,7,9-12">import { toObservable } from '@angular/core/rxjs-interop'; filterControl = new FormControl('');playgrounds = input.required&lt;Playground[]&gt;(); filter$ = this.filterControl.valueChanges$;playgrounds$ = toObservable(this.playgrounds); filteredPlaygrounds$ = combineLatest([  this.filter$,   this.playgrounds$,]).pipe(  ...,)</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:192px;width:480px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:1.0em">Creating an Observable from a signal </span></p>
+
+<p><span style="font-size:1.0em">Use <span style="color:#FF8C00">toObservable()</span>&nbsp;to create an Observable which tracks the value of a signal. </span></p>
+
+<p><span style="font-size:1.0em"><span style="color:rgb(255, 255, 255)">Can only be created in an </span><span style="color:rgb(255, 140, 0)">Injection context</span></span></p>
+
+<p><span style="font-size:1.0em">Behind the scenes it's a <span style="color:#FF8C00">ReplaySubject </span>wrapped in an <span style="color:#FF8C00">effect()</span></span></p>
+  </div>
+  <aside class="notes">Show the same example again demo/src/app/signals/playgrounds/playgrounds.component.ts
+
+toObservable creates an Observable which tracks the value of a signal
+
+Emits values asynchronously. So if original signal emits multiple values in same tick, the Observable emits receive the latest signal value.
+
+</aside>
+</section>

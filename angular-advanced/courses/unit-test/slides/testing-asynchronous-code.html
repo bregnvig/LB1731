@@ -1,0 +1,11 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:194px;width:1076px;height:auto;z-index:10">
+    <h1>testing asynchronous code</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:257px;width:1076px;height:auto;z-index:11">
+    <h2>The promise pattern</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:168px;top:360px;width:944px;height:auto;z-index:13;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">it('should...', () =&gt; new Promise&lt;void&gt;((resolve, reject) =&gt; {  emitsTrue$.subscribe({    next: value =&gt; { expect(value).toBe(true); resolve(); },    error: (error) =&gt; reject(error),  });}))</code></pre>
+  </div>
+</section>

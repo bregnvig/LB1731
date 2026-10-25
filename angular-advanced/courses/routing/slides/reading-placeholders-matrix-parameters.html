@@ -1,0 +1,13 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1083px;height:auto;z-index:10;text-align:left">
+    <h2>Reading placeholders &amp; matrix parameters</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:21.5px;top:216px;width:1237px;height:288px;z-index:11">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-plaintext" data-line-numbers="2-9">  ngOnInit(): void {    this.transform$ = this.route.params.pipe(      map&lt;Params, Transform&gt;(params =&gt; params['transform']),      map(transform =&gt; `text-${transform}`)    );    this.route.params.pipe(      map&lt;Params, number | undefined&gt;(params =&gt; params['row'] &amp;&amp; parseInt(params['row'])),      untilDestroyed(this),    ).subscribe(row =&gt; this.row = row);  }</code></pre>
+  </div>
+  <aside class="notes">Show the Show all, Show 1 etc. This will result in matrix parameters
+
+We read them the same way. We read them from the params or paramsMap observable
+
+Show the demo code how they are being read the same way</aside>
+</section>

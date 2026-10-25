@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:72px;width:1177.9px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3: Asynchronous changes</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:144px;width:1078.69px;height:auto;z-index:11;text-align:left">
+    <ol>
+	<li>Add <span style="color:#FF8C00">HttpClient </span>as an argument to the constructor of <span style="color:rgb(255, 140, 0)">AuthService</span>
+</li>
+	<li>Replace the contents of <span style="color:rgb(255, 140, 0)">auth.service.spec.ts</span>&nbsp;with <a href="http://gist.github.com/johannesnormannjensen/cedb5f3402351acae3d50647edd7e657" target="_blank">this</a>&nbsp;and see your tests fail</li>
+	<li>Make the tests green again. If you need inspiration <a href="https://gist.github.com/johannesnormannjensen/3e40a630dabf0e1b3477620bef9c9a89" target="_blank">look here</a>
+</li>
+	<li>Create a new test with an <span style="color:rgb(255, 140, 0)">expectation message</span>&nbsp;in the "When not logged in" suite: "should call '<em>/api/login</em>'".<br>
+	'<em>api/login</em>' returns type <span style="color:#FF8C00">AuthUser</span>&nbsp;(found in <em>model </em>directory)</li>
+	<li>Look at the test "should login with email &amp; password" as the starting point for your test setup. Expect the httpClientMock to have called its post method with <span style="color:rgb(255, 255, 255)">'/api/login' like the </span><span style="color:rgb(255, 140, 0)">expectation message</span>&nbsp;states. If you're in doubt check <a href="https://gist.github.com/johannesnormannjensen/79c35677929f0fcfa827d994486185aa" target="_blank">this </a>out</li>
+	<li>Make the test pass.</li>
+</ol>
+  </div>
+</section>

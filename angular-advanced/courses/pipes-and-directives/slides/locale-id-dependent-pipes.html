@@ -1,0 +1,27 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
+    <h2>
+<span style="color:#FF8C00">LOCALE_ID</span> dependent pipes</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:512px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>CurrencyPipe</li>
+	<li>DatePipe</li>
+	<li>DecimalPipe</li>
+	<li>PercentPipe</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" style="left:80px;top:460px;width:890px;height:177px;z-index:12;font-size:130%">
+    <pre><code class="language-xml">&lt;p&gt;Today is {{ today | date }}&lt;/p&gt;
+&lt;!-- Today is Jan 4, 2022 --&gt;
+
+&lt;!-- With LOCALE_ID: 'da' --&gt;
+&lt;p&gt;I dag er den {{ today | date }}&lt;/p&gt;
+&lt;!-- I dag er den 4. jan. 2022 --&gt;</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:860px;top:289px;width:340px;height:136px;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="3,4">  providers: [    {      provide: LOCALE_ID,      useValue: 'da'    }  ]</code></pre>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="0" data-x2="679" data-y2="207" data-color="#ffffff" data-width="4" data-start="arrow" data-end="none" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:181px;top:150px;width:679px;height:207px;z-index:14"></div>
+  <aside class="notes">Remember how to provide the LOCALE_ID? Click the template for an example</aside>
+</section>

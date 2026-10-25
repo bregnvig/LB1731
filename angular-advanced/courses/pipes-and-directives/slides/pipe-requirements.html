@@ -1,0 +1,38 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>pipe requirements</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:175px;width:512px;height:auto;z-index:11;text-align:left">
+    <ol>
+	<li>An exported class</li>
+	<li>A pipe decorator</li>
+	<li>Implement the <span style="color:#ff8c00">PipeTransform</span>&nbsp;interface</li>
+	<li>Use <span style="color:rgb(255, 140, 0)"><code>standalone: false</code></span>, and add class to module declaration<span style="color:rgb(128, 128, 128)"><span style="font-size:0.7em">&nbsp; &gt;= v19</span></span>
+</li>
+	<li>Use <span style="color:rgb(255, 140, 0)"><code>standalone: true</code></span>, or add class to module declaration<span style="color:rgb(128, 128, 128)"><span style="font-size:0.7em">&nbsp; &lt;v19</span></span>
+</li>
+	<li>
+<span style="color:rgb(255, 255, 255)">Any clean up can be performed in the </span><code><span style="color:#FF8C00">ngOnDestroy</span></code><span style="color:rgb(255, 255, 255)">&nbsp;method - there is no </span><span style="color:#FF8C00"><code>ngOnInit</code></span>
+</li>
+</ol>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-frame="macos" style="left:576px;top:288px;width:684px;height:158px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-bash" data-line-numbers="4">ng g p MyFirst CREATE src/app/my-first.pipe.spec.tsCREATE src/app/my-first.pipe.tsUPDATE src/app/app.module.ts</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:576px;top:483px;width:684px;height:219px;z-index:13">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript">@Pipe({
+  name: 'myFirst',
+  standalone: true
+})
+export class MyFirstPipe implements PipeTransform {
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return null;
+  }
+}</code></pre>
+  </div>
+  <aside class="notes">name is kinda like the selector in a component. I.e. the name you'll be using in the template
+Notice how the module is being updated in the CLI output - if you are not standalone...
+Remember to change the input value to the correct type. Also delete args, if you do not use them. Finally adjust the return type. Readability!!
+
+Since v15 you can create components as standalone</aside>
+</section>
