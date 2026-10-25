@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { combineLatest, interval, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { FooterComponent } from './footer/footer.component';
@@ -13,6 +13,7 @@ import { withLength } from './utils/rxjs-utils';
     selector: 'loop-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
