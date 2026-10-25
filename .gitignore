@@ -53,8 +53,6 @@ testem.log
 Thumbs.db
 
 # Angular Advanced workspace files
-angular-advanced/package.json
-angular-advanced/package-lock.json
 
 # Slide decks - exported PDFs are build artifacts
 slides/*.pdf
