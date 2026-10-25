@@ -1,56 +1,26 @@
 #!/usr/bin/env bash
 
-# Resolve lab+solution directories for a course.
-# Handles both flat (labs/rxjs/package.json) and nested (labs/unit-test/exercise-*/package.json).
+# Lab and solution directories of a course: courses/<course>/{labs,solutions}, either
+# the app itself (rxjs) or one exercise-* directory per exercise.
 get_course_directories() {
-  local course="$1"
-  local dirs=()
-
-  for base in labs solutions; do
-    if [[ -d "$base/$course" ]]; then
-      if [[ -f "$base/$course/package.json" ]]; then
-        dirs+=("$base/$course")
-      else
-        for exercise_dir in $base/$course/*/; do
-          if [[ -d "$exercise_dir" && -f "$exercise_dir/package.json" ]]; then
-            dirs+=("${exercise_dir%/}")
-          fi
-        done
-      fi
+  local course="$1" dir
+  for dir in courses/"$course"/{labs,solutions} courses/"$course"/{labs,solutions}/*/; do
+    dir="${dir%/}"
+    if [[ -f "$dir/package.json" ]]; then
+      echo "$dir"
     fi
   done
-
-  echo "${dirs[@]}"
 }
 
-# All directories with package.json across demo, labs, and solutions.
+# All directories with package.json: demo and every course.
 get_all_directories() {
-  local dirs=()
-
-  if [[ -d "demo" && -f "demo/package.json" ]]; then
-    dirs+=("demo")
+  local course
+  if [[ -f demo/package.json ]]; then
+    echo demo
   fi
-
-  for base in labs solutions; do
-    if [[ -d "$base" ]]; then
-      for course_dir in $base/*/; do
-        if [[ -d "$course_dir" ]]; then
-          course_dir="${course_dir%/}"
-          if [[ -f "$course_dir/package.json" ]]; then
-            dirs+=("$course_dir")
-          else
-            for exercise_dir in $course_dir/*/; do
-              if [[ -d "$exercise_dir" && -f "$exercise_dir/package.json" ]]; then
-                dirs+=("${exercise_dir%/}")
-              fi
-            done
-          fi
-        fi
-      done
-    fi
+  for course in courses/*/; do
+    get_course_directories "$(basename "$course")"
   done
-
-  echo "${dirs[@]}"
 }
 
 # Execute a command string in each directory.
