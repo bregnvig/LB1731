@@ -1,4 +1,4 @@
-import { Component, effect, input, signal } from '@angular/core';
+import { Component, effect, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -20,6 +20,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
       z-index: 1000;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgbAlert]
 })
 export class ErrorComponent {

@@ -1,6 +1,6 @@
 import { enableProdMode, inject, provideAppInitializer, provideZonelessChangeDetection } from '@angular/core';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -25,7 +25,7 @@ const initializeFontAwesomeFactory = (faIconLibrary: FaIconLibrary) => {
 bootstrapApplication(AppComponent, {
   providers: [
     provideZonelessChangeDetection(),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     provideAppInitializer(() => {
       const initializerFn = (initializeFontAwesomeFactory)(inject(FaIconLibrary));
       return initializerFn();

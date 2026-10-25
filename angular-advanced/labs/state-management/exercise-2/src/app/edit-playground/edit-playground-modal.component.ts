@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Playground } from '../model';
@@ -7,6 +7,7 @@ import { EditPlaygroundControlComponent } from './edit-playground-control.compon
 @Component({
   selector: 'loop-edit-playground-modal',
   imports: [ReactiveFormsModule, EditPlaygroundControlComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div>
       <div class="modal-header">

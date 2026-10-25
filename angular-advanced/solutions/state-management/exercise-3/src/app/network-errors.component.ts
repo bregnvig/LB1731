@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Playground } from './model';
@@ -32,6 +32,7 @@ export const getNetworkErrorsState = () => {
   imports: [
     ReactiveFormsModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     .position-fixed {
       background-color: rgba(0,0,0,0.5);
