@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
       NgbModule,
     ),
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     provideRouter(AppRoutes),
   ]
 }).catch(err => console.error(err));
