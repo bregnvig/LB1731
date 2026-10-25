@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, combineLatest, noop } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { withLength } from './utils/rxjs-utils';
 @Component({
     selector: 'loop-root',
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SidebarComponent, FooterComponent, AsyncPipe, LeafletModule]
 })
 export class AppComponent {
