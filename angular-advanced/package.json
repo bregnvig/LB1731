@@ -2,6 +2,15 @@
   "name": "angular-advanced",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "postinstall": "scripts/check-packages.sh"
+  },
+  "workspaces": [
+    "demo",
+    "courses/*/labs",
+    "courses/*/solutions",
+    "courses/*/*/exercise-*"
+  ],
   "dependencies": {
     "@angular/animations": "^22.2.3",
     "@angular/common": "^22.2.3",
