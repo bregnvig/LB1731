@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Coordinate, Playground } from '../model';
 import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.component';
@@ -6,6 +6,7 @@ import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.
 @Component({
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SidebarListItemComponent,
     FaIconComponent,

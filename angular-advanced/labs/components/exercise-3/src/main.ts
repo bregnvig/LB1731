@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, enableProdMode, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -26,7 +26,7 @@ bootstrapApplication(AppComponent, {
       NgbModule,
       FontAwesomeModule
     ),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideRouter(AppRoutes),
     {
       provide: APP_INITIALIZER,
