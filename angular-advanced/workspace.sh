@@ -5,7 +5,7 @@ set -e  # Fail fast for module loading and arg parsing
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Source modules
-for module in utils install upgrade verify; do
+for module in utils install upgrade verify zips; do
   if [[ ! -f "$SCRIPT_DIR/scripts/$module.sh" ]]; then
     echo "Error: Missing script module: scripts/$module.sh"
     exit 1
@@ -21,6 +21,7 @@ show_help() {
   echo "  update, u        Update Angular core packages (lightweight)"
   echo "  upgrade, ng      Full upgrade: install, bootstrap, Angular core + third-party"
   echo "  verify, v        Verify directories can install, build, and serve"
+  echo "  test-zips, tz    Check student zips match tests/student-zips.manifest (--bless to update)"
   echo "  help, h          Show this help"
   echo ""
   echo "Targets:"
@@ -33,6 +34,7 @@ show_help() {
   echo "  ./workspace.sh upgrade di       # Full upgrade of labs/di and solutions/di"
   echo "  ./workspace.sh verify all       # Verify all directories install, build, serve"
   echo "  ./workspace.sh install all      # Install packages in all directories"
+  echo "  ./workspace.sh test-zips        # Students still get the same zips?"
 }
 
 # Resolve target to list of directories
@@ -134,6 +136,10 @@ case "$command" in
       exit 1
     fi
     verify_directories "${directories[@]}"
+    ;;
+
+  "test-zips"|"tz")
+    test_zips "$target"
     ;;
 
   "help"|"h"|"")
