@@ -12,8 +12,8 @@ find "$1" -name package.json -not -path '*/node_modules/*' | while read -r pkg; 
   name=$(jq -r .name "$pkg")
   jq --slurpfile root "$root/package.json" '. + ($root[0] | {dependencies, devDependencies, overrides})' \
     "$pkg" > "$pkg.tmp" && mv "$pkg.tmp" "$pkg"
-  # Drop the workspace entries: students get one project, not the whole angular-advanced workspace
-  jq --arg name "$name" '.name = $name | .packages[""].name = $name | del(.packages[""].workspaces)
+  # Drop the workspace entries and the root postinstall flag: students get one project, not the workspace
+  jq --arg name "$name" '.name = $name | .packages[""].name = $name | del(.packages[""].workspaces, .packages[""].hasInstallScript)
     | .packages |= with_entries(select(.key == "" or (.key | startswith("node_modules/")) and (.value.link | not)))' \
     "$root/package-lock.json" > "$(dirname "$pkg")/package-lock.json"
 done
