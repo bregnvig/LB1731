@@ -5,7 +5,7 @@ set -e  # Fail fast for module loading and arg parsing
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Source modules
-for module in utils install upgrade verify zips; do
+for module in utils verify zips; do
   if [[ ! -f "$SCRIPT_DIR/scripts/$module.sh" ]]; then
     echo "Error: Missing script module: scripts/$module.sh"
     exit 1
@@ -17,23 +17,20 @@ show_help() {
   echo "Usage: workspace.sh [command] [target]"
   echo ""
   echo "Commands:"
-  echo "  install, i       Install npm packages"
-  echo "  update, u        Update Angular core packages (lightweight)"
-  echo "  upgrade, ng      Full upgrade: install, bootstrap, Angular core + third-party"
-  echo "  verify, v        Verify directories can install, build, and serve"
+  echo "  install, i       Install npm packages (one package.json for everything)"
+  echo "  verify, v        Verify directories build and serve"
   echo "  test-zips, tz    Check student zips match tests/student-zips.manifest (--bless to update)"
   echo "  help, h          Show this help"
   echo ""
-  echo "Targets:"
+  echo "Targets (verify):"
   echo "  -a, all          All labs, solutions, and demo"
   echo "  demo             Demo directory only"
   echo "  [course]         Specific course (courses/[course]/labs and courses/[course]/solutions)"
   echo ""
   echo "Examples:"
-  echo "  ./workspace.sh upgrade all      # Full upgrade of all directories"
-  echo "  ./workspace.sh upgrade di       # Full upgrade of courses/di/labs and courses/di/solutions"
-  echo "  ./workspace.sh verify all       # Verify all directories install, build, serve"
-  echo "  ./workspace.sh install all      # Install packages in all directories"
+  echo "  ./workspace.sh install          # npm install in angular-advanced/"
+  echo "  ./workspace.sh verify all       # Verify all directories build and serve"
+  echo "  ./workspace.sh verify di        # Verify courses/di/labs and courses/di/solutions"
   echo "  ./workspace.sh test-zips        # Students still get the same zips?"
 }
 
@@ -62,65 +59,7 @@ target="${2:-}"
 
 case "$command" in
   "install"|"i")
-    set +e  # Don't abort on individual directory failures
-    if [[ -z "$target" ]]; then
-      # Root install with workspace setup
-      echo '{
-  "name": "angular-advanced",
-  "workspaces": [
-    "./demo",
-    "./courses/*/labs",
-    "./courses/*/labs/*",
-    "./courses/*/solutions",
-    "./courses/*/solutions/*"
-  ]
-}' > package.json
-      npm install --force
-      rm package.json package-lock.json
-    else
-      directories=($(resolve_target "$target"))
-      if [[ ${#directories[@]} -eq 0 ]]; then
-        echo "Error: Target '$target' not found"
-        exit 1
-      fi
-      for dir in "${directories[@]}"; do
-        smart_install "$dir"
-      done
-    fi
-    ;;
-
-  "update"|"u")
-    set +e  # Directory-processing functions handle errors internally
-    export CI=true
-    if [[ -z "$target" ]]; then
-      echo "Error: Target required for update command"
-      show_help
-      exit 1
-    fi
-    directories=($(resolve_target "$target"))
-    if [[ ${#directories[@]} -eq 0 ]]; then
-      echo "Error: Target '$target' not found"
-      exit 1
-    fi
-    update_directories "${directories[@]}"
-    ;;
-
-  "upgrade"|"ng")
-    set +e  # Directory-processing functions handle errors internally
-    export CI=true
-    if [[ -z "$target" ]]; then
-      echo "Error: Target required for upgrade command"
-      show_help
-      exit 1
-    fi
-    directories=($(resolve_target "$target"))
-    if [[ ${#directories[@]} -eq 0 ]]; then
-      echo "Error: Target '$target' not found"
-      exit 1
-    fi
-    echo "Upgrading Angular and Bootstrap in ${#directories[@]} directories..."
-    upgrade_with_install "${directories[@]}"
-    echo "Upgrade complete!"
+    npm install
     ;;
 
   "verify"|"v")

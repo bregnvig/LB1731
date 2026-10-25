@@ -36,16 +36,11 @@
             "allowedCommonJsDependencies": ["leaflet", "seedrandom"],
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
-                "output": "assets/"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/leaflet/dist/leaflet.css"
+              "leaflet/dist/leaflet.css"
             ],
             "scripts": [],
             "browser": "src/main.ts",

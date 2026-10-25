@@ -40,10 +40,10 @@
             ],
             "styles": [
               "src/styles.scss", 
-              "node_modules/leaflet/dist/leaflet.css"
+              "leaflet/dist/leaflet.css"
             ],
             "scripts": [
-              "node_modules/leaflet/dist/leaflet.js"
+              "leaflet/dist/leaflet.js"
             ],
             "browser": "src/main.ts",
             "stylePreprocessorOptions": {

@@ -238,4 +238,4 @@ Each module builds on the same playground-finder application. Labs are organized
 | Signals | `courses/signals` | 3 exercises |
 | State Management | `courses/state-management` | 3 exercises |
 
-Each course folder has `labs/` (starting points) and `solutions/`, with one `exercise-N` folder per exercise (rxjs is a single app). Students get the old layout in `labs.zip` / `solutions.zip`: `labs/<course>/exercise-N`. The solution for exercise N serves as the starting point for exercise N+1.
+Each course folder has `labs/` (starting points) and `solutions/`, with one `exercise-N` folder per exercise (rxjs is a single app). Students get the old layout in `labs.zip` / `solutions.zip`: `labs/<course>/exercise-N`. The solution for exercise N serves as the starting point for exercise N+1. All dependencies live in `angular-advanced/package.json` (`./workspace.sh install`); exercises only keep their scripts, and the zips give each exercise a full `package.json` and `package-lock.json`.

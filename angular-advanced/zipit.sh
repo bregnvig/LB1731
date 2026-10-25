@@ -18,6 +18,7 @@ for course in courses/*/; do
   done
 done
 rsync -a "${exclude[@]}" demo/ "$stage/demo/"
+scripts/student-packages.sh "$stage"
 
 cd "$stage"
 for z in solutions demo labs; do

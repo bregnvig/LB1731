@@ -22,18 +22,3 @@ get_all_directories() {
     get_course_directories "$(basename "$course")"
   done
 }
-
-# Execute a command string in each directory.
-run_in_directories() {
-  local command="$1"
-  local directories=("${@:2}")
-
-  for dir in "${directories[@]}"; do
-    if [[ -d "$dir" && -f "$dir/package.json" ]]; then
-      echo "Running '$command' in $dir"
-      (cd "$dir" && eval "$command")
-    else
-      echo "Skipping $dir (not found or no package.json)"
-    fi
-  done
-}

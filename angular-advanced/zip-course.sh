@@ -8,6 +8,8 @@ if ls "$scriptdir/courses/$1/labs" "$scriptdir/courses/$1/solutions" >/dev/null 
     rsync -r --exclude "**/node_modules/*" --exclude "**/.angular/*" --exclude "**/dist/*" "$scriptdir/courses/$1/labs/" "$tempdir/lab"
     rsync -r --exclude "**/node_modules/*" --exclude "**/.angular/*" --exclude "**/dist/*" "$scriptdir/courses/$1/solutions/" "$tempdir/solution"
 
+    "$scriptdir/scripts/student-packages.sh" "$tempdir"
+
     (cd $tempdir && zip -r $1 .) 
 
     cp "$tempdir/$1.zip" .
