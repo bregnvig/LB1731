@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Coordinate, Playground } from '../model';
 import { DefaultDescriptionPipe } from "../pipe/default-description.pipe";
 import { DistancePipe } from "../pipe/distance.pipe";
@@ -7,6 +7,7 @@ import { HumanizeDistancePipe } from "../pipe/humanize-distance.pipe";
 @Component({
   selector: 'loop-sidebar',
   templateUrl: './sidebar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     DistancePipe,
     HumanizeDistancePipe,

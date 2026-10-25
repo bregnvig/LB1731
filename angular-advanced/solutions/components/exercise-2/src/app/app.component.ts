@@ -1,5 +1,5 @@
 import { AsyncPipe, NgComponentOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -22,6 +22,7 @@ import { withLength } from './utils/rxjs-utils';
       <ng-container *ngComponentOutlet="component; inputs: { playground }" />
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [SidebarComponent, AsyncPipe, LeafletModule, NgComponentOutlet]
 })
 export class AppComponent {

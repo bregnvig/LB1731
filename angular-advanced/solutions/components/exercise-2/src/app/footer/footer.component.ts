@@ -1,8 +1,9 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Playground } from '../model';
 
 @Component({
   selector: 'loop-footer',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
   @if(playground(); as p) {
     <footer>
