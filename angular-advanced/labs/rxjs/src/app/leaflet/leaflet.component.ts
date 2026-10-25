@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
 import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
@@ -10,6 +10,7 @@ import { MarkerFactory } from './marker-factory';
 @Component({
     selector: 'leaflet',
     template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId"></div>',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true,
 })
 export class LeafletComponent implements AfterViewInit, OnDestroy {

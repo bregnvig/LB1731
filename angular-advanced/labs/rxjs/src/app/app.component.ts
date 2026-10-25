@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
 import { Center, LeafletComponent, Marker } from './leaflet';
@@ -11,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     selector: 'loop-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [LeafletComponent, SidebarComponent, FooterComponent, AsyncPipe]
 })
 export class AppComponent {
