@@ -1,4 +1,4 @@
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditPlaygroundModalComponent } from './edit-playground/edit-playground-modal.component';
 import { ErrorComponent } from "./error.component";
@@ -15,6 +15,7 @@ import { isTruthy } from './utils';
   selector: 'loop-root',
   templateUrl: './app.component.html',
   imports: [FooterComponent, SidebarComponent, LeafletModule, ErrorComponent, NetworkErrorsComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [PlaygroundStore]
 })
 export class AppComponent {

@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
@@ -20,6 +20,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Reac
       </div>    
     </form>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
