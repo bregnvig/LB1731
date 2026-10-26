@@ -16,8 +16,8 @@ export const test = base.extend<{ root: string; editor: string }>({
     // @ts-expect-error plain JS module (dynamic: the server is an ES module, this file compiles to CommonJS)
     const { createServer } = await import('../server/server.mjs');
     const server: Server = createServer({ root, dist: join(__dirname, '../dist/slides/browser') });
-    await new Promise<void>(ok => server.listen(0, ok));
-    await use(`http://localhost:${(server.address() as { port: number }).port}`);
+    await new Promise<void>(ok => server.listen(0, '127.0.0.1', ok));
+    await use(`http://127.0.0.1:${(server.address() as { port: number }).port}`);
     server.close();
   },
 });

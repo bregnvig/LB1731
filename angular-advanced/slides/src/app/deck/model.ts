@@ -44,8 +44,9 @@ export type Block = TextBlock | CodeBlock | ShapeBlock | LineBlock | ImageBlock 
 export type BlockType = Block['type'];
 
 export interface Slide { path: string; hidden: boolean; autoAnimate: boolean; blocks: Block[]; notes: string; etag: string }
-export interface Course { id: string; title: string; slides: Slide[] }
-export interface Deck { title: string; intro: Slide[]; courses: Course[] }
+/** `etag` is the order file's (deck.json) as loaded, to detect changes on disk. */
+export interface Course { id: string; title: string; slides: Slide[]; etag?: string }
+export interface Deck { title: string; intro: Slide[]; courses: Course[]; etag?: string }
 
 /** What the server sends per slide file. */
 export interface SlideFile { path: string; hidden: boolean; html: string; etag: string }

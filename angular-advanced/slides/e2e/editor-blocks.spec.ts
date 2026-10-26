@@ -67,3 +67,11 @@ test('shape, line and common settings change the file', async ({ page, root }) =
   await page.getByLabel('Block name').press('Enter');
   await expect(page.getByText('already used on this slide')).toBeVisible();
 });
+
+test('the Link button links the selected text', async ({ page, root }) => {
+  page.on('dialog', d => d.accept('https://example.com'));
+  await page.mouse.dblclick(...await at(page, 640, 330));
+  await page.getByRole('toolbar', { name: 'Text formatting' }).getByRole('button', { name: 'Link' }).click();
+  await page.mouse.click(...await at(page, 640, 650));
+  await expect.poll(() => slideFile(root)).toContain('<a href="https://example.com">Demo course</a>');
+});

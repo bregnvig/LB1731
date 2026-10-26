@@ -20,7 +20,7 @@ test('a file changed on disk is not overwritten', async ({ page, editor, root })
   const outside = readFileSync(file, 'utf8').replace('</section>', '  <aside class="notes">Edited elsewhere</aside>\n</section>');
   writeFileSync(file, outside);
   await page.getByLabel('Speaker notes').fill('Mine');
-  await expect(page.getByRole('alert')).toContainText('changed on disk');
+  await expect(page.getByRole('alert')).toContainText('Changed on disk');
   expect(readFileSync(file, 'utf8')).toBe(outside);
   await page.getByRole('button', { name: 'Reload from disk' }).click();
   await expect(page.getByLabel('Speaker notes')).toHaveValue('Edited elsewhere');
@@ -39,4 +39,19 @@ test('slides can be added, hidden and reordered', async ({ page, editor, root })
 
   await page.locator('nav [data-slide="courses/demo/slides/slide-1.html"]').dragTo(page.locator('nav [data-slide="courses/demo/slides/demo.html"]'));
   await expect.poll(() => order().map((s: { file: string }) => s.file).slice(0, 2)).toEqual(['slide-1.html', 'demo.html']);
+});
+
+test('an order file changed on disk is not overwritten', async ({ page, editor, root }) => {
+  const orderFile = join(root, 'courses/demo/slides/deck.json');
+  await page.goto(`${editor}/edit/demo/demo.html`);
+  await expect(page.getByTestId('canvas')).toBeVisible();
+  // Someone else (an LLM, a git pull) changes the order while the editor is open.
+  const outside = readFileSync(orderFile, 'utf8').replace('"title": "Demo"', '"title": "Demo course"');
+  writeFileSync(orderFile, outside);
+  await page.locator('nav [data-slide="courses/demo/slides/fragments.html"]').dragTo(page.locator('nav [data-slide="courses/demo/slides/demo.html"]'));
+  await expect(page.getByRole('alert')).toContainText('demo/deck.json');
+  expect(readFileSync(orderFile, 'utf8')).toBe(outside);
+  await page.getByRole('button', { name: 'Reload from disk' }).click();
+  await expect(page.getByTestId('status')).toHaveText('Saved to disk');
+  await expect(page.locator('nav [data-slide]').first()).toHaveAttribute('data-slide', 'courses/demo/slides/demo.html');
 });

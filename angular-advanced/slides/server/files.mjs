@@ -25,12 +25,16 @@ async function slideFiles(root, dir, entries) {
   }));
 }
 
+/** The deck for the app. `etag` is each order file's, so the editor can tell when one changed on disk. */
 export async function loadDeck(root) {
-  const readJson = async p => JSON.parse(await readFile(join(root, p), 'utf8'));
+  const readJson = async p => {
+    const buf = await readFile(join(root, p));
+    return { json: JSON.parse(buf.toString('utf8')), etag: etagOf(buf) };
+  };
   const top = await readJson('slides/deck.json');
-  const courses = await Promise.all(top.courses.map(async id => {
+  const courses = await Promise.all(top.json.courses.map(async id => {
     const course = await readJson(`courses/${id}/slides/deck.json`);
-    return { id, title: course.title, slides: await slideFiles(root, `courses/${id}/slides`, course.slides) };
+    return { id, title: course.json.title, etag: course.etag, slides: await slideFiles(root, `courses/${id}/slides`, course.json.slides) };
   }));
-  return { title: top.title, slides: await slideFiles(root, 'slides/intro', top.slides), courses };
+  return { title: top.json.title, etag: top.etag, slides: await slideFiles(root, 'slides/intro', top.json.slides), courses };
 }

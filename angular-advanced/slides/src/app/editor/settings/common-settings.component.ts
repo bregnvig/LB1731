@@ -1,10 +1,10 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Block, Border } from '../../deck/model';
 import { EditorStore } from '../editor.store';
+import { num, validPatch } from './num';
 import { ColorFieldComponent } from './color-field.component';
 
 const NEW_BORDER: Border = { width: 2, style: 'solid', color: '#ffffff', radius: 0 };
-const num = (e: Event) => Number((e.target as HTMLInputElement).value);
 
 /** Settings every block has: name, position and size, border, depth, duplicate, lock, delete. */
 @Component({
@@ -67,10 +67,12 @@ export class CommonSettingsComponent {
   readonly round = (n: number) => Math.round(n * 100) / 100;
 
   set(patch: Partial<Block>, coalesce?: string) {
+    if (!validPatch(patch) || (patch.width ?? 1) < 1 || (typeof patch.height === 'number' && patch.height < 1)) return;
     this.store.updateBlocks([this.block().name], b => ({ ...b, ...patch }) as Block, coalesce && `${coalesce}:${this.block().name}`);
   }
 
   setBorder(patch: Partial<Border>) {
+    if (!validPatch(patch)) return;
     this.set({ border: { ...(this.block().border ?? NEW_BORDER), ...patch } }, patch.color ? 'border-color' : undefined);
   }
 

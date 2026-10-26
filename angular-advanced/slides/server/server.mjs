@@ -57,6 +57,8 @@ export function createServer({ root, dist, routes = {} }) {
         if (req.method === 'PUT') {
           const ifMatch = req.headers['if-match'];
           if (ifMatch && (!current || ifMatch !== etagOf(current))) return send(409, 'changed on disk');
+          // A create: never overwrite a file that is already there.
+          if (req.headers['if-none-match'] === '*' && current) return send(409, 'already exists');
           const body = await readBody(req);
           await mkdir(dirname(file), { recursive: true });
           await writeFile(file, body);
@@ -84,11 +86,12 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     // The editor's Export PDF button.
     'POST /api/pdf': async (req, res) => {
       const { exportPdf } = await import('../scripts/pdf.mjs');
-      const path = await exportPdf({ root, url: `http://localhost:${port}` });
+      const path = await exportPdf({ root, url: `http://127.0.0.1:${port}` });
       res.writeHead(200, { 'Content-Type': TYPES['.json'] }).end(JSON.stringify({ path }));
     },
   };
-  createServer({ root, dist: join(here, '../dist/slides/browser'), routes }).listen(port, () => {
+  // Only this machine: the file API can write and delete slides, and the tool runs on classroom networks.
+  createServer({ root, dist: join(here, '../dist/slides/browser'), routes }).listen(port, '127.0.0.1', () => {
     console.log(`Slides: http://localhost:${values.port}/present  (editor: /edit, presenter: /presenter)`);
   });
 }

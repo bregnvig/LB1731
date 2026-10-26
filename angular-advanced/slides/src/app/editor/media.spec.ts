@@ -19,6 +19,7 @@ describe('image names', () => {
   it('makes a file name safe for the slide folder', () => {
     expect(safeImageName('My Logo.PNG')).toBe('my-logo.png');
     expect(safeImageName('Über (final) v2.jpeg')).toBe('ber-final-v2.jpeg');
+    expect(safeImageName('a..b...png')).toBe('a.b.png');
   });
 
   it('refuses types other than images', () => {

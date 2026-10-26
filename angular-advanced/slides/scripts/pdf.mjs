@@ -18,8 +18,8 @@ export async function exportPdf({ root, out = join(slidesDir, 'out', `${basename
   let server;
   if (!url) {
     server = createServer({ root, dist });
-    await new Promise(ok => server.listen(0, ok));
-    url = `http://localhost:${server.address().port}`;
+    await new Promise(ok => server.listen(0, '127.0.0.1', ok));
+    url = `http://127.0.0.1:${server.address().port}`;
   }
   const browser = await chromium.launch();
   try {

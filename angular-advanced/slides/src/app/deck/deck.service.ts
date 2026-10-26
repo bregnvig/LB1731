@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Deck, Slide, SlideFile } from './model';
 import { parseSlide, serializeSlide } from './slide-format';
 
@@ -9,47 +9,49 @@ export class ConflictError extends Error {
   }
 }
 
-interface DeckJson { title: string; slides: SlideFile[]; courses: { id: string; title: string; slides: SlideFile[] }[] }
+interface DeckJson { title: string; etag: string; slides: SlideFile[]; courses: { id: string; title: string; etag: string; slides: SlideFile[] }[] }
 
 const fileName = (path: string) => path.slice(path.lastIndexOf('/') + 1);
 const folder = (path: string) => path.slice(0, path.lastIndexOf('/'));
 
 @Injectable({ providedIn: 'root' })
 export class DeckService {
-  readonly deck = signal<Deck | null>(null);
-
   async load(): Promise<Deck> {
     const res = await fetch('/api/deck');
     if (!res.ok) throw new Error(`Loading the deck failed: ${res.status} ${await res.text()}`);
     const json: DeckJson = await res.json();
-    const deck: Deck = {
+    return {
       title: json.title,
+      etag: json.etag,
       intro: json.slides.map(parseSlide),
-      courses: json.courses.map(c => ({ id: c.id, title: c.title, slides: c.slides.map(parseSlide) })),
+      courses: json.courses.map(c => ({ id: c.id, title: c.title, etag: c.etag, slides: c.slides.map(parseSlide) })),
     };
-    this.deck.set(deck);
-    return deck;
   }
 
   async saveSlide(slide: Slide): Promise<Slide> {
     const res = await fetch(`/api/files/${slide.path}`, {
-      method: 'PUT', body: serializeSlide(slide), headers: slide.etag ? { 'If-Match': slide.etag } : {},
+      // No etag means a new file: create it, but never over one that is already there.
+      method: 'PUT', body: serializeSlide(slide), headers: slide.etag ? { 'If-Match': slide.etag } : { 'If-None-Match': '*' },
     });
     if (res.status === 409) throw new ConflictError(slide.path);
     if (!res.ok) throw new Error(`Saving ${slide.path} failed: ${res.status}`);
     return { ...slide, etag: res.headers.get('ETag') ?? '' };
   }
 
-  /** Writes the order file of a course, or of the intro when courseId is null. */
-  async saveOrder(courseId: string | null, slides: Slide[]): Promise<void> {
-    const deck = this.deck();
-    if (!deck) throw new Error('Deck not loaded');
+  /**
+   * Writes the order file of a course, or of the intro when courseId is null, if it hasn't changed on
+   * disk since it was loaded. Returns its new etag.
+   */
+  async saveOrder(deck: Deck, courseId: string | null, slides: Slide[]): Promise<string> {
     const entries = slides.map(s => (s.hidden ? { file: fileName(s.path), hidden: true } : { file: fileName(s.path) }));
     const [path, json] = courseId == null
       ? ['slides/deck.json', { title: deck.title, slides: entries, courses: deck.courses.map(c => c.id) }]
       : [`courses/${courseId}/slides/deck.json`, { title: deck.courses.find(c => c.id === courseId)?.title ?? courseId, slides: entries }];
-    const res = await fetch(`/api/files/${path}`, { method: 'PUT', body: `${JSON.stringify(json, null, 2)}\n` });
+    const etag = courseId == null ? deck.etag : deck.courses.find(c => c.id === courseId)?.etag;
+    const res = await fetch(`/api/files/${path}`, { method: 'PUT', body: `${JSON.stringify(json, null, 2)}\n`, headers: etag ? { 'If-Match': etag } : {} });
+    if (res.status === 409) throw new ConflictError(path);
     if (!res.ok) throw new Error(`Saving ${path} failed: ${res.status}`);
+    return res.headers.get('ETag') ?? '';
   }
 
   async deleteSlide(slide: Slide): Promise<void> {

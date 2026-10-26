@@ -9,7 +9,14 @@ export class ThumbDirective {
   readonly appThumb = input.required<Slide>();
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   constructor() {
-    afterRenderEffect(() => paintSlide(this.el, this.appThumb(), { highlight: false }));
+    let painted: Slide['blocks'] | null = null;
+    afterRenderEffect(() => {
+      const slide = this.appThumb();
+      // Notes and etags change the slide object but not the picture.
+      if (slide.blocks === painted) return;
+      painted = slide.blocks;
+      paintSlide(this.el, slide, { highlight: false });
+    });
   }
 }
 

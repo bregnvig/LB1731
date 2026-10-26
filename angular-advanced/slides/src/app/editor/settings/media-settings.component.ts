@@ -1,11 +1,11 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Block, DrawingBlock, ImageBlock, TableBlock } from '../../deck/model';
 import { EditorStore } from '../editor.store';
+import { num, validPatch } from './num';
 import { TableEdit, editTable } from '../media';
 import { ColorFieldComponent } from './color-field.component';
 import { getDecl, setDecl } from './type-settings.component';
 
-const num = (e: Event) => Number((e.target as HTMLInputElement).value);
 
 /** Reads and rewrites the color (and, for pen strokes, the width) of a drawing's paths. */
 function drawingStyle(svg: string) {
@@ -104,11 +104,13 @@ export class MediaSettingsComponent {
   });
 
   set(patch: Record<string, unknown>, coalesce?: string) {
+    if (!validPatch(patch)) return;
     this.store.updateBlocks([this.block().name], b => ({ ...b, ...patch }) as Block, coalesce && `${coalesce}:${this.block().name}`);
   }
 
   /** The img gets all four values once any is set, so it's positioned and sized inside the frame. */
   setCrop(prop: 'left' | 'top' | 'width' | 'height', value: number) {
+    if (!Number.isFinite(value)) return;
     const c = { ...this.crop(), [{ left: 'x', top: 'y', width: 'width', height: 'height' }[prop]]: value };
     let style = this.image().imgStyle;
     for (const [p, v] of [['left', c.x], ['top', c.y], ['width', c.width], ['height', c.height]] as const) style = setDecl(style, p, `${v}px`);
@@ -127,6 +129,7 @@ export class MediaSettingsComponent {
   }
 
   setDrawing(change: { color?: string; width?: number }) {
+    if (!validPatch(change)) return;
     this.set({ svg: this.drawing().with(change) }, change.color ? 'drawing-color' : undefined);
   }
 }

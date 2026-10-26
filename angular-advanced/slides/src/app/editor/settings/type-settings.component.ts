@@ -1,6 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Block, CodeBlock, LineBlock, ShapeBlock, TextBlock } from '../../deck/model';
 import { EditorStore } from '../editor.store';
+import { num, validPatch } from './num';
 import { LINE_SPEC } from '../new-block';
 import { ColorFieldComponent } from './color-field.component';
 
@@ -20,7 +21,6 @@ const LANGUAGES = [
   { id: 'typescript', label: 'TypeScript' }, { id: 'xml', label: 'HTML' }, { id: 'bash', label: 'bash' },
   { id: 'auto', label: 'Detect' }, { id: 'plaintext', label: 'Plain' },
 ];
-const num = (e: Event) => Number((e.target as HTMLInputElement).value);
 
 /** The settings that depend on the block type: text, code, shape and line. */
 @Component({
@@ -121,6 +121,7 @@ export class TypeSettingsComponent {
 
   /** `coalesce` names a field typed into or dragged, so one edit is one undo step. */
   set(patch: Record<string, unknown>, coalesce?: string) {
+    if (!validPatch(patch)) return;
     this.store.updateBlocks([this.block().name], b => ({ ...b, ...patch }) as Block, coalesce && `${coalesce}:${this.block().name}`);
   }
 

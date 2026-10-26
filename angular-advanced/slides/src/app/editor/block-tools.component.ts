@@ -75,6 +75,11 @@ export class BlockToolsComponent {
     if (!file || !slide) return;
     const src = await this.store.storeImage(file);
     if (!src) return;
+    // src is relative to the slide the upload started on.
+    if (this.store.slide()?.path !== slide.path) {
+      this.store.notice.set(`${src} was uploaded, but you moved to another slide; add it again on the slide where you want it.`);
+      return;
+    }
     const { width, height } = await naturalSize(file);
     const k = Math.min(1, 640 / width, 480 / height);
     const w = Math.round(width * k), h = Math.round(height * k);

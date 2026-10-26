@@ -18,7 +18,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
 @Component({
   selector: 'app-editor',
   imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, MotionSettingsComponent, SlideListComponent, TypeSettingsComponent],
-  host: { '(window:keydown)': 'key($event)' },
+  host: { '(window:keydown)': 'key($event)', '(window:beforeunload)': 'leaving($event)' },
   // Not encapsulated: the inspector's building blocks (.group, .row, .seg, .sw, .field, .btn) are shared with its panels.
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -52,10 +52,11 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
     </nav>
 
     <main>
-      @if (store.status() === 'conflict') {
+      @if (store.conflicts().length) {
         <div class="banner" role="alert">
-          This slide changed on disk since it was opened. Your last edits aren't saved.
-          <button type="button" class="btn" (click)="store.reloadSlide()">Reload from disk</button>
+          <span>Changed on disk since it was opened, so not saved: <b>{{ conflictNames() }}</b>.
+            Reloading takes those files from disk; edits on other slides are saved first.</span>
+          <button type="button" class="btn" (click)="store.reloadConflicts()">Reload from disk</button>
         </div>
       }
       @if (overview()) {
@@ -230,7 +231,7 @@ export class EditorComponent {
   }
 
   statusText() {
-    return { saved: 'Saved to disk', saving: 'Saving…', conflict: 'Changed on disk', error: `Not saved: ${this.store.error()}` }[this.store.status()];
+    return { saved: 'Saved to disk', saving: 'Saving…', conflict: 'Not saved: changed on disk', error: `Not saved, retrying: ${this.store.error()}` }[this.store.status()];
   }
 
   openCourse(id: string) {
@@ -251,10 +252,20 @@ export class EditorComponent {
     this.open(at ? `/present#/${at.h}/${at.v}` : '/present');
   }
 
+  /** Closing or reloading the tab with edits not on disk yet asks first. */
+  leaving(e: BeforeUnloadEvent) {
+    if (this.store.unsaved()) e.preventDefault();
+  }
+
+  conflictNames() {
+    return this.store.conflicts().map(p => p.replace(/^courses\//, '').replace('/slides/', '/')).join(', ');
+  }
+
   async exportPdf() {
     this.exporting.set(true);
     this.pdfMessage.set('Exporting PDF…');
     try {
+      await this.store.flushNow();
       const res = await fetch('/api/pdf', { method: 'POST' });
       this.pdfMessage.set(res.ok ? `PDF: ${(await res.json()).path}` : `PDF failed: ${await res.text()}`);
     } finally {

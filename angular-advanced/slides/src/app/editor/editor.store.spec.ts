@@ -18,7 +18,7 @@ function setup() {
   const service = {
     load: vi.fn(async () => structuredClone(deck)),
     saveSlide: vi.fn(async (s: Slide) => ({ ...s, etag: `e${++n}` })),
-    saveOrder: vi.fn(async (_id: string | null, _slides: Slide[]) => {}),
+    saveOrder: vi.fn(async (_deck: Deck, _id: string | null, _slides: Slide[]) => 'o1'),
     deleteSlide: vi.fn(async () => {}),
   };
   TestBed.configureTestingModule({ providers: [{ provide: DeckService, useValue: service }] });
@@ -68,29 +68,77 @@ describe('EditorStore', () => {
     expect(service.saveSlide.mock.calls[1][0].etag).toBe('e1');
   });
 
-  it('stops saving after a conflict until the slide is reloaded', async () => {
+  it('stops saving a slide changed on disk until it is reloaded, and keeps saving the others', async () => {
     const { store, service } = await opened();
     service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/a.html'));
     store.updateSlide(s => ({ ...s, notes: 'a' }));
     await vi.advanceTimersByTimeAsync(500);
     expect(store.status()).toBe('conflict');
+    expect(store.conflicts()).toEqual(['courses/demo/slides/a.html']);
+    store.updateSlide(s => ({ ...s, notes: 'a2' }));
+    store.openSlide(1);
     store.updateSlide(s => ({ ...s, notes: 'b' }));
-    await vi.advanceTimersByTimeAsync(1000);
-    expect(service.saveSlide).toHaveBeenCalledTimes(1);
-    await store.reloadSlide();
+    await vi.advanceTimersByTimeAsync(500);
+    expect(service.saveSlide.mock.calls.map(c => [c[0].path, c[0].notes])).toEqual([
+      ['courses/demo/slides/a.html', 'a'], ['courses/demo/slides/b.html', 'b'],
+    ]);
+    store.openSlide(0);
+    await store.reloadConflicts();
     expect(store.status()).toBe('saved');
     expect(store.slide()!.notes).toBe('');
+  });
+
+  it('reloading after a conflict first saves the edits waiting on other slides', async () => {
+    const { store, service } = await opened();
+    service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/a.html'));
+    store.updateSlide(s => ({ ...s, notes: 'a' }));
+    await vi.advanceTimersByTimeAsync(500);
+    store.openSlide(1);
+    store.updateSlide(s => ({ ...s, notes: 'b' }));
+    await store.reloadConflicts();
+    expect(service.saveSlide).toHaveBeenLastCalledWith(expect.objectContaining({ path: 'courses/demo/slides/b.html', notes: 'b' }));
+  });
+
+  it('retries a failed save and stays in error until it works', async () => {
+    const { store, service } = await opened();
+    service.saveSlide.mockRejectedValueOnce(new Error('server down'));
+    store.updateSlide(s => ({ ...s, notes: 'a' }));
+    await vi.advanceTimersByTimeAsync(500);
+    expect(store.status()).toBe('error');
+    expect(store.unsaved()).toBe(true);
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(service.saveSlide).toHaveBeenCalledTimes(2);
+    expect(store.status()).toBe('saved');
+    expect(store.unsaved()).toBe(false);
+  });
+
+  it('an order file changed on disk is a conflict too', async () => {
+    const { store, service } = await opened();
+    service.saveOrder.mockRejectedValueOnce(new ConflictError('courses/demo/slides/deck.json'));
+    await store.moveSlide(0, 1);
+    expect(store.conflicts()).toEqual(['courses/demo/slides/deck.json']);
+    await store.reloadConflicts();
+    expect(store.status()).toBe('saved');
+    expect(store.slides()[0].path).toBe('courses/demo/slides/a.html');
   });
 
   it('moves a slide and saves the new order', async () => {
     const { store, service } = await opened();
     await store.moveSlide(0, 2);
-    expect(service.saveOrder).toHaveBeenCalledWith('demo', [
+    expect(service.saveOrder).toHaveBeenCalledWith(expect.anything(), 'demo', [
       expect.objectContaining({ path: 'courses/demo/slides/b.html' }),
       expect.objectContaining({ path: 'courses/demo/slides/c.html' }),
       expect.objectContaining({ path: 'courses/demo/slides/a.html' }),
     ]);
     expect(store.slide()!.path).toBe('courses/demo/slides/a.html');
+  });
+
+  it('picks the next name when a new slide file already exists on disk', async () => {
+    const { store, service } = await opened();
+    service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/slide-1.html'));
+    await store.addSlide();
+    expect(store.slide()!.path).toBe('courses/demo/slides/slide-2.html');
+    expect(store.status()).toBe('saved');
   });
 
   it('adds an empty slide after the current one and opens it', async () => {
@@ -108,15 +156,17 @@ describe('EditorStore', () => {
     const { store, service } = await opened();
     await store.setHidden(true);
     expect(store.slide()!.hidden).toBe(true);
-    expect(service.saveOrder.mock.calls[0][1][0].hidden).toBe(true);
+    expect(service.saveOrder.mock.calls[0][2][0].hidden).toBe(true);
     expect(service.saveSlide).not.toHaveBeenCalled();
   });
 
-  it('deletes the current slide', async () => {
+  it('deletes the current slide, writing the order first so the deck never points at a missing file', async () => {
     const { store, service } = await opened();
     store.openSlide(2);
     await store.deleteSlide();
     expect(service.deleteSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'courses/demo/slides/c.html' }));
+    expect(service.saveOrder.mock.invocationCallOrder[0]).toBeLessThan(service.deleteSlide.mock.invocationCallOrder[0]);
+    expect(service.saveOrder.mock.calls[0][2].map((s: Slide) => s.path)).not.toContain('courses/demo/slides/c.html');
     expect(store.slides().length).toBe(2);
     expect(store.slideIndex()).toBe(1);
   });
@@ -153,6 +203,16 @@ describe('EditorStore', () => {
       expect(store.slide()!.blocks.map(b => b.name)).toEqual(['a']);
       expect(block(store, 'a').animation!.on).toBeNull();
       expect(store.selection()).toEqual([]);
+    });
+
+    it('keeps triggers inside groups pointing at the right block', async () => {
+      const child = text('c', { animation: { effect: 'fade-in', duration: 0.6, delay: 0, on: 'q' } });
+      const { store } = await withBlocks([text('q'), { ...text('g'), type: 'group', children: [child] } as Block]);
+      store.renameBlock('q', 'question');
+      const inner = () => (block(store, 'g') as Extract<Block, { type: 'group' }>).children[0];
+      expect(inner().animation!.on).toBe('question');
+      store.deleteBlocks(['question']);
+      expect(inner().animation!.on).toBeNull();
     });
 
     it('brings a block to the front by reusing the existing depths', async () => {

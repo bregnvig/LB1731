@@ -35,7 +35,8 @@ export function safeImageName(name: string): string | null {
   const dot = name.lastIndexOf('.');
   const ext = name.slice(dot + 1).toLowerCase();
   if (dot < 0 || !IMAGE_TYPES.includes(ext)) return null;
-  const base = name.slice(0, dot).toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'image';
+  // Runs of dots become one: the server refuses any name containing "..".
+  const base = name.slice(0, dot).toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/\.{2,}/g, '.').replace(/^[-.]+|[-.]+$/g, '') || 'image';
   return `${base}.${ext}`;
 }
 

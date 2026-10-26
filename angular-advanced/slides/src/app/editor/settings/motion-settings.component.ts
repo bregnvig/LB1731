@@ -1,13 +1,13 @@
 import { Component, inject, input } from '@angular/core';
 import { Animation, Block, Effect, Fragment } from '../../deck/model';
 import { EditorStore } from '../editor.store';
+import { num, validPatch } from './num';
 
 const EFFECTS: { id: Effect; label: string }[] = [
   { id: 'fade-in', label: 'Fade in' }, { id: 'fade-out', label: 'Fade out' }, { id: 'scale-up', label: 'Scale up' },
   { id: 'scale-down', label: 'Scale down' }, { id: 'slide-up', label: 'Slide up' }, { id: 'slide-down', label: 'Slide down' },
 ];
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
-const num = (e: Event) => Number((e.target as HTMLInputElement).value);
 
 /**
  * Plays a block's animation on the canvas: start state at once, then the transition to the end
@@ -83,6 +83,7 @@ export class MotionSettingsComponent {
   readonly triggers = () => this.store.triggerOptions(this.block().name);
 
   setAnimation(patch: Partial<Animation>) {
+    if (!validPatch(patch)) return;
     this.store.updateBlocks([this.block().name], b => (b.animation ? { ...b, animation: { ...b.animation, ...patch } } : b));
   }
 

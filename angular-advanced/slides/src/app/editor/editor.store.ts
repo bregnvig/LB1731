@@ -7,12 +7,22 @@ import { safeImageName, uniqueImageName } from './media';
 export type SaveStatus = 'saved' | 'saving' | 'conflict' | 'error';
 
 const MAX_HISTORY = 100;
+
+/** Applies `fn` to every block, group children included. */
+const mapDeep = (blocks: Block[], fn: (b: Block) => Block): Block[] =>
+  blocks.map(b => {
+    const m = fn(b);
+    return m.type === 'group' ? { ...m, children: mapDeep(m.children, fn) } : m;
+  });
+const retrigger = (from: Set<string>, to: string | null) => (b: Block): Block =>
+  b.animation?.on && from.has(b.animation.on) ? { ...b, animation: { ...b.animation, on: to } } : b;
 const folderOf = (path: string) => path.slice(0, path.lastIndexOf('/'));
 
 /**
  * The editor's state. Slide edits go through `updateSlide`, which records undo history per slide
- * and writes the file 500 ms after the last change. A file changed on disk by someone else stops
- * saving until the slide is reloaded.
+ * and writes the file 500 ms after the last change; a failed write is retried. A file changed on
+ * disk by someone else (a slide or an order file) is never overwritten: it stops saving, the other
+ * files keep saving, and `reloadConflicts` takes the files from disk.
  */
 @Injectable({ providedIn: 'root' })
 export class EditorStore {
@@ -23,8 +33,13 @@ export class EditorStore {
   readonly courseId = signal<string | null>(null);
   readonly slideIndex = signal(0);
   readonly selection = signal<string[]>([]);
-  readonly status = signal<SaveStatus>('saved');
+  /** Files changed on disk since they were loaded: slide paths and order files (deck.json). */
+  readonly conflicts = signal<string[]>([]);
+  /** The last failed write, until a write succeeds. */
   readonly error = signal('');
+  private readonly writing = signal(0);
+  readonly status = computed<SaveStatus>(() =>
+    this.conflicts().length ? 'conflict' : this.error() ? 'error' : this.writing() ? 'saving' : 'saved');
   /** A message for the user that isn't about saving (a refused upload…). */
   readonly notice = signal('');
   /** 'pen' while drawing: dragging on the canvas draws instead of selecting. */
@@ -128,13 +143,13 @@ export class EditorStore {
     this.selection.set(copies.map(c => c.name));
   }
 
+  /** Animations started by a click on a deleted block (or on a block inside a deleted group) start on entry instead. */
   deleteBlocks(names: string[]) {
-    const gone = new Set(names);
-    this.updateSlide(s => ({
-      ...s,
-      blocks: s.blocks.filter(b => !gone.has(b.name))
-        .map(b => (b.animation?.on && gone.has(b.animation.on) ? { ...b, animation: { ...b.animation, on: null } } : b)),
-    }));
+    const s = this.slide();
+    if (!s) return;
+    const deleted = s.blocks.filter(b => names.includes(b.name));
+    const gone = new Set(blockNames({ ...s, blocks: deleted }));
+    this.updateSlide(sl => ({ ...sl, blocks: mapDeep(sl.blocks.filter(b => !names.includes(b.name)), retrigger(gone, null)) }));
     this.selection.update(sel => sel.filter(n => !gone.has(n)));
   }
 
@@ -144,10 +159,7 @@ export class EditorStore {
     next = next.trim();
     if (!s || !next || (next !== old && blockNames(s).includes(next))) return false;
     if (next === old) return true;
-    this.updateBlocks(null, b => {
-      const renamed = b.name === old ? { ...b, name: next } : b;
-      return renamed.animation?.on === old ? { ...renamed, animation: { ...renamed.animation, on: next } } : renamed;
-    });
+    this.updateSlide(sl => ({ ...sl, blocks: mapDeep(sl.blocks, b => retrigger(new Set([old]), next)(b.name === old ? { ...b, name: next } : b)) }));
     this.selection.update(sel => sel.map(n => (n === old ? next : n)));
     return true;
   }
@@ -184,6 +196,7 @@ export class EditorStore {
   private history = new Map<string, { undo: Slide[]; redo: Slide[]; lastKey?: string }>();
   private pending = new Set<string>();
   private timer?: ReturnType<typeof setTimeout>;
+  private flushing = Promise.resolve();
 
   async load() {
     this.deck.set(await this.service.load());
@@ -246,9 +259,17 @@ export class EditorStore {
     if (!current) return;
     const dir = folderOf(current.path);
     const taken = new Set(list.map(s => s.path));
-    let n = 1;
-    while (taken.has(`${dir}/slide-${n}.html`)) n++;
-    const created = await this.guard(() => this.service.saveSlide({ path: `${dir}/slide-${n}.html`, hidden: false, autoAnimate: false, blocks: [], notes: '', etag: '' }));
+    let created: Slide | null = null;
+    // A file of that name may exist on disk without being in the deck; creating never overwrites, so try the next.
+    for (let n = 1; !created && n < 1000; n++) {
+      const path = `${dir}/slide-${n}.html`;
+      if (taken.has(path)) continue;
+      try {
+        created = await this.write(() => this.service.saveSlide({ path, hidden: false, autoAnimate: false, blocks: [], notes: '', etag: '' }));
+      } catch (e) {
+        if (!(e instanceof ConflictError)) return this.fail(e);
+      }
+    }
     if (!created) return;
     const at = this.slideIndex() + 1;
     this.setList([...list.slice(0, at), created, ...list.slice(at)]);
@@ -256,15 +277,21 @@ export class EditorStore {
     await this.saveOrder();
   }
 
+  /** Writes the order without the slide first, then deletes its file, so the deck never lists a missing file. */
   async deleteSlide() {
     const current = this.slide();
     if (!current || this.slides().length < 2) return;
+    const before = this.slides(), index = this.slideIndex();
+    this.setList(before.filter(s => s.path !== current.path));
+    this.openSlide(index);
+    if (!(await this.saveOrder())) {
+      this.setList(before);
+      this.openSlide(index);
+      return;
+    }
     this.pending.delete(current.path);
-    if ((await this.guard(() => this.service.deleteSlide(current))) === undefined) return;
-    this.setList(this.slides().filter(s => s !== current));
     this.history.delete(current.path);
-    this.openSlide(this.slideIndex());
-    await this.saveOrder();
+    await this.guard(() => this.service.deleteSlide(current));
   }
 
   async moveSlide(from: number, to: number) {
@@ -273,20 +300,36 @@ export class EditorStore {
     const [moved] = list.splice(from, 1);
     list.splice(to, 0, moved);
     this.setList(list);
-    this.slideIndex.set(list.indexOf(current!));
+    this.slideIndex.set(list.findIndex(s => s.path === current?.path));
     await this.saveOrder();
   }
 
-  /** After a conflict: take the files as they are on disk now. */
-  async reloadSlide() {
-    const path = this.slide()?.path;
-    clearTimeout(this.timer);
-    this.pending.clear();
-    this.history.clear();
+  /** True while an edit isn't on disk yet. */
+  unsaved(): boolean {
+    return this.pending.size > 0 || this.status() !== 'saved';
+  }
+
+  /**
+   * After a conflict: saves what is waiting on other slides, then takes every file as it is on disk.
+   * The conflicted slides lose their unsaved edits and undo history; the others keep theirs.
+   */
+  async reloadConflicts() {
+    await this.flushNow();
+    if (this.pending.size) return;
+    const path = this.slide()?.path, conflicted = this.conflicts();
     await this.load();
-    const index = this.slides().findIndex(s => s.path === path);
-    this.slideIndex.set(Math.max(0, index));
-    this.status.set('saved');
+    for (const p of conflicted) this.history.delete(p);
+    this.conflicts.set([]);
+    this.error.set('');
+    this.slideIndex.set(Math.max(0, this.slides().findIndex(s => s.path === path)));
+  }
+
+  /** Writes waiting edits now (before an export, a reload…). */
+  flushNow(): Promise<void> {
+    clearTimeout(this.timer);
+    // One flush at a time, so a slow save can't race the next one with an old etag.
+    this.flushing = this.flushing.then(() => this.flush());
+    return this.flushing;
   }
 
   private step(from: 'undo' | 'redo', to: 'undo' | 'redo') {
@@ -332,37 +375,66 @@ export class EditorStore {
   }
 
   private scheduleSave(path: string) {
-    if (this.status() === 'conflict') return;
+    if (this.conflicts().includes(path)) return;
     this.pending.add(path);
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.flush(), 500);
+    this.timer = setTimeout(() => this.flushNow(), 500);
   }
 
   private async flush() {
+    let failed = false;
     for (const path of [...this.pending]) {
       this.pending.delete(path);
       const s = this.find(path);
-      if (!s) continue;
-      this.status.set('saving');
-      const saved = await this.guard(() => this.service.saveSlide(s));
-      if (!saved) return;
-      // Keep edits made while saving; only the etag comes from the save.
-      this.setListOf(path, list => list.map(x => (x.path === path ? { ...x, etag: saved.etag } : x)));
+      if (!s || this.conflicts().includes(path)) continue;
+      try {
+        const saved = await this.write(() => this.service.saveSlide(s));
+        // Keep edits made while saving; only the etag comes from the save.
+        this.setListOf(path, list => list.map(x => (x.path === path ? { ...x, etag: saved.etag } : x)));
+      } catch (e) {
+        if (!(e instanceof ConflictError)) this.pending.add(path);
+        this.fail(e);
+        failed = true;
+      }
     }
-    if (this.status() === 'saving') this.status.set('saved');
+    if (!failed) this.error.set('');
+    // Try again later; the edits stay in memory meanwhile and closing the tab asks first.
+    if (this.pending.size) this.timer = setTimeout(() => this.flushNow(), 3000);
   }
 
-  private async saveOrder() {
-    await this.guard(() => this.service.saveOrder(this.courseId(), this.slides()));
+  /** Writes the open list's order file; returns false when that failed. */
+  private async saveOrder(): Promise<boolean> {
+    const deck = this.deck(), id = this.courseId();
+    if (!deck) return false;
+    const etag = await this.guard(() => this.service.saveOrder(deck, id, this.slides()));
+    if (etag == null) return false;
+    this.deck.update(d => d && (id == null ? { ...d, etag } : { ...d, courses: d.courses.map(c => (c.id === id ? { ...c, etag } : c)) }));
+    return true;
   }
 
-  /** Runs a write; on failure sets the status and returns undefined. Resolves to null for void writes. */
-  private async guard<T>(write: () => Promise<T>): Promise<T | null | undefined> {
+  /** Counts a write in flight while it runs. */
+  private async write<T>(fn: () => Promise<T>): Promise<T> {
+    this.writing.update(n => n + 1);
     try {
-      return (await write()) ?? null;
+      return await fn();
+    } finally {
+      this.writing.update(n => n - 1);
+    }
+  }
+
+  private fail(e: unknown) {
+    if (e instanceof ConflictError) this.conflicts.update(c => (c.includes(e.path) ? c : [...c, e.path]));
+    else this.error.set(e instanceof Error ? e.message : String(e));
+  }
+
+  /** Runs a write; on failure records it and returns undefined. Resolves to null for void writes. */
+  private async guard<T>(fn: () => Promise<T>): Promise<T | null | undefined> {
+    try {
+      const result = (await this.write(fn)) ?? null;
+      this.error.set('');
+      return result;
     } catch (e) {
-      this.status.set(e instanceof ConflictError ? 'conflict' : 'error');
-      this.error.set(e instanceof Error ? e.message : String(e));
+      this.fail(e);
       return undefined;
     }
   }

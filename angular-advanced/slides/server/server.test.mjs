@@ -46,6 +46,15 @@ test('GET /api/deck returns intro and courses with html and etags', async () => 
   assert.equal(d.courses[0].title, 'Demo');
   assert.equal(d.courses[0].slides[1].hidden, true);
   assert.match(d.courses[0].slides[0].etag, /^[0-9a-f]{40}$/);
+  assert.match(d.etag, /^[0-9a-f]{40}$/);
+  assert.match(d.courses[0].etag, /^[0-9a-f]{40}$/);
+});
+
+test('PUT with If-None-Match * creates a file but never overwrites one', async () => {
+  const create = body => fetch(`${base}/api/files/courses/demo/slides/fresh.html`, { method: 'PUT', headers: { 'If-None-Match': '*' }, body });
+  assert.equal((await create('<section>1</section>')).status, 200);
+  assert.equal((await create('<section>2</section>')).status, 409);
+  assert.equal(await readFile(join(root, 'courses/demo/slides/fresh.html'), 'utf8'), '<section>1</section>');
 });
 
 test('PUT with the current etag replaces the file and returns a new ETag', async () => {
