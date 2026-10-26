@@ -291,6 +291,6 @@
       </div>
     </div>
   </div>
-  <aside class="notes">With signals and OnPush, only the component whose template reads the changed signal is refreshed. Zoneless (the v21 default) works this way.
-The click here has to change a signal. Calling a method without changing state no longer triggers change detection, and the changed signal has to be read in the template.</aside>
+  <aside class="notes">Signals + OnPush: only the component whose template reads the changed signal refreshes. Zoneless (v21 default) works this way.
+The click must change a signal, and that signal must be read in the template. A method call without state change no longer triggers change detection.</aside>
 </section>

@@ -16,6 +16,7 @@ Bonus: delete <code><span style="color:#FF8C00">ChangeDetectionStrategy.Eager</s
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:691.366px;top:174.61px;width:537.268px;height:295.392px;z-index:13">
     <img src="images/exercise-1-use-signals-effects-2-1.png" alt="">
   </div>
-  <aside class="notes">The solution (step-2) only saves when playgrounds is defined. Without that guard, a reload during the 3 s load stores "undefined", JSON.parse throws in the constructor, and the app stays blank until localStorage is cleared (DevTools &gt; Application &gt; Local storage).
-Next: "Don't copy state with an effect". Their center and markers come straight from location and playground, a good computed example.</aside>
+  <aside class="notes">Solution (step-2) only saves when playgrounds is defined.
+Without the guard: reload during the 3 s load stores "undefined", JSON.parse throws, app stays blank until localStorage is cleared (DevTools &gt; Application &gt; Local storage).
+Next: "Don't copy state with an effect". Their center and markers are good computed candidates.</aside>
 </section>

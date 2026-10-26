@@ -46,7 +46,8 @@
       "file": "signal-change-detection.html"
     },
     {
-      "file": "changing-the-ui.html"
+      "file": "changing-the-ui.html",
+      "hidden": true
     },
     {
       "file": "what-is-in-a-view.html",

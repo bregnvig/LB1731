@@ -16,5 +16,6 @@
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:691.366px;top:174.61px;width:537.268px;height:373.949px;z-index:12">
     <img src="images/exercise-1-use-signals-effects-1.png" alt="">
   </div>
-  <aside class="notes">The common trap: @if (playground) without () is always true, because a signal is a function. The template then reads a property of undefined and the whole page goes blank, with a TypeError in FooterComponent in the console. The build only warns (NG8109).</aside>
+  <aside class="notes">Trap: @if (playground) without () is always true (a signal is a function).
+Symptom: blank page, TypeError in FooterComponent in the console. The build only warns (NG8109).</aside>
 </section>

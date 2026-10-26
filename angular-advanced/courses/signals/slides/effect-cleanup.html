@@ -23,7 +23,7 @@ export class SearchComponent {
 
 <p><span style="font-size:0.7em">Cancel what the previous run started: a timer, a request, a subscription. Here: only search when the user stops typing.</span></p>
   </div>
-  <aside class="notes">Type fast: every keystroke clears the previous timer, so only the last query is logged.
-Cleanup is for cancelling, not for remembering the previous value: that's linkedSignal's long form, a few slides back.
-v22 has debounced(signal, 300) for exactly this (experimental), and resources cancel their own requests.</aside>
+  <aside class="notes">Type fast: each keystroke clears the previous timer, only the last query is logged.
+Cleanup is for cancelling, not remembering the previous value (that's linkedSignal's long form).
+v22: debounced(signal, 300) does this (experimental); resources cancel their own requests.</aside>
 </section>

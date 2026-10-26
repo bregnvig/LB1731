@@ -26,6 +26,6 @@ debouncedQuery = debounced(this.query, 300);
 debouncedQuery.value();
 </code></pre>
   </div>
-  <aside class="notes">debounced returns a resource, not a signal: read it with .value(); it's loading while the user is still typing. Pair it with httpResource for a search box. Experimental: the API may change.
-Signal Forms (@angular/forms/signals) are their own topic; just point at them.</aside>
+  <aside class="notes">debounced returns a resource, not a signal: read .value(); loading while the user types. Pair with httpResource for search. Experimental.
+Signal Forms (@angular/forms/signals): own topic, just point at them.</aside>
 </section>

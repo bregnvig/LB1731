@@ -33,7 +33,7 @@ rename() {
 }
 </code></pre>
   </div>
-  <aside class="notes">Demo: /signals/computed-vs-effect. Open the console, click Rename. It prints "computed: Grace Hopper | copy: Ada Lovelace", then "Effect ran". On screen both say Grace Hopper.
-Back to the infinite-loop demo: the real fix is no effect. addRandomPlayground() calls this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]).
-Ask about their exercise 1 code: center and markers come straight from location and playground, so they could be computed. The subscribe(x =&gt; this.x.set(x)) calls are the same copy pattern; toSignal fixes that (later today).</aside>
+  <aside class="notes">Demo: /signals/computed-vs-effect. Console open, click Rename: logs "computed: Grace Hopper | copy: Ada Lovelace", then "Effect ran". Screen shows Grace Hopper for both.
+Infinite-loop real fix: no effect. addRandomPlayground() does this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]).
+Ask about their exercise 1: center and markers could be computed. subscribe(x =&gt; this.x.set(x)) is the same copy pattern; toSignal fixes it (later today).</aside>
 </section>

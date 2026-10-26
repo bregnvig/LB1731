@@ -17,14 +17,7 @@
 
 <p><span style="font-size:1.0em"><span style="color:#FF8C00">input()</span>&nbsp;signals in templates automatically marks <span style="color:#FF8C00">OnPush</span>&nbsp;components as dirty without extra code.</span></p>
   </div>
-  <aside class="notes">Enhanced Type Safety
-  No Need for Non-Null Assertions
-    With decorator-based @Input(), required inputs often need the non-null assertion operator ! to avoid TypeScript errors.
-  Signal Inputs Simplify Required Inputs
-    Using input.required, you ensure a value is always present without needing to use !.
-  Automatic Type Checking
-    Transforms are automatically type-checked for correctness.
-    The use of ngOnChanges SimpleValues loose type
-
-</aside>
+  <aside class="notes">No more ! on required inputs: input.required always has a value.
+ngOnChanges/SimpleChanges loses the type; use input() + computed() instead.
+Transforms are type-checked.</aside>
 </section>

@@ -32,5 +32,5 @@ export class PlaygroundComponent {
 Computed Signals are lazily evaluated and memoized, meaning the value is calculated only when needed, and shared between all consumers</p>
   </div>
   <aside class="notes">Show demo/src/app/signals/inputs/inputs.component.ts (/signals/inputs): distance = computed(...), used in the template.
-Lazy: nothing runs until something reads it. Memoized: reading it ten times runs the function once, until a dependency changes.</aside>
+Lazy: nothing runs until read. Memoized: ten reads, one run, until a dependency changes.</aside>
 </section>

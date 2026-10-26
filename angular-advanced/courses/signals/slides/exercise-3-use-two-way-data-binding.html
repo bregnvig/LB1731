@@ -16,5 +16,7 @@
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:149.798px;width:602.2px;height:420.404px;z-index:12">
     <img src="images/exercise-3-use-two-way-data-binding-1.png" alt="">
   </div>
-  <aside class="notes">The solution (step-4) navigates from an effect on the model. It works, but the route then sets playground again: two sources of truth in a circle. (selectedPlaygroundChange)="navigate($event)" reacts to the user's click only. Good discussion right after "Don't copy state with an effect".</aside>
+  <aside class="notes">Solution (step-4) navigates from an effect on the model. Works, but the route then sets playground again: two sources of truth in a circle.
+Better: (selectedPlaygroundChange)="navigate($event)" reacts to the user's click only.
+Good discussion after "Don't copy state with an effect".</aside>
 </section>

@@ -66,6 +66,6 @@
   [template]="playground" 
   (pageChange)="pageChanged($event)" /&gt;</code></pre>
   </div>
-  <aside class="notes">Two-way [(page)] takes the signal itself; one-way [page] takes its value, page().
-Demo: /signals/model (demo/src/app/signals/model). Its page is a linkedSignal: the pagination writes it, and switching city resets it to the first page.</aside>
+  <aside class="notes">[(page)] takes the signal itself; [page] takes its value, page().
+Demo: /signals/model (demo/src/app/signals/model). page is a linkedSignal: pagination writes it, switching city resets it to page 1.</aside>
 </section>

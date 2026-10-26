@@ -29,7 +29,7 @@ export class PlaygroundService {
 <p><span style="font-size:1em">If the observable errors, reading the signal throws</span></p>
   </div>
   <aside class="notes">Show demo/src/app/signals/playgrounds/playgrounds.component.ts (/signals/playgrounds).
-Ask them if this reminds them of something from RxJS (BehaviorSubject).
-Where you use the async pipe on an observable today, consider toSignal() instead.
-It unsubscribes when the injection context is destroyed (component or service). requireSync is for observables that emit synchronously, like a BehaviorSubject: no undefined in the type.</aside>
+Ask: what RxJS thing does this remind you of? (BehaviorSubject)
+Where you use async pipe today, consider toSignal().
+Unsubscribes when the injection context is destroyed. requireSync for sync emitters (BehaviorSubject): no undefined in the type.</aside>
 </section>

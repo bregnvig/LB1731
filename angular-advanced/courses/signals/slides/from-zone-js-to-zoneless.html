@@ -21,8 +21,8 @@ providers: [
 // Zoneless is the default.
 </code></pre>
   </div>
-  <aside class="notes">Zone.js monkey patches setTimeout, addEventListener, promises... and runs change detection after each one. It doesn't know whether state changed, only that something async finished.
-Zoneless: change detection runs when something tells Angular it changed: a signal read in a template, an event in a template, async pipe, markForCheck.
-Change detection itself is covered in the Components module; this is the short version.
+  <aside class="notes">Zone.js patches setTimeout, addEventListener, promises and runs change detection after each. It knows something async finished, not that state changed.
+Zoneless: Angular is told about changes: signal read in a template, template event, async pipe, markForCheck.
+Short version only; full change detection is in the Components module.
 Interactive comparison: https://jeanmeche.github.io/angular-change-detection/</aside>
 </section>
