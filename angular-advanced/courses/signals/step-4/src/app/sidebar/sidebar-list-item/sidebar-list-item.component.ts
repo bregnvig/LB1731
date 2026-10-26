@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, Signal } from '@angular/core';
-import { Coordinate, Playground } from '../model';
-import { LocationService } from '../service';
+import { Coordinate, Playground } from '../../model';
+import { LocationService } from '../../service';
 
 @Component({
   selector: 'loop-sidebar-list-item',
