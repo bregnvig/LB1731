@@ -3,19 +3,23 @@ import type { BlockAnimationsPlugin } from '../player/block-animations';
 import { Bus, connectSync } from './sync';
 
 // A shared in-memory channel: every bus sees every other bus's messages, like BroadcastChannel.
-function channel() {
+// `queued` holds messages until flush(), like real windows that each take a while to answer.
+function channel(queued = false) {
   const buses: { fn?: (e: { data: unknown }) => void }[] = [];
   const sent: unknown[] = [];
+  const queue: (() => void)[] = [];
   const bus = (): Bus => {
     const me: { fn?: (e: { data: unknown }) => void } = {};
     buses.push(me);
+    const deliver = (data: unknown) => buses.filter(b => b !== me).forEach(b => b.fn?.({ data }));
     return {
-      postMessage: data => { sent.push(data); buses.filter(b => b !== me).forEach(b => b.fn?.({ data })); },
+      postMessage: data => { sent.push(data); if (queued) queue.push(() => deliver(data)); else deliver(data); },
       addEventListener: (_: 'message', fn) => { me.fn = fn; },
       close: () => buses.splice(buses.indexOf(me), 1),
     };
   };
-  return { bus, sent };
+  const flush = () => { while (queue.length) queue.shift()!(); };
+  return { bus, sent, flush };
 }
 
 function fakeReveal() {
@@ -57,12 +61,15 @@ describe('connectSync', () => {
   });
 
   it('gives a late window the current state after hello', () => {
+    vi.useFakeTimers();
     const ch = channel();
     const a = fakeReveal();
     connectSync(a as any, anims(fakeAnimations()), { bus: ch.bus() });
     a.slide(2, 0);
+    vi.advanceTimersByTime(1000);
     const c = fakeReveal();
     connectSync(c as any, anims(fakeAnimations()), { bus: ch.bus() });
+    vi.useRealTimers();
     expect(c.getIndices()).toEqual({ h: 2, v: 0, f: undefined });
   });
 
@@ -92,6 +99,53 @@ describe('connectSync', () => {
     expect(f.next).toHaveBeenCalledTimes(1);
     expect(f.getIndices().h).toBe(5);
     expect(post).not.toHaveBeenCalled();
+  });
+
+  it('a window that just opened does not answer hello with its own start position', () => {
+    vi.useFakeTimers();
+    const ch = channel(true);
+    const a = fakeReveal();
+    connectSync(a as any, anims(fakeAnimations()), { bus: ch.bus() });
+    a.slide(2, 1);
+    ch.flush();
+    // Two windows open together: neither knows the state yet when the other says hello.
+    vi.advanceTimersByTime(1000);
+    const b = fakeReveal(), c = fakeReveal();
+    connectSync(b as any, anims(fakeAnimations()), { bus: ch.bus() });
+    vi.advanceTimersByTime(10);
+    connectSync(c as any, anims(fakeAnimations()), { bus: ch.bus() });
+    ch.flush();
+    vi.useRealTimers();
+    expect([a, b, c].map(r => r.getIndices())).toEqual(Array(3).fill({ h: 2, v: 1, f: undefined }));
+  });
+
+  it('a follower takes the controller\'s answer even when it counts as older', () => {
+    // Same millisecond: the tie-breaking fraction makes the follower look older than the controller.
+    vi.useFakeTimers();
+    // Each window draws its id, then its tie-breaking fraction.
+    const random = vi.spyOn(Math, 'random').mockReturnValueOnce(0.3).mockReturnValueOnce(0.9).mockReturnValueOnce(0.6).mockReturnValueOnce(0.1);
+    const ch = channel();
+    const a = fakeReveal();
+    a.slide(3, 0);
+    connectSync(a as any, anims(fakeAnimations()), { bus: ch.bus() });
+    const f = fakeReveal();
+    connectSync(f as any, anims(fakeAnimations()), { bus: ch.bus(), follower: 'next' });
+    random.mockRestore();
+    vi.useRealTimers();
+    expect(f.getIndices()).toEqual({ h: 4, v: 0, f: undefined });
+  });
+
+  it('a follower opened before any controller hears from the first one to open', () => {
+    vi.useFakeTimers();
+    const ch = channel();
+    const f = fakeReveal();
+    connectSync(f as any, anims(fakeAnimations()), { bus: ch.bus(), follower: 'next' });
+    vi.advanceTimersByTime(10);
+    const a = fakeReveal();
+    a.slide(3, 0);
+    connectSync(a as any, anims(fakeAnimations()), { bus: ch.bus() });
+    vi.useRealTimers();
+    expect(f.getIndices()).toEqual({ h: 4, v: 0, f: undefined });
   });
 
   it('stops listening when disconnected', () => {
