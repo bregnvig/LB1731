@@ -27,7 +27,7 @@ export class SidebarListItemComponent {
   playground = input.required<Playground>();
   location = input<Coordinate | undefined>(undefined);
   distance: Signal<string>;
-  description = computed(() => this.playground().description ?? 'No description');
+  description = computed(() => this.playground().description || 'No description');
 
   constructor({ getDistance }: LocationService) {
     this.distance = computed(() => {

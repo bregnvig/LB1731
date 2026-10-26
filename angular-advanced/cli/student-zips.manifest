@@ -1382,7 +1382,7 @@ da917bd51996ad2bb7bc90ba2ae89528eb8b3372675dc3e669e3c61ca9f68e63  labs/signals/e
 1483dd922423809eccc55092bf99c283cd5586f798bc2ae55083ad63454bc165  labs/signals/exercise-3/src/app/service/index.ts
 03cd72609a3dc849dbce3766a1dc5b570f7b68cef5e73c1ca842bbf591c90fe2  labs/signals/exercise-3/src/app/service/location.service.ts
 ad96038005ca35abfa2a4d7553202f5295d4f22b07d92d750d2b8e8e8cf15dc8  labs/signals/exercise-3/src/app/service/playground.service.ts
-efd4954881c90b880705f94d1672a58d0f0f0c8d8feddc0e92014b05029b866c  labs/signals/exercise-3/src/app/sidebar/sidebar-list-item.component.ts
+f0f21607cb1c0892ef31ed993834451b0b42bcd98799f88e25dfb5dcb3fc1666  labs/signals/exercise-3/src/app/sidebar/sidebar-list-item.component.ts
 695e0880db531a3fa11aa87a016b41246b185937fe883f27471240d598c66eea  labs/signals/exercise-3/src/app/sidebar/sidebar.component.html
 e503d8ddb830dde3a16d2a4b0e39555c10335c255ed704cae9abce63d54344bc  labs/signals/exercise-3/src/app/sidebar/sidebar.component.ts
 8005829e1d16dde629acd7b1244562505a9a16c98064111bb6877ddb08daedaa  labs/signals/exercise-3/src/app/utils/rxjs-utils.ts
@@ -2896,7 +2896,7 @@ da917bd51996ad2bb7bc90ba2ae89528eb8b3372675dc3e669e3c61ca9f68e63  solutions/sign
 1483dd922423809eccc55092bf99c283cd5586f798bc2ae55083ad63454bc165  solutions/signals/exercise-2/src/app/service/index.ts
 03cd72609a3dc849dbce3766a1dc5b570f7b68cef5e73c1ca842bbf591c90fe2  solutions/signals/exercise-2/src/app/service/location.service.ts
 ad96038005ca35abfa2a4d7553202f5295d4f22b07d92d750d2b8e8e8cf15dc8  solutions/signals/exercise-2/src/app/service/playground.service.ts
-efd4954881c90b880705f94d1672a58d0f0f0c8d8feddc0e92014b05029b866c  solutions/signals/exercise-2/src/app/sidebar/sidebar-list-item.component.ts
+f0f21607cb1c0892ef31ed993834451b0b42bcd98799f88e25dfb5dcb3fc1666  solutions/signals/exercise-2/src/app/sidebar/sidebar-list-item.component.ts
 695e0880db531a3fa11aa87a016b41246b185937fe883f27471240d598c66eea  solutions/signals/exercise-2/src/app/sidebar/sidebar.component.html
 e503d8ddb830dde3a16d2a4b0e39555c10335c255ed704cae9abce63d54344bc  solutions/signals/exercise-2/src/app/sidebar/sidebar.component.ts
 8005829e1d16dde629acd7b1244562505a9a16c98064111bb6877ddb08daedaa  solutions/signals/exercise-2/src/app/utils/rxjs-utils.ts
@@ -2948,7 +2948,7 @@ da917bd51996ad2bb7bc90ba2ae89528eb8b3372675dc3e669e3c61ca9f68e63  solutions/sign
 1483dd922423809eccc55092bf99c283cd5586f798bc2ae55083ad63454bc165  solutions/signals/exercise-3/src/app/service/index.ts
 03cd72609a3dc849dbce3766a1dc5b570f7b68cef5e73c1ca842bbf591c90fe2  solutions/signals/exercise-3/src/app/service/location.service.ts
 ad96038005ca35abfa2a4d7553202f5295d4f22b07d92d750d2b8e8e8cf15dc8  solutions/signals/exercise-3/src/app/service/playground.service.ts
-efd4954881c90b880705f94d1672a58d0f0f0c8d8feddc0e92014b05029b866c  solutions/signals/exercise-3/src/app/sidebar/sidebar-list-item.component.ts
+f0f21607cb1c0892ef31ed993834451b0b42bcd98799f88e25dfb5dcb3fc1666  solutions/signals/exercise-3/src/app/sidebar/sidebar-list-item.component.ts
 7a7756dcaa7f2aab0f2b8f8e495680877e7ff17b143d9d0f8c693fd01c6d5177  solutions/signals/exercise-3/src/app/sidebar/sidebar.component.html
 3632ddef4bff233f94f5d43f6874729b534cc6448f5886fb1aa906dc89b4b0e7  solutions/signals/exercise-3/src/app/sidebar/sidebar.component.ts
 8005829e1d16dde629acd7b1244562505a9a16c98064111bb6877ddb08daedaa  solutions/signals/exercise-3/src/app/utils/rxjs-utils.ts

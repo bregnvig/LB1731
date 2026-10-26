@@ -31,5 +31,5 @@ playgrounds.set([{name: 'Hoppeborgen'}]);
 <p><span style="font-size:0.7em"><code>signal()</code>, <code>computed()</code> and <code>toSignal()</code> all take an <code>equal</code> option</span></p>
   </div>
   <aside class="notes">Default equality is Object.is: a new array is always a change, even with the same content.
-Demo: /signals/equality (demo/src/app/signals/equality/playgrounds-equality.component.ts). toSignal refetches every second, list re-renders. Uncomment the equal line: it stops.</aside>
+Demo: /signals/equality (demo/src/app/signals/equality/playgrounds-equality.component.ts). toSignal refetches every second. Watch the console: without equal the shared list logs every second; uncomment the equal line and it stops.</aside>
 </section>
