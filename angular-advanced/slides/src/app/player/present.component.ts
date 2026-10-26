@@ -6,6 +6,7 @@ import { createBlockAnimations } from './block-animations';
 import { deckHtml } from './deck-html';
 import { highlightCode, scrollToHighlights } from './highlight';
 import { inlineSvgImages } from './inline-svg';
+import { connectSync } from '../sync/sync';
 
 export const REVEAL_CONFIG = {
   width: 1280,
@@ -36,6 +37,7 @@ export class PresentComponent implements OnDestroy {
   private readonly deckService = inject(DeckService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('reveal');
   private reveal?: RevealApi;
+  private disconnect?: () => void;
   readonly animations = createBlockAnimations();
 
   constructor() {
@@ -63,9 +65,12 @@ export class PresentComponent implements OnDestroy {
     this.reveal.on('slidechanged', scrollCode);
     await this.reveal.initialize();
     (window as any).Reveal = this.reveal;
+    // The next-slide view in the presenter follows one step ahead; printing needs no sync.
+    if (!params.has('print-pdf')) this.disconnect = connectSync(this.reveal, this.animations, params.get('embed') === 'next' ? { follower: 'next' } : {});
   }
 
   ngOnDestroy() {
+    this.disconnect?.();
     this.reveal?.destroy();
   }
 }
