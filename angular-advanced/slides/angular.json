@@ -25,6 +25,15 @@
               }
             ],
             "styles": [
+              "node_modules/reveal.js/dist/reset.css",
+              "node_modules/reveal.js/dist/reveal.css",
+              "node_modules/@fontsource/overpass/400.css",
+              "node_modules/@fontsource/overpass/400-italic.css",
+              "node_modules/@fontsource/overpass/700.css",
+              "node_modules/@fontsource/overpass/700-italic.css",
+              "src/theme/deck.css",
+              "src/theme/code-dark.css",
+              "src/theme/code-monokai.css",
               "src/styles.css"
             ]
           },
