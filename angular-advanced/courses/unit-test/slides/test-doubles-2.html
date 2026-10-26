@@ -1,0 +1,20 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>Test Doubles</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:248px;width:1076px;height:auto;z-index:11">
+    <h2>stubs</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:340px;top:324px;width:600px;height:auto;z-index:12">
+    <p>Always returns predefined output</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:276.38px;top:400px;width:727.24px;height:164px;z-index:14;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="2-4">it('should use stub', () =&gt; {
+  TestBed.overrideProvider(AuthService, {
+    useValue: { login: () =&gt; true }// always returns same value
+  });
+  const service = TestBed.inject(AuthService);
+  // expect(something);
+});</code></pre>
+  </div>
+</section>

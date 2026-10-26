@@ -1,0 +1,13 @@
+{
+  "name": "unit-test-step-4",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "test": "ng test",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "server": "node server.js"
+  }
+}

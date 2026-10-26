@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:762px;height:auto;z-index:10;text-align:left">
+    <h2>An Attribute directive</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:240.925px;width:1182.31px;height:auto;z-index:11">
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Directive({ selector: '[loopExpand]' })
+export class ExpandDirective {
+
+  loopExpand = input&lt;boolean, boolean | string&gt;(false, {transform: booleanAttribute});
+
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:194px;width:615px;height:auto;z-index:12;text-align:left">
+    <p><span style="color:rgb(255, 255, 255)">An Input Decorator</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:64px;top:544.971px;width:954.313px;height:auto;z-index:13;filter:drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-xml">&lt;input  loopExpand/&gt;          &lt;!-- Will expand --&gt;
+&lt;input [loopExpand]="true"/&gt;  &lt;!-- Will expand --&gt;
+&lt;input [loopExpand]="false"/&gt; &lt;!-- Will not expand --&gt;</code></pre>
+  </div>
+  <aside class="notes">So using the exact same name as 
+An input decorator must be prefixed with the directive name
+
+Databinding is just as the one used between components
+</aside>
+</section>

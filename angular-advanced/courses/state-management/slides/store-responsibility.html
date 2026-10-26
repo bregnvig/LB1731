@@ -1,0 +1,73 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:15.585px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Store responsibility</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:47px;width:1022.98px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()
+export class PlaygroundStore {
+  
+  #service = inject(PlaygroundService);
+  #refresh = new BehaviourSubject&lt;void&gt;(undefined);
+  error = new ReplaySubject&lt;any&gt;();
+  updateError = new ReplaySubject&lt;any&gt;();
+  loading = new BehaviourSubject&lt;boolean&gt;(false);
+  
+  playgrounds: Observable&lt;Playground[]&gt; = this.#refresh.pipe(
+    tap(() =&gt; this.loading.next(true))
+    switchMap(() =&gt; this.#service.list()),
+    catchError(error =&gt; { this.error.next(error); throw error }),
+    shareReplay(1)
+    tap(() =&gt; { this.loading.next(false); this.error.next(undefined) })
+  )
+  
+  update(playground: Playground): Observable&lt;void&gt; {
+    return this.#service.update(playground).pipe(
+      catchError(error =&gt; { this.updateError.next(error); throw error }),
+      tap(() =&gt; { this.#refresh.next(); this.updateError.next(undefined) })
+    )
+  }
+}</code></pre>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:582.766px;top:525.402px;width:680.234px;height:140.598px;z-index:13">
+    <div class="block" data-type="line" data-name="arrow-1" data-x1="204.632" data-y1="122.59799999999996" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:0px;top:0px;width:204.632px;height:122.598px;z-index:14"></div>
+    <div class="block" data-type="text" data-name="text-1" style="left:217.234px;top:104.598px;width:462.98px;height:auto;z-index:15">
+      <p style="text-align:left">Why do we have separate errors?🤔</p>
+    </div>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:80px;top:47px;width:1022.98px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()
+export class RxjsPlaygroundStore {
+
+  #service = inject(RxjsPlaygroundService);
+  #refresh = new BehaviorSubject&lt;void&gt;(undefined);
+  readonly updateError = new BehaviorSubject&lt;Playground | undefined&gt;(undefined);
+  readonly loading = new BehaviorSubject&lt;boolean&gt;(true);
+  readonly error = new ReplaySubject&lt;any&gt;();
+
+  readonly playgrounds = this.#refresh.pipe(
+    tap(() =&gt; this.loading.next(true)),
+    switchMap(() =&gt; this.#service.list()),
+    tap(() =&gt; this.error.next(undefined)),
+    catchError(error =&gt; { this.error.next(error); return of([]) }),
+    tap(() =&gt; this.loading.next(false)),
+    shareReplay(1),
+  );
+
+  update(playground: Playground): Observable&lt;void&gt; {
+    return this.#service.update(playground).pipe(
+      catchError(error =&gt; { this.updateError.next(error); throw error; }),
+      tap(() =&gt; { this.#refresh.next(); this.updateError.next(undefined); }),
+    );
+  }
+}</code></pre>
+  </div>
+  <aside class="notes">Why is it not called list()? Because it is state. list is an operation
+
+So the service is being used in a stateless way, while the store contains all the state, plus all the management of loading, error refreshing etc
+
+Notice that the code here kinda looks like the code from our exercise component.
+
+See how this store is a facade to the service in some ways
+
+Click code for question</aside>
+</section>

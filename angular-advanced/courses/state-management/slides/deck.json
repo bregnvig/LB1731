@@ -1,0 +1,125 @@
+{
+  "title": "State mangement",
+  "slides": [
+    {
+      "file": "state-mangement.html"
+    },
+    {
+      "file": "what-is-state.html"
+    },
+    {
+      "file": "two-kinds-of-state.html"
+    },
+    {
+      "file": "application-state.html"
+    },
+    {
+      "file": "local-state-component-hierarchy.html"
+    },
+    {
+      "file": "where-to-put-it.html"
+    },
+    {
+      "file": "store.html"
+    },
+    {
+      "file": "url.html"
+    },
+    {
+      "file": "what-about-forms.html"
+    },
+    {
+      "file": "exercise-1-getting-started.html"
+    },
+    {
+      "file": "exercise-1-examine-the-current-solution.html"
+    },
+    {
+      "file": "exercise-1-delete-a-playground.html"
+    },
+    {
+      "file": "was-that-dry.html"
+    },
+    {
+      "file": "single-source-of-truth.html"
+    },
+    {
+      "file": "service-store-relationship.html"
+    },
+    {
+      "file": "store-responsibility.html"
+    },
+    {
+      "file": "exercise-2-add-store.html"
+    },
+    {
+      "file": "what-about-state-signals.html"
+    },
+    {
+      "file": "out-store-with-signals.html"
+    },
+    {
+      "file": "so-to-signal.html"
+    },
+    {
+      "file": "feeling-experimental.html"
+    },
+    {
+      "file": "rxresource.html"
+    },
+    {
+      "file": "rxresource-what-do-we-get.html"
+    },
+    {
+      "file": "rxresource-value.html"
+    },
+    {
+      "file": "rxresource-params.html"
+    },
+    {
+      "file": "rxresource-reload.html"
+    },
+    {
+      "file": "rxresource-status.html"
+    },
+    {
+      "file": "rxresource-error.html"
+    },
+    {
+      "file": "rxresource-isloading.html"
+    },
+    {
+      "file": "store-using-rxresource-using-properties.html"
+    },
+    {
+      "file": "store-using-rxresource-as-a-readonly-res.html"
+    },
+    {
+      "file": "exercise-3-signal-store.html"
+    },
+    {
+      "file": "state-management-libraries.html"
+    },
+    {
+      "file": "ngrx-signal-store.html"
+    },
+    {
+      "file": "ngrx-the-enterprise-workhorse.html"
+    },
+    {
+      "file": "ngrx-component-store-local-state-big-ben.html"
+    },
+    {
+      "file": "ngxs-decorator-driven.html"
+    },
+    {
+      "file": "rxjs-with-services-the-classic.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    },
+    {
+      "file": "credits.html"
+    }
+  ]
+}

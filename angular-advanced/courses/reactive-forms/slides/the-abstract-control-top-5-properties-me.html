@@ -1,0 +1,30 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>The abstract control - top 5 properties &amp; methods</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:648px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>
+<span style="color:#FF8C00">value</span> - the current value of the abstract control. Valid or not</li>
+	<li style="color:rgb(255, 255, 255)">
+<span style="color:rgb(255, 140, 0)">invalid</span>&nbsp;or <span style="color:rgb(255, 140, 0)">valid</span>&nbsp;- the current validity state of the abstractcontrol</li>
+	<li>
+<span style="color:#FF8C00">valueChanges</span> - a data stream of change events</li>
+	<li>
+<span style="color:rgb(255, 140, 0)">reset</span> - initialize/resets the abstract controls values</li>
+	<li>
+<span style="color:#FF8C00">patchValue</span> - updates the abstract controls values</li>
+</ul>
+  </div>
+  <aside class="notes">See the top 5 demo. Talk about reset vs. patch,
+Reset marks the control as untouched and pristine.
+patchValue just sets the valus.
+
+When to use what? 
+
+Talk about emitEvent - and why it is interesting in regards to custom controls and also when we reset the form and don't want fx. new api calls based on form value
+
+Talk about css classes and inspect the DOM
+
+Can a control be !valid and !invalid - Yes, the control is disabled (show example in top 5) and when we use async validators. More about them later</aside>
+</section>

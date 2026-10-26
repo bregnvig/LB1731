@@ -1,0 +1,169 @@
+{
+  "title": "Routing",
+  "slides": [
+    {
+      "file": "routing.html"
+    },
+    {
+      "file": "i-assume.html"
+    },
+    {
+      "file": "recap.html"
+    },
+    {
+      "file": "why.html"
+    },
+    {
+      "file": "defining-a-route.html"
+    },
+    {
+      "file": "create-routing-module.html"
+    },
+    {
+      "file": "where-to-show-the-route.html"
+    },
+    {
+      "file": "navigation.html"
+    },
+    {
+      "file": "placeholders-for-primitive-values.html"
+    },
+    {
+      "file": "matrix-parameters-the-complex-ones.html"
+    },
+    {
+      "file": "reading-placeholders-matrix-parameters.html"
+    },
+    {
+      "file": "reading-query-parameters.html"
+    },
+    {
+      "file": "reading-matrix-or-query-parameters-at-co.html"
+    },
+    {
+      "file": "exercise-1-add-routes-to-playground-app.html"
+    },
+    {
+      "file": "exercise-1-add-routes-to-playground-app-2.html"
+    },
+    {
+      "file": "matrix-vs-query-parameters.html"
+    },
+    {
+      "file": "fragments-of-a-url.html"
+    },
+    {
+      "file": "matrix-parameters-path-segment-params.html"
+    },
+    {
+      "file": "query-parameters-url-params.html"
+    },
+    {
+      "file": "guards.html"
+    },
+    {
+      "file": "guards-2.html"
+    },
+    {
+      "file": "guard-canactivate.html"
+    },
+    {
+      "file": "guard-canactivatechild.html"
+    },
+    {
+      "file": "guard-candeactivate.html"
+    },
+    {
+      "file": "guard-canload.html"
+    },
+    {
+      "file": "angular-functional-router-guard.html"
+    },
+    {
+      "file": "function-guards.html"
+    },
+    {
+      "file": "guard-canactivate-2.html"
+    },
+    {
+      "file": "guard-candeactivate-2.html"
+    },
+    {
+      "file": "applying-the-guard-before-v14.html"
+    },
+    {
+      "file": "applying-the-functional-guard.html"
+    },
+    {
+      "file": "exercise-2-restrict-access-with-auth-gua.html"
+    },
+    {
+      "file": "exercise-2-restrict-access-with-auth-gua-2.html"
+    },
+    {
+      "file": "resolver.html"
+    },
+    {
+      "file": "a-resolver-before-v14.html"
+    },
+    {
+      "file": "a-functional-resolver-after-v14.html"
+    },
+    {
+      "file": "applying-the-resolver.html"
+    },
+    {
+      "file": "read-data-set-by-resolver.html"
+    },
+    {
+      "file": "data.html"
+    },
+    {
+      "file": "setting-static-data.html"
+    },
+    {
+      "file": "reading-static-data-in-the-guard.html"
+    },
+    {
+      "file": "how-to-use-the-url-to-save-app-state.html"
+    },
+    {
+      "file": "url-state-change-flow.html"
+    },
+    {
+      "file": "exercise-3-save-state-in-the-url-1-2.html"
+    },
+    {
+      "file": "exercise-3-save-state-in-the-url-2-2.html"
+    },
+    {
+      "file": "lazy-loading.html"
+    },
+    {
+      "file": "routes-lazily-vs-eagerly-loaded-using-mo.html"
+    },
+    {
+      "file": "routes-lazily-vs-eagerly-loaded-using-ro.html"
+    },
+    {
+      "file": "lazy-loading-2.html"
+    },
+    {
+      "file": "lazy-loading-3.html"
+    },
+    {
+      "file": "applying-the-canload-guard.html"
+    },
+    {
+      "file": "lazy-loading-4.html",
+      "hidden": true
+    },
+    {
+      "file": "3rd-party-strategies-quicklink.html",
+      "hidden": true
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>After view init</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:160.813px;width:697.923px;height:auto;z-index:11;text-align:left">
+    <p>Is being called after the view, and it's children, has been initialized.</p>
+
+<p>Good for working with DOM elements and animations.&nbsp;</p>
+
+<p>Called once.</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:343.813px;width:808.277px;height:243.585px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-11">export class PlaygroundComponent implements AfterViewInit {
+ 
+  playgrounds = input&lt;Playground[]&gt;([]);
+  
+  constructor(private route: ActivatedRoute) { }
+  
+  ngAfterViewInit(): void {
+    if (this.route.snapshot.fragment) {
+      document.getElementById(this.route.snapshot.fragment).scrollIntoView();
+    }
+  }
+}</code></pre>
+  </div>
+  <aside class="notes">Show example. Need to use after view init. Otherwise the panel is not created. Show what happens if we do it in ngOnInit
+
+We'll talk more about ViewChild later
+
+There are others, but these are the ones I have used</aside>
+</section>

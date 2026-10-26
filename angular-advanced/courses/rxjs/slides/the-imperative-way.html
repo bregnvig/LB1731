@@ -1,0 +1,106 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>The imperative way</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:94.5px;top:91px;width:1091px;height:572px;z-index:11">
+    <pre style="font-size: 7px; line-height: 8px;"><code class="language-typescript" data-line-numbers="">import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/app/shared';
+
+@Component({
+  selector: 'loop-imperative-way',
+  templateUrl: './imperative-way.component.html',
+  styleUrls: ['./imperative-way.component.scss']
+})
+export class ImperativeWayComponent implements OnInit, OnDestroy {
+
+  playgrounds: Playground[] = [];
+  term: string = '';
+  trackById = (i: number, playground: Playground) =&gt; playground.id;
+
+  private fetchedPlaygrounds: Playground[] = this.playgrounds;
+  private location: Coordinate | undefined;
+  private fetchFailed = false;
+  private watchId: number | undefined;
+
+  constructor(private service: PlaygroundService, private locationService: LocationService) { }
+
+  ngOnInit(): void {
+    this.initializeLocation();
+    this.fetchPlaygrounds();
+    window.addEventListener('online', () =&gt; this.fetchFailed &amp;&amp; this.fetchPlaygrounds());
+  }
+
+  ngOnDestroy(): void {
+    this.watchId &amp;&amp; window.navigator.geolocation.clearWatch(this.watchId);
+  }
+
+  fetchPlaygrounds(): void {
+    this.service.playgrounds$.subscribe({
+      next: playgrounds =&gt; this.setPlaygrounds(playgrounds),
+      error: error =&gt; error instanceof HttpErrorResponse &amp;&amp; !window.navigator.onLine &amp;&amp; (this.fetchFailed = true),
+      complete: () =&gt; console.log('Complete'),
+    });
+  }
+
+  filterPlaygrounds() {
+    const term = this.term.toLocaleLowerCase();
+    this.playgrounds = this.fetchedPlaygrounds.filter(p =&gt; p.name.toLocaleLowerCase().includes(term));
+  }
+
+  getDistance(playground: Playground): string | undefined {
+    return this.location &amp;&amp; `${Math.round(this.locationService.getDistance(playground.position, this.location))}m`;
+  }
+
+  private setPlaygrounds(playgrounds: Playground[]) {
+    this.fetchFailed = false;
+    this.fetchedPlaygrounds = playgrounds;
+    this.filterPlaygrounds();
+    this.sortPlaygrounds();
+  }
+
+  private updateLocation(location: Coordinate) {
+    console.log('Location updated', location);
+
+    this.location = location;
+    this.sortPlaygrounds();
+  }
+
+  private sortPlaygrounds() {
+    if (this.location &amp;&amp; this.playgrounds?.length) {
+      const getDistance = this.locationService.getDistance;
+      const location = this.location;
+      const sortFn = (a: Playground, b: Playground) =&gt; getDistance(a.position, location) - getDistance(b.position, location);
+      this.playgrounds.sort(sortFn);
+    }
+  }
+
+  private initializeLocation() {
+    this.watchId = window.navigator.geolocation.watchPosition(position =&gt; {
+      this.updateLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    });
+  }
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:340px;top:668px;width:600px;height:auto;z-index:12">
+    <p><span style="font-size:0.7em">(Let's look at the code in the editor instead)</span></p>
+  </div>
+  <aside class="notes">SHOW DEMO
+
+Show there is a scrollbar
+
+Try to change to location. The sorting changes. But now filter. Notice how the sorting is screwed up? This is because there is a small error in the code. Line 43. We are filtering the original non-sorted array of playgrounds
+
+Notice the state term, fetchedPlaygrounds, location, fetchedFailed, watchId. Even playgrounds. Plus four different private methods spread over the component.
+
+Imperative code is characterized by explicit control flow, manual iteration, and direct manipulation of state:
+
+Imperative programming tells the program exactly what to do and in what order by: focusing on explicitly describing how to achieve a result by providing step-by-step instructions.
+Declarative programming delegates the "how" to underlying systems or abstractions by: focusing on describing what the desired outcome should be, without specifying the exact steps to achieve it.
+
+
+</aside>
+</section>

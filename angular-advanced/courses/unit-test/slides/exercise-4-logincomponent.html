@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:72px;width:1177.9px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4: LoginComponent</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:144px;width:1078.69px;height:auto;z-index:11;text-align:left">
+    <ol>
+	<li>Create a LoginComponent using the Angular CLI: <span style="color:rgb(255, 140, 0)">ng g c login</span>
+</li>
+	<li>Notice the command created four files: <span style="color:rgb(255, 140, 0)">login.component.ts/.spec.ts/.scss/.html</span>
+</li>
+	<li><span style="color:rgb(255, 255, 255)">Replace the four files <a href="https://gist.github.com/johannesnormannjensen/d63eb742898024fd95a8e90884711cbf" target="_blank">with this</a></span></li>
+	<li>Create a new test in <span style="color:rgb(255, 140, 0)">login.component.spec.ts</span>&nbsp;with an <span style="color:rgb(255, 140, 0)">expectation message</span><span style="color:rgb(255, 255, 255)">&nbsp;"should call login with email &amp; password from form"</span>
+</li>
+	<li>Setup the test <a href="https://gist.github.com/johannesnormannjensen/77ec8aa92bca21285a8aca8921c41418" target="_blank">like this</a><span style="color:rgb(255, 255, 255)">&nbsp;and see the test fail.</span>
+</li>
+	<li>Implement the login method in <span style="color:rgb(255, 140, 0)">login.component.ts</span><span style="color:rgb(255, 255, 255)">&nbsp;and make the test pass.</span>
+</li>
+	<li>Create a new test with an <span style="color:rgb(255, 140, 0)">expectation message</span>&nbsp;"should not login when form is invalid".</li>
+	<li>Setup the test like before but with invalid input to the form. Change the expect to fit the <span style="color:rgb(255, 140, 0)">expectation message</span><span style="color:rgb(255, 255, 255)">&nbsp;</span>of the test. See the test fail.</li>
+	<li>Make the test pass. You can use <span style="color:rgb(255, 140, 0)">this.fg.valid</span><span style="color:rgb(255, 255, 255)">&nbsp;</span>to check the validity of the form.</li>
+	<li>When you're done <span style="color:rgb(255, 140, 0)">login.component.spec.ts</span>&nbsp;could look something like <a href="https://gist.github.com/johannesnormannjensen/2a3ca599275b28260c7f64c627fdad85" target="_blank">this</a>
+</li>
+</ol>
+  </div>
+  <aside class="notes">Ask what kinds of units we were testing here. State change (for validity) &amp; API call.</aside>
+</section>

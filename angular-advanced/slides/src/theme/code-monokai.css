@@ -1,0 +1,13 @@
+/* Monokai code theme for highlight.js tokens. Colors follow the Monokai palette by Wimer Hazenberg as used by highlight.js's monokai style (BSD-3-Clause). */
+
+.reveal .block[data-theme='monokai'] code {
+  background: #272822;
+  color: #ddd;
+}
+
+.reveal [data-theme='monokai'] :is(.hljs-attr, .hljs-name, .hljs-tag) { color: #f92672; }
+.reveal [data-theme='monokai'] :is(.hljs-keyword, .hljs-literal) { color: #f92672; font-weight: 700; }
+.reveal [data-theme='monokai'] :is(.hljs-built_in, .hljs-string, .hljs-subst) { color: #a6e22e; }
+.reveal [data-theme='monokai'] .hljs-title { color: #a6e22e; font-weight: 700; }
+.reveal [data-theme='monokai'] .hljs-comment { color: #75715e; }
+.reveal [data-theme='monokai'] :is(.hljs-function, .hljs-number, .hljs-params) { color: #ddd; }

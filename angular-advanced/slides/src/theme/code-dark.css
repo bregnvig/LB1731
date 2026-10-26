@@ -1,0 +1,15 @@
+/* Dark code theme (the deck's default) for highlight.js tokens. Colors follow the Seti syntax palette by Jesse Weed (MIT). */
+
+.reveal .block[data-theme='dark'] code {
+  background: #151718;
+  color: #d4d7d6;
+}
+
+.reveal [data-theme='dark'] :is(.hljs-attribute, .hljs-built_in, .hljs-class, .hljs-name) { color: #9fca56; }
+.reveal [data-theme='dark'] .hljs-comment { color: #41535b; }
+.reveal [data-theme='dark'] .hljs-keyword { color: #e6cd69; }
+.reveal [data-theme='dark'] :is(.hljs-literal, .hljs-number) { color: #cd3f45; }
+.reveal [data-theme='dark'] :is(.hljs-meta, .hljs-params, .hljs-string, .hljs-subst, .hljs-symbol, .hljs-tag, .hljs-title) { color: #55b5db; }
+.reveal [data-theme='dark'] .hljs-template-variable { color: #a074c4; }
+.reveal [data-theme='dark'] :is(.hljs-attr, .hljs-function, .hljs-regexp, .hljs-type) { color: #d4d7d6; }
+.reveal [data-theme='dark'] .hljs-tag .hljs-attr { color: #55b5db; }

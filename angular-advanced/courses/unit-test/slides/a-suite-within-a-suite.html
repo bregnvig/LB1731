@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>A suite within a suite</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:248px;width:1076px;height:auto;z-index:11">
+    <h2>Improve the readability of your test suites</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:320px;top:360px;width:640px;height:auto;z-index:13;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="">describe('AuthService', () =&gt; {
+  describe('Initially', () =&gt; {
+    //...
+  });
+  describe('When logged in', () =&gt; {
+    //...
+  });
+  describe('When not logged in', () =&gt; {
+    //...
+  });
+});</code></pre>
+  </div>
+  <aside class="notes">It is not illegal to have multiple describes in a describe. 
+This can vastly improve the readability of your code. 
+Instead of writing in the test "when not logged in should throw error" + "when not logged in should..."
+Each describe is self contained so they won't touch each others module setup. </aside>
+</section>

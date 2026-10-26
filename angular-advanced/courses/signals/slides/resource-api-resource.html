@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:816px;height:auto;z-index:10;text-align:left">
+    <h2>Resource Api - resource</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:576px;width:813px;height:auto;z-index:11">
+    <p>Use this if you need custom logic, local persistence or any other advanced strategies 🤓</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:640px;height:auto;z-index:12;text-align:left">
+    <p>The most flexible option</p>
+
+<p>&nbsp;</p>
+
+<p>You define how data is fetched</p>
+
+<p>&nbsp;</p>
+
+<p>Works with <strong>any</strong>&nbsp;async source like</p>
+
+<ul>
+	<li>HTTP</li>
+	<li>IndexedDB</li>
+	<li>You name it!</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:720px;top:245px;width:543.817px;height:auto;z-index:14">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// IndexedDB using idb
+
+const notes = resource({
+  loader: async () =&gt; {
+    const db = await openDB('notes', 1);
+    return db.getAll('entries');
+  }
+});</code></pre>
+  </div>
+</section>

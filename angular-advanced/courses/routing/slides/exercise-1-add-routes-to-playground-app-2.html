@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:976px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - Add routes to playground app 2/2</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:201px;width:939px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>Currently the sidebar emits an event when a playground is selected using the click event. Change that to use the <span style="color:#FF8C00">routerLink</span>&nbsp;instead.</li>
+	<li>Since we no longer emit an event, delete the <span style="color:#FF8C00">selected</span>&nbsp;property from the sidebar. Fix any compile errors</li>
+	<li>In the map template we can no longer listen to the selected event. So delete that.</li>
+	<li>Which mean that the <span style="color:#FF8C00">playground$</span>&nbsp;property in <span style="color:#FF8C00">map</span>&nbsp;component must be changed from a <span style="color:#FF8C00">Subject</span>&nbsp;to an <span style="color:#FF8C00">Observable</span>&nbsp;type.</li>
+	<li>Create an observable using the <span style="color:#FF8C00">ActivatedRoute</span>&nbsp;listening for route params changes. Find the playground using the placeholder value and the <span style="color:#FF8C00">getById</span>&nbsp;method from the playground service. Assign this observable to the <span style="color:#FF8C00">playground$</span>&nbsp;property</li>
+</ul>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:260px;top:662px;width:600px;height:auto;z-index:12">
+    <h2>Done! Is it working?<span style="color:rgb(204, 204, 204)">😃</span>
+</h2>
+  </div>
+</section>

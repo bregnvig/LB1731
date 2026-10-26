@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>The injection token</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:164.5px;top:192.5px;width:951px;height:auto;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px;"><code class="language-typescript" data-line-numbers="">class InjectionToken&lt;T&gt; {
+  constructor(
+    _desc: string, 
+    options?: { 
+      providedIn?: Type&lt;any&gt; | "root" | "platform" | "any"; 
+      factory: () =&gt; T; 
+    }
+  )
+  protected _desc: string
+  toString(): string
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:84px;width:1076px;height:auto;z-index:12">
+    <h3><span style="font-size:0.7em">From the Angular API</span></h3>
+  </div>
+  <aside class="notes">Again the any and type are deprecated</aside>
+</section>

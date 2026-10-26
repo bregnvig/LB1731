@@ -1,0 +1,20 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:41px;width:1076px;height:auto;z-index:10">
+    <h2 style="color:rgb(255, 255, 255); text-align:left">provideAppInitializer</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:387px;width:700px;height:144px;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">[
+  provideAppInitializer(() =&gt; {
+    const service = inject(PlaygroundService);
+    return timer(2000).pipe(switchMap(() =&gt; service.playgrounds$));
+  }),
+]</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:105.747px;width:800px;height:auto;z-index:12">
+    <p style="text-align:left">A callback function that is being executed prior to<span style="color:rgb(255, 255, 255); text-align:left">&nbsp;be executed before the application is made available</span></p>
+
+<p style="text-align:left">&nbsp;</p>
+
+<p style="text-align:left">If the function returns an observable or a promise, initialization is not complete, until it is either <code><span style="color:#FF8C00">complete</span></code>&nbsp;or <span style="color:#FF8C00"><code>resolved</code></span>.</p>
+  </div>
+</section>

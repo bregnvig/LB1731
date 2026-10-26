@@ -1,0 +1,27 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:194px;width:1076px;height:auto;z-index:10">
+    <h1>"The unhappy path"</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:257px;width:1076px;height:auto;z-index:11">
+    <h2>Your code is not impervious to Wrongful INput</h2>
+  </div>
+  <aside class="notes">We want to come up with unhappy paths for our tests so that WE can make decisions on how to respond to that.
+For instance the login function could handle null emails or passwords. This way we can avoid sending the backend requests when we don't have to. 
+
+Happy path vs. Unhappy path
+During product design and development, stakeholders focus on intended user behavior. Product owners describe this happy path with business requirements. Engineers push code to enable users to do these things. A user who demonstrates this expected behavior follows the happy path.
+
+These are examples of happy paths:
+
+User creates a new account
+User signs in with their new credentials
+User retrieves information about their account
+But what happens when there’s unintended behavior, like when a user submits invalid inputs? These unhappy path scenarios are often neglected in design and development. But with enough traffic, unexpected inputs will inevitably come from both well-intentioned and malicious users.
+
+These are examples of unhappy paths:
+
+User creates a new account without providing all required inputs
+User signs in with invalid credentials
+User pastes a SQL query that gets executed (maliciously or unintentionally)
+A strong test plan covers both happy and unhappy paths. Positive test cases describe happy path scenarios, where errors result in failed tests. Negative test cases describe unhappy path scenarios, where expected errors result in passed tests.</aside>
+</section>

@@ -1,0 +1,39 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:0px;top:248px;width:1280px;height:auto;z-index:10">
+    <h2>Tobe or not tobe</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:0px;top:184px;width:1280px;height:auto;z-index:11">
+    <h1>Expect</h1>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-2" data-fragment-index="0" style="left:240px;top:399.6px;width:320px;height:auto;z-index:12">
+    <p style="text-align:left">expect(x).<strong>toBe</strong>(...):</p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-3" data-fragment-index="0" style="left:720px;top:435.6px;width:320px;height:auto;z-index:13">
+    <ul>
+	<li style="text-align:left">deep equality</li>
+	<li style="text-align:left">same structure (even if different ref)</li>
+</ul>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-4" data-fragment-index="0" style="left:720px;top:399.6px;width:320px;height:auto;z-index:14">
+    <p style="text-align:left"><span style="color:rgb(255, 255, 255); text-align:left">expect(x).</span><strong>toEqual</strong><span style="color:rgb(255, 255, 255); text-align:left">(...):</span></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-5" data-fragment-index="0" style="left:240px;top:435.6px;width:320px;height:auto;z-index:15;transform:rotate(0deg)">
+    <ul>
+	<li style="text-align:left">Object.is(x, y)</li>
+	<li style="text-align:left">identity (exactly same value)</li>
+</ul>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-6" data-fragment-index="0" style="left:440px;top:612px;width:400px;height:auto;z-index:16;transform:rotate(0deg)">
+    <p style="text-align:left">(If in doubt just use toEqual)</p>
+  </div>
+  <aside class="notes">Explain about toBe vs toEqual
+
+Intent is obvious, and Obvious is always better. 
+It is reasonable to expect other developers to be familiar with how === works and to understand we are purposefully checking if both variables reference the same value.
+
+Consistency. Using .toEqual for this will match the rest of your tests. It should be the default choice when doing matchers.
+
+Reduces reliance on assumptions. (Assuming everyone knows how .toBe works. Which they don't. I literally had to correct the stack overflow post after looking up the Jest source code).
+
+Reduces need for communication. (Verifying that everyone knows how .toBe, and by extension, Object.is works.)</aside>
+</section>

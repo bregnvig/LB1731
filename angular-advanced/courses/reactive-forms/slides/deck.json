@@ -1,0 +1,150 @@
+{
+  "title": "Reactive forms",
+  "slides": [
+    {
+      "file": "reactive-forms.html"
+    },
+    {
+      "file": "reactive-forms-2.html"
+    },
+    {
+      "file": "reactive-forms-3.html"
+    },
+    {
+      "file": "key-differences.html"
+    },
+    {
+      "file": "template-driven-form.html"
+    },
+    {
+      "file": "model-driven-form.html"
+    },
+    {
+      "file": "i-assume.html"
+    },
+    {
+      "file": "recap.html"
+    },
+    {
+      "file": "what-is-a-control.html"
+    },
+    {
+      "file": "the-abstract-control.html"
+    },
+    {
+      "file": "the-abstract-control-top-5-properties-me.html"
+    },
+    {
+      "file": "the-form-control.html"
+    },
+    {
+      "file": "the-form-array.html"
+    },
+    {
+      "file": "the-form-group.html"
+    },
+    {
+      "file": "a-template-example.html"
+    },
+    {
+      "file": "building-a-form-using-the-form-builder-v.html"
+    },
+    {
+      "file": "building-a-form-using-the-form-builder-v-2.html"
+    },
+    {
+      "file": "building-a-form-using-the-form-builder-v-3.html"
+    },
+    {
+      "file": "exercise-1-edit-a-playground.html"
+    },
+    {
+      "file": "validation.html"
+    },
+    {
+      "file": "form-validation.html"
+    },
+    {
+      "file": "built-in-validators.html"
+    },
+    {
+      "file": "custom-validators.html"
+    },
+    {
+      "file": "async-custom-validators.html"
+    },
+    {
+      "file": "exercise-2-1-add-built-in-validation.html"
+    },
+    {
+      "file": "exercise-2-2-add-custom-validator.html"
+    },
+    {
+      "file": "exercise-2-3-add-async-custom-validator.html"
+    },
+    {
+      "file": "custom-controls.html"
+    },
+    {
+      "file": "what-is-a-custom-control.html"
+    },
+    {
+      "file": "a-form.html"
+    },
+    {
+      "file": "another-form.html"
+    },
+    {
+      "file": "so-how-about-a-custom-control.html"
+    },
+    {
+      "file": "custom-controls-the-concepts.html"
+    },
+    {
+      "file": "introducing-the-control-value-accessor.html"
+    },
+    {
+      "file": "register-on-change.html"
+    },
+    {
+      "file": "write-value.html"
+    },
+    {
+      "file": "set-disabled-state.html"
+    },
+    {
+      "file": "register-on-touched.html"
+    },
+    {
+      "file": "are-we-done-yet.html"
+    },
+    {
+      "file": "providing-a-control.html"
+    },
+    {
+      "file": "validity-of-a-custom-control.html"
+    },
+    {
+      "file": "who-controls-the-validity-of-a-custom-co.html"
+    },
+    {
+      "file": "the-custom-controls-validity.html"
+    },
+    {
+      "file": "implement-the-validate-method.html"
+    },
+    {
+      "file": "implement-the-validate-method-2.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-3-add-a-custom-control.html"
+    },
+    {
+      "file": "exercise-3-add-a-custom-control-2.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

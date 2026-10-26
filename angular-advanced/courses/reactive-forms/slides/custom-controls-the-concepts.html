@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:896px;height:auto;z-index:10;text-align:left">
+    <h2>Custom controls - the concepts</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:159px;width:788.766px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>You either add functionality to a simple input field. E.g the address element from before</li>
+	<li>Or you group the input fields the <em>belongs</em>&nbsp;together.. E.g the address form group from before</li>
+	<li>Propagate changes - When a change occurs in the custom control the form that uses this custom control must be notified</li>
+	<li>Write value - When a control is to be initialized with a value we write the value to the control, using either patchValue or reset</li>
+	<li>Enable/disable - when the parent form want a control enabled or disabled the custom control is notified and should handle the event.</li>
+	<li>Marked as touched - When the inner controls are touched, the customer control must propagate this to the parent.</li>
+</ul>
+  </div>
+  <aside class="notes">What you write is what you propagate! Simple as that! Always do that!
+
+Marking as touched is all about CSS classes</aside>
+</section>

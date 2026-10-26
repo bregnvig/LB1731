@@ -1,0 +1,184 @@
+{
+  "title": "RxJS",
+  "slides": [
+    {
+      "file": "rxjs.html"
+    },
+    {
+      "file": "what-is-reactive-programming.html"
+    },
+    {
+      "file": "why-not-do-it-the-imperative-way.html"
+    },
+    {
+      "file": "use-case.html"
+    },
+    {
+      "file": "the-imperative-way.html"
+    },
+    {
+      "file": "the-rxjs-way.html"
+    },
+    {
+      "file": "benefits.html"
+    },
+    {
+      "file": "creators.html"
+    },
+    {
+      "file": "creators-2.html"
+    },
+    {
+      "file": "combinelatest.html"
+    },
+    {
+      "file": "combinelatest-rxjs-v7-5.html"
+    },
+    {
+      "file": "forkjoin.html"
+    },
+    {
+      "file": "merge.html",
+      "hidden": true
+    },
+    {
+      "file": "zip.html"
+    },
+    {
+      "file": "of.html"
+    },
+    {
+      "file": "an-observable-and-an-observer-all-in-one.html"
+    },
+    {
+      "file": "exercise-time.html"
+    },
+    {
+      "file": "operators.html"
+    },
+    {
+      "file": "operators-2.html"
+    },
+    {
+      "file": "map-operator.html"
+    },
+    {
+      "file": "filter-operator.html"
+    },
+    {
+      "file": "multicast-sharing.html"
+    },
+    {
+      "file": "share.html"
+    },
+    {
+      "file": "sharereplay-1.html"
+    },
+    {
+      "file": "higher-order-observable.html"
+    },
+    {
+      "file": "example-using-switchmap.html"
+    },
+    {
+      "file": "switchmap-mergemap-exhaustmap-and-concat.html"
+    },
+    {
+      "file": "first.html"
+    },
+    {
+      "file": "debouncetime.html"
+    },
+    {
+      "file": "startwith.html"
+    },
+    {
+      "file": "withlatestfrom.html"
+    },
+    {
+      "file": "distinctuntilchanged-simple-data-types.html"
+    },
+    {
+      "file": "distinctuntilchanged-complex-data-types.html"
+    },
+    {
+      "file": "rxjs-operators.html"
+    },
+    {
+      "file": "exercise-time-2.html"
+    },
+    {
+      "file": "create-your-own-observable.html"
+    },
+    {
+      "file": "create-a-watch-geo-location-creator.html"
+    },
+    {
+      "file": "subscriber-error-error.html"
+    },
+    {
+      "file": "custom-operators.html"
+    },
+    {
+      "file": "what-is-an-operator.html"
+    },
+    {
+      "file": "world-simplest-custom-operator.html"
+    },
+    {
+      "file": "exploding-head-operator.html"
+    },
+    {
+      "file": "cache-it-on-error-reuse-and-retry-if-off.html"
+    },
+    {
+      "file": "but-there-is-an-easier-way.html"
+    },
+    {
+      "file": "filter-vs-truthy-falsy.html"
+    },
+    {
+      "file": "filter-vs-truthy-falsy-as-a-guard.html"
+    },
+    {
+      "file": "sharereplay-vs-sharelatest.html"
+    },
+    {
+      "file": "retrywhen-vs-retrywhenonline.html"
+    },
+    {
+      "file": "exercise-time-3.html"
+    },
+    {
+      "file": "subscribe-unsubscribe-strategies.html"
+    },
+    {
+      "file": "let-s-start-with-why.html"
+    },
+    {
+      "file": "using-first.html"
+    },
+    {
+      "file": "using-an-abstract-super-class.html",
+      "hidden": true
+    },
+    {
+      "file": "using-firstvaluefrom.html"
+    },
+    {
+      "file": "using-async-pipe.html"
+    },
+    {
+      "file": "using-takeuntildestroyed.html"
+    },
+    {
+      "file": "using-ngneat-until-destroy-pre-v19.html"
+    },
+    {
+      "file": "exercise-time-4.html"
+    },
+    {
+      "file": "extra-exercise.html"
+    }
+  ]
+}

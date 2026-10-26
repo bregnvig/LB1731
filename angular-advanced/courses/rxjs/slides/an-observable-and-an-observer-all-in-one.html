@@ -1,0 +1,90 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>An Observable and an Observer - all in one!</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:240px;top:121px;width:880px;height:234px;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px;"><code class="language-typescript">const mySubject$ = new Subject&lt;boolean&gt;();
+
+// Replay latest event. Default to infinity🤯
+const myReplay$ = new ReplaySubject&lt;boolean&gt;(1); 
+
+// Initial value
+const myBehavior$ = new BehaviorSubject&lt;boolean&gt;(true);
+</code></pre>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:240px;top:431px;width:720px;height:0px;z-index:13"></div>
+  <div class="block" data-type="line" data-name="line-1" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:902px;top:397.5px;width:0px;height:67px;z-index:12"></div>
+  <div class="block" data-type="text" data-name="text-1" style="left:998px;top:413px;width:180px;height:auto;z-index:14;text-align:left">
+    <p>Subject</p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-2" data-x1="0" data-y1="33.5" data-x2="34" data-y2="0" data-color="#ffe599" data-width="4" data-start="arrow" data-end="none" style="left:454px;top:397.5px;width:34px;height:33.5px;z-index:15"></div>
+  <div class="block" data-type="text" data-name="text-2" style="left:488px;top:371px;width:322px;height:auto;z-index:16;color:rgb(255, 229, 153)">
+    <p style="text-align:left"><span style="font-size:0.7em">Subscribe. Will only receive event B</span></p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-3" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:240px;top:524.5px;width:720px;height:0px;z-index:18"></div>
+  <div class="block" data-type="line" data-name="line-2" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:902px;top:491px;width:0px;height:67px;z-index:17"></div>
+  <div class="block" data-type="text" data-name="text-3" style="left:998px;top:506.5px;width:180px;height:auto;z-index:19;text-align:left">
+    <p>ReplaySubject</p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-4" data-x1="0" data-y1="33.5" data-x2="34" data-y2="0" data-color="#ffe599" data-width="4" data-start="arrow" data-end="none" style="left:454px;top:491px;width:34px;height:33.5px;z-index:20"></div>
+  <div class="block" data-type="text" data-name="text-4" style="left:488px;top:464.5px;width:399px;height:auto;z-index:21;color:rgb(255, 229, 153)">
+    <p style="text-align:left"><span style="font-size:0.7em">Subscribe. Will receive event B &amp; C</span></p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-5" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:240px;top:638.25px;width:720px;height:0px;z-index:23"></div>
+  <div class="block" data-type="line" data-name="line-3" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:902px;top:604.75px;width:0px;height:67px;z-index:22"></div>
+  <div class="block" data-type="text" data-name="text-5" style="left:998px;top:620.25px;width:216px;height:auto;z-index:24;text-align:left">
+    <p>BehaviorSubject</p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-6" data-x1="0" data-y1="51.5" data-x2="80" data-y2="0" data-color="#ffe599" data-width="4" data-start="arrow" data-end="none" style="left:400px;top:586.75px;width:80px;height:51.5px;z-index:25"></div>
+  <div class="block" data-type="text" data-name="text-6" style="left:488px;top:568.75px;width:447px;height:auto;z-index:26;color:rgb(255, 229, 153)">
+    <p style="text-align:left"><span style="font-size:0.7em">Subscribe. Will receive initial value and event A</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-7" style="left:348px;top:684px;width:600px;height:auto;z-index:27">
+    <p><span style="font-size:0.7em"><span style="color:rgb(255, 255, 255)">Let's look at our rxjs-way example</span></span></p>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" style="left:295.5px;top:407px;width:49px;height:48px;z-index:28">
+    <div class="block" data-type="shape" data-name="shape-1" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:29"></div>
+    <div class="block" data-type="text" data-name="text-8" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:30">
+      <p><span style="color:#000000"><span style="font-size:21px">A</span></span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-2" style="left:536px;top:408px;width:49px;height:48px;z-index:31">
+    <div class="block" data-type="shape" data-name="shape-2" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:32"></div>
+    <div class="block" data-type="text" data-name="text-9" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:33">
+      <p><font color="#000000"><span style="font-size:21px">B</span></font></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-3" style="left:295.5px;top:500.5px;width:49px;height:48px;z-index:34">
+    <div class="block" data-type="shape" data-name="shape-3" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:35"></div>
+    <div class="block" data-type="text" data-name="text-10" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:36">
+      <p><span style="color:#000000"><span style="font-size:21px">A</span></span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-4" style="left:375.5px;top:500.5px;width:49px;height:48px;z-index:37">
+    <div class="block" data-type="shape" data-name="shape-4" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:38"></div>
+    <div class="block" data-type="text" data-name="text-11" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:39">
+      <p><font color="#000000"><span style="font-size:21px">B</span></font></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-5" style="left:502.75px;top:614.25px;width:49px;height:48px;z-index:40">
+    <div class="block" data-type="shape" data-name="shape-5" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:41"></div>
+    <div class="block" data-type="text" data-name="text-12" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:42">
+      <p><span style="color:#000000"><span style="font-size:21px">A</span></span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-6" style="left:536px;top:500.5px;width:49px;height:48px;z-index:43">
+    <div class="block" data-type="shape" data-name="shape-6" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:44"></div>
+    <div class="block" data-type="text" data-name="text-13" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:45">
+      <p><span style="color:#000000"><span style="font-size:21px">C</span></span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-7" style="left:240px;top:614.25px;width:49px;height:48px;z-index:46">
+    <div class="block" data-type="shape" data-name="shape-7" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:47"></div>
+    <div class="block" data-type="text" data-name="text-14" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:48">
+      <p><span style="color:#000000"><span style="font-size:21px">I</span></span></p>
+    </div>
+  </div>
+  <aside class="notes">Talk about the refresh button. Talk about we are using combine latest again
+
+Talk about getting back to the switchMap later:  because it ensures only the latest request is processed, automatically cancels previous ones</aside>
+</section>

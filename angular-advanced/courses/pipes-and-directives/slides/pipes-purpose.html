@@ -1,0 +1,20 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Pipes - purpose</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:65px;top:216px;width:547.789px;height:auto;z-index:11;text-align:left">
+    <p style="color:rgb(255, 255, 255)">Pipes works within templates</p>
+
+<p style="color:#ffffff">Use pipes to style data</p>
+
+<p style="color:#ffffff">A pipe takes at least one value as input and <span style="color:rgb(255, 140, 0)">transform</span>s it to a desired output</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" style="left:80px;top:432px;width:890px;height:117px;z-index:12;font-size:130%">
+    <pre><code class="language-xml">&lt;p&gt;Today is {{ today }}&lt;/p&gt;
+&lt;!-- Today is Sat Jan 4 2021 08:39:44 GMT+0200 (CEST) --&gt;
+&lt;p&gt;Today is {{ today | date }}&lt;/p&gt;
+&lt;!-- Today is Jan 4, 2021 --&gt;</code></pre>
+  </div>
+  <aside class="notes">Tip  - You can provide a pipe, as you would any service, and then have it injected into a component. This is not the intent of pipes though. formatDate vs. DatePipe
+</aside>
+</section>

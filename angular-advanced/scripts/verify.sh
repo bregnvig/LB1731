@@ -1,55 +1,45 @@
 #!/usr/bin/env bash
-# Depends on: install.sh (smart_install)
+# verify_directories runs npm install in angular-advanced/ first; projects share its node_modules.
 
 verify_directory() {
   local dir="$1"
-  local install_result="SKIP"
   local build_result="SKIP"
   local serve_result="SKIP"
 
   if [[ ! -d "$dir" || ! -f "$dir/package.json" ]]; then
     echo "Skipping $dir (not found or no package.json)" >&2
-    echo "$dir|SKIP|SKIP|SKIP"
+    echo "$dir|SKIP|SKIP"
     return 1
   fi
 
   echo "" >&2
   echo "--- Verifying $dir ---" >&2
 
-  # Step 1: Install
-  if smart_install "$dir" >&2; then
-    install_result="PASS"
-  else
-    install_result="FAIL"
-    echo "$dir|$install_result|$build_result|$serve_result"
-    return 1
-  fi
-
   # Unit-test course: students only run `npm test`, and app-routes.ts imports the
   # LoginComponent they create in exercise 4, so build/serve can't pass. Test instead.
   if [[ "$dir" == */unit-test/* ]]; then
     if (cd "$dir" && CI=true npx ng test --watch=false) >&2 2>&1; then
       build_result="PASS"
-    elif [[ "$dir" == courses/unit-test/labs/exercise-1 ]]; then
-      # Expected: step 1 of the exercise creates service/auth.service (ng g s service/auth)
+    elif [[ "$dir" == courses/unit-test/step-1 ]]; then
+      # Expected: lab 1 starts by creating service/auth.service (ng g s service/auth)
       build_result="XFAIL"
     else
       build_result="FAIL"
     fi
-    echo "$dir|$install_result|$build_result|N/A"
+    echo "$dir|$build_result|N/A"
     return 0
   fi
 
-  # Step 2: Build
+  # Step 1: Build
   if (cd "$dir" && npx ng build) >&2 2>&1; then
     build_result="PASS"
   else
     build_result="FAIL"
-    echo "$dir|$install_result|$build_result|$serve_result"
+    echo "$dir|$build_result|$serve_result"
     return 1
   fi
 
-  # Step 3: Serve — start, wait for compilation, kill
+  # Step 2: Serve — start, wait for compilation, kill
   local serve_log
   serve_log=$(mktemp)
 
@@ -81,12 +71,14 @@ verify_directory() {
   wait "$serve_pgid" 2>/dev/null || true
   rm -f "$serve_log"
 
-  echo "$dir|$install_result|$build_result|$serve_result"
+  echo "$dir|$build_result|$serve_result"
 }
 
 verify_directories() {
   local directories=("$@")
   local results=()
+
+  npm install || { echo "npm install failed"; return 1; }
 
   for dir in "${directories[@]}"; do
     local result
@@ -99,14 +91,14 @@ verify_directories() {
   echo "========================================="
   echo "VERIFICATION SUMMARY"
   echo "========================================="
-  printf "%-45s %-10s %-10s %-10s\n" "Directory" "Install" "Build/Test" "Serve"
-  printf "%-45s %-10s %-10s %-10s\n" "---------" "-------" "----------" "-----"
+  printf "%-45s %-10s %-10s\n" "Directory" "Build/Test" "Serve"
+  printf "%-45s %-10s %-10s\n" "---------" "----------" "-----"
 
   local all_pass=true
   for result in "${results[@]}"; do
-    IFS='|' read -r dir install build serve <<< "$result"
-    printf "%-45s %-10s %-10s %-10s\n" "$dir" "$install" "$build" "$serve"
-    if [[ "$install" != "PASS" || ! "$build" =~ ^(PASS|XFAIL)$ || ! "$serve" =~ ^(PASS|N/A)$ ]]; then
+    IFS='|' read -r dir build serve <<< "$result"
+    printf "%-45s %-10s %-10s\n" "$dir" "$build" "$serve"
+    if [[ ! "$build" =~ ^(PASS|XFAIL)$ || ! "$serve" =~ ^(PASS|N/A)$ ]]; then
       all_pass=false
     fi
   done

@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:72px;width:686px;height:auto;z-index:10;text-align:left">
+    <h2>ExerCISE - Use an InjectionToken</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:132px;width:810px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">If not happy with the solution to exercise 1? Then goto the the <span style="color:#ff8c00">labs/di/exercise-2</span>&nbsp;directory</span></p>
+
+<p><span style="font-size:0.7em">Now that we know how to provide a string, let's change the service <span style="color:#ff8c00">playgrounds.service</span>&nbsp;to have the URL injected.</span></p>
+
+<p><span style="font-size:0.7em">Because there is really no reason to have two identical services, when the only difference is an URL.</span></p>
+
+<p><span style="font-size:0.7em">So add an <span style="color:#ff8c00">InjectionToken</span>, without a default implementation. Assign the injection token to a constant &nbsp;called <span style="color:#ff8c00">PLAYGROUNDS_URL</span>.</span></p>
+
+<p><span style="font-size:0.7em">Now provide the <span style="color:#ff8c00">PLAYGROUNDS_URL</span>&nbsp;in the <span style="color:#ff8c00">main.ts </span>using <span style="color:#ff8c00">useValue</span>. Create a new environment variable, in both environments, called <span style="color:#ff8c00">playgroundsURL</span>&nbsp;use the urls from the existing services.</span></p>
+
+<p><span style="font-size:0.7em">Finally you need to update the <span style="color:#ff8c00">PlaygroundService</span>&nbsp;to have the URL injected and used.</span></p>
+
+<p><span style="font-size:0.7em">You can now delete the <span style="color:#ff8c00">aarhus-playground.service.ts</span>&nbsp;if you feel like. That way you are also sure you are not referencing it anywhere.</span></p>
+
+<p><span style="font-size:0.7em">Try running both <span style="color:#ff8c00">npm run copenhagen</span>&nbsp;and <span style="color:#ff8c00">npm run aarhus</span>&nbsp;to see that it works</span></p>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:0px;top:137px;width:1280px;height:auto;z-index:10">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-xml" data-line-numbers="|5,9,13,19,23">&lt;form&gt;
+  &lt;div class="form-row"&gt;
+    &lt;div class="form-group col"&gt;
+      &lt;label for="street"&gt;Address&lt;/label&gt;
+      &lt;input id="street" [ngModel]="address.street" name="street" required type="text" class="form-control" (blur)="onBlur()"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group col-auto"&gt;
+      &lt;label for="streetNumber"&gt;Street no.&lt;/label&gt;
+      &lt;input id="streetNumber" required [ngModel]="address.streetNumber" name="streetNumber"  type="text" maxlength="6" class="form-control" (blur)="onBlur()"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group col-auto"&gt;
+      &lt;label for="floor"&gt;Floor&lt;/label&gt;
+      &lt;input id="floor" [ngModel]="address.floor" name="floor"  type="text" size="5" class="form-control" (blur)="onBlur()"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="form-row"&gt;
+    &lt;div class="form-group col-auto"&gt;
+      &lt;label for="zip"&gt;Zip&lt;/label&gt;
+      &lt;input id="zip" [ngModel]="address.zip" name="zip" required pattern="[1-9][\d]{3}" type="text" size="4" class="form-control" (blur)="onBlur()"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group col"&gt;
+      &lt;label for="city"&gt;City&lt;/label&gt;
+      &lt;input id="city" maxLengh="30" [ngModel]="address.city" name="city" required type="text" class="form-control" (blur)="onBlur()"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:36px;width:600px;height:auto;z-index:11">
+    <h2 style="text-align: left;">Template driven form</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:89px;width:600px;height:auto;z-index:12">
+    <p style="text-align:left">In 10 seconds - tell me fields and validation<span style="color:rgb(204, 204, 204)">🤯</span></p>
+  </div>
+</section>

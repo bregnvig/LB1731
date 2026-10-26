@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Cleanup Random service</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:142px;top:144px;width:996px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="15-18">@Injectable({
+  providedIn: 'root'
+})
+export class RandomService {
+
+  no: number = 0;
+
+  #subscription: Subscription | undefined;
+
+  constructor() {
+    this.#subscription = timer(0, 5000).pipe(
+      startWith(undefined),
+      map(() =&gt; Math.floor(Math.random() * 1000)),
+    ).subscribe(no =&gt; this.no = no);
+    inject(DestroyRef).onDestroy(() =&gt; {
+      console.log(`Service is being destroyed`);
+      this.#subscription?.unsubscribe();
+    });
+  }
+
+}</code></pre>
+  </div>
+  <aside class="notes">Today we would implement it with takUntilDestroyed</aside>
+</section>

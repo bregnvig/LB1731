@@ -1,8 +1,0 @@
-<leaflet [center]="center$ | async" [markers]="markers$ | async" />
-<loop-sidebar
-  [playgrounds]="playgrounds$ |async"
-  (edit)="edit($event)"
-  (selected)="playground$.next($event)"/>
-@if (playground$ | async; as playground) {
-<loop-footer [playground]="playground"/>
-}

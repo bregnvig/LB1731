@@ -1,0 +1,150 @@
+{
+  "title": "Pipes & directives",
+  "slides": [
+    {
+      "file": "pipes-directives.html"
+    },
+    {
+      "file": "pipes.html"
+    },
+    {
+      "file": "pipes-purpose.html"
+    },
+    {
+      "file": "pipes-parameters.html"
+    },
+    {
+      "file": "pipes-chaining.html"
+    },
+    {
+      "file": "built-in-pipes.html"
+    },
+    {
+      "file": "locale-id-dependent-pipes.html"
+    },
+    {
+      "file": "json-pipe.html"
+    },
+    {
+      "file": "keyvalue-pipe.html"
+    },
+    {
+      "file": "async-pipe.html"
+    },
+    {
+      "file": "how-to-build-your-own.html"
+    },
+    {
+      "file": "pipe-requirements.html"
+    },
+    {
+      "file": "my-first-pipe.html"
+    },
+    {
+      "file": "exercise-1-getting-started.html"
+    },
+    {
+      "file": "exercise-1-create-a-distance-pipe-1-2.html"
+    },
+    {
+      "file": "exercise-1-create-a-distance-pipe-2-2.html"
+    },
+    {
+      "file": "but-what-if-you-change-location.html"
+    },
+    {
+      "file": "pure.html"
+    },
+    {
+      "file": "exercise-2-impure-distance-pipe.html"
+    },
+    {
+      "file": "before-moving-on.html"
+    },
+    {
+      "file": "alternative-implementation.html"
+    },
+    {
+      "file": "directives.html"
+    },
+    {
+      "file": "attribute-directive.html"
+    },
+    {
+      "file": "built-in-attribute-directives.html"
+    },
+    {
+      "file": "how-to-build-your-own-2.html"
+    },
+    {
+      "file": "an-attribute-directive.html"
+    },
+    {
+      "file": "an-attribute-directive-2.html"
+    },
+    {
+      "file": "an-attribute-directive-3.html"
+    },
+    {
+      "file": "an-attribute-directive-modern.html"
+    },
+    {
+      "file": "an-attribute-directive-old-school.html"
+    },
+    {
+      "file": "an-attribute-directive-4.html"
+    },
+    {
+      "file": "an-attribute-directive-old-school-2.html"
+    },
+    {
+      "file": "exercise-3-custom-attribute-directive.html"
+    },
+    {
+      "file": "exercise-3-custom-attribute-directive-2.html",
+      "hidden": true
+    },
+    {
+      "file": "structural-directive.html"
+    },
+    {
+      "file": "built-in.html"
+    },
+    {
+      "file": "can-i-create-my-own.html"
+    },
+    {
+      "file": "but-why.html"
+    },
+    {
+      "file": "how-to-create-a-structural-directive.html"
+    },
+    {
+      "file": "structural-dependencies.html"
+    },
+    {
+      "file": "inserting-and-removing-the-dom-element.html"
+    },
+    {
+      "file": "determining-when-to-create-the-view.html"
+    },
+    {
+      "file": "using-the-directive.html"
+    },
+    {
+      "file": "the-syntax.html"
+    },
+    {
+      "file": "additional-input.html"
+    },
+    {
+      "file": "variables-are-also-possible.html"
+    },
+    {
+      "file": "exercise-4.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

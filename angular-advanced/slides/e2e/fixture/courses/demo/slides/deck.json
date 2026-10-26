@@ -1,0 +1,11 @@
+{
+  "title": "Demo",
+  "slides": [
+    { "file": "demo.html" },
+    { "file": "fragments.html" },
+    { "file": "draft.html", "hidden": true },
+    { "file": "animations.html" },
+    { "file": "code.html" },
+    { "file": "shapes.html" }
+  ]
+}

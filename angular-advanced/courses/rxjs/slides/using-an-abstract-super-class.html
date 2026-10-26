@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Using an abstract super class</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:35px;top:107px;width:809px;height:325px;z-index:11">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript">@Directive()
+export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy {
+
+  protected readonly subscriptions: Subscription[] = [];
+  protected readonly destroyed$ = new Subject&lt;boolean&gt;();
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    (this.subscriptions || []).forEach(s =&gt; s.unsubscribe());
+  }
+
+  takeUntilDestroyed&lt;T&gt;(): UnaryFunction&lt;Observable&lt;T&gt;, Observable&lt;T&gt;&gt; {
+    return pipe(takeUntil&lt;T&gt;(this.destroyed$));
+  }
+
+}</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:640px;top:456px;width:627px;height:78px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2">this.service.playgrounds$.pipe(
+  this.takeUntilDestroyed()
+).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:320px;top:592px;width:927px;height:112px;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="1,4">this.subscriptions.push(
+  this.service.playgrounds$.subscribe(playgrounds =&gt; this.playgrounds = playgrounds),
+  this.locationService.location$.subscribe(location =&gt; this.center = new Center(location)),
+);</code></pre>
+  </div>
+  <aside class="notes">We do not need to unsubscribe destroyed$ since we do not subscribe.
+
+This was by far the most used solutions for my main project.. But we are migrating</aside>
+</section>

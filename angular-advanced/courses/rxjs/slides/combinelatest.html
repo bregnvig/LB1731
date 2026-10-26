@@ -1,0 +1,106 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>combineLatest</h2>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:280px;top:177.5px;width:720px;height:0px;z-index:11"></div>
+  <div class="block" data-type="line" data-name="arrow-2" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:280px;top:297px;width:720px;height:0px;z-index:13"></div>
+  <div class="block" data-type="line" data-name="line-1" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:942px;top:263.5px;width:0px;height:67px;z-index:12"></div>
+  <div class="block" data-type="line" data-name="line-2" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:941px;top:144px;width:0px;height:67px;z-index:14"></div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:425px;top:368px;width:435px;height:62px;z-index:15;font-size:200%">
+    <pre><code class="language-typescript">combineLatest([a$, b$])</code></pre>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-3" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:280px;top:492.5px;width:720px;height:0px;z-index:16"></div>
+  <div class="block" data-type="line" data-name="line-3" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:941px;top:459px;width:0px;height:67px;z-index:17"></div>
+  <div class="block" data-type="text" data-name="text-1" style="left:340px;top:612px;width:600px;height:auto;z-index:18">
+    <p>When two or more data sources are dependent on each other</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:348px;top:682px;width:600px;height:auto;z-index:19">
+    <p><span style="font-size:0.7em"><span style="color:rgb(255, 255, 255)">Let's look at our rxjs-way example</span></span></p>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" style="left:454px;top:153.5px;width:49px;height:48px;z-index:20">
+    <div class="block" data-type="shape" data-name="shape-1" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:21"></div>
+    <div class="block" data-type="text" data-name="text-3" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:22">
+      <p><span style="font-size:0.7em">1</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-2" style="left:534px;top:153.5px;width:49px;height:48px;z-index:23">
+    <div class="block" data-type="shape" data-name="shape-2" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:24"></div>
+    <div class="block" data-type="text" data-name="text-4" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:25">
+      <p><span style="font-size:19.6px">2</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-3" style="left:699.5px;top:153.5px;width:49px;height:48px;z-index:26">
+    <div class="block" data-type="shape" data-name="shape-3" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:27"></div>
+    <div class="block" data-type="text" data-name="text-5" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:28">
+      <p><span style="font-size:19.6px">3</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-4" style="left:774px;top:153.5px;width:49px;height:48px;z-index:29">
+    <div class="block" data-type="shape" data-name="shape-4" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:30"></div>
+    <div class="block" data-type="text" data-name="text-6" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:31">
+      <p><span style="font-size:19.6px">4</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-5" style="left:854px;top:153.5px;width:49px;height:48px;z-index:32">
+    <div class="block" data-type="shape" data-name="shape-5" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:33"></div>
+    <div class="block" data-type="text" data-name="text-7" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:34">
+      <p><span style="font-size:19.6px">5</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-6" style="left:375.5px;top:273px;width:49px;height:48px;z-index:35">
+    <div class="block" data-type="shape" data-name="shape-6" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:36"></div>
+    <div class="block" data-type="text" data-name="text-8" style="left:13.25px;top:6px;width:22.5px;height:auto;z-index:37">
+      <p><font color="#000000"><span style="font-size:21px">A</span></font></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-7" style="left:609.25px;top:273px;width:49px;height:48px;z-index:38">
+    <div class="block" data-type="shape" data-name="shape-7" data-shape="circle" data-fill="rgb(0, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:39"></div>
+    <div class="block" data-type="text" data-name="text-9" style="left:13.25px;top:6px;width:22.5px;height:auto;z-index:40">
+      <p><span style="color:#000000"><span style="font-size:21px">B</span></span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-8" style="left:454px;top:468.5px;width:49px;height:48px;z-index:41">
+    <div class="block" data-type="text" data-name="text-10" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:43">
+      <p><span style="color:#000000"><span style="font-size:0.7em">1A</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-8" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:42"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-9" style="left:534px;top:468.5px;width:49px;height:48px;z-index:44">
+    <div class="block" data-type="text" data-name="text-11" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:46">
+      <p><span style="color:#000000"><span style="font-size:0.7em">2A</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-9" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:45"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-10" style="left:609.25px;top:468.5px;width:49px;height:48px;z-index:47">
+    <div class="block" data-type="text" data-name="text-12" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:49">
+      <p><span style="color:#000000"><span style="font-size:0.7em">2B</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-10" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:48"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-11" style="left:699.5px;top:468.5px;width:49px;height:48px;z-index:50">
+    <div class="block" data-type="text" data-name="text-13" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:52">
+      <p><span style="color:#000000"><span style="font-size:0.7em">3B</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-11" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:51"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-12" style="left:774px;top:468.5px;width:49px;height:48px;z-index:53">
+    <div class="block" data-type="text" data-name="text-14" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:55">
+      <p><span style="color:#000000"><span style="font-size:0.7em">4B</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-12" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:54"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-13" style="left:854px;top:469.5px;width:49px;height:48px;z-index:56">
+    <div class="block" data-type="text" data-name="text-15" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:58">
+      <p><span style="color:#000000"><span style="font-size:0.7em">5B</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-13" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:57"></div>
+  </div>
+  <aside class="notes">rxjs-way.component.ts:20
+
+Let's look at how the filtering works by combining playgrounds and filterControl 
+
+Remember that no event arrives before all combined observables has emitted at least one event.
+
+By combining we avoid the if statement from imperative-way:67
+</aside>
+</section>

@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:81px;width:1076px;height:auto;z-index:10">
+    <h1>Exercise time</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:79px;top:216px;width:819px;height:auto;z-index:11">
+    <ol>
+	<li style="text-align:left"><span style="font-size:25.2px">In the same folder as before, <span style="color:#ff8c00">labs/rxjs</span></span></li>
+	<li style="text-align:left">If not already running, <span style="font-size:25.2px">run <span style="color:#ff8c00">ng serve</span>&nbsp;and go to<span style="color:#ff8c00">&nbsp;<a href="http://localhost:4200" target="_blank">http://localhost:4200</a></span></span>
+</li>
+	<li style="text-align:left">
+<span style="font-size:25.2px">Go to </span><span style="color:#FF8C00">app.component.ts</span>
+</li>
+	<li style="text-align:left">
+<span style="font-size:25.2px">Sometimes the browser will actually emit the same geoposition twice. The will result in sorting the playgrounds twice. Make sure the location is </span><em>distinct</em><span style="font-size:25.2px">&nbsp;before emitting the event.</span>
+</li>
+	<li style="text-align:left"><span style="font-size:25.2px">Using the creator <a href="https://rxjs.dev/api/index/function/timer" target="_blank">timer</a>&nbsp;automatically refresh the playgrounds every 10th. second.</span></li>
+	<li style="text-align:left"><span style="font-size:25.2px">Assign the <span style="color:#ff8c00">markers$</span>&nbsp;observable with the current location</span></li>
+</ol>
+  </div>
+  <aside class="notes">This exercise focuses on the operators we have just been through:
+ - Filter Duplicates: Ensure geolocation updates are distinct to avoid redundant processing.
+ - Auto-Refresh: Use timer to automatically refresh data every 10 seconds.
+ - Bind Location: Assign the current location to the markers$ observable.
+</aside>
+</section>

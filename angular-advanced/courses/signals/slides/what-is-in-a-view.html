@@ -1,0 +1,45 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:13;text-align:left">
+    <h2>What is in a view?</h2>
+  </div>
+  <div class="block" data-type="shape" data-name="shape-1" data-shape="rect" data-fill="rgba(0, 0, 0, 0)" data-stroke="#4a86e8" data-stroke-width="5" data-radius="0" style="left:45px;top:176px;width:1189px;height:534.316px;z-index:10"></div>
+  <div class="block" data-type="group" data-name="group-1" style="left:64px;top:190px;width:127px;height:82px;z-index:14">
+    <div class="block" data-type="shape" data-name="shape-2" data-shape="rect" data-fill="rgba(0, 0, 0, 0)" data-stroke="#ffffff" data-stroke-width="5" data-radius="0" style="left:0px;top:0px;width:127px;height:82px;z-index:15"></div>
+    <div class="block" data-type="text" data-name="text-1" style="left:6.999px;top:35px;width:120.001px;height:auto;z-index:16">
+      <p><span style="font-size:1.0em"><span style="color:#afeeee">{&nbsp; &nbsp; }</span></span></p>
+    </div>
+    <div class="block" data-type="text" data-name="text-2" style="left:6.999px;top:3px;width:113.002px;height:auto;z-index:17">
+      <p><span style="font-size:0.5em">Component</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="shape" data-name="shape-3" data-shape="rect" data-fill="rgba(0, 0, 0, 0)" data-stroke="#ffffff" data-stroke-width="5" data-radius="0" style="left:200px;top:190px;width:1022.84px;height:508.259px;z-index:11"></div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:208.92px;top:195.158px;width:1005px;height:auto;z-index:12">
+    <pre style="font-size: 15px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1-27|2|5-19|7-17">&lt;aside tabindex="1"&gt;
+  &lt;header&gt;{{ title() }}&lt;/header&gt;
+  &lt;nav&gt;
+    &lt;div class="list-group"&gt;
+      @if(location()) {
+        @for(playground of playgrounds(); track playground.id) {
+          &lt;button
+            class="list-group-item d-flex list-group-item-action justify-content-between"
+            [class.active]="playground === selectedPlayground"
+            (click)="selectPlayground(playground)"&gt;
+            &lt;div class="d-flex flex-column justify-content-between"&gt;
+              &lt;h6 class="mb-1"&gt;{{playground.name}}
+                &lt;span class="badge bg-primary badge-pill"&gt;{{playground.position | distance}}&lt;/span&gt;
+              &lt;/h6&gt;
+              &lt;small&gt;{{playground.description | defaultDescription}}&lt;/small&gt;
+            &lt;/div&gt;
+          &lt;/button&gt;
+        }
+      } @else {
+        &lt;div class="list-group-item d-flex justify-content-between"&gt;
+          &lt;span&gt;Determining your location&lt;/span&gt;
+          &lt;fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/&gt;
+        &lt;/div&gt;      
+      }
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/aside&gt;</code></pre>
+  </div>
+</section>
