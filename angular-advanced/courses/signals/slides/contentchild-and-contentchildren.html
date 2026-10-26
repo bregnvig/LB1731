@@ -8,6 +8,10 @@
 Works just like you're used to, but now updates automatically via signals!</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:614.183px;top:256px;width:585.817px;height:208px;z-index:13">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">playgrounds = contentChildren(PlaygroundComponent); effect(() =&gt; {  console.log('count:', this.playgrounds().length);});</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">playgrounds = contentChildren(PlaygroundComponent);
+
+effect(() =&gt; {
+  console.log('count:', this.playgrounds().length);
+});</code></pre>
   </div>
 </section>

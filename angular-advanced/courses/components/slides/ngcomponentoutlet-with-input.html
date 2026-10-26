@@ -6,6 +6,15 @@
     <p>Create a dynamic component using the component class</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:315px;width:896px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4,9">@Component({  template: `	&lt;input type="text" [{ngModel}]="message"	&lt;ng-container *ngComponentOutlet="dynamicComponent; {inputs: {message} }" /&gt;  `}})export class MyComponent {  dynamicComponent = MyDynamicComponent;  message = 'Hello';}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4,9">@Component({
+  template: `
+	&lt;input type="text" [{ngModel}]="message"
+	&lt;ng-container *ngComponentOutlet="dynamicComponent; {inputs: {message} }" /&gt;
+  `
+}})
+export class MyComponent {
+  dynamicComponent = MyDynamicComponent;
+  message = 'Hello';
+}</code></pre>
   </div>
 </section>

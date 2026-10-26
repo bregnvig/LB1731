@@ -3,10 +3,29 @@
     <h2>service &amp; store relationship</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:176px;width:675.378px;height:auto;z-index:11">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1">@Injectable({providedIn: 'root'})export class PlaygroundService {  list(): Observable&lt;Playground[]&gt; {    return ...  }  update(playground: Playground): Observable&lt;void&gt; {    return ...  }}</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1|2|3-9|">@Injectable({providedIn: 'root'})
+export class PlaygroundService {
+  list(): Observable&lt;Playground[]&gt; {
+    return ...
+  }
+  update(playground: Playground): Observable&lt;void&gt; {
+    return ...
+  }
+}</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:80px;top:409.545px;width:675.378px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1">@Injectable()export class PlaygroundStore {    #service = inject(PlaygroundService);    playgrounds(): Observable&lt;Playground[]&gt; {    return ...  }  update(playground: Playground): Observable&lt;void&gt; {    return ...  }}</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1|2|4|6-11|">@Injectable()
+export class PlaygroundStore {
+  
+  #service = inject(PlaygroundService);
+  
+  playgrounds(): Observable&lt;Playground[]&gt; {
+    return ...
+  }
+  update(playground: Playground): Observable&lt;void&gt; {
+    return ...
+  }
+}</code></pre>
   </div>
   <aside class="notes">Create demo</aside>
 </section>

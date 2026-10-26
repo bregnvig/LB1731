@@ -3,7 +3,24 @@
     <h2>An angular example - without DI</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:64px;top:198px;width:1012px;height:346px;z-index:11">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="10,11">@Component({})export class WithoutDIComponent implements OnInit {   playgrounds$: Observable&lt;Playground[]&gt; | undefined;  location$: Observable&lt;Coordinate&gt;;   #service: PlaygroundService;   constructor() {    this.#service = new AarhusPlaygroundService();    this.location$ = new LocationService().location$;  }   ngOnInit(): void {    this.playgrounds$ = this.#service.playgrounds$;  }}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="10,11">@Component({})
+export class WithoutDIComponent implements OnInit {
+
+  playgrounds$: Observable&lt;Playground[]&gt; | undefined;
+  location$: Observable&lt;Coordinate&gt;;
+
+  #service: PlaygroundService;
+
+  constructor() {
+    this.#service = new AarhusPlaygroundService();
+    this.location$ = new LocationService().location$;
+  }
+
+  ngOnInit(): void {
+    this.playgrounds$ = this.#service.playgrounds$;
+  }
+}
+</code></pre>
   </div>
   <aside class="notes">What if AarhusPlayground services has dependencies? Actually, what if it need the HttpClient. That might be hard to get. (It actually is..)
 

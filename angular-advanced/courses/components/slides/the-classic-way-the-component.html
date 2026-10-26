@@ -3,7 +3,26 @@
     <h2>The classic way - the component</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:0px;top:176.449px;width:1280px;height:auto;z-index:11">
-    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">export class NonTemplateOutletComponent {   playgrounds: Signal&lt;Playground[]&gt;;  filterControl = new FormControl();   constructor() {     const service = inject(PlaygroundService);    this.playgrounds = toSignal(combineLatest([      service.playgrounds$,      this.filterControl.valueChanges.pipe(        debounceTime(300),        startWith(''),        map((term: string) =&gt; new RegExp(term, 'i'))      )    ]).pipe(      map(([playgrounds, matcher]) =&gt; playgrounds.filter(p =&gt; matcher.test(p.name)))    ));  }}</code></pre>
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">export class NonTemplateOutletComponent {
+
+  playgrounds: Signal&lt;Playground[]&gt;;
+  filterControl = new FormControl();
+
+  constructor() { 
+    const service = inject(PlaygroundService);
+    this.playgrounds = toSignal(combineLatest([
+      service.playgrounds$,
+      this.filterControl.valueChanges.pipe(
+        debounceTime(300),
+        startWith(''),
+        map((term: string) =&gt; new RegExp(term, 'i'))
+      )
+    ]).pipe(
+      map(([playgrounds, matcher]) =&gt; playgrounds.filter(p =&gt; matcher.test(p.name)))
+    ));
+  }
+}
+</code></pre>
   </div>
   <aside class="notes">Go through the code. So this is nice, and it works perfectly.</aside>
 </section>

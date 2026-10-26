@@ -3,13 +3,29 @@
     <h2>Implement the validate method</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:498px;width:1065px;height:auto;z-index:11">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">  validate(control: AbstractControl): ValidationErrors | null {    return !control.value?.zip || /^[1-9][0-9]{3}$/.test(control.value.zip)       ? null       : { invalidZip: true };  }</code></pre>
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">  validate(control: AbstractControl): ValidationErrors | null {
+    return !control.value?.zip || /^[1-9][0-9]{3}$/.test(control.value.zip) 
+      ? null 
+      : { invalidZip: true };
+  }</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:340px;top:684px;width:600px;height:auto;z-index:12">
     <p><span style="font-size:0.7em">If you only need access the value propagated</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:80px;top:144px;width:1065px;height:327px;z-index:13">
-    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="8">@Component({  selector: 'loop-address-control',  templateUrl: './address-control.component.html',  styleUrls: ['./address-control.component.scss'],  providers: [    {      provide: NG_VALIDATORS,      useExisting: AddressControlComponent,      multi: true    }  ],})</code></pre>
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="8">@Component({
+  selector: 'loop-address-control',
+  templateUrl: './address-control.component.html',
+  styleUrls: ['./address-control.component.scss'],
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: AddressControlComponent,
+      multi: true
+    }
+  ],
+})
+</code></pre>
   </div>
   <aside class="notes">In this case the validate method has no access to "this"
 

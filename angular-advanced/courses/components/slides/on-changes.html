@@ -8,7 +8,15 @@
 <p>Called every time an input property changes</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:360px;width:673.967px;height:188.422px;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="12-14">export class PlaygroundComponent implements OnChange {   playgrounds = input.required&lt;Playground[]&gt;();    ngOnChanges(changes: SimpleChanges) {    this.playgrounds().sort((a, b) =&gt; a.name.localeCompare(b.name))  } }</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="12-14">export class PlaygroundComponent implements OnChange {
+ 
+  playgrounds = input.required&lt;Playground[]&gt;();
+  
+  ngOnChanges(changes: SimpleChanges) {
+    this.playgrounds().sort((a, b) =&gt; a.name.localeCompare(b.name))
+  }
+
+}</code></pre>
   </div>
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:642.734px;top:84.9609px;width:621.037px;height:221.852px;z-index:13">
     <img src="images/on-changes-1.png" alt="">

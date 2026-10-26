@@ -10,6 +10,17 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:376px;width:880px;height:333px;z-index:12">
-    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="">@Component({  selector: 'loop-address-control',  templateUrl: './address-control.component.html',  styleUrls: ['./address-control.component.scss'],  providers: [    {      provide: NG_VALIDATORS,      useExisting: forwardRef(() =&gt; AddressControlComponent),      multi: true    }  ],})</code></pre>
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="">@Component({
+  selector: 'loop-address-control',
+  templateUrl: './address-control.component.html',
+  styleUrls: ['./address-control.component.scss'],
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() =&gt; AddressControlComponent),
+      multi: true
+    }
+  ],
+})</code></pre>
   </div>
 </section>

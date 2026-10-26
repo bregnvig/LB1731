@@ -4,6 +4,23 @@
 </h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:143.5px;top:225.5px;width:993px;height:381px;z-index:13;border-width:4px">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Component({  template: `    &lt;ul&gt;      @for (p of playgrounds; track p.id) {        &lt;li&gt;{{ p.name }}&lt;/li&gt;      }    &lt;/ul&gt;  `,})export class AppComponent {   playgrounds?: Playground[];   constructor() {    inject(PlaygroundService).playgrounds$.pipe(      takeUntilDestroyed()    ).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);  }</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Component({
+  template: `
+    &lt;ul&gt;
+      @for (p of playgrounds; track p.id) {
+        &lt;li&gt;{{ p.name }}&lt;/li&gt;
+      }
+    &lt;/ul&gt;
+  `,
+})
+export class AppComponent {
+
+  playgrounds?: Playground[];
+
+  constructor() {
+    inject(PlaygroundService).playgrounds$.pipe(
+      takeUntilDestroyed()
+    ).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);
+  }</code></pre>
   </div>
 </section>

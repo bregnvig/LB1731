@@ -54,6 +54,18 @@ describe('block animations', () => {
     expect(anim.clicked()).toEqual(['code-2']);
   });
 
+  it('applies the start state instantly and transitions only to the end state', async () => {
+    const reveal = fakeReveal(slide);
+    const anim = createBlockAnimations();
+    anim.init(reveal as any);
+    reveal.emit('ready');
+    expect(el('answer').style.transitionProperty).toBe('none');
+    await frames();
+    anim.trigger('code-2');
+    expect(el('answer').style.transitionProperty).not.toBe('none');
+    expect(el('answer').style.transitionDuration).toBe('0.6s');
+  });
+
   it('notifies listeners when a trigger fires', () => {
     const reveal = fakeReveal(slide);
     const anim = createBlockAnimations();

@@ -3,7 +3,17 @@
     <h2>Out store with signals</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:190.059px;width:675.378px;height:auto;z-index:11">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()export class PlaygroundStore {    #service = inject(PlaygroundService);    playgrounds: Signal&lt;Playground[]&gt; = ...    update(playground: Playground): void {    ...  }}</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Injectable()
+export class PlaygroundStore {
+  
+  #service = inject(PlaygroundService);
+  
+  playgrounds: Signal&lt;Playground[]&gt; = ...
+  
+  update(playground: Playground): void {
+    ...
+  }
+}</code></pre>
   </div>
   <aside class="notes">Create demo</aside>
 </section>

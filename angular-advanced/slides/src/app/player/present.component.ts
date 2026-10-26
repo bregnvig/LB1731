@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnDestroy, ViewEncapsulation, afterNextRender, inject, viewChild } from '@angular/core';
 import Reveal, { type RevealApi } from 'reveal.js';
-import RevealHighlight from 'reveal.js/plugin/highlight';
 import RevealNotes from 'reveal.js/plugin/notes';
 import { DeckService } from '../deck/deck.service';
 import { createBlockAnimations } from './block-animations';
 import { deckHtml } from './deck-html';
+import { highlightCode, scrollToHighlights } from './highlight';
+import { inlineSvgImages } from './inline-svg';
 
 export const REVEAL_CONFIG = {
   width: 1280,
@@ -19,7 +20,6 @@ export const REVEAL_CONFIG = {
   center: false,
   transition: 'slide',
   backgroundTransition: 'slide',
-  highlight: { escapeHTML: false },
 } as const;
 
 /**
@@ -29,7 +29,7 @@ export const REVEAL_CONFIG = {
 @Component({
   selector: 'app-present',
   template: `<div class="reveal" #reveal><div class="slides"></div></div>`,
-  styles: `app-present { position: fixed; inset: 0; }`,
+  styles: `app-present { position: absolute; inset: 0; }`,
   encapsulation: ViewEncapsulation.None,
 })
 export class PresentComponent implements OnDestroy {
@@ -46,14 +46,21 @@ export class PresentComponent implements OnDestroy {
     const deck = await this.deckService.load();
     const el = this.root().nativeElement;
     el.querySelector('.slides')!.innerHTML = deckHtml(deck);
+    highlightCode(el);
+    await inlineSvgImages(el);
     const params = new URLSearchParams(location.search);
     const embedded = params.has('embed');
     this.reveal = new Reveal(el, {
       ...REVEAL_CONFIG,
       ...(params.has('test') ? { transition: 'none', backgroundTransition: 'none', showHiddenSlides: true, controls: false, progress: false, hash: false } : {}),
       ...(embedded ? { controls: false, progress: false, hash: false } : {}),
-      plugins: [RevealNotes, RevealHighlight, this.animations],
+      plugins: [RevealNotes, this.animations],
     });
+    // Code blocks scroll to their highlighted lines once their slide is on screen.
+    const scrollCode = () => (this.reveal?.getCurrentSlide() as HTMLElement | undefined)
+      ?.querySelectorAll<HTMLElement>('.block[data-type="code"] pre > code[data-line-numbers]').forEach(scrollToHighlights);
+    this.reveal.on('ready', scrollCode);
+    this.reveal.on('slidechanged', scrollCode);
     await this.reveal.initialize();
     (window as any).Reveal = this.reveal;
   }

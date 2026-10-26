@@ -18,6 +18,14 @@
 <p><code><span style="color:#FF8C00">value()</span></code>, &nbsp;<code><span style="color:#FF8C00">isLoading()</span></code><span style="color:rgb(255, 255, 255)">, </span><span style="color:#FF8C00"><code>reload()</code></span><span style="color:rgb(255, 255, 255)">,</span>&nbsp; <code><span style="color:#FF8C00">error()</span></code><span style="color:rgb(255, 255, 255)">&nbsp;and much more.</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:734.183px;top:256px;width:465.817px;height:208px;z-index:15">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// classconst user = resource(...); // template@if (user.isLoading()) {  &lt;spinner/&gt;} @else { user.value() }</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// class
+const user = resource(...);
+
+// template
+@if (user.isLoading()) {
+  &lt;spinner/&gt;
+} @else {
+ user.value() 
+}</code></pre>
   </div>
 </section>

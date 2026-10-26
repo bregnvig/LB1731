@@ -1,6 +1,6 @@
 <section>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:288px;width:1108.96px;height:171.027px;z-index:10">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-plaintext">export class PlaygroundResolverService implements Resolve&lt;Playground | undefined&gt; {
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-auto">export class PlaygroundResolverService implements Resolve&lt;Playground | undefined&gt; {
   // ...
   resolve(route: ActivatedRouteSnapshot): Observable&lt;Playground | undefined&gt; {
     return this.service.getById(route.params.id);

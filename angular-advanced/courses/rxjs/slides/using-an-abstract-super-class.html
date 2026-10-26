@@ -21,10 +21,15 @@ export abstract class AbstractSubscribeUnsubscribeDirective implements OnDestroy
 }</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:640px;top:456px;width:627px;height:78px;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2">this.service.playgrounds$.pipe(  this.takeUntilDestroyed()).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);</code></pre>
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2">this.service.playgrounds$.pipe(
+  this.takeUntilDestroyed()
+).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:320px;top:592px;width:927px;height:112px;z-index:13">
-    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="1,4">this.subscriptions.push(  this.service.playgrounds$.subscribe(playgrounds =&gt; this.playgrounds = playgrounds),  this.locationService.location$.subscribe(location =&gt; this.center = new Center(location)),);</code></pre>
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="1,4">this.subscriptions.push(
+  this.service.playgrounds$.subscribe(playgrounds =&gt; this.playgrounds = playgrounds),
+  this.locationService.location$.subscribe(location =&gt; this.center = new Center(location)),
+);</code></pre>
   </div>
   <aside class="notes">We do not need to unsubscribe destroyed$ since we do not subscribe.
 

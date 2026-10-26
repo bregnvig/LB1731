@@ -1,6 +1,25 @@
 <section>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:173px;width:1120px;height:504px;z-index:10">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="1,11,16">&lt;form [formGroup]="fg"&gt;  &lt;div class="form-group"&gt;    &lt;label for="email"&gt;Email address&lt;/label&gt;    &lt;input       #email       id="email"      type="email"       class="form-control col"       (keydown.enter)="addEmail(email.value)"&gt;  &lt;/div&gt;  &lt;div class="form-group flex-wrap" formArrayName="emailAddresses"&gt;    @for(_ of emailAddressesControl.controls; track $index) {      &lt;input        type="text"        class="col-12 form-control mb-2"        [formControlName]="$index"&gt;    }  &lt;/div&gt;&lt;/form&gt;</code></pre>
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="1,11,16">&lt;form [formGroup]="fg"&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="email"&gt;Email address&lt;/label&gt;
+    &lt;input 
+      #email 
+      id="email"
+      type="email" 
+      class="form-control col" 
+      (keydown.enter)="addEmail(email.value)"&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group flex-wrap" formArrayName="emailAddresses"&gt;
+    @for(_ of emailAddressesControl.controls; track $index) {
+      &lt;input
+        type="text"
+        class="col-12 form-control mb-2"
+        [formControlName]="$index"&gt;
+    }
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
   </div>
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:11;text-align:left">
     <h2>A template example</h2>

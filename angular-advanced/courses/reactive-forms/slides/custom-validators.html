@@ -12,7 +12,21 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:26px;top:397.032px;width:1239px;height:322.968px;z-index:12">
-    <pre style="font-size: 17px; line-height: 20px;"><code class="language-typescript" data-line-numbers="11-14">        zipAndCity: this.fb.group({      zip: this.fb.control(        '',        {          validators: Validators.pattern(/^[1-9][0-9]{3}$/),          asyncValidators: isValidZip(this.service)        },      ),      city: this.fb.control({ value: '', disabled: true }),    }, {      validators: (zipAndCity: FormGroup&lt;ZipAndCityForm&gt;): null | ValidationErrors =&gt;       	zipAndCity.controls.zip.valid &amp;&amp; zipAndCity.controls.zip.value &amp;&amp; !zipAndCity.controls.city.value       	? { error: 'label.missing.city' }         : null    } as AbstractControlOptions)</code></pre>
+    <pre style="font-size: 17px; line-height: 20px;"><code class="language-typescript" data-line-numbers="11-14">        zipAndCity: this.fb.group({
+      zip: this.fb.control(
+        '',
+        {
+          validators: Validators.pattern(/^[1-9][0-9]{3}$/),
+          asyncValidators: isValidZip(this.service)
+        },
+      ),
+      city: this.fb.control({ value: '', disabled: true }),
+    }, {
+      validators: (zipAndCity: FormGroup&lt;ZipAndCityForm&gt;): null | ValidationErrors =&gt; 
+      	zipAndCity.controls.zip.valid &amp;&amp; zipAndCity.controls.zip.value &amp;&amp; !zipAndCity.controls.city.value 
+      	? { error: 'label.missing.city' } 
+        : null
+    } as AbstractControlOptions)</code></pre>
   </div>
   <aside class="notes">Look at the example validators. 
 

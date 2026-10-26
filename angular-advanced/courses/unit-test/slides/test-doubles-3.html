@@ -9,6 +9,14 @@
     <p>Mimics real implementation</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:98.76px;top:368px;width:1082.48px;height:auto;z-index:14;border-width:1px">
-    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="4">it('should use fake', () =&gt; {  TestBed.overrideProvider(AuthService, {    useValue: {      login: (email: string, password: string) =&gt; !!email &amp;&amp; !!password    }  });  const service = TestBed.inject(AuthService);  // expect(something);});</code></pre>
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript" data-line-numbers="4">it('should use fake', () =&gt; {
+  TestBed.overrideProvider(AuthService, {
+    useValue: {
+      login: (email: string, password: string) =&gt; !!email &amp;&amp; !!password
+    }
+  });
+  const service = TestBed.inject(AuthService);
+  // expect(something);
+});</code></pre>
   </div>
 </section>

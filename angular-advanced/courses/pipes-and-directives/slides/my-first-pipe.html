@@ -3,7 +3,15 @@
     <h2>My first pipe</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:216px;width:1015px;height:auto;z-index:11">
-    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="6-8">import { Pipe, PipeTransform } from '@angular/core';@Pipe({  name: 'myFirst'})export class MyFirstPipe implements PipeTransform {  transform(value: string): `My first ${string}` {    return `My first ${value}`;  }}</code></pre>
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="6-8">import { Pipe, PipeTransform } from '@angular/core';
+@Pipe({
+  name: 'myFirst'
+})
+export class MyFirstPipe implements PipeTransform {
+  transform(value: string): `My first ${string}` {
+    return `My first ${value}`;
+  }
+}</code></pre>
   </div>
   <aside class="notes">Look how the parameters are narrowed as is the return value.
 

@@ -18,6 +18,11 @@
     <p>Automatically re-runs whenever params change.</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:610.183px;top:355px;width:658.817px;height:auto;z-index:14">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">const user$ = ... // any observable const user = rxResource({  params: () =&gt; user$,  stream: ({params}) =&gt; this.userData.load(params.userId)});</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">const user$ = ... // any observable
+
+const user = rxResource({
+  params: () =&gt; user$,
+  stream: ({params}) =&gt; this.userData.load(params.userId)
+});</code></pre>
   </div>
 </section>

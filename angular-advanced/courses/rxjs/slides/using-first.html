@@ -11,7 +11,9 @@
     </div>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:298.5px;top:169.5px;width:593px;height:93px;z-index:16">
-    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2">this.service.playgrounds$.pipe(  first()).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);</code></pre>
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="2">this.service.playgrounds$.pipe(
+  first()
+).subscribe(playgrounds =&gt; this.playgrounds = playgrounds);</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-2" style="left:298.5px;top:468px;width:600px;height:auto;z-index:17">
     <p style="text-align:left">But what if <span style="color:#ff8c00">playgrounds$</span>&nbsp;wasn't an ajax call, but a web socket? What if the service had implemented an <span style="color:#ff8c00">interval(10000)</span> to automatically refresh? You would never receive new playgrounds!</p>

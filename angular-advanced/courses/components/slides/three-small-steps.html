@@ -6,10 +6,15 @@
     <pre style="font-size: 16px; line-height: 19px;"><code class="language-bash">$ npm install ng-dynamic-component --save</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:64px;top:343.211px;width:650px;height:88.789px;z-index:12">
-    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2">@...({  imports: [DynamicIoModule, NgComponentOutlet],})</code></pre>
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2">@...({
+  imports: [DynamicIoModule, NgComponentOutlet],
+})</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:64px;top:463px;width:685.876px;height:121.323px;z-index:13">
-    <pre style="font-size: 20px; line-height: 24px;"><code class="language-xml" data-line-numbers="">&lt;ng-template   [ngComponentOutlet]="component"  [ndcDynamicInputs]="{ playground }"&gt; &lt;/ng-template&gt;</code></pre>
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-xml" data-line-numbers="">&lt;ng-template 
+  [ngComponentOutlet]="component"
+  [ndcDynamicInputs]="{ playground }"&gt;
+ &lt;/ng-template&gt;</code></pre>
   </div>
   <aside class="notes">Go look at the dynamic example. See that a lot less code is being written.</aside>
 </section>

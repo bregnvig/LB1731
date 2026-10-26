@@ -13,15 +13,26 @@ body,
   font-weight: 400;
   line-height: 1;
   color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .reveal .slides {
   text-align: center;
 }
 
+.reveal .slides section {
+  height: 100%;
+  line-height: 1.3;
+}
+
 .reveal .slide-number {
   color: #ddd;
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.reveal .slide-number a {
+  text-decoration: none;
 }
 
 /* Blocks */
@@ -88,6 +99,21 @@ body,
 .reveal .block ul { list-style-type: disc; }
 .reveal .block ol { list-style-type: decimal; }
 
+.reveal .block blockquote {
+  font-style: italic;
+}
+
+/* A large opening quote mark that doesn't make the first line taller */
+.reveal .block blockquote::before {
+  content: '\201C';
+  display: inline-block;
+  height: 1px;
+  padding: 0 0.15em;
+  font-size: 2em;
+  line-height: 1em;
+  vertical-align: top;
+}
+
 .reveal .block blockquote p {
   display: inline;
 }
@@ -101,19 +127,33 @@ body,
   font-weight: 700;
 }
 
+.reveal .block :is(em, i) {
+  font-style: italic;
+}
+
 .reveal .block[data-type='text'] code {
   font-family: Courier, monospace;
+}
+
+.reveal .block[data-type='text'] pre {
+  font-family: Courier, monospace;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .reveal .block[data-type='table'] table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
 }
 
 .reveal .block[data-type='table'] :is(th, td) {
   padding: 5px;
   border: 1px solid #fff;
   text-align: left;
+  vertical-align: top;
 }
 
 .reveal .block[data-type='table'] th {
@@ -149,6 +189,8 @@ body,
 .reveal .block[data-type='code'] pre {
   position: relative;
   height: 100%;
+  font-size: 0.55em;
+  line-height: 1.2;
   font-family: Courier, monospace;
   text-align: left;
   white-space: pre-wrap;
@@ -207,3 +249,21 @@ body,
 .reveal .block[data-animate='slide-up'].animate-start { transform: translateY(40px); }
 .reveal .block[data-animate='slide-down'].animate-start { transform: translateY(-40px); }
 .reveal .block[data-animate='fade-out'].animate-in { opacity: 0; }
+
+/* Inlined SVG images take their color from the block (inline-svg.ts) */
+.reveal .block.svg-inlined img { display: none; }
+.reveal .block.svg-inlined svg :is(path, polygon, polyline, circle, ellipse, rect, line) { fill: var(--svg-color); }
+
+.reveal .slides,
+.reveal .slides * {
+  box-sizing: border-box;
+}
+
+.reveal .slides table {
+  border-spacing: 0;
+}
+
+/* Line numbers (highlight.ts writes empty cells carrying data-line-number) */
+.reveal .hljs-ln-n::before {
+  content: attr(data-line-number);
+}

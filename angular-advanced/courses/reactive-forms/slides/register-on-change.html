@@ -10,6 +10,19 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:367px;width:1147px;height:auto;z-index:12;filter:drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)">
-    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="6,8,10-12">export class AddressControlComponent {	  private propagateChange: ((_: any) =&gt; any) | undefined;    constructor() {    this.fg.valueChanges.pipe(      takeUntilDestroyed()    ).subscribe(value =&gt; this.propagateChange?(value));  }   registerOnChange(fn: any): void {    this.propagateChange = fn;  } }</code></pre>
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="6,8,10-12">export class AddressControlComponent {
+	
+  private propagateChange: ((_: any) =&gt; any) | undefined;
+  
+  constructor() {
+    this.fg.valueChanges.pipe(
+      takeUntilDestroyed()
+    ).subscribe(value =&gt; this.propagateChange?(value));
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  } 
+}</code></pre>
   </div>
 </section>

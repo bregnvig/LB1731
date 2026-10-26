@@ -9,6 +9,31 @@
     <p style="text-align:left"><span style="font-size:0.7em"><span style="color:#808080">It's doable in pre v20, but is a nightmare</span></span></p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:212.5px;width:1090px;height:auto;z-index:14">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5">@Component({  selector: 'loop-my-component',  template: `    ...    &lt;ng-container #dynamicContainer /&gt;    ...   `})export class MyComponent {  container = viewChild('dynamicContainer', { read: ViewContainerRef });	  constructor() {    effect(() =&gt; {      const container = this.container()      container &amp;&amp; container.createComponent(DisplayPlaygroundComponent, {        bindings: [          inputBinding('playground', () =&gt; playground),          outputBinding('vote', (vote: 'up' | 'down') =&gt; {            console.log(playground.name, vote);          })        ]      })    })  }}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5|11|14-24|">@Component({
+  selector: 'loop-my-component',
+  template: `
+    ...
+    &lt;ng-container #dynamicContainer /&gt;
+    ...
+
+  `
+})
+export class MyComponent {
+  container = viewChild('dynamicContainer', { read: ViewContainerRef });
+	
+  constructor() {
+    effect(() =&gt; {
+      const container = this.container()
+      container &amp;&amp; container.createComponent(DisplayPlaygroundComponent, {
+        bindings: [
+          inputBinding('playground', () =&gt; playground),
+          outputBinding('vote', (vote: 'up' | 'down') =&gt; {
+            console.log(playground.name, vote);
+          })
+        ]
+      })
+    })
+  }
+}</code></pre>
   </div>
 </section>

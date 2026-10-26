@@ -3,10 +3,40 @@
     <h2>Signal Inputs - in Action</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:187.138px;width:629.276px;height:489.724px;z-index:11">
-    <pre style="font-size: 14px; line-height: 17px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7,9,12-20">import { Component, input, computed, effect } from '@angular/core'; @Component({...})export class UserProfileComponent {    // Optional input with a default value  location = input&lt;Coordinate | null&gt;(null);   // Required input without an initial value  playground = input.required&lt;Playground&gt;();   // Derived value using computed  playgroundInfo = computed(() =&gt; {    const location = this.location();    if(location) {      const playground = this.playground();      const distance = this.ls.getDistance(location, playground),      return { ...playground, distance }     }    return undefined;  });   constructor(private ls: LocationService) {    // Monitoring changes with effect    effect(() =&gt; {      console.log('Location updated:', this.location());    });  }}</code></pre>
+    <pre style="font-size: 14px; line-height: 17px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7,9,12-20">import { Component, input, computed, effect } from '@angular/core';
+
+@Component({...})
+export class UserProfileComponent {
+  
+  // Optional input with a default value
+  location = input&lt;Coordinate | null&gt;(null); 
+  // Required input without an initial value
+  playground = input.required&lt;Playground&gt;();
+
+  // Derived value using computed
+  playgroundInfo = computed(() =&gt; {
+    const location = this.location();
+    if(location) {
+      const playground = this.playground();
+      const distance = this.ls.getDistance(location, playground),
+      return { ...playground, distance } 
+    }
+    return undefined;
+  });
+
+  constructor(private ls: LocationService) {
+    // Monitoring changes with effect
+    effect(() =&gt; {
+      console.log('Location updated:', this.location());
+    });
+  }
+}
+</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:720px;top:386.5px;width:506px;height:60px;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-xml" data-line-numbers="">&lt;p&gt;Name: {{ playgroundInfo()?.name }}&lt;/p&gt;&lt;p&gt;Distance: {{ playgroundInfo()?.distance }}&lt;/p&gt;</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-xml" data-line-numbers="">&lt;p&gt;Name: {{ playgroundInfo()?.name }}&lt;/p&gt;
+&lt;p&gt;Distance: {{ playgroundInfo()?.distance }}&lt;/p&gt;
+</code></pre>
   </div>
   <aside class="notes">Notice the .required. Notice required does not have an initial value</aside>
 </section>

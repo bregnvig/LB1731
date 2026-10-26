@@ -6,6 +6,9 @@
     <p>Fetches data when the request signal(s) change</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:311.867px;width:843.406px;height:auto;z-index:12">
-    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2">const userResource = rxResource({  params: () =&gt; ({id: userId()}),  stream: ({params}) =&gt; fetchUser(params.id),});</code></pre>
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2">const userResource = rxResource({
+  params: () =&gt; ({id: userId()}),
+  stream: ({params}) =&gt; fetchUser(params.id),
+});</code></pre>
   </div>
 </section>

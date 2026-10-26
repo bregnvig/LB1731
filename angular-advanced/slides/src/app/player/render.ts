@@ -66,7 +66,8 @@ function lineSvg(b: LineBlock): string {
     const gap = (dl - n * d) / (n - 1);
     dash = ` stroke-dasharray="${Array(n).fill(`${d} ${gap}`).join(' ')}"`;
   }
-  const W = Math.max(b.x1, b.x2) || 1, H = Math.max(b.y1, b.y2) || 1;
+  // At least 1px each way, or a vertical or horizontal line gets an empty viewBox and isn't drawn.
+  const W = Math.max(b.x1, b.x2, 1), H = Math.max(b.y1, b.y2, 1);
   return `<svg preserveAspectRatio="xMidYMid" width="${num(W)}" height="${num(H)}" viewBox="0 0 ${num(W)} ${num(H)}">`
     + `<path data-line fill="rgba(0,0,0,0)" stroke="${esc(b.color)}" stroke-width="${num(w)}"${dash} d="M${num(sx)} ${num(sy)} L${num(ex)} ${num(ey)}"></path>`
     + (b.start === 'arrow' ? arrow(b.x1, b.y1, -ux, -uy, 'start') : '')

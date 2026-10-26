@@ -10,7 +10,18 @@
 <p>Called once.</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:343.813px;width:808.277px;height:243.585px;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-11">export class PlaygroundComponent implements AfterViewInit {   playgrounds = input&lt;Playground[]&gt;([]);    constructor(private route: ActivatedRoute) { }    ngAfterViewInit(): void {    if (this.route.snapshot.fragment) {      document.getElementById(this.route.snapshot.fragment).scrollIntoView();    }  }}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-11">export class PlaygroundComponent implements AfterViewInit {
+ 
+  playgrounds = input&lt;Playground[]&gt;([]);
+  
+  constructor(private route: ActivatedRoute) { }
+  
+  ngAfterViewInit(): void {
+    if (this.route.snapshot.fragment) {
+      document.getElementById(this.route.snapshot.fragment).scrollIntoView();
+    }
+  }
+}</code></pre>
   </div>
   <aside class="notes">Show example. Need to use after view init. Otherwise the panel is not created. Show what happens if we do it in ngOnInit
 

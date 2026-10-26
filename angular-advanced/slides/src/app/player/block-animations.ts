@@ -23,6 +23,7 @@ const animated = (root: ParentNode) => [...root.querySelectorAll<HTMLElement>('[
 
 function endState(el: HTMLElement, instant: boolean) {
   if (instant) el.style.transition = 'none';
+  else el.style.transitionProperty = '';
   el.classList.replace('animate-start', 'animate-in') || el.classList.add('animate-in');
 }
 
@@ -48,6 +49,8 @@ export function createBlockAnimations(): BlockAnimationsPlugin {
       el.style.transitionDuration = `${el.dataset['animateDuration'] ?? 0.6}s`;
       el.style.transitionDelay = `${el.dataset['animateDelay'] ?? 0}s`;
       el.classList.remove('animate-in');
+      // The start state applies instantly; only the move to the end state is animated.
+      el.style.transitionProperty = 'none';
       el.classList.add('animate-start');
       const on = el.dataset['animateOn'];
       if (!on) entry.push(el);

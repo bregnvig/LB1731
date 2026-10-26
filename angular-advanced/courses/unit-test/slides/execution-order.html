@@ -6,9 +6,35 @@
     <h1>Inner Suites gotchas</h1>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:11.358px;top:288px;width:690.35px;height:265.242px;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">describe("AuthService", () =&gt; {  beforeAll(() =&gt; console.log("AuthService before all"));  beforeEach(() =&gt; console.log("AuthService before all"));  it("AuthService t1",() =&gt; console.log("AuthService level t1"));  it("AuthService t2",() =&gt; console.log("AuthService level t2"));    describe("After login", () =&gt; {    beforeAll(() =&gt; console.log("After login before all"));    beforeEach(() =&gt; console.log("After login before all"));    it("After login t1",() =&gt; console.log("After login t1"));    it("After login t2",() =&gt; console.log("After login t2"));  });});</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">describe("AuthService", () =&gt; {
+  beforeAll(() =&gt; console.log("AuthService before all"));
+  beforeEach(() =&gt; console.log("AuthService before all"));
+  it("AuthService t1",() =&gt; console.log("AuthService level t1"));
+  it("AuthService t2",() =&gt; console.log("AuthService level t2"));
+  
+  describe("After login", () =&gt; {
+    beforeAll(() =&gt; console.log("After login before all"));
+    beforeEach(() =&gt; console.log("After login before all"));
+    it("After login t1",() =&gt; console.log("After login t1"));
+    it("After login t2",() =&gt; console.log("After login t2"));
+  });
+});</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:749.825px;top:288px;width:420.35px;height:395.242px;z-index:13">
-    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">AuthService before allAuthService before eachAuthService level t1AuthService before eachAuthService level t2 After login before allAuthService before each // what??After login before eachAfter login t1 AuthService before each // what??After login before eachAfter login t2</code></pre>
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">AuthService before all
+AuthService before each
+AuthService level t1
+AuthService before each
+AuthService level t2
+
+After login before all
+AuthService before each // what??
+After login before each
+After login t1
+
+AuthService before each // what??
+After login before each
+After login t2
+</code></pre>
   </div>
 </section>

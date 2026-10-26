@@ -3,10 +3,31 @@
     <h2>View children v17.2+</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:51px;top:150px;width:689.474px;height:143px;z-index:11">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-plaintext" data-line-numbers="4">@for (watchNo of watchNos; track watchNo) {  &lt;div class="row"&gt;    &lt;div class="col"&gt;      Stop watch {{no}} - &lt;loop-stop-watch /&gt;    &lt;/div&gt;  &lt;/div&gt;}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-auto" data-line-numbers="4">@for (watchNo of watchNos; track watchNo) {
+  &lt;div class="row"&gt;
+    &lt;div class="col"&gt;
+      Stop watch {{no}} - &lt;loop-stop-watch /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}
+</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:51px;top:322px;width:800px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-plaintext" data-line-numbers="4,6-9">export class ViewChildrenComponent {   watchNos: number[] = [0];  watches = viewChildren&lt;StopWatchComponent&gt;();    constructor() {  	effect(() =&gt; this.watches()?    	.filter(({ isRunning }) =&gt; !isRunning)        .forEach(w =&gt; w.start()))  }   addWatch() {    this.watchNos.push(this.watchNos.length);  }}</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-auto" data-line-numbers="4,6-9">export class ViewChildrenComponent {
+
+  watchNos: number[] = [0];
+  watches = viewChildren&lt;StopWatchComponent&gt;();
+  
+  constructor() {
+  	effect(() =&gt; this.watches()?
+    	.filter(({ isRunning }) =&gt; !isRunning)
+        .forEach(w =&gt; w.start()))
+  }
+
+  addWatch() {
+    this.watchNos.push(this.watchNos.length);
+  }
+}</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-1" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-2" style="left:821px;top:42px;width:402px;height:auto;z-index:13">
     <p style="text-align:left">The signal value is now just a readonly array</p>

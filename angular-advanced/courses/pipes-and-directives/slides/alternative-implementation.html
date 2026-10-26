@@ -6,7 +6,24 @@
     <p>Make it perform and be reusable</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:217px;width:964px;height:auto;z-index:12">
-    <pre style="font-size: 19px; line-height: 23px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">import { Pipe, PipeTransform } from '@angular/core';import { Coordinate } from '../model';import { LocationService } from '../service'; @Pipe({    name: 'distance',    standalone: true,})export class DistancePipe implements PipeTransform {    service = inject(LocationService);   transform(value: Coordinate, other: Coordinate): number | 'Unknown distance' {    return value &amp;&amp; other       ? this.service.getDistance(other, value);      : 'Unknown distance'  }}</code></pre>
+    <pre style="font-size: 19px; line-height: 23px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">import { Pipe, PipeTransform } from '@angular/core';
+import { Coordinate } from '../model';
+import { LocationService } from '../service';
+
+@Pipe({
+    name: 'distance',
+    standalone: true,
+})
+export class DistancePipe implements PipeTransform {
+  
+  service = inject(LocationService);
+
+  transform(value: Coordinate, other: Coordinate): number | 'Unknown distance' {
+    return value &amp;&amp; other 
+      ? this.service.getDistance(other, value);
+      : 'Unknown distance'
+  }
+}</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:64px;top:653px;width:983px;height:auto;z-index:13;transform:rotate(0deg)">
     <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript">{{playground.position | distance : location$ | async}}</code></pre>

@@ -6,6 +6,12 @@
     <h2>canload functional guard</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:74.02px;top:319.5px;width:1131.96px;height:auto;z-index:12">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-plaintext" data-line-numbers="">export const isLoggedInGuard = (route: Route, segments: UrlSegment[]): Observable&lt;boolean | UrlTree&gt; =&gt; {  const router = inject(Router);  return inject(AuthService).isLoggedIn$.pipe(    map(isLoggedIn =&gt; isLoggedIn || router.createUrlTree(['/login'])),  );}</code></pre>
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-auto" data-line-numbers="">export const isLoggedInGuard = (route: Route, segments: UrlSegment[]): Observable&lt;boolean | UrlTree&gt; =&gt; {
+  const router = inject(Router);
+  return inject(AuthService).isLoggedIn$.pipe(
+    map(isLoggedIn =&gt; isLoggedIn || router.createUrlTree(['/login'])),
+  );
+}
+</code></pre>
   </div>
 </section>

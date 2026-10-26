@@ -10,7 +10,18 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:377px;width:1147px;height:323.436px;z-index:12;filter:drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)">
-    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="5-7,9-11">export class AddressControlComponent implements OnInit {	  private propagateTouched: (() =&gt; void) | undefined;    onBlur() {    this.propagateTouched!();  }   registerOnTouched(fn: any): void {    this.propagateTouched = fn;  }}</code></pre>
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="5-7,9-11">export class AddressControlComponent implements OnInit {
+	
+  private propagateTouched: (() =&gt; void) | undefined;
+  
+  onBlur() {
+    this.propagateTouched!();
+  }
+
+  registerOnTouched(fn: any): void {
+    this.propagateTouched = fn;
+  }
+}</code></pre>
   </div>
   <aside class="notes">Show the difference commenting out the onBlur methods code. Show the AddressControlComponent does not have the CSS class ng-touched
 </aside>

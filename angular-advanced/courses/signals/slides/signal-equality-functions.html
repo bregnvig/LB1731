@@ -4,7 +4,25 @@
 <p>Determine whether a new value is different from the previous one</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:592px;top:227px;width:668px;height:421px;z-index:11">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4">import { signal } from '@angular/core'; const equalPlaygrounds = (a, b) =&gt; 	JSON.stringify(a) === JSON.stringify(b); const playgrounds = signal([{name: 'Naturlegepladsen'}]); // A computed signal with our custom equality functionconst changedPlaygrounds = computed(  () =&gt; this.playgrounds,   { equal: equalPlaygrounds }) // No change in changedPlaygroundsplaygrounds.set([{name: 'Naturlegepladsen'}]);  // changedPlaygrounds has changedplaygrounds.set([{name: 'Hoppeborgen'}]);</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4|6-12|14-15|17-18">import { signal } from '@angular/core';
+
+const equalPlaygrounds = (a, b) =&gt; 
+	JSON.stringify(a) === JSON.stringify(b);
+
+const playgrounds = signal([{name: 'Naturlegepladsen'}]);
+
+// A computed signal with our custom equality function
+const changedPlaygrounds = computed(
+  () =&gt; this.playgrounds, 
+  { equal: equalPlaygrounds }
+)
+
+// No change in changedPlaygrounds
+playgrounds.set([{name: 'Naturlegepladsen'}]); 
+
+// changedPlaygrounds has changed
+playgrounds.set([{name: 'Hoppeborgen'}]);
+</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:80px;top:288px;width:512px;height:auto;z-index:12;text-align:left">
     <p>Example:</p>

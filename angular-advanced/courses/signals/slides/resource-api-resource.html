@@ -23,6 +23,13 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:720px;top:245px;width:543.817px;height:auto;z-index:14">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// IndexedDB using idb const notes = resource({  loader: async () =&gt; {    const db = await openDB('notes', 1);    return db.getAll('entries');  }});</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// IndexedDB using idb
+
+const notes = resource({
+  loader: async () =&gt; {
+    const db = await openDB('notes', 1);
+    return db.getAll('entries');
+  }
+});</code></pre>
   </div>
 </section>

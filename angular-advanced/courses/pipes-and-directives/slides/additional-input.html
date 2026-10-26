@@ -8,10 +8,18 @@
 <p>Let's create an <span style="color:#FF8C00">else</span>&nbsp;option</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:64px;top:276px;width:816px;height:143px;z-index:12">
-    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="">@Input()set loopIsInRoleElse(value: TemplateRef&lt;any&gt;) {  this.elseTemplate = value;  this.updateView();}</code></pre>
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="">@Input()
+set loopIsInRoleElse(value: TemplateRef&lt;any&gt;) {
+  this.elseTemplate = value;
+  this.updateView();
+}
+</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:63.25px;top:471px;width:1153.5px;height:133px;z-index:13;filter:drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="2,3">&lt;div class="col-4"&gt;  &lt;span *loopIsInRole="'anonymous'; else notAnonymous"&gt;I'm anonymous&lt;/span&gt;  &lt;ng-template #notAnonymous&gt;I'm someone&lt;/ng-template&gt;&lt;/div&gt;</code></pre>
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="2,3">&lt;div class="col-4"&gt;
+  &lt;span *loopIsInRole="'anonymous'; else notAnonymous"&gt;I'm anonymous&lt;/span&gt;
+  &lt;ng-template #notAnonymous&gt;I'm someone&lt;/ng-template&gt;
+&lt;/div&gt;</code></pre>
   </div>
   <aside class="notes">The input property must be prefixed with the selector name
 

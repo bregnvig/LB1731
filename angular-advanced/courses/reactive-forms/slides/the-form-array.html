@@ -12,7 +12,15 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:105.752px;top:470px;width:972.496px;height:auto;z-index:12">
-    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="1,6">  &lt;div formArrayName="emailAddresses" class="form-group flex-wrap"&gt;    @for(_ of emailAddressesControl.controls; track $index) {      &lt;input        type="text"        class="col-12 form-control mb-2"        [formControlName]="$index"&gt;    }  &lt;/div&gt;</code></pre>
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-xml" data-line-numbers="1,6|">  &lt;div formArrayName="emailAddresses" class="form-group flex-wrap"&gt;
+    @for(_ of emailAddressesControl.controls; track $index) {
+      &lt;input
+        type="text"
+        class="col-12 form-control mb-2"
+        [formControlName]="$index"&gt;
+    }
+  &lt;/div&gt;
+</code></pre>
   </div>
   <aside class="notes">Show example. Add email addresses, but also show what happens when you change the email in the array. Look at the source code, to show valueChanges.
 

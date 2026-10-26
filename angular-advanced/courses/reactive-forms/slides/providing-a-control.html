@@ -8,7 +8,18 @@
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:276px;width:880px;height:333px;z-index:12">
-    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="5-11">@Component({  selector: 'loop-address-control',  templateUrl: './address-control.component.html',  styleUrls: ['./address-control.component.scss'],  providers: [    {      provide: NG_VALUE_ACCESSOR,      useExisting: forwardRef(() =&gt; AddressControlComponent),      multi: true    }  ],})</code></pre>
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="5-11">@Component({
+  selector: 'loop-address-control',
+  templateUrl: './address-control.component.html',
+  styleUrls: ['./address-control.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() =&gt; AddressControlComponent),
+      multi: true
+    }
+  ],
+})</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-2" style="left:237px;top:648px;width:806px;height:auto;z-index:13;text-align:left">
     <h2 style="text-align: center;">Now you are done <span style="font-size:0.5em">kinda</span>

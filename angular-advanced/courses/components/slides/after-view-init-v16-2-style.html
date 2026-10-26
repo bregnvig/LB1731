@@ -6,6 +6,19 @@
     <p>Prefer this when working with v1.6.2+</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:288px;width:808.277px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-11">export class PlaygroundComponent {   playgrounds = input&lt;Playground[]&gt;([]);    constructor() {     const route = inject(ActivatedRoute);    afterNextRender(() =&gt; {      if (this.route.snapshot.fragment) {        document.getElementById(this.route.snapshot.fragment).scrollIntoView();      }          })  }  }</code></pre>
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-11">export class PlaygroundComponent {
+ 
+  playgrounds = input&lt;Playground[]&gt;([]);
+  
+  constructor() { 
+    const route = inject(ActivatedRoute);
+    afterNextRender(() =&gt; {
+      if (this.route.snapshot.fragment) {
+        document.getElementById(this.route.snapshot.fragment).scrollIntoView();
+      }      
+    })
+  }
+  
+}</code></pre>
   </div>
 </section>

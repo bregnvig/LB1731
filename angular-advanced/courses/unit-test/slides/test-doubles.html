@@ -9,6 +9,16 @@
     <p>Filler objects</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:161.52px;top:371px;width:958.48px;height:252px;z-index:15;transform:rotate(0deg);border-width:1px">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4-5">it(`should return UrlTree['/login'] when not logged in`, () =&gt; {  // Arrange  TestBed.overrideProvider(AuthService, { useValue: { isLoggedIn: false } });  const route = {} as ActivatedRouteSnapshot; // dummy  const routerState = {} as RouterStateSnapshot; // dummy  const expectedResult = TestBed.inject(Router).createUrlTree(['/login']);  // Act  const result = TestBed.runInInjectionContext(() =&gt; authGuard(route, routerState));  // Assert  expect(result).toEqual(expectedResult);});</code></pre>
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4-5">it(`should return UrlTree['/login'] when not logged in`, () =&gt; {
+  // Arrange
+  TestBed.overrideProvider(AuthService, { useValue: { isLoggedIn: false } });
+  const route = {} as ActivatedRouteSnapshot; // dummy
+  const routerState = {} as RouterStateSnapshot; // dummy
+  const expectedResult = TestBed.inject(Router).createUrlTree(['/login']);
+  // Act
+  const result = TestBed.runInInjectionContext(() =&gt; authGuard(route, routerState));
+  // Assert
+  expect(result).toEqual(expectedResult);
+});</code></pre>
   </div>
 </section>

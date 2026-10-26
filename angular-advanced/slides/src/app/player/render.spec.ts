@@ -27,6 +27,13 @@ describe('renderBlock', () => {
     expect(el.querySelector('path[data-arrow="end"]')!.getAttribute('d')).toBe('M 700 -15.75 L 715.75 0 L 700 15.75 L 715.75 0');
   });
 
+  it('gives a nearly vertical line an svg at least 1px wide', () => {
+    const el = dom(renderBlock({ ...base, width: 0, height: 80, type: 'line', x1: 2.842170943040401e-14, y1: 80, x2: 0, y2: 0, color: '#fff', thickness: 6,
+      dashed: false, start: 'none', end: 'none' }, '')).firstElementChild!;
+    expect(el.querySelector('svg')!.getAttribute('width')).toBe('1');
+    expect(el.querySelector('svg')!.getAttribute('viewBox')).toBe('0 0 1 80');
+  });
+
   it('draws a circle that fills its box', () => {
     const el = dom(renderBlock({ ...base, type: 'shape', shape: 'circle', fill: '#222', stroke: null, strokeWidth: 0, radius: 0 }, '')).firstElementChild!;
     const ellipse = el.querySelector('ellipse')!;

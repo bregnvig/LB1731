@@ -3,7 +3,12 @@
     <h2>Reading query parameters</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:21.5px;top:216px;width:1237px;height:172px;z-index:11">
-    <pre style="font-size: 22px; line-height: 26px;"><code class="language-plaintext" data-line-numbers="2">  ngOnInit(): void {    this.route.queryParams.pipe(      map&lt;Params, number | undefined&gt;(params =&gt; params['row'] &amp;&amp; parseInt(params['row'])),      this.takeUntilDestroyed()    ).subscribe(row =&gt; this.row = row);  }</code></pre>
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-auto" data-line-numbers="2">  ngOnInit(): void {
+    this.route.queryParams.pipe(
+      map&lt;Params, number | undefined&gt;(params =&gt; params['row'] &amp;&amp; parseInt(params['row'])),
+      this.takeUntilDestroyed()
+    ).subscribe(row =&gt; this.row = row);
+  }</code></pre>
   </div>
   <aside class="notes">Remember query params are shared. Not scoped like the matrix params</aside>
 </section>
