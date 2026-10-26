@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ConflictError, DeckService } from '../deck/deck.service';
 import { Block, Deck, Slide } from '../deck/model';
+import { serializeSlide } from '../deck/slide-format';
 import { EditorStore } from './editor.store';
 
 const slide = (path: string, extra: Partial<Slide> = {}): Slide =>
@@ -168,6 +169,27 @@ describe('EditorStore', () => {
       const copy = block(store, 'a-copy-2');
       expect([copy.x, copy.y, copy.z]).toEqual([120, 120, 5]);
       expect(store.selection()).toEqual(['a-copy-2']);
+    });
+
+    it('turns an animation on with the defaults and off again', async () => {
+      const { store } = await withBlocks([text('a')]);
+      store.setAnimation('a', true);
+      expect(block(store, 'a').animation).toEqual({ effect: 'fade-in', duration: 0.6, delay: 0, on: null });
+      store.setAnimation('a', false);
+      expect(block(store, 'a').animation).toBeUndefined();
+    });
+
+    it('offers every other block as a click trigger', async () => {
+      const { store } = await withBlocks([text('a'), text('b'), text('c')]);
+      expect(store.triggerOptions('b')).toEqual(['a', 'c']);
+    });
+
+    it('a fragment shows up as the fragment class in the file', async () => {
+      const { store } = await withBlocks([text('a')]);
+      store.setFragment('a', true);
+      expect(serializeSlide(store.slide()!)).toContain('class="block fragment"');
+      store.setFragment('a', false);
+      expect(serializeSlide(store.slide()!)).not.toContain('fragment');
     });
 
     it('resizes and selects additively', async () => {

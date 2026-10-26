@@ -7,6 +7,7 @@ import { EditorStore } from './editor.store';
 import { LayersComponent } from './layers.component';
 import { CommonSettingsComponent } from './settings/common-settings.component';
 import { MediaSettingsComponent } from './settings/media-settings.component';
+import { MotionSettingsComponent } from './settings/motion-settings.component';
 import { TypeSettingsComponent } from './settings/type-settings.component';
 import { SlideListComponent } from './slide-list.component';
 
@@ -16,7 +17,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
 /** The editor: slide list, canvas, inspector and notes. Routes: /edit and /edit/:course/:file (course "intro" for the intro). */
 @Component({
   selector: 'app-editor',
-  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, SlideListComponent, TypeSettingsComponent],
+  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, MotionSettingsComponent, SlideListComponent, TypeSettingsComponent],
   host: { '(window:keydown)': 'key($event)' },
   // Not encapsulated: the inspector's building blocks (.group, .row, .seg, .sw, .field, .btn) are shared with its panels.
   encapsulation: ViewEncapsulation.None,
@@ -69,13 +70,16 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
     <aside>
       <div class="tabs" role="tablist">
         <button type="button" role="tab" [class.on]="tab() === 'block'" [attr.aria-selected]="tab() === 'block'" (click)="tab.set('block')">Block</button>
-        <button type="button" role="tab" disabled>Motion</button>
+        <button type="button" role="tab" [class.on]="tab() === 'motion'" [attr.aria-selected]="tab() === 'motion'" (click)="tab.set('motion')">Motion</button>
         <button type="button" role="tab" [class.on]="tab() === 'layers'" [attr.aria-selected]="tab() === 'layers'" (click)="tab.set('layers')">Layers</button>
         <span class="kind">{{ kind() }}</span>
       </div>
       <div class="panel">
         @if (tab() === 'layers') {
           <app-layers />
+        } @else if (tab() === 'motion') {
+          @if (selectedBlock(); as b) { <app-motion-settings [block]="b" /> }
+          @else { <p class="hint">Select one block to animate it or make it a fragment.</p> }
         } @else if (selectedBlock(); as b) {
           <app-type-settings [block]="b" />
           <app-media-settings [block]="b" />
@@ -183,7 +187,7 @@ export class EditorComponent {
   private readonly location = inject(Location);
   readonly fileOf = fileOf;
   readonly overview = signal(false);
-  readonly tab = signal<'block' | 'layers'>('block');
+  readonly tab = signal<'block' | 'motion' | 'layers'>('block');
   readonly exporting = signal(false);
   readonly pdfMessage = signal('');
 

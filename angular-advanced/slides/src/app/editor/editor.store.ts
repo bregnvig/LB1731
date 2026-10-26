@@ -152,6 +152,20 @@ export class EditorStore {
     return true;
   }
 
+  setAnimation(name: string, on: boolean) {
+    this.updateBlocks([name], b => ({ ...b, animation: on ? { effect: 'fade-in', duration: 0.6, delay: 0, on: null } : undefined }));
+  }
+
+  /** Blocks whose click can start `name`'s animation: every other block on the slide. */
+  triggerOptions(name: string): string[] {
+    const s = this.slide();
+    return s ? blockNames(s).filter(n => n !== name) : [];
+  }
+
+  setFragment(name: string, on: boolean) {
+    this.updateBlocks([name], b => ({ ...b, fragment: on ? { index: null, style: '' } : undefined }));
+  }
+
   private restack(backToFront: string[]) {
     const zs = (this.slide()?.blocks ?? []).map(b => b.z).sort((a, b) => a - b);
     const z = new Map(backToFront.map((n, i) => [n, zs[i]]));
