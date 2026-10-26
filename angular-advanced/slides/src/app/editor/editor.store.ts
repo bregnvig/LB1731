@@ -1,0 +1,228 @@
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { ConflictError, DeckService } from '../deck/deck.service';
+import { Deck, Slide } from '../deck/model';
+
+export type SaveStatus = 'saved' | 'saving' | 'conflict' | 'error';
+
+const MAX_HISTORY = 100;
+const folderOf = (path: string) => path.slice(0, path.lastIndexOf('/'));
+
+/**
+ * The editor's state. Slide edits go through `updateSlide`, which records undo history per slide
+ * and writes the file 500 ms after the last change. A file changed on disk by someone else stops
+ * saving until the slide is reloaded.
+ */
+@Injectable({ providedIn: 'root' })
+export class EditorStore {
+  private readonly service = inject(DeckService);
+
+  readonly deck = signal<Deck | null>(null);
+  /** null is the intro. */
+  readonly courseId = signal<string | null>(null);
+  readonly slideIndex = signal(0);
+  readonly selection = signal<string[]>([]);
+  readonly status = signal<SaveStatus>('saved');
+  readonly error = signal('');
+
+  readonly slides = computed(() => {
+    const deck = this.deck(), id = this.courseId();
+    if (!deck) return [];
+    return id == null ? deck.intro : deck.courses.find(c => c.id === id)?.slides ?? [];
+  });
+  readonly slide = computed<Slide | undefined>(() => this.slides()[this.slideIndex()]);
+
+  /** Where slide `index` of the open list is in the presentation (h, v), or null when it's hidden. */
+  revealIndices(index: number): { h: number; v: number } | null {
+    const deck = this.deck(), id = this.courseId(), list = this.slides();
+    if (!deck || !list[index] || list[index].hidden) return null;
+    const visibleBefore = (slides: Slide[], i = slides.length) => slides.slice(0, i).filter(s => !s.hidden).length;
+    if (id == null) return { h: visibleBefore(list, index), v: 0 };
+    return { h: visibleBefore(deck.intro) + deck.courses.findIndex(c => c.id === id), v: visibleBefore(list, index) };
+  }
+
+  private history = new Map<string, { undo: Slide[]; redo: Slide[]; lastKey?: string }>();
+  private pending = new Set<string>();
+  private timer?: ReturnType<typeof setTimeout>;
+
+  async load() {
+    this.deck.set(await this.service.load());
+  }
+
+  openCourse(id: string | null) {
+    this.courseId.set(id);
+    this.openSlide(0);
+  }
+
+  openSlide(index: number) {
+    this.slideIndex.set(Math.max(0, Math.min(index, this.slides().length - 1)));
+    this.selection.set([]);
+  }
+
+  /**
+   * Changes the current slide. Changes with the same `coalesce` key in a row (typing in one field)
+   * share one undo step.
+   */
+  updateSlide(fn: (s: Slide) => Slide, coalesce?: string) {
+    const current = this.slide();
+    if (!current) return;
+    const h = this.historyOf(current.path);
+    if (!coalesce || h.lastKey !== coalesce) {
+      h.undo.push(current);
+      if (h.undo.length > MAX_HISTORY) h.undo.shift();
+    }
+    h.lastKey = coalesce;
+    h.redo = [];
+    this.replace(fn(current));
+    this.scheduleSave(current.path);
+  }
+
+  setNotes(text: string) {
+    this.updateSlide(s => ({ ...s, notes: text }), 'notes');
+  }
+
+  undo() {
+    this.step('undo', 'redo');
+  }
+
+  redo() {
+    this.step('redo', 'undo');
+  }
+
+  async setAutoAnimate(v: boolean) {
+    this.updateSlide(s => ({ ...s, autoAnimate: v }));
+  }
+
+  /** Hidden lives in the order file, not in the slide. */
+  async setHidden(v: boolean) {
+    const current = this.slide();
+    if (!current) return;
+    this.replace({ ...current, hidden: v });
+    await this.saveOrder();
+  }
+
+  async addSlide() {
+    const list = this.slides(), current = this.slide();
+    if (!current) return;
+    const dir = folderOf(current.path);
+    const taken = new Set(list.map(s => s.path));
+    let n = 1;
+    while (taken.has(`${dir}/slide-${n}.html`)) n++;
+    const created = await this.guard(() => this.service.saveSlide({ path: `${dir}/slide-${n}.html`, hidden: false, autoAnimate: false, blocks: [], notes: '', etag: '' }));
+    if (!created) return;
+    const at = this.slideIndex() + 1;
+    this.setList([...list.slice(0, at), created, ...list.slice(at)]);
+    this.openSlide(at);
+    await this.saveOrder();
+  }
+
+  async deleteSlide() {
+    const current = this.slide();
+    if (!current || this.slides().length < 2) return;
+    this.pending.delete(current.path);
+    if ((await this.guard(() => this.service.deleteSlide(current))) === undefined) return;
+    this.setList(this.slides().filter(s => s !== current));
+    this.history.delete(current.path);
+    this.openSlide(this.slideIndex());
+    await this.saveOrder();
+  }
+
+  async moveSlide(from: number, to: number) {
+    const list = [...this.slides()];
+    const current = this.slide();
+    const [moved] = list.splice(from, 1);
+    list.splice(to, 0, moved);
+    this.setList(list);
+    this.slideIndex.set(list.indexOf(current!));
+    await this.saveOrder();
+  }
+
+  /** After a conflict: take the files as they are on disk now. */
+  async reloadSlide() {
+    const path = this.slide()?.path;
+    clearTimeout(this.timer);
+    this.pending.clear();
+    this.history.clear();
+    await this.load();
+    const index = this.slides().findIndex(s => s.path === path);
+    this.slideIndex.set(Math.max(0, index));
+    this.status.set('saved');
+  }
+
+  private step(from: 'undo' | 'redo', to: 'undo' | 'redo') {
+    const current = this.slide();
+    if (!current) return;
+    const h = this.historyOf(current.path);
+    const target = h[from].pop();
+    if (!target) return;
+    h[to].push(current);
+    h.lastKey = undefined;
+    // The file on disk now has the current etag, whatever the snapshot remembers.
+    this.replace({ ...target, etag: current.etag });
+    this.scheduleSave(current.path);
+  }
+
+  private historyOf(path: string) {
+    let h = this.history.get(path);
+    if (!h) this.history.set(path, (h = { undo: [], redo: [] }));
+    return h;
+  }
+
+  /** Puts a new version of a slide (matched by path) into the deck. */
+  private replace(next: Slide) {
+    this.setListOf(next.path, list => list.map(s => (s.path === next.path ? next : s)));
+  }
+
+  private setList(list: Slide[]) {
+    const id = this.courseId();
+    this.deck.update(d => d && (id == null ? { ...d, intro: list } : { ...d, courses: d.courses.map(c => (c.id === id ? { ...c, slides: list } : c)) }));
+  }
+
+  private setListOf(path: string, fn: (list: Slide[]) => Slide[]) {
+    this.deck.update(d => {
+      if (!d) return d;
+      if (d.intro.some(s => s.path === path)) return { ...d, intro: fn(d.intro) };
+      return { ...d, courses: d.courses.map(c => (c.slides.some(s => s.path === path) ? { ...c, slides: fn(c.slides) } : c)) };
+    });
+  }
+
+  private find(path: string): Slide | undefined {
+    const d = this.deck();
+    return d ? [...d.intro, ...d.courses.flatMap(c => c.slides)].find(s => s.path === path) : undefined;
+  }
+
+  private scheduleSave(path: string) {
+    if (this.status() === 'conflict') return;
+    this.pending.add(path);
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.flush(), 500);
+  }
+
+  private async flush() {
+    for (const path of [...this.pending]) {
+      this.pending.delete(path);
+      const s = this.find(path);
+      if (!s) continue;
+      this.status.set('saving');
+      const saved = await this.guard(() => this.service.saveSlide(s));
+      if (!saved) return;
+      // Keep edits made while saving; only the etag comes from the save.
+      this.setListOf(path, list => list.map(x => (x.path === path ? { ...x, etag: saved.etag } : x)));
+    }
+    if (this.status() === 'saving') this.status.set('saved');
+  }
+
+  private async saveOrder() {
+    await this.guard(() => this.service.saveOrder(this.courseId(), this.slides()));
+  }
+
+  /** Runs a write; on failure sets the status and returns undefined. Resolves to null for void writes. */
+  private async guard<T>(write: () => Promise<T>): Promise<T | null | undefined> {
+    try {
+      return (await write()) ?? null;
+    } catch (e) {
+      this.status.set(e instanceof ConflictError ? 'conflict' : 'error');
+      this.error.set(e instanceof Error ? e.message : String(e));
+      return undefined;
+    }
+  }
+}
