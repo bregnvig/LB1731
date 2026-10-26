@@ -27,11 +27,11 @@ show_help() {
   echo "Targets:"
   echo "  -a, all          All labs, solutions, and demo"
   echo "  demo             Demo directory only"
-  echo "  [course]         Specific course (labs/[course] and solutions/[course])"
+  echo "  [course]         Specific course (courses/[course]/labs and courses/[course]/solutions)"
   echo ""
   echo "Examples:"
   echo "  ./workspace.sh upgrade all      # Full upgrade of all directories"
-  echo "  ./workspace.sh upgrade di       # Full upgrade of labs/di and solutions/di"
+  echo "  ./workspace.sh upgrade di       # Full upgrade of courses/di/labs and courses/di/solutions"
   echo "  ./workspace.sh verify all       # Verify all directories install, build, serve"
   echo "  ./workspace.sh install all      # Install packages in all directories"
   echo "  ./workspace.sh test-zips        # Students still get the same zips?"
@@ -69,10 +69,10 @@ case "$command" in
   "name": "angular-advanced",
   "workspaces": [
     "./demo",
-    "./solutions/*",
-    "./solutions/**/*",
-    "./labs/*",
-    "./labs/**/*"
+    "./courses/*/labs",
+    "./courses/*/labs/*",
+    "./courses/*/solutions",
+    "./courses/*/solutions/*"
   ]
 }' > package.json
       npm install --force

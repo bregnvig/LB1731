@@ -30,7 +30,7 @@ verify_directory() {
   if [[ "$dir" == */unit-test/* ]]; then
     if (cd "$dir" && CI=true npx ng test --watch=false) >&2 2>&1; then
       build_result="PASS"
-    elif [[ "$dir" == labs/unit-test/exercise-1 ]]; then
+    elif [[ "$dir" == courses/unit-test/labs/exercise-1 ]]; then
       # Expected: step 1 of the exercise creates service/auth.service (ng g s service/auth)
       build_result="XFAIL"
     else

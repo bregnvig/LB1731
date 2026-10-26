@@ -226,16 +226,16 @@ Patterns and libraries for managing application state in Angular.
 
 Each module builds on the same playground-finder application. Labs are organized as:
 
-| Module | Lab folder | Exercises |
+| Module | Folder | Exercises |
 |--------|-----------|-----------|
-| RxJS | `labs/rxjs` | 4 exercises + 1 extra |
-| Dependency Injection | `labs/di` | 3 exercises |
-| Components | `labs/components` | 3 exercises |
-| Unit Testing | `labs/unit-test` | 4 exercises |
-| Reactive Forms | `labs/reactive-forms` | 3 exercises |
-| Routing | `labs/routing` | 3 exercises |
-| Pipes & Directives | `labs/pipes-and-directives` | 4 exercises |
-| Signals | `labs/signals` | 3 exercises |
-| State Management | `labs/state-management` | 3 exercises |
+| RxJS | `courses/rxjs` | 4 exercises + 1 extra |
+| Dependency Injection | `courses/di` | 3 exercises |
+| Components | `courses/components` | 3 exercises |
+| Unit Testing | `courses/unit-test` | 4 exercises |
+| Reactive Forms | `courses/reactive-forms` | 3 exercises |
+| Routing | `courses/routing` | 3 exercises |
+| Pipes & Directives | `courses/pipes-and-directives` | 4 exercises |
+| Signals | `courses/signals` | 3 exercises |
+| State Management | `courses/state-management` | 3 exercises |
 
-Each exercise folder contains a starting lab and a corresponding solution. The solution for exercise N serves as the starting point for exercise N+1.
+Each course folder has `labs/` (starting points) and `solutions/`, with one `exercise-N` folder per exercise (rxjs is a single app). Students get the old layout in `labs.zip` / `solutions.zip`: `labs/<course>/exercise-N`. The solution for exercise N serves as the starting point for exercise N+1.
