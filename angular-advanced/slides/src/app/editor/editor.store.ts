@@ -340,8 +340,8 @@ export class EditorStore {
     if (!target) return;
     h[to].push(current);
     h.lastKey = undefined;
-    // The file on disk now has the current etag, whatever the snapshot remembers.
-    this.replace({ ...target, etag: current.etag });
+    // The file on disk now has the current etag and format, whatever the snapshot remembers.
+    this.replace({ ...target, etag: current.etag, dropsMarkup: current.dropsMarkup });
     this.scheduleSave(current.path);
   }
 
@@ -389,8 +389,8 @@ export class EditorStore {
       if (!s || this.conflicts().includes(path)) continue;
       try {
         const saved = await this.write(() => this.service.saveSlide(s));
-        // Keep edits made while saving; only the etag comes from the save.
-        this.setListOf(path, list => list.map(x => (x.path === path ? { ...x, etag: saved.etag } : x)));
+        // Keep edits made while saving; only the etag comes from the save. The file is in the editor's format now.
+        this.setListOf(path, list => list.map(x => (x.path === path ? { ...x, etag: saved.etag, dropsMarkup: false } : x)));
       } catch (e) {
         if (!(e instanceof ConflictError)) this.pending.add(path);
         this.fail(e);

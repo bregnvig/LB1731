@@ -59,6 +59,11 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
           <button type="button" class="btn" (click)="store.reloadConflicts()">Reload from disk</button>
         </div>
       }
+      @if (!overview() && store.slide()?.dropsMarkup) {
+        <div class="banner" role="status" data-testid="drops-markup">
+          <span>This file has markup the editor doesn't keep. Your next edit saves it in the editor's format, and that markup is dropped. Git still has the old file.</span>
+        </div>
+      }
       @if (overview()) {
         <app-slide-list class="overview" [grid]="true" />
       } @else if (store.slide(); as s) {

@@ -96,6 +96,13 @@ describe('slide format', () => {
     expect(serializeSlide(parseSlide(file(out)))).toBe(out);
   });
 
+  it('flags a file with markup the format does not keep', () => {
+    expect(parseSlide(file(everyType)).dropsMarkup).toBeUndefined();
+    expect(parseSlide(file(everyType.replace('\n', '\r\n') + '\n')).dropsMarkup).toBeUndefined();
+    expect(parseSlide(file(everyType.replace('<aside', '<p>loose text</p>\n  <aside'))).dropsMarkup).toBe(true);
+    expect(parseSlide(file(everyType.replace('<section data-auto-animate>', '<section data-auto-animate class="x">'))).dropsMarkup).toBe(true);
+  });
+
   it('keeps notes, auto-animate, path, hidden and etag', () => {
     const slide = parseSlide({ ...file(everyType), hidden: true });
     expect(slide).toMatchObject({ path: 'courses/rxjs/slides/demo.html', hidden: true, autoAnimate: true, etag: 'e' });
