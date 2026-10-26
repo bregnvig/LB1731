@@ -56,6 +56,10 @@ A slide is one `<section>` with absolutely positioned blocks on a 1280×720 canv
 
 If a file changes on disk while it's open in the editor, the editor doesn't overwrite it. It stops saving and offers to reload.
 
+## Credits
+
+Third-party libraries, fonts, color palettes and images, and their licenses, are listed in [CREDITS.md](CREDITS.md).
+
 ## Working on the tool
 
 The tool has its own `package.json` (not one of the workspace's projects): run `npm install` here.

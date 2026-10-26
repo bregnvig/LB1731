@@ -1,4 +1,4 @@
-/* Dark code theme (the deck's default) for highlight.js tokens. */
+/* Dark code theme (the deck's default) for highlight.js tokens. Colors follow the Seti syntax palette by Jesse Weed (MIT). */
 
 .reveal .block[data-theme='dark'] code {
   background: #151718;

@@ -1,4 +1,4 @@
-/* Monokai code theme for highlight.js tokens. */
+/* Monokai code theme for highlight.js tokens. Colors follow the Monokai palette by Wimer Hazenberg as used by highlight.js's monokai style (BSD-3-Clause). */
 
 .reveal .block[data-theme='monokai'] code {
   background: #272822;
