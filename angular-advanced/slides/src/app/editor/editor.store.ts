@@ -1,6 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { ConflictError, DeckService } from '../deck/deck.service';
-import { Deck, Slide } from '../deck/model';
+import { Block, Deck, Slide } from '../deck/model';
+import { blockNames } from '../deck/slide-format';
 
 export type SaveStatus = 'saved' | 'saving' | 'conflict' | 'error';
 
@@ -30,6 +31,107 @@ export class EditorStore {
     return id == null ? deck.intro : deck.courses.find(c => c.id === id)?.slides ?? [];
   });
   readonly slide = computed<Slide | undefined>(() => this.slides()[this.slideIndex()]);
+
+  // Blocks. Names are unique on a slide; these work on the top-level blocks.
+
+  select(names: string[], additive = false) {
+    if (!additive) return this.selection.set(names);
+    const now = new Set(this.selection());
+    for (const n of names) if (now.has(n)) now.delete(n); else now.add(n);
+    this.selection.set([...now]);
+  }
+
+  /** Changes the named blocks (all blocks with `names` = null). */
+  updateBlocks(names: string[] | null, fn: (b: Block) => Block, coalesce?: string) {
+    const set = names && new Set(names);
+    this.updateSlide(s => ({ ...s, blocks: s.blocks.map(b => (!set || set.has(b.name) ? fn(b) : b)) }), coalesce);
+  }
+
+  moveBlocks(names: string[], dx: number, dy: number, coalesce?: string) {
+    this.updateBlocks(names, b => (b.locked ? b : { ...b, x: b.x + dx, y: b.y + dy }), coalesce);
+  }
+
+  resizeBlock(name: string, rect: { x: number; y: number; width: number; height: number | 'auto' }) {
+    this.updateBlocks([name], b => (b.locked ? b : { ...b, ...rect } as Block));
+  }
+
+  setLocked(names: string[], locked: boolean) {
+    this.updateBlocks(names, b => ({ ...b, locked: locked || undefined }));
+  }
+
+  /** Restacks by handing the existing z values out again in the new order, so other blocks keep theirs. */
+  setDepth(names: string[], op: 'back' | 'backward' | 'forward' | 'front') {
+    const blocks = this.slide()?.blocks ?? [];
+    const order = [...blocks].sort((a, b) => a.z - b.z).map(b => b.name);
+    const moving = new Set(names);
+    const rest = order.filter(n => !moving.has(n)), picked = order.filter(n => moving.has(n));
+    let next: string[];
+    if (op === 'front') next = [...rest, ...picked];
+    else if (op === 'back') next = [...picked, ...rest];
+    else {
+      next = [...order];
+      const step = op === 'forward' ? 1 : -1;
+      const indices = picked.map(n => next.indexOf(n));
+      for (const i of step === 1 ? indices.reverse() : indices) {
+        const j = i + step;
+        if (j < 0 || j >= next.length || moving.has(next[j])) continue;
+        [next[i], next[j]] = [next[j], next[i]];
+      }
+    }
+    this.restack(next);
+  }
+
+  /** Moves one block to position `index` in the layers list, which runs from front to back. */
+  moveLayer(name: string, index: number) {
+    const order = [...(this.slide()?.blocks ?? [])].sort((a, b) => b.z - a.z).map(b => b.name).filter(n => n !== name);
+    order.splice(index, 0, name);
+    this.restack(order.reverse());
+  }
+
+  duplicate(names: string[]) {
+    const s = this.slide();
+    if (!s) return;
+    const taken = new Set(blockNames(s));
+    let z = Math.max(0, ...s.blocks.map(b => b.z));
+    const copies = s.blocks.filter(b => names.includes(b.name)).map(b => {
+      let name = `${b.name}-copy`;
+      for (let n = 2; taken.has(name); n++) name = `${b.name}-copy-${n}`;
+      taken.add(name);
+      return { ...structuredClone(b), name, x: b.x + 20, y: b.y + 20, z: ++z, locked: undefined } as Block;
+    });
+    this.updateSlide(sl => ({ ...sl, blocks: [...sl.blocks, ...copies] }));
+    this.selection.set(copies.map(c => c.name));
+  }
+
+  deleteBlocks(names: string[]) {
+    const gone = new Set(names);
+    this.updateSlide(s => ({
+      ...s,
+      blocks: s.blocks.filter(b => !gone.has(b.name))
+        .map(b => (b.animation?.on && gone.has(b.animation.on) ? { ...b, animation: { ...b.animation, on: null } } : b)),
+    }));
+    this.selection.update(sel => sel.filter(n => !gone.has(n)));
+  }
+
+  /** Renames a block and the click triggers that point at it. False when the name is empty or taken. */
+  renameBlock(old: string, next: string): boolean {
+    const s = this.slide();
+    next = next.trim();
+    if (!s || !next || (next !== old && blockNames(s).includes(next))) return false;
+    if (next === old) return true;
+    this.updateBlocks(null, b => {
+      const renamed = b.name === old ? { ...b, name: next } : b;
+      return renamed.animation?.on === old ? { ...renamed, animation: { ...renamed.animation, on: next } } : renamed;
+    });
+    this.selection.update(sel => sel.map(n => (n === old ? next : n)));
+    return true;
+  }
+
+  private restack(backToFront: string[]) {
+    const zs = (this.slide()?.blocks ?? []).map(b => b.z).sort((a, b) => a - b);
+    const z = new Map(backToFront.map((n, i) => [n, zs[i]]));
+    this.updateBlocks(null, b => (z.get(b.name) === b.z ? b : { ...b, z: z.get(b.name)! }));
+  }
 
   /** Where slide `index` of the open list is in the presentation (h, v), or null when it's hidden. */
   revealIndices(index: number): { h: number; v: number } | null {

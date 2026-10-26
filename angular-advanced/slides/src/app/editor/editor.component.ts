@@ -3,6 +3,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CanvasComponent } from './canvas.component';
 import { EditorStore } from './editor.store';
+import { LayersComponent } from './layers.component';
 import { SlideListComponent } from './slide-list.component';
 
 const fileOf = (path: string) => path.slice(path.lastIndexOf('/') + 1);
@@ -11,7 +12,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
 /** The editor: slide list, canvas, inspector and notes. Routes: /edit and /edit/:course/:file (course "intro" for the intro). */
 @Component({
   selector: 'app-editor',
-  imports: [CanvasComponent, SlideListComponent],
+  imports: [CanvasComponent, LayersComponent, SlideListComponent],
   host: { '(window:keydown)': 'key($event)' },
   template: `
     <header>
@@ -53,19 +54,26 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
         <app-slide-list class="overview" [grid]="true" />
       } @else if (store.slide(); as s) {
         <app-canvas [slide]="s" />
-        <div class="stagefoot"><kbd>↑</kbd><kbd>↓</kbd> move between slides · <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo</div>
+        <div class="stagefoot"><kbd>↑</kbd><kbd>↓</kbd> move between slides · <kbd>Shift</kbd>+click to multi-select · <kbd>Alt</kbd> while dragging: no guides · <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo</div>
       }
     </main>
 
     <aside>
-      <div class="tabs">
-        <button type="button" class="on">Block</button>
-        <button type="button" disabled>Motion</button>
-        <button type="button" disabled>Layers</button>
-        <span class="kind">Slide</span>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" [class.on]="tab() === 'block'" [attr.aria-selected]="tab() === 'block'" (click)="tab.set('block')">Block</button>
+        <button type="button" role="tab" disabled>Motion</button>
+        <button type="button" role="tab" [class.on]="tab() === 'layers'" [attr.aria-selected]="tab() === 'layers'" (click)="tab.set('layers')">Layers</button>
+        <span class="kind">{{ kind() }}</span>
       </div>
       <div class="panel">
-        @if (store.slide(); as s) {
+        @if (tab() === 'layers') {
+          <app-layers />
+        } @else if (store.selection().length) {
+          <div class="group">
+            <span class="label">{{ store.selection().length === 1 ? store.selection()[0] : store.selection().length + ' blocks' }}</span>
+            <p class="hint">Drag to move, handles to resize, arrow keys to nudge (Shift: 10 px). Delete removes.</p>
+          </div>
+        } @else if (store.slide(); as s) {
           <div class="group">
             <span class="label">Slide</span>
             <div class="row"><span>File</span><span class="mono">{{ fileOf(s.path) }}</span></div>
@@ -144,6 +152,7 @@ export class EditorComponent {
   private readonly location = inject(Location);
   readonly fileOf = fileOf;
   readonly overview = signal(false);
+  readonly tab = signal<'block' | 'layers'>('block');
   readonly exporting = signal(false);
   readonly pdfMessage = signal('');
 
@@ -160,6 +169,14 @@ export class EditorComponent {
       const s = this.store.slide();
       if (s) this.location.replaceState(`/edit/${this.store.courseId() ?? 'intro'}/${fileOf(s.path)}`);
     });
+  }
+
+  kind() {
+    const sel = this.store.selection();
+    if (!sel.length) return 'Slide';
+    if (sel.length > 1) return `${sel.length} blocks`;
+    const type = this.store.slide()?.blocks.find(b => b.name === sel[0])?.type ?? '';
+    return type.charAt(0).toUpperCase() + type.slice(1);
   }
 
   courseTitle() {
@@ -210,9 +227,23 @@ export class EditorComponent {
     if (mod && e.key.toLowerCase() === 'z' && !typing(e)) {
       e.preventDefault();
       if (e.shiftKey) this.store.redo(); else this.store.undo();
-    } else if (!mod && !typing(e) && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
-      e.preventDefault();
-      this.store.openSlide(this.store.slideIndex() + (e.key === 'ArrowUp' ? -1 : 1));
+      return;
     }
+    if (mod || typing(e)) return;
+    const sel = this.store.selection();
+    const nudge: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    if (sel.length && nudge[e.key]) {
+      const step = e.shiftKey ? 10 : 1;
+      this.store.moveBlocks(sel, nudge[e.key][0] * step, nudge[e.key][1] * step, 'nudge');
+    } else if (sel.length && (e.key === 'Delete' || e.key === 'Backspace')) {
+      this.store.deleteBlocks(sel);
+    } else if (e.key === 'Escape') {
+      this.store.select([]);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      this.store.openSlide(this.store.slideIndex() + (e.key === 'ArrowUp' ? -1 : 1));
+    } else {
+      return;
+    }
+    e.preventDefault();
   }
 }

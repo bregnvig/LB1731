@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ConflictError, DeckService } from '../deck/deck.service';
-import { Deck, Slide } from '../deck/model';
+import { Block, Deck, Slide } from '../deck/model';
 import { EditorStore } from './editor.store';
 
 const slide = (path: string, extra: Partial<Slide> = {}): Slide =>
@@ -118,5 +118,67 @@ describe('EditorStore', () => {
     expect(service.deleteSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'courses/demo/slides/c.html' }));
     expect(store.slides().length).toBe(2);
     expect(store.slideIndex()).toBe(1);
+  });
+
+  describe('blocks', () => {
+    const text = (name: string, extra: Partial<Block> = {}) =>
+      ({ type: 'text', name, x: 100, y: 100, width: 200, height: 'auto', z: 1, html: '<p>t</p>', ...extra }) as Block;
+
+    async function withBlocks(blocks: Block[]) {
+      const s = await opened();
+      s.store.updateSlide(sl => ({ ...sl, blocks }));
+      return s;
+    }
+    const block = (store: EditorStore, name: string) => store.slide()!.blocks.find(b => b.name === name)!;
+
+    it('moves selected blocks but not locked ones', async () => {
+      const { store } = await withBlocks([text('a'), text('b', { locked: true })]);
+      store.moveBlocks(['a', 'b'], 10, -5);
+      expect([block(store, 'a').x, block(store, 'a').y]).toEqual([110, 95]);
+      expect(block(store, 'b').x).toBe(100);
+    });
+
+    it('renaming updates click triggers that point at the block', async () => {
+      const { store } = await withBlocks([text('q'), text('a', { animation: { effect: 'fade-in', duration: 0.6, delay: 0, on: 'q' } })]);
+      expect(store.renameBlock('q', 'question')).toBe(true);
+      expect(block(store, 'a').animation!.on).toBe('question');
+      expect(store.renameBlock('a', 'question')).toBe(false);
+    });
+
+    it('deleting a block turns animations it triggered into entry animations', async () => {
+      const { store } = await withBlocks([text('q'), text('a', { animation: { effect: 'fade-in', duration: 0.6, delay: 0, on: 'q' } })]);
+      store.select(['q']);
+      store.deleteBlocks(['q']);
+      expect(store.slide()!.blocks.map(b => b.name)).toEqual(['a']);
+      expect(block(store, 'a').animation!.on).toBeNull();
+      expect(store.selection()).toEqual([]);
+    });
+
+    it('brings a block to the front by reusing the existing depths', async () => {
+      const { store } = await withBlocks([text('a', { z: 10 }), text('b', { z: 11 }), text('c', { z: 12 })]);
+      store.setDepth(['a'], 'front');
+      expect(['a', 'b', 'c'].map(n => block(store, n).z)).toEqual([12, 10, 11]);
+      store.setDepth(['a'], 'backward');
+      expect(['a', 'b', 'c'].map(n => block(store, n).z)).toEqual([11, 10, 12]);
+    });
+
+    it('duplicates with a free name, offset and on top', async () => {
+      const { store } = await withBlocks([text('a', { z: 3 }), text('a-copy', { z: 4 })]);
+      store.duplicate(['a']);
+      const copy = block(store, 'a-copy-2');
+      expect([copy.x, copy.y, copy.z]).toEqual([120, 120, 5]);
+      expect(store.selection()).toEqual(['a-copy-2']);
+    });
+
+    it('resizes and selects additively', async () => {
+      const { store } = await withBlocks([text('a'), text('b')]);
+      store.resizeBlock('a', { x: 5, y: 6, width: 300, height: 40 });
+      expect(block(store, 'a')).toMatchObject({ x: 5, y: 6, width: 300, height: 40 });
+      store.select(['a']);
+      store.select(['b'], true);
+      expect(store.selection()).toEqual(['a', 'b']);
+      store.select(['a'], true);
+      expect(store.selection()).toEqual(['b']);
+    });
   });
 });
