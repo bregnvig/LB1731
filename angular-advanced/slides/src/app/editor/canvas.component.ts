@@ -5,6 +5,9 @@ import { inlineSvgImages } from '../player/inline-svg';
 import { renderBlock, renderSlide, slideFolder } from '../player/render';
 import { EditorStore } from './editor.store';
 import { Guide, Rect, snap } from './guides';
+import { Point, pointsToPath } from './media';
+
+const PEN = { color: '#ff0000', width: 6 };
 
 /**
  * Draws a slide the way the presentation does, every block in its end state: inside a 1280×720
@@ -21,7 +24,8 @@ type Gesture =
   | { kind: 'move'; x0: number; y0: number; names: string[]; moved: boolean; hit: string }
   | { kind: 'resize'; x0: number; y0: number; name: string; handle: Handle; start: Rect }
   | { kind: 'end'; name: string; end: 1 | 2 }
-  | { kind: 'marquee'; x0: number; y0: number; additive: boolean };
+  | { kind: 'marquee'; x0: number; y0: number; additive: boolean }
+  | { kind: 'pen'; points: Point[] };
 
 const HANDLES: Handle[] = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
 const MIN = 8;
@@ -38,7 +42,7 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
   selector: 'app-canvas',
   template: `<div class="frame" [style.width.px]="1280 * scale()" [style.height.px]="720 * scale()">
     <div class="editor-slide" #paint [style.transform]="'scale(' + scale() + ')'"></div>
-    <div class="overlay" #overlay data-testid="canvas" [class.editing]="editing()" [style.transform]="'scale(' + scale() + ')'" [style.--inv]="1 / scale()"
+    <div class="overlay" #overlay data-testid="canvas" [class.editing]="editing()" [class.pen]="store.tool() === 'pen'" [style.transform]="'scale(' + scale() + ')'" [style.--inv]="1 / scale()"
       (pointerdown)="down($event)" (pointermove)="move($event)" (pointerup)="up($event)" (pointercancel)="cancel()" (dblclick)="edit($event)">
       @if (editing() && rects().get(editing()!); as r) {
         <div class="fmt" role="toolbar" aria-label="Text formatting" [style.left.px]="r.x" [style.top.px]="r.y" (mousedown)="keepSelection($event)">
@@ -65,6 +69,9 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
       @for (g of guides(); track $index) {
         <div class="guide" [class.x]="g.axis === 'x'" [style.left.px]="g.axis === 'x' ? g.at : null" [style.top.px]="g.axis === 'y' ? g.at : null"></div>
       }
+      @if (stroke()) {
+        <svg class="stroke" width="1280" height="720"><path [attr.d]="stroke()" fill="none" [attr.stroke]="pen.color" [attr.stroke-width]="pen.width" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      }
       @if (marquee(); as m) {
         <div class="marquee" [style.left.px]="m.x" [style.top.px]="m.y" [style.width.px]="m.width" [style.height.px]="m.height"></div>
       }
@@ -87,6 +94,8 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
     .guide { position: absolute; left: 0; right: 0; border-top: calc(1px * var(--inv)) dashed var(--guide); pointer-events: none; }
     .guide.x { top: 0; bottom: 0; right: auto; border-top: 0; border-left: calc(1px * var(--inv)) dashed var(--guide); }
     .overlay.editing { pointer-events: none; }
+    .overlay.pen { cursor: crosshair; }
+    .stroke { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
     .fmt { position: absolute; pointer-events: auto; display: flex; gap: 2px; background: var(--ink); border-radius: calc(6px * var(--inv)); padding: calc(3px * var(--inv));
       transform: translateY(calc(-100% - 8px * var(--inv))); font: calc(12px * var(--inv)) 'IBM Plex Sans', sans-serif; }
     .fmt button, .fmt .pick { border: 0; background: none; color: #fff; padding: calc(3px * var(--inv)) calc(8px * var(--inv)); border-radius: calc(4px * var(--inv)); cursor: pointer; font: inherit; }
@@ -97,7 +106,9 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
   `,
 })
 export class CanvasComponent {
-  private readonly store = inject(EditorStore);
+  readonly store = inject(EditorStore);
+  readonly pen = PEN;
+  readonly stroke = signal('');
   readonly slide = input.required<Slide>();
   readonly scale = signal(0.6);
   private readonly paint = viewChild.required<ElementRef<HTMLElement>>('paint');
@@ -171,6 +182,10 @@ export class CanvasComponent {
     if (e.button !== 0 || target.closest('.fmt')) return;
     const p = this.point(e);
     this.overlay().nativeElement.setPointerCapture(e.pointerId);
+    if (this.store.tool() === 'pen') {
+      this.gesture = { kind: 'pen', points: [p] };
+      return;
+    }
     const name = this.store.selection()[0];
     if (target.dataset['handle']) {
       this.gesture = { kind: 'resize', x0: p.x, y0: p.y, name, handle: target.dataset['handle'] as Handle, start: this.rects().get(name)! };
@@ -194,7 +209,10 @@ export class CanvasComponent {
     const g = this.gesture;
     if (!g) return;
     const p = this.point(e);
-    if (g.kind === 'move') {
+    if (g.kind === 'pen') {
+      g.points.push(p);
+      this.stroke.set(pointsToPath(g.points));
+    } else if (g.kind === 'move') {
       let dx = p.x - g.x0, dy = p.y - g.y0;
       if (!g.moved && Math.hypot(dx, dy) * this.scale() < 3) return;
       g.moved = true;
@@ -209,7 +227,8 @@ export class CanvasComponent {
       this.offset.set({ x: dx, y: dy });
       for (const n of g.names) this.element(n)?.style.setProperty('translate', `${dx}px ${dy}px`);
     } else if (g.kind === 'resize') {
-      const r = this.resized(g.start, g.handle, p.x - g.x0, p.y - g.y0, e.shiftKey);
+      const b = this.slide().blocks.find(b => b.name === g.name);
+      const r = this.resized(g.start, g.handle, p.x - g.x0, p.y - g.y0, e.shiftKey || (b?.type === 'image' && b.keepRatio));
       const el = this.element(g.name);
       if (!el) return;
       Object.assign(el.style, { left: `${r.x}px`, top: `${r.y}px`, width: `${r.width}px` }, sideways(g.handle) ? {} : { height: `${r.height}px` });
@@ -228,7 +247,9 @@ export class CanvasComponent {
   up(e: PointerEvent) {
     const g = this.gesture;
     if (!g) return;
-    if (g.kind === 'move') {
+    if (g.kind === 'pen') {
+      this.addDrawing(g.points);
+    } else if (g.kind === 'move') {
       const { x, y } = this.offset();
       if (g.moved && (x || y)) this.store.moveBlocks(g.names, x, y);
       else if (!g.moved && !e.shiftKey) this.store.select([g.hit]);
@@ -252,15 +273,16 @@ export class CanvasComponent {
     this.offset.set({ x: 0, y: 0 });
     this.guides.set([]);
     this.marquee.set(null);
+    this.stroke.set('');
     for (const el of this.blockElements()) el.style.removeProperty('translate');
   }
 
-  /** Double-click a text block to type into it; the text is written when it loses focus. */
+  /** Double-click a text or table block to type into it; the text is written when it loses focus. */
   edit(e: MouseEvent) {
     const name = this.hit(e as PointerEvent);
     const block = this.slide().blocks.find(b => b.name === name);
     const el = name ? this.element(name) : undefined;
-    if (block?.type !== 'text' || block.locked || !el) return;
+    if ((block?.type !== 'text' && block?.type !== 'table') || block.locked || !el) return;
     this.store.select([block.name]);
     this.editing.set(block.name);
     el.contentEditable = 'true';
@@ -278,6 +300,20 @@ export class CanvasComponent {
     const escape = (ev: KeyboardEvent) => { if (ev.key === 'Escape') el.blur(); };
     el.addEventListener('focusout', done);
     el.addEventListener('keydown', escape);
+  }
+
+  /** A pen stroke becomes a drawing block the size of the stroke, its path in slide coordinates like the deck's drawings. */
+  private addDrawing(points: Point[]) {
+    if (points.length < 2) return;
+    const pad = PEN.width / 2;
+    const x = Math.floor(Math.min(...points.map(p => p.x)) - pad), y = Math.floor(Math.min(...points.map(p => p.y)) - pad);
+    const width = Math.ceil(Math.max(...points.map(p => p.x)) + pad) - x, height = Math.ceil(Math.max(...points.map(p => p.y)) + pad) - y;
+    const names = this.slide().blocks.map(b => b.name);
+    let n = 1;
+    while (names.includes(`drawing-${n}`)) n++;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="none" width="100%" height="100%" viewBox="${x} ${y} ${width} ${height}">`
+      + `<path fill="none" stroke="${PEN.color}" stroke-width="${PEN.width}" stroke-linecap="round" stroke-linejoin="round" d="${pointsToPath(points)}"></path></svg>`;
+    this.store.addBlock({ type: 'drawing', name: `drawing-${n}`, x, y, width, height, z: Math.max(0, ...this.slide().blocks.map(b => b.z)) + 1, svg });
   }
 
   /** Clicking the format bar must not lose the text selection. */

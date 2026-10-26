@@ -6,6 +6,7 @@ import { CanvasComponent } from './canvas.component';
 import { EditorStore } from './editor.store';
 import { LayersComponent } from './layers.component';
 import { CommonSettingsComponent } from './settings/common-settings.component';
+import { MediaSettingsComponent } from './settings/media-settings.component';
 import { TypeSettingsComponent } from './settings/type-settings.component';
 import { SlideListComponent } from './slide-list.component';
 
@@ -15,7 +16,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
 /** The editor: slide list, canvas, inspector and notes. Routes: /edit and /edit/:course/:file (course "intro" for the intro). */
 @Component({
   selector: 'app-editor',
-  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, SlideListComponent, TypeSettingsComponent],
+  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, SlideListComponent, TypeSettingsComponent],
   host: { '(window:keydown)': 'key($event)' },
   // Not encapsulated: the inspector's building blocks (.group, .row, .seg, .sw, .field, .btn) are shared with its panels.
   encapsulation: ViewEncapsulation.None,
@@ -34,6 +35,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
       <button type="button" class="ghost" title="Redo (Ctrl+Shift+Z)" (click)="store.redo()">↷ Redo</button>
       <span class="status" [class]="store.status()" data-testid="status">{{ statusText() }}</span>
       <span class="spacer"></span>
+      @if (store.notice()) { <span class="hint notice" role="status">{{ store.notice() }}</span> }
       @if (pdfMessage()) { <span class="hint" data-testid="pdf">{{ pdfMessage() }}</span> }
       <button type="button" class="btn" [disabled]="exporting()" (click)="exportPdf()">Export PDF</button>
       <button type="button" class="btn" (click)="open('/presenter')">Presenter view</button>
@@ -76,6 +78,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
           <app-layers />
         } @else if (selectedBlock(); as b) {
           <app-type-settings [block]="b" />
+          <app-media-settings [block]="b" />
           <app-common-settings [block]="b" />
         } @else if (store.selection().length) {
           <div class="group">
@@ -272,6 +275,7 @@ export class EditorComponent {
       this.store.deleteBlocks(sel);
     } else if (e.key === 'Escape') {
       this.store.select([]);
+      this.store.tool.set('select');
     } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       this.store.openSlide(this.store.slideIndex() + (e.key === 'ArrowUp' ? -1 : 1));
     } else {

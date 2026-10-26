@@ -1,4 +1,5 @@
 import { Block } from '../deck/model';
+import { NEW_TABLE } from './media';
 
 /** The deck's accent color (--deck-accent in deck.css), used to fill new shapes. */
 export const ACCENT = '#e7ad52';
@@ -6,7 +7,7 @@ export const ACCENT = '#e7ad52';
 /** Highlighted lines: steps separated by |, each empty or a list of lines and ranges ("|2|4-6,9"). */
 export const LINE_SPEC = /^(\d+(-\d+)?(,\d+(-\d+)?)*)?(\|(\d+(-\d+)?(,\d+(-\d+)?)*)?)*$/;
 
-export type NewBlockType = 'text' | 'code' | 'shape' | 'line' | 'arrow';
+export type NewBlockType = 'text' | 'code' | 'shape' | 'line' | 'arrow' | 'table';
 
 const clamp = (v: number, max: number) => Math.round(Math.max(0, Math.min(v, max)));
 
@@ -21,6 +22,8 @@ export function newBlock(type: NewBlockType, existing: string[], at: { x: number
       return { type, ...place(600, 0), height: 'auto', html: '<p>Text</p>' };
     case 'code':
       return { type, ...place(786, 159), code: '', lang: 'typescript', theme: 'dark', frame: 'none', lines: null, autoHeight: false, preStyle: 'font-size: 20px; line-height: 24px;' };
+    case 'table':
+      return { type, ...place(800, 0), height: 'auto', html: NEW_TABLE };
     case 'shape':
       return { type, ...place(200, 120), shape: 'rect', fill: ACCENT, stroke: null, strokeWidth: 0, radius: 0 };
     case 'line':

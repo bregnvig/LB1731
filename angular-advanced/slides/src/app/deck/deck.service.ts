@@ -57,12 +57,16 @@ export class DeckService {
     if (!res.ok && res.status !== 404) throw new Error(`Deleting ${slide.path} failed: ${res.status}`);
   }
 
-  /** Stores an image next to the slides in `dir` (a slide folder) and returns its path relative to that folder. */
-  async uploadImage(dir: string, file: File): Promise<string> {
-    const rel = `images/${file.name}`;
+  /** Stores an image as `images/<name>` next to the slides in `dir` (a slide folder) and returns that relative path. */
+  async uploadImage(dir: string, file: Blob, name: string): Promise<string> {
+    const rel = `images/${name}`;
     const res = await fetch(`/api/files/${dir}/${rel}`, { method: 'PUT', body: file });
-    if (!res.ok) throw new Error(`Uploading ${file.name} failed: ${res.status}`);
+    if (!res.ok) throw new Error(`Uploading ${name} failed: ${res.status}`);
     return rel;
+  }
+
+  async imageExists(dir: string, name: string): Promise<boolean> {
+    return (await fetch(`/api/files/${dir}/images/${name}`)).ok;
   }
 }
 

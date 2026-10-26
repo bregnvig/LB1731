@@ -2,6 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { ConflictError, DeckService } from '../deck/deck.service';
 import { Block, Deck, Slide } from '../deck/model';
 import { blockNames } from '../deck/slide-format';
+import { safeImageName, uniqueImageName } from './media';
 
 export type SaveStatus = 'saved' | 'saving' | 'conflict' | 'error';
 
@@ -24,6 +25,10 @@ export class EditorStore {
   readonly selection = signal<string[]>([]);
   readonly status = signal<SaveStatus>('saved');
   readonly error = signal('');
+  /** A message for the user that isn't about saving (a refused upload…). */
+  readonly notice = signal('');
+  /** 'pen' while drawing: dragging on the canvas draws instead of selecting. */
+  readonly tool = signal<'select' | 'pen'>('select');
 
   readonly slides = computed(() => {
     const deck = this.deck(), id = this.courseId();
@@ -39,6 +44,21 @@ export class EditorStore {
     const now = new Set(this.selection());
     for (const n of names) if (now.has(n)) now.delete(n); else now.add(n);
     this.selection.set([...now]);
+  }
+
+  /** Uploads an image into the current slide's folder under a safe, unused name; returns its path relative to the folder. */
+  async storeImage(file: File): Promise<string | null> {
+    const slide = this.slide();
+    const name = safeImageName(file.name);
+    if (!slide || !name) {
+      this.notice.set(`${file.name} isn't a PNG, JPG, GIF or SVG image.`);
+      return null;
+    }
+    const dir = folderOf(slide.path);
+    const unique = await uniqueImageName(name, n => this.service.imageExists(dir, n));
+    const rel = await this.guard(() => this.service.uploadImage(dir, file, unique));
+    if (rel) this.notice.set('');
+    return rel ?? null;
   }
 
   addBlock(block: Block) {

@@ -17,40 +17,76 @@ const TOOLS: Tool[] = [
   { type: 'code', label: 'Code', icon: '<path d="M6 4L2 8l4 4M10 4l4 4-4 4"/>' },
 ];
 
+/** The image's own size; SVGs without one count as 400×300. */
+function naturalSize(file: Blob): Promise<{ width: number; height: number }> {
+  const url = URL.createObjectURL(file);
+  return new Promise(ok => {
+    const img = new Image();
+    const done = (width: number, height: number) => { URL.revokeObjectURL(url); ok({ width, height }); };
+    img.onload = () => done(img.naturalWidth || 400, img.naturalHeight || 300);
+    img.onerror = () => done(400, 300);
+    img.src = url;
+  });
+}
+
 /** The insert bar above the canvas: adds a block in the middle of the slide and selects it. */
 @Component({
   selector: 'app-block-tools',
   template: `
     @for (t of tools; track t.type) {
-      <button type="button" [disabled]="!ready(t)" (click)="add(t)">
+      <button type="button" [class.on]="t.type === 'pen' && store.tool() === 'pen'" [attr.aria-pressed]="t.type === 'pen' ? store.tool() === 'pen' : null"
+        (click)="t.type === 'image' ? picker.click() : add(t)">
         <svg viewBox="0 0 16 16" aria-hidden="true" [innerHTML]="t.svg"></svg>{{ t.label }}
       </button>
     }
+    <input #picker type="file" accept=".png,.jpg,.jpeg,.gif,.svg" hidden data-testid="image-picker" (change)="addImage(picker)">
   `,
   styles: `
     :host { display: flex; gap: 2px; background: var(--ink); padding: 4px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,.15); align-self: center; margin-top: 14px; }
     button { border: 0; background: none; color: #e9e6df; display: flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; cursor: pointer; font-size: 12px; }
     button:hover:not(:disabled) { background: #3a3833; }
-    button:disabled { opacity: .4; cursor: default; }
+    button.on { background: var(--accent); }
     button:focus-visible { outline: 2px solid var(--accent-soft); }
     svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; }
   `,
 })
 export class BlockToolsComponent {
-  private readonly store = inject(EditorStore);
+  readonly store = inject(EditorStore);
   // The icons are our own constants, so they can skip sanitizing (which would drop the SVG).
   readonly tools = TOOLS.map(t => ({ ...t, svg: inject(DomSanitizer).bypassSecurityTrustHtml(t.icon) }));
 
-  ready(t: Tool): t is Tool & { type: NewBlockType } {
-    return ['text', 'shape', 'line', 'arrow', 'code'].includes(t.type);
-  }
-
   add(t: Tool) {
     const slide = this.store.slide();
-    if (!slide || !this.ready(t)) return;
-    const z = Math.max(0, ...slide.blocks.map(b => b.z)) + 1;
-    const b = newBlock(t.type, blockNames(slide), { x: 0, y: 0 }, z);
+    if (!slide || t.type === 'image') return;
+    if (t.type === 'pen') {
+      this.store.tool.update(tool => (tool === 'pen' ? 'select' : 'pen'));
+      return;
+    }
+    const b = newBlock(t.type, blockNames(slide), { x: 0, y: 0 }, this.topZ());
     const height = b.height === 'auto' ? 40 : b.height;
     this.store.addBlock({ ...b, x: Math.round(640 - b.width / 2), y: Math.round(360 - height / 2) });
+  }
+
+  /** Uploads the picked image and adds it in the middle of the slide, at most 640×480 at its own ratio. */
+  async addImage(picker: HTMLInputElement) {
+    const file = picker.files?.[0];
+    picker.value = '';
+    const slide = this.store.slide();
+    if (!file || !slide) return;
+    const src = await this.store.storeImage(file);
+    if (!src) return;
+    const { width, height } = await naturalSize(file);
+    const k = Math.min(1, 640 / width, 480 / height);
+    const w = Math.round(width * k), h = Math.round(height * k);
+    let n = 1;
+    while (blockNames(slide).includes(`image-${n}`)) n++;
+    this.store.addBlock({
+      type: 'image', name: `image-${n}`, x: Math.round(640 - w / 2), y: Math.round(360 - h / 2), width: w, height: h, z: this.topZ(),
+      src, alt: '', inlineSvg: false, svgColor: null, imgStyle: '', keepRatio: true,
+    });
+  }
+
+  private topZ() {
+    return Math.max(0, ...(this.store.slide()?.blocks ?? []).map(b => b.z)) + 1;
   }
 }
