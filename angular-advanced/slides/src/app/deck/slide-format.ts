@@ -84,12 +84,15 @@ const childBlocks = (parent: Element) =>
 export function parseSlide(file: SlideFile): Slide {
   const section = new DOMParser().parseFromString(file.html, 'text/html').querySelector('section');
   if (!section) throw new Error(`${file.path}: no <section>`);
-  return {
+  const slide: Slide = {
     path: file.path, hidden: file.hidden, etag: file.etag,
     autoAnimate: section.hasAttribute('data-auto-animate'),
     blocks: childBlocks(section),
     notes: section.querySelector(':scope > aside.notes')?.textContent ?? '',
   };
+  // Anything the model doesn't hold shows up as a difference when written back.
+  const norm = (s: string) => s.replace(/\r\n/g, '\n').trim();
+  return norm(serializeSlide(slide)) === norm(file.html) ? slide : { ...slide, dropsMarkup: true };
 }
 
 function blockAttrs(b: Block): string[] {

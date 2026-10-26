@@ -59,6 +59,21 @@ describe('EditorStore', () => {
     expect(store.slide()!.etag).toBe('e1');
   });
 
+  it('a slide that drops markup on save stops saying so once saved, also after undo', async () => {
+    const { store, service } = setup();
+    const deck = await service.load();
+    deck.courses[0].slides[0].dropsMarkup = true;
+    service.load.mockResolvedValueOnce(deck);
+    await store.load();
+    store.openCourse('demo');
+    expect(store.slide()!.dropsMarkup).toBe(true);
+    store.updateSlide(s => ({ ...s, notes: 'a' }));
+    await vi.advanceTimersByTimeAsync(500);
+    expect(store.slide()!.dropsMarkup).toBe(false);
+    store.undo();
+    expect(store.slide()!.dropsMarkup).toBe(false);
+  });
+
   it('undo keeps the latest etag so the save is not a false conflict', async () => {
     const { store, service } = await opened();
     store.updateSlide(s => ({ ...s, notes: 'a' }));

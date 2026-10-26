@@ -27,6 +27,21 @@ test('a file changed on disk is not overwritten', async ({ page, editor, root })
   await expect(page.getByTestId('status')).toHaveText('Saved to disk');
 });
 
+test('markup the editor does not keep is announced, then dropped on save', async ({ page, editor, root }) => {
+  const file = join(root, 'courses/demo/slides/demo.html');
+  writeFileSync(file, readFileSync(file, 'utf8').replace('</section>', '  <p>hand-written</p>\n</section>'));
+  await page.goto(`${editor}/edit/demo/demo.html`);
+  await expect(page.getByTestId('drops-markup')).toBeVisible();
+  await page.goto(`${editor}/edit/demo/code.html`);
+  await expect(page.getByLabel('Speaker notes')).toBeVisible();
+  await expect(page.getByTestId('drops-markup')).toHaveCount(0);
+  await page.goto(`${editor}/edit/demo/demo.html`);
+  await page.getByLabel('Speaker notes').fill('Edited');
+  await expect(page.getByTestId('status')).toHaveText('Saved to disk');
+  await expect(page.getByTestId('drops-markup')).toHaveCount(0);
+  expect(readFileSync(file, 'utf8')).not.toContain('hand-written');
+});
+
 test('slides can be added, hidden and reordered', async ({ page, editor, root }) => {
   const order = () => JSON.parse(readFileSync(join(root, 'courses/demo/slides/deck.json'), 'utf8')).slides;
   await page.goto(`${editor}/edit/demo/demo.html`);
