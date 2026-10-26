@@ -1,13 +1,13 @@
 #!/bin/bash
-scriptdir=$(dirname $(readlink -f $0))
+scriptdir=$(dirname $(dirname $(readlink -f $0)))
 
 if [[ -n "$1" && -d "$scriptdir/courses/$1" ]]; then
     tempdir=$(mktemp -d)
 
     rsync -r --exclude "**/node_modules/*" --exclude "**/.angular/*" --exclude "**/dist/*" "$scriptdir/demo/" "$tempdir/demo"
-    "$scriptdir/scripts/stage-course.sh" "$1" "$tempdir/lab" "$tempdir/solution"
+    "$scriptdir/cli/stage-course.sh" "$1" "$tempdir/lab" "$tempdir/solution"
 
-    "$scriptdir/scripts/student-packages.sh" "$tempdir"
+    "$scriptdir/cli/student-packages.sh" "$tempdir"
 
     (cd $tempdir && zip -r $1 .) 
 

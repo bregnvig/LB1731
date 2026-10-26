@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Usage: scripts/student-packages.sh <staged dir>
+# Usage: cli/student-packages.sh <staged dir>
 # Exercises only keep name and scripts in package.json; versions live in angular-advanced/package.json,
 # which lists them as workspaces (npm install in a project installs there).
 # Students install each exercise on its own, so every staged package.json gets the shared
 # dependencies, and a package-lock.json copied from the shared one under the exercise's name.
 set -e
 root="$(dirname "$(realpath "$0")")/.."
-"$root/scripts/check-packages.sh"
+"$root/cli/check-packages.sh"
 
 find "$1" -name package.json -not -path '*/node_modules/*' | while read -r pkg; do
   name=$(jq -r .name "$pkg")

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Student zip check: build the zips with zipit.sh and compare every file (path + sha256)
-# with tests/student-zips.manifest, so students keep getting exactly what they always got.
+# Student zip check: build the zips with cli/zipit.sh and compare every file (path + sha256)
+# with cli/student-zips.manifest, so students keep getting exactly what they always got.
 
-ZIP_MANIFEST="tests/student-zips.manifest"
+ZIP_MANIFEST="cli/student-zips.manifest"
 
 # Print "<sha256>  <path>" for every file in the zips, sorted by path.
 zip_manifest() {
   local tmp
   tmp=$(mktemp -d)
-  if ! ./zipit.sh "$tmp" >/dev/null; then
+  if ! cli/zipit.sh "$tmp" >/dev/null; then
     rm -rf "$tmp"
     return 1
   fi

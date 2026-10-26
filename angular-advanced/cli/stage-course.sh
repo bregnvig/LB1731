@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: scripts/stage-course.sh <course> <labs dir> <solutions dir>
+# Usage: cli/stage-course.sh <course> <labs dir> <solutions dir>
 # Copies a course into the layout students get: lab N = step-N and solution N = step-(N+1),
 # since the solution of exercise N is where exercise N+1 starts. rxjs is one app with labs/ and solutions/.
 set -e

@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
-# angular-advanced CLI. mise.toml puts .bin/ on PATH, so it runs from anywhere: adv help
+# angular-advanced CLI. mise.toml puts cli/bin/ on PATH, so it runs from anywhere: adv help
 
 set -e  # Fail fast for module loading and arg parsing
 
-# Commands use paths relative to angular-advanced/ (courses/..., demo, tests/...)
-ROOT="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+# Commands use paths relative to angular-advanced/ (courses/..., demo, cli/...)
+ROOT="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../..")"
 CALLER_DIR="$PWD"  # for paths given on the command line
 cd "$ROOT"
 
 # Source modules
 for module in utils verify zips upgrade; do
-  if [[ ! -f "$ROOT/scripts/$module.sh" ]]; then
-    echo "Error: Missing script module: scripts/$module.sh"
+  if [[ ! -f "$ROOT/cli/$module.sh" ]]; then
+    echo "Error: Missing script module: cli/$module.sh"
     exit 1
   fi
-  source "$ROOT/scripts/$module.sh"
+  source "$ROOT/cli/$module.sh"
 done
 
 show_help() {
@@ -23,7 +23,7 @@ show_help() {
   echo "Commands:"
   echo "  install, i       Install npm packages (one package.json for everything)"
   echo "  verify, v        Verify directories build and serve"
-  echo "  test-zips, tz    Check student zips match tests/student-zips.manifest (--bless to update)"
+  echo "  test-zips, tz    Check student zips match cli/student-zips.manifest (--bless to update)"
   echo "  upgrade, u       Upgrade every project to Angular [major] (default: latest) [extra packages]"
   echo "  slides, s        Slides: present, presenter view and editor on http://localhost:4300 (pdf [out]: export PDF)"
   echo "  help, h          Show this help"
