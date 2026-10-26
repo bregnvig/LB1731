@@ -25,5 +25,3 @@ Most images are our own screenshots and drawings (`working-with-signals-graph.sv
 | Architecture icon from onlinewebfonts.com | `courses/components/slides/images/angular-architecture-*.svg` | CC BY 3.0: credit "Icon from onlinewebfonts.com" |
 | Emoji from Twemoji, Twitter | `courses/signals/slides/images/signals-2.svg` | CC BY 4.0: credit "Twemoji by Twitter" |
 | Logos of Angular, RxJS, NgRx, NGXS, Jasmine, Karma, Vitest | various `images/` | Trademarks of their owners, shown to name the tools |
-
-The speaker photos on the quicklink, a-unit, bad-tests and test-management-3 slides have no recorded source or permission. Each of those slides has a TODO in its speaker notes to check it.
