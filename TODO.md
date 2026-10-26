@@ -26,3 +26,4 @@
 ## Repo
 
 - [x] Delete the empty root `package-lock.json` (`"packages": {}`, left over from the Angular v20 commit).
+- [ ] Shrink the clone. Today's cleanup took the checkout from 88.6 MB to 60.8 MB, but `.git` is still 72 MB packed because history keeps every deleted file. `examples.zip` alone is 42.5 MB of that (added 2017-09-23 in 2b33eb79, removed the next day); old `package-lock.json` versions are most of the rest. Removing them means rewriting history (`git filter-repo --path examples.zip --invert-paths`, maybe `--strip-blobs-bigger-than`), so every commit hash changes: force-push master, close or merge open PRs first, and every clone and worktree has to re-clone. GitHub keeps the old objects reachable through `refs/pull/*` until GitHub Support purges them. Decide first whether ~60% off the clone is worth that.
