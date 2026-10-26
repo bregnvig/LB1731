@@ -25,12 +25,10 @@
       "hidden": true
     },
     {
-      "file": "default-change-detection.html",
-      "hidden": true
+      "file": "default-change-detection.html"
     },
     {
-      "file": "onpush-change-detection.html",
-      "hidden": true
+      "file": "onpush-change-detection.html"
     },
     {
       "file": "signals-2.html",
