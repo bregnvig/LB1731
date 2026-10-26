@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:12">
+    <h2>An example - configuring it</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:108.5px;top:329px;width:1063px;height:88px;z-index:13">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">export const PLAYGROUNDS_URL = new InjectionToken&lt;string&gt;('Playgrounds URL', {
+  providedIn: 'root',
+  factory: () =&gt; 'assets/copenhagen.json'
+});</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:108.5px;top:288px;width:1076px;height:auto;z-index:14">
+    <h3 style="text-align: left;">An injection token with default implementation</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:108.5px;top:197px;width:1063px;height:42px;z-index:10">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">export const PLAYGROUNDS_URL = new InjectionToken&lt;string&gt;('Playgrounds URL');</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:108.5px;top:161px;width:1076px;height:auto;z-index:11">
+    <h3 style="text-align:left">Just an injection token</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:108.5px;top:504px;width:538px;height:127px;z-index:15">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-typescript" data-line-numbers="">providers: [
+  {
+    provide: PLAYGROUNDS_URL,
+    useValue: 'assets/aarhus.json'
+  }
+]</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:108.5px;top:468px;width:815px;height:auto;z-index:16">
+    <h3 style="text-align: left;">Add to an injector <span style="font-size:0.5em">(Or override the default implementation)</span>
+</h3>
+  </div>
+  <aside class="notes">So the first example is not provided anywhere 
+The second example is provided in root, and can therefore be used everywhere
+The last either provides the injectiontoken or overrides the exsisting provided value</aside>
+</section>

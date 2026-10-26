@@ -1,0 +1,22 @@
+{
+  "title": "Angular Advanced",
+  "slides": [
+    {
+      "file": "advanced.html"
+    },
+    {
+      "file": "exercises-pdf.html"
+    }
+  ],
+  "courses": [
+    "rxjs",
+    "di",
+    "components",
+    "unit-test",
+    "reactive-forms",
+    "routing",
+    "pipes-and-directives",
+    "signals",
+    "state-management"
+  ]
+}

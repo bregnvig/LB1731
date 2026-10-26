@@ -1,0 +1,6 @@
+/* A slide drawn by the editor (canvas and thumbnails): a 1280×720 reveal frame, scaled by its parent. */
+.editor-slide { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; transform-origin: 0 0; }
+.editor-slide .reveal { width: 1280px; height: 720px; }
+.editor-slide .reveal .slides { width: 1280px; height: 720px; pointer-events: auto; }
+/* The editor shows every block; a code block's highlight steps stay on their first step. */
+.editor-slide .reveal .slides section .block.fragment { opacity: 1; visibility: inherit; }

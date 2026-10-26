@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>Test helpers</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:248px;width:1076px;height:auto;z-index:11">
+    <h2>Debugelement</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:148.315px;top:360px;width:983.37px;height:auto;z-index:13;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px;"><code class="language-typescript">const { debugElement } = fixture;
+const buttonComponentDebugElement = debugElement.query(By.directive(ButtonComponent));
+const anotherDebugElement = debugElement.query(By.css('#someid' || '.someclass' || 'h5'));
+
+anotherDebugElement.classes // Record&lt;string, boolean&gt;
+anotherDebugElement.styles // Record&lt;string, string&gt;
+anotherDebugElement.children || anotherDebugElement.parent // NavigationHelpers</code></pre>
+  </div>
+  <aside class="notes">For accessing elements in the DOM, Angular has another abstraction: The DebugElement wraps the native DOM element. The fixture’s debugElement property returns the Component’s host element. For the CounterComponent, this is the app-counter element.
+
+const { debugElement } = fixture;
+The DebugElement offers handy properties like properties, attributes, classes and styles to examine the DOM element itself. The properties parent, children and childNodes help navigating in the DOM tree. They return DebugElements as well.</aside>
+</section>

@@ -1,0 +1,25 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1136px;height:auto;z-index:10;text-align:left">
+    <h2>Form validation</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:180px;width:848px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>Attach one or more validators to any kind of control</li>
+	<li>A validator is just a function - therefore easy to test<span style="color:#cccccc; text-align:center">😃 </span><span style="color:#00ff00"><span style="text-align:center">Have you seen Johannes' unit test module? If not - go sign up!👍</span></span>
+</li>
+	<li><span style="text-align:center">Receives a single parameter, of type abstract control, to perform the validation on.</span></li>
+	<li>Returns null for passed validation.</li>
+	<li>Returns <a href="https://angular.io/api/forms/ValidationErrors" target="_blank">ValidationErrors</a>&nbsp;which is just a <span style="color:#ff8c00">Record&lt;string, any&gt;</span>&nbsp;for a failed validation</li>
+	<li>Lots of built-in validators. Check <a href="https://angular.io/api/forms/Validators" target="_blank">Validators </a>from <span style="color:#ff8c00">@angular/forms</span>
+</li>
+	<li>
+<span style="color:#ff8c00">errors</span>&nbsp;is really the top 6 property on an <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>. Use this property to create meaningful errors messages</li>
+	<li>The CSS class <span style="color:#ff8c00">ng-invalid</span>&nbsp;will automatically be added and removed from the control by the Angular framework&nbsp;</li>
+</ul>
+  </div>
+  <aside class="notes">Talk briefly about validators are directive in template driven forms
+
+errors consists of the errors accumulated by the different validators
+
+</aside>
+</section>

@@ -1,0 +1,53 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>distinctUntilChanged - complex data types</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" style="left:181.25px;top:242.5px;width:1066.5px;height:103px;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript">playground$.valueChanges.pipe(
+  distinctUntilChanged((previous, current) =&gt; previous.id === current.id)
+).subscribe(current =&gt; this.playground = current);</code></pre>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:280px;top:177.5px;width:720px;height:0px;z-index:12"></div>
+  <div class="block" data-type="line" data-name="line-1" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:941px;top:144px;width:0px;height:67px;z-index:13"></div>
+  <div class="block" data-type="group" data-name="group-1" style="left:454px;top:153.5px;width:49px;height:48px;z-index:14">
+    <div class="block" data-type="shape" data-name="shape-1" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:15"></div>
+    <div class="block" data-type="text" data-name="text-1" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:16">
+      <p><span style="font-size:19.6px">A</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-2" style="left:699.5px;top:153.5px;width:49px;height:48px;z-index:17">
+    <div class="block" data-type="shape" data-name="shape-2" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:18"></div>
+    <div class="block" data-type="text" data-name="text-2" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:19">
+      <p><span style="font-size:19.6px">B</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-2" data-x1="0" data-y1="0" data-x2="720" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="arrow" style="left:280px;top:412.5px;width:720px;height:0px;z-index:20"></div>
+  <div class="block" data-type="line" data-name="line-2" data-x1="0" data-y1="67" data-x2="0" data-y2="0" data-color="#ffffff" data-width="7" data-start="none" data-end="none" style="left:941px;top:379px;width:0px;height:67px;z-index:21"></div>
+  <div class="block" data-type="group" data-name="group-3" style="left:454px;top:388.5px;width:49px;height:48px;z-index:22">
+    <div class="block" data-type="text" data-name="text-3" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:24">
+      <p><span style="color:#000000"><span style="font-size:0.7em">A</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-3" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:23"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-4" style="left:699.5px;top:388.5px;width:49px;height:48px;z-index:25">
+    <div class="block" data-type="text" data-name="text-4" style="left:10.25px;top:6px;width:28.5px;height:auto;z-index:27">
+      <p><span style="color:#000000"><span style="font-size:0.7em">B</span></span></p>
+    </div>
+    <div class="block" data-type="shape" data-name="shape-4" data-shape="circle" data-fill="rgb(255, 255, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:26"></div>
+  </div>
+  <div class="block" data-type="group" data-name="group-5" style="left:606.75px;top:153.5px;width:49px;height:48px;z-index:28">
+    <div class="block" data-type="shape" data-name="shape-5" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:29"></div>
+    <div class="block" data-type="text" data-name="text-5" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:30">
+      <p><span style="font-size:19.6px">A</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-6" style="left:535.5px;top:153.5px;width:49px;height:48px;z-index:31">
+    <div class="block" data-type="shape" data-name="shape-6" data-shape="circle" data-fill="rgb(255, 0, 0)" data-stroke="#eeeeee" data-stroke-width="2" data-radius="0" style="left:0px;top:0px;width:49px;height:48px;z-index:32"></div>
+    <div class="block" data-type="text" data-name="text-6" style="left:15.75px;top:6px;width:17.5px;height:auto;z-index:33">
+      <p><span style="font-size:19.6px">A</span></p>
+    </div>
+  </div>
+  <div class="block" data-type="text" data-name="text-7" style="left:340px;top:604.5px;width:655.75px;height:auto;z-index:34">
+    <p>When you don't want to react events containing the same data, but cannot rely on object references&nbsp;</p>
+  </div>
+</section>

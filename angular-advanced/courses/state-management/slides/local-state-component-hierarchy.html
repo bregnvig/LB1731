@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:107.5px;width:918px;height:auto;z-index:10;text-align:left">
+    <h2>Local state / Component HIERARCHY</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:215.5px;width:512px;height:auto;z-index:12;text-align:left">
+    <ul>
+	<li>Provided on component level</li>
+	<li>Shared across the entire component hierarchy</li>
+	<li>Exists for the entire lifespan of the component.&nbsp;</li>
+	<li>Is dynamic and can change during its lifespan</li>
+</ul>
+  </div>
+  <aside class="notes">Mostly likely we would use a DI service to store the state. Unless there is a direct parent-child relationship where the child e.g is a presentation component.
+
+Every time a component dies its state dies with it. Every time a component is created, its initial state is created with it. Which is also the reason application state is only initialized once, as the application is only initialized once.
+
+</aside>
+</section>

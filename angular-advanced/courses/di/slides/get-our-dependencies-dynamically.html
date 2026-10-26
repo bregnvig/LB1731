@@ -1,0 +1,28 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:80px;top:110px;width:713px;height:auto;z-index:10;text-align:left">
+    <h2>Get our dependencies dynamically</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:216px;width:880px;height:auto;z-index:11;text-align:left">
+    <p>Use the Injector class to fetch dependencies dynamically at runtime.</p>
+
+<p>And not only in a <strong>Injection Context</strong>. Notice how we can use it in <span style="color:#FF8C00"><code>ngOnInit</code></span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:339px;width:1176px;height:321px;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3,9,11">export class WithInjectorComponent implements OnInit {
+
+  #injector = inject(Injector);
+  playgrounds$: Observable&lt;Playground[]&gt; | undefined;
+  location$: Observable&lt;Coordinate&gt; | undefined;
+
+  ngOnInit(): void {
+    const locationService = this.#injector.get(LocationService);
+    this.location$ = locationService.location$;
+    const d = locationService.getDistance;
+    this.playgrounds$ = combineLatest([this.#injector.get(PlaygroundService).playgrounds$, this.location$]).pipe(
+      map(([playgrounds, location]) =&gt; playgrounds.sort((a, b) =&gt; d(a.position, location) - d(b.position, location)))
+    );
+  }
+}
+</code></pre>
+  </div>
+</section>

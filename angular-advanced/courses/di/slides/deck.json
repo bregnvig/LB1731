@@ -1,0 +1,152 @@
+{
+  "title": "DEPENDENCY injection",
+  "slides": [
+    {
+      "file": "dependency-injection.html"
+    },
+    {
+      "file": "some-quotes.html"
+    },
+    {
+      "file": "simple-example.html"
+    },
+    {
+      "file": "angular-dependency-injection.html"
+    },
+    {
+      "file": "an-angular-example-without-di.html"
+    },
+    {
+      "file": "an-angular-example-with-di.html"
+    },
+    {
+      "file": "an-angular-example-with-di-prior-to-v14.html"
+    },
+    {
+      "file": "providing-a-service.html"
+    },
+    {
+      "file": "1-concept-an-injector.html"
+    },
+    {
+      "file": "1-concept-an-injector-2.html"
+    },
+    {
+      "file": "2-concept-injecting.html"
+    },
+    {
+      "file": "2-concept-without-injecting.html"
+    },
+    {
+      "file": "back-to-the-code.html"
+    },
+    {
+      "file": "an-example.html"
+    },
+    {
+      "file": "provide.html"
+    },
+    {
+      "file": "1-the-preferred-way.html"
+    },
+    {
+      "file": "2-the-convenient-old-school-way.html"
+    },
+    {
+      "file": "3-overriding-the-default-implementation.html"
+    },
+    {
+      "file": "4-using-something-completely-different.html"
+    },
+    {
+      "file": "5-using-a-factory.html"
+    },
+    {
+      "file": "one-last-thing-about-providing.html"
+    },
+    {
+      "file": "using-the-last-thing-about-providing.html"
+    },
+    {
+      "file": "exercise-create-a-aarhus-service.html"
+    },
+    {
+      "file": "injectiontoken.html"
+    },
+    {
+      "file": "the-thing-about-classes-and-injection-to.html"
+    },
+    {
+      "file": "the-injection-token.html"
+    },
+    {
+      "file": "an-example-configuring-it.html"
+    },
+    {
+      "file": "an-example-using-it.html"
+    },
+    {
+      "file": "exercise-use-an-injectiontoken.html"
+    },
+    {
+      "file": "injector-levels.html"
+    },
+    {
+      "file": "root.html"
+    },
+    {
+      "file": "provide-in-a-component.html"
+    },
+    {
+      "file": "provide-in-a-route.html"
+    },
+    {
+      "file": "injectors-resume.html"
+    },
+    {
+      "file": "injector-destruction.html"
+    },
+    {
+      "file": "cleanup-random-service.html"
+    },
+    {
+      "file": "what-about-those-things-that-weren-t-tru.html"
+    },
+    {
+      "file": "what-about-those-things-that-weren-t-tru-2.html"
+    },
+    {
+      "file": "locale-id-built-in-injection-tokens.html"
+    },
+    {
+      "file": "app-initializer-built-in-injection-token.html"
+    },
+    {
+      "file": "provideappinitializer.html"
+    },
+    {
+      "file": "exercise-prefetch-the-playgrounds.html"
+    },
+    {
+      "file": "the-injector-class.html"
+    },
+    {
+      "file": "get-our-dependencies-dynamically.html"
+    },
+    {
+      "file": "injector-considerations.html"
+    },
+    {
+      "file": "injector-use-case-prior-to-v14.html"
+    },
+    {
+      "file": "inject-function-in-v14.html"
+    },
+    {
+      "file": "injector-use-case-v14.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

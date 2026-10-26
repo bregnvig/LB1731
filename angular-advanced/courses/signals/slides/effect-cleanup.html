@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:835px;height:auto;z-index:10;text-align:left;transform:rotate(0deg)">
+    <h2>Effect Cleanup</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:474px;top:216px;width:763px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">@Component({ ...})
+export class CounterComponent {
+  count = signal(0);
+
+  constructor() {
+    const previousValue = signal&lt;number | undefined&gt;(undefined)
+    effect(onCleanup =&gt; {
+      const count = this.count();
+      console.log(count, previousValue());
+      onCleanup(() =&gt; previousValue.set(count));
+    });
+    setInterval(() =&gt; this.count.update(value =&gt; value + 1), 1000);
+  }
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:288px;width:394px;height:auto;z-index:12;text-align:left">
+    <p>Example:</p>
+
+<p><span style="font-size:0.7em">You want to use the previous value for something</span></p>
+  </div>
+</section>

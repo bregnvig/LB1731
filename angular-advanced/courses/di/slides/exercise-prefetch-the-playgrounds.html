@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:91px;width:773.244px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise - Prefetch the playgrounds</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:139px;width:736px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.9em;">If not happy with the solution to exercise 2? Then goto the the labs/di/exercise-3 directory</span></p>
+
+<p><span style="font-size:0.9em;">In the <span style="color:#FF8C00;"><code>main.ts</code>&nbsp;</span>add a </span><span style="color:#FF8C00;"><code>provideAppInitializer</code></span><span style="font-size:0.9em;"><span style="color:#FF8C00;">&nbsp;</span>to prefetch the playgrounds.</span></p>
+
+<p><span style="font-size:0.9em;">Do that by returning the playgrounds$ observable from the <span style="color:#FF8C00;"><code>PlaygroundService</code></span>.</span></p>
+
+<p><span style="font-size:0.9em;">Now check the network traffic. Notice the playgrounds are being fetched more than once!</span></p>
+
+<p><span style="font-size:0.9em;">So change the unicast observable in the playgrounds service, to a multicast, that will use the cached result. Remember multicast from the RxJS module?</span></p>
+
+<p><span style="font-size: 0.9em;">It will be hard to see the difference, so try to add a <code><span style="color:#ff8c00;">timer(2000).pipe(switchMap...)</span></code>&nbsp;in the </span><span style="color: rgb(255, 140, 0); font-family: Courier, monospace;  font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400;">provideAppInitializer</span><span style="font-size: 0.9em;">&nbsp;function to see how the application take a long time to load.</span></p>
+  </div>
+  <aside class="notes">We can use promises, since the observable would need to be complete, and there for we would never receive new playgrounds anyways.</aside>
+</section>

@@ -1,0 +1,33 @@
+<section>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:165px;width:1108.96px;height:267px;z-index:10">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="6-8">RouterModule.forRoot([
+// ...
+  {
+    path: ':id',
+    component: MapComponent,
+    resolve: {
+        playground: PlaygroundResolverService
+    }
+  },
+// ...
+])</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:869px;height:auto;z-index:11;text-align:left">
+    <h2>Applying the resolver</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:80px;top:447.988px;width:1108.96px;height:262.023px;z-index:12">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="6-8">RouterModule.forRoot([
+// ...
+  {
+    path: ':id',
+    component: MapComponent,
+    resolve: {
+        playground: resolvePlayground
+    }
+  },
+// ...
+])</code></pre>
+  </div>
+  <aside class="notes">Multiple resolvers can be set. Record&lt;string, Resolver&gt;
+Resolved value is set on the property 'data' on ActivatedRoute</aside>
+</section>

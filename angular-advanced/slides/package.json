@@ -1,0 +1,38 @@
+{
+  "name": "slides",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng build && node server/server.mjs",
+    "build": "ng build",
+    "test": "ng test --watch=false && node --test server/*.test.mjs",
+    "e2e": "playwright test -c e2e/playwright.config.ts",
+    "pdf": "node scripts/pdf.mjs"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.1",
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "highlight.js": "10.0.3",
+    "reveal.js": "^6.0.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.4",
+    "@angular/cli": "^22.2.4",
+    "@angular/compiler-cli": "^22.2.0",
+    "@playwright/test": "^1.64.1",
+    "jsdom": "^30.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  }
+}

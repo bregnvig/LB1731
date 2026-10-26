@@ -5,6 +5,7 @@ set -e  # Fail fast for module loading and arg parsing
 
 # Commands use paths relative to angular-advanced/ (courses/..., demo, tests/...)
 ROOT="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+CALLER_DIR="$PWD"  # for paths given on the command line
 cd "$ROOT"
 
 # Source modules
@@ -23,6 +24,7 @@ show_help() {
   echo "  install, i       Install npm packages (one package.json for everything)"
   echo "  verify, v        Verify directories build and serve"
   echo "  test-zips, tz    Check student zips match tests/student-zips.manifest (--bless to update)"
+  echo "  slides, s        Slides: present, presenter view and editor on http://localhost:4300 (pdf [out]: export PDF)"
   echo "  help, h          Show this help"
   echo ""
   echo "Targets (verify):"
@@ -35,6 +37,8 @@ show_help() {
   echo "  adv verify all       # Verify all directories build and serve"
   echo "  adv verify di        # Verify courses/di/step-*"
   echo "  adv test-zips        # Students still get the same zips?"
+  echo "  adv slides           # Present or edit the slides"
+  echo "  adv slides pdf       # Export the slides to slides/out/angular-advanced.pdf"
 }
 
 # Resolve target to list of directories
@@ -63,6 +67,15 @@ target="${2:-}"
 case "$command" in
   "install"|"i")
     npm install
+    (cd slides && npm install)
+    ;;
+
+  "slides"|"s")
+    if [[ "$target" == "pdf" ]]; then
+      (cd slides && npm run pdf -- ${3:+--out "$(cd "$CALLER_DIR" && realpath -m "$3")"})
+    else
+      (cd slides && npm start)
+    fi
     ;;
 
   "verify"|"v")

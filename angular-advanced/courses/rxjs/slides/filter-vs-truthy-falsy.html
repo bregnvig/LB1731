@@ -1,0 +1,27 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2>Filter vs. truthy / Falsy</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" data-auto-height style="left:39.5px;top:240px;width:1223px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript">export const truthy = &lt;T&gt;() =&gt; pipe(filter(x =&gt; !!x);
+export const falsy = &lt;T&gt;() =&gt; pipe(filter(x =&gt; !x);
+
+// Only when there are result from the backend
+this.service.getPlayground(id).pipe(
+  truthy()
+).subscribe(playground =&gt; this.name = playground?.name);
+
+// Same thing, using filter
+this.service.getPlayground(id).pipe(
+  filter(playground =&gt; !!playground)
+).subscribe(playground =&gt; this.name = playground?.name);
+</code></pre>
+  </div>
+  <aside class="notes">Here we're using custom operators, truthy() and falsy(), to filter streams based on truthy or falsy values.
+
+Simplifies Reuse: These operators makes our code more reusable and expressive by encapsulating common filtering logic.
+
+Comparison: Both the custom truthy() and a regular filter achieve the same result, but truthy() makes the intent clearer, improving readability.
+
+Like this you can too abstract and simplify repetitive tasks, making your code cleaner and easier to maintain!</aside>
+</section>

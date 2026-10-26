@@ -1,0 +1,28 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Register on change<span style="color:rgb(204, 204, 204); text-align:center">😵</span>
+</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:157px;width:548px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>Called once, when your custom control is being attached to the Angular form framework. Model driven or template driven</li>
+	<li>The parameter is a callback function for propagating changes in your control</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:367px;width:1147px;height:auto;z-index:12;filter:drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="6,8,10-12">export class AddressControlComponent {
+	
+  private propagateChange: ((_: any) =&gt; any) | undefined;
+  
+  constructor() {
+    this.fg.valueChanges.pipe(
+      takeUntilDestroyed()
+    ).subscribe(value =&gt; this.propagateChange?(value));
+  }
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  } 
+}</code></pre>
+  </div>
+</section>

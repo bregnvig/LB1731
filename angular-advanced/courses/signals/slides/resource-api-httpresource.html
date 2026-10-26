@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:816px;height:auto;z-index:10;text-align:left">
+    <h2>Resource Api - httpResource</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:636px;width:813px;height:auto;z-index:11">
+    <p>Use for REST APIs and typical HTTP requests</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:628px;height:auto;z-index:12;text-align:left">
+    <p>Initiates the request eagerly</p>
+
+<p>&nbsp;</p>
+
+<p>Uses Angular’s <span style="color:#FF8C00">HttpClient</span>&nbsp;under the hood, with automatic loading, error, and reload handling.</p>
+
+<p>&nbsp;</p>
+
+<p>Think: <span style="color:#FF8C00">request</span>&nbsp;→ <span style="color:#FF8C00">response</span>&nbsp;→ maybe <span style="color:#FF8C00">resourceRef</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:720px;top:245px;width:543.817px;height:auto;z-index:14">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">const todos = httpResource('/api/todos');
+
+// Response value
+todos.value();
+
+// HttpResourceRef with string in value()
+todos.text(() =&gt; ({ … }));
+
+// HttpResourceRef with Blob object in value()
+todos.blob(() =&gt; ({ … })); 
+
+// HttpResourceRef with ArrayBuffer in value()
+todos.arrayBuffer(() =&gt; ({ … })); 
+
+// Fetch the resource again
+todos.reload()</code></pre>
+  </div>
+</section>

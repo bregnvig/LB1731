@@ -1,0 +1,32 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:184px;width:1076px;height:auto;z-index:10">
+    <h1>Test Doubles</h1>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:248px;width:1076px;height:auto;z-index:11">
+    <h2>MOCKS</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:340px;top:324px;width:600px;height:auto;z-index:12">
+    <p>Gives full control over module/object</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:397.76px;top:360px;width:484.48px;height:auto;z-index:14;border-width:1px">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-7,11">import { DateTime } from 'luxon';
+import { vi } from 'vitest';
+...
+
+vi.mock('luxon', async () =&gt; ({
+    ...(await vi.importActual('luxon')),
+    DateTime: { now: () =&gt; true },
+}));
+
+describe('Luxon service', () =&gt; {
+  it('should return true', () =&gt; {
+    expect(DateTime.now()).toBe(true);
+  });
+});</code></pre>
+  </div>
+  <aside class="notes">Mocks are rarely used
+A Mock is the most powerful and flexible version in the chain of test doubles.
+The behavior of the mocked interface can be changed dynamically based on scenarios.
+
+Mocks are pre-programmed with expectations which form a specification of the calls they are expected to receive. They can throw an exception if they receive a call they don't expect and are checked during verification to ensure they got all the calls they were expecting.</aside>
+</section>

@@ -1,0 +1,18 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:72px;width:686px;height:auto;z-index:10;text-align:left">
+    <h2>ExerCISE - Create a Aarhus service</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:132px;width:810px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.9em">Goto the the <span style="color:#ff8c00">labs/di</span>&nbsp;directory</span></p>
+
+<p><span style="font-size:0.9em">Create an <span style="color:#ff8c00">aarhus-playground.service.ts</span>&nbsp;by copying the &nbsp;existing playground service.</span></p>
+
+<p><span style="font-size:0.9em">Change the URL to point to the <span style="color:#ff8c00">assets/aarhus.json</span>. The aarhus service should <strong>NOT</strong>&nbsp;have the <span style="color:#ff8c00">providedIn: 'root'</span></span></p>
+
+<p><span style="font-size:0.9em">Open the <span style="color:#ff8c00">environment.ts</span>&nbsp;and add a property <code><span style="color:#ff8c00">location</span></code>. Give it a value of '<span style="color:#ff8c00">copenhagen</span>'. Next up open the <span style="color:#ff8c00">environment.aarhus.ts</span>&nbsp;and add the same property with a value of <span style="color:#ff8c00">aarhus</span></span></p>
+
+<p><span style="font-size:0.9em">Use a factory provider and the <span style="color:#ff8c00">location</span>&nbsp;property from the environment to decide which service to create, using <span style="color:#ff8c00">new</span>, and return from the factory method in the <code><span style="color:#ff8c00">main.ts</span></code>. </span></p>
+
+<p><span style="font-size:0.9em">You should be able to <span style="color:#ff8c00">npm run copenhagen</span>&nbsp;and <span style="color:#ff8c00">npm run aarhus</span>&nbsp;at the same time. Verify that you see different playgrounds</span></p>
+  </div>
+</section>

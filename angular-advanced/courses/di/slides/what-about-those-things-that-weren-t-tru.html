@@ -1,0 +1,52 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
+    <h2 style="color: rgb(255, 255, 255);">WHAT ABOUT THOSE THINGS THAT WEREN'T TRUE?</h2>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" style="left:201.5px;top:101px;width:794px;height:120px;z-index:11">
+    <div class="block" data-type="text" data-name="text-1" style="left:0px;top:0px;width:600px;height:auto;z-index:12">
+      <p style="text-align:left"><span style="color:#FF8C00"><code>optional</code></span>&nbsp;- If it is alright it's not there</p>
+    </div>
+    <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:0px;top:48px;width:794px;height:72px;z-index:13">
+      <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript">export class RandomComponent {
+  service = inject(RandomService, { optional: true });
+}
+</code></pre>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-2" style="left:201.5px;top:253px;width:794px;height:126px;z-index:14">
+    <div class="block" data-type="text" data-name="text-2" style="left:0px;top:0px;width:618px;height:auto;z-index:15">
+      <p style="text-align:left"><code><span style="color:#FF8C00">skipSelf</span></code>&nbsp;- Go find it somewhere. Just not here!</p>
+    </div>
+    <div class="block" data-type="code" data-name="code-2" data-theme="dark" style="left:0px;top:54px;width:794px;height:72px;z-index:16">
+      <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript">export class RandomComponent {
+  service = inject(RandomService, { skipSelf: true });
+}
+</code></pre>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-3" style="left:201.5px;top:411px;width:877px;height:126px;z-index:17">
+    <div class="block" data-type="text" data-name="text-3" style="left:0px;top:0px;width:877px;height:auto;z-index:18">
+      <p style="text-align:left"><span style="color:#FF8C00"><code>self</code></span>&nbsp;- Needs to be provided here</p>
+    </div>
+    <div class="block" data-type="code" data-name="code-3" data-theme="dark" style="left:0px;top:54px;width:853.355px;height:72px;z-index:19">
+      <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript">export class RandomComponent {
+  service = inject(RandomService, { self: true });
+}
+</code></pre>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-4" style="left:201.5px;top:569px;width:877px;height:126px;z-index:20">
+    <div class="block" data-type="text" data-name="text-4" style="left:0px;top:0px;width:877px;height:auto;z-index:21">
+      <p style="text-align:left"><span style="color:#FF8C00"><code>host</code></span>&nbsp;- Needs to be provided here or parent when using projection&nbsp;</p>
+    </div>
+    <div class="block" data-type="code" data-name="code-4" data-theme="dark" style="left:0px;top:54px;width:853.355px;height:72px;z-index:22">
+      <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript">export class RandomComponent {
+  service = inject(RandomService, { host: true });
+}
+</code></pre>
+    </div>
+  </div>
+  <aside class="notes">Let's play with these in the random example. Notice how the second number in the first three are the same -&gt; @SkipSelf The first value are unique as they uses @Self
+
+The last two are wrapped, and receives the Random service from the component that wraps them. Notice how the second random is the same for the wrapped components? That because we walk up the tree and takes the first one</aside>
+</section>

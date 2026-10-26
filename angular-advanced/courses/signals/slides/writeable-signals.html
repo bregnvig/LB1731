@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
+    <h2>Writeable signals</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:572px;top:216px;width:696px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5,8,10-16">import { signal } from '@angular/core';
+
+@Component({
+  ...,
+  template: `&lt;p (click)="upvote()"&gt;{{ playground().rating }}&lt;/p&gt;`
+})
+export class PlaygroundComponent {
+  playground: WriteableSignal&lt;Playground&gt; = ...;
+
+  upvote(): void {
+    // value becomes {name: 'Byggepladsen', rating: 2}
+    playground.set({name: 'Byggepladsen', rating: 2});
+
+    // value becomes {name: 'Byggepladsen', rating: 3}	
+    playground.update(v =&gt; ({...v, rating: v.rating + 1}));
+  }                    
+}
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:496px;height:auto;z-index:13;text-align:left">
+    <p style="color:rgb(255, 255, 255)"><span style="color:rgb(255, 255, 255)">Some signals can be modified directly</span></p>
+
+<p style="color:rgb(255, 255, 255)"><span style="color:rgb(255, 255, 255)">The type is </span><span style="color:#FF8C00"><code>WriteableSignal&lt;...&gt;</code></span></p>
+
+<p style="color:rgb(255, 255, 255)">Create using e.g <span style="color:#FF8C00"><code>signal(...)</code></span></p>
+
+<p style="color:rgb(255, 255, 255)">Set value using the <span style="color:#FF8C00"><code>.set(...)</code></span>&nbsp;method</p>
+
+<p style="color:rgb(255, 255, 255)"><span style="font-size:1.0em"><span style="color:rgb(255, 255, 255)">Or update the value using </span><span style="color:rgb(255, 140, 0)">.update()</span><span style="color:rgb(255, 255, 255)">&nbsp;method</span><br>
+<span style="color:rgb(255, 255, 255)">to compute a new value from the previous one</span></span></p>
+  </div>
+</section>

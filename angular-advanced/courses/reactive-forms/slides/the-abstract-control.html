@@ -1,0 +1,54 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>The abstract control</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:626.443px;height:auto;z-index:11;text-align:left">
+    <p>Angular works with three different model driven controls.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;+ FormRecord since v14</p>
+
+<p>&nbsp;</p>
+
+<p>All of the above extends from the <a href="https://angular.io/api/forms/AbstractControl" target="_blank"><span style="color:#ff8c00">AbstractControl</span></a></p>
+  </div>
+  <div class="block" data-type="table" data-name="table-1" style="left:64px;top:323.5px;width:1122px;height:auto;z-index:16">
+    <table><tbody>
+<tr>
+<th>Control</th>
+<th>When migrating to v14 +&nbsp;</th>
+<th>Which means</th>
+</tr>
+<tr>
+<td>FormControl&lt;T&gt;</td>
+<td>UntypedFormControl</td>
+<td>FormControl&lt;any&gt;</td>
+</tr>
+<tr>
+<td>FormGroup&lt;T&gt;</td>
+<td>UntypedFormGroup</td>
+<td>FormGroup&lt;any&gt;</td>
+</tr>
+<tr>
+<td>FormArray&lt;T&gt;</td>
+<td>UntypedFormArray</td>
+<td>FormArray&lt;any&gt;</td>
+</tr>
+</tbody></table>
+  </div>
+  <aside class="notes">This is still true, but the FormControl, FormGroup and FormArray prior to v13 has all been renamed to UnTypedXXX 
+This was done by the ng update command, which meant the ng update changed 1740 places in the project, so we didn't have to
+
+FormRecord is similar to a FormGroup but the controls must all be of the same type</aside>
+</section>

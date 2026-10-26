@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:102px;top:194px;width:1076px;height:auto;z-index:10">
+    <h2>Why not do it the IMPERATIVE way?</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:102px;top:235px;width:1076px;height:auto;z-index:11">
+    <ul>
+	<li>Interaction with UI is by nature <span style="color:rgb(255, 255, 255); text-align:left">asynchronous</span>&nbsp;and unpredictable</li>
+	<li>Only one thread, so we need to be asynchronous, or we'll block the thread</li>
+	<li>Lot's of state</li>
+	<li>Hard to read <span style="color:rgb(204, 204, 204)">😁</span>
+</li>
+</ul>
+  </div>
+  <aside class="notes">Asynchronous UI: UI events, like button clicks, can happen anytime, making it tricky to manage with imperative code.
+
+Single Thread: If we process tasks sequentially, like waiting for a network request, the UI can freeze—users hate that!
+
+State Complexity: Imagine tracking every variable change manually—lots of if statements and callbacks everywhere.
+
+Readability: Nested callbacks or complex state management makes code look like spaghetti—hard to debug!</aside>
+</section>

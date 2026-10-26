@@ -1,0 +1,178 @@
+{
+  "title": "Components",
+  "slides": [
+    {
+      "file": "components.html"
+    },
+    {
+      "file": "recap.html"
+    },
+    {
+      "file": "angular-architecture.html"
+    },
+    {
+      "file": "i-assume-knowledge-of.html"
+    },
+    {
+      "file": "the-class-the-metadata-and-the-template.html"
+    },
+    {
+      "file": "lifecycle.html"
+    },
+    {
+      "file": "on-init.html"
+    },
+    {
+      "file": "rethinking-on-init.html"
+    },
+    {
+      "file": "rethinking-on-init-2.html"
+    },
+    {
+      "file": "on-destroy.html"
+    },
+    {
+      "file": "destroyref.html"
+    },
+    {
+      "file": "on-changes.html"
+    },
+    {
+      "file": "after-view-init.html",
+      "hidden": true
+    },
+    {
+      "file": "after-view-init-v16-2-style.html"
+    },
+    {
+      "file": "content-projection.html"
+    },
+    {
+      "file": "content-projection-2.html"
+    },
+    {
+      "file": "slide-17.html"
+    },
+    {
+      "file": "the-template.html"
+    },
+    {
+      "file": "single-slot-vs-multi-slot.html"
+    },
+    {
+      "file": "single-slot.html"
+    },
+    {
+      "file": "going-back-to-the-playground-list-item.html"
+    },
+    {
+      "file": "exercise-1.html"
+    },
+    {
+      "file": "exercise-1-continued.html"
+    },
+    {
+      "file": "view-child-view-children.html"
+    },
+    {
+      "file": "view-child.html"
+    },
+    {
+      "file": "view-child-by-type.html"
+    },
+    {
+      "file": "view-child-by-template-reference-variabl.html"
+    },
+    {
+      "file": "view-children.html"
+    },
+    {
+      "file": "view-children-v17-2.html"
+    },
+    {
+      "file": "view-children-2.html"
+    },
+    {
+      "file": "dynamic-components.html"
+    },
+    {
+      "file": "introducing-ngcomponentoutlet.html"
+    },
+    {
+      "file": "ngcomponentoutlet-with-input.html"
+    },
+    {
+      "file": "ngcomponentoutlet-with-output.html"
+    },
+    {
+      "file": "so-what-about-output.html"
+    },
+    {
+      "file": "dynamic-components-v20.html"
+    },
+    {
+      "file": "not-on-v20-introducing-ng-dynamic-compon.html"
+    },
+    {
+      "file": "three-small-steps.html"
+    },
+    {
+      "file": "what-about-outputs-3-party-lib.html"
+    },
+    {
+      "file": "exercise-2-create-a-component-dynamicall.html"
+    },
+    {
+      "file": "template-outlet.html"
+    },
+    {
+      "file": "usecase-filter-playgrounds.html"
+    },
+    {
+      "file": "the-classic-way-the-template.html"
+    },
+    {
+      "file": "the-classic-way-the-component.html"
+    },
+    {
+      "file": "but-what-if-we-wanted-to-do-the-same-wit.html"
+    },
+    {
+      "file": "template-outlets-to-the-rescue.html"
+    },
+    {
+      "file": "lets-create-a-common-filter-component.html"
+    },
+    {
+      "file": "lets-create-a-common-filter-component-2.html",
+      "hidden": true
+    },
+    {
+      "file": "change-detection-strategy.html"
+    },
+    {
+      "file": "what-is-change-detection.html"
+    },
+    {
+      "file": "how-does-angular-detect-changes.html"
+    },
+    {
+      "file": "running-outside-zone-js.html"
+    },
+    {
+      "file": "the-changedetection-property.html"
+    },
+    {
+      "file": "the-changedetection-property-2.html"
+    },
+    {
+      "file": "the-container-and-presentation-component.html"
+    },
+    {
+      "file": "exercise-3-speeding-up-the-application.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>write value<span style="color:rgb(204, 204, 204); text-align:center">😁</span>
+</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:512px;height:auto;z-index:11;text-align:left">
+    <p>Every time a control is being created, every time a <span style="color:#FF8C00">patchValue</span> is being executed and every time a <span style="color:#FF8C00">reset</span> is being executed this method is being called.</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:432px;width:770.927px;height:113.154px;z-index:12">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript" data-line-numbers="">  writeValue(address: Partial&lt;Address&gt;): void {
+    this.fg.reset(address || {}, { emitEvent: false });
+  }
+</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-animate="scale-down" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:646.914px;top:88.5499px;width:588.752px;height:199.45px;z-index:13">
+    <pre style="font-size: 22px; line-height: 26px;"><code class="language-typescript">fg = this.fb.group({
+  street: this.fb.control(''),
+  streetNumber: this.fb.control(''),
+  floor: this.fb.control(''),
+  zip: this.fb.control(''),
+  city: this.fb.control(''),
+});
+</code></pre>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="259.9273560295191" data-x2="391.854" data-y2="0" data-color="#ffffff" data-width="4" data-start="none" data-end="arrow" data-animate="scale-down" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:255.06px;top:205.912px;width:391.854px;height:259.9274px;z-index:14"></div>
+  <aside class="notes">Click the writeValue code to show the fg.
+
+Talk about why we do not emit event - since the outside world is setting the controls value, we really shouldn't propage this "change". Not emitting an event will make us not propagate the "change"</aside>
+</section>

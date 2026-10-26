@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:947px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - Create a Distance pipe 1/2</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:201px;width:939px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li style="color:#ffffff">The purpose of the <span style="color:#ff8c00">DistancePipe </span>will be to show how far your current location is from a specific playground.</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="monokai" style="left:80px;top:360px;width:1120px;height:226px;z-index:13;font-size:130%">
+    <pre><code class="language-xml" data-line-numbers="1,5">&lt;!-- sidebar.component.html --&gt;
+...
+&lt;div class="d-flex flex-column justify-content-between"&gt;
+  &lt;h6 class="mb-1"&gt;{{playground.name}}
+    &lt;span class="badge bg-primary badge-pill"&gt;{{playground.position | distance}}&lt;/span&gt;
+  &lt;/h6&gt;
+  &lt;small&gt;{{playground.description | defaultDescription}}&lt;/small&gt;
+&lt;/div&gt;
+...</code></pre>
+  </div>
+</section>

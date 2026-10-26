@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:835px;height:auto;z-index:10;text-align:left;transform:rotate(0deg)">
+    <h2>Signal Equality Functions</h2>
+<p>Determine whether a new value is different from the previous one</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:592px;top:227px;width:668px;height:421px;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4|6-12|14-15|17-18">import { signal } from '@angular/core';
+
+const equalPlaygrounds = (a, b) =&gt; 
+	JSON.stringify(a) === JSON.stringify(b);
+
+const playgrounds = signal([{name: 'Naturlegepladsen'}]);
+
+// A computed signal with our custom equality function
+const changedPlaygrounds = computed(
+  () =&gt; this.playgrounds, 
+  { equal: equalPlaygrounds }
+)
+
+// No change in changedPlaygrounds
+playgrounds.set([{name: 'Naturlegepladsen'}]); 
+
+// changedPlaygrounds has changed
+playgrounds.set([{name: 'Hoppeborgen'}]);
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:288px;width:512px;height:auto;z-index:12;text-align:left">
+    <p>Example:</p>
+
+<p><span style="font-size:0.7em">You want to create a Signal that tracks changes in an array but considers two arrays equal if they have the same contents, even if they are different instances</span></p>
+  </div>
+  <aside class="notes">TODO - Change to computed example
+arraysAreEqual function is used as the custom equality function when creating the Signal. 
+arraysAreEqual compares the contents of the arrays rather than the instances. Thus, the Signal's value is only considered different if the contents of the array change, even if the array instances themselves are different.
+
+This strategy is especially useful when you're working with complex data structures, such as arrays of objects or nested structures, and you want to trigger updates only when the data content changes, not when the reference to the data changes.</aside>
+</section>

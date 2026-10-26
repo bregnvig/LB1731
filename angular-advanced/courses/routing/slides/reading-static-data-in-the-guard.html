@@ -1,0 +1,14 @@
+<section>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:83px;top:216px;width:1114px;height:auto;z-index:10">
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-auto">export const isAuthorizedGuard = (route: ActivatedRouteSnapshot) =&gt; {
+  return inject(AuthService).roles$.pipe(
+  map(roles =&gt; (roles || []).some(role =&gt; route.data.roles.includes(role))),
+  map(isAuthorized =&gt; isAuthorized || this.router.createUrlTree(['/unauthorized']))
+}
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:869px;height:auto;z-index:11;text-align:left">
+    <h2>Reading static data in the guard</h2>
+  </div>
+  <aside class="notes">Speak about the scope data. Only provided for this route</aside>
+</section>
