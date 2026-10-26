@@ -88,15 +88,22 @@ describe('block animations', () => {
     expect(anim.clicked()).toEqual(['code-2']);
   });
 
-  it('resets a slide when it is left', () => {
+  it('keeps a slide as it was while it is left, and starts it over when it is shown again', () => {
     const reveal = fakeReveal(slide);
     const anim = createBlockAnimations();
     anim.init(reveal as any);
     reveal.emit('ready');
+    reveal.go(other);
+    // Still hidden: the slide is on screen during the transition away.
+    expect(el('answer').classList.contains('animate-start')).toBe(true);
+    reveal.go(slide);
     anim.trigger('code-2');
     reveal.go(other);
-    expect(el('answer').classList.contains('animate-in')).toBe(false);
+    expect(el('answer').classList.contains('animate-in')).toBe(true);
     expect(anim.clicked()).toEqual([]);
+    reveal.go(slide);
+    expect(el('answer').classList.contains('animate-start')).toBe(true);
+    expect(el('answer').classList.contains('animate-in')).toBe(false);
   });
 
   it('shows a block whose trigger target is missing, with a warning', () => {

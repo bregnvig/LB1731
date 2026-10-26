@@ -32,14 +32,8 @@ export function createBlockAnimations(): BlockAnimationsPlugin {
   let clicks: string[] = [];
   const listeners: ((name: string) => void)[] = [];
 
-  function reset(slide: HTMLElement | undefined) {
-    if (!slide) return;
-    for (const el of animated(slide)) {
-      el.classList.remove('animate-in', 'animate-start');
-      el.style.transition = '';
-    }
-  }
-
+  // A slide being left keeps its state until it is shown again: it is still on screen while the
+  // transition runs, and clearing it there would flash its hidden blocks in.
   function enter(slide: HTMLElement | undefined) {
     clicks = [];
     if (!slide) return;
@@ -75,10 +69,7 @@ export function createBlockAnimations(): BlockAnimationsPlugin {
     init(r) {
       reveal = r;
       r.on('ready', () => enter(r.getCurrentSlide() as HTMLElement));
-      r.on('slidechanged', (e: any) => {
-        reset(e.previousSlide);
-        enter(e.currentSlide);
-      });
+      r.on('slidechanged', (e: any) => enter(e.currentSlide));
       r.getRevealElement()?.addEventListener('click', e => {
         const block = (e.target as HTMLElement).closest<HTMLElement>('[data-name]');
         const name = block?.dataset['name'];
