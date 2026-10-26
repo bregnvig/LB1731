@@ -13,7 +13,7 @@ for course in courses/*/; do
   course=$(basename "$course")
   cli/stage-course.sh "$course" "$stage/labs/$course" "$stage/solutions/$course"
 done
-rsync -a --exclude node_modules --exclude dist --exclude .angular --exclude '*.sh' demo/ "$stage/demo/"
+rsync -a --exclude node_modules --exclude dist --exclude .angular --exclude '*.sh' --exclude /README.md demo/ "$stage/demo/"
 cli/student-packages.sh "$stage"
 
 cd "$stage"
