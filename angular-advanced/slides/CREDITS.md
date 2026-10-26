@@ -18,7 +18,7 @@ Build and test tools (Angular CLI, Vitest, Playwright and their dependencies) ar
 
 ## In the slides
 
-Most images are our own screenshots and drawings (`working-with-signals-graph.svg`, `guards-shield.svg` and `you-are-already-testing-browser.svg` were drawn for this deck). These come from others; the slides that show them carry a credit line, and the last slide (`courses/state-management/slides/credits.html`) lists them with the trademark notice:
+Most images are our own screenshots and drawings (`working-with-signals-graph.svg` and `guards-shield.svg` were drawn for this deck). These come from others; the slides that show them carry a credit line, and the last slide (`courses/state-management/slides/credits.html`) lists them with the trademark notice:
 
 | What | Where | Terms |
 |------|-------|-------|
