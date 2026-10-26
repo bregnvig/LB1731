@@ -8,14 +8,14 @@
 @Component({...})
 export class PlaygroundComponent {
   playgrounds: Signal&lt;Playground[]&gt; = ...;
-        
+
   constructor() {
-  	effect(() =&gt; {
+    effect(() =&gt; {
       localStorage.setItem(
-        'playgrounds', 
-        JSON.stringify(playgrounds())
-      )
-    })
+        'playgrounds',
+        JSON.stringify(this.playgrounds())
+      );
+    });
   }
 }
 </code></pre>
@@ -28,13 +28,11 @@ export class PlaygroundComponent {
 <p>You can create an effect using the <span style="color:#FF8C00"><code>effect()</code></span>&nbsp;function</p>
 
 <p>Effects always run at least once.</p>
+
+<p>Create it in an injection context (constructor or field). It's destroyed with its component or service, or call <span style="color:#FF8C00"><code>destroy()</code></span> on the returned ref.</p>
   </div>
-  <aside class="notes">Show example with Infinite loop: angular-advanced/demo/src/app/signals/infinite-loop/infinite-loop.component.ts - It can also be fixed by making the [...untracked(() =&gt; this.playgrounds()), newPlaygroundValue] part untracked
-
-HAS to be done in injection context. Why? see below.
-
-Unsubscribe from effect? No! Automatically done when Injector is destroyed.
-
-Worth noting that v18 and v19 have different execution timings. 
- </aside>
+  <aside class="notes">For side effects that leave Angular: localStorage, logging, a third-party library, the DOM.
+Timing: it runs during change detection, and several changes close together give one run.
+Injection context: effect needs the injector to know when to stop. Outside a constructor or field, pass { injector }.
+Show the infinite-loop demo (/signals/infinite-loop): the effect writes playgrounds, which it also reads, so it runs again (it stops at 200). Fix 1 is untracked (next slide); the real fix comes after exercise 1.</aside>
 </section>

@@ -291,8 +291,6 @@
       </div>
     </div>
   </div>
-  <aside class="notes">As of the time of writing (Angular v19), the Signal Components has not yet been introduced, 
-and Signal change detection still relies on Zone.js. The following section is based only on the RFC.
-
-The click here would actually need to change the state. If no state change no change detection. That was not the case with the previous example. If a method got called, change detection would occur. The changed signal would even need to be shown in the template</aside>
+  <aside class="notes">With signals and OnPush, only the component whose template reads the changed signal is refreshed. Zoneless (the v21 default) works this way.
+The click here has to change a signal. Calling a method without changing state no longer triggers change detection, and the changed signal has to be read in the template.</aside>
 </section>

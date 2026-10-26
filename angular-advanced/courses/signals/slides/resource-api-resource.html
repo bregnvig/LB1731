@@ -5,7 +5,7 @@
   <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:576px;width:813px;height:auto;z-index:11">
     <p>Use this if you need custom logic, local persistence or any other advanced strategies 🤓</p>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:640px;height:auto;z-index:12;text-align:left">
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:480px;height:auto;z-index:12;text-align:left">
     <p>The most flexible option</p>
 
 <p>&nbsp;</p>
@@ -22,14 +22,18 @@
 	<li>You name it!</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:720px;top:245px;width:543.817px;height:auto;z-index:14">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">// IndexedDB using idb
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:580px;top:245px;width:680px;height:auto;z-index:14">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">// IndexedDB using idb
 
 const notes = resource({
-  loader: async () =&gt; {
+  params: () =&gt; ({ folder: this.folder() }),
+  loader: async ({ params }) =&gt; {
     const db = await openDB('notes', 1);
-    return db.getAll('entries');
+    return db.getAllFromIndex(
+      'entries', 'folder', params.folder);
   }
-});</code></pre>
+});
+</code></pre>
   </div>
+  <aside class="notes">The loader also gets abortSignal: pass it to fetch, and a request that's no longer needed is cancelled when params change.</aside>
 </section>

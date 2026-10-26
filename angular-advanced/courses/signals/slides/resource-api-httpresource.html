@@ -5,8 +5,8 @@
   <div class="block" data-type="text" data-name="text-1" style="left:233.5px;top:636px;width:813px;height:auto;z-index:11">
     <p>Use for REST APIs and typical HTTP requests</p>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:628px;height:auto;z-index:12;text-align:left">
-    <p>Initiates the request eagerly</p>
+  <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:460px;height:auto;z-index:12;text-align:left">
+    <p>Initiates the request eagerly. The URL is a function: it fetches again when the signals it reads change.</p>
 
 <p>&nbsp;</p>
 
@@ -16,22 +16,20 @@
 
 <p>Think: <span style="color:#FF8C00">request</span>&nbsp;→ <span style="color:#FF8C00">response</span>&nbsp;→ maybe <span style="color:#FF8C00">resourceRef</span></p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:720px;top:245px;width:543.817px;height:auto;z-index:14">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">const todos = httpResource('/api/todos');
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:245px;width:700px;height:auto;z-index:14">
+    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript">const todos = httpResource&lt;Todo[]&gt;(() =&gt; '/api/todos');
 
-// Response value
-todos.value();
+// Fetches again when userId changes
+const user = httpResource&lt;User&gt;(() =&gt; `/api/users/${this.userId()}`);
 
-// HttpResourceRef with string in value()
-todos.text(() =&gt; ({ … }));
+// The response as text, Blob or ArrayBuffer
+const readme = httpResource.text(() =&gt; '/README.md');
+const logo = httpResource.blob(() =&gt; '/logo.png');
 
-// HttpResourceRef with Blob object in value()
-todos.blob(() =&gt; ({ … })); 
-
-// HttpResourceRef with ArrayBuffer in value()
-todos.arrayBuffer(() =&gt; ({ … })); 
-
-// Fetch the resource again
-todos.reload()</code></pre>
+todos.value();   // Todo[] | undefined
+todos.reload();  // fetch again
+</code></pre>
   </div>
+  <aside class="notes">Return undefined from the URL function to wait (status idle), e.g. while no user is selected.
+It's built on HttpClient, so interceptors run.</aside>
 </section>

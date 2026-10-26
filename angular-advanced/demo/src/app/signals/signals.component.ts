@@ -20,6 +20,9 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
     <li ngbNavItem="model">
         <a ngbNavLink routerLink="model" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Model</a>
     </li>
+    <li ngbNavItem="computed-vs-effect">
+        <a ngbNavLink routerLink="computed-vs-effect" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Computed vs effect</a>
+    </li>
     <li ngbNavItem="infinite-loop">
         <a ngbNavLink routerLink="infinite-loop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Infinite loop</a>
     </li>
@@ -30,7 +33,7 @@ import { NgbNav, NgbNavItem, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
         <a ngbNavLink routerLink="playgrounds" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Playgrounds</a>
     </li>
     <li ngbNavItem="linked">
-        <a ngbNavLink routerLink="linked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">linked</a>
+        <a ngbNavLink routerLink="linked" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Linked signal</a>
     </li>
   </ul>
   <router-outlet></router-outlet>

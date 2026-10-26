@@ -4,23 +4,23 @@
 <p>Determine whether a new value is different from the previous one</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:592px;top:227px;width:668px;height:421px;z-index:11">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4|6-12|14-15|17-18">import { signal } from '@angular/core';
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4|6-12|14-15|17-18">import { computed, signal } from '@angular/core';
 
-const equalPlaygrounds = (a, b) =&gt; 
-	JSON.stringify(a) === JSON.stringify(b);
+const sameJson = (a: unknown, b: unknown) =&gt;
+  JSON.stringify(a) === JSON.stringify(b);
 
 const playgrounds = signal([{name: 'Naturlegepladsen'}]);
 
-// A computed signal with our custom equality function
-const changedPlaygrounds = computed(
-  () =&gt; this.playgrounds, 
-  { equal: equalPlaygrounds }
-)
+// A computed signal with a custom equality function
+const names = computed(
+  () =&gt; playgrounds().map(p =&gt; p.name),
+  { equal: sameJson }
+);
 
-// No change in changedPlaygrounds
-playgrounds.set([{name: 'Naturlegepladsen'}]); 
+// New array, same content: names does not change
+playgrounds.set([{name: 'Naturlegepladsen'}]);
 
-// changedPlaygrounds has changed
+// Different content: names changes
 playgrounds.set([{name: 'Hoppeborgen'}]);
 </code></pre>
   </div>
@@ -28,10 +28,8 @@ playgrounds.set([{name: 'Hoppeborgen'}]);
     <p>Example:</p>
 
 <p><span style="font-size:0.7em">You want to create a Signal that tracks changes in an array but considers two arrays equal if they have the same contents, even if they are different instances</span></p>
+<p><span style="font-size:0.7em"><code>signal()</code>, <code>computed()</code> and <code>toSignal()</code> all take an <code>equal</code> option</span></p>
   </div>
-  <aside class="notes">TODO - Change to computed example
-arraysAreEqual function is used as the custom equality function when creating the Signal. 
-arraysAreEqual compares the contents of the arrays rather than the instances. Thus, the Signal's value is only considered different if the contents of the array change, even if the array instances themselves are different.
-
-This strategy is especially useful when you're working with complex data structures, such as arrays of objects or nested structures, and you want to trigger updates only when the data content changes, not when the reference to the data changes.</aside>
+  <aside class="notes">The default equality is Object.is: a new array is always a change, even with the same content.
+Demo /signals/equality (demo/src/app/signals/equality/playgrounds-equality.component.ts): toSignal refetches every second and the list re-renders each time. Uncomment the equal line and it stops.</aside>
 </section>

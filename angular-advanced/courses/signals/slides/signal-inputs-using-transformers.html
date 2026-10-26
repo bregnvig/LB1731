@@ -18,7 +18,7 @@ export class PlaygroundsComponent {
   location = input&lt;Coordinate | null&gt;(null); 
   // Required input without an initial value
   playgrounds = input.required&lt;Playground[], Playground | Playground[]&gt;({
-    transform: value =&gt; Array.isArray(value) ? value : Array.from(value)
+    transform: value =&gt; Array.isArray(value) ? value : [value]
   });
 }</code></pre>
   </div>

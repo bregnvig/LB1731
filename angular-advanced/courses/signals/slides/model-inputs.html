@@ -48,7 +48,8 @@
     <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-xml" data-line-numbers="4">&lt;loop-pagination 
   [items]="playgrounds" 
   [template]="playground" 
-  [page]="page" /&gt;</code></pre>
+  [page]="page()" /&gt;
+</code></pre>
   </div>
   <div class="block" data-type="code" data-name="code-5" data-theme="dark" data-auto-height style="left:735px;top:623px;width:500px;height:auto;z-index:20">
     <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-xml" data-line-numbers="|4">&lt;loop-pagination 
@@ -65,4 +66,6 @@
   [template]="playground" 
   (pageChange)="pageChanged($event)" /&gt;</code></pre>
   </div>
+  <aside class="notes">Two-way [(page)] takes the signal itself; one-way [page] takes its value, page().
+Demo: /signals/model (demo/src/app/signals/model). Its page is a linkedSignal: the pagination writes it, and switching city resets it to the first page.</aside>
 </section>

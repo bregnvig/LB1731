@@ -8,7 +8,7 @@
 filterControl = new FormControl('');
 playgrounds = input.required&lt;Playground[]&gt;();
 
-filter$ = this.filterControl.valueChanges$;
+filter$ = this.filterControl.valueChanges;
 playgrounds$ = toObservable(this.playgrounds);
 
 filteredPlaygrounds$ = combineLatest([

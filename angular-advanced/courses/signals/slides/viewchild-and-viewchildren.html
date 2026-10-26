@@ -17,7 +17,7 @@
 sidebar = viewChild.required(SidebarComponent);
 
 effect(() =&gt; {
-  console.log('playground name:', this.playground()?.name, sidebar().selected);
+  console.log('playground name:', this.playground()?.name, this.sidebar().selected);
 });
 </code></pre>
   </div>

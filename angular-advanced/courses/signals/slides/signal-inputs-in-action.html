@@ -3,33 +3,27 @@
     <h2>Signal Inputs - in Action</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" style="left:80px;top:187.138px;width:629.276px;height:489.724px;z-index:11">
-    <pre style="font-size: 14px; line-height: 17px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7,9,12-20">import { Component, input, computed, effect } from '@angular/core';
+    <pre style="font-size: 14px; line-height: 17px; tab-size: 4;"><code class="language-typescript" data-line-numbers="8,10,13-21">import { Component, computed, inject, input } from '@angular/core';
 
 @Component({...})
 export class UserProfileComponent {
-  
+  private ls = inject(LocationService);
+
   // Optional input with a default value
-  location = input&lt;Coordinate | null&gt;(null); 
+  location = input&lt;Coordinate | null&gt;(null);
   // Required input without an initial value
   playground = input.required&lt;Playground&gt;();
 
   // Derived value using computed
   playgroundInfo = computed(() =&gt; {
     const location = this.location();
-    if(location) {
+    if (location) {
       const playground = this.playground();
-      const distance = this.ls.getDistance(location, playground),
-      return { ...playground, distance } 
+      const distance = this.ls.getDistance(location, playground);
+      return { ...playground, distance };
     }
     return undefined;
   });
-
-  constructor(private ls: LocationService) {
-    // Monitoring changes with effect
-    effect(() =&gt; {
-      console.log('Location updated:', this.location());
-    });
-  }
 }
 </code></pre>
   </div>
@@ -38,5 +32,6 @@ export class UserProfileComponent {
 &lt;p&gt;Distance: {{ playgroundInfo()?.distance }}&lt;/p&gt;
 </code></pre>
   </div>
-  <aside class="notes">Notice the .required. Notice required does not have an initial value</aside>
+  <aside class="notes">Notice the .required. Notice required does not have an initial value.
+Demo: /signals/inputs (demo/src/app/signals/inputs) shows a decorator input next to a signal input.</aside>
 </section>

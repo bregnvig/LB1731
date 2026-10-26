@@ -6,11 +6,11 @@
     <p>Good for integrating existing RxJS observables!</p>
   </div>
   <div class="block" data-type="text" data-name="text-2" style="left:80px;top:216px;width:906px;height:auto;z-index:12;text-align:left">
-    <p>Designed for reactive data streams using RxJS</p>
+    <p>Like resource, but the loader returns an Observable</p>
 
 <p>&nbsp;</p>
 
-<p>Perfect when your data source emits over time</p>
+<p>Every value the Observable emits becomes <code>value()</code></p>
 
 <p>&nbsp;</p>
   </div>
@@ -18,11 +18,14 @@
     <p>Automatically re-runs whenever params change.</p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:610.183px;top:355px;width:658.817px;height:auto;z-index:14">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">const user$ = ... // any observable
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">userId = input.required&lt;string&gt;();
 
-const user = rxResource({
-  params: () =&gt; user$,
-  stream: ({params}) =&gt; this.userData.load(params.userId)
-});</code></pre>
+user = rxResource({
+  params: () =&gt; ({ id: this.userId() }),
+  stream: ({ params }) =&gt; this.userData.load(params.id)
+});
+</code></pre>
   </div>
+  <aside class="notes">params is a function that reads signals, like computed. When userId changes, the old stream is unsubscribed and stream runs again.
+State management exercise 3 uses rxResource.</aside>
 </section>

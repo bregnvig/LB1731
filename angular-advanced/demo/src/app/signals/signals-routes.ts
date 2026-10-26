@@ -8,6 +8,7 @@ import { PlaygroundsComponent } from "./playgrounds/playgrounds.component";
 import { SignalsComponent } from "./signals.component";
 import { PlaygroundsUntrackedComponent } from "./untracked";
 import { LinkedSignalComponent } from "./linked-signal/linked-signal.component";
+import { ComputedVsEffectComponent } from "./computed-vs-effect/computed-vs-effect.component";
 
 export const SignalsRoutes: Routes = [
   {
@@ -45,6 +46,10 @@ export const SignalsRoutes: Routes = [
       {
         path: 'linked',
         component: LinkedSignalComponent,
+      },
+      {
+        path: 'computed-vs-effect',
+        component: ComputedVsEffectComponent,
       },
       {
         path: '**',

@@ -3,24 +3,27 @@
     <h2>Effect Cleanup</h2>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:474px;top:216px;width:763px;height:auto;z-index:11">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">@Component({ ...})
-export class CounterComponent {
-  count = signal(0);
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="8-10">@Component({...})
+export class SearchComponent {
+  query = signal('');
 
   constructor() {
-    const previousValue = signal&lt;number | undefined&gt;(undefined)
     effect(onCleanup =&gt; {
-      const count = this.count();
-      console.log(count, previousValue());
-      onCleanup(() =&gt; previousValue.set(count));
+      const query = this.query();
+      const timer = setTimeout(() =&gt; this.search(query), 300);
+      // Before the next run, and when it's destroyed
+      onCleanup(() =&gt; clearTimeout(timer));
     });
-    setInterval(() =&gt; this.count.update(value =&gt; value + 1), 1000);
   }
-}</code></pre>
+}
+</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:80px;top:288px;width:394px;height:auto;z-index:12;text-align:left">
     <p>Example:</p>
 
-<p><span style="font-size:0.7em">You want to use the previous value for something</span></p>
+<p><span style="font-size:0.7em">Cancel what the previous run started: a timer, a request, a subscription. Here: only search when the user stops typing.</span></p>
   </div>
+  <aside class="notes">Type fast: every keystroke clears the previous timer, so only the last query is logged.
+Cleanup is for cancelling, not for remembering the previous value: that's linkedSignal's long form, a few slides back.
+v22 has debounced(signal, 300) for exactly this (experimental), and resources cancel their own requests.</aside>
 </section>

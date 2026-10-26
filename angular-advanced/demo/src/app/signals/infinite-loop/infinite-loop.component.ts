@@ -20,8 +20,8 @@ export class InfiniteLoopComponent {
   infiniteLoopEffect = effect(() => {
     const newPlaygroundValue = this.newPlayground();
 
-    if (this.playgrounds().length > 50000) {
-      console.log('Reached 50000 playgrounds. Stopped before crashing the browser.');
+    if (this.playgrounds().length > 200) {
+      console.log('Reached 200 playgrounds. Stopped before the tab freezes.');
       return;
     }
     if (newPlaygroundValue) {
@@ -30,6 +30,8 @@ export class InfiniteLoopComponent {
       this.playgrounds.set(updatedPlaygrounds);
       // this.newPlayground.set(null); // Uncomment this line to stop the infinite loop
     }
+    // Fix 1: read playgrounds with untracked(() => this.playgrounds()), so writing it doesn't rerun the effect.
+    // The real fix: no effect. addRandomPlayground() does this.playgrounds.update(p => [...p, getRandomPlayground()]).
 
   });
 

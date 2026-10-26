@@ -5,28 +5,42 @@
       "file": "signals.html"
     },
     {
-      "file": "what-is-change-detection.html"
+      "file": "what-is-change-detection.html",
+      "hidden": true
     },
     {
-      "file": "change-detection.html"
+      "file": "change-detection.html",
+      "hidden": true
     },
     {
-      "file": "angular-change-detection.html"
+      "file": "angular-change-detection.html",
+      "hidden": true
     },
     {
-      "file": "what-is-zone-js.html"
+      "file": "what-is-zone-js.html",
+      "hidden": true
     },
     {
-      "file": "two-different-strategies.html"
+      "file": "two-different-strategies.html",
+      "hidden": true
     },
     {
-      "file": "default-change-detection.html"
+      "file": "default-change-detection.html",
+      "hidden": true
     },
     {
-      "file": "onpush-change-detection.html"
+      "file": "onpush-change-detection.html",
+      "hidden": true
     },
     {
-      "file": "signals-2.html"
+      "file": "signals-2.html",
+      "hidden": true
+    },
+    {
+      "file": "from-zone-js-to-zoneless.html"
+    },
+    {
+      "file": "onpush-is-the-default.html"
     },
     {
       "file": "signal-change-detection.html"
@@ -35,10 +49,12 @@
       "file": "changing-the-ui.html"
     },
     {
-      "file": "what-is-in-a-view.html"
+      "file": "what-is-in-a-view.html",
+      "hidden": true
     },
     {
-      "file": "working-with-signals.html"
+      "file": "working-with-signals.html",
+      "hidden": true
     },
     {
       "file": "a-signal.html"
@@ -50,16 +66,10 @@
       "file": "computed-signals.html"
     },
     {
-      "file": "signal-equality-functions.html"
-    },
-    {
       "file": "effects.html"
     },
     {
       "file": "reading-without-tracking-dependencies.html"
-    },
-    {
-      "file": "effect-cleanup.html"
     },
     {
       "file": "exercise-1-getting-started.html"
@@ -69,6 +79,24 @@
     },
     {
       "file": "exercise-1-use-signals-effects-2.html"
+    },
+    {
+      "file": "don-t-copy-state-with-an-effect.html"
+    },
+    {
+      "file": "linkedsignal.html"
+    },
+    {
+      "file": "linkedsignal-keep-the-selection.html"
+    },
+    {
+      "file": "which-tool.html"
+    },
+    {
+      "file": "signal-equality-functions.html"
+    },
+    {
+      "file": "effect-cleanup.html"
     },
     {
       "file": "signal-inputs.html"
@@ -138,6 +166,9 @@
     },
     {
       "file": "resource-api-resource.html"
+    },
+    {
+      "file": "new-in-angular-21-and-22.html"
     },
     {
       "file": "signals-observables.html"

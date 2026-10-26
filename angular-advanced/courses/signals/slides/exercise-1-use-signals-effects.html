@@ -3,18 +3,18 @@
     <h2>Exercise 1 - Use Signals &amp; effects</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:19.6px">Looking at the source code in home.component.ts we'll see the we are currently using plain data type, such as Center, Marker, arrays etc.</span></p>
+    <p><span style="font-size:19.6px">Looking at the source code in home.component.ts we'll see that we are currently using plain data types, such as Center, Marker, arrays etc.</span></p>
 
-<p><span style="font-size:19.6px">Change all the instance variable, except <code><span style="color:#FF8C00">router</span></code>, into <span style="color:#FF8C00">signal</span>s.</span></p>
+<p><span style="font-size:19.6px">Change all the instance variables, except <code><span style="color:#FF8C00">router</span></code>, into <span style="color:#FF8C00">signal</span>s.</span></p>
 
-<p><span style="font-size:19.6px">When you have changed to variables into signals you will have some compile errors. Fix these errors, before moving on.</span></p>
+<p><span style="font-size:19.6px">When you have changed the variables into signals you will have some compile errors. Fix these errors, before moving on.</span></p>
 
-<p><span style="font-size:19.6px">Did you notice the loader? If not try to reload your page. Still didn't see it? Check if you have updated the template correctly to work with signals. Specifically the <code><span style="color:#FF8C00">@if</span></code></span></p>
+<p><span style="font-size:19.6px">Did you notice the loader? If not, reload the page. A blank page instead? A signal is used without <code><span style="color:#FF8C00">()</span></code> somewhere, often in an <code><span style="color:#FF8C00">@if</span></code>. The terminal warns about it (NG8109).</span></p>
 
 <p><span style="font-size:19.6px">When you see the loader you are ready for the next part of the exercise</span></p>
   </div>
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:691.366px;top:174.61px;width:537.268px;height:373.949px;z-index:12">
     <img src="images/exercise-1-use-signals-effects-1.png" alt="">
   </div>
-  <aside class="notes">A</aside>
+  <aside class="notes">The common trap: @if (playground) without () is always true, because a signal is a function. The template then reads a property of undefined and the whole page goes blank, with a TypeError in FooterComponent in the console. The build only warns (NG8109).</aside>
 </section>
