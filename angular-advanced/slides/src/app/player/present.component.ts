@@ -3,6 +3,7 @@ import Reveal, { type RevealApi } from 'reveal.js';
 import RevealHighlight from 'reveal.js/plugin/highlight';
 import RevealNotes from 'reveal.js/plugin/notes';
 import { DeckService } from '../deck/deck.service';
+import { createBlockAnimations } from './block-animations';
 import { deckHtml } from './deck-html';
 
 export const REVEAL_CONFIG = {
@@ -35,6 +36,7 @@ export class PresentComponent implements OnDestroy {
   private readonly deckService = inject(DeckService);
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('reveal');
   private reveal?: RevealApi;
+  readonly animations = createBlockAnimations();
 
   constructor() {
     afterNextRender(() => this.start());
@@ -50,7 +52,7 @@ export class PresentComponent implements OnDestroy {
       ...REVEAL_CONFIG,
       ...(params.has('test') ? { transition: 'none', backgroundTransition: 'none', showHiddenSlides: true, controls: false, progress: false, hash: false } : {}),
       ...(embedded ? { controls: false, progress: false, hash: false } : {}),
-      plugins: [RevealNotes, RevealHighlight],
+      plugins: [RevealNotes, RevealHighlight, this.animations],
     });
     await this.reveal.initialize();
     (window as any).Reveal = this.reveal;

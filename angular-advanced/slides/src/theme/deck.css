@@ -192,3 +192,18 @@ body,
     radial-gradient(circle 6px at 40px 20px, #e6c028 98%, transparent),
     radial-gradient(circle 6px at 60px 20px, #54c22b 98%, transparent);
 }
+
+/* Block animations: a block waits in its start state (.animate-start) and transitions to
+   its end state (.animate-in); timing comes from block-animations.ts. */
+
+.reveal .block[data-animate] {
+  transition-property: opacity, transform;
+  transition-timing-function: ease;
+}
+
+.reveal .block[data-animate]:not([data-animate='fade-out']).animate-start { opacity: 0; }
+.reveal .block[data-animate='scale-up'].animate-start { transform: scale(0.5); }
+.reveal .block[data-animate='scale-down'].animate-start { transform: scale(1.5); }
+.reveal .block[data-animate='slide-up'].animate-start { transform: translateY(40px); }
+.reveal .block[data-animate='slide-down'].animate-start { transform: translateY(-40px); }
+.reveal .block[data-animate='fade-out'].animate-in { opacity: 0; }
