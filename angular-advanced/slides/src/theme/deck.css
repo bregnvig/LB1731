@@ -238,6 +238,11 @@ body,
 /* Block animations: a block waits in its start state (.animate-start) and transitions to
    its end state (.animate-in); timing comes from block-animations.ts. */
 
+/* A group's box spans all its children, so in the player its empty area lets clicks through to
+   the blocks below (an animation's click target, say); its child blocks still take clicks. */
+app-present .block[data-type='group'] { pointer-events: none; }
+app-present .block[data-type='group'] > .block:not([data-type='group']) { pointer-events: auto; }
+
 .reveal .block[data-animate] {
   transition-property: opacity, transform;
   transition-timing-function: ease;
