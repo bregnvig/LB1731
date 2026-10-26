@@ -84,8 +84,32 @@ describe('block animations', () => {
     reveal.emit('ready');
     anim.restore(['code-2']);
     expect(el('answer').classList.contains('animate-in')).toBe(true);
-    expect(el('answer').style.transition).toBe('none');
+    expect(el('answer').style.transitionProperty).toBe('none');
     expect(anim.clicked()).toEqual(['code-2']);
+  });
+
+  it('plays a click back to the start state when its target is clicked again', () => {
+    const reveal = fakeReveal(slide);
+    const anim = createBlockAnimations();
+    anim.init(reveal as any);
+    reveal.emit('ready');
+    el('code-2').click();
+    el('code-2').click();
+    expect(el('answer').classList.contains('animate-start')).toBe(true);
+    expect(el('answer').classList.contains('animate-in')).toBe(false);
+    expect(el('answer').style.transitionProperty).not.toBe('none');
+    expect(anim.clicked()).toEqual([]);
+  });
+
+  it('restores a click that was toggled off in another window', () => {
+    const reveal = fakeReveal(slide);
+    const anim = createBlockAnimations();
+    anim.init(reveal as any);
+    reveal.emit('ready');
+    anim.trigger('code-2');
+    anim.restore([]);
+    expect(el('answer').classList.contains('animate-start')).toBe(true);
+    expect(anim.clicked()).toEqual([]);
   });
 
   it('keeps a slide as it was while it is left, and starts it over when it is shown again', () => {
@@ -121,7 +145,7 @@ describe('block animations', () => {
     anim.finishAll();
     for (const name of ['intro', 'answer']) {
       expect(el(name).classList.contains('animate-in')).toBe(true);
-      expect(el(name).style.transition).toBe('none');
+      expect(el(name).style.transitionProperty).toBe('none');
     }
   });
 });
