@@ -2,19 +2,21 @@
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:751.684px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Use Signals &amp; effects</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:19.6px">The reason that we see the loader is because our backend is slow!</span></p>
-
-<p><span style="font-size:19.6px">So let's cache the playgrounds so that we initially can show the playgrounds we have previously fetched.</span></p>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:630px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">We see the loader because our backend is slow! So let's cache the playgrounds and show the ones we fetched last time right away.</span></p>
 
 <p><span style="font-size:19.6px">Use an <span style="color:#FF8C00">effect</span>&nbsp;to save the playgrounds in the <code><span style="color:#FF8C00">localStorage</span></code>. You will need to use <span style="color:#FF8C00"><code>setItem</code></span>&nbsp;&amp; <span style="color:#FF8C00"><code>getItem</code></span>&nbsp;from the <span style="color:#FF8C00"><code>localStorage</code></span>.</span></p>
+<p><span style="font-size:19.6px">Only save when there are playgrounds: until the backend answers, the signal is <code><span style="color:#FF8C00">undefined</span></code>, which isn't JSON. Blank page after a reload? Clear localStorage in DevTools.</span></p>
 
-<p><span style="font-size:19.6px">As <code><span style="color:#FF8C00">localStorage</span></code>&nbsp;only saves strings, you will need to convert the array into a string <span style="color:#FF8C00"><code>JSON.stringify</code></span>. And back, when reading the data from <span style="color:#FF8C00">localStorage (</span></span><span style="color:rgb(255, 140, 0); font-size:19.6px"><code>JSON.parse)</code></span></p>
+<p><span style="font-size:19.6px"><code><span style="color:#FF8C00">localStorage</span></code>&nbsp;only saves strings: <code><span style="color:#FF8C00">JSON.stringify</span></code> the array when saving, <code><span style="color:#FF8C00">JSON.parse</span></code> it when reading.</span></p>
 
 <p><span style="font-size:19.6px">Finally initialize the playgrounds signal with data from <code><span style="color:#FF8C00">localStorage</span></code><br>
-Consider adding OnPush, now that we use signals</span></p>
+Bonus: delete <code><span style="color:#FF8C00">changeDetection: ChangeDetectionStrategy.Eager</span></code> from HomeComponent (AppComponent is optional). OnPush is the default and works with signals.</span></p>
   </div>
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:691.366px;top:174.61px;width:537.268px;height:295.392px;z-index:13">
     <img src="images/exercise-1-use-signals-effects-2-1.png" alt="">
   </div>
+  <aside class="notes">Solution (step-2) only saves when playgrounds is defined.
+Without the guard: reload during the 3 s load stores "undefined", JSON.parse throws, app stays blank until localStorage is cleared (DevTools &gt; Application &gt; Local storage).
+Next: "Don't copy state with an effect". Their center and markers are good computed candidates.</aside>
 </section>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, computed, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, inject, linkedSignal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { icon, LatLng, marker } from 'leaflet';
@@ -16,11 +16,12 @@ import { PaginationComponent } from './pagination.compont';
 
 export class ModelComponent {
 
-  page = signal(0);
-
   copenhagen = toSignal(inject(HttpClient).get<Playground[]>('assets/copenhagen.json'));
   aarhus = toSignal(inject(HttpClient).get<Playground[]>('assets/aarhus.json'));
-  active: Signal<Playground[] | undefined> = this.copenhagen;
+  city = signal<'copenhagen' | 'aarhus'>('copenhagen');
+  active = computed(() => this.city() === 'copenhagen' ? this.copenhagen() : this.aarhus());
+  // Writable (the pagination sets it), but back to page 0 whenever the list changes.
+  page = linkedSignal({ source: this.active, computation: () => 0 });
   options = createOptions();
 
   playground = computed(() => this.active()?.[this.page()]);
@@ -36,13 +37,11 @@ export class ModelComponent {
   }));
 
   useCopenhagen() {
-    this.active = this.copenhagen;
-    this.page.set(0);
+    this.city.set('copenhagen');
   }
 
   useAarhus() {
-    this.active = this.aarhus;
-    this.page.set(0);
+    this.city.set('aarhus');
   }
 
 }

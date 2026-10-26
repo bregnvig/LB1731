@@ -1,0 +1,28 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>From Zone.js to zoneless</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:612px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>Zone.js patches browser events, timers and promises, and checks components after every one</li>
+	<li>It only knows something <em>might</em> have changed 🤔</li>
+	<li>Since v21, new apps are <strong>zoneless</strong>: signals tell Angular exactly which views to update</li>
+	<li>The course apps still opt in to Zone.js</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:700px;top:230px;width:520px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">// src/main.ts in the course apps
+providers: [
+  provideZoneChangeDetection(),
+  ...
+]
+
+// A new app since v21: nothing.
+// Zoneless is the default.
+</code></pre>
+  </div>
+  <aside class="notes">Zone.js patches setTimeout, addEventListener, promises and runs change detection after each. It knows something async finished, not that state changed.
+Zoneless: Angular is told about changes: signal read in a template, template event, async pipe, markForCheck.
+Short version only; full change detection is in the Components module.
+Interactive comparison: https://jeanmeche.github.io/angular-change-detection/</aside>
+</section>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, Signal } from '@angular/core';
-import { Coordinate, Playground } from '../model';
-import { LocationService } from '../service';
+import { Coordinate, Playground } from '../../model';
+import { LocationService } from '../../service';
 
 @Component({
   selector: 'loop-sidebar-list-item',
@@ -27,7 +27,7 @@ export class SidebarListItemComponent {
   playground = input.required<Playground>();
   location = input<Coordinate | undefined>(undefined);
   distance: Signal<string>;
-  description = computed(() => this.playground().description ?? 'No description');
+  description = computed(() => this.playground().description || 'No description');
 
   constructor({ getDistance }: LocationService) {
     this.distance = computed(() => {

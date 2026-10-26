@@ -1,0 +1,39 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Don't copy state with an effect</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:472px;height:auto;z-index:11;text-align:left">
+    <p>The effect runs later, during change detection. Until then, code reads a stale copy</p>
+
+<p>Two sources of truth, an extra change detection pass, and a risk of loops</p>
+
+<p>The screen looks fine. The code doesn't</p>
+
+<p>Derived: <span style="color:#FF8C00"><code>computed</code></span><br>
+Derived, but writable: <span style="color:#FF8C00"><code>linkedSignal</code></span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:216px;width:700px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4-5|7-12|14-18">firstName = signal('Ada');
+lastName = signal('Lovelace');
+
+// Derived: always in sync
+fullName = computed(() =&gt; `${this.firstName()} ${this.lastName()}`);
+
+// Anti-pattern: a copy kept up to date by an effect
+fullNameCopy = signal('');
+constructor() {
+  effect(() =&gt;
+    this.fullNameCopy.set(`${this.firstName()} ${this.lastName()}`));
+}
+
+rename() {
+  this.firstName.set('Grace');
+  this.fullName();      // 'Grace Lovelace'
+  this.fullNameCopy();  // still 'Ada Lovelace'
+}
+</code></pre>
+  </div>
+  <aside class="notes">Demo: /signals/computed-vs-effect. Console open, click Rename: logs "computed: Grace Hopper | copy: Ada Lovelace", then "Effect ran". Screen shows Grace Hopper for both.
+Infinite-loop real fix: no effect. addRandomPlayground() does this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]).
+Ask about their exercise 1: center and markers could be computed. subscribe(x =&gt; this.x.set(x)) is the same copy pattern; toSignal fixes it (later today).</aside>
+</section>

@@ -8,7 +8,7 @@
 filterControl = new FormControl('');
 playgrounds = input.required&lt;Playground[]&gt;();
 
-filter$ = this.filterControl.valueChanges$;
+filter$ = this.filterControl.valueChanges;
 playgrounds$ = toObservable(this.playgrounds);
 
 filteredPlaygrounds$ = combineLatest([
@@ -28,11 +28,5 @@ filteredPlaygrounds$ = combineLatest([
 
 <p><span style="font-size:1.0em">Behind the scenes it's a <span style="color:#FF8C00">ReplaySubject </span>wrapped in an <span style="color:#FF8C00">effect()</span></span></p>
   </div>
-  <aside class="notes">Show the same example again demo/src/app/signals/playgrounds/playgrounds.component.ts
-
-toObservable creates an Observable which tracks the value of a signal
-
-Emits values asynchronously. So if original signal emits multiple values in same tick, the Observable emits receive the latest signal value.
-
-</aside>
+  <aside class="notes">Emits asynchronously (via an effect): several sets in the same tick give one emission with the latest value.</aside>
 </section>

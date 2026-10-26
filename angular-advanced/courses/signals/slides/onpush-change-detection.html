@@ -335,11 +335,7 @@
       </div>
     </div>
   </div>
-  <aside class="notes">I have the same delay in both drawings. The final component here is animated at 1.1s The same component was animated at 2.2 in the previous drawing
-
-Show change detection code in demo: http://localhost:4201/signals/untracked (use the profiler to see that user  the user comp
-
-However, using the OnPush strategy requires developers to have more knowledge of Angular in order to trigger change detection correctly. (manual markForCheck, async pipe, new instance of Input, …).
-
-Demo: https://jeanmeche.github.io/angular-change-detection/</aside>
+  <aside class="notes">Only the path from the root to the marked component is checked. Same component: 1.1s instead of 2.1s, and the default goes on to 3s.
+The cost: you must mark it yourself (markForCheck, async pipe, new @Input instance).
+Demo: /signals/untracked with the Angular DevTools profiler.</aside>
 </section>

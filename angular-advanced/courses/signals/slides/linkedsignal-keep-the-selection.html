@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>linkedSignal - keep the selection</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:472px;height:auto;z-index:11;text-align:left">
+    <p>The long form gets the previous value</p>
+
+<p>Keep the selection if it is still in the new list, otherwise take the first</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:230px;width:680px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">selected = linkedSignal&lt;Playground[], Playground&gt;({
+  source: this.playgrounds,
+  computation: (playgrounds, previous) =&gt;
+    playgrounds.find(p =&gt; p.id === previous?.value.id)
+      ?? playgrounds[0],
+});
+</code></pre>
+  </div>
+  <aside class="notes">Demo: /signals/linked. Select random, then Shuffle (same playgrounds, new order): left (short form) jumps to first, right (long form) keeps the selection. New playgrounds resets both.
+This is what the old effect-cleanup example tried: use the previous value.</aside>
+</section>

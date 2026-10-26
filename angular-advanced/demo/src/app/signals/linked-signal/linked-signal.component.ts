@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, effect, linkedSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, linkedSignal, signal } from '@angular/core';
 import { getRandomPlayground, Playground } from 'src/app/shared';
 import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playground-ul.component";
 import { SharedPlaygroundLiComponent } from 'src/app/shared/component/shared-playground-li.component';
+
+const newPlaygrounds = () => Array.from({ length: 5 }, () => getRandomPlayground());
 
 @Component({
   selector: 'loop-linked-signal',
@@ -9,39 +11,50 @@ import { SharedPlaygroundLiComponent } from 'src/app/shared/component/shared-pla
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
-      <button class="btn btn-primary mb-3" (click)="selectPlayground()">Add Random Playground</button>
-      <div>
-        <h6>Selected Playground</h6>
-        <loop-shared-playground-li [playground]="selectedPlayground()"/>
+      <div class="btn-group mb-3">
+        <button class="btn btn-primary" (click)="selectRandom()">Select random</button>
+        <button class="btn btn-outline-primary" (click)="shuffle()">Shuffle</button>
+        <button class="btn btn-outline-primary" (click)="replace()">New playgrounds</button>
       </div>
-      <!-- <div>
-        <h6>Old way Selected Playground</h6>
-        <loop-shared-playground-li [playground]="state().selectedPlayground()"/>
-      </div> -->
-
+      <div class="row">
+        <div class="col">
+          <h6>Short form: resets to the first</h6>
+          <loop-shared-playground-li [playground]="selected()"/>
+        </div>
+        <div class="col">
+          <h6>Long form: keeps the selection if it's still there</h6>
+          <loop-shared-playground-li [playground]="kept()"/>
+        </div>
+      </div>
       <loop-shared-playground-ul class="mt-3" [playgrounds]="playgrounds()"/>
     </div>
   `
 })
 export class LinkedSignalComponent {
-  playgrounds = signal<Playground[]>(Array.from({ length: 100 }, () => getRandomPlayground()));
+  playgrounds = signal<Playground[]>(newPlaygrounds());
 
-  selectedPlayground = linkedSignal(() => this.playgrounds()[0]);
+  // Writable, and recomputed (back to the first) whenever playgrounds changes.
+  selected = linkedSignal(() => this.playgrounds()[0]);
 
-  selectPlayground() {
-    this.selectedPlayground.set(this.playgrounds()[Math.floor(Math.random() * this.playgrounds().length)]);
+  // The long form gets the previous value, so it can keep it when it's still in the list.
+  kept = linkedSignal<Playground[], Playground>({
+    source: this.playgrounds,
+    computation: (playgrounds, previous) => playgrounds.find(p => p.id === previous?.value.id) ?? playgrounds[0],
+  });
+
+  selectRandom() {
+    const playgrounds = this.playgrounds();
+    const playground = playgrounds[Math.floor(Math.random() * playgrounds.length)];
+    this.selected.set(playground);
+    this.kept.set(playground);
   }
 
-  // // Old way of doing it
-  // state = computed(() => {
-  //   return {
-  //     playgrounds: this.playgrounds(),
-  //     selectedPlayground: signal(this.playgrounds()[0]),
-  //   };
-  // })
+  // Same playgrounds, new order: a new array, so both linked signals recompute.
+  shuffle() {
+    this.playgrounds.update(playgrounds => [...playgrounds].sort(() => Math.random() - 0.5));
+  }
 
-  // selectPlayground() {
-  //   this.state().selectedPlayground.set(this.playgrounds()[Math.floor(Math.random() * this.playgrounds().length)]);
-  // }
-
+  replace() {
+    this.playgrounds.set(newPlaygrounds());
+  }
 }

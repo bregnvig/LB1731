@@ -9,10 +9,10 @@
 <loop-pagination [items]="playgrounds" [template]="playground" [(page)]="page" />
 }
 <div class="mt-3 btn-group">
-  <button type="button" class="btn btn--outline-primary" [class.active]="copenhagen === active" (click)="useCopenhagen()">
+  <button type="button" class="btn btn--outline-primary" [class.active]="city() === 'copenhagen'" (click)="useCopenhagen()">
     Use Copenhagen
   </button>
-  <button type="button" class="btn btn--outline-primary" [class.active]="aarhus === active" (click)="useAarhus()">
+  <button type="button" class="btn btn--outline-primary" [class.active]="city() === 'aarhus'" (click)="useAarhus()">
     Use Aarhus
   </button>
 </div>

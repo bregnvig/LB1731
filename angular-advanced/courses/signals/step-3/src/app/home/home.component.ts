@@ -90,7 +90,13 @@ export class HomeComponent {
       takeUntilDestroyed(),
     ).subscribe(markers => this.markers.set(markers));
 
-    effect(() => localStorage.setItem('playground', JSON.stringify(this.playgrounds())));
+    effect(() => {
+      const playgrounds = this.playgrounds();
+      // Nothing to cache until the slow backend answers: JSON.stringify(undefined) isn't JSON
+      if (playgrounds) {
+        localStorage.setItem('playground', JSON.stringify(playgrounds));
+      }
+    });
   }
 
   selected(playground: Playground) {

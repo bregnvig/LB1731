@@ -172,28 +172,31 @@ Creating custom pipes and directives - one module, two subjects.
 Angular's optimized change detection mechanism using reactive primitives.
 
 **Topics covered:**
-- **Change detection recap:** what it is (when to update what with which value), zone.js and its limitations (monkey patching, extra JS overhead)
-- **Two strategies compared:** Default (checks entire tree) vs. OnPush (checks only on input changes) vs. Signal-based (checks only the affected view)
-- What is a "view" in Angular
+- **From zone.js to zoneless:** zone.js and its limits, zoneless by default for new apps (v21), OnPush the default (v22, the old default is now `Eager`), signal-based change detection updates only the affected view
 - **Working with signals:**
   - WritableSignal: signal(), .set(), .update()
   - Computed signals: computed() - lazily evaluated and memoized
   - Signal equality functions for custom change detection
-  - Effects: effect() - run side effects when signals change (stable since v20), effect cleanup with onCleanup
+  - Effects: effect() - run side effects when signals change (stable since v20), lifetime and injection context
   - Reading without tracking: untracked()
+  - Don't copy state with an effect: computed vs. an effect-kept copy (demo `/signals/computed-vs-effect`)
+  - linkedSignal: writable derived state, short form and the long form that keeps the previous selection (stable since v20)
+  - Which tool: computed, linkedSignal, resource, RxJS + toSignal, effect
+  - Effect cleanup with onCleanup: cancelling timers and requests
 - **Signal inputs:** input(), input.required() (stable since v19), transformers (booleanAttribute, numberAttribute, custom)
 - **Function-based outputs:** output(), output with alias, outputFromObservable()
 - **Model inputs:** model() for two-way data binding (stable since v19)
 - **RxJS interop:** toSignal() (Observable to Signal, v20), toObservable() (Signal to Observable)
 - What has been "signalified": @ViewChild/@ViewChildren, @ContentChild/@ContentChildren
 - What hasn't changed: @HostListener, @HostBinding/host
-- **Resource API:** rxResource(), httpResource(), resource() - unified pattern for fetch/cache/react; ResourceRef with value(), isLoading(), reload(), error(), status()
+- **Resource API (stable since v22):** rxResource(), httpResource(), resource() - unified pattern for fetch/cache/react; ResourceRef with value(), isLoading(), reload(), error(), status()
+- **New in 21 and 22:** zoneless, OnPush default, stable resources, linkedSignal `set`, `debounced()` (experimental), Signal Forms
 - Signals vs. Observables: when to use which
 
 **Exercises:**
-1. **Getting started with signals & effects** (p375-377) - Convert instance variables to signals; use effect to cache playgrounds in localStorage; initialize from localStorage; consider adding OnPush
+1. **Getting started with signals & effects** (p375-377) - Convert instance variables to signals; use effect to cache playgrounds in localStorage (only once they are loaded); initialize from localStorage; bonus: remove `Eager`
 2. **Using input & output** (p384-386) - Convert @Input/@Output to signal-based input()/output() in sidebar; create SidebarListItemComponent with signal inputs; replace pipes with computed()
-3. **Use two-way data binding** (p388) - Convert selectedPlayground to model() input; use two-way binding in home component; remove separate output
+3. **Use two-way data binding** (p388) - Convert selectedPlayground to model() input; use two-way binding in home component; remove separate output; navigate on selection (event binding or effect: a discussion point)
 
 ---
 
