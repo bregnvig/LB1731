@@ -79,7 +79,16 @@ export function createServer({ root, dist, routes = {} }) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { values } = parseArgs({ options: { root: { type: 'string', default: join(here, '../..') }, port: { type: 'string', default: '4300' } } });
   const root = resolve(values.root);
-  createServer({ root, dist: join(here, '../dist/slides/browser') }).listen(Number(values.port), () => {
+  const port = Number(values.port);
+  const routes = {
+    // The editor's Export PDF button.
+    'POST /api/pdf': async (req, res) => {
+      const { exportPdf } = await import('../scripts/pdf.mjs');
+      const path = await exportPdf({ root, url: `http://localhost:${port}` });
+      res.writeHead(200, { 'Content-Type': TYPES['.json'] }).end(JSON.stringify({ path }));
+    },
+  };
+  createServer({ root, dist: join(here, '../dist/slides/browser'), routes }).listen(port, () => {
     console.log(`Slides: http://localhost:${values.port}/present  (editor: /edit, presenter: /presenter)`);
   });
 }

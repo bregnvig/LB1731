@@ -56,6 +56,8 @@ export class PresentComponent implements OnDestroy {
       ...REVEAL_CONFIG,
       ...(params.has('test') ? { transition: 'none', backgroundTransition: 'none', showHiddenSlides: true, controls: false, progress: false, hash: false } : {}),
       ...(embedded ? { controls: false, progress: false, hash: false } : {}),
+      // One page per slide, every fragment shown.
+      ...(params.has('print-pdf') ? { pdfSeparateFragments: false } : {}),
       plugins: [RevealNotes, this.animations],
     });
     // Code blocks scroll to their highlighted lines once their slide is on screen.
@@ -63,10 +65,19 @@ export class PresentComponent implements OnDestroy {
       ?.querySelectorAll<HTMLElement>('.block[data-type="code"] pre > code[data-line-numbers]').forEach(scrollToHighlights);
     this.reveal.on('ready', scrollCode);
     this.reveal.on('slidechanged', scrollCode);
+    const printed = new Promise(ok => this.reveal!.on('pdf-ready', ok));
     await this.reveal.initialize();
     (window as any).Reveal = this.reveal;
-    // The next-slide view in the presenter follows one step ahead; printing needs no sync.
-    if (!params.has('print-pdf')) this.disconnect = connectSync(this.reveal, this.animations, params.get('embed') === 'next' ? { follower: 'next' } : {});
+    if (params.has('print-pdf')) {
+      // Once the print layout is done and the entry pass has run, everything goes to its end state.
+      await printed;
+      el.querySelectorAll<HTMLElement>('.block[data-type="code"] pre > code[data-line-numbers]').forEach(scrollToHighlights);
+      this.animations.finishAll();
+      (window as any).printReady = true;
+      return;
+    }
+    // The next-slide view in the presenter follows one step ahead.
+    this.disconnect = connectSync(this.reveal, this.animations, params.get('embed') === 'next' ? { follower: 'next' } : {});
   }
 
   ngOnDestroy() {
