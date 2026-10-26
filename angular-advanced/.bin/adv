@@ -9,7 +9,7 @@ CALLER_DIR="$PWD"  # for paths given on the command line
 cd "$ROOT"
 
 # Source modules
-for module in utils verify zips; do
+for module in utils verify zips upgrade; do
   if [[ ! -f "$ROOT/scripts/$module.sh" ]]; then
     echo "Error: Missing script module: scripts/$module.sh"
     exit 1
@@ -24,6 +24,7 @@ show_help() {
   echo "  install, i       Install npm packages (one package.json for everything)"
   echo "  verify, v        Verify directories build and serve"
   echo "  test-zips, tz    Check student zips match tests/student-zips.manifest (--bless to update)"
+  echo "  upgrade, u       Upgrade every project to Angular [major] (default: latest) [extra packages]"
   echo "  slides, s        Slides: present, presenter view and editor on http://localhost:4300 (pdf [out]: export PDF)"
   echo "  help, h          Show this help"
   echo ""
@@ -37,6 +38,8 @@ show_help() {
   echo "  adv verify all       # Verify all directories build and serve"
   echo "  adv verify di        # Verify courses/di/step-*"
   echo "  adv test-zips        # Students still get the same zips?"
+  echo "  adv upgrade          # Next Angular major: bump package.json, run migrations everywhere"
+  echo "  adv upgrade 23 @ng-bootstrap/ng-bootstrap@24  # also upgrade a library that blocks it"
   echo "  adv slides           # Present or edit the slides"
   echo "  adv slides pdf       # Export the slides to slides/out/angular-advanced.pdf"
 }
@@ -91,6 +94,11 @@ case "$command" in
       exit 1
     fi
     verify_directories "${directories[@]}"
+    ;;
+
+  "upgrade"|"u")
+    shift
+    upgrade_angular "$@"
     ;;
 
   "test-zips"|"tz")
