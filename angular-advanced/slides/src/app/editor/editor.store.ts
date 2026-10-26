@@ -41,6 +41,11 @@ export class EditorStore {
     this.selection.set([...now]);
   }
 
+  addBlock(block: Block) {
+    this.updateSlide(s => ({ ...s, blocks: [...s.blocks, block] }));
+    this.selection.set([block.name]);
+  }
+
   /** Changes the named blocks (all blocks with `names` = null). */
   updateBlocks(names: string[] | null, fn: (b: Block) => Block, coalesce?: string) {
     const set = names && new Set(names);

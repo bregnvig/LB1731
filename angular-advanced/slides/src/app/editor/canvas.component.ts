@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, DestroyRef, ElementRef, afterRenderEffect, computed, inject, input, signal, viewChild } from '@angular/core';
 import { LineBlock, Slide } from '../deck/model';
 import { highlightCode } from '../player/highlight';
@@ -37,21 +36,30 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
  */
 @Component({
   selector: 'app-canvas',
-  imports: [DecimalPipe],
   template: `<div class="frame" [style.width.px]="1280 * scale()" [style.height.px]="720 * scale()">
     <div class="editor-slide" #paint [style.transform]="'scale(' + scale() + ')'"></div>
-    <div class="overlay" #overlay data-testid="canvas" [style.transform]="'scale(' + scale() + ')'" [style.--inv]="1 / scale()"
-      (pointerdown)="down($event)" (pointermove)="move($event)" (pointerup)="up($event)" (pointercancel)="cancel()">
+    <div class="overlay" #overlay data-testid="canvas" [class.editing]="editing()" [style.transform]="'scale(' + scale() + ')'" [style.--inv]="1 / scale()"
+      (pointerdown)="down($event)" (pointermove)="move($event)" (pointerup)="up($event)" (pointercancel)="cancel()" (dblclick)="edit($event)">
+      @if (editing() && rects().get(editing()!); as r) {
+        <div class="fmt" role="toolbar" aria-label="Text formatting" [style.left.px]="r.x" [style.top.px]="r.y" (mousedown)="keepSelection($event)">
+          @for (f of blocksFormats; track f.tag) { <button type="button" (click)="format('formatBlock', f.tag)">{{ f.label }}</button> }
+          <button type="button" aria-label="Bold" (click)="format('bold')"><b>B</b></button>
+          <button type="button" aria-label="Italic" (click)="format('italic')"><i>I</i></button>
+          <label class="pick" title="Text color">A<input type="color" aria-label="Selection color" value="#e7ad52" (input)="format('foreColor', $any($event.target).value)"></label>
+          <button type="button" (click)="link()">Link</button>
+        </div>
+      }
       @for (b of selected(); track b.name) {
         <div class="box" [class.locked]="b.locked" [style.left.px]="b.rect.x + offset().x" [style.top.px]="b.rect.y + offset().y"
           [style.width.px]="b.rect.width" [style.height.px]="b.rect.height">
-          @if (single() && b.line) {
+          @if (editing()) {
+          } @else if (single() && b.line) {
             <i class="end" data-end="1" [style.left.px]="b.line.x1" [style.top.px]="b.line.y1"></i>
             <i class="end" data-end="2" [style.left.px]="b.line.x2" [style.top.px]="b.line.y2"></i>
           } @else if (single() && !b.locked) {
             @for (h of b.handles; track h) { <i [class]="'h ' + h" [attr.data-handle]="h"></i> }
           }
-          @if (single()) { <span class="size" data-testid="size">{{ b.rect.width | number: '1.0-0' }} × {{ b.rect.height | number: '1.0-0' }}</span> }
+          @if (single() && !editing()) { <span class="size" data-testid="size">{{ round(b.rect.width) }} × {{ round(b.rect.height) }}</span> }
         </div>
       }
       @for (g of guides(); track $index) {
@@ -78,6 +86,13 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
       font: 500 calc(11px * var(--inv)) / 1.6 'IBM Plex Mono', monospace; padding: 0 calc(6px * var(--inv)); border-radius: calc(3px * var(--inv)); }
     .guide { position: absolute; left: 0; right: 0; border-top: calc(1px * var(--inv)) dashed var(--guide); pointer-events: none; }
     .guide.x { top: 0; bottom: 0; right: auto; border-top: 0; border-left: calc(1px * var(--inv)) dashed var(--guide); }
+    .overlay.editing { pointer-events: none; }
+    .fmt { position: absolute; pointer-events: auto; display: flex; gap: 2px; background: var(--ink); border-radius: calc(6px * var(--inv)); padding: calc(3px * var(--inv));
+      transform: translateY(calc(-100% - 8px * var(--inv))); font: calc(12px * var(--inv)) 'IBM Plex Sans', sans-serif; }
+    .fmt button, .fmt .pick { border: 0; background: none; color: #fff; padding: calc(3px * var(--inv)) calc(8px * var(--inv)); border-radius: calc(4px * var(--inv)); cursor: pointer; font: inherit; }
+    .fmt button:hover, .fmt .pick:hover { background: #3a3833; }
+    .fmt .pick { position: relative; color: #e7ad52; font-weight: 600; }
+    .fmt .pick input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
     .marquee { position: absolute; background: rgba(15, 118, 110, .12); border: calc(1px * var(--inv)) solid var(--accent); pointer-events: none; }
   `,
 })
@@ -89,12 +104,17 @@ export class CanvasComponent {
   private readonly overlay = viewChild.required<ElementRef<HTMLElement>>('overlay');
 
   /** Where each top-level block is drawn, measured after painting (text heights are only known then). */
-  private readonly rects = signal(new Map<string, Rect>());
+  readonly rects = signal(new Map<string, Rect>());
   readonly offset = signal({ x: 0, y: 0 });
   readonly guides = signal<Guide[]>([]);
   readonly marquee = signal<Rect | null>(null);
   private gesture: Gesture | null = null;
+  /** The text block being typed into, if any. */
+  readonly editing = signal<string | null>(null);
+  readonly blocksFormats = [{ tag: 'p', label: 'P' }, { tag: 'h1', label: 'H1' }, { tag: 'h2', label: 'H2' }, { tag: 'h3', label: 'H3' }];
+  private range: Range | null = null;
 
+  readonly round = Math.round;
   readonly single = computed(() => this.store.selection().length === 1);
   readonly selected = computed(() => {
     const names = new Set(this.store.selection()), rects = this.rects();
@@ -106,8 +126,15 @@ export class CanvasComponent {
   });
 
   constructor() {
+    let painted: { path: string; blocks: Slide['blocks'] } | null = null;
     afterRenderEffect(() => {
-      paintSlide(this.paint().nativeElement, this.slide(), { highlight: true });
+      const slide = this.slide();
+      // Saving changes the etag and typing notes changes the notes; neither changes the drawing,
+      // and repainting would throw away text being edited.
+      if (painted?.path === slide.path && painted.blocks === slide.blocks) return;
+      painted = { path: slide.path, blocks: slide.blocks };
+      this.editing.set(null);
+      paintSlide(this.paint().nativeElement, slide, { highlight: true });
       this.rects.set(new Map(this.blockElements().map(el => [el.dataset['name']!, { x: el.offsetLeft, y: el.offsetTop, width: el.offsetWidth, height: el.offsetHeight }])));
     });
     // Fit the slide into the space the editor gives the canvas.
@@ -139,8 +166,10 @@ export class CanvasComponent {
   }
 
   down(e: PointerEvent) {
-    if (e.button !== 0) return;
-    const target = e.target as HTMLElement, p = this.point(e);
+    const target = e.target as HTMLElement;
+    // The format bar's buttons handle their own clicks; capturing the pointer would steal them.
+    if (e.button !== 0 || target.closest('.fmt')) return;
+    const p = this.point(e);
     this.overlay().nativeElement.setPointerCapture(e.pointerId);
     const name = this.store.selection()[0];
     if (target.dataset['handle']) {
@@ -224,6 +253,57 @@ export class CanvasComponent {
     this.guides.set([]);
     this.marquee.set(null);
     for (const el of this.blockElements()) el.style.removeProperty('translate');
+  }
+
+  /** Double-click a text block to type into it; the text is written when it loses focus. */
+  edit(e: MouseEvent) {
+    const name = this.hit(e as PointerEvent);
+    const block = this.slide().blocks.find(b => b.name === name);
+    const el = name ? this.element(name) : undefined;
+    if (block?.type !== 'text' || block.locked || !el) return;
+    this.store.select([block.name]);
+    this.editing.set(block.name);
+    el.contentEditable = 'true';
+    el.focus();
+    document.getSelection()?.selectAllChildren(el);
+    const done = (ev: FocusEvent) => {
+      if ((ev.relatedTarget as HTMLElement | null)?.closest('.fmt')) return;
+      el.removeEventListener('focusout', done);
+      el.removeEventListener('keydown', escape);
+      el.contentEditable = 'false';
+      this.editing.set(null);
+      const html = el.innerHTML.trim();
+      if (html !== block.html.trim()) this.store.updateBlocks([block.name], b => ({ ...b, html }) as typeof b);
+    };
+    const escape = (ev: KeyboardEvent) => { if (ev.key === 'Escape') el.blur(); };
+    el.addEventListener('focusout', done);
+    el.addEventListener('keydown', escape);
+  }
+
+  /** Clicking the format bar must not lose the text selection. */
+  keepSelection(e: MouseEvent) {
+    const sel = document.getSelection();
+    if (sel?.rangeCount) this.range = sel.getRangeAt(0).cloneRange();
+    if (!(e.target as HTMLElement).matches('input')) e.preventDefault();
+  }
+
+  // ponytail: document.execCommand for inline formatting; replace if Chromium drops it.
+  format(command: string, value?: string) {
+    const el = this.editing() && this.element(this.editing()!);
+    if (!el) return;
+    el.focus();
+    const sel = document.getSelection();
+    if (this.range && sel) {
+      sel.removeAllRanges();
+      sel.addRange(this.range);
+    }
+    document.execCommand('styleWithCSS', false, 'true');
+    document.execCommand(command, false, value);
+  }
+
+  link() {
+    const url = prompt('Link address');
+    if (url) this.format('createLink', url);
   }
 
   private union(rs: Rect[]): Rect {
