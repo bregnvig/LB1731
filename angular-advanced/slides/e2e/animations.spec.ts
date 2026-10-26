@@ -11,6 +11,17 @@ test('a click-triggered block waits for its target and then appears', async ({ p
   await expect(answer).toHaveCSS('opacity', '1');
 });
 
+test('clicking the target again plays the block back out', async ({ page }) => {
+  await page.goto('/present#/1/2');
+  await page.waitForFunction(() => (window as any).Reveal?.isReady?.());
+  const answer = page.locator('section.present [data-name="answer"]');
+  const question = page.locator('section.present [data-name="question"]');
+  await question.click();
+  await expect(answer).toHaveCSS('opacity', '1', { timeout: 1000 });
+  await question.click();
+  await expect(answer).toHaveCSS('opacity', '0', { timeout: 1000 });
+});
+
 test('a group whose box covers the click target does not swallow the click', async ({ page }) => {
   await page.goto('/present#/1/2');
   await page.waitForFunction(() => (window as any).Reveal?.isReady?.());

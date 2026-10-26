@@ -2,17 +2,17 @@ import type { RevealApi } from 'reveal.js';
 
 // Enter/exit animations on blocks. A block with data-animate starts in its start state
 // (.animate-start) and moves to its end state (.animate-in) with a CSS transition, either when
-// the slide appears or when the block named in data-animate-on is clicked. The effect's
-// start and end states live in deck.css.
+// the slide appears or when the block named in data-animate-on is clicked. Clicking that block
+// again plays it back to the start state. The effect's start and end states live in deck.css.
 
 export interface BlockAnimationsPlugin {
   id: 'block-animations';
   init(reveal: RevealApi): void;
-  /** Plays the animations started by clicking the block called `name` on the current slide. */
+  /** Plays (or plays back) the animations toggled by clicking the block called `name` on the current slide. */
   trigger(name: string): void;
-  /** Names triggered on the current slide, in order. */
+  /** Names toggled on for the current slide, in the order they were clicked. */
   clicked(): string[];
-  /** Applies clicks straight to their end state (used to catch up with another window). */
+  /** Sets every click on the current slide straight to on (named here) or off (used to catch up with another window). */
   restore(names: string[]): void;
   /** Every animated block in the document in its end state (print, editor preview). */
   finishAll(): void;
@@ -21,11 +21,12 @@ export interface BlockAnimationsPlugin {
 
 const animated = (root: ParentNode) => [...root.querySelectorAll<HTMLElement>('[data-animate]')];
 
-function endState(el: HTMLElement, instant: boolean) {
-  if (instant) el.style.transition = 'none';
-  else el.style.transitionProperty = '';
-  el.classList.replace('animate-start', 'animate-in') || el.classList.add('animate-in');
+function setState(el: HTMLElement, end: boolean, instant: boolean) {
+  el.style.transitionProperty = instant ? 'none' : '';
+  const [from, to] = end ? ['animate-start', 'animate-in'] : ['animate-in', 'animate-start'];
+  el.classList.replace(from, to) || el.classList.add(to);
 }
+const endState = (el: HTMLElement, instant: boolean) => setState(el, true, instant);
 
 export function createBlockAnimations(): BlockAnimationsPlugin {
   let reveal: RevealApi | undefined;
@@ -57,11 +58,12 @@ export function createBlockAnimations(): BlockAnimationsPlugin {
     requestAnimationFrame(() => requestAnimationFrame(() => entry.forEach(el => endState(el, false))));
   }
 
-  function play(name: string, instant: boolean) {
+  function play(name: string, on: boolean, instant: boolean) {
     const slide = reveal?.getCurrentSlide() as HTMLElement | undefined;
     if (!slide) return;
-    for (const el of slide.querySelectorAll<HTMLElement>(`[data-animate-on="${CSS.escape(name)}"]`)) endState(el, instant);
-    if (!clicks.includes(name)) clicks.push(name);
+    for (const el of slide.querySelectorAll<HTMLElement>(`[data-animate-on="${CSS.escape(name)}"]`)) setState(el, on, instant);
+    clicks = clicks.filter(n => n !== name);
+    if (on) clicks.push(name);
   }
 
   return {
@@ -78,12 +80,15 @@ export function createBlockAnimations(): BlockAnimationsPlugin {
       });
     },
     trigger(name) {
-      play(name, false);
+      play(name, !clicks.includes(name), false);
       listeners.forEach(fn => fn(name));
     },
     clicked: () => [...clicks],
     restore(names) {
-      names.forEach(name => play(name, true));
+      const slide = reveal?.getCurrentSlide() as HTMLElement | undefined;
+      const all = new Set([...slide?.querySelectorAll<HTMLElement>('[data-animate-on]') ?? []].map(el => el.dataset['animateOn']!));
+      all.forEach(name => play(name, false, true));
+      names.forEach(name => play(name, true, true));
     },
     finishAll() {
       animated(document).forEach(el => endState(el, true));

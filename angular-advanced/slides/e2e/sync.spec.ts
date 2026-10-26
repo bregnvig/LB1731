@@ -20,7 +20,7 @@ test('the presenter drives the presentation and shows notes', async ({ context }
   await expect(presenter.getByTestId('notes')).toHaveText('Ask before clicking.');
 });
 
-test('a click in the presentation plays in the presenter, and a reload catches up', async ({ context }) => {
+test('a click in the presentation plays in the presenter, a reload catches up, and a second click plays it back', async ({ context }) => {
   const show = await context.newPage();
   await show.goto('/present#/1/2');
   await ready(show);
@@ -37,6 +37,10 @@ test('a click in the presentation plays in the presenter, and a reload catches u
   await ready(show);
   await expect.poll(() => indices(show), { timeout: 1000 }).toMatchObject({ h: 1, v: 2 });
   await expect(show.locator('section.present [data-name="answer"]')).toHaveCSS('opacity', '1', { timeout: 1000 });
+
+  // A second click plays it back out, in the presenter too.
+  await show.locator('section.present [data-name="question"]').click();
+  await expect(answer).toHaveCSS('opacity', '0', { timeout: 2000 });
 });
 
 test('the next view shows where the presentation goes when moving back into a course', async ({ context }) => {
