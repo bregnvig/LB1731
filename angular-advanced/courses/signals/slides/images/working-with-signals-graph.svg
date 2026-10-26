@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 266" width="266" height="266">
+  <defs>
+    <marker id="tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#dddddd"/>
+    </marker>
+  </defs>
+  <g stroke="#dddddd" stroke-width="5" stroke-linecap="round" fill="none" marker-end="url(#tip)">
+    <path d="M114 72 L83 112"/>
+    <path d="M152 72 L183 112"/>
+    <path d="M86 162 L116 198"/>
+    <path d="M180 162 L150 198"/>
+  </g>
+  <circle cx="133" cy="48" r="30" fill="#e7ad52"/>
+  <circle cx="70" cy="138" r="25" fill="none" stroke="#ffffff" stroke-width="6"/>
+  <circle cx="196" cy="138" r="25" fill="none" stroke="#ffffff" stroke-width="6"/>
+  <rect x="108" y="203" width="50" height="50" rx="10" fill="none" stroke="#e7ad52" stroke-width="6"/>
+  <path d="M124 228 l7 7 l13 -15" fill="none" stroke="#e7ad52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

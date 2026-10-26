@@ -18,7 +18,7 @@ Build and test tools (Angular CLI, Vitest, Playwright and their dependencies) ar
 
 ## In the slides
 
-Most images are our own screenshots and drawings. These come from others:
+Most images are our own screenshots and drawings (`working-with-signals-graph.svg`, `guards-shield.svg` and `you-are-already-testing-browser.svg` were drawn for this deck). These come from others; the slides that show them carry a credit line, and the last slide (`courses/state-management/slides/credits.html`) lists them with the trademark notice:
 
 | What | Where | Terms |
 |------|-------|-------|
@@ -26,4 +26,4 @@ Most images are our own screenshots and drawings. These come from others:
 | Emoji from Twemoji, Twitter | `courses/signals/slides/images/signals-2.svg` | CC BY 4.0: credit "Twemoji by Twitter" |
 | Logos of Angular, RxJS, NgRx, NGXS, Jasmine, Karma, Vitest | various `images/` | Trademarks of their owners, shown to name the tools |
 
-Photos of people, the cartoon in `guards-1.png` and the GIF in `you-are-already-testing-1.gif` have no recorded source.
+The speaker photos on the quicklink, a-unit, bad-tests and test-management-3 slides have no recorded source or permission.
