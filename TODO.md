@@ -2,7 +2,7 @@
 
 ## Angular Advanced
 
-- [ ] Replace `"baseUrl": "./"` + `"ignoreDeprecations": "6.0"` with `"paths": { "src/*": ["./src/*"] }` in every `tsconfig.json`. TypeScript 6 deprecates `baseUrl` and TypeScript 7 removes it, together with the `ignoreDeprecations` opt-out. The code imports `src/app/...` paths, so `paths` has to replace `baseUrl`, not just delete it.
+- [x] Replace `"baseUrl": "./"` + `"ignoreDeprecations": "6.0"` with `"paths": { "src/*": ["./src/*"] }` in every `tsconfig.json` (TypeScript 7 removes both). rxjs also dropped `downlevelIteration`, which the opt-out had hidden and ES2022 doesn't need.
 - [x] DI: `environment.prod.ts` is missing `location` and `playgroundsURL`, so `ng build` fails in `labs/di/exercise-2..3` and `solutions/di/exercise-1..3`. (#11)
 - [x] Unit test: `app-routes.ts` imports `./login/login.component`, which only exists in `solutions/unit-test/exercise-4`. Content left as is; `verify` runs `ng test` for this course, lab 1 is an expected failure. (#12)
 - [x] Zip manifest test: `workspace.sh test-zips` checks that `labs.zip`, `solutions.zip` and `demo.zip` keep the structure students get. (#13)
