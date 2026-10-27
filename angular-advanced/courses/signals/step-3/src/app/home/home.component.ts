@@ -20,7 +20,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <leaflet [center]="center()" [markers]="markers()"/>
     </main>
     <loop-sidebar
-      [playgrounds]="playgrounds() ?? []"
+      [playgrounds]="playgrounds()"
       [selectedPlayground]="playground()"
       [location]="location()"
       (selected)="selected($event)"/>

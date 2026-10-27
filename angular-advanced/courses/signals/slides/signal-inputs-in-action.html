@@ -19,7 +19,7 @@ export class UserProfileComponent {
     const location = this.location();
     if (location) {
       const playground = this.playground();
-      const distance = this.ls.getDistance(location, playground);
+      const distance = this.ls.getDistance(location, playground.position);
       return { ...playground, distance };
     }
     return undefined;

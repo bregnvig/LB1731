@@ -20,7 +20,7 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       <leaflet [center]="center()" [markers]="markers()"/>
     </main>
     <loop-sidebar
-      [playgrounds]="playgrounds() ?? []"
+      [playgrounds]="playgrounds()"
       [(selectedPlayground)]="playground"
       (selectedPlaygroundChange)="navigate($event)"
       [location]="location()"/>

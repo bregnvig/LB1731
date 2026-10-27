@@ -10,7 +10,7 @@ import { SidebarListItemComponent } from './sidebar-list-item/sidebar-list-item.
 })
 export class SidebarComponent {
 
-  playgrounds = input.required<Playground[]>();
+  playgrounds = input.required<Playground[] | undefined>();
   selectedPlayground = input<Playground | undefined>();
   location = input<Coordinate | undefined>(undefined);
 

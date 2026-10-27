@@ -27,13 +27,13 @@ constructor() {
 }
 
 rename() {
-  this.firstName.set('Grace');
-  this.fullName();      // 'Grace Lovelace'
+  this.firstName.set('Grace'); this.lastName.set('Hopper');
+  this.fullName();      // 'Grace Hopper'
   this.fullNameCopy();  // still 'Ada Lovelace'
 }
 </code></pre>
   </div>
   <aside class="notes">Demo: /signals/computed-vs-effect. Console open, click Rename: logs "computed: Grace Hopper | copy: Ada Lovelace", then "Effect ran". Screen shows Grace Hopper for both.
-Infinite-loop real fix: no effect. addRandomPlayground() does this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]).
+Infinite-loop real fix: no effect. addRandomPlayground() would do this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]) itself (the comment in infinite-loop.component.ts says so; the demo keeps the effect to show the loop).
 Ask about their exercise 1: center and markers could be computed. subscribe(x =&gt; this.x.set(x)) is the same copy pattern; toSignal fixes it (later today).</aside>
 </section>

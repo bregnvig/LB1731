@@ -30,6 +30,7 @@ export class UserLocationComponent {
 <p><span style="font-size:0.7em">You want post the users location everytime it changes, but not when the user changes (eg. a profile change). </span></p>
   </div>
   <aside class="notes">Like withLatestFrom in RxJS: location triggers, user is just read.
-Back to /signals/infinite-loop: untracked playgrounds stops the loop, but only hides the problem.
+Demo: /signals/untracked. Change the user: no new post. Change the location: a new post.
+Then back to /signals/infinite-loop: untracked playgrounds stops the loop, but only hides the problem.
 Real fix after exercise 1: don't update state from an effect.</aside>
 </section>

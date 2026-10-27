@@ -26,11 +26,12 @@ const user = resource(...);
 // template
 @if (user.isLoading()) {
   &lt;spinner/&gt;
-} @else {
+} @else if (user.hasValue()) {
   {{ user.value() }}
 }
 </code></pre>
   </div>
-  <aside class="notes">idle: params returned undefined, nothing loaded yet (e.g. no user selected).
+  <aside class="notes">value() throws while the resource is in error, so guard it with hasValue() (or check error() first).
+idle: params returned undefined, nothing loaded yet (e.g. no user selected).
 local: you called set() or update() on the value yourself.</aside>
 </section>

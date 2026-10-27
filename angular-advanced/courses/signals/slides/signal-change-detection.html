@@ -292,5 +292,5 @@
     </div>
   </div>
   <aside class="notes">Signals + OnPush: only the component whose template reads the changed signal refreshes. Zoneless (v21 default) works this way.
-The click must change a signal, and that signal must be read in the template. A method call without state change no longer triggers change detection.</aside>
+A click in a template still checks that component, signal or not. What signals add: the components that read the changed signal refresh too, even though nobody clicked in them. Async work outside a template event (HTTP, timers) needs a signal write, the async pipe or markForCheck.</aside>
 </section>

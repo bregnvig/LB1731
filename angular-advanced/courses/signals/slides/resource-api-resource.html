@@ -35,5 +35,5 @@ const notes = resource({
 });
 </code></pre>
   </div>
-  <aside class="notes">Pass abortSignal to fetch: a stale request is cancelled when params change.</aside>
+  <aside class="notes">With fetch, pass the loader's abortSignal so a stale request is cancelled when params change. This IndexedDB example has nothing to cancel.</aside>
 </section>

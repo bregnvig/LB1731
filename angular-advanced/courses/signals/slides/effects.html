@@ -34,5 +34,5 @@ export class PlaygroundComponent {
   <aside class="notes">For side effects that leave Angular: localStorage, logging, third-party libs, the DOM.
 Runs during change detection; several changes close together give one run.
 Needs an injection context to know when to stop. Outside constructor/field init, pass { injector }.
-Demo: /signals/infinite-loop. The effect writes playgrounds, which it also reads (stops at 200). Fix 1: untracked (next slide). Real fix after exercise 1.</aside>
+Demo: /signals/infinite-loop. The effect writes playgrounds, which it also reads (stops just after 200). Fix 1: untracked (next slide). Real fix after exercise 1.</aside>
 </section>
