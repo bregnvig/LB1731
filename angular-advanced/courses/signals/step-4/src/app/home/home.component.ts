@@ -1,4 +1,4 @@
-import { Component, effect, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -20,14 +20,14 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       <leaflet [center]="center()" [markers]="markers()"/>
     </main>
     <loop-sidebar
-      [playgrounds]="playgrounds()"
+      [playgrounds]="playgrounds() ?? []"
       [(selectedPlayground)]="playground"
+      (selectedPlaygroundChange)="navigate($event)"
       [location]="location()"/>
     @if (playground()) {
       <loop-footer [playground]="playground()"/>
     }
   `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         LeafletModule,
         SidebarComponent,
@@ -45,7 +45,7 @@ export class HomeComponent {
   location = signal<Coordinate | undefined>(undefined);
 
   constructor(
-    router: Router,
+    private router: Router,
     route: ActivatedRoute,
     service: PlaygroundService,
     locationService: LocationService,
@@ -96,9 +96,10 @@ export class HomeComponent {
         localStorage.setItem('playground', JSON.stringify(playgrounds));
       }
     });
-    effect(() => {
-      const playground = this.playground();
-      playground && router.navigate([playground.id]);
-    });
+  }
+
+  // Only the user's click navigates. An effect would also fire when the route sets the selection.
+  navigate(playground: Playground | undefined) {
+    playground && this.router.navigate([playground.id]);
   }
 }

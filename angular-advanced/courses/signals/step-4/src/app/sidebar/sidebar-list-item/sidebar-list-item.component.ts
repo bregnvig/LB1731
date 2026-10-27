@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, Signal } from '@angular/core';
+import { Component, computed, input, Signal } from '@angular/core';
 import { Coordinate, Playground } from '../../model';
 import { LocationService } from '../../service';
 
@@ -18,7 +18,6 @@ import { LocationService } from '../../service';
     </button>
   `,
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class SidebarListItemComponent {

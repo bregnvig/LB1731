@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Playground } from '../model';
 
 @Component({
@@ -11,7 +11,6 @@ import { Playground } from '../model';
       <p>{{ playground!.description }}</p>
     </footer>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
 

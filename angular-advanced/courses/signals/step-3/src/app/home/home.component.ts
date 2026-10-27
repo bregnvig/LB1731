@@ -1,4 +1,4 @@
-import { Component, effect, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, distinctUntilChanged, map, startWith, switchMap } from 'rxjs';
@@ -20,7 +20,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <leaflet [center]="center()" [markers]="markers()"/>
     </main>
     <loop-sidebar
-      [playgrounds]="playgrounds()"
+      [playgrounds]="playgrounds() ?? []"
       [selectedPlayground]="playground()"
       [location]="location()"
       (selected)="selected($event)"/>
@@ -28,7 +28,6 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <loop-footer [playground]="playground()"/>
     }
   `,
-    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         LeafletModule,
         SidebarComponent,

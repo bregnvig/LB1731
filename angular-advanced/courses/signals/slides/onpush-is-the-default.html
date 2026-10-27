@@ -26,5 +26,10 @@ export class HomeComponent {}
   </div>
   <aside class="notes">ChangeDetectionStrategy.Default is deprecated; Eager is its new name.
 Signals in the template: an OnPush component updates by itself.
-Exercise 1 ends with: remove Eager, see it still works.</aside>
+Exercise 1 ends with: remove Eager, see it still works.
+Why step 1 needs Eager on Home AND App:
+Zone.js sees the HTTP response arrive and runs change detection over the whole app. That pass skips every OnPush component that isn't marked dirty, and only the three triggers on this slide mark it (plus the async pipe / markForCheck). Home assigns a plain field inside a subscribe callback: none of them. Angular can't see a plain field being assigned, so Home is skipped. The loader keeps spinning, and [playgrounds]="playgrounds" never hands the playgrounds (already in Home's field) to the sidebar, so its input stays undefined.
+Eager means: check me on every pass, dirty or not. Zone's pass then picks up the new field.
+App: the pass goes top-down, and a clean OnPush App is skipped with everything below it, so Home's Eager is never reached.
+Signals fix it: setting a signal marks the components that read it dirty, and lets the pass through their parents. That's why the bonus works after exercise 1.</aside>
 </section>

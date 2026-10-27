@@ -31,10 +31,6 @@
       "file": "onpush-change-detection.html"
     },
     {
-      "file": "signals-2.html",
-      "hidden": true
-    },
-    {
       "file": "from-zone-js-to-zoneless.html"
     },
     {
