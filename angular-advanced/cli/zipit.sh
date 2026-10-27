@@ -3,6 +3,7 @@
 # Students keep the layout the slides use (labs/<course>/exercise-N), so cli/stage-course.sh copies
 # courses/<course>/step-N into that layout before zipping. `adv test-zips` checks the result.
 set -e
+mkdir -p "${1:-.}"
 out="$(realpath "${1:-.}")"
 cd "$(dirname "$(realpath "$0")")/.."
 

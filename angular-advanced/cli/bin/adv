@@ -23,6 +23,7 @@ show_help() {
   echo "Commands:"
   echo "  install, i       Install npm packages (one package.json for everything)"
   echo "  verify, v        Verify directories build and serve"
+  echo "  dist, d          Student zips (solutions, demo, labs) and the slides PDF in dist/"
   echo "  test-zips, tz    Check student zips match cli/student-zips.manifest (--bless to update)"
   echo "  upgrade, u       Upgrade every project to Angular [major] (default: latest) [extra packages]"
   echo "  slides, s        Slides: present, presenter view and editor on http://localhost:4300 (pdf [out]: export PDF)"
@@ -37,6 +38,7 @@ show_help() {
   echo "  adv install          # npm install in angular-advanced/"
   echo "  adv verify all       # Verify all directories build and serve"
   echo "  adv verify di        # Verify courses/di/step-*"
+  echo "  adv dist             # Everything students get, in angular-advanced/dist"
   echo "  adv test-zips        # Students still get the same zips?"
   echo "  adv upgrade          # Next Angular major: bump package.json, run migrations everywhere"
   echo "  adv upgrade 23 @ng-bootstrap/ng-bootstrap@24  # also upgrade a library that blocks it"
@@ -99,6 +101,12 @@ case "$command" in
   "upgrade"|"u")
     shift
     upgrade_angular "$@"
+    ;;
+
+  "dist"|"d")
+    cli/zipit.sh dist
+    # Build first: the PDF export reuses whatever build it finds
+    (cd slides && npm run build && npm run pdf -- --out ../dist/angular-advanced.pdf)
     ;;
 
   "test-zips"|"tz")

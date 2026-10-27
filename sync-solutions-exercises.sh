@@ -31,9 +31,8 @@ PAIRS=(
 )
 
 # Kept out of the mirror entirely: never copied, never deleted from the target.
-# Build and tooling artifacts only. Deliberately NOT the same list as zipit.sh,
-# which additionally drops **/di/* and **/*.sh when packaging for students -
-# those are real exercise content and must stay in sync here.
+# Build and tooling artifacts only: **/di/* and **/*.sh are real exercise
+# content and must stay in sync here.
 EXCLUDES=(
   --exclude='node_modules/'
   --exclude='.angular/'

@@ -11,7 +11,7 @@ Course material for Angular Advanced: the exercises, the demo app, the slides an
 
 ## Workspace
 
-Each course folder has one `step-N` folder per state of the app: lab N is `step-N`, and solution N is `step-(N+1)`, because the solution for exercise N is the starting point for exercise N+1 (rxjs is a single app with `labs/` and `solutions/`). `cli/stage-course.sh` turns the steps into the layout students get in `labs.zip` / `solutions.zip`: `labs/<course>/exercise-N` and `solutions/<course>/exercise-N`.
+Each course folder has one `step-N` folder per state of the app: lab N is `step-N`, and solution N is `step-(N+1)`, because the solution for exercise N is the starting point for exercise N+1 (rxjs is a single app with `labs/` and `solutions/`). `cli/stage-course.sh` turns the steps into the layout students get in `labs.zip` / `solutions.zip`: `labs/<course>/exercise-N` and `solutions/<course>/exercise-N`. `adv dist` puts everything students get in `dist/` (ignored): `solutions.zip`, `demo.zip`, `labs.zip` and `angular-advanced.pdf`.
 
 `mise.toml` pins Node 24 and puts `cli/bin/` on PATH, so the `adv` CLI (`adv help`) works anywhere inside `angular-advanced/`.
 

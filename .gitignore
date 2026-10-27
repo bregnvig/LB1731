@@ -8,6 +8,7 @@ examples/.vscode
 
 # compiled output
 /dist
+/angular-advanced/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
