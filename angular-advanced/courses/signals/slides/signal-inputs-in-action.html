@@ -33,5 +33,11 @@ export class UserProfileComponent {
 </code></pre>
   </div>
   <aside class="notes">Point at .required: no initial value.
-Demo: /signals/inputs (demo/src/app/signals/inputs): decorator input next to a signal input.</aside>
+Demo: /signals/inputs (demo/src/app/signals/inputs): decorator input next to a signal input.
+
+Here it is in a component. location is optional with a default of null. playground is required, with no initial value.
+Both are signals, so you read them by calling them.
+playgroundInfo is a computed built from both inputs and a service. When the parent passes a new playground or location, it recalculates. No ngOnChanges.
+In the template we read playgroundInfo(), with ?. because it is undefined until there is a location.
+Demo /signals/inputs puts a decorator input next to a signal input.</aside>
 </section>

@@ -23,5 +23,11 @@ select(playground: Playground) {
 </code></pre>
   </div>
   <aside class="notes">Demo: /signals/linked, left column. Select random, then New playgrounds: selection resets.
-Also /signals/model: pagination writes page, switching city resets it to page 1.</aside>
+Also /signals/model: pagination writes page, switching city resets it to page 1.
+
+linkedSignal fills the gap between signal and computed.
+Like computed, it is derived from a source and resets when the source changes. Like signal, you can set it.
+The example is the classic one: the first playground is selected by default, the user can pick another, and when a new list arrives the selection goes back to the first.
+With an effect you would write that as a copy. With linkedSignal it is one line.
+Demo /signals/linked, left column: select a random one, then New playgrounds, and the selection resets.</aside>
 </section>

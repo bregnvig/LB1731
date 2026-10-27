@@ -16,5 +16,10 @@ When complete, start the application using <span style="color:#ff8c00">npm start
 <p><span style="font-size:0.7em">You will also use <span style="color:#FF8C00">signals</span>&nbsp;and an <span style="color:#FF8C00">effect </span>to save and retrieve playground data using <span style="color:#FF8C00">localStorage</span>, converting arrays to strings and back. </span></p>
   </div>
   <aside class="notes">The list (and later the cache) waits for browser location. Until then the map shows and the sidebar says "Determining your location". Blocked it? That stays forever: reset the site permission.
-After the exercise: "Don't copy state with an effect" (/signals/computed-vs-effect), then linkedSignal.</aside>
+After the exercise: "Don't copy state with an effect" (/signals/computed-vs-effect), then linkedSignal.
+
+Time for exercise 1. Go to labs/signals/exercise-1, npm install, npm start.
+The browser asks for your location: allow it. The playground list waits for it. If you blocked it by accident, reset the site permission and reload.
+The backend is slow on purpose. Your job: turn Home's fields into signals, then cache the playgrounds in localStorage with an effect so the list shows up right away next time.
+Take the next two slides as your checklist.</aside>
 </section>

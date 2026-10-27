@@ -35,5 +35,9 @@ const notes = resource({
 });
 </code></pre>
   </div>
-  <aside class="notes">With fetch, pass the loader's abortSignal so a stale request is cancelled when params change. This IndexedDB example has nothing to cancel.</aside>
+  <aside class="notes">With fetch, pass the loader's abortSignal so a stale request is cancelled when params change. This IndexedDB example has nothing to cancel.
+
+resource is the general one: the loader is any async function you write.
+Use it for anything that is not HttpClient: fetch, IndexedDB, a third-party SDK. Here notes are read from IndexedDB for the current folder.
+The loader gets an abortSignal. With fetch, pass it on so the old request is cancelled when the params change.</aside>
 </section>

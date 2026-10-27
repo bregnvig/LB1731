@@ -24,5 +24,11 @@ export class PlaygroundComponent {
 <p style="color:rgb(255, 255, 255)">Read values by calling the signal</p>
   </div>
   <aside class="notes">Read by calling it: playground() returns the current value.
-Outside a component it's the same: const playground = signal({...}); playground().</aside>
+Outside a component it's the same: const playground = signal({...}); playground().
+
+So what is a signal? A box around a value that knows who reads it.
+You create one with signal() and an initial value. Angular also has creators that hand you signals: input(), computed(), toSignal() and more, all coming today.
+You read it by calling it: playground() returns the current value. In the template too: playground().name.
+The call is the important part. When a template or a computed calls the signal, Angular records the dependency. That is how it knows who to update later.
+It works the same outside a component: any TypeScript file can create and read a signal.</aside>
 </section>

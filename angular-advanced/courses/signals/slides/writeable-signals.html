@@ -37,5 +37,11 @@ export class PlaygroundComponent {
 <span style="color:rgb(255, 255, 255)">to compute a new value from the previous one</span></span></p>
   </div>
   <aside class="notes">set replaces the value, update computes it from the current one.
-Equality is by reference: playground().rating++ notifies no one. Return a new object (the spread in update).</aside>
+Equality is by reference: playground().rating++ notifies no one. Return a new object (the spread in update).
+
+A signal you create with signal() is writable. The type is WritableSignal.
+Two ways to change it. set replaces the value. update gives you the current value and you return the new one.
+The catch is equality: a signal compares by reference. playground().rating++ changes the object but the signal still holds the same object, so nobody is notified.
+That is why update returns a new object with the spread. Treat signal values as immutable.
+Here the click calls upvote(), which updates the signal, and the template re-renders the rating.</aside>
 </section>

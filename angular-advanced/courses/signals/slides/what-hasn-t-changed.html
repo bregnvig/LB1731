@@ -32,5 +32,8 @@ onClick() {
 })
 </code></pre>
   </div>
-  <aside class="notes">host metadata gets type completion.</aside>
+  <aside class="notes">host metadata gets type completion.
+
+Not everything moved. @HostListener and @HostBinding are still decorators and work as before.
+Prefer the host property in @Component: listeners in parentheses, bindings in square brackets, like a template. It is type-checked, and you can read signals in it, like isActive() here.</aside>
 </section>

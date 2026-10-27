@@ -32,5 +32,11 @@ export class UserLocationComponent {
   <aside class="notes">Like withLatestFrom in RxJS: location triggers, user is just read.
 Demo: /signals/untracked. Change the user: no new post. Change the location: a new post.
 Then back to /signals/infinite-loop: untracked playgrounds stops the loop, but only hides the problem.
-Real fix after exercise 1: don't update state from an effect.</aside>
+Real fix after exercise 1: don't update state from an effect.
+
+Sometimes an effect needs a value but should not re-run when that value changes.
+Here: post the location every time it changes. We need the user id, but a profile change should not post the location again.
+untracked reads the user without making it a dependency. Only location triggers the effect. If you know RxJS, it is withLatestFrom.
+Demo /signals/untracked: change the user, no post. Change the location, a post.
+Back in /signals/infinite-loop, untracked stops the loop. But it only hides the real problem: we are updating state from an effect. We fix that properly after exercise 1.</aside>
 </section>

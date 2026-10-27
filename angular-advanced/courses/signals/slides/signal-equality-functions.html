@@ -31,5 +31,11 @@ playgrounds.set([{name: 'Hoppeborgen'}]);
 <p><span style="font-size:0.7em"><code>signal()</code>, <code>computed()</code> and <code>toSignal()</code> all take an <code>equal</code> option</span></p>
   </div>
   <aside class="notes">Default equality is Object.is: a new array is always a change, even with the same content.
-Demo: /signals/equality (demo/src/app/signals/equality/playgrounds-equality.component.ts). toSignal refetches every second. Watch the console: without equal the shared list logs every second; uncomment the equal line and it stops.</aside>
+Demo: /signals/equality (demo/src/app/signals/equality/playgrounds-equality.component.ts). toSignal refetches every second. Watch the console: without equal the shared list logs every second; uncomment the equal line and it stops.
+
+Every signal decides whether a new value is a change. By default it uses Object.is, so a new array is always a change, even with the same content.
+Usually that is what you want. But when an upstream source keeps producing new arrays with the same data, everything downstream recomputes for nothing.
+Pass an equal function: here names compares as JSON. Set a new array with the same name, and names does not change, so nothing that reads it runs again. A different name, and it does.
+signal, computed and toSignal all take equal.
+Demo /signals/equality: the list is refetched every second. Watch the console, then uncomment the equal line and the logging stops.</aside>
 </section>

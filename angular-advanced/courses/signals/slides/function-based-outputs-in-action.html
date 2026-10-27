@@ -36,4 +36,8 @@ export class MyComponent {
   (selectPlayground)="selectPlayground($event)"
 /&gt;</code></pre>
   </div>
+  <aside class="notes">Here a list component emits the playground that was clicked.
+select is a plain output. The second one uses alias, so the parent binds (selectPlayground) while the field has another name.
+For the parent nothing changes: (select)="..." with $event, the same as with @Output.
+That is the point: you can migrate a component without touching its parents.</aside>
 </section>

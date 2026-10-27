@@ -17,5 +17,10 @@
     <img src="images/exercise-1-use-signals-effects-1.png" alt="">
   </div>
   <aside class="notes">Trap: @if (playground) without () is always true (a signal is a function).
-Symptom: blank page, TypeError in FooterComponent in the console. The build only warns (NG8109).</aside>
+Symptom: blank page, TypeError in FooterComponent in the console. The build only warns (NG8109).
+
+Part one: open home.component.ts. Every field except router becomes a signal.
+Then fix the compile errors, and the NG8109 warnings in the terminal: those are templates that use a signal without calling it. The suggested fix in the warning has a stray } at the end, do not copy that.
+If you get a blank page, look for a signal in an @if without (). A function is always truthy.
+When everything compiles you should see the loader. If you do not, reload. That is your cue for part two.</aside>
 </section>

@@ -19,5 +19,10 @@
   </div>
   <aside class="notes">No more ! on required inputs: the parent must bind an input.required, so it is always set. Its type can still allow undefined, like the sidebar's playgrounds while they load.
 ngOnChanges/SimpleChanges loses the type; use input() + computed() instead.
-Transforms are type-checked.</aside>
+Transforms are type-checked.
+
+Now the component API. Inputs first: input() is @Input as a signal, stable since v19.
+The types are better. ngOnChanges gives you SimpleChanges, which loses the types. With input you combine inputs with computed and keep them.
+input.required means the parent must bind it. So no more ! on the field. It is always set, but its type can still allow undefined, like the sidebar's playgrounds while they load.
+And change detection comes for free: an input read in the template marks an OnPush component, like any other signal.</aside>
 </section>

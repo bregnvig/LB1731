@@ -55,5 +55,11 @@
   (pageChange)="pageChanged($event)" /&gt;</code></pre>
   </div>
   <aside class="notes">[(page)] takes the signal itself; [page] takes its value, page().
-Demo: /signals/model (demo/src/app/signals/model). page is a linkedSignal: pagination writes it, switching city resets it to page 1.</aside>
+Demo: /signals/model (demo/src/app/signals/model). page is a linkedSignal: pagination writes it, switching city resets it to page 1.
+
+model() is the last one: an input the component can also write. Stable since v19.
+The component declares page = model(0) and calls set or update on it. Angular emits pageChange for you.
+The parent has three options. [(page)] with the signal itself: two-way binding. [page] with page(): one-way, like any input. Or just (pageChange) to listen.
+No transforms on model inputs.
+Demo /signals/model: page is a linkedSignal in the parent. Pagination writes it, and switching city resets it to page 1.</aside>
 </section>

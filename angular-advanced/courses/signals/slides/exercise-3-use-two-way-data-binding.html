@@ -21,5 +21,11 @@
   <aside class="notes">Solution (step-4): (selectedPlaygroundChange)="navigate($event)" next to [(selectedPlayground)]. It reacts to the user's click only.
 An effect on the model also works, but the route then sets playground again: two sources of truth in a circle.
 Discussion: why not an effect? It also fires when the route sets the selection.
-Good discussion after "Don't copy state with an effect".</aside>
+Good discussion after "Don't copy state with an effect".
+
+Exercise 3: two-way binding. Start fresh in labs/signals/exercise-3 if you like.
+Turn the sidebar's selectedPlayground into a model. It still compiles and works, but it is not two-way yet.
+Delete the selected output. In the sidebar, set selectedPlayground directly in the template, or in a method.
+In Home use [(selectedPlayground)]. Now clicking no longer changes the URL, so navigate in a (selectedPlaygroundChange) handler.
+Afterwards, ask why not an effect on the model. It would also fire when the route sets the selection: two sources of truth in a circle. That is the 'react to a user action' row.</aside>
 </section>

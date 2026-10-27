@@ -9,5 +9,11 @@
     <img src="images/signals-2.svg" alt="">
   </div>
   <aside class="notes">Signals: Angular's reactive primitive for state.
-Plan: why (zoneless change detection), the core API, then inputs/outputs, RxJS interop and resources.</aside>
+Plan: why (zoneless change detection), the core API, then inputs/outputs, RxJS interop and resources.
+
+Signals hold state so Angular knows exactly what changed.
+Why first: Angular is leaving Zone.js and checking the whole tree. To check less, it has to know which components depend on a value, and a signal tells it.
+Then the core API: signal, computed, effect, and when not to use an effect. Then signal inputs, outputs and two-way binding, which the exercises use. Last: RxJS interop and resources for async data.
+Three exercises on the playground app.
+Ask who has used signals: it sets the pace for the core API slides.</aside>
 </section>

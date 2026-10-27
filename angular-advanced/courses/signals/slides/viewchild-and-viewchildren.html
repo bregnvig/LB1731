@@ -21,4 +21,7 @@ effect(() =&gt; {
 });
 </code></pre>
   </div>
+  <aside class="notes">Queries are signals now: viewChild and viewChildren.
+No more ngAfterViewInit to wait for the view. The query is a signal, so read it in a computed or an effect and it updates when the child appears or goes away.
+viewChild can be undefined, for example inside an @if. viewChild.required promises it is always there, so no ?.</aside>
 </section>

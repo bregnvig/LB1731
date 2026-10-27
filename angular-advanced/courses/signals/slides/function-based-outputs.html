@@ -19,4 +19,8 @@
 
 <p><span style="font-size:1.0em">Easily create outputs that emit values from observables with <span style="color:#FF8C00">outputFromObservable()</span>.<span style="color:#FF8C00">​​</span></span></p>
   </div>
+  <aside class="notes">Outputs got the same treatment. output() replaces @Output and EventEmitter. It is stable since v19.
+You declare it as a field, like input, and call emit to send a value.
+It is not a signal. It is an event, so there is nothing to read.
+If you already have an observable, outputFromObservable turns it into an output.</aside>
 </section>

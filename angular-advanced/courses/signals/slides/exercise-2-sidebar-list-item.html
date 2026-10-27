@@ -22,4 +22,7 @@
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:149.798px;width:609.483px;height:420.404px;z-index:10">
     <img src="images/exercise-2-sidebar-list-item-1.png" alt="">
   </div>
+  <aside class="notes">Next, pull one row of the sidebar out into its own component. In a new terminal in labs/signals/exercise-2: npx ng g c sidebar/sidebar-list-item -t -s. That gives an inline template and inline styles.
+It gets three inputs: playground, active and location. Move the button from the sidebar into it.
+Ask the room where the click listener goes. The answer: in the sidebar, on &lt;loop-sidebar-list-item&gt;. The sidebar owns the selection and emits selected, so the list item only displays.</aside>
 </section>

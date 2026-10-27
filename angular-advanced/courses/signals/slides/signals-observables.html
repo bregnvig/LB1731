@@ -27,5 +27,11 @@
 
 <p><span style="font-size:0.7em"><span class="a ab ac ae af ag ah ai aj ak b c d e f g h i j k l m n o p q r s t u ui-provider v w x y z">You can always produce a signal from a complex RxJS!</span></span></p>
   </div>
-  <aside class="notes">Signals do NOT replace RxJS.</aside>
+  <aside class="notes">Signals do NOT replace RxJS.
+
+To finish: signals do not replace RxJS.
+RxJS is for events over time: throttling, waiting for one thing and then another, zipping, combining, ignoring for N seconds.
+Signals are for state: what is the value now, and what depends on it.
+You can always end an RxJS pipeline with toSignal, and the template just reads a signal.
+Go back to the which-tool slide if you want a recap.</aside>
 </section>

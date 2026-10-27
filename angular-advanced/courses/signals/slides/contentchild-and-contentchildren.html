@@ -14,4 +14,6 @@ effect(() =&gt; {
   console.log('count:', this.playgrounds().length);
 });</code></pre>
   </div>
+  <aside class="notes">The same for projected content: contentChild and contentChildren.
+contentChildren returns a signal of a read-only array. Here an effect logs how many playgrounds were projected, and runs again when that changes.</aside>
 </section>

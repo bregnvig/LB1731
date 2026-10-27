@@ -20,5 +20,11 @@ Bonus: delete <code><span style="color:#FF8C00">changeDetection: ChangeDetection
 Without the guard: reload during the 3 s load stores "undefined", JSON.parse throws, app stays blank until localStorage is cleared (DevTools &gt; Application &gt; Local storage).
 Bonus only works after the conversion: remove Eager from Home while it still uses plain fields and the loader spins forever.
 App is optional: a signal read in Home's template marks Home and its ancestors for refresh, so change detection reaches Home through an OnPush App.
-Next: "Don't copy state with an effect". Their center and markers are good computed candidates.</aside>
+Next: "Don't copy state with an effect". Their center and markers are good computed candidates.
+
+Part two: the loader is there because the backend is slow. So we cache.
+Write an effect that saves playgrounds to localStorage whenever they change. Only save when there are playgrounds: before the backend answers, the signal is undefined and that is not JSON.
+localStorage only holds strings: JSON.stringify to save, JSON.parse to read.
+Then initialize the playgrounds signal from localStorage, so the list is there before the backend answers.
+Bonus: delete Eager from Home. It still works now, because the template reads signals. That is the OnPush slide in practice.</aside>
 </section>

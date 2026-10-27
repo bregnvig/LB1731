@@ -292,5 +292,11 @@
     </div>
   </div>
   <aside class="notes">Signals + OnPush: only the component whose template reads the changed signal refreshes. Zoneless (v21 default) works this way.
-A click in a template still checks that component, signal or not. What signals add: the components that read the changed signal refresh too, even though nobody clicked in them. Async work outside a template event (HTTP, timers) needs a signal write, the async pipe or markForCheck.</aside>
+A click in a template still checks that component, signal or not. What signals add: the components that read the changed signal refresh too, even though nobody clicked in them. Async work outside a template event (HTTP, timers) needs a signal write, the async pipe or markForCheck.
+
+Now the same tree with signals.
+Click OK: only the component whose template reads the changed signal refreshes. Its parents are passed through, not re-checked, and every other branch is skipped.
+This is how zoneless Angular works, and why it can drop Zone.js: the signal says exactly which view needs updating.
+A click in a template still checks that component, signal or not. What signals add is that a component which reads the signal refreshes too, even though nobody clicked in it.
+HTTP responses and timers are not template events. For those you need a signal write, the async pipe or markForCheck.</aside>
 </section>

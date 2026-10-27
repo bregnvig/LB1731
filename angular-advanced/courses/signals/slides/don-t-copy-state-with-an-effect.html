@@ -35,5 +35,13 @@ rename() {
   </div>
   <aside class="notes">Demo: /signals/computed-vs-effect. Console open, click Rename: logs "computed: Grace Hopper | copy: Ada Lovelace", then "Effect ran". Screen shows Grace Hopper for both.
 Infinite-loop real fix: no effect. addRandomPlayground() would do this.playgrounds.update(p =&gt; [...p, getRandomPlayground()]) itself (the comment in infinite-loop.component.ts says so; the demo keeps the effect to show the loop).
-Ask about their exercise 1: center and markers could be computed. subscribe(x =&gt; this.x.set(x)) is the same copy pattern; toSignal fixes it (later today).</aside>
+Ask about their exercise 1: center and markers could be computed. subscribe(x =&gt; this.x.set(x)) is the same copy pattern; toSignal fixes it (later today).
+
+Now the most common mistake with effects: using one to keep a copy of state in sync.
+fullName is a computed: always right, the moment you read it. fullNameCopy is a signal an effect keeps updated.
+In rename we set the names and read both straight away. The computed says Grace Hopper. The copy still says Ada Lovelace, because the effect only runs later, during change detection.
+The screen looks fine, because by the time it renders the effect has run. The code in between reads stale data. And you have two sources of truth, an extra pass and a risk of loops.
+Demo /signals/computed-vs-effect with the console open.
+If it is derived, use computed. If it is derived but the user can also change it, that is linkedSignal, next slide.
+Look at your exercise 1: center and markers could have been computed.</aside>
 </section>

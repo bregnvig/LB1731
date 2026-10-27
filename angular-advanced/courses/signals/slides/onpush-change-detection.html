@@ -337,5 +337,11 @@
   </div>
   <aside class="notes">Click OK: only the path from the root to the marked component is checked, done by about 1.3s instead of 3s on the Default slide.
 The cost: you must mark it yourself (markForCheck, async pipe, new @Input instance).
-Demo: https://jeanmeche.github.io/angular-change-detection/ (zoneless: click AppRef.tick()).</aside>
+Demo: https://jeanmeche.github.io/angular-change-detection/ (zoneless: click AppRef.tick()).
+
+An OnPush component says: don't check me unless there is a reason.
+Click OK: Angular only walks the path from the root to the marked component and skips every other branch.
+It is checked only when marked: a new @Input reference (mutating the same array does not count), an event in its own template, the async pipe receiving a value, or markForCheck().
+A plain field set in a subscribe tells Angular nothing, so the screen does not update. That is the classic OnPush bug, and exercise 1 shows it.
+Signals remove the bookkeeping: a signal read in a template marks its component by itself.</aside>
 </section>

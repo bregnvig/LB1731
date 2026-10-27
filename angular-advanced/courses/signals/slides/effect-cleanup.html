@@ -25,5 +25,11 @@ export class SearchComponent {
   </div>
   <aside class="notes">Type fast: each keystroke clears the previous timer, only the last query is logged.
 Cleanup is for cancelling, not remembering the previous value (that's linkedSignal's long form).
-v22: debounced(signal, 300) does this (experimental); resources cancel their own requests.</aside>
+v22: debounced(signal, 300) does this (experimental); resources cancel their own requests.
+
+An effect can clean up after itself. It gets an onCleanup function.
+What you register runs before the next run and when the effect is destroyed. Use it to cancel what the previous run started: a timer, a request, a subscription.
+Here it is a debounced search: every keystroke starts a 300 ms timer, and the next keystroke clears it. Only the last query searches.
+Do not use cleanup to remember the previous value. That is linkedSignal's long form.
+In practice you will rarely write this: resources cancel their own requests, and Angular 22 has an experimental debounced().</aside>
 </section>

@@ -35,5 +35,11 @@ debouncedQuery.value();
   </div>
   <aside class="notes">linkedSignal set: the main use is writing back to the source, so the linked value stays derived. rawSet (second parameter) writes the linked signal directly, e.g. to clamp.
 debounced returns a resource, not a signal: read .value(); loading while the user types. Pair with httpResource for search. Experimental.
-Signal Forms (@angular/forms/signals): own topic, just point at them.</aside>
+Signal Forms (@angular/forms/signals): own topic, just point at them.
+
+A quick tour of what is new, most of which we have already seen.
+v21 made new apps zoneless. v22 made OnPush the default and the resource API stable.
+linkedSignal can now write back. set on fahrenheit converts and writes celsius, so fahrenheit stays derived. The second form gets rawSet, which writes the linked signal itself, here to keep the quantity at least 1.
+debounced() is experimental. It gives you a resource that settles 300 ms after the last change. Read .value(). Nice together with httpResource for a search box.
+Signal Forms are stable too, but they are a topic of their own. Just point at them.</aside>
 </section>

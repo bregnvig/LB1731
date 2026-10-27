@@ -31,5 +31,13 @@ export class PlaygroundService {
   <aside class="notes">Show demo/src/app/signals/playgrounds/playgrounds.component.ts (/signals/playgrounds).
 Ask: what RxJS thing does this remind you of? (BehaviorSubject)
 Where you use async pipe today, consider toSignal().
-Unsubscribes when the injection context is destroyed. requireSync for sync emitters (BehaviorSubject): no undefined in the type.</aside>
+Unsubscribes when the injection context is destroyed. requireSync for sync emitters (BehaviorSubject): no undefined in the type.
+
+Most of you already have RxJS code. You do not rewrite it, you bridge it.
+toSignal subscribes to an observable and gives you a signal with the latest value. Here the HTTP call becomes a playgrounds signal the template can read.
+It subscribes right away, it is read-only, and it unsubscribes when its injection context is destroyed.
+Until the first value it is undefined, unless you give initialValue, or requireSync for something that emits synchronously like a BehaviorSubject.
+If the observable errors, reading the signal throws.
+Ask: what RxJS thing does this remind you of? A BehaviorSubject: always a current value.
+Where you use the async pipe today, toSignal is the signal version. Demo /signals/playgrounds.</aside>
 </section>

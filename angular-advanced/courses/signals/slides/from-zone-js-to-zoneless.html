@@ -24,5 +24,11 @@ providers: [
   <aside class="notes">Zone.js patches setTimeout, addEventListener, promises and runs change detection after each. It knows something async finished, not that state changed.
 Zoneless: Angular is told about changes: signal read in a template, template event, async pipe, markForCheck.
 Short version only; full change detection is in the Components module.
-Interactive comparison: https://jeanmeche.github.io/angular-change-detection/</aside>
+Interactive comparison: https://jeanmeche.github.io/angular-change-detection/
+
+Zone.js wraps every browser API that runs code later (addEventListener, setTimeout, promises). When a callback finishes, it tells Angular to run change detection.
+The problem is the second bullet: Zone.js knows something async finished, not whether state changed or which component cares.
+Since v21 new apps leave Zone.js out. Nothing patches the browser; Angular is told directly: a signal read in a template changes, a template event, the async pipe, markForCheck().
+Our course apps still opt in: provideZoneChangeDetection() in main.ts. A new app writes nothing, zoneless is the default.
+Remember we are on Zone.js: it explains how exercise 1 behaves. The full story is in the Components module.</aside>
 </section>

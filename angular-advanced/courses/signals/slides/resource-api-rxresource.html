@@ -27,5 +27,10 @@ user = rxResource({
 </code></pre>
   </div>
   <aside class="notes">params reads signals like computed. userId changes: old stream unsubscribed, stream runs again.
-State management exercise 3 uses rxResource.</aside>
+State management exercise 3 uses rxResource.
+
+rxResource is for when you already have an observable, like a service method that returns one.
+params reads signals, like computed. Here userId. stream gets the params and returns the observable.
+When userId changes, the old subscription is dropped and stream runs again. Every value the observable emits becomes value().
+You will use it in the state management exercise.</aside>
 </section>

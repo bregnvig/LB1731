@@ -17,4 +17,7 @@
 <p><br>
 Think: <span style="color:#FF8C00">fetch</span>&nbsp;→ <span style="color:#FF8C00">cache</span>&nbsp;→ <span style="color:#FF8C00">react</span></p>
   </div>
+  <aside class="notes">Today each team loads data its own way: subscribe in ngOnInit, a loading flag, an error flag, maybe a switchMap.
+Resources are one pattern for all of it. You describe what to load from which signals, and you get the value, the loading state and the error as signals.
+When the signals change, it loads again and cancels the old request. Think: fetch, cache, react.</aside>
 </section>

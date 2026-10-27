@@ -20,5 +20,9 @@ export class PlaygroundsComponent {
     <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-xml" data-line-numbers="">&lt;app-playgrounds [playgrounds]="playgrounds()" /&gt;</code></pre>
   </div>
   <aside class="notes">A transformer is a plain function: what the parent passes in, what the component keeps. Here: always sorted.
-Keep it pure and cheap: runs on every input change.</aside>
+Keep it pure and cheap: runs on every input change.
+
+A transformer is just a function: in goes what the parent passes, out comes what the component keeps.
+Here the list is always sorted by name, whatever order the parent uses.
+Keep it pure and cheap. It runs every time the input changes.</aside>
 </section>

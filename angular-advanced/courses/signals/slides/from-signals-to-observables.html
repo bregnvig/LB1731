@@ -28,5 +28,10 @@ filteredPlaygrounds$ = combineLatest([
 
 <p><span style="font-size:1.0em">Behind the scenes it's a <span style="color:#FF8C00">ReplaySubject </span>wrapped in an <span style="color:#FF8C00">effect()</span></span></p>
   </div>
-  <aside class="notes">Emits asynchronously (via an effect): several sets in the same tick give one emission with the latest value.</aside>
+  <aside class="notes">Emits asynchronously (via an effect): several sets in the same tick give one emission with the latest value.
+
+The other way: toObservable turns a signal into an observable.
+You need it when a signal has to join an RxJS pipeline. Here a signal input is combined with a form control's valueChanges in combineLatest.
+It also needs an injection context. Inside it is an effect writing to a ReplaySubject.
+Because of the effect it emits asynchronously: set the signal three times in a row and you get one emission with the last value.</aside>
 </section>

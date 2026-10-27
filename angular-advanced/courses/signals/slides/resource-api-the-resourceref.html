@@ -33,5 +33,10 @@ const user = resource(...);
   </div>
   <aside class="notes">value() throws while the resource is in error, so guard it with hasValue() (or check error() first).
 idle: params returned undefined, nothing loaded yet (e.g. no user selected).
-local: you called set() or update() on the value yourself.</aside>
+local: you called set() or update() on the value yourself.
+
+There are three creators: resource, rxResource and httpResource. All of them return the same thing, a ResourceRef. Stable since v22.
+value(), isLoading(), error() and status() are signals. reload() fetches again.
+status is one of: idle (nothing to load yet, like no user selected), loading, reloading, resolved, error, or local after you set the value yourself.
+One gotcha in the template: value() throws while the resource is in error. Guard it with hasValue(), like here.</aside>
 </section>

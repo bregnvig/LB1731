@@ -31,5 +31,11 @@ todos.reload();  // fetch again
 </code></pre>
   </div>
   <aside class="notes">URL function returns undefined: waits (idle), e.g. no user selected.
-Built on HttpClient, so interceptors run.</aside>
+Built on HttpClient, so interceptors run.
+
+httpResource is the shortest one, for plain HTTP GETs.
+You give it a function that returns the URL. It fetches straight away, and again when a signal in the URL changes. Here, a new userId fetches the new user.
+If the function returns undefined it waits, status idle.
+It uses HttpClient, so your interceptors still run. .text, .blob and .arrayBuffer give you other response types.
+value() is undefined until the response arrives.</aside>
 </section>

@@ -535,5 +535,9 @@
   </div>
   <aside class="notes">Any event (click, timer, HTTP) checks every component in the tree, top to bottom.
 Click OK and watch the timing: the last component lights up at 3s.
-Interactive demo: https://jeanmeche.github.io/angular-change-detection/ (it is zoneless: click AppRef.tick() to run a pass).</aside>
+Interactive demo: https://jeanmeche.github.io/angular-change-detection/ (it is zoneless: click AppRef.tick() to run a pass).
+
+Zone.js patches every browser event (click, timer, HTTP). Afterwards Angular only knows that something might have changed, not what, so it checks every component in the tree, top to bottom.
+Click OK: one button, yet every component is checked. The slide slows it down; the work (comparing every binding) is real.
+This strategy was called Default. In Angular 22 it is Eager, and Default is a deprecated alias. The name comes back in exercise 1.</aside>
 </section>

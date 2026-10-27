@@ -32,5 +32,11 @@ export class PlaygroundComponent {
 Computed Signals are lazily evaluated and memoized, meaning the value is calculated only when needed, and shared between all consumers</p>
   </div>
   <aside class="notes">Talk through the snippet. The /signals/inputs demo also uses input(), so it comes with signal inputs.
-Lazy: nothing runs until read. Memoized: ten reads, one run, until a dependency changes.</aside>
+Lazy: nothing runs until read. Memoized: ten reads, one run, until a dependency changes.
+
+Most state is derived from other state, and computed is for that.
+You give it a function. Every signal it calls becomes a dependency. Here distance depends on playground and location.
+It is lazy: nothing runs until someone reads distance. And memoized: read it ten times, it runs once, until playground or location changes.
+You cannot set a computed. If you want to change distance, you change what it is computed from.
+Rule of thumb: if a value can be calculated from other signals, it is a computed, not a signal you keep in sync.</aside>
 </section>
