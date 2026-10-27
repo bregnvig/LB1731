@@ -23,6 +23,7 @@
   - Each command on its own line (pipes ex3 wraps mid-command).
   - pipes step-4/5 include `focus.directive.ts` from a hidden bonus slide.
 - [ ] Drop `changeDetection: ChangeDetectionStrategy.OnPush` everywhere: it's the default since v22 (`ng g c` leaves it out), and spelling it out contradicts the "OnPush is the default" slide. Signals is done. Left: about 70 component files across the other eight courses' steps, 28 files in `demo/`, and the slides `components/the-changedetection-property-2.html` and `routing/read-data-set-by-resolver.html`. Exceptions to decide on: components exercise 3 ("Speeding up the application") starts from all-`Eager` and asks for OnPush, so reword it to "remove `Eager` where it's safe" and let step-4 delete the `Eager` lines; the demo's change-detection examples that put `Eager` and OnPush side by side can keep it. Needs `adv verify all` and `adv test-zips --bless`.
+- [ ] Switch the builders from `@angular-devkit/build-angular:*` to `@angular/build:*` (`application`, `dev-server`, `extract-i18n`): `ng serve` warns that the Webpack package is deprecated. The projects already use the esbuild `application` builder, so it's a rename. Signals is done. Left: di, pipes-and-directives, reactive-forms, routing, rxjs (labs, solutions) and state-management. Once nothing uses it, drop `@angular-devkit/build-angular` from the root `package.json`. Needs `adv verify all` and `adv test-zips --bless`.
 
 ## Repo
 
