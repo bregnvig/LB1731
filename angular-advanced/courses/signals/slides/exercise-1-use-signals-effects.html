@@ -7,7 +7,7 @@
 
 <p><span style="font-size:19.6px">Change all the instance variables, except <code><span style="color:#FF8C00">router</span></code>, into <span style="color:#FF8C00">signal</span>s.</span></p>
 
-<p><span style="font-size:19.6px">When you have changed the variables into signals you will have some compile errors. Fix these errors. Then fix every NG8109 warning in the terminal too. Its suggested fix has a stray }: write playgrounds(), not playgrounds()}.</span></p>
+<p><span style="font-size:19.6px">When you have changed the variables into signals you will have some compile errors. Fix these errors. Then fix every NG8109 warning in the terminal too.</span></p>
 
 <p><span style="font-size:19.6px">A blank page means a missing <code><span style="color:#FF8C00">()</span></code> in the template, e.g. <code><span style="color:#FF8C00">@if (playground)</span></code>.</span></p>
 
@@ -16,7 +16,8 @@
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:691.366px;top:174.61px;width:537.268px;height:373.949px;z-index:12">
     <img src="images/exercise-1-use-signals-effects-1.png" alt="">
   </div>
-  <aside class="notes">Trap: @if (playground) without () is always true (a signal is a function).
+  <aside class="notes">NG8109 prints "should be invoked: playgrounds()}". The } is Angular's typo: write playgrounds().
+Trap: @if (playground) without () is always true (a signal is a function).
 Symptom: blank page, TypeError in FooterComponent in the console. The build only warns (NG8109).
 
 Part one: open home.component.ts. Every field except router becomes a signal.
