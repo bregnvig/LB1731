@@ -3,15 +3,15 @@
     <h2>Testing code that calls HttpClient</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:17.6px">HttpClient is the <b>third party</b>. No real network in a unit test.</span></p>
+    <p><span style="font-size:16px">HttpClient is the <b>third party</b>. No real network in a unit test.</span></p>
 
-<p><span style="font-size:17.6px">&bull; <code><span style="color:#ff8c00">provideHttpClientTesting()</span></code> swaps in a fake backend</span></p>
+<p><span style="font-size:16px">&bull; <code><span style="color:#ff8c00">provideHttpClientTesting()</span></code> swaps in a fake backend. It replaces <code><span style="color:#ff8c00">HttpClientTestingModule</span></code>, and <code><span style="color:#ff8c00">HttpTestingController</span></code> replaces a <code><span style="color:#ff8c00">createSpyObj</span></code> HttpClient.</span></p>
 
-<p><span style="font-size:17.6px">&bull; <code><span style="color:#ff8c00">HttpTestingController</span></code>: <code><span style="color:#ff8c00">expectOne(url)</span></code> finds the pending GET, <code><span style="color:#ff8c00">flush(body)</span></code> answers it</span></p>
+<p><span style="font-size:16px">&bull; <code><span style="color:#ff8c00">HttpTestingController</span></code>: <code><span style="color:#ff8c00">expectOne(url)</span></code> finds the pending GET, <code><span style="color:#ff8c00">flush(body)</span></code> answers it</span></p>
 
-<p><span style="font-size:17.6px">&bull; The GET only starts on <b>subscribe</b>: <code><span style="color:#ff8c00">firstValueFrom(...)</span></code> first, then <code><span style="color:#ff8c00">expectOne</span></code></span></p>
+<p><span style="font-size:16px">&bull; The GET only starts on <b>subscribe</b>: <code><span style="color:#ff8c00">firstValueFrom(...)</span></code> first, then <code><span style="color:#ff8c00">expectOne</span></code></span></p>
 
-<p><span style="font-size:17.6px">&bull; <code><span style="color:#ff8c00">verify()</span></code> in <code><span style="color:#ff8c00">afterEach</span></code> fails on unanswered or unexpected requests</span></p>
+<p><span style="font-size:16px">&bull; <code><span style="color:#ff8c00">verify()</span></code> in <code><span style="color:#ff8c00">afterEach</span></code> fails on unanswered or unexpected requests</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:150px;width:600px;height:auto;z-index:12">
     <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">describe('PlaygroundService', () =&gt; {
@@ -33,7 +33,7 @@
   // it(...) cases below
 });</code></pre>
   </div>
-  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:522px;width:1204px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:545px;width:1204px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">  it('should return only the playgrounds whose name contains the query', async () =&gt; {
     // Arrange
     const result = firstValueFrom(service.search('christianshavn'));
@@ -43,13 +43,13 @@
     expect(await result).toEqual([panterensBastion]);
   });</code></pre>
   </div>
-  <aside class="notes">Third party = HttpClient. Fake it with provideHttpClientTesting.
+  <aside class="notes">Third party = HttpClient. Fake it with provideHttpClientTesting (replaces HttpClientTestingModule; the controller replaces a createSpyObj HttpClient).
 Order: subscribe (firstValueFrom), then expectOne, then flush, then await.
 Cold observable: no subscribe, no request, expectOne fails.
 verify() in afterEach: nothing left over.
 
 The service's unit of work ends where HttpClient starts: HttpClient is the third party, as in the Osherove model this morning. We never hit the network.
-provideHttpClientTesting replaces the backend. HttpTestingController is your remote: expectOne with the URL finds the one pending request, flush answers it with the body you choose.
+provideHttpClientTesting replaces the backend. If you know HttpClientTestingModule or a createSpyObj HttpClient, both are gone: the provider and HttpTestingController do that job now. HttpTestingController is your remote: expectOne with the URL finds the one pending request, flush answers it with the body you choose.
 The order on the bottom matters. HttpClient is cold: the GET starts when somebody subscribes. firstValueFrom subscribes. So start firstValueFrom first, then expectOne, then flush, and only then await the result. Swap the first two and expectOne fails because nothing was requested yet.
 verify in afterEach catches requests nobody answered or nobody expected. Your turn.</aside>
 </section>

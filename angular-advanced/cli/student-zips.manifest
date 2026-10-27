@@ -1667,8 +1667,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  labs/unit-test
 2fa287fb4ed9f32b5b78060d4d1c177ac52dcf4d9b466dbde1e9a11ce6bcf3e2  labs/unit-test/exercise-2/src/app/login/login.component.ts
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  labs/unit-test/exercise-2/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  labs/unit-test/exercise-2/src/app/model/coordinate.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  labs/unit-test/exercise-2/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  labs/unit-test/exercise-2/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  labs/unit-test/exercise-2/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  labs/unit-test/exercise-2/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  labs/unit-test/exercise-2/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  labs/unit-test/exercise-2/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  labs/unit-test/exercise-2/src/app/pipe/default-description.pipe.ts
@@ -1733,8 +1733,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  labs/unit-test
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  labs/unit-test/exercise-3/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  labs/unit-test/exercise-3/src/app/model/coordinate.ts
 addd1bea2dcf4b02028a6b0ca5813ea12e6c70ff828b04f5c4f4fc4bb5f653a2  labs/unit-test/exercise-3/src/app/model/filter-playgrounds.generated.spec.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  labs/unit-test/exercise-3/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  labs/unit-test/exercise-3/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  labs/unit-test/exercise-3/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  labs/unit-test/exercise-3/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  labs/unit-test/exercise-3/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  labs/unit-test/exercise-3/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  labs/unit-test/exercise-3/src/app/pipe/default-description.pipe.ts
@@ -1801,8 +1801,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  labs/unit-test
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  labs/unit-test/exercise-4/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  labs/unit-test/exercise-4/src/app/model/coordinate.ts
 e3629e54ad6d78422f4fb7e108dfaa987a3d72bd695d4f3b49ef56e3880e038c  labs/unit-test/exercise-4/src/app/model/filter-playgrounds.generated.spec.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  labs/unit-test/exercise-4/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  labs/unit-test/exercise-4/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  labs/unit-test/exercise-4/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  labs/unit-test/exercise-4/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  labs/unit-test/exercise-4/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  labs/unit-test/exercise-4/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  labs/unit-test/exercise-4/src/app/pipe/default-description.pipe.ts
@@ -3199,8 +3199,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  solutions/unit
 2fa287fb4ed9f32b5b78060d4d1c177ac52dcf4d9b466dbde1e9a11ce6bcf3e2  solutions/unit-test/exercise-1/src/app/login/login.component.ts
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  solutions/unit-test/exercise-1/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  solutions/unit-test/exercise-1/src/app/model/coordinate.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  solutions/unit-test/exercise-1/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  solutions/unit-test/exercise-1/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  solutions/unit-test/exercise-1/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  solutions/unit-test/exercise-1/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  solutions/unit-test/exercise-1/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  solutions/unit-test/exercise-1/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  solutions/unit-test/exercise-1/src/app/pipe/default-description.pipe.ts
@@ -3265,8 +3265,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  solutions/unit
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  solutions/unit-test/exercise-2/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  solutions/unit-test/exercise-2/src/app/model/coordinate.ts
 addd1bea2dcf4b02028a6b0ca5813ea12e6c70ff828b04f5c4f4fc4bb5f653a2  solutions/unit-test/exercise-2/src/app/model/filter-playgrounds.generated.spec.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  solutions/unit-test/exercise-2/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  solutions/unit-test/exercise-2/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  solutions/unit-test/exercise-2/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  solutions/unit-test/exercise-2/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  solutions/unit-test/exercise-2/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  solutions/unit-test/exercise-2/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  solutions/unit-test/exercise-2/src/app/pipe/default-description.pipe.ts
@@ -3333,8 +3333,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  solutions/unit
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  solutions/unit-test/exercise-3/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  solutions/unit-test/exercise-3/src/app/model/coordinate.ts
 e3629e54ad6d78422f4fb7e108dfaa987a3d72bd695d4f3b49ef56e3880e038c  solutions/unit-test/exercise-3/src/app/model/filter-playgrounds.generated.spec.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  solutions/unit-test/exercise-3/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  solutions/unit-test/exercise-3/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  solutions/unit-test/exercise-3/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  solutions/unit-test/exercise-3/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  solutions/unit-test/exercise-3/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  solutions/unit-test/exercise-3/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  solutions/unit-test/exercise-3/src/app/pipe/default-description.pipe.ts
@@ -3403,8 +3403,8 @@ d3d4d9a13164e053b126de87f6dc0e51727e69ca955e0ac1754b1fa77934e446  solutions/unit
 27d27a322dfe60c805bb0ff2e03e5b672f3ee7952b79025851de1b03f10229eb  solutions/unit-test/exercise-4/src/app/model/auth-user.ts
 d1f0b44848bf565f91981180b55927c38df77e5fc38b95660f0a52c1634d8c6f  solutions/unit-test/exercise-4/src/app/model/coordinate.ts
 e3629e54ad6d78422f4fb7e108dfaa987a3d72bd695d4f3b49ef56e3880e038c  solutions/unit-test/exercise-4/src/app/model/filter-playgrounds.generated.spec.ts
-4319bb632bed31253a7d9b19e4a2a5bd4db5a9423f0761baae68370b1e839820  solutions/unit-test/exercise-4/src/app/model/filter-playgrounds.spec.ts
-a451bcd937c061d22447bc1e52702a78381a93c71df6de7ed97458aae1f72e70  solutions/unit-test/exercise-4/src/app/model/filter-playgrounds.ts
+bd7805490af1fa36dfa12a963910623d3fc4ed99b534969604300cd55404b3d9  solutions/unit-test/exercise-4/src/app/model/filter-playgrounds.spec.ts
+89affea6789eb6b1964777b40dd4038ff05d339befd65baf729b314aa9d7ac76  solutions/unit-test/exercise-4/src/app/model/filter-playgrounds.ts
 35406d35da149b16e951357ba2477ad7487a71b34253e78984b1a7586a1b2ee1  solutions/unit-test/exercise-4/src/app/model/playground.ts
 60ff36011b86c0c21a1ddd68ba772751fd2e9a8b30694921a1204e7b92823c86  solutions/unit-test/exercise-4/src/app/pipe/default-description.pipe.spec.ts
 102b6efcd00b3ffe42c860c6c62d2150e3e508c48415a6ce361236c640e95089  solutions/unit-test/exercise-4/src/app/pipe/default-description.pipe.ts

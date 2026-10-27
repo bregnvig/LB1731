@@ -45,13 +45,19 @@ import { PlaygroundService } from './playground.service';
 
 });</code></pre>
   </div>
-  <div class="block" data-type="text" data-name="text-4" style="left:660px;top:640px;width:580px;height:auto;z-index:14;text-align:left">
-    <p><span style="font-size:0.6em"><code><span style="color:#ff8c00">provideHttpClientTesting()</span></code> alone is enough: no <code><span style="color:#ff8c00">provideHttpClient()</span></code> needed.</span></p>
+  <div class="block" data-type="code" data-name="code-5" data-theme="dark" data-auto-height style="left:660px;top:590px;width:580px;height:auto;z-index:15">
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">// playground.service.ts
+import { map, Observable } from 'rxjs';
+import { filterPlaygrounds } from '../model/filter-playgrounds';</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-4" style="left:660px;top:670px;width:580px;height:auto;z-index:14;text-align:left">
+    <p><span style="font-size:0.6em"><code><span style="color:#ff8c00">provideHttpClientTesting()</span></code> alone is enough.</span></p>
   </div>
   <aside class="notes">Skeleton for the spec: imports, fixtures copied from filter-playgrounds.spec.ts, beforeEach and afterEach.
 provideHttpClientTesting() alone is enough.
 
 These are the imports: describe, it, expect, beforeEach and afterEach from vitest, the testing controller and provider from @angular/common/http/testing, TestBed, firstValueFrom, and the Playground and PlaygroundService types. Copy the two fixtures from filter-playgrounds.spec.ts, do not retype them.
+For the service itself, import map from rxjs (next to Observable) and filterPlaygrounds from ../model/filter-playgrounds.
 The setup is the one from the previous slide. provideHttpClientTesting on its own is enough: you do not add provideHttpClient as well. afterEach calls verify, so a request nobody answered fails the test.
 Fill in the two cases yourself, section by section: Arrange by subscribing with firstValueFrom, Act with expectOne and flush, Assert by awaiting the result.</aside>
 </section>

@@ -3,7 +3,7 @@
     <h2>Exercise 2 - Bonus: the second toggle</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:120px;width:1204px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.65em">Add this test to <code><span style="color:#ff8c00">favorites.service.spec.ts</span></code>, inside the <code><span style="color:#ff8c00">describe</span></code>, and keep the bar red until you have seen why:</span></p>
+    <p><span style="font-size:0.65em">Add this test to <code><span style="color:#ff8c00">favorites.service.spec.ts</span></code>, inside the <code><span style="color:#ff8c00">describe</span></code>. Run <code><span style="color:#ff8c00">npm test</span></code> and read the red message before you change any code:</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:170px;width:1204px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">it('should keep both playgrounds when two are toggled', () =&gt; {
@@ -25,7 +25,8 @@ readonly favoriteIds = computed(() =&gt; this.on() ? ['legeplads.2'] : []);
 
 toggle(id: string): void { this.on.update(on =&gt; !on); }</code></pre>
   </div>
-  <aside class="notes">Third test: toggle legeplads.1, then legeplads.2. Goes in favorites.service.spec.ts.
+  <aside class="notes">Run npm test, read the red before changing code.
+Third test: toggle legeplads.1, then legeplads.2. Goes in favorites.service.spec.ts.
 Boolean flag (favorites.service.ts) goes red: second toggle switches the first off.
 Next slide: the fix.
 

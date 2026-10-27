@@ -24,7 +24,7 @@ describe('filterPlaygrounds', () => {
     // Arrange
     const playgrounds = [havnegade, panterensBastion];
     // Act
-    const result = filterPlaygrounds(playgrounds, 'christianshavn');
+    const result = filterPlaygrounds(playgrounds, 'CHRISTIANSHAVN');
     // Assert
     expect(result).toEqual([panterensBastion]);
   });

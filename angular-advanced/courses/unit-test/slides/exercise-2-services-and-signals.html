@@ -22,13 +22,16 @@ expect(service.favoriteIds()).toEqual([...]);</code></pre>
     <p><span style="font-size:0.65em"><code><span style="color:#ff8c00">@Service()</span></code> is what <code><span style="color:#ff8c00">npx ng g s</span></code> generates in Angular 22.</span></p>
 <p><span style="font-size:0.65em"><code><span style="color:#ff8c00">TestBed.inject(FavoritesService)</span></code> gives the test a real instance. No constructor, no manual <code><span style="color:#ff8c00">new</span></code>.</span></p>
 <p><span style="font-size:0.65em">A signal is a function: you read it by calling it, <code><span style="color:#ff8c00">favoriteIds()</span></code>.</span></p>
+<p><span style="font-size:0.65em"><code><span style="color:#ff8c00">@Service()</span></code> classes get dependencies with <code><span style="color:#ff8c00">inject()</span></code>, which only works inside Angular's injector. <code><span style="color:#ff8c00">new Service(mock)</span></code> is gone: use <code><span style="color:#ff8c00">TestBed.inject</span></code>.</span></p>
 <p><span style="font-size:0.65em"><strong>Test the public API, not private fields.</strong> Call <code><span style="color:#ff8c00">toggle</span></code>, read <code><span style="color:#ff8c00">favoriteIds()</span></code>. If you rename a private field the tests should still pass.</span></p>
   </div>
   <aside class="notes">@Service() + TestBed.inject. Read a signal by calling it.
 Public API only: toggle in, favoriteIds() out.
+Veteran: no new Service(mock), inject() needs the injector, use TestBed.inject.
 
 The service is a plain class with @Service(), which is what ng g s generates in Angular 22. It uses inject() instead of constructor parameters.
 In a test you do not call new. TestBed.inject(FavoritesService) builds it the way Angular would.
+Veterans: new FavoritesService(mock) no longer works. A @Service() class gets its dependencies with inject(), and inject() only works inside Angular's injector, so always get the instance from TestBed.inject.
 A signal is read by calling it, so the assertion is expect(service.favoriteIds()).toEqual([...]).
 Test through what the service exposes. If the test reaches into a private field, every refactoring of the internals breaks it for no reason. Tests should only go red when behaviour changes.
 The tests are zoneless via src/test-providers.ts, which matters in later exercises more than here.</aside>

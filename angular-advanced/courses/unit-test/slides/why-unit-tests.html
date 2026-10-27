@@ -6,8 +6,7 @@
     <p><span style="font-size:0.8em">Someone "tidies" the playground filter:</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:200px;width:600px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">const q = query.trim();
-return playgrounds.filter(playground =&gt; playground.name.includes(q));</code></pre>
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">return playgrounds.filter(playground =&gt; playground.name.includes(query));</code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-3" style="left:38px;top:290px;width:560px;height:auto;z-index:13;text-align:left">
     <p><span style="font-size:0.75em">The app builds. The list still shows. Nothing is red.</span></p>

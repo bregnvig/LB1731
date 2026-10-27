@@ -11,9 +11,11 @@
 
 <p><span style="font-size:19.6px">&bull; Assert the rejection: <code><span style="color:#ff8c00">await expect(result).rejects.toMatchObject({ status: 500 })</span></code></span></p>
 
-<p><span style="font-size:19.6px">Which behaviour did you just pin down? Who decides what the user sees on an error?</span></p>
+<p><span style="font-size:19.6px"><b>Green on arrival, expected: it pins behavior that already exists.</b> The service lets the error through; the caller decides what the user sees.</span></p>
+
+<p><span style="font-size:19.6px">See it fail: in <code><span style="color:#ff8c00">search</span></code> temporarily add <code><span style="color:#ff8c00">catchError(() =&gt; of([]))</span></code> to the pipe (imports from <code><span style="color:#ff8c00">rxjs</span></code>). The test goes red. Undo it.</span></p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:400px;width:1204px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:470px;width:1204px;height:auto;z-index:12">
     <pre style="font-size: 15px; line-height: 21px; tab-size: 4;"><code class="language-typescript">// Arrange
 const result = firstValueFrom(service.search('christianshavn'));
 // Act
@@ -23,9 +25,10 @@ await expect(result).rejects.toMatchObject({ status: 500 });
 </code></pre>
   </div>
   <aside class="notes">Bonus. Third case in playground.service.spec.ts: 'should reject when the server fails'.
-Answer to the last question: the service lets the error through; the caller decides.
+Green on arrival, expected: pins existing behavior. See it fail: add catchError(() =&gt; of([])) to search, red, undo.
 
 If you are done early, test the unhappy path. flush can answer with an error: pass a status of 500.
 The observable errors, so firstValueFrom rejects. Use await expect(result).rejects.toMatchObject with status 500.
-Notice what this pins down: our service does not swallow errors, it passes them on. That is a decision, and now a test protects it. Whoever calls search decides what the user sees.</aside>
+The test is green the moment you write it, because the service already passes errors on. That is expected: it pins behavior that already exists. Our service does not swallow errors; that is a decision, and now a test protects it. Whoever calls search decides what the user sees.
+To see it fail, break the code on purpose: add catchError(() =&gt; of([])) to the pipe in search, importing catchError and of from rxjs. The error is swallowed, firstValueFrom resolves, and the test goes red. Undo the change.</aside>
 </section>

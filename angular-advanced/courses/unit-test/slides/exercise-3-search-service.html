@@ -11,14 +11,17 @@
 
 <p><span style="font-size:17px">&nbsp;&nbsp;&nbsp;<code><span style="color:#ff8c00">christianshavn</span></code> gives <code><span style="color:#ff8c00">[panterensBastion]</span></code> &nbsp;&bull;&nbsp; <code><span style="color:#ff8c00">århus</span></code> gives <code><span style="color:#ff8c00">[]</span></code></span></p>
 
-<p><span style="font-size:17px">3. Add <code><span style="color:#ff8c00">search(query: string): Observable&lt;Playground[]&gt;</span></code> to <code><span style="color:#ff8c00">playground.service.ts</span></code>: <code><span style="color:#ff8c00">playgrounds$</span></code> through <code><span style="color:#ff8c00">filterPlaygrounds</span></code>. Green.</span></p>
+<p><span style="font-size:17px">&nbsp;&nbsp;&nbsp;Run <code><span style="color:#ff8c00">npm test</span></code> and read the red message (a compile error is fine) before you write any code.</span></p>
+
+<p><span style="font-size:17px">3. Add <code><span style="color:#ff8c00">search(query: string): Observable&lt;Playground[]&gt;</span></code> to <code><span style="color:#ff8c00">playground.service.ts</span></code>: <code><span style="color:#ff8c00">playgrounds$</span></code> through <code><span style="color:#ff8c00">filterPlaygrounds</span></code>. Import <code><span style="color:#ff8c00">map</span></code> from <code><span style="color:#ff8c00">rxjs</span></code> (with <code><span style="color:#ff8c00">Observable</span></code>) and <code><span style="color:#ff8c00">filterPlaygrounds</span></code> from <code><span style="color:#ff8c00">../model/filter-playgrounds</span></code>. Green.</span></p>
   </div>
   <aside class="notes">Lab exercise-3. TDD: spec red (search missing), then the service.
 Fixtures from filter-playgrounds.spec.ts. Queries christianshavn, århus.
 Stuck on the order? subscribe first, expectOne second.
 
 Same loop as this morning. Write the spec first and see it fail, because search does not exist on PlaygroundService yet. The imports and the beforeEach/afterEach setup are on the next slide.
+Run npm test and read the red message before writing any code.
 Two cases: christianshavn returns only the Panterens Bastion playground, århus returns an empty list. Copy the two fixtures from the filter spec instead of retyping them.
-Then add search to the service: take playgrounds$ and run it through filterPlaygrounds. Watch the spec go green.
+Then add search to the service (imports: map from rxjs, filterPlaygrounds from ../model/filter-playgrounds): take playgrounds$ and run it through filterPlaygrounds. Watch the spec go green.
 If expectOne complains nothing was requested, you forgot to subscribe first.</aside>
 </section>
