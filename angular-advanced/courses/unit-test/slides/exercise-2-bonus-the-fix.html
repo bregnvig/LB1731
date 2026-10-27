@@ -1,0 +1,41 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:40px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2 - Bonus: the fix</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:100px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.65em">Keep a signal of ids. Add the id when it is missing, remove it when it is there. <code><span style="color:#ff8c00">favorites.service.ts</span></code> becomes:</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:150px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { Service, signal } from '@angular/core';
+
+@Service()
+export class FavoritesService {
+
+  private readonly _favoriteIds = signal&lt;string[]&gt;([]);
+  readonly favoriteIds = this._favoriteIds.asReadonly();
+
+  toggle(id: string): void {
+    this._favoriteIds.update(ids =&gt; ids.includes(id) ? ids.filter(favoriteId =&gt; favoriteId !== id) : [...ids, id]);
+  }
+
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:38px;top:480px;width:1204px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.65em">Then add this test to <code><span style="color:#ff8c00">favorites.service.spec.ts</span></code>. It is green on arrival: the fix already handles it, and the test pins that behavior.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-4" data-theme="dark" data-auto-height style="left:38px;top:540px;width:1204px;height:auto;z-index:14">
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">it('should remove a playground from the favorites when toggled again', () =&gt; {
+  // Arrange
+  service.toggle('legeplads.2');
+  // Act
+  service.toggle('legeplads.2');
+  // Assert
+  expect(service.favoriteIds()).toEqual([]);
+});</code></pre>
+  </div>
+  <aside class="notes">Fix: a signal of ids, asReadonly for favoriteIds. Whole class in favorites.service.ts.
+Toggle-twice test in favorites.service.spec.ts: green on arrival, pins the behavior.
+
+A boolean cannot say which playgrounds are favorites. A signal holding the list of ids can: toggle adds the id if it is missing and removes it if it is there. The private signal is _favoriteIds, and favoriteIds is its read-only view, so nobody outside the service can set it.
+Then add the test where you toggle one id twice and expect an empty list. It is green the moment you write it, because the same implementation already handles it. That is fine: the test pins the behavior, so it turns red if someone breaks the removal.</aside>
+</section>

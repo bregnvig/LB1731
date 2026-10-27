@@ -1,0 +1,33 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:60px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2 - Bonus: the second toggle</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:120px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.65em">Add this test to <code><span style="color:#ff8c00">favorites.service.spec.ts</span></code>, inside the <code><span style="color:#ff8c00">describe</span></code>, and keep the bar red until you have seen why:</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:170px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">it('should keep both playgrounds when two are toggled', () =&gt; {
+  // Arrange
+  service.toggle('legeplads.1');
+  // Act
+  service.toggle('legeplads.2');
+  // Assert
+  expect(service.favoriteIds()).toEqual(['legeplads.1', 'legeplads.2']);
+});</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:38px;top:370px;width:1204px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.65em">A boolean implementation passes cycle one and goes red here. Each toggle flips the same flag, so the second one switches the first off.</span></p>
+<p><span style="font-size:0.65em">In <code><span style="color:#ff8c00">favorites.service.ts</span></code> it looks like this:</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-4" data-theme="dark" data-auto-height style="left:38px;top:480px;width:1204px;height:auto;z-index:14">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">private readonly on = signal(false);
+readonly favoriteIds = computed(() =&gt; this.on() ? ['legeplads.2'] : []);
+
+toggle(id: string): void { this.on.update(on =&gt; !on); }</code></pre>
+  </div>
+  <aside class="notes">Third test: toggle legeplads.1, then legeplads.2. Goes in favorites.service.spec.ts.
+Boolean flag (favorites.service.ts) goes red: second toggle switches the first off.
+Next slide: the fix.
+
+Add the third test to the spec you already have, inside the describe. A boolean implementation made cycle one pass: one flag, one hardcoded id. With two playgrounds the second toggle flips the same flag back off, and you get an empty list instead of both ids. If your service is a boolean, run it and read the failure before you fix it.</aside>
+</section>

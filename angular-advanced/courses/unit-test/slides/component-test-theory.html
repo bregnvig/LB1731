@@ -1,0 +1,45 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Testing a component: what a person sees</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:480px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:17.6px">Assert the <b>DOM</b>, not the fields.</span></p>
+
+<p><span style="font-size:17.6px">&bull; Inputs: <code><span style="color:#ff8c00">fixture.componentRef.setInput(name, value)</span></code>, not an assignment</span></p>
+
+<p><span style="font-size:17.6px">&bull; <code><span style="color:#ff8c00">await fixture.whenStable()</span></code> renders. The tests are zoneless (<code><span style="color:#ff8c00">src/test-providers.ts</span></code>)</span></p>
+
+<p><span style="font-size:17.6px">&bull; Read it back with <code><span style="color:#ff8c00">querySelector</span></code> and <code><span style="color:#ff8c00">textContent</span></code></span></p>
+
+<p><span style="font-size:17.6px">&bull; Typing: set <code><span style="color:#ff8c00">value</span></code>, dispatch an <code><span style="color:#ff8c00">input</span></code> event</span></p>
+
+<p><span style="font-size:17.6px">&bull; Zoneless and OnPush only re-render on a notification: <code><span style="color:#ff8c00">setInput</span></code>, a signal the template reads, an event. A plain field write is ignored.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:540px;top:150px;width:700px;height:auto;z-index:12">
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">// Arrange
+fixture = TestBed.createComponent(PlaygroundSearchComponent);
+element = fixture.nativeElement;
+fixture.componentRef.setInput('playgrounds', [havnegade, panterensBastion]);
+await fixture.whenStable();
+
+// Act
+const field = element.querySelector('input')!;
+field.value = query;
+field.dispatchEvent(new Event('input'));
+await fixture.whenStable();
+
+// Assert
+expect(element.querySelector('ul')!.textContent).toContain('Ingen legepladser');
+</code></pre>
+  </div>
+  <aside class="notes">A component test asserts what a person sees: text in the DOM.
+setInput for inputs. await fixture.whenStable() to render. querySelector + textContent.
+Typing = set value + dispatch 'input'.
+Plain field write: no notification, no re-render.
+No detectChanges needed.
+
+A component has a template, so its output is what a user sees. Assert that: text in the DOM. Not the component's private fields.
+Inputs are signals, you cannot assign them. Use fixture.componentRef.setInput with the input name. Then await fixture.whenStable(): the tests run zoneless, so this renders the template. See test-providers.ts if you want to know why.
+To read what is shown, querySelector and textContent. To type, set the field's value and dispatch an input event, then wait for stability again.
+Why not just write to a field on the component? Zoneless and OnPush change detection only run after a notification: setInput, a signal the template reads, or an event handler. A plain field write gives none, so the DOM stays old. That is also how the real app behaves.</aside>
+</section>

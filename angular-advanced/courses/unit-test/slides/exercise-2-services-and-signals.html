@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:60px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Testing a service that holds a signal</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:140px;width:560px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { Service } from '@angular/core';
+
+@Service()
+export class FavoritesService {
+}</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:300px;width:560px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">beforeEach(() =&gt; {
+  service = TestBed.inject(FavoritesService);
+});
+
+// Act
+// Assert
+expect(service.favoriteIds()).toEqual([...]);</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:640px;top:140px;width:600px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.65em"><code><span style="color:#ff8c00">@Service()</span></code> is what <code><span style="color:#ff8c00">npx ng g s</span></code> generates in Angular 22.</span></p>
+<p><span style="font-size:0.65em"><code><span style="color:#ff8c00">TestBed.inject(FavoritesService)</span></code> gives the test a real instance. No constructor, no manual <code><span style="color:#ff8c00">new</span></code>.</span></p>
+<p><span style="font-size:0.65em">A signal is a function: you read it by calling it, <code><span style="color:#ff8c00">favoriteIds()</span></code>.</span></p>
+<p><span style="font-size:0.65em"><strong>Test the public API, not private fields.</strong> Call <code><span style="color:#ff8c00">toggle</span></code>, read <code><span style="color:#ff8c00">favoriteIds()</span></code>. If you rename a private field the tests should still pass.</span></p>
+  </div>
+  <aside class="notes">@Service() + TestBed.inject. Read a signal by calling it.
+Public API only: toggle in, favoriteIds() out.
+
+The service is a plain class with @Service(), which is what ng g s generates in Angular 22. It uses inject() instead of constructor parameters.
+In a test you do not call new. TestBed.inject(FavoritesService) builds it the way Angular would.
+A signal is read by calling it, so the assertion is expect(service.favoriteIds()).toEqual([...]).
+Test through what the service exposes. If the test reaches into a private field, every refactoring of the internals breaks it for no reason. Tests should only go red when behaviour changes.
+The tests are zoneless via src/test-providers.ts, which matters in later exercises more than here.</aside>
+</section>

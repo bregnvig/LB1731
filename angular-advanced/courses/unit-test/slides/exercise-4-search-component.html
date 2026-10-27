@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - The search component</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">Go to <code><span style="color:#ff8c00">labs/unit-test/exercise-4</span></code>. Run <code><span style="color:#ff8c00">npm install</span></code> and <code><span style="color:#ff8c00">npm test</span></code>.</span></p>
+
+<p><span style="font-size:19.6px">Open <code><span style="color:#ff8c00">src/app/sidebar/playground-search.component.ts</span></code>: the starter lists <b>every</b> playground, whatever you type.</span></p>
+
+<p><span style="font-size:19.6px">1. Create <code><span style="color:#ff8c00">playground-search.component.spec.ts</span></code> (imports and <code><span style="color:#ff8c00">beforeEach</span></code> on the next slide) with the same two fixtures (<code><span style="color:#ff8c00">legeplads.1</span></code>, <code><span style="color:#ff8c00">legeplads.2</span></code>).</span></p>
+
+<p><span style="font-size:19.6px">2. <code><span style="color:#ff8c00">setInput</span></code> both playgrounds, type <code><span style="color:#ff8c00">trampolin</span></code>, expect the list to contain "Havnegades trampolinpromenade" and not "Christianshavn". <b>Red</b>.</span></p>
+
+<p><span style="font-size:19.6px">3. Fix the component with <b>one</b> call to <code><span style="color:#ff8c00">filterPlaygrounds</span></code> in a <code><span style="color:#ff8c00">computed</span></code> (click the title for the hint). <b>Green</b>.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height data-animate="fade-in" data-animate-duration="0.4" data-animate-delay="0" data-animate-on="title" style="left:38px;top:440px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { Component, computed, input, signal } from '@angular/core';
+import { filterPlaygrounds } from '../model/filter-playgrounds';
+
+readonly filteredPlaygrounds = computed(() =&gt; filterPlaygrounds(this.playgrounds(), this.query()));
+
+@for (playground of filteredPlaygrounds(); track playground.id) {
+</code></pre>
+  </div>
+  <aside class="notes">Lab exercise-4. Starter template iterates playgrounds(); no filtering.
+Red: both names are listed. Green: one computed + the @for line.
+Hint appears on a click of the title. Solution: courses/unit-test/step-5.
+Same fixtures and queries: trampolin, christianshavn, århus.
+
+Open the component. It has a search field and a list, but the list shows everything. Write the test for the behaviour you want first.
+The imports and the beforeEach skeleton are on the next slide.
+beforeEach: create the component, setInput with the two playgrounds, await whenStable. In the test: set the field to trampolin, dispatch an input event, await whenStable, then check the list text.
+It must fail first: the Christianshavn playground is still listed. Good, that is the red.
+Now add one call to filterPlaygrounds, inside a computed, and loop over it in the template. Green. The click on the title shows the three lines.</aside>
+</section>

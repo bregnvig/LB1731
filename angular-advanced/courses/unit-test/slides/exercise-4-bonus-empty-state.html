@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Bonus: Ingen legepladser</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">Same spec. A second case for the empty state.</span></p>
+
+<p><span style="font-size:19.6px">1. Type <code><span style="color:#ff8c00">århus</span></code>, expect the list to contain "Ingen legepladser". Run it <b>before the fix</b> and see it <b>red</b>: if the component is already fixed, make <code><span style="color:#ff8c00">filteredPlaygrounds</span></code> return <code><span style="color:#ff8c00">this.playgrounds()</span></code> for a moment, then put the <code><span style="color:#ff8c00">computed</span></code> back.</span></p>
+
+<p><span style="font-size:19.6px">2. Now delete the <code><span style="color:#ff8c00">@empty</span></code> block from the template. Does your spec notice?</span></p>
+
+<p><span style="font-size:19.6px">3. Restore it. Which oracle did you use: the list text, or something weaker?</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:400px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">  async function search(query: string): Promise&lt;void&gt; {
+    const field = element.querySelector('input')!;
+    // Act
+    field.value = query;
+    field.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+  }
+
+  it(`should show 'Ingen legepladser' when no name matches`, async () =&gt; {
+    // Act
+    await search('århus');
+    // Assert
+    expect(element.querySelector('ul')!.textContent).toContain('Ingen legepladser');
+  });</code></pre>
+  </div>
+  <aside class="notes">Bonus. With the starter, århus still lists both: red. With the computed: green.
+Deleting @empty must turn the spec red, otherwise the oracle is weak.
+Link back to the deletion question.
+
+Second case: a query that matches nothing. The template has an empty state that says Ingen legepladser.
+Add the search helper (on the slide) next to the tests, then the new case. Run it before the fix and see it fail, make it pass with the computed.
+Then run the deletion question on your own test: delete the @empty block and see whether the spec notices. If it stays green, your assertion is too weak.</aside>
+</section>

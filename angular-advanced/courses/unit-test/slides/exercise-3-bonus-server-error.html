@@ -1,0 +1,31 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Bonus: the server fails</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">Same lab, same spec. A third case: the server answers <b>500</b>.</span></p>
+
+<p><span style="font-size:19.6px">&bull; <code><span style="color:#ff8c00">flush</span></code> takes a body and a <code><span style="color:#ff8c00">{ status, statusText }</span></code></span></p>
+
+<p><span style="font-size:19.6px">&bull; The observable errors, so <code><span style="color:#ff8c00">firstValueFrom</span></code> <b>rejects</b></span></p>
+
+<p><span style="font-size:19.6px">&bull; Assert the rejection: <code><span style="color:#ff8c00">await expect(result).rejects.toMatchObject({ status: 500 })</span></code></span></p>
+
+<p><span style="font-size:19.6px">Which behaviour did you just pin down? Who decides what the user sees on an error?</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:400px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 15px; line-height: 21px; tab-size: 4;"><code class="language-typescript">// Arrange
+const result = firstValueFrom(service.search('christianshavn'));
+// Act
+httpTesting.expectOne('assets/copenhagen.json').flush('Server error', { status: 500, statusText: 'Internal Server Error' });
+// Assert
+await expect(result).rejects.toMatchObject({ status: 500 });
+</code></pre>
+  </div>
+  <aside class="notes">Bonus. Third case in playground.service.spec.ts: 'should reject when the server fails'.
+Answer to the last question: the service lets the error through; the caller decides.
+
+If you are done early, test the unhappy path. flush can answer with an error: pass a status of 500.
+The observable errors, so firstValueFrom rejects. Use await expect(result).rejects.toMatchObject with status 500.
+Notice what this pins down: our service does not swallow errors, it passes them on. That is a decision, and now a test protects it. Whoever calls search decides what the user sees.</aside>
+</section>
