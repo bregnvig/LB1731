@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Bonus: content-visibility</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:580px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure, change, measure again.</span> Write the number down before you touch anything.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/sidebar/sidebar-list-item/sidebar-list-item.component.ts</span></code>: add a <code><span style="color:#ff8c00">styles</span></code> block that targets <code><span style="color:#ff8c00">:host</span></code>.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:660px;top:160px;width:580px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure before:</span> Performance panel, record a reload, note Rendering and Layout time in the summary.</span></p><p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure after:</span> record again. Rendering/Layout time should drop (try 6x CPU slowdown to see it). <code>document.querySelectorAll('*').length</code> is unchanged: it is render work, not node count.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:660px;top:500px;width:580px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript">styles: `
+  :host {
+    display: block;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 66px;
+  }
+`,
+</code></pre>
+  </div>
+  <aside class="notes">Style on the list item host: display block, content-visibility auto, contain-intrinsic-size auto 66px.
+File: sidebar/sidebar-list-item/sidebar-list-item.component.ts
+Measure: Performance panel, record a reload, compare Rendering/Layout time before and after. The DOM count does NOT change (still about 1,020).
+
+Bonus. Add a styles block to the list item component with the host rule on the slide.
+Record before and after in the Performance panel: start recording, reload the page, stop. Look at the summary: how many milliseconds of Rendering and Layout? Do the same after the change.
+Then run the node count again. It is the same, about 1,020. content-visibility does not remove nodes. It stops the browser from doing layout and paint for the rows you cannot see.
+The difference is small on a fast machine. Try the 6x CPU slowdown in the Performance panel's settings to make it show.</aside>
+</section>

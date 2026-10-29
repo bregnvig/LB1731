@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>OnPush is the default (v22)</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:532px;height:auto;z-index:11;text-align:left">
+    <p>Every component is OnPush unless it opts out</p>
+
+<p>The old default is now called <span style="color:#FF8C00"><code>Eager</code></span>. Every component in this app has it: it is what <code>ng update</code> adds to an existing app</p>
+
+<p>An OnPush component is checked when</p>
+<ul>
+	<li>an input changes</li>
+	<li>an event fires in its template</li>
+	<li>a signal its template reads changes</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:620px;top:230px;width:640px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3-4">@Component({
+  selector: 'loop-footer',
+  // Opts out of OnPush (the old default)
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `...`,
+})
+export class FooterComponent {}
+</code></pre>
+  </div>
+  <aside class="notes">d.ts in node_modules/@angular/core: OnPush = 0 ("NOTE: OnPush is enabled by default."), Eager = 1, Default = 1 deprecated alias ("due to be removed").
+Eager: checked whenever the traversal reaches it. Works under zone.js, it is what the footer needs while a plain field changes.
+Exercise 2: delete the Eager line, in every component, once the field is a signal.
+ng update: the change-detection-eager migration (22.0.0, in @angular/core/schematics/migrations.json) adds ChangeDetectionStrategy.Eager to all components. Our starting app looks like that.
+
+Since Angular 22 every component is OnPush unless it says otherwise. You can see it in the type declarations in node_modules: OnPush is the first member, and its comment says OnPush is enabled by default. The old default is now called Eager, and Default still compiles as a deprecated alias that is going to be removed.
+Eager means check me every time the change detection traversal reaches me. That is what lets the footer's plain field work under Zone.js: the zone runs a cycle every second, and the footer is checked and picks up the new number. That is why the footer says Eager, and, like an app after ng update, so does every other component: the migration adds it everywhere so nothing changes behaviour.
+An OnPush component is checked when an input changes, an event fires in its template, or a signal its template reads changes. The third is what we use in exercise 2: make the counter a signal and the Eager lines can go, in every component.</aside>
+</section>

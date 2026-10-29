@@ -1,0 +1,36 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1000px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2 - Fix the footer with a signal</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1200px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code>, file <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code></p>
+<ol style="font-size:0.7em">
+	<li><code><span style="color:#ff8c00">seconds</span></code> becomes <code><span style="color:#ff8c00">signal(0)</span></code></li>
+	<li>Write it with <code><span style="color:#ff8c00">.set(...)</span></code>, read it as <code><span style="color:#ff8c00">seconds()</span></code> in the template</li>
+	<li>Delete the <code><span style="color:#ff8c00">changeDetection</span></code> line and the <code><span style="color:#ff8c00">ChangeDetectionStrategy</span></code> import from the footer and from every other component: OnPush is the default</li>
+</ol>
+<p style="font-size:0.7em"><strong>Measure after:</strong> the counter counts again. Record 10 quiet seconds: still one bar per second, but now only the footer is refreshed. Move the mouse over the map: no bars. Run <code><span style="color:#ff8c00">npm run build</span></code>: polyfills is 494 bytes.</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:350px;width:1200px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript">import { Component, Input, signal } from '@angular/core';
+
+  seconds = signal(0);
+
+  constructor() {
+    setInterval(() =&gt; this.seconds.set(Math.round((Date.now() - this.loadedAt) / 1000)), 1000);
+  }
+
+// template:
+&lt;p&gt;&lt;small&gt;Opdateret for {{ seconds() }} sekunder siden&lt;/small&gt;&lt;/p&gt;
+</code></pre>
+  </div>
+  <aside class="notes">signal(0), .set(), seconds() in template, remove changeDetection + its import, in every component.
+@Input()s stay as they are (inputs set by the parent mark the view).
+Measure after: bars only when the signal changes (every second, footer only), none from the mouse; polyfills 494 B.
+No markForCheck needed.
+
+The fix is small. Make seconds a signal, set it in the interval, and call it in the template. Then delete the changeDetection line, so the footer is OnPush like everything else, and delete the import that is no longer used. Do the same in the other six components: the app, home, sidebar, list item, detail page and the Leaflet wrapper. Then no component is checked by default any more.
+Why does it work? The template reads the signal. When the interval sets a new value, Angular marks exactly that view for refresh and schedules a cycle. No markForCheck, no zone, no Eager.
+Measure after. The counter counts. In the profiler you still have one bar per second, because the number really does change every second, but now the cycle refreshes only the footer. Move the mouse over the map and nothing happens. Run the build again and compare the polyfills line with your before number.
+Compare all three states: step one, mouse bars everywhere. Exercise 1, only the timer. Now, only what actually changed.</aside>
+</section>

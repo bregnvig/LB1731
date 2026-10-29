@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>What does "slow" mean?</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:640px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li><strong>Startup</strong>: download, parse and first render. Big bundles, everything loaded eagerly</li>
+	<li><strong>Interaction</strong>: clicks, typing and mouse moves feel laggy. Too much change detection, long tasks</li>
+	<li><strong>Memory</strong>: fast at first, slower the longer you use it. Leaks, too many DOM nodes</li>
+</ul>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:760px;top:216px;width:460px;height:auto;z-index:12;text-align:left">
+    <p>Today's labs</p>
+<ul>
+	<li>Exercise 1 and 2: interaction</li>
+	<li>Exercise 3: startup</li>
+	<li>Exercise 4: memory and the DOM</li>
+</ul>
+  </div>
+  <aside class="notes">Three kinds of slow, each with its own tool.
+Startup: ng build output, Network panel. Interaction: Profiler, Performance panel. Memory: heap snapshots.
+Labs 1+2 interaction, lab 3 startup, lab 4 memory.
+
+When a user says the app is slow, ask which slow. Startup is the wait before they can use it: JavaScript to download, parse and run. Interaction is lag after startup: you move the mouse or click and the screen answers late, usually because Angular does too much work per event. Memory is slow over time: it was fine when you opened it, and an hour later the tab is heavy because things were never cleaned up, or there are simply too many DOM nodes.
+Each kind has a different tool, and a fix for one does nothing for the others. That is why we measure first. The four labs go through all three.</aside>
+</section>

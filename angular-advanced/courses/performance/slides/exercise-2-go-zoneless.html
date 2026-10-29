@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1000px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2 - Measure, then go zoneless</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:600px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:680px;top:150px;width:560px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-bash">npm install
+npm run build
+npm start
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:38px;top:190px;width:600px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.7em"><strong>Measure before:</strong> note the <code><span style="color:#ff8c00">polyfills</span></code> line of <code><span style="color:#ff8c00">npm run build</span></code> (35.09 kB). Then in the Profiler record 10 seconds without touching the app: one bar every second, the footer.</p>
+<p style="font-size:0.7em"><strong>Change</strong></p>
+<ol style="font-size:0.7em">
+	<li><code><span style="color:#ff8c00">angular.json</span></code>: delete <code><span style="color:#ff8c00">"zone.js"</span></code> from <code><span style="color:#ff8c00">polyfills</span></code></li>
+	<li><code><span style="color:#ff8c00">src/main.ts</span></code>: replace <code><span style="color:#ff8c00">provideZoneChangeDetection()</span></code> with <code><span style="color:#ff8c00">provideZonelessChangeDetection()</span></code> (and its import)</li>
+</ol>
+<p style="font-size:0.7em">Restart <code><span style="color:#ff8c00">npm start</span></code>. The footer counter is stuck on one number. That is what you just learned.</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:640px;top:290px;width:600px;height:auto;z-index:14">
+    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">bootstrapApplication(AppComponent, {
+  providers: [
+    provideZonelessChangeDetection(),provideHttpClient(withXhr()),
+    provideRouter(AppRoutes),
+</code></pre>
+  </div>
+  <aside class="notes">Lab exercise-2. Measure before: polyfills 35.09 kB in the build, one footer bar per second in the profiler.
+Change: remove zone.js from polyfills (angular.json has no test target), switch provider in main.ts.
+Expect: counter freezes. Next slide fixes it.
+
+Exercise 2 starts, as always, with a measurement. Go to labs/performance/exercise-2, npm install, then run npm run build and look at the polyfills line: about 35 kilobytes. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer.
+Now the change. In angular.json remove zone.js from the polyfills of the build. Only the build: this app has no test target. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, and fix the import.
+Restart and look at the footer. The counter is frozen. Exactly like in the bonus, and for the same reason: a timer writes a plain field and nothing tells Angular. Next slide fixes it. Leave the runOutsideAngular from exercise 1 where it is.</aside>
+</section>

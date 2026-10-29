@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>content-visibility: auto</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:500px;height:auto;z-index:11;text-align:left">
+    <p>Skip layout and paint of off-screen rows</p>
+<p>The node count stays the same: only render work goes down</p>
+<p><span style="color:#FF8C00"><code>contain-intrinsic-size</code></span> reserves a height so the scrollbar is stable</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:600px;top:240px;width:680px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">styles: `
+  :host {
+    display: block;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 66px;
+  }
+`,
+</code></pre>
+  </div>
+  <aside class="notes">Pure CSS: the browser skips layout and paint of rows that are off screen.
+Does NOT reduce the node count. It reduces rendering work.
+contain-intrinsic-size gives the skipped rows a height so the scrollbar doesn't jump. auto remembers the real one.
+Bonus in exercise 4.
+
+If you cannot remove nodes, you can make them cheaper. content-visibility auto tells the browser: do not do layout or paint for this element while it is off screen. It is pure CSS, no JavaScript.
+The element's size is unknown while it is skipped, so the scrollbar would jump. contain-intrinsic-size gives it a placeholder size. The auto keyword means: once you have rendered it, remember the real size.
+Be clear on what it does: the node count stays at about 1,020. What goes down is the time spent in layout and rendering, which you see in the Performance panel. That is a different problem from memory.
+That is the bonus in this exercise: put it on the list item host.</aside>
+</section>

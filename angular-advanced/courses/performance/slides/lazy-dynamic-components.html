@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Lazy dynamic components</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:470px;height:auto;z-index:11;text-align:left">
+    <p>The template cannot say it up front: a click decides</p>
+<p><span style="color:#FF8C00"><code>await import(...)</code></span> gives the class, in its own chunk</p>
+<p><span style="color:#FF8C00"><code>NgComponentOutlet</code></span> renders a <span style="color:#FF8C00"><code>Type</code></span> (or <span style="color:#FF8C00"><code>null</code></span>: nothing)</p>
+<p>Or <span style="color:#FF8C00"><code>createComponent</code></span> on a <span style="color:#FF8C00"><code>ViewContainerRef</code></span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:230px;width:720px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">about = signal&lt;Type&lt;unknown&gt; | null&gt;(null);
+
+async toggleAbout() {
+  if (this.about()) {
+    this.about.set(null);
+  } else {
+    const { AboutComponent } = await import('../about/about.component');
+    this.about.set(AboutComponent);
+  }
+}
+
+&lt;ng-container *ngComponentOutlet="about()"/&gt;
+</code></pre>
+  </div>
+  <aside class="notes">@defer needs the component in the template. When code decides at runtime: import() + render it.
+await import(...) gives the class; NgComponentOutlet renders a Type.
+Or ViewContainerRef.createComponent(Type).
+Bonus in the exercise: the "Om appen" panel.
+
+Sometimes there is no place in a template for @defer: the user clicks a button, and only then do you know you need the component. Then you do it by hand.
+Step one: await import() gives you the file, and from it the component class. The bundler puts that file in its own chunk, so nothing is downloaded until this line runs.
+Step two: render the class. NgComponentOutlet takes a component type and renders it; with null it renders nothing. The other way is to call createComponent on a ViewContainerRef. NgComponentOutlet is the shorter one, so that is what the bonus uses.
+The signal holds the type. When it changes from null to the class, the outlet renders it, and since it is a signal it works zoneless too.</aside>
+</section>

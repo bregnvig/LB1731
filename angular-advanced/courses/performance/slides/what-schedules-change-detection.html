@@ -1,0 +1,32 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Zoneless: what schedules change detection?</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:560px;height:auto;z-index:11;text-align:left">
+    <p>A cycle is scheduled when</p>
+<ul>
+	<li>a <strong>signal</strong> read in a template changes</li>
+	<li><code>markForCheck()</code> is called (the async pipe does it)</li>
+	<li>a template or host <strong>listener</strong> fires</li>
+	<li><code>ComponentRef.setInput</code> is called</li>
+	<li>a dirty view is attached</li>
+</ul>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:680px;top:216px;width:540px;height:auto;z-index:12;text-align:left">
+    <p>It is <em>not</em> scheduled by</p>
+<ul>
+	<li><code>setTimeout</code> or <code>setInterval</code></li>
+	<li>a promise or XHR finishing</li>
+	<li>assigning a plain field</li>
+</ul>
+<p><span style="font-size:0.7em;color:#a9a9a9">Also: <code>NgZone.onStable</code> and friends never emit, <code>isStable</code> is always true. SSR needs <code>PendingTasks</code>. Tests: <code>fixture.whenStable()</code>.</span></p>
+  </div>
+  <aside class="notes">Triggers: signal read in template, markForCheck/async pipe, bound listeners, setInput, attaching a dirty view.
+Not triggers: timers, promises, plain fields. That is why the footer will freeze.
+Breaks: onMicrotaskEmpty/onUnstable/onStable never emit; isStable always true.
+Source: angular.dev/guide/zoneless.
+
+Here is the list you need in your head. Without Zone.js, change detection is scheduled by a short list of things: a signal read in a template changes, markForCheck is called, which the async pipe does for you, a listener bound in a template fires, setInput is called on a component created in code, or a dirty view is attached.
+Look at what is not on the list: timers, finished promises, finished requests, and a plain field being assigned. Those used to work because the zone ran a cycle after them. Now they do nothing visible. The footer's setInterval writes a plain field, so the counter will freeze when we remove zone.js.
+Also be aware that NgZone events like onStable never emit, and isStable is always true, so code that waits on them needs another way. In tests, use fixture.whenStable. The rule of thumb: if the screen should change, change a signal.</aside>
+</section>

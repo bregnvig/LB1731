@@ -1,0 +1,31 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>DOM size</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:560px;height:auto;z-index:11;text-align:left">
+    <p>Lighthouse warns from about <span style="color:#FF8C00">800</span> nodes, errors above about 1400</p>
+<p>Count them in the console:</p>
+<p><span style="font-size:0.7em"><span style="color:#FF8C00"><code>document.querySelectorAll('*').length</code></span></span></p>
+<p>One row = 7 elements, 133 rows = about 930 from the list alone</p>
+<p><span style="color:#FF8C00"><code>track</code></span> keeps DOM for unchanged items</p>
+<p><small>Source: Chrome for Developers, Lighthouse DOM size, updated 2024-06-21</small></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:660px;top:260px;width:600px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 24px; tab-size: 4;"><code class="language-html">@for (playground of playgrounds(); track playground.id) {
+  &lt;loop-sidebar-list-item
+    [playground]="playground"
+    ... /&gt;
+}
+</code></pre>
+  </div>
+  <aside class="notes">Every element costs memory and style/layout work.
+Lighthouse warns above about 800 nodes, errors above about 1400 (Chrome for Developers, updated 2024-06-21).
+Console: document.querySelectorAll('*').length
+Our list: 7 elements per row x 133 rows = about 930 from the list alone.
+@for needs a track expression: stable identity lets Angular reuse DOM instead of rebuilding.
+
+Every element in the page has a cost: memory, and work whenever styles or layout are recalculated. Big DOMs make every interaction slower.
+Lighthouse gives a rough rule: a warning above about 800 nodes and an error above about 1400. That is from the Chrome for Developers documentation page on DOM size, last updated in June 2024, so treat the exact numbers as a rule of thumb, newer Lighthouse versions fold it into an insight called Optimize DOM size.
+To check in your own app, run document.querySelectorAll star in the console. Ours says about 1,020, and 931 of them are the list: each row is a list item, button, div, h6, small, div and span, seven elements, times 133 playgrounds.
+In the template, @for requires a track expression. Tracking by id means that when the array changes, Angular keeps the rows that are still there, instead of destroying and recreating them.</aside>
+</section>

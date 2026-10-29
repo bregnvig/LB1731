@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Lazy routes</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:470px;height:auto;z-index:11;text-align:left">
+    <p><span style="color:#FF8C00"><code>loadComponent</code></span> for one standalone component</p>
+<p><span style="color:#FF8C00"><code>loadChildren</code></span> for a route tree</p>
+<p>Remove the static <span style="color:#FF8C00"><code>import</code></span> at the top, or the code stays in <span style="color:#FF8C00"><code>main</code></span></p>
+<p>The step-4 detail route is in the exercise</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:230px;width:720px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">{
+  path: 'legeplads/:id',
+  loadComponent: () =&gt;
+    import('src/app/playground-detail/playground-detail.component')
+      .then(m =&gt; m.PlaygroundDetailComponent),
+},
+{
+  path: 'admin',
+  loadChildren: () =&gt;
+    import('./admin/admin.routes').then(m =&gt; m.ADMIN_ROUTES),
+},
+</code></pre>
+  </div>
+  <aside class="notes">loadComponent for one component, loadChildren for a whole route tree.
+Both take a function returning import(). The bundler splits at the import.
+The detail route in the exercise gets a chunk of about 1 kB: small, but the pattern is the point.
+Both run in an injection context.
+
+A lazy route is a route whose code is not in the first download. You give the router a function that calls import(), and the build tool puts the imported file in its own chunk.
+loadComponent is for a single standalone component. This is what you do in the exercise for the detail route: remove the import at the top of the routes file, and use loadComponent instead.
+loadChildren is for a group of routes, for instance everything under /admin. The imported file exports a Routes array, and if it is the default export you do not even need the then.
+Important: it only works if nothing else imports that component statically. One normal import at the top of the file and the chunk is back in main.
+The functions run in an injection context, so you can call inject() inside them if you need to.</aside>
+</section>

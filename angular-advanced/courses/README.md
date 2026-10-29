@@ -225,6 +225,27 @@ Patterns and libraries for managing application state in Angular.
 
 ---
 
+### 10. Performance & Change Detection
+
+Finding and fixing what makes the playground app slow, with one rule for every lab: measure, change, measure again.
+
+**Topics covered:**
+- What "slow" means for a user: startup, interaction, memory
+- Change detection and zone.js: patched async APIs, a cycle after every task; `NgZone.runOutsideAngular`
+- **Tools:** Angular DevTools Profiler, the Angular track in the Chrome Performance panel (`ng.enableProfiling()`), Chrome Memory panel heap snapshots
+- **Zoneless:** what schedules change detection without zone.js, OnPush as the default (old default `Eager`), signals: no cleanup, `computed` lazy, `effect`/`toSignal` eager
+- **Loading less up front:** reading `ng build` output, lazy routes (`loadComponent`, preloading), `@defer` triggers and placeholders, lazily loaded dynamic components
+- **Memory and the DOM:** leaks from intervals, listeners and third-party objects (`DestroyRef`), detached nodes, DOM size, `content-visibility`, `WeakMap`
+- One slide each: `ngSrc`, virtual scroll, bundle budgets, SSR and incremental hydration
+
+**Exercises:**
+1. **Measure and leave the zone** - Profile the map and the ticking footer; create the Leaflet map with `runOutsideAngular`; profile again; bonus: run the footer interval outside the zone and see it freeze
+2. **Go zoneless and move to signals** - Remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and drop `Eager`; compare the build output
+3. **Load less up front** - `loadComponent` for the detail route, `@defer` around the map and the footer, register only the used icons; compare initial and lazy chunks; bonus: lazily loaded "Om appen" panel with `NgComponentOutlet`
+4. **Memory and the DOM** - Heap snapshots before and after navigating home and detail; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`; count DOM nodes; bonus: `content-visibility: auto` on the list rows
+
+---
+
 ## Exercise Progression
 
 Each module builds on the same playground-finder application. Labs are organized as:
@@ -240,5 +261,6 @@ Each module builds on the same playground-finder application. Labs are organized
 | Pipes & Directives | `courses/pipes-and-directives` | 4 exercises |
 | Signals | `courses/signals` | 3 exercises |
 | State Management | `courses/state-management` | 3 exercises |
+| Performance | `courses/performance` | 4 exercises |
 
 The workspace these courses live in (steps, zips, the `adv` CLI, the slides) is described in [../README.md](../README.md).

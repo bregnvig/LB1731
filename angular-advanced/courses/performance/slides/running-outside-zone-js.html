@@ -1,0 +1,35 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1036px;height:auto;z-index:10;text-align:left">
+    <h2>Running outside Zone.js</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:196px;width:1196px;height:auto;z-index:11">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4,7">export class ChangeDetectionComponent implements AfterViewInit {
+
+  div = viewChild.required&lt;ElementRef&lt;HTMLElement&gt;&gt;('outside');
+  #zone = inject(NgZone);
+
+  ngAfterViewInit(): void {
+    this.#zone.runOutsideAngular(() =&gt;
+      this.div().nativeElement.addEventListener('mousemove', event =&gt; this.mouseMove(event)));
+  }
+
+  mouseMove(event: MouseEvent) {
+    console.log('Mouse move', event);
+  }
+}
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:570px;width:1100px;height:auto;z-index:12;text-align:left">
+    <ul>
+	<li>Code started inside <code>runOutsideAngular</code> never triggers Zone.js: no change detection after it</li>
+	<li>Good for high-frequency events and third-party libraries. But nothing tells Angular about changes either: update state with a <strong>signal</strong>, or call <code>NgZone.run</code></li>
+</ul>
+  </div>
+  <aside class="notes">Only the listener registration goes outside. Same log output, different profiler.
+Careful: you are switching Angular off for that code.
+Original slide mixed #zone and this.zone: fixed here.
+
+Here is the tool. NgZone.runOutsideAngular takes a function and runs it outside the zone. Anything it starts, like this event listener, is not patched by zone.js, so when the mouse moves, Angular does not run change detection.
+Show the green example: the log looks the same, but in the profiler there are no bars.
+It is a power tool. You are cutting the wire between this code and Angular. Use it for high-frequency events and third-party libraries that manage their own DOM, and be sure that nothing in your templates depends on what happens in there. If it does, update a signal, or hop back in with zone.run.</aside>
+</section>

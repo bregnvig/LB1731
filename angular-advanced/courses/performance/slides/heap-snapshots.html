@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Heap snapshots</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1100px;height:auto;z-index:11;text-align:left">
+    <p><span style="color:#FF8C00"><code>DevTools > Memory > Heap snapshot</code></span></p>
+<ol>
+	<li>Trash icon: collect garbage</li>
+	<li>Snapshot on the starting page</li>
+	<li>Use the app, trash icon again</li>
+	<li>Second snapshot, compare</li>
+</ol>
+<p>Filter <span style="color:#FF8C00"><code>Detached</code></span>, or a class name, and read <span style="color:#FF8C00">Retainers</span></p>
+  </div>
+  <aside class="notes">Chrome DevTools &gt; Memory &gt; Heap snapshot. Trash icon first (collect garbage), then Take snapshot.
+Compare two snapshots: Summary dropdown &gt; Comparison, or just count instances.
+Class filter: type Detached. Click an object: the Retainers pane shows what keeps it alive.
+Shallow size = the object itself, retained size = what is freed with it.
+
+A heap snapshot is a photo of every object in memory. You take two and compare.
+Open DevTools, Memory tab, choose Heap snapshot. Click the trash can first, that forces a garbage collection, so what is left is really being held. Then Take snapshot.
+Do something in the app, home to detail and back a few times, collect garbage again, take a second snapshot.
+In the class filter type Detached. A detached DOM node is a node that is out of the page but still in memory, because something still points to it. Those are the leaks you can see. You can also filter by class name, like FooterComponent or LeafletComponent, and count instances. After four trips there should not be five footers.
+Click an object and look at the Retainers pane at the bottom: it shows the chain that keeps it alive. For the footer it ends in a timer. That is the pointer you need to cut.
+Shallow size is the object alone, retained size is everything that would be freed with it. Sort by retained size to find the big ones.</aside>
+</section>

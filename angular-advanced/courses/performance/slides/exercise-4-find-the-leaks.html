@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Find the leaks</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure, change, measure again.</span> Write the number down before you touch anything.</span></p><p><span style="font-size:0.7em">Change directory to <code><span style="color:#ff8c00">labs/performance/exercise-4</span></code> and run:</span></p><p><span style="font-size:0.7em"><code><span style="color:#ff8c00">npm install</span></code><br><code><span style="color:#ff8c00">npm start -- --no-hmr</span></code></span></p><p><span style="font-size:0.7em">Chrome DevTools, <code>Memory</code>, <code>Heap snapshot</code>. Trash icon, snapshot 1 on the home page. Select a playground, open <code>Detaljer</code>, go back; repeat 4-5 times. Trash icon, snapshot 2.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:660px;top:160px;width:580px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure before:</span> in snapshot 2 type <code>Detached</code> in the class filter and write down the count. Then filter <code>FooterComponent</code> and <code>LeafletComponent</code>: how many instances? (We saw 10 footers after five rounds, no extra LeafletComponent.)</span></p><p><span style="font-size:0.7em">Click one and read <code>Retainers</code>. What keeps the footer alive? What keeps the map?</span></p>
+  </div>
+  <aside class="notes">Measure first: two heap snapshots, home -&gt; detail -&gt; home a few times between.
+Lab: labs/performance/exercise-4
+Expect: Detached elements (one detached main per visit), FooterComponent instances growing. LeafletComponent instances do not grow: Leaflet keeps the map alive through a window resize listener. Write the counts down.
+Use --no-hmr so the dev server doesn't keep old modules around.
+
+Last exercise. Go to labs/performance/exercise-4, npm install, and npm start with the extra flag, dash dash no hmr.
+First we find the leaks, we do not fix anything yet. Open DevTools, Memory, Heap snapshot. Click the trash can, take snapshot one on the home page.
+Now click a playground, click the Detaljer link in the footer to get to the detail page, and use the Back link. Do that four or five times. Trash can, snapshot two.
+Type Detached in the filter and write down how many detached elements you see. Then filter on Footer and Leaflet and count instances. Click one and read the Retainers pane. What holds the footer? What holds the map?
+Write the numbers down. They are your before.</aside>
+</section>

@@ -1,0 +1,23 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>The fixes of the day</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1100px;height:auto;z-index:11;text-align:left">
+    <ol>
+	<li>Measure first, every time</li>
+	<li>Register only the icons you use: 1.77 MB to 761 kB</li>
+	<li><span style="color:#FF8C00"><code>loadComponent</code></span> and <span style="color:#FF8C00"><code>@defer</code></span> for what is heavy or not needed at start</li>
+	<li><span style="color:#FF8C00"><code>runOutsideAngular</code></span>, then zoneless and signals: change detection only when something changed</li>
+	<li>Clean up with <span style="color:#FF8C00"><code>DestroyRef</code></span>: intervals, maps, listeners</li>
+	<li>Keep the DOM small: <span style="color:#FF8C00"><code>track</code></span>, <span style="color:#FF8C00"><code>content-visibility</code></span>, virtual scroll</li>
+</ol>
+  </div>
+  <aside class="notes">In order of payoff in THIS app. Yours will differ: measure.
+Icons 1.77 MB -&gt; 761 kB; lazy + defer -&gt; 621 kB; zoneless: polyfills 35 kB -&gt; 0.5 kB and no CD per mousemove.
+Leaks grow over time, the rest is per load.
+Ask: which one would you try first at work?
+
+Here is the day on one slide, in the order they paid off in our app. In your own app the order will be different, and the only way to know is the habit from this morning: measure, change, measure again.
+One: register only the icons you use. Two lines, and the initial download went from 1.77 megabytes to 761 kilobytes. Two: lazy routes and defer for what is heavy or not needed at start. All together we ended at 621 kilobytes. Three: leave the zone for the noisy third party code, then go zoneless and signals, so change detection runs only when something changed. Four: clean up with DestroyRef, so an interval or a map does not outlive its component. Five: keep the DOM small, and use content-visibility or virtual scroll for long lists.
+Which one would you start with at work, and what will you measure first?</aside>
+</section>
