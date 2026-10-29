@@ -1,0 +1,39 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:40px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - The spec skeleton</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:100px;width:1204px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { describe, it, expect, beforeEach } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Playground } from '../model/playground';
+import { PlaygroundSearchComponent } from './playground-search.component';
+
+// const havnegade ... const panterensBastion ...   (the same two fixtures)
+
+describe('PlaygroundSearchComponent', () =&gt; {
+  let fixture: ComponentFixture&lt;PlaygroundSearchComponent&gt;;
+  let element: HTMLElement;
+
+  beforeEach(async () =&gt; {
+    // Arrange
+    fixture = TestBed.createComponent(PlaygroundSearchComponent);
+    element = fixture.nativeElement;
+    fixture.componentRef.setInput('playgrounds', [havnegade, panterensBastion]);
+    await fixture.whenStable();
+  });
+
+  it('should only list the playgrounds whose name contains the query', async () =&gt; {
+    // Act
+    //   field.value = 'trampolin'; field.dispatchEvent(new Event('input'));
+    //   await fixture.whenStable();
+    // Assert
+    //   element.querySelector('ul')!.textContent
+  });
+
+});</code></pre>
+  </div>
+  <aside class="notes">Skeleton: imports (ComponentFixture and TestBed from @angular/core/testing), fixtures, beforeEach with createComponent, setInput and whenStable.
+
+Copy the imports: describe, it, expect and beforeEach from vitest, ComponentFixture and TestBed from @angular/core/testing, the Playground type and the component. Paste the two fixtures under them.
+beforeEach is the Arrange: it creates the component, sets the playgrounds input and waits for the first render. The test then Acts by typing into the field, dispatching an input event and waiting again, and Asserts by reading the list text.</aside>
+</section>

@@ -70,34 +70,25 @@ Advanced component patterns in Angular's component-centric framework.
 
 ---
 
-### 4. Unit Testing (slides 163-208)
+### 4. Unit Testing
 
-Leveraging automated testing in Angular applications with Vitest.
+Test-driven development with Vitest on the playground app: a pure function, a signal service, an HTTP call and a component, plus a review of a weak generated spec.
 
 **Topics covered:**
-- Why test: identify bugs, ensure functionality, reduce costs, build trust
-- What makes a good unit test: lightweight, fast, consistent, repeatable
-- Bad tests and false sense of security
-- What is a "unit" (Roy Osherove's definition) - unit of work, not a function or class
-- A unit in Angular context: returns a value, changes state, calls a 3rd party API
-- **Test runners:** Karma (deprecated), Jasmine, Vitest (official Angular 21 default)
-- Migrating from Karma + Jasmine to Vitest
-- **Test structure:** describe, it, beforeEach/afterEach/beforeAll/afterAll
-- Arrange/Act/Assert pattern
-- **Test helpers:** TestBed, ComponentFixture, DebugElement, NativeElement
-- **Test doubles:** dummies, stubs, fakes, spies (vi.spyOn), mocks (vi.mock)
-- Test Driven Development (TDD) - red/green/refactor cycle
-- Testing asynchronous code (Promise pattern)
-- Testing components: state, API calls, (not DOM)
-- **Test management:** standalone components for isolation, SCAM pattern (pre-standalone), keeping tests isolated
-- What not to test: private functions, click events, DOM (at least not initially)
-- Costs of testing and over-testing
+- Why unit tests; Roy Osherove's unit of work and its three outcomes: a return value (`filterPlaygrounds`), a state change (favorites), a third-party call (the Copenhagen GET)
+- TDD red-green-refactor, and "never trust a test you didn't see fail"
+- **Vitest** with `@angular/build:unit-test`: `describe`/`it`/`expect` imported from `vitest`, `npm test` in watch mode
+- `@Service()` and `TestBed.inject`; testing a signal by reading it; test the public API, not private fields
+- **Oracle review:** weak oracles (truthy, length, the function's own output) and the deletion question: "Would this test fail if the code were deleted?"
+- **HTTP:** `provideHttpClientTesting`, `HttpTestingController`, `firstValueFrom` before `expectOne`, `flush`, `verify`
+- **Components:** `setInput`, `await fixture.whenStable()`, `querySelector`, dispatching `input`, OnPush
+- Next steps (named, not installed): Vitest browser mode, MSW, Stryker, vitest-axe, coverage
 
 **Exercises:**
-1. **AuthService test** (p190) - Create AuthService with Angular CLI; write TDD tests for login with email & password; see test fail then make it pass; test isLoggedIn state
-2. **AuthService - new service & suite within a suite** (p194) - Replace TestBed.inject with `new AuthService()`; organize tests into nested describes ("Initially", "When logged in", "When not logged in"); add "should throw on login" test
-3. **Asynchronous changes** (p199) - Add HttpClient to AuthService; replace spec with async version; test that login calls '/api/login' endpoint using httpClientMock
-4. **LoginComponent** (p201) - Create LoginComponent; test "should call login with email & password from form"; test "should not login when form is invalid"
+1. **Filter playgrounds with TDD** - Write `model/filter-playgrounds.spec.ts` first, then `filterPlaygrounds(playgrounds, query)`: `'christianshavn'` finds only Panterens Bastion, ignoring case; `'århus'` finds nothing and breaks a hardcoded answer; refactor
+2. **FavoritesService** - TDD a `@Service()` with a `favoriteIds` signal and `toggle(id)`: toggling adds, toggling again removes, two toggles keep both. Then the oracle review: make `filterPlaygrounds` return its input, watch `filter-playgrounds.generated.spec.ts` stay green, rewrite it to assert the literal name
+3. **Search over HTTP** - Add `PlaygroundService.search(query)` filtering the `assets/copenhagen.json` GET; test it with `HttpTestingController`; bonus: a 500 rejects
+4. **PlaygroundSearchComponent** - The starter lists every playground; write a component spec that types `trampolin` and expects only Havnegade, see it red, call `filterPlaygrounds` in a `computed`, see it green; bonus: the `Ingen legepladser` empty state
 
 ---
 

@@ -1,0 +1,43 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:40px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - Red, green, refactor</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:100px;width:600px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.65em">Run <code><span style="color:#ff8c00">npm test</span></code> and read the red message before you write any code.</span></p>
+<p><span style="font-size:0.65em"><strong>Cycle one</strong>: name the test <code><span style="color:#ff8c00">should return the playgrounds whose name contains the query, ignoring case</span></code>. Query <code><span style="color:#ff8c00">'christianshavn'</span></code> returns the Panterens Bastion playground. See it red (the function does not exist). Make it green with a hardcode.</span></p>
+<p><span style="font-size:0.65em"><strong>Cycle two</strong>: test <code><span style="color:#ff8c00">'århus'</span></code> returns <code><span style="color:#ff8c00">[]</span></code>. The hardcode breaks. Fix the function: lowercase the query and the name.</span></p>
+<p><span style="font-size:0.65em"><strong>Capitals check</strong>: change the cycle one query to <code><span style="color:#ff8c00">'CHRISTIANSHAVN'</span></code>. It stays green. Now remove <code><span style="color:#ff8c00">.toLowerCase()</span></code> from the query: red. Restore it, remove it from the name: red. Restore it.</span></p>
+<p><span style="font-size:0.65em"><strong>Refactor</strong>: tidy up with the bar green.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:660px;top:100px;width:590px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { describe, it, expect } from 'vitest';
+import { filterPlaygrounds } from './filter-playgrounds';
+import { Playground } from './playground';
+
+// const havnegade ...
+// const panterensBastion ...
+
+describe('filterPlaygrounds', () =&gt; {
+
+  it('should return ...', () =&gt; {
+    // Arrange
+    // Act
+    const result = ...;
+    // Assert
+    expect(result).toEqual(...);
+  });
+
+});</code></pre>
+  </div>
+  <aside class="notes">Run npm test, read the red before any code.
+Cycle one: 'christianshavn' gives [panterensBastion]. Red, then hardcode, green.
+Cycle two: 'århus' gives []. Hardcode breaks. Real code.
+Capitals check: query 'CHRISTIANSHAVN' stays green; drop toLowerCase on query, then on name: both red.
+Refactor with the bar green.
+
+Before you write any code, run npm test and read the red message. Know why it is red.
+Cycle one. Write the test for christianshavn and expect the Panterens Bastion playground. Name it exactly: should return the playgrounds whose name contains the query, ignoring case. Run it and read the failure: the function does not exist yet. Then make it pass the cheapest way you can. Returning a list with the second playground is fine.
+Cycle two. Write the test for århus and expect an empty list. Your hardcode now fails, and that is the point. Write the real code: lower-case the query and the name and keep the playgrounds whose name includes it.
+Capitals check. Change the query in the first test to CHRISTIANSHAVN. Only a function that lowercases both sides passes it: the name has Christianshavns, the query is all capitals. It is green. Now prove it can fail: delete toLowerCase on the query and watch it go red, restore it, delete toLowerCase on the name, red again, restore. Never trust a test you did not see fail.
+Refactor: tidy up, keeping the bar green.</aside>
+</section>
