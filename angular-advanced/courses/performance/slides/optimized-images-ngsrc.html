@@ -2,31 +2,27 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
     <h2>Images: ngSrc</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:540px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:239px;width:540px;height:auto;z-index:11;text-align:left">
     <p><span style="color:#FF8C00"><code>ngSrc</code></span> instead of <span style="color:#FF8C00"><code>src</code></span> (<span style="color:#FF8C00"><code>NgOptimizedImage</code></span>)</p>
 <p>Matters when an image is the <span style="color:#FF8C00">LCP</span> element (Largest Contentful Paint)</p>
-<p><span style="color:#FF8C00"><code>priority</code></span> on that one image</p>
+<p><span style="color:#FF8C00"><code>priority</code></span> on that one image. Without it, dev mode logs <span style="color:#FF8C00"><code>NG02955</code></span></p>
 <p><span style="color:#FF8C00"><code>width</code></span> + <span style="color:#FF8C00"><code>height</code></span>, or <span style="color:#FF8C00"><code>fill</code></span></p>
-<p>This app has no images: no lab</p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:240px;width:620px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-html">&lt;img ngSrc="hero.jpg" width="800" height="600" priority&gt;
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:239px;width:620px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 24px; tab-size: 4;"><code class="language-html">&lt;img ngSrc="/assets/performance/hero.webp"
+     width="2400" height="1200" priority&gt;
 
-&lt;div class="hero"&gt;
-  &lt;img ngSrc="hero.jpg" fill priority&gt;
+&lt;div class="fill-box"&gt;
+  &lt;img ngSrc="/assets/performance/sandbox.webp" fill&gt;
 &lt;/div&gt;
 </code></pre>
   </div>
-  <aside class="notes">The playground app has no images, so no lab. Know it for when you do.
-NgOptimizedImage: ngSrc instead of src.
-It matters when an image is the Largest Contentful Paint element.
-priority for the LCP image: fetchpriority high, eager, preload on SSR.
-width and height required, or fill with a positioned parent.
-Dev mode warns if the LCP image has no priority.
+  <aside class="notes">Demo: /performance/images. Console open, click Reload without priority: error NG02955 for hero.webp. Click Reload with priority: console clean.
+30 seconds. The playground app has no big images, so there's no exercise. Know it for when you do.
 
-This app has no images, so there is no exercise, but you will meet this on every real project.
-Replace src with ngSrc and import NgOptimizedImage. You get lazy loading by default, an automatic srcset when you configure an image loader, and dev mode warnings for the usual mistakes.
-It matters most for LCP, Largest Contentful Paint: the time until the biggest thing above the fold has rendered, often a hero image. Good is under 2.5 seconds. Put priority on that image: it gets fetch priority high, is not lazy, and with server side rendering it is preloaded. Angular warns in dev mode if the LCP image has no priority.
-Width and height are required so the browser reserves the space and the layout does not jump. If the size is not known, use fill, with a positioned parent, and object-fit in CSS.
-Do not put priority on everything, then it means nothing. One image per page, usually.</aside>
+Replace src with ngSrc and import NgOptimizedImage. You get lazy loading by default, a srcset when you configure an image loader, and dev mode warnings for the usual mistakes.
+It matters most for LCP, Largest Contentful Paint: the time until the biggest thing above the fold has rendered. Often that's a hero image. Put priority on that one: it gets fetch priority high, isn't lazy, and with server-side rendering it's preloaded.
+Let me show you. Console open, Reload without priority: NG02955, Angular telling us the LCP image has no priority. Reload with priority: clean.
+Width and height are required, so the browser reserves the space and the page doesn't jump. If you don't know the size, use fill with a positioned parent, like the second image here.
+Ask the room: which image on your own start page is the LCP element? Don't put priority on everything, then it means nothing. One image per page, usually.</aside>
 </section>

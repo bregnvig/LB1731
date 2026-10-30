@@ -1,23 +1,28 @@
 <section>
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
-    <h2>What stays eager</h2>
+    <h2>What @defer can't split out</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1100px;height:auto;z-index:11;text-align:left">
-    <p>Only standalone components, directives and pipes</p>
-<p>Also used outside the block (same file), or via <span style="color:#FF8C00"><code>@ViewChild</code></span>: eager</p>
-<p>Placeholder, loading and error dependencies: eager</p>
-<p>Imported through a barrel file: chunk stays in <span style="color:#FF8C00"><code>main</code></span></p>
-<p>Dev server with HMR loads every chunk up front: <span style="color:#FF8C00"><code>npm start -- --no-hmr</code></span></p>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:239px;width:560px;height:auto;z-index:11;text-align:left">
+<p>Used outside the block, even as a <span style="color:#FF8C00"><code>viewChild</code></span>: eager</p>
+<p>Used by <span style="color:#FF8C00"><code>@placeholder</code></span>, <span style="color:#FF8C00"><code>@loading</code></span>, <span style="color:#FF8C00"><code>@error</code></span>: eager</p>
   </div>
-  <aside class="notes">Only standalone components, directives and pipes.
-Used outside the block in the same file, or as @ViewChild: eager.
-Placeholder, loading and error dependencies are eager.
-Barrel file import keeps it in main. Home imports the file directly.
-HMR loads defer chunks eagerly: ng serve --no-hmr. SSR renders the placeholder.
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:660px;top:239px;width:580px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">export class HomeComponent {
+  map = viewChild(LeafletComponent);
+  ...
 
-@defer only moves code that nothing else needs at start. That gives a few ways to quietly lose the win.
-The dependency has to be standalone. If anything outside the block uses it in the same file, or you grab it with a ViewChild, it stays eager. What the placeholder, loading and error blocks use is eager too.
-Barrel files: if you import from an index.ts that re-exports a lot, the bundler may keep the chunk in main. That is why Home imports LeafletComponent from its own file. And in this course I also removed the global Leaflet script from angular.json, since a global script loaded Leaflet in the first download whatever you did to the template.
-In development, hot module replacement loads every defer chunk up front, so you will not see them load. Start with npm start -- --no-hmr to see the real behaviour in the Network tab.
-With server side rendering the server renders the placeholder and the triggers do not run there.</aside>
+// npm run build: Initial total 1.79 MB,
+// and no leaflet-component chunk</code></pre>
+  </div>
+  <aside class="notes">30 seconds, a list of "don't".
+viewChild(LeafletComponent) in Home on top of @defer: no leaflet chunk, Initial total 1.79 MB (measured on a copy of the exercise 3 start).
+Placeholder, loading, error: what they use is eager.
+Only standalone components, directives and pipes move. SSR renders the placeholder, triggers don't run on the server.
+The HMR trap (dev server loads every defer chunk up front) is on the exercise 3 "Watch the chunks load" slide.
+
+@defer only moves code that nothing else needs at start, and there are a few quiet ways to lose the win.
+First: if anything outside the block uses the component, it stays eager. Here I deferred the map and added one viewChild of LeafletComponent in Home. The build has no leaflet chunk any more, and Initial total is 1.79 MB, a bit worse than doing nothing. Ask the room: how would you notice that in a code review? You wouldn't. You notice it in the lazy table of the build.
+Second: what the placeholder, loading and error blocks use is eager too, so keep them cheap.
+And only standalone things move. In a modern app that's everything, but in an older one with NgModules, check.
+With server-side rendering the server renders the placeholder and the triggers don't run there.</aside>
 </section>

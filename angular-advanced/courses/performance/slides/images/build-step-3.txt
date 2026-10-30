@@ -1,0 +1,6 @@
+Initial chunk files   | Names         |  Raw size | Estimated transfer size
+main-A7GXUQUP.js      | main          |   1.53 MB |               357.12 kB
+styles-TMTHUCME.css   | styles        | 242.57 kB |                25.55 kB
+polyfills-J74PZYSW.js | polyfills     | 494 bytes |               494 bytes
+
+                      | Initial total |   1.77 MB |               383.17 kB

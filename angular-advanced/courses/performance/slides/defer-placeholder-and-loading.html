@@ -20,14 +20,12 @@
 }
 </code></pre>
   </div>
-  <aside class="notes">@placeholder: shown first, until the trigger fires. minimum avoids a flash.
-@loading: shown while the chunk downloads. after waits before showing, minimum keeps it up.
-@error: the chunk failed.
-Reserve the space in the placeholder or the layout jumps (CLS).
-Step-4 uses a vh-100 div for the map and a one-line footer.
+  <aside class="notes">Demo: /performance/defer. Throttle Slow 4G, reload, click "Click me": "Loading ..." for about a second, then the card naming interaction-loaded.component-….js.
+@placeholder until the trigger, @loading while downloading, @error if it fails. Reserve the space.
 
-The block has up to three companions. The placeholder is what the user sees before the content is requested. The loading block is what they see while the chunk downloads. The error block is shown if the download fails.
-Two timers stop flicker. In placeholder, minimum is how long it must stay once shown. In loading, after delays showing it, so a fast download never shows a spinner at all, and minimum keeps it up long enough to be read.
-Reserve the space. If the placeholder is a different size than the content, the page jumps when the content arrives. That is layout shift, and it counts against you. In the exercise the map placeholder is an empty full-size div, and the footer placeholder is an empty footer.
-Note that whatever the placeholder, loading and error blocks use is loaded eagerly, so keep them cheap.</aside>
+The block has up to three companions. The placeholder is what the user sees before the content is requested. The loading block shows while the chunk downloads. The error block shows if the download fails.
+Let me show you the loading block. Throttle to Slow 4G, reload, click "Click me" on the interaction card. "Loading ..." for about a second, then the real card. Ask the room: without throttling, would you have seen it at all?
+Two timers stop flicker. In placeholder, minimum is how long it stays once shown. In loading, after delays showing it, so a fast download never shows a spinner at all, and minimum keeps it up long enough to read.
+Reserve the space. If the placeholder isn't the size of the content, the page jumps when the content arrives. That's layout shift, and it counts against you. In the exercise the map placeholder is an empty full-size div and the footer placeholder is an empty footer.
+Whatever the placeholder, loading and error blocks use is loaded eagerly, so keep them cheap.</aside>
 </section>

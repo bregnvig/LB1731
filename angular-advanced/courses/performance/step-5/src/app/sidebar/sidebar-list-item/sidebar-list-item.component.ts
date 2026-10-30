@@ -17,13 +17,6 @@ import { LocationService } from '../../service';
       </div>
     </button>
   `,
-  styles: `
-    :host {
-      display: block;
-      content-visibility: auto;
-      contain-intrinsic-size: auto 66px;
-    }
-  `,
   standalone: true,
 })
 

@@ -10,24 +10,22 @@
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:540px;top:230px;width:740px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">constructor() {
-  const id = setInterval(
-    () =&gt; this.seconds.set(Math.round((Date.now() - this.loadedAt) / 1000)),
-    1000);
+  const id = setInterval(() =&gt; this.seconds.set(...), 1000);
   inject(DestroyRef).onDestroy(() =&gt; clearInterval(id));
-}
 
-// RxJS
-this.stream$.pipe(takeUntilDestroyed()).subscribe(...);
+  // RxJS
+  this.stream$.pipe(takeUntilDestroyed()).subscribe(...);
+}
 </code></pre>
   </div>
   <aside class="notes">DestroyRef.onDestroy: run this when the owner (component, service, directive) is destroyed.
 Register next to where you create the thing.
 takeUntilDestroyed() for RxJS in an injection context; pass a DestroyRef elsewhere.
-The footer interval below is the shape of the fix in the exercise.
+The footer interval on the right is the fix from the exercise.
 
 DestroyRef is the one tool for cleanup. Inject it, and onDestroy takes a function that runs when the component, directive or service that owns it is destroyed.
 The big advantage over ngOnDestroy: you write the cleanup right next to the thing it cleans up, and you do not have to store the id in a field just to reach it later.
 Here is the footer from the exercise: setInterval gives an id, and the next line says: when this is destroyed, clearInterval that id.
-For RxJS there is takeUntilDestroyed. In a constructor or field initializer you call it with no argument; anywhere else, pass in the DestroyRef.
+For RxJS there is takeUntilDestroyed. In a constructor or field initializer you call it with no argument, like here inside the constructor; anywhere else, ngOnInit for example, pass in the DestroyRef, or it throws because there's no injection context.
 In the exercise you do the same for the Leaflet map: after you create it, register a callback that calls remove on the map.</aside>
 </section>

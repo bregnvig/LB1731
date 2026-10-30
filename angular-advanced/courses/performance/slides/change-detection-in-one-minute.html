@@ -1,27 +1,26 @@
 <section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
     <h2>Change detection in one minute</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1100px;height:auto;z-index:11;text-align:left">
-    <ul>
-	<li>Change detection keeps the DOM in sync with your state</li>
-	<li>It walks the component tree from the top and compares every template binding with its old value</li>
-	<li>The cost is <em>components checked</em> &times; <em>bindings in them</em>, every cycle</li>
-</ul>
-<p>Two questions decide the cost</p>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:200px;width:520px;height:auto;z-index:11;text-align:left">
+    <p>Change detection compares every template binding with its old value.</p>
 <ul>
-	<li><strong>When</strong> does a cycle run?</li>
-	<li><strong>Which</strong> components does it check?</li>
+	<li><strong>When</strong> does a cycle run? Zone.js: after every event, timer and promise</li>
+	<li><strong>Which</strong> components? <span style="color:#FF8C00"><code>Eager</code></span> (the old Default): every component. <span style="color:#FF8C00"><code>OnPush</code></span>: only what is marked dirty</li>
 </ul>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:64px;top:560px;width:1100px;height:auto;z-index:12;text-align:left">
-    <p><span style="font-size:0.7em">Zone.js answers <em>when</em> (after every async task). OnPush and signals answer <em>which</em>.</span></p>
+  <div class="block fragment" data-type="text" data-name="text-2" style="left:64px;top:560px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>Zone.js knows a task <em>finished</em>, not that state <em>changed</em> 🤔</p>
   </div>
-  <aside class="notes">CD = compare bindings, update the DOM.
-Cost = components checked x bindings, per cycle.
-When: zone.js (today's start), signals (zoneless). Which: Eager vs OnPush.
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:620px;top:200px;width:620px;height:269.7px;z-index:12">
+    <img src="images/demo-cd-tree.jpg" alt="The /performance/change-detection demo: components A to G as a tree, each Eager, checks 0">
+  </div>
+  <aside class="notes">Before class: npm run start:no-hmr in demo/, open http://localhost:4201/performance/change-detection, press Reset counters.
+Demo: /performance/change-detection. All Eager, click "click" on E: all seven nodes flash, checks 1 each. All OnPush, Reset, same click: only E, B, A flash.
+Cost = components checked x bindings, per cycle. When: zone.js. Which: Eager vs OnPush.
 
-Change detection is Angular's way of keeping the screen in sync with your data. After something happens, it walks the component tree from the root, and for every binding in every template it compares the new value with the old one and updates the DOM if it differs.
-That makes the cost easy to state: how many components are checked, times how many bindings they have, once per cycle. So there are two levers. How often does a cycle run, and how many components does each cycle check?
-Zone.js decides when cycles run in the app as we start. Today we replace that with signals, and we use OnPush to check fewer components. The full story is in the Components module.</aside>
+Change detection keeps the screen in sync with your data. After something happens, Angular walks the tree from the root and compares every binding with its old value.
+So the cost is easy to state: how many components are checked, times how many bindings they have, once per cycle. Two levers: how often does a cycle run, and how many components does each one check?
+Switch to the demo. All Eager, Reset counters, click "click" on E. Every node flashes yellow, seven checks for one click on a leaf. Now All OnPush, Reset, the same click: only E, B and A. Ask the room: why A and B, when nobody clicked them? They're on the path from E to the root.
+Click for the last line. Zone.js decides when cycles run in today's app. It patches events, timers and promises, and runs a cycle after every one. It knows a task finished, not that anything changed. Remember that for the map in exercise 1.</aside>
 </section>

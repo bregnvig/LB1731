@@ -2,28 +2,38 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - What did you measure?</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:470px;height:auto;z-index:11;text-align:left">
-    <p>Initial total, raw / transfer, one change at a time on step-3</p>
-<p>The obvious suspect, Leaflet, is <span style="color:#FF8C00">not</span> the biggest win</p>
-<p>The two full icon packs were most of <span style="color:#FF8C00"><code>main</code></span></p>
-<p>Your numbers will differ a little</p>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:239px;width:440px;height:auto;z-index:11;text-align:left">
+    <p>Each change alone on the exercise 3 start, <span style="color:#FF8C00"><code>Initial total</code></span> raw / transfer</p>
+<p>Lazy route and footer: a chunk each, the total doesn't drop</p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:560px;top:230px;width:720px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 26px; tab-size: 4;"><code class="language-text" data-line-numbers="3">                       raw      transfer
-step-3 (before)       1.77 MB   383.17 kB
-only icons          760.93 kB   161.12 kB
-only @defer map       1.63 MB   346.82 kB
-all four changes    621.38 kB   126.15 kB
+  <div class="block fragment" data-type="text" data-name="text-2" data-fragment-index="1" style="left:64px;top:450px;width:440px;height:auto;z-index:14;text-align:left">
+    <p>The obvious suspect, Leaflet, is <span style="color:#FF8C00">not</span> the biggest win. Two unused icon packs were most of <span style="color:#FF8C00"><code>main</code></span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:530px;top:239px;width:700px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 26px; tab-size: 4;"><code class="language-text">                         raw    transfer
+before                 1.77 MB   383.17 kB
+lazy detail route      1.77 MB   383.35 kB
+@defer footer          1.78 MB   386.49 kB
+@defer map             1.63 MB   346.49 kB
 </code></pre>
   </div>
-  <aside class="notes">Show after the exercise. Compare with the sticky-note guesses.
-Icons alone: 1.77 MB -&gt; 760.93 kB raw. @defer map alone: 1.63 MB. All four: 621.38 kB.
-Punchline: the obvious suspect (Leaflet) is not the biggest win. Measure to find it.
-Numbers measured on step-3 in a scratch copy; theirs differ a little.
+  <div class="block fragment" data-type="code" data-name="code-2" data-theme="dark" data-auto-height data-fragment-index="1" style="left:530px;top:425px;width:700px;height:auto;z-index:13">
+    <pre style="font-size: 18px; line-height: 26px; tab-size: 4;"><code class="language-text">only faSpinner       760.93 kB   161.12 kB
+the solution         621.38 kB   126.18 kB
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:64px;top:620px;width:1150px;height:auto;z-index:15;text-align:left">
+    <p><span style="font-size:0.7em">Your builds, one change after another: <span style="color:#FF8C00">1.77 MB → 1.77 MB → 1.62 MB → 1.64 MB → 618 kB</span></span></p>
+  </div>
+  <aside class="notes">Show after the exercise, compare with the sticky-note guesses. Click once to reveal the icon row and the punchline.
+Each row is one change alone on a copy of the exercise 3 start (npm run build, 2026-10-30). Solution row = build of solution 3, bonus included.
+Bottom line = their cumulative numbers, slide order, raw / transfer: route 1.77 MB / 383.35 kB, + map 1.62 MB / 346.89 kB, + footer 1.64 MB / 347.57 kB, + icons 618.31 kB / 125.49 kB (no bonus; the solution row has the Om appen bonus).
 
-Let's compare. On step-3 I applied the changes one at a time.
-Registering only the spinner icon takes the initial download from 1.77 megabytes down to 761 kilobytes, from 383 to 161 kilobytes transferred. That is the biggest single win, and the change is two lines. Those two icon packs are most of main.
-Deferring the map alone only goes to 1.63 megabytes. Leaflet is 155 kilobytes. It is the obvious suspect, it is the library everyone points at, and it is not where most of the weight is.
-All the changes together: 621 kilobytes, 126 transferred. The shared chunk is Angular itself, which now gets split out because there are lazy chunks.
-So the lesson: do not guess where the weight is. Measure, then change the biggest thing first.</aside>
+Let's compare. Your own numbers are the bottom line: each build on top of the last. Ask the room: did the footer make it go up? It did, 1.62 to 1.64. To see what each change is worth by itself, I made each one alone on a copy of the starting point.
+The lazy route: a one-kilobyte chunk, and Initial total doesn't move. The footer: same story, it even grows a little: splitting has a small cost of its own. Those two are about the pattern, not the bytes.
+The map: 1.77 down to 1.63 MB. Leaflet is the library everyone points at, and it's 155 kilobytes.
+Ask the room: who guessed the map? Hands up. Now click.
+Registering only the spinner: 1.77 MB down to 761 kilobytes, 383 down to 161 transferred. The biggest single win, and the change is two lines. Those two icon packs were most of main.
+Everything together: 618 kilobytes in your build, 621 in the solution, which also has the Om appen bonus. 126 transferred.
+So: don't guess where the weight is. Read the build, change the biggest thing first, and measure again.</aside>
 </section>

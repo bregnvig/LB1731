@@ -2,39 +2,39 @@
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:880px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Leave the zone</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1200px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>. Open <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code>.</p>
-<ol style="font-size:0.7em">
-	<li>Inject <code><span style="color:#ff8c00">NgZone</span></code> as <code><span style="color:#ff8c00">zone</span></code></li>
-	<li>Wrap only the <code><span style="color:#ff8c00">mapContructor(...)</span></code> call in <code><span style="color:#ff8c00">this.zone.runOutsideAngular(...)</span></code>. Mind the closing <code><span style="color:#ff8c00">}))</span></code></li>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:450px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">Open <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code></span></p>
+<ol>
+	<li><span style="font-size:0.7em">Inject <code><span style="color:#ff8c00">NgZone</span></code> as <code><span style="color:#ff8c00">zone</span></code> (add <code><span style="color:#ff8c00">inject</span></code> and <code><span style="color:#ff8c00">NgZone</span></code> to the <code>@angular/core</code> import)</span></li>
+	<li><span style="font-size:0.7em">Wrap only the <code><span style="color:#ff8c00">mapContructor(...)</span></code> call in <code><span style="color:#ff8c00">this.zone.runOutsideAngular(() =&gt; ...)</span></code>. Mind the closing <code><span style="color:#ff8c00">}))</span></code></span></li>
 </ol>
-<p style="font-size:0.7em"><strong>Measure after.</strong> Reload, record the same 5 seconds of mouse, drag and zoom. The bar for every mouse move is gone. One bar per second is left: the footer. Compare with your number.</p>
-<p style="font-size:0.7em;color:#a9a9a9">The zoom buttons and marker hovers still start a cycle: they were added after the map was created, outside the wrapped call.</p>
+<p><span style="font-size:0.7em"><strong>Measure after:</strong> reload, record exactly 5 seconds of mouse moves again.</span></p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:350px;width:1200px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1,3,6,13">import { AfterViewInit, Component, inject, Input, NgZone, OnDestroy } from '@angular/core';
-
-  private zone = inject(NgZone);
+  <div class="block fragment" data-type="text" data-name="text-2" style="left:510px;top:420px;width:750px;height:auto;z-index:12;text-align:left">
+    <h2><span style="color:#ff8c00">5 s of mouse moves: 5 bars</span></h2>
+<p><span style="font-size:0.7em">Was ~290. The ones left are the footer's timer: exercise 2.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:149.8px;width:750px;height:auto;z-index:13">
+    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1,4,11">  private zone = inject(NgZone);
 
   ngAfterViewInit() {
     const _map = this.zone.runOutsideAngular(() =&gt; mapContructor(this.mapId, {
       zoomControl: false,
       center: undefined,
-      // ...
-      layers: [tileLayer('///{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt;'
-      })]
+      zoom: 7,
+      minZoom: 4,
+      maxZoom: 19,
+      layers: [...]
     }));
     control.zoom({ position: 'topleft' }).addTo(_map);
 </code></pre>
   </div>
   <aside class="notes">Inject NgZone, wrap mapContructor(...) only. Reload.
-Measure after: same 5 s -&gt; mousemove bars gone, one per second left (footer). Compare the count.
-Leaflet registers map listeners at creation, so only creation needs to be outside.
-Zoom buttons / marker hover are added later and still run in the zone.
+Click: 5 s of mouse moves = 5 bars, was ~290. The 5 left are the footer timer, one per second.
+Not on the slide: zoom buttons, and the setView/setZoom calls from the center$ subscriptions (leaflet.component.ts:48-49), still run in the zone. That's where the bars after a list click come from (43 in our run). Zoneless, exercise 2, is the real fix.
 
-Now the fix. Open leaflet.component.ts. Inject NgZone, and in ngAfterViewInit wrap just the call that creates the map in runOutsideAngular. It is one expression, so it becomes an arrow function that returns the map, and you need an extra closing parenthesis after the options object.
-Why is wrapping the creation enough? Leaflet registers its mousemove, drag and zoom listeners when the map is created. Because that happens outside the zone, they are never patched, so no cycles.
-Measure after: reload, record the same five seconds. The wall of bars is gone. What remains is one bar per second. That is the footer's timer, we leave it for the bonus and for exercise 2.
-Small caveat: the zoom buttons and the marker hovers are added after creation, so they are still inside the zone. Clicking them still runs a cycle. That is fine, it is a click, not a stream.</aside>
+Now the fix. Open leaflet.component.ts. Inject NgZone, and in ngAfterViewInit wrap just the call that creates the map. It's one expression, so it becomes an arrow function that returns the map. Watch the closing: two parentheses after the options object. Add inject and NgZone to the import from @angular/core.
+Measure after. Reload, record exactly five seconds of mouse moves again. Click. Five bars, where you had about 290. They are the footer's one-second timer, one per second, and that's exercise 2.
+Ask the room: why is wrapping creation enough, when the mouse moves long after? Because Leaflet registers its listeners at creation. Created outside the zone, never patched.
+Two caveats, if someone asks. The zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's fine, it's a click, not a stream. And click a playground in the list: you still get a burst of bars, 43 in our run. The center$ subscriptions on lines 48 and 49 call setView and setZoom inside the zone, and Leaflet's pan animation runs from there. You could wrap those too, but zoneless in exercise 2 fixes it for the whole app at once.</aside>
 </section>

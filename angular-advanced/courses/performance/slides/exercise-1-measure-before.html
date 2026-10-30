@@ -2,22 +2,34 @@
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:880px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Measure before</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:1200px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>, app running with <code><span style="color:#ff8c00">npm start</span></code>.</p>
-<ol style="font-size:0.7em">
-	<li>Wait for the spinner to go away. Open DevTools &gt; <strong>Angular</strong> &gt; <strong>Profiler</strong></li>
-	<li>Press <strong>Record</strong>. Move the mouse over the map for 5 seconds, drag it, zoom with the wheel. Press <strong>Stop</strong></li>
-	<li><strong>Count the bars</strong>. Write the number down</li>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:560px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">Wait for the list. Open DevTools, <strong>Angular</strong>, <strong>Profiler</strong>.</span></p>
+<ol>
+	<li><span style="font-size:0.7em">Press <strong>Record</strong></span></li>
+	<li><span style="font-size:0.7em">Move the mouse slowly over the map, no clicks. Record <strong>exactly 5 seconds</strong></span></li>
+	<li><span style="font-size:0.7em">Press <strong>Stop</strong> and <strong>count the bars</strong>. Write the number down</span></li>
+	<li><span style="font-size:0.7em">Click one bar: which components were refreshed?</span></li>
 </ol>
-<p style="font-size:0.7em">What you should see: a lot of bars, one for every mouse move, drag and zoom step, plus one bar every second. Click a bar: the whole app was checked, even <code><span style="color:#ff8c00">FooterComponent</span></code>.</p>
-<p style="font-size:0.7em">The every-second bars come from the footer: <em>Opdateret for N sekunder siden</em>. We will not fix those in this exercise.</p>
+<p><span style="font-size:0.7em">Nothing on the page reads the mouse. The map is <span style="color:#ff8c00">Leaflet</span>, created inside Angular's zone, so zone.js runs a cycle after every one of its events.</span></p>
   </div>
-  <aside class="notes">Profiler: Record, 5 s of mouse over the map, drag, zoom, Stop. Write down the bar count.
-Expect: a bar per mousemove + one per second (footer).
-Why? Leaflet registers its listeners inside the zone -&gt; zone.js runs CD for the whole app after each one.
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:160px;width:600px;height:auto;z-index:12;text-align:left">
+    <p>What we measured</p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-3" style="left:640px;top:230px;width:600px;height:auto;z-index:13;text-align:left">
+    <h2><span style="color:#ff8c00">5 s of mouse moves: ~290 bars</span></h2>
+<p><span style="font-size:0.7em">One per mouse move, plus one per second from the footer: <em>Opdateret for N sekunder siden</em></span></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="text-4" style="left:640px;top:420px;width:600px;height:auto;z-index:14;text-align:left">
+    <h2><span style="color:#ff8c00">1 bar = the whole app</span></h2>
+<p><span style="font-size:0.7em">All 6 components, all 133 list rows, even <code>FooterComponent</code></span></p>
+  </div>
+  <aside class="notes">Record exactly 5 s, mouse moving slowly over the map, no clicks, Stop. Count the bars.
+Click: ~290 bars in 5 s (our runs: 290 and 295). Click: one bar refreshed all 6 components and all 133 rows.
+Why: Leaflet registers its listeners when the map is created, inside the zone.
+6 components, not 7: PlaygroundDetailComponent only exists on /legeplads/:id.
 
-Measure before. Open Angular DevTools, the Profiler tab, press Record. Now move the mouse over the map for about five seconds, drag it, zoom with the wheel. Press Stop.
-You get a forest of bars. Roughly one per mouse move, and in the quiet moments one per second. Write down how many bars you got for your five seconds.
-Click a few. Every one of them checked the whole app: the sidebar with its 133 rows, the footer, everything, because a mouse moved over a map. In our own run, 60 mouse moves gave 61 bars, and every bar refreshed all six components on the page and all 133 rows.
-Why? Leaflet adds its mousemove, drag and zoom listeners when it creates the map. We create the map inside Angular's zone, so zone.js patches those listeners and runs change detection after each. Nothing in the app reads a mouse move on the map. Next slide: how to stop that.</aside>
+Measure before. Wait until the list is there, open the Angular tab, Profiler, press Record. Move the mouse slowly over the map, no clicks, no zoom, and stop after exactly five seconds. A fixed time is what makes before and after comparable.
+Click. In our runs, five seconds gave about 290 bars. Chrome sends roughly one mousemove per frame while the mouse moves, and every one is a cycle, plus five from the footer's one-second timer. Your number depends on your mouse and your screen, so write yours down.
+Click. Now click one of the bars. It refreshed all six components on the page and all 133 rows in the sidebar, because a mouse moved over a map. Ask the room: the app has seven components, why six? The seventh is the detail page, and it only exists on /legeplads/:id.
+Ask the room: what on this page needs to know where the mouse is? Nothing. Leaflet adds its mousemove, drag and zoom listeners when it creates the map, and we create it inside Angular's zone, so zone.js patches them and runs change detection after each one. Next slide: how to step outside the zone.</aside>
 </section>

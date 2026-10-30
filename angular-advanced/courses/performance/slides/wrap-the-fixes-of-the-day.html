@@ -2,22 +2,31 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
     <h2>The fixes of the day</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1100px;height:auto;z-index:11;text-align:left">
-    <ol>
-	<li>Measure first, every time</li>
-	<li>Register only the icons you use: 1.77 MB to 761 kB</li>
-	<li><span style="color:#FF8C00"><code>loadComponent</code></span> and <span style="color:#FF8C00"><code>@defer</code></span> for what is heavy or not needed at start</li>
-	<li><span style="color:#FF8C00"><code>runOutsideAngular</code></span>, then zoneless and signals: change detection only when something changed</li>
-	<li>Clean up with <span style="color:#FF8C00"><code>DestroyRef</code></span>: intervals, maps, listeners</li>
-	<li>Keep the DOM small: <span style="color:#FF8C00"><code>track</code></span>, <span style="color:#FF8C00"><code>content-visibility</code></span>, virtual scroll</li>
-</ol>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:210px;width:1150px;height:auto;z-index:11;text-align:left">
+    <table>
+      <tbody>
+        <tr><td style="padding:8px 48px 8px 0">Load less</td><td style="padding:8px 0">1.77 MB → 621 kB</td></tr>
+        <tr><td style="padding:8px 48px 8px 0"><code><span style="color:#FF8C00">runOutsideAngular</span></code></td><td style="padding:8px 0">~290 → 5 bars in 5 s</td></tr>
+        <tr><td style="padding:8px 48px 8px 0"><code><span style="color:#FF8C00">DestroyRef.onDestroy</span></code></td><td style="padding:8px 0">10 leaked footers → 0</td></tr>
+        <tr><td style="padding:8px 48px 8px 0">Zoneless + signals</td><td style="padding:8px 0">6 → 1 component per tick</td></tr>
+      </tbody>
+    </table>
   </div>
-  <aside class="notes">In order of payoff in THIS app. Yours will differ: measure.
-Icons 1.77 MB -&gt; 761 kB; lazy + defer -&gt; 621 kB; zoneless: polyfills 35 kB -&gt; 0.5 kB and no CD per mousemove.
-Leaks grow over time, the rest is per load.
-Ask: which one would you try first at work?
+  <div class="block" data-type="text" data-name="text-monday" style="left:64px;top:520px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>Start with the slow your users feel. <strong>Measure it before you fix it.</strong></p>
+  </div>
+  <div class="block fragment fade-down" data-type="text" data-name="text-2" style="left:64px;top:600px;width:1150px;height:auto;z-index:12;text-align:left">
+    <p>Which one would you try at work?</p>
+  </div>
+  <aside class="notes">Four fixes, in the order they paid off in THIS app. Yours will differ: measure.
+Read the Monday line out.
+Click: the question to the room.
 
-Here is the day on one slide, in the order they paid off in our app. In your own app the order will be different, and the only way to know is the habit from this morning: measure, change, measure again.
-One: register only the icons you use. Two lines, and the initial download went from 1.77 megabytes to 761 kilobytes. Two: lazy routes and defer for what is heavy or not needed at start. All together we ended at 621 kilobytes. Three: leave the zone for the noisy third party code, then go zoneless and signals, so change detection runs only when something changed. Four: clean up with DestroyRef, so an interval or a map does not outlive its component. Five: keep the DOM small, and use content-visibility or virtual scroll for long lists.
-Which one would you start with at work, and what will you measure first?</aside>
+Here's the day on one slide, in the order they paid off in our app.
+One: load less. Our first download was 1.77 megabytes, and the biggest part wasn't the map, it was an icon library we registered in full. Only the icons we use, a lazy route with loadComponent and two defer blocks, and Initial total in the build output was 621 kilobytes. Every user pays that on every load, so it goes first.
+Two: the map's mouse events ran change detection for the whole app. Five seconds of mouse moves, about 290 Profiler bars. One runOutsideAngular, and it was 5: one per second, the footer.
+Three: every visit left a footer and a map behind. After five rounds that was 10 footers and 10 detached maps, Detached &lt;leaflet&gt; ×10, in the heap snapshot. Two onDestroy callbacks, and it was 0. Small per visit, but it grows for as long as the tab is open.
+Four: zoneless and signals. Here the honest number is smaller: when the footer ticks, the Profiler shows Angular refreshing the footer instead of all six components. A click in the list still refreshes everything once. It pays more the bigger your component tree is.
+So on Monday: in your own app, start with the kind of slow your users complain about, not with the fix you liked best today. Measure that first: Initial total from the build, bars in the Profiler, or instances across two heap snapshots. Write the number down, change one thing, measure again.
+Click. Ask the room: which one would you try at work, and what would you measure first? Let two or three people answer.</aside>
 </section>

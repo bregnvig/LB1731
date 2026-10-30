@@ -2,36 +2,41 @@
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1000px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 2 - Measure, then go zoneless</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:600px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code></p>
-  </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:680px;top:150px;width:560px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-bash">npm install
-npm run build
-npm start
-</code></pre>
-  </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:38px;top:190px;width:600px;height:auto;z-index:13;text-align:left">
-    <p style="font-size:0.7em"><strong>Measure before:</strong> note the <code><span style="color:#ff8c00">polyfills</span></code> line of <code><span style="color:#ff8c00">npm run build</span></code> (35.09 kB). Then in the Profiler record 10 seconds without touching the app: one bar every second, the footer.</p>
-<p style="font-size:0.7em"><strong>Change</strong></p>
-<ol style="font-size:0.7em">
-	<li><code><span style="color:#ff8c00">angular.json</span></code>: delete <code><span style="color:#ff8c00">"zone.js"</span></code> from <code><span style="color:#ff8c00">polyfills</span></code></li>
-	<li><code><span style="color:#ff8c00">src/main.ts</span></code>: replace <code><span style="color:#ff8c00">provideZoneChangeDetection()</span></code> with <code><span style="color:#ff8c00">provideZonelessChangeDetection()</span></code> (and its import)</li>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:540px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>.</span></p>
+<p><span style="font-size:0.7em"><strong>Measure before:</strong> run <code><span style="color:#ff8c00">npm run build</span></code> and write down the <code>polyfills</code> line. Then <code><span style="color:#ff8c00">npm start</span></code> and record 10 seconds without touching the app: one bar per second. Click one: all 6 components. Then record one click on a playground in the list and count the bars.</span></p>
+<p><span style="font-size:0.7em"><strong>Change</strong></span></p>
+<ol>
+	<li><span style="font-size:0.7em"><code><span style="color:#ff8c00">angular.json</span></code>: delete <code><span style="color:#ff8c00">"zone.js"</span></code> from <code>polyfills</code></span></li>
+	<li><span style="font-size:0.7em"><code><span style="color:#ff8c00">src/main.ts</span></code>: <code><span style="color:#ff8c00">provideZoneChangeDetection()</span></code> becomes <code><span style="color:#ff8c00">provideZonelessChangeDetection()</span></code>, in the import too. Default since v21; we keep it explicit</span></li>
 </ol>
-<p style="font-size:0.7em">Restart <code><span style="color:#ff8c00">npm start</span></code>. The footer counter is stuck on one number. That is what you just learned.</p>
   </div>
-  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:640px;top:290px;width:600px;height:auto;z-index:14">
-    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">bootstrapApplication(AppComponent, {
-  providers: [
-    provideZonelessChangeDetection(),provideHttpClient(withXhr()),
-    provideRouter(AppRoutes),
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:590px;top:149.8px;width:670px;height:auto;z-index:12">
+    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-text" data-line-numbers="4">Initial chunk files   | Names         |  Raw size | Estimated transfer size
+main-3ECWWERD.js      | main          |   1.53 MB |               357.55 kB
+styles-TMTHUCME.css   | styles        | 242.57 kB |                25.55 kB
+polyfills-BHOTQAFE.js | polyfills     |  35.09 kB |                11.52 kB
+
+                      | Initial total |   1.81 MB |               394.62 kB
 </code></pre>
   </div>
-  <aside class="notes">Lab exercise-2. Measure before: polyfills 35.09 kB in the build, one footer bar per second in the profiler.
-Change: remove zone.js from polyfills (angular.json has no test target), switch provider in main.ts.
-Expect: counter freezes. Next slide fixes it.
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:590px;top:290px;width:670px;height:auto;z-index:13">
+    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">// angular.json
+"polyfills": [
+  "zone.js",
+  "@angular/localize/init"
+],
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:590px;top:440px;width:670px;height:auto;z-index:14;text-align:left">
+    <p><span style="font-size:0.7em">Restart <code><span style="color:#ff8c00">npm start</span></code>. The footer counter is stuck. That's the setInterval row in the zoneless table.</span></p>
+  </div>
+  <aside class="notes">labs/performance/exercise-2. Before: polyfills 35.09 kB, one footer bar per second, each refreshes all 6 components. One list click: 43 bars.
+Change: zone.js out of polyfills, provideZonelessChangeDetection in main.ts.
+Expect: the counter freezes. Next slide fixes it.
 
-Exercise 2 starts, as always, with a measurement. Go to labs/performance/exercise-2, npm install, then run npm run build and look at the polyfills line: about 35 kilobytes. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer.
-Now the change. In angular.json remove zone.js from the polyfills of the build. Only the build: this app has no test target. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, and fix the import.
-Restart and look at the footer. The counter is frozen. Exactly like in the bonus, and for the same reason: a timer writes a plain field and nothing tells Angular. Next slide fixes it. Leave the runOutsideAngular from exercise 1 where it is.</aside>
+Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
+Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer's timer, and clicking a bar shows it refreshed all six components. Then record one click on a playground in the list. We got 43 bars for that one click: Leaflet's pan, started from inside the zone.
+Now the change. In angular.json delete the zone.js line from polyfills. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, in the import too. Since v21 zoneless is the default, so deleting the line would do the same; the solution keeps provideZonelessChangeDetection so the next reader sees the choice. Leave runOutsideAngular from exercise 1 where it is.
+Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. That's the setInterval row in the zoneless table. Next slide fixes it.</aside>
 </section>

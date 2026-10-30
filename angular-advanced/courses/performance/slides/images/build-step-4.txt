@@ -1,0 +1,13 @@
+Initial chunk files   | Names                       |  Raw size | Estimated transfer size
+styles-TMTHUCME.css   | styles                      | 242.57 kB |                25.55 kB
+main-FMNODF45.js      | main                        | 224.15 kB |                53.77 kB
+chunk-Brn4EiAY.js     | -                           | 154.16 kB |                46.35 kB
+polyfills-J74PZYSW.js | polyfills                   | 494 bytes |               494 bytes
+
+                      | Initial total               | 621.38 kB |               126.18 kB
+
+Lazy chunk files      | Names                       |  Raw size | Estimated transfer size
+chunk-Cco4KEok.js     | leaflet-component           | 154.60 kB |                40.96 kB
+chunk-CF1Bj3Ch.js     | footer-component            |   1.58 kB |               808 bytes
+chunk-BfUlVp1B.js     | playground-detail-component |   1.02 kB |                 1.02 kB
+chunk-DTuvQTMR.js     | about-component             | 481 bytes |               481 bytes

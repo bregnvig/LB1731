@@ -2,28 +2,27 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
     <h2>Angular DevTools: the Profiler</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:620px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:200px;width:560px;height:auto;z-index:11;text-align:left">
     <ol>
-	<li>Install <strong>Angular DevTools</strong> from the Chrome Web Store (before the lab!)</li>
-	<li>Open Chrome DevTools (<span style="color:#ff8c00">F12</span>) and the <strong>Angular</strong> tab</li>
-	<li>Open the <strong>Profiler</strong> tab and press <strong>Record</strong></li>
-	<li>Use the app, press <strong>Stop</strong></li>
+	<li>Open DevTools (<span style="color:#FF8C00">F12</span>), <strong>Angular</strong> tab, <strong>Profiler</strong></li>
+	<li>Press <strong>Record</strong>, use the app, press <strong>Stop</strong></li>
 </ol>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:720px;top:216px;width:500px;height:auto;z-index:12;text-align:left">
-    <p>What you get</p>
-<ul>
-	<li>One bar per change detection cycle</li>
-	<li>Click a bar to see which components were checked and how long each took</li>
+  <div class="block" data-type="text" data-name="text-2" style="left:680px;top:200px;width:540px;height:auto;z-index:12;text-align:left">
+    <ul>
+	<li>One bar = one change detection cycle</li>
+	<li>Click a bar: which components were refreshed, how long each took</li>
 </ul>
-<p><span style="font-size:0.7em;color:#a9a9a9">Works on the dev server only (<code>npm start</code>). The page must be an Angular dev build.</span></p>
   </div>
-  <aside class="notes">Install first: Chrome Web Store, "Angular DevTools".
-F12 &gt; Angular tab &gt; Profiler &gt; Record &gt; use the app &gt; Stop.
-Bar = one CD cycle. Click bar: components checked + time.
-Count the bars: that is our before/after number in exercise 1 and 2.
+  <div class="block fragment" data-type="text" data-name="text-3" style="left:64px;top:500px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>Count the <span style="color:#FF8C00">bars</span> in 5 seconds of mouse moves, and <span style="color:#FF8C00">which components</span> one bar refreshed.</p>
+  </div>
+  <aside class="notes">F12, Angular tab, Profiler, Record, use the app, Stop.
+One bar = one cycle. Click a bar: components refreshed + time.
+Not on the slide any more: install Angular DevTools from the Chrome Web Store (exercise 1 says it too). Dev builds only: npm start.
 
-Our first tool. Angular DevTools is a Chrome extension, you should have installed it before class. If not, do it now, it is in the Chrome Web Store under that name.
-Open DevTools with F12, there is a new Angular tab. The Profiler sub-tab has a Record button. Press it, do something in the app, press Stop. Each bar is one change detection cycle. Click a bar and you see which components were checked and how long they took.
-The easiest number to compare before and after is simply how many bars you get for the same ten seconds of use. It only works on a development build, which is what npm start gives you.</aside>
+Our first tool. Angular DevTools is a Chrome extension. Check that everyone has it now, it's a one-minute install and you can't do the first two labs without it.
+Open DevTools, there's an Angular tab, and inside it a Profiler. Press Record, do something in the app, press Stop. Every bar is one change detection cycle. Click a bar and you see which components were refreshed and how long each took.
+Click for the punchline. The easiest number to compare is how many bars you get for the same thing done twice, for the same five seconds, and what one bar refreshed. That's the before and after for the next two exercises.
+It only works on a development build, which is what npm start gives you. Ask the room: has anyone recorded their own app with this? What did one click cost?</aside>
 </section>

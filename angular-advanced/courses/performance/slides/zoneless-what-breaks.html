@@ -1,0 +1,27 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Zoneless: what breaks</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:1150px;height:auto;z-index:11;text-align:left">
+    <table style="table-layout:fixed;width:1100px"><colgroup><col style="width:620px"><col style="width:480px"></colgroup>
+      <thead>
+        <tr><th style="padding:6px 48px 6px 0">Stops working</th><th style="padding:6px 0">Instead</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:6px 48px 6px 0">A field set in a timer, a promise or <span style="color:#FF8C00"><code>subscribe</code></span></td><td style="padding:6px 0">a <span style="color:#FF8C00"><code>signal</code></span></td></tr>
+        <tr><td style="padding:6px 48px 6px 0">An input object mutated in place</td><td style="padding:6px 0">pass a new object</td></tr>
+        <tr><td style="padding:6px 48px 6px 0"><span style="color:#FF8C00"><code>fakeAsync</code></span> tests</td><td style="padding:6px 0">keep <span style="color:#FF8C00"><code>zone.js/testing</code></span> in the test polyfills</td></tr>
+        <tr><td style="padding:6px 48px 6px 0">Waiting for <span style="color:#FF8C00"><code>NgZone.onStable</code></span></td><td style="padding:6px 0"><span style="color:#FF8C00"><code>afterNextRender</code></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">Four things that break when zone.js goes. Only the first one is in our app: the footer.
+Inputs: under OnPush a mutated object has the same reference, so nothing marks the child. fakeAsync needs zone.js/testing. NgZone.onStable and onMicrotaskEmpty never emit zoneless.
+
+Before you take zone.js out in exercise 2, here's what to look for in your own code.
+First row, the one you'll hit today: a plain field written in setTimeout, setInterval, a promise or a subscribe. With zone.js, the cycle after the task picked it up. Zoneless, nothing schedules a cycle, so the screen stays where it was. Make it a signal. That's exactly the footer counter in a minute.
+Second: an input object you mutate in place, like pushing to an array a child gets as an input. Same reference, so OnPush sees no change and the child stays stale. Pass a new array or a new object, or make it a signal.
+Third, tests. fakeAsync and tick are built on zone.js. Keep zone.js/testing in the test polyfills for those specs, or move them to real timers or your test runner's fake timers.
+Fourth: code that waits for the zone to settle, NgZone.onStable or onMicrotaskEmpty, often in third-party wrappers or old directives. Zoneless, those never emit. If what you want is "after Angular has rendered", that's afterNextRender.
+Ask the room: grep your app for fakeAsync and onStable. How many hits?</aside>
+</section>

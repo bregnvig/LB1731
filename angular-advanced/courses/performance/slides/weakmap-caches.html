@@ -29,5 +29,5 @@ WeakRef: for optional references.
 A WeakMap is a map whose keys are objects held weakly. If nobody else references the key object, it is garbage collected and its entry disappears. So the cache cannot keep stale objects alive, which a normal Map would.
 It fits when you compute something from an object and the result is valid as long as that object exists: a parsed version, a formatted label, a layout measurement.
 Why we did not use it in the lab. The idea was to cache each playground's distance. But in this app the distance is already a computed in each list item, remembered per playground and location. It only re-runs when the location changes, and then you need a new distance anyway. A WeakMap keyed by playground would hand back the old distance after the location changed. A cache is only correct when the key captures everything the value depends on.
-So the bonus in the lab is content-visibility instead. WeakMap lives on this slide only.</aside>
+WeakMap lives on this slide only.</aside>
 </section>

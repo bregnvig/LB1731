@@ -1,30 +1,38 @@
 <section>
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
-    <h2>Exercise 3 - Load less up front</h2>
+    <h2>Exercise 3 - Load less up front (1/2)</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure, change, measure again.</span> Write the number down before you touch anything.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/app.routes.ts</span></code>: make the <code><span style="color:#ff8c00">legeplads/:id</span></code> route lazy with <code><span style="color:#ff8c00">loadComponent</span></code>. Build.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/home/home.component.ts</span></code>: wrap <code><span style="color:#ff8c00">&lt;leaflet&gt;</span></code> in <code><span style="color:#ff8c00">@defer (on idle)</span></code> with an empty <code><span style="color:#ff8c00">@placeholder</span></code>. Build.</span></p><p><span style="font-size:0.7em">Same file: wrap <code><span style="color:#ff8c00">&lt;loop-footer&gt;</span></code> in <code><span style="color:#ff8c00">@defer (on viewport)</span></code>. Build.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/main.ts</span></code>: register only <code><span style="color:#ff8c00">faSpinner</span></code> instead of <code><span style="color:#ff8c00">fas</span></code> and <code><span style="color:#ff8c00">far</span></code>. Build.</span></p>
+    <p><span style="font-size:0.7em"><strong>1. Lazy detail route.</strong> In <code><span style="color:#ff8c00">src/app/app.routes.ts</span></code>, make <code><span style="color:#ff8c00">legeplads/:id</span></code> use <code><span style="color:#ff8c00">loadComponent</span></code> and delete the <code><span style="color:#ff8c00">PlaygroundDetailComponent</span></code> import at the top. Build: a <em>Lazy chunk files</em> table appears with <code><span style="color:#ff8c00">playground-detail-component</span></code>, about 1 kB.</span></p>
+<p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> if any file still uses the class, it stays in <code><span style="color:#ff8c00">main</span></code>.</span></p>
+<p><span style="font-size:0.7em"><strong>2. Defer the map.</strong> In <code><span style="color:#ff8c00">src/app/home/home.component.ts</span></code>, wrap <code><span style="color:#ff8c00">&lt;leaflet&gt;</span></code> in <code><span style="color:#ff8c00">@defer (on idle)</span></code> with an empty full-size <code><span style="color:#ff8c00">@placeholder</span></code>. Build: a <code><span style="color:#ff8c00">leaflet-component</span></code> chunk of about 155 kB.</span></p>
+<p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> use <code><span style="color:#ff8c00">LeafletComponent</span></code> anywhere outside the block, even a <code><span style="color:#ff8c00">viewChild</span></code>, and there is no chunk: Leaflet stays in <code><span style="color:#ff8c00">main</span></code>.</span></p>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:160px;width:600px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure after each change:</span> <code>npx ng build</code> and write down <code>Initial total</code>. Which change moved it most? Guess first.</span></p><p><span style="font-size:0.7em">Then <code>npm start -- --no-hmr</code>: in the Network tab the map chunk appears after the page is up, and the footer chunk as soon as its placeholder is in the viewport, which is right away here, about a tenth of a second after main.</span></p>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:620px;height:auto;z-index:12">
+    <pre style="font-size: 15px; line-height: 20px; tab-size: 4;"><code class="language-typescript">{
+  path: 'legeplads/:id',
+  loadComponent: () =&gt;
+    import('src/app/playground-detail/playground-detail.component')
+      .then(m =&gt; m.PlaygroundDetailComponent),
+},
+</code></pre>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:470px;width:600px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-html">@defer (on idle) {
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:630px;top:330px;width:620px;height:auto;z-index:13">
+    <pre style="font-size: 15px; line-height: 20px; tab-size: 4;"><code class="language-html">@defer (on idle) {
   &lt;leaflet [center]="center()" [markers]="markers()"/&gt;
 } @placeholder {
   &lt;div class="vh-100 vw-100"&gt;&lt;/div&gt;
 }
 </code></pre>
   </div>
-  <aside class="notes">One change at a time, build after each, write down Initial total.
-1 routes, 2 map, 3 footer, 4 icons. Do not skip the builds.
-Placeholder for the map: empty vh-100 vw-100 div. Footer: footer with &amp;nbsp;.
-Spoiler guard: do not tell them which wins.
+  <aside class="notes">Change 1: app.routes.ts, loadComponent, delete the static import. Lazy table: playground-detail-component, about 1 kB.
+Change 2: home.component.ts, @defer (on idle) around leaflet, placeholder an empty vh-100 vw-100 div. Lazy table: leaflet-component, about 155 kB.
+Measured on a copy: viewChild(LeafletComponent) in Home on top of the defer = no leaflet chunk, 1.79 MB.
+Don't tell them which change wins.
 
-Four changes. After each one run npx ng build and write down Initial total. If you do all four and build once, you learn nothing.
-One: in app.routes.ts, make the detail route lazy with loadComponent and remove the static import at the top.
-Two: in home.component.ts, wrap the leaflet element in @defer on idle, with a placeholder that is an empty div, class vh-100 vw-100.
-Three: wrap the footer in @defer on viewport, placeholder an empty footer.
-Four: in main.ts, the app registers every icon in the two FontAwesome packs. Only one icon is used, faSpinner. Register only that one with addIcons.
-Which one do you think will give the most? Write your guess on a sticky note, we will compare.</aside>
+Two changes on this slide, build after each.
+One: the detail route. In app.routes.ts, replace component with loadComponent and an import(), and delete the import line at the top. Build, and a second table shows up: lazy chunk files, with playground-detail-component in it. About one kilobyte. Small, but the table is the proof it worked. If anything still uses the class the normal way, there's no chunk.
+Two: the map. In home.component.ts, wrap the leaflet element in @defer on idle, and give it a placeholder: an empty div with vh-100 vw-100, so the page doesn't jump. Build again: a leaflet-component chunk of about 155 kilobytes.
+The trap: if anything in Home touches LeafletComponent outside the block, a viewChild for example, it stays eager and you get no chunk at all. Look for the chunk in the lazy table every time.
+Ask the room after each build: did Initial total move as much as you expected?</aside>
 </section>

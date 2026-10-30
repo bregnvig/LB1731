@@ -232,17 +232,17 @@ Finding and fixing what makes the playground app slow, with one rule for every l
 **Topics covered:**
 - What "slow" means for a user: startup, interaction, memory
 - Change detection and zone.js: patched async APIs, a cycle after every task; `NgZone.runOutsideAngular`
-- **Tools:** Angular DevTools Profiler, the Angular track in the Chrome Performance panel (`ng.enableProfiling()`), Chrome Memory panel heap snapshots
-- **Zoneless:** what schedules change detection without zone.js, OnPush as the default (old default `Eager`), signals: no cleanup, `computed` lazy, `effect`/`toSignal` eager
-- **Loading less up front:** reading `ng build` output, lazy routes (`loadComponent`, preloading), `@defer` triggers and placeholders, lazily loaded dynamic components
-- **Memory and the DOM:** leaks from intervals, listeners and third-party objects (`DestroyRef`), detached nodes, DOM size, `content-visibility`, `WeakMap`
-- One slide each: `ngSrc`, virtual scroll, bundle budgets, SSR and incremental hydration
+- **Tools:** Angular DevTools Profiler, `ng build` output, Chrome Memory panel heap snapshots
+- **Zoneless:** what schedules change detection without zone.js, what breaks without it, OnPush as the default (old default `Eager`), signals instead of plain fields
+- **Loading less up front:** reading `ng build` output, lazy routes (`loadComponent`, `loadChildren`), `@defer` triggers and placeholders, lazily loaded dynamic components
+- **Memory and the DOM:** leaks from intervals, listeners and third-party objects (`DestroyRef`), detached nodes and retainers in heap snapshots
+- `ngSrc` has a hidden slide and a demo page, no lab
 
 **Exercises:**
 1. **Measure and leave the zone** - Profile the map and the ticking footer; create the Leaflet map with `runOutsideAngular`; profile again; bonus: run the footer interval outside the zone and see it freeze
-2. **Go zoneless and move to signals** - Remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and drop `Eager`; compare the build output
+2. **Go zoneless and move to signals** - Remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and drop `Eager` in all seven components; compare the build output
 3. **Load less up front** - `loadComponent` for the detail route, `@defer` around the map and the footer, register only the used icons; compare initial and lazy chunks; bonus: lazily loaded "Om appen" panel with `NgComponentOutlet`
-4. **Memory and the DOM** - Heap snapshots before and after navigating home and detail; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`; count DOM nodes; bonus: `content-visibility: auto` on the list rows
+4. **Memory and the DOM** - Heap snapshots before and after navigating home and detail; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`
 
 ---
 
