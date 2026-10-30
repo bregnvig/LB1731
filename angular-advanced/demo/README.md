@@ -144,6 +144,94 @@ Order to demo: **Global → Local → URL → Form → RxJS store → Signal sto
 
 ---
 
+## Performance
+
+Source: `src/app/performance`
+Base URL: `http://localhost:4201/performance`
+
+Start with `npm run start:no-hmr` for this one: with HMR (the `ng serve` default) the dev server loads every `@defer` chunk up front.
+
+The route shell is `PerformanceComponent` (`performance.component.ts`), the same tab bar + `<router-outlet>` as state management. The demo app runs on zone.js and is not switched to zoneless, so the CD tree shows zone.js behaviour; the slides say what changes without it.
+
+Order to demo: **Change detection → @defer → Leaks**. Change detection goes with the intro and the theory of exercises 1–2, `@defer` with the theory of exercise 3, leaks with exercise 4. The ngSrc slide is hidden in the deck; show `/performance/images` only if someone asks about images.
+
+### 1. Change detection tree — `/performance/change-detection`
+
+**Files:** `change-detection/cd-tree.component.ts`, `change-detection/cd-node.ts`
+
+**What it shows:** which components Angular checks for each kind of trigger, Eager vs OnPush, as a tree of seven nodes A–G (A on top, B and C below, D–G as leaves).
+
+A node flashes yellow and its **checks** counter goes up when Angular checks it (a template binding calls `checked()`, `cd-node.ts:148`, and flashes from outside the zone, so the flash never causes a cycle). The strategy button on a node rebuilds it as the other strategy and resets the counters. Every button on a node except **click** is wired with `addEventListener` outside the zone (`cd-node.ts:129`), so pressing it starts no cycle by itself: you only see what the trigger does. **Reset counters** is outside the zone too. The counters read 2 after a page load; press **Reset counters** first.
+
+**Demo flow:**
+1. All Eager (the default). Click **click** on E — every node flashes, A–G all show `checks 1`.
+2. Reset, click **setTimeout** on B — a second later every node flashes, all show `checks 2` (one cycle for entering the zone, one for the timer). This is the bars-per-mouse-move problem of lab 1.
+3. Reset, click **outside zone** on B — nothing flashes, all stay at 0. The field went up, but B still shows the old value until the next cycle. That is `runOutsideAngular`, the fix of lab 1.
+4. Click **All OnPush**, then **click** on E — only E, B and A flash (`checks 1`); C, D, F, G stay at 0. An event marks the node and its ancestors.
+5. Reset, **signal** on B — only B flashes. A signal read in the template refreshes just that view.
+6. Reset, **markForCheck** on E — E, B, A, like the click. **input** on B — A and B (the parent re-renders and passes the new value down).
+7. Reset, **setTimeout** on B — nothing flashes, and B keeps `field 0`. Now click **click** on B: A and B flash and the field jumps to 1. Under OnPush a plain field changed in a timer is a stale UI; under zoneless the timer would not even start a cycle. That's why lab 2 turns the state into signals.
+
+**Talking point:** OnPush plus signals means Angular checks the path to what changed and nothing else. If a value only shows up after you click something else, you changed a plain field outside anything Angular tracks: make it a signal. Inspired by Matthieu Riegler's [Angular change detection demo](https://jeanmeche.github.io/angular-change-detection/).
+
+### 2. `@defer` triggers — `/performance/defer`
+
+**Files:** `defer/defer-board.component.ts`, `defer/loaded/*.ts` (one component per chunk)
+
+**What it shows:** each `@defer` block becomes its own JS chunk, fetched when its trigger fires (`defer-board.component.ts:27-100`).
+
+**Demo flow:**
+1. DevTools, Network, filter **JS**, reload. `idle-loaded.component-….js` and `prefetch-loaded.component-….js` arrive at once; `timer-loaded…` about 3 s later. The green card names the chunk it came from.
+2. Hover **Hover me** — `hover-loaded…` appears in the list.
+3. Click **Click me** — `interaction-loaded…`.
+4. Tick **show()** — `when-loaded…`. Untick it: the block stays (`when` is one-shot).
+5. Click **Downloaded already. Click me** — it renders, and no new request: `prefetch on idle` already fetched it in step 1.
+6. Scroll down — `viewport-loaded…` loads when its box comes into view.
+7. Throttle to **Slow 4G**, reload, click **Click me** — **Loading ...** shows for about a second before the card. Locally a chunk arrives in well under 100 ms, so `@loading (after 100ms)` never shows without throttling.
+
+**Talking point:** wrap the heavy thing below the fold in `@defer (on viewport)` and it leaves `main`. In lab 3 that's the map.
+
+### 3. ngSrc — `/performance/images` (optional, slide hidden)
+
+**Files:** `images/images.component.ts`, `src/assets/performance/*.webp`
+
+**What it shows:** `NgOptimizedImage` tells you in dev mode when the LCP image lacks `priority` (`images.component.ts:29`).
+
+**Demo flow:**
+1. Open the console. Click **Reload without priority** — Angular logs error **NG02955** for `hero.webp`: it is the LCP element and has no `priority`.
+2. Click **Reload with priority** — the heading says "with `priority`" and the console stays clean.
+3. Scroll down: `fill` (no width/height, fills its `position: relative` box) and `placeholder` (a tiny blurred data URL). With **Slow 4G** the placeholder shows before the swings image arrives.
+
+Use the reload buttons, not the tabs: LCP is measured on a fresh page load only. The `ngSrc` paths start with `/` on purpose: the LCP check resolves a relative path against the page URL, not `<base href>`, and would never match.
+
+**Talking point:** swap `src` for `ngSrc` with `width` and `height`, add `priority` to the one image above the fold, and let the console tell you which one that is.
+
+### 4. Leaks — `/performance/leaks`
+
+**Files:** `leaks/leaks.component.ts`, `leaks/leaky.component.ts`
+
+**What it shows:** a component that starts a `setInterval`, adds a `window` listener and subscribes to an app-wide subject, and never cleans up (`leaky.component.ts:41-57`). Every unmounted instance stays in memory. **Use the fix** switches it to `DestroyRef.onDestroy` + `takeUntilDestroyed()`. The counters use a `FinalizationRegistry`, so **Collected** moves only after a garbage collection: DevTools, Memory, **Collect garbage** (bin icon).
+
+**Demo flow:**
+1. Click **Mount a playground card** — a red card ticks every second. Click **Send an update**: "last update: Havrebakkens Legeplads". **Created 1**.
+2. Click **Unmount a playground card**, then **Mount + unmount 10 times** — **Created 11, Still alive 11** (1 from step 1 plus 10).
+3. Collect garbage — **Collected 0, Still alive 11**. The interval, the listener and the subscription still point at every card.
+4. Reload. Tick **Use the fix**, **Mount + unmount 10 times**, collect garbage — **Created 10, Collected 10, Still alive 0**.
+5. Optional, Map vs WeakMap: **Cache 1000 playgrounds in each**, **Drop the playgrounds**, collect garbage — WeakMap collected **1000**, Map collected **0** (size still 1000). **map.clear()**, collect garbage — Map collected **1000**.
+
+**Talking point:** anything you start in a component (interval, listener, subscription, third-party map) gets its cleanup in `DestroyRef.onDestroy` right next to it. The first thing you measure is whether the count of a component in a heap snapshot goes back down after you leave the page.
+
+### Summary slide order
+
+| Path | Concept | Key takeaway |
+| --- | --- | --- |
+| `/change-detection` | Eager vs OnPush, zone triggers | Timers check the whole tree; signals check one node |
+| `/defer` | `@defer` triggers | One block, one chunk, loaded when the trigger fires |
+| `/images` | `NgOptimizedImage` | `priority` on the LCP image, the console tells you which |
+| `/leaks` | Cleanup with `DestroyRef` | Uncleaned intervals and subscriptions keep every instance alive |
+
+---
+
 ## TODO — other demo areas
 
 The rest of `src/app` will be added in follow-up sections.

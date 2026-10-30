@@ -50,6 +50,10 @@ export const routes: Routes = [
     loadChildren: () => import('./state-management/state-management.routes').then(m => m.StateManagementRoutes)
   },
   {
+    path: 'performance',
+    loadChildren: () => import('./performance/performance.routes').then(m => m.PerformanceRoutes)
+  },
+  {
     path: '**',
     redirectTo: 'rxjs'
   }
