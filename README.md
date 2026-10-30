@@ -678,15 +678,15 @@ Rendered from the uncommitted lift on the `performance` worktree. 36 visible sli
 <details><summary>Speaker notes</summary>
 
 > Four fixes, in the order they paid off in THIS app. Yours will differ: measure.
-> The Monday sentence is on the slide: read it out.
+> Read the Monday line out.
 > Click: the question to the room.
 >
 > Here's the day on one slide, in the order they paid off in our app.
-> One: load less. Our first download was 1.77 megabytes, and the biggest part wasn't the map, it was an icon library we registered in full. Only the icons we use, a lazy route and two defer blocks, and the initial total was 621 kilobytes. Every user pays that on every load, so it goes first.
-> Two: the map's mouse events ran change detection for the whole app. 60 mouse moves, 61 cycles. One runOutsideAngular, and it was 1.
-> Three: every visit left a footer and a map behind. After five rounds that was 10 footers and 14,000 detached nodes. Two onDestroy callbacks, and it was 0. Small per visit, but it grows for as long as the tab is open.
-> Four: zoneless and signals. Here the honest number is smaller: when the footer ticks, Angular refreshes the footer instead of all six components. A click in the list still refreshes everything once. It pays more the bigger your component tree is.
-> So on Monday, and it's on the slide. In your own app, you would start with the kind of slow your users complain about, not with the fix you liked best today. The first thing you measure is that kind's number, the middle column: Initial total from the build, bars in the Profiler, or instances across two heap snapshots. Write it down, change one thing, measure again.
+> One: load less. Our first download was 1.77 megabytes, and the biggest part wasn't the map, it was an icon library we registered in full. Only the icons we use, a lazy route with loadComponent and two defer blocks, and Initial total in the build output was 621 kilobytes. Every user pays that on every load, so it goes first.
+> Two: the map's mouse events ran change detection for the whole app. 60 mouse moves, 61 Profiler bars. One runOutsideAngular, and it was 1.
+> Three: every visit left a footer and a map behind. After five rounds that was 10 footers and 14,000 detached nodes in the heap snapshot. Two onDestroy callbacks, and it was 0. Small per visit, but it grows for as long as the tab is open.
+> Four: zoneless and signals. Here the honest number is smaller: when the footer ticks, the Profiler shows Angular refreshing the footer instead of all six components. A click in the list still refreshes everything once. It pays more the bigger your component tree is.
+> So on Monday: in your own app, start with the kind of slow your users complain about, not with the fix you liked best today. Measure that first: Initial total from the build, bars in the Profiler, or instances across two heap snapshots. Write the number down, change one thing, measure again.
 > Click. Ask the room: which one would you try at work, and what would you measure first? Let two or three people answer.
 
 </details>
