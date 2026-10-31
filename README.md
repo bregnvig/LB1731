@@ -29,12 +29,13 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 
 <details><summary>Speaker notes</summary>
 
-> Three kinds of slow, each with its own tool and its own number.
+> Three kinds of slow, each with its own number.
+> Interaction: Angular DevTools Profiler, bars in 5 s of mouse moves (labs 1, 2). Startup: Initial total from npm run build, plus the Network tab (lab 3). Memory: Memory panel, live FooterComponent objects across two heap snapshots (lab 4).
 > Interaction: the screen answers late. Startup: the wait before you can use it. Memory: slower the longer you use it.
 > Click: the rule of the day. Every exercise has a measure before and a measure after.
 >
 > When a user says the app is slow, ask which slow. Interaction is lag: you move the mouse or click and the screen answers late, usually because Angular does too much work per event. Startup is the wait before you can use it: JavaScript to download, parse and run. Memory is slow over time: fine when you opened it, heavy an hour later because things were never cleaned up.
-> Each kind has its own tool, and a fix for one does nothing for the others. The last column is what you write down before you touch any code.
+> Each kind has its own tool, and a fix for one does nothing for the others. The right column is what you write down before you touch any code.
 > Click. That's the only rule today. Measure, change exactly one thing, measure again in exactly the same way. Developers are bad at guessing where time goes, and a fix that does nothing still feels like progress.
 > Ask the room: which of the three did your last "the app is slow" ticket mean?
 
