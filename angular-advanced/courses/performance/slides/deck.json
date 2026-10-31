@@ -28,6 +28,9 @@
       "file": "exercise-1-measure-before.html"
     },
     {
+      "file": "exercise-1-measure-before-2.html"
+    },
+    {
       "file": "running-outside-zone-js.html"
     },
     {
@@ -53,6 +56,9 @@
       "file": "zoneless-what-breaks.html"
     },
     {
+      "file": "exercise-2-measure-before.html"
+    },
+    {
       "file": "exercise-2-go-zoneless.html"
     },
     {
@@ -60,6 +66,9 @@
     },
     {
       "file": "exercise-2-measure-after.html"
+    },
+    {
+      "file": "exercise-2-measure-after-2.html"
     },
     {
       "file": "reading-the-ng-build-output.html"
@@ -88,16 +97,25 @@
       "file": "exercise-3-getting-started.html"
     },
     {
-      "file": "exercise-3-load-less.html"
+      "file": "exercise-3-lazy-route.html"
     },
     {
-      "file": "exercise-3-load-less-2.html"
+      "file": "exercise-3-defer-map.html"
+    },
+    {
+      "file": "exercise-3-defer-footer.html"
+    },
+    {
+      "file": "exercise-3-one-icon.html"
     },
     {
       "file": "exercise-3-see-it-load.html"
     },
     {
       "file": "exercise-3-bonus-about-panel.html"
+    },
+    {
+      "file": "exercise-3-bonus-about-panel-2.html"
     },
     {
       "file": "exercise-3-what-we-measured.html"
@@ -126,7 +144,13 @@
       "file": "exercise-4-read-the-snapshot.html"
     },
     {
+      "file": "exercise-4-read-the-retainers.html"
+    },
+    {
       "file": "exercise-4-fix-the-leaks.html"
+    },
+    {
+      "file": "exercise-4-measure-after.html"
     },
     {
       "file": "exercise-4-bonus-content-visibility.html",

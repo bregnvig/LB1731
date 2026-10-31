@@ -3,9 +3,9 @@
     <h2>Exercise 3 - Watch the chunks load</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">Start the app with <code><span style="color:#ff8c00">npm start -- --no-hmr</span></code> (no hot module replacement)</span></p>
-<p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> with plain <code><span style="color:#ff8c00">npm start</span></code>, hot module replacement loads every <code><span style="color:#ff8c00">@defer</span></code> chunk up front. You would see nothing.</span></p>
-<p><span style="font-size:0.7em">DevTools, Network tab, filter <strong>JS</strong>, type <code><span style="color:#ff8c00">/main\.js|component/</span></code> in the filter box, reload. <code><span style="color:#ff8c00">footer.component-….js</span></code> and <code><span style="color:#ff8c00">leaflet.component-….js</span></code> come in right after <code><span style="color:#ff8c00">main.js</span></code>: on idle is quick, and the footer placeholder is already in the viewport.</span></p>
+    <p><span style="font-size:0.7em">Start the app with <code><span style="color:#ff8c00">npm start -- --no-hmr</span></code></span></p>
+<p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> with plain <code><span style="color:#ff8c00">npm start</span></code>, hot module replacement loads every <code><span style="color:#ff8c00">@defer</span></code> chunk up front. You'd see nothing.</span></p>
+<p><span style="font-size:0.7em">DevTools, Network tab, filter <strong>JS</strong>, type <code><span style="color:#ff8c00">/main\.js|component/</span></code> in the filter box, reload. <code><span style="color:#ff8c00">footer.component-….js</span></code> and <code><span style="color:#ff8c00">leaflet.component-….js</span></code> come in right after <code><span style="color:#ff8c00">main.js</span></code>.</span></p>
 <p><span style="font-size:0.7em">Click a playground, then <strong>Detaljer</strong>. Only now does <code><span style="color:#ff8c00">playground-detail.component-….js</span></code> load.</span></p>
   </div>
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:620px;top:160px;width:622px;height:246.8px;z-index:12">
@@ -13,7 +13,7 @@
   </div>
   <aside class="notes">npm start -- --no-hmr. Network, filter JS, filter box /main\.js|component/, reload: footer.component and leaflet.component right after main. Detaljer: playground-detail.component loads on the click.
 Screenshot: real DevTools (frontend from Chromium's remote debugging port, zoomed 1.5x), step-4 on npm start -- --no-hmr, after select + Detaljer. Initiator column: main.js for footer and leaflet, app.routes.ts:11 for the detail page.
-Plain npm start (HMR) loads defer chunks up front: the most common "defer doesn't work" question.
+Plain npm start loads defer chunks up front: the most common "defer doesn't work" question.
 
 The build table told us the chunks exist. Now we watch them load.
 Stop the dev server and start it with npm start -- --no-hmr. Hot module replacement loads every defer chunk up front, so with plain npm start the Network tab shows nothing interesting and you'd think defer is broken.

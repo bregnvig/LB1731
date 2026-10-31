@@ -2,31 +2,14 @@
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 4 - Read the snapshot</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure before:</span> in snapshot 2, type in the class filter and write the numbers down:</span></p><ul><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">Detached</span></code>: no single total. Read the row <code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code>: <strong>×10</strong>, one per old Home</span></li><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">FooterComponent</span></code>: <strong>11</strong>, the one on screen plus 10 leaked</span></li></ul><p><span style="font-size:0.7em">Click a detached node and read <code><span style="color:#ff8c00">Retainers</span></code>. What keeps the old Home alive?</span></p><p><span style="font-size:0.7em">The trap: anything you selected in Elements (<code><span style="color:#ff8c00">$0</span></code>) or logged to the console is kept alive under <strong>DevTools console</strong>. Ignore entries whose only retainer is <code><span style="color:#ff8c00">DevTools console</span></code>.</span></p>
-  </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:160px;width:602px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-plaintext">Window
-  → _leaflet_events
-  → resize handler
-  → L.Map
-  → _container
-  → div.leaflet-container
-  → &lt;leaflet&gt;
-  → &lt;main&gt;
-  → ... the whole old Home</code></pre>
-  </div>
-  <div class="block fragment fade-down" data-type="text" data-name="text-2" style="left:640px;top:390px;width:602px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.7em">Leaflet's resize listener on <code><span style="color:#ff8c00">window</span></code>: only <code><span style="color:#ff8c00">map.remove()</span></code> takes it off.</span></p><p><span style="font-size:0.7em">The footer's <code><span style="color:#ff8c00">setInterval</span></code> callback holds the rest: nobody calls <code><span style="color:#ff8c00">clearInterval</span></code>.</span></p>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:1000px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Measure before:</span> in snapshot 2, type in the class filter and write the numbers down:</span></p><ul><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">Detached</span></code>: no single total. Read the row <code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code>: <strong>×10</strong>, one per old Home</span></li><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">FooterComponent</span></code>: <strong>11</strong>, the one on screen plus 10 leaked</span></li></ul>
+<p><span style="font-size:0.7em">Why 10? <code><span style="color:#ff8c00">''</span></code> and <code><span style="color:#ff8c00">':id'</span></code> both show <code><span style="color:#ff8c00">HomeComponent</span></code>: every navigation builds a new Home, 2 per round.</span></p>
   </div>
   <aside class="notes">Before numbers after 5 rounds: Detached &lt;leaflet&gt; ×10 (and Detached &lt;loop-sidebar-list-item&gt; ×1,330 = 10 × 133), FooterComponent ×11 (1 live + 10 leaked).
-Retainers on a detached node: Window -&gt; _leaflet_events -&gt; resize handler -&gt; L.Map -&gt; ... -&gt; &lt;main&gt;.
-Click: the two culprits. Trap: DevTools console retainers.
+Two Homes per round: select goes '' -&gt; ':id', a different route entry, so a new Home; Tilbage til kortet goes back to '', another new Home. 5 rounds = 10.
 The "14,120 detached nodes" in older notes was every detached DOM node (elements, Text, Comment) summed from the raw snapshot by script. DevTools never shows that sum: the Summary has one "Detached &lt;tag&gt;" row per tag, plus blink:: internals. So students read one row.
 
-In snapshot two, type Detached in the class filter. You get a long list, one row per tag: Detached &lt;div&gt;, Detached &lt;button&gt;, and so on, and DevTools has no total for all of them. So read one row that means something: Detached &lt;leaflet&gt;. Ten. One map element per old Home, ten old Homes. If you want a bigger number, Detached &lt;loop-sidebar-list-item&gt; says 1,330: ten old lists of 133 rows. Then type FooterComponent: 11. One is the footer on screen, ten are leaked, two per round, like I said.
-Now click one of the detached nodes and read the Retainers pane. You'll see a chain like the one on the right: it starts at Window, goes through _leaflet_events, a resize handler, the Leaflet map, its container div, and from there up through the leaflet element and main into the whole old Home.
-Ask the room: who put a listener on window? Let them guess before you click.
-Click. Leaflet did. A map listens for window resize, and only map.remove() takes the listener off. Nobody calls it, so the map keeps its container, and a detached node keeps its parents, so the whole old Home stays. The footer is the other half: the setInterval callback still runs every second and holds the footer.
-The trap: if you click around in the Elements panel or log a node to the console, DevTools itself holds on to it, and it shows up with DevTools console as its retainer. That's not your app. Ignore those.</aside>
+In snapshot two, type Detached in the class filter. You get a long list, one row per tag: Detached &lt;div&gt;, Detached &lt;button&gt;, and so on, and DevTools has no total for all of them. So read one row that means something: Detached &lt;leaflet&gt;. Ten. One map element per old Home, ten old Homes. If you want a bigger number, Detached &lt;loop-sidebar-list-item&gt; says 1,330: ten old lists of 133 rows. Then type FooterComponent: 11. One is the footer on screen, ten are leaked.
+Why ten? Look at app.routes.ts: the empty path and ':id' are two route entries with the same HomeComponent. Selecting a playground goes from one to the other, and the router builds a new Home. Tilbage til kortet goes back to the empty path: another new Home. Two per round. Five rounds, ten Homes that should be gone.</aside>
 </section>

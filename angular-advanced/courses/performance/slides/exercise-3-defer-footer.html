@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Defer the footer</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">Same file: wrap <code><span style="color:#ff8c00">&lt;loop-footer&gt;</span></code> in <code><span style="color:#ff8c00">@defer (on viewport)</span></code> with an empty <code><span style="color:#ff8c00">&lt;footer&gt;</span></code> as placeholder.</span></p>
+<p><span style="font-size:0.7em">Build: a <code><span style="color:#ff8c00">footer-component</span></code> chunk. Write down <code><span style="color:#ff8c00">Initial total</span></code>.</span></p>
+<p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> <code><span style="color:#ff8c00">on viewport</span></code> above the fold costs, it doesn't save: alone, <code><span style="color:#ff8c00">Initial total</span></code> 383.17 → 386.49 kB.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:620px;height:auto;z-index:12">
+    <pre style="font-size: 15px; line-height: 20px; tab-size: 4;"><code class="language-html">@defer (on viewport) {
+  &lt;loop-footer [playground]="playground()" [loadedAt]="loadedAt()"/&gt;
+} @placeholder {
+  &lt;footer&gt;&amp;nbsp;&lt;/footer&gt;
+}
+</code></pre>
+  </div>
+  <aside class="notes">Change 3: @defer (on viewport) around loop-footer, placeholder &lt;footer&gt;&amp;nbsp;&lt;/footer&gt;. Lazy table: footer-component.
+Footer alone on the exercise 3 start: Initial total 1.77 MB / 383.17 kB -&gt; 1.78 MB / 386.49 kB. The footer is on screen at load, so the chunk is fetched at once, and the split adds runtime.
+
+The footer. Same file, wrap loop-footer in @defer on viewport, and the placeholder is an empty footer with a non-breaking space so it keeps its height. Build: a footer-component chunk. And the trap: the footer is on screen from the first frame, so on viewport fires at once. You pay a second request and some defer runtime, and Initial total goes up, 383.17 to 386.49 kilobytes when we did it alone. Defer what's below the fold or behind a click, not what's in view.</aside>
+</section>

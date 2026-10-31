@@ -3,13 +3,12 @@
     <h2>Exercise 1 - Bonus: try it, then revert</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1200px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:0.7em">Lab <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>. Open <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>.</p>
-<p style="font-size:0.7em">Run the footer's <code><span style="color:#ff8c00">setInterval</span></code> outside the zone too (below).</p>
+    <p style="font-size:0.7em">In <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>, open <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>. Run the footer's <code><span style="color:#ff8c00">setInterval</span></code> outside the zone too.</p>
 <p style="font-size:0.7em"><strong>Measure:</strong> the footer bars disappear from the profiler. But look at the page: <em>Opdateret for N sekunder siden</em> stops counting.</p>
-<p style="font-size:0.7em">Why: the number still changes, but nobody tells Angular. Zone.js was the only thing doing that.</p>
-<p style="font-size:0.7em"><strong>This is an experiment. Undo it afterwards</strong>, do not keep it. You will fix the counter properly in exercise 2.</p>
+<p style="font-size:0.7em">Why: the number still changes, but only zone.js told Angular.</p>
+<p style="font-size:0.7em"><strong>Experiment only: undo it afterwards.</strong> Exercise 2 fixes the counter properly.</p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:350px;width:1200px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:320px;width:1200px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript">constructor() {
   inject(NgZone).runOutsideAngular(() =&gt;
     setInterval(() =&gt; this.seconds = Math.round((Date.now() - this.loadedAt) / 1000), 1000));

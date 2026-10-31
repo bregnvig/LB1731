@@ -3,19 +3,21 @@
     <h2>Exercise 4 - Find the leaks</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-4</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>. When complete, start the application by running <code><span style="color:#ff8c00">npm start</span></code></span></p><p><span style="font-size:0.7em">Open Chrome DevTools, <code><span style="color:#ff8c00">Memory</span></code>, <code><span style="color:#ff8c00">Heap snapshot</span></code>. On the home page: trash icon, then take snapshot 1.</span></p><p><span style="font-size:0.7em">Now do <strong>5 rounds</strong>: select a playground in the list, click <code><span style="color:#ff8c00">Detaljer</span></code> in the footer, click <code><span style="color:#ff8c00">Tilbage til kortet</span></code>.</span></p><p><span style="font-size:0.7em">Trash icon, snapshot 2.</span></p><p><span style="font-size:0.7em"><code><span style="color:#ff8c00">''</span></code> and <code><span style="color:#ff8c00">':id'</span></code> both show <code><span style="color:#ff8c00">HomeComponent</span></code>, so every navigation builds a new Home. 5 rounds = 10 old Homes.</span></p>
+    <p><span style="font-size:0.7em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-4</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>, then <code><span style="color:#ff8c00">npm start</span></code></span></p>
+<p><span style="font-size:0.7em">Open DevTools, <code><span style="color:#ff8c00">Memory</span></code>, <code><span style="color:#ff8c00">Heap snapshot</span></code>. On the home page: trash icon, snapshot 1.</span></p>
+<p><span style="font-size:0.7em"><strong>5 rounds</strong>: select a playground in the list, click <code><span style="color:#ff8c00">Detaljer</span></code> in the footer, click <code><span style="color:#ff8c00">Tilbage til kortet</span></code>.</span></p>
+<p><span style="font-size:0.7em">Trash icon, snapshot 2.</span></p>
   </div>
   <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:160px;width:602px;height:221.8px;z-index:12">
     <img src="images/devtools-memory-two-snapshots.jpg" alt="DevTools Memory panel: two heap snapshots, class filter FooterComponent, ×11">
   </div>
   <aside class="notes">Lab: labs/performance/exercise-4, npm install, npm start.
 Snapshot 1 on home, 5 rounds (select, Detaljer, Tilbage til kortet), snapshot 2.
-Two Homes per round: select goes '' -&gt; ':id', a different route entry, so a new Home; Tilbage til kortet goes back to '', another new Home. 5 rounds = 10.
 Screenshot: real DevTools Memory panel on step-4 after exactly these 5 rounds, class filter FooterComponent: ×11.
 
 Last exercise, and this time we don't fix anything until we've measured. If you want a clean start, labs/performance/exercise-4, npm install, npm start.
 Open DevTools, Memory, Heap snapshot. On the home page, click the trash can and take snapshot one.
 Now five rounds. Select a playground in the list, click Detaljer in the footer, and click Tilbage til kortet on the detail page. Five times. Trash can, snapshot two. On the right is what that looks like: two snapshots in the sidebar, and a class filter at the top.
-Why do I insist on counting rounds? Because you'll count footers in a minute, and the number will surprise you if you don't know this. Look at app.routes.ts: the empty path and ':id' are two route entries with the same HomeComponent. Selecting a playground goes from one to the other, and the router builds a new Home. Tilbage til kortet goes back to the empty path: another new Home. Two per round. Five rounds, ten Homes that should be gone.
+Count the rounds: you'll count footers in a minute, and the number only makes sense if you know how many rounds you did.
 Ask the room: the screenshot says FooterComponent ×11. Who expected 1?</aside>
 </section>
