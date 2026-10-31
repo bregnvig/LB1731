@@ -104,7 +104,7 @@ Over the type's word limit: cut to the claim and move the explanation to the not
 
 **Theme changes respect the other courses.** Courses that are not lifted yet have no `data-template` and must render exactly as before. Scope every theme change to `section[data-template]`, and prove it: `bash scripts/compare-theme.sh <angular-advanced> <slides on master> <slides with your change> <scratch dir>` must end with `0 of N slides differ`.
 
-Text sizes and colours come from the type scale in slide-types.md: title, lead, body, accent, code. No inline sizes or colours. Accent (orange) on at most two things per slide plus the "Trap:" label. Paths and identifiers are white `<code>`, UI labels `<strong>`.
+Text sizes and colours come from the type scale in slide-types.md: display, title, stat, body, accent, code. No inline sizes or colours. Accent (orange) on at most two things per slide plus the "Trap:" label. Paths and identifiers are white `<code>`, UI labels `<strong>`.
 
 **No tables.** No `<table>`, no `table` block, and no columns faked with spaces in a code block. A table makes the room read rows instead of listening. Use one of these instead:
 

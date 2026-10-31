@@ -20,9 +20,9 @@ Every typed slide (`<section data-template>`) gets its text sizes from the theme
 |---|---|---|---|
 | display | `<h1>` in `title` / `statement` | 49px | Course name, one-line statements |
 | title | `<h2>` in the `title` block | 32px, uppercase | Slide titles |
-| lead | `<p class="lead">` | 28px bold | Reveal-list lines, results, the line the room should remember |
+| stat | `<p class="stat">before → <span class="accent">after</span></p>` | 64px bold | A measured result on `number` and `exercise-result` slides, with a body label under it |
 | body | plain `<p>`, `<ul>`, `<ol>` | 24px, line-height 1.35 | Claims, steps, callouts, punchlines, why lines |
-| accent | `<span class="accent">` (or `class="lead accent"`) | orange, size of its text | The one term or number to look at, and "Trap:" |
+| accent | `<span class="accent">` | orange, size of its text | The one term or number to look at, and "Trap:" |
 | code | code blocks | 22px | All code blocks |
 
 Inline `<code>` is white monospace at the size of its text. UI labels are `<strong>`.
@@ -54,17 +54,17 @@ This table is the output of `python3 scripts/check-slides.py --describe`. The nu
 |---|---|---|---|
 | `title` | First slide of a course: the course name, one short italic line, and the course image in the lower right (bottom-right corner at 1200,648, longest side 288px). | `title`, `subtitle`, `image-1` | 12 |
 | `statement` | One big sentence or question on its own, e.g. "Time for questions 🤓". | `title` | 12 |
-| `reveal-list` | Three to five short phrases, one per click, then an optional punchline 48px below the last line. For categories and lists. | `title`, `line-1` (click), `line-2` (click), `line-3` (click), `line-4`* (click), `line-5`* (click), `punchline`* (click) | 40, 8 per line |
+| `reveal-list` | Three to five short items in one list, each appearing on a click, then an optional punchline. For kinds, steps and "In your app" homework. | `title`, `items`, `punchline`* (click) | 45, 8 per item |
 | `claim-code` | Up to three short claims on the left, the code that shows them on the right. | `title`, `claims`, `code-1`, `punchline`* (click) | 35, 8 code lines |
 | `claim-image` | Up to three short claims on the left, a cropped screenshot of what they describe on the right. | `title`, `claims`, `image-1`, `punchline`* (click) | 30 |
 | `code-pair` | Two code blocks side by side (before and after, or the definition and its use), one caption line. | `title`, `code-1`, `code-2`, `caption`* | 15, 8 code lines |
-| `number` | One or two big measured results, then one line on why, 48px below. | `title`, `result-1`, `result-2`* (click), `why`* | 20 |
+| `number` | One or two measured results as big numbers, side by side: the before in white, the after in accent, a short label under each. Then one line on why. | `title`, `result-1`, `result-2`* (click), `why`* | 30 |
 | `wrap` | Last content slide: one line per technique with this app's number, the Monday line, the question. | `title`, `line-1`, `line-2`, `line-3`*, `line-4`*, `monday`, `question` (click) | 50 |
 | `exercise-start` | First slide of exercise 1: path, npm install, npm start, what the exercise is for, the running app on the right. | `title`, `steps`, `image-2`*, `note`*, `image-1` | 55 |
 | `exercise-step` | One step of an exercise with nothing to show on the right: 1-4 numbered instructions, then an optional callout 48px below: a trap ("Trap: …") or what they should see ("You should see: …"). | `title`, `steps`, `callout`* | 60 |
 | `exercise-step-code` | One step of an exercise: short instructions on the left, the code to write on the right. | `title`, `steps`, `code-1`, `callout`* | 50, 8 code lines |
 | `exercise-step-image` | One step of an exercise: short instructions on the left, a screenshot of what they should see on the right. | `title`, `steps`, `image-1`, `callout`* | 45 |
-| `exercise-result` | What the exercise measured: one or two big results, one line on why, 48px below. | `title`, `result-1`, `result-2`* (click), `why`* | 25 |
+| `exercise-result` | Debrief after an exercise: one or two measured results as big numbers, the before in white, the after in accent, a short label under each. Then one line on why. | `title`, `result-1`, `result-2`* (click), `why`* | 30 |
 
 ## Choosing a type
 
@@ -72,5 +72,5 @@ This table is the output of `python3 scripts/check-slides.py --describe`. The nu
 - A list of kinds, steps or items: `reveal-list`. Never a table.
 - A number the room should remember: `number` (theory) or `exercise-result` (after an exercise).
 - An exercise is a run of step slides, one step each: `exercise-start` for the first slide of exercise 1, then `exercise-step`, `exercise-step-code` or `exercise-step-image`. Exercises 2 to 4 open with an `exercise-step` that starts "Not happy with the result of the previous exercise?". The last step ends with "Done? Come back to the room."
-- After the run, the debrief: `exercise-result` slides ("Exercise N - What we measured"), then any theory that explains what they found, then the "In your app" homework as a `reveal-list` titled "In your app: …".
+- After the run, the debrief: `exercise-result` slides ("Exercise N - What we measured"), then any theory that explains what they found, then the "In your app" homework as a `reveal-list` titled "In your app: …" (a numbered `<ol>` when the items are steps).
 - Too many words for the type: split at the next step or idea. Never shrink the text.

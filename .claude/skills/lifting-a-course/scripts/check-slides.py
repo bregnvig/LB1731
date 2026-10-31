@@ -24,8 +24,8 @@ def b(name, kind, left, top, width, *, fragment=False, required=True, sample='',
 THEORY_TITLE = lambda text: b('title', 'text', 64, 96, 1150, sample=f'<h2>{text}</h2>')
 EX_TITLE = lambda text: b('title', 'text', 64, 96, 1150, sample=f'<h2>{text}</h2>')
 EX = lambda s: f'<p>{s}</p>'
-LINE = lambda s: f'<p class="lead">{s}</p>'
-RESULT = lambda s: f'<p class="lead accent">{s}</p>'
+STAT = lambda before, after, label: f'<p class="stat">{before} → <span class="accent">{after}</span></p>\n<p>{label}</p>'
+ITEMS = lambda tag, *items: f'<{tag}>\n' + '\n'.join(f'<li class="fragment">{i}</li>' for i in items) + f'\n</{tag}>'
 STEPS = lambda *items: '<ol>\n' + '\n'.join(f'<li>{i}</li>' for i in items) + '\n</ol>'
 
 TYPES = {
@@ -40,14 +40,10 @@ TYPES = {
         words=12, notes=False,
         blocks=[b('title', 'text', 102, 274, 1076, sample='<h1>Time for questions 🤓</h1>')]),
     'reveal-list': dict(
-        what='Three to five short phrases, one per click, then an optional punchline 48px below the last line. For categories and lists.',
-        words=40, line_words=8,
+        what='Three to five short items in one list, each appearing on a click, then an optional punchline. For kinds, steps and "In your app" homework.',
+        words=45, item_words=8,
         blocks=[THEORY_TITLE('What does "slow" mean?'),
-                b('line-1', 'text', 64, 200, 1150, fragment=True, sample=LINE('Slow to respond')),
-                b('line-2', 'text', 64, 280, 1150, fragment=True, sample=LINE('Slow to start')),
-                b('line-3', 'text', 64, 360, 1150, fragment=True, sample=LINE('Slower over time')),
-                b('line-4', 'text', 64, 440, 1150, fragment=True, required=False),
-                b('line-5', 'text', 64, 520, 1150, fragment=True, required=False),
+                b('items', 'text', 64, 200, 1150, sample=ITEMS('ul', 'Slow to respond', 'Slow to start', 'Slower over time')),
                 b('punchline', 'text', 64, None, 1150, fragment=True, required=False,
                   sample=f'<p>Each has its own number. {O.format("Measure it before you fix it.")}</p>')]),
     'claim-code': dict(
@@ -72,11 +68,11 @@ TYPES = {
                 b('code-2', 'code', 666, 200, 580, fragment=None, sample='// after'),
                 b('caption', 'text', 64, None, 1150, fragment=None, required=False, sample='<p>One short line.</p>')]),
     'number': dict(
-        what='One or two big measured results, then one line on why, 48px below.',
-        words=20,
+        what='One or two measured results as big numbers, side by side: the before in white, the after in accent, a short label under each. Then one line on why.',
+        words=30, stats=True,
         blocks=[THEORY_TITLE('What we measured'),
-                b('result-1', 'text', 64, 220, 1150, sample=RESULT('~290 → 5 bars')),
-                b('result-2', 'text', 64, 320, 1150, fragment=True, required=False, sample=RESULT('1 bar = the whole app')),
+                b('result-1', 'text', 64, 260, 560, sample=STAT('~300', '5', 'bars in 5 s of mouse moves')),
+                b('result-2', 'text', 656, 260, 560, fragment=True, required=False, sample=STAT('229', '6 ms', 'change detection in those 5 s')),
                 b('why', 'text', 64, None, 1150, fragment=None, required=False, sample='<p>One line on why.</p>')]),
     'wrap': dict(
         what="Last content slide: one line per technique with this app's number, the Monday line, the question.",
@@ -117,12 +113,12 @@ TYPES = {
                 b('image-1', 'image', 630, 160, 630, sample='images/devtools-network-chunks.jpg'),
                 b('callout', 'text', 64, None, 540, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
     'exercise-result': dict(
-        what='What the exercise measured: one or two big results, one line on why, 48px below.',
-        words=25, exercise=True,
+        what='Debrief after an exercise: one or two measured results as big numbers, the before in white, the after in accent, a short label under each. Then one line on why.',
+        words=30, exercise=True, stats=True,
         blocks=[EX_TITLE('Exercise 2 - What we measured'),
-                b('result-1', 'text', 64, 180, 1150, fragment=None, sample=RESULT('5 s of mouse moves: ~290 bars')),
-                b('result-2', 'text', 64, 280, 1150, fragment=True, required=False, sample=RESULT('1 bar = the whole app')),
-                b('why', 'text', 64, None, 1150, fragment=None, required=False, sample=EX('Why, in one line.'))]),
+                b('result-1', 'text', 64, 260, 560, fragment=None, sample=STAT('~300', '5', 'bars in 5 s of mouse moves')),
+                b('result-2', 'text', 656, 260, 560, fragment=True, required=False, sample=STAT('229', '6 ms', 'change detection in those 5 s')),
+                b('why', 'text', 64, None, 1150, fragment=None, required=False, sample='<p>Why, in one line.</p>')]),
 }
 
 STEP_TYPES = {'exercise-start', 'exercise-step', 'exercise-step-code', 'exercise-step-image'}
@@ -178,9 +174,14 @@ def check(path):
         if blk['kind'] == 'text' and name != 'title':
             inline = sorted(set(re.findall(r'(font-size|line-height|color)\s*:', blk['inner'])))
             if inline:
-                add(f'block "{name}" sets {", ".join(inline)} inline; use the type scale: class="lead", class="accent", plain text is body')
-            if name.startswith(('result-', 'line-')) and 'class="lead' not in blk['inner'] and s['template'] != 'wrap':
-                add(f'block "{name}" must use class="lead"')
+                add(f'block "{name}" sets {", ".join(inline)} inline; use the type scale: class="stat", class="accent", plain text is body')
+            unknown = set(c for cl in re.findall(r'class="([^"]*)"', blk['inner']) for c in cl.split()) - {'stat', 'accent', 'fragment'} - {c for c in re.findall(r'class="(language-[\w-]+)"', blk['inner'])}
+            if unknown:
+                add(f'block "{name}" uses class {", ".join(sorted(unknown))}; the type scale has stat and accent')
+            if t.get('stats') and name.startswith('result-'):
+                st = re.findall(r'<p class="stat">(.*?)</p>', blk['inner'], re.S)
+                if len(st) != 1 or 'class="accent"' not in st[0]:
+                    add(f'block "{name}" needs one <p class="stat">before → <span class="accent">after</span></p> and a label under it')
         if x.get('corner'):
             right, bottom, side = x['corner']
             g, h = blk['geo'], re.search(r'height:([\d.]+)px', blk['style'])
@@ -215,10 +216,15 @@ def check(path):
     n = sum(len(words_of(b['inner'])) for k, b in s['blocks'].items() if k != 'title' and b['kind'] == 'text')
     if n > t['words']:
         add(f'{n} words (max {t["words"]} for {s["template"]}, title not counted)')
-    if t.get('line_words'):
-        for k, blk in s['blocks'].items():
-            if k.startswith('line-') and len(words_of(blk['inner'])) > t['line_words']:
-                add(f'block "{k}" has more than {t["line_words"]} words')
+    if t.get('item_words') and 'items' in s['blocks']:
+        lis = re.findall(r'<li([^>]*)>(.*?)</li>', s['blocks']['items']['inner'], re.S)
+        if not 3 <= len(lis) <= 5:
+            add(f'block "items" has {len(lis)} items (3 to 5)')
+        for attrs, li in lis:
+            if 'fragment' not in attrs:
+                add('every item in "items" appears on a click: <li class="fragment">')
+            if len(words_of(li)) > t['item_words']:
+                add(f'item "{" ".join(words_of(li))[:30]}…" has more than {t["item_words"]} words')
     orange = [m for k, b in s['blocks'].items() if k != 'title' and b['kind'] == 'text'
               for m in re.findall(r'class="[^"]*\baccent\b[^"]*"[^>]*>([^<]*)', b['inner']) if not m.strip().lower().startswith('trap')]
     if len(orange) > ORANGE_MAX:
@@ -270,7 +276,7 @@ def describe():
     for name, t in TYPES.items():
         blocks = ', '.join(f'`{x["name"]}`' + ('' if x['required'] else '*') + (' (click)' if x['fragment'] else '') for x in t['blocks'])
         extra = f', {t["code_lines"]} code lines' if 'code_lines' in t else ''
-        extra += f', {t["line_words"]} per line' if 'line_words' in t else ''
+        extra += f', {t["item_words"]} per item' if 'item_words' in t else ''
         print(f'| `{name}` | {t["what"]} | {blocks} | {t["words"]}{extra} |')
 
 def main(argv):
