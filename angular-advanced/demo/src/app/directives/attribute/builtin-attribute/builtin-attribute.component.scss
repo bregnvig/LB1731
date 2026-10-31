@@ -1,9 +1,8 @@
 @import "src/scss/variables";
 
-// A real traffic light on the gradient stage: dark housing, recessed
-// sockets, lamps that glow when on and sit dim behind the glass when off.
-// Dimming is opacity, so the green lamp (whose opacity the template sets)
-// looks the same as the other two.
+// A traffic light drawn like a HUD readout: an outlined housing, a ring
+// per lamp and flat lamps that glow when on. Dimming is opacity, so the green
+// lamp (whose opacity the template sets) looks the same as the other two.
 
 .stage {
   display: flex;
@@ -14,33 +13,19 @@
 }
 
 .flex-item {
-  gap: 1rem;
-  padding: 1.125rem;
-  border-radius: 2.25rem;
-  background: linear-gradient(90deg, #17111f, #2c2535 45%, #110c17);
-  box-shadow: inset 0 1px 0 rgba($white, .12), inset 0 -2px 0 rgba(#000, .5), 0 24px 40px -12px rgba(#020814, .7);
+  gap: .875rem;
+  padding: .875rem;
+  border: 1px solid rgba($signal, .35);
+  border-radius: 1.75rem;
+  background: rgba($navy, .6);
 }
 
 .trafic-light {
-  position: relative;
-  width: 6rem;
-  height: 6rem;
-  padding: .4375rem;
+  width: 5rem;
+  height: 5rem;
+  padding: .375rem;
+  border: 1px solid rgba($white, .14);
   border-radius: 50%;
-  background: #07040b;
-  box-shadow: inset 0 4px 10px rgba(#000, .9), 0 1px 0 rgba($white, .08);
-
-  // Glass in front of the lamp, on or off: visor shadow on top, a highlight
-  &::after {
-    content: "";
-    position: absolute;
-    inset: .4375rem;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 35% 32%, rgba($white, .4), rgba($white, 0) 30%),
-      linear-gradient(rgba(#000, .55), rgba(#000, 0) 38%);
-    pointer-events: none;
-  }
 }
 
 .light {
@@ -48,34 +33,17 @@
   height: 100%;
   border-radius: 50%;
   opacity: .2;
-  background: radial-gradient(circle at 50% 55%, var(--core), var(--lamp) 55%, var(--rim));
-  box-shadow: 0 0 1.25rem .25rem var(--lamp), 0 0 4rem 1rem var(--glow);
+  background: var(--lamp);
+  box-shadow: 0 0 1.5rem var(--lamp);
   transition: opacity .35s ease;
 
   &.active {
     opacity: 1;
   }
 
-  &.red {
-    --core: #ffd3cc;
-    --lamp: #ff2b3a;
-    --rim: #8a0010;
-    --glow: #{rgba(#ff2b3a, .45)};
-  }
-
-  &.yellow {
-    --core: #fff4c4;
-    --lamp: #ffbf1a;
-    --rim: #8a5200;
-    --glow: #{rgba(#ffbf1a, .45)};
-  }
-
-  &.green {
-    --core: #d4ffe6;
-    --lamp: #14e07a;
-    --rim: #006b36;
-    --glow: #{rgba(#14e07a, .45)};
-  }
+  &.red { --lamp: #ff3b4a; }
+  &.yellow { --lamp: #ffc21a; }
+  &.green { --lamp: #1fe28a; }
 }
 
 .state {
