@@ -96,7 +96,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 6. Plan B: the Angular track in Chrome
+## 6. Exercise 1 - Plan B: the Angular track in Chrome
 
 `chrome-performance-angular-track.html` · type `claim-code`
 
@@ -132,7 +132,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 8. Running outside zone.js
+## 8. Exercise 1 - Running outside zone.js
 
 `running-outside-zone-js.html` · type `claim-code`
 
@@ -322,11 +322,29 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 19. Exercise 2 - Measure before
+## 19. Lists: track and computed
+
+`lists-track-and-computed.html` · type `claim-code`
+
+![lists-track-and-computed.html](slides/19-lists-track-and-computed.jpg)
+
+<details><summary>Speaker notes</summary>
+
+> Not a lab: the app already does it right. Numbers from a copy of step-3, dev build, CPU 4x: the server list (new objects, same ids) replaces the cached list.
+> track playground.id: 25.6 ms median, 0 rows created. track playground (object identity): 58.0 ms median, 133 rows destroyed + 133 created.
+>
+> One slide on lists, because every app has one. The list in our app is already done right, so this is to check in yours.
+> @for needs a track expression. It tells Angular which row is which when the list changes. The app tracks by id. When the server answer replaces the cached list, every object is new but the ids are the same, so Angular keeps all 133 rows and only updates bindings: 25.6 milliseconds with the CPU slowed down.
+> Track the object itself, and every new object is a new row: 133 rows destroyed and 133 created, 58 milliseconds. Ask the room: what does your API return on a refresh, the same objects or new ones?
+> Second rule: anything a row derives, put it in a computed, like description and distance here. A method call in a template runs on every check of that row; a computed runs only when what it reads changes.
+
+</details>
+
+## 20. Exercise 2 - Measure before
 
 `exercise-2-measure-before.html` · type `exercise-step`
 
-![exercise-2-measure-before.html](slides/19-exercise-2-measure-before.jpg)
+![exercise-2-measure-before.html](slides/20-exercise-2-measure-before.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -338,11 +356,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 20. Exercise 2 - Go zoneless
+## 21. Exercise 2 - Go zoneless
 
 `exercise-2-go-zoneless.html` · type `exercise-step-code`
 
-![exercise-2-go-zoneless.html](slides/20-exercise-2-go-zoneless.jpg)
+![exercise-2-go-zoneless.html](slides/21-exercise-2-go-zoneless.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -353,11 +371,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 21. Exercise 2 - Fix the footer with a signal
+## 22. Exercise 2 - Fix the footer with a signal
 
 `exercise-2-fix-the-footer.html` · type `exercise-step-code`
 
-![exercise-2-fix-the-footer.html](slides/21-exercise-2-fix-the-footer.jpg)
+![exercise-2-fix-the-footer.html](slides/22-exercise-2-fix-the-footer.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -369,11 +387,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 22. Exercise 2 - What we measured
+## 23. Exercise 2 - What we measured
 
 `exercise-2-zoneless-result.html` · type `exercise-result`
 
-![exercise-2-zoneless-result.html](slides/22-exercise-2-zoneless-result.jpg)
+![exercise-2-zoneless-result.html](slides/23-exercise-2-zoneless-result.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -385,11 +403,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 23. Exercise 2 - Remove Eager
+## 24. Exercise 2 - Remove Eager
 
 `exercise-2-remove-eager.html` · type `exercise-step`
 
-![exercise-2-remove-eager.html](slides/23-exercise-2-remove-eager.jpg)
+![exercise-2-remove-eager.html](slides/24-exercise-2-remove-eager.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -400,11 +418,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 24. Exercise 2 - Measure after
+## 25. Exercise 2 - Measure after
 
 `exercise-2-measure-after.html` · type `exercise-result`
 
-![exercise-2-measure-after.html](slides/24-exercise-2-measure-after.jpg)
+![exercise-2-measure-after.html](slides/25-exercise-2-measure-after.jpg)
 
 <details><summary>Speaker notes</summary>
 
@@ -414,24 +432,6 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 > Click. Quiet: still one bar per second, because the number really does change every second. But click the bar: only FooterComponent. Before, that tick checked all six components and 133 rows.
 > Click. And the build: polyfills from 35 kilobytes to 494 bytes. main is practically the same, so the saving is zone.js itself.
 > Click. The list click is still two bars, and the first one checks everything. That's not the signals failing. Look at app.routes.ts: the empty path and ':id' are two route entries that both show HomeComponent. Going from one to the other, the router destroys Home and builds a new one, and a new Home renders all 133 rows. Ask the room: what happens on a second click, from one playground to another? Same route entry, so Home is reused, and that bar checks 2 rows: the one you left and the one you picked.
-
-</details>
-
-## 25. Lists: track and computed
-
-`lists-track-and-computed.html` · type `claim-code`
-
-![lists-track-and-computed.html](slides/25-lists-track-and-computed.jpg)
-
-<details><summary>Speaker notes</summary>
-
-> Not a lab: the app already does it right. Numbers from a copy of step-3, dev build, CPU 4x: the server list (new objects, same ids) replaces the cached list.
-> track playground.id: 25.6 ms median, 0 rows created. track playground (object identity): 58.0 ms median, 133 rows destroyed + 133 created.
->
-> One slide on lists, because every app has one. The list in our app is already done right, so this is to check in yours.
-> @for needs a track expression. It tells Angular which row is which when the list changes. The app tracks by id. When the server answer replaces the cached list, every object is new but the ids are the same, so Angular keeps all 133 rows and only updates bindings: 25.6 milliseconds with the CPU slowed down.
-> Track the object itself, and every new object is a new row: 133 rows destroyed and 133 created, 58 milliseconds. Ask the room: what does your API return on a refresh, the same objects or new ones?
-> Second rule: anything a row derives, put it in a computed, like description and distance here. A method call in a template runs on every check of that row; a computed runs only when what it reads changes.
 
 </details>
 
@@ -730,7 +730,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 43. What holds the old DOM
+## 43. Exercise 4 - What holds the old DOM
 
 `what-holds-the-old-dom.html` · type `claim-image`
 
@@ -748,7 +748,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 44. Cleaning up with DestroyRef
+## 44. Exercise 4 - Cleaning up with DestroyRef
 
 `cleaning-up-with-destroyref.html` · type `claim-code`
 
