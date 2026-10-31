@@ -128,6 +128,9 @@ TYPES = {
 
 # Notes are for delivery. These phrases are authoring history and fail the check.
 NOTES_RESIDUE = re.compile(r'cut from the slide|not on the slide any ?more|so it fits|older notes|was moved|moved (here|to the notes)|previous version|we changed', re.I)
+# Slide text stays on the current step. The house opener is the one allowed reference to another exercise.
+OPENER = 'Not happy with the result of the previous exercise?'
+OTHER_LAB = re.compile(r'\b(labs?|exercises?|øvelse[rn]?)\s+\d+|\b(next|previous|later|earlier|another) (lab|exercise)\b', re.I)
 MIN_CODE_PX, ORANGE_MAX, VISIBLE_MAX = 22, 2, 50
 
 def words_of(fragment_html):
@@ -220,6 +223,12 @@ def check(path):
               for m in re.findall(r'color:\s*#ff8c00[^>]*>([^<]*)', b['inner'], re.I) if not m.strip().lower().startswith('trap')]
     if len(orange) > ORANGE_MAX:
         add(f'{len(orange)} orange spans (max {ORANGE_MAX} plus "Trap:"); paths and names go in white <code>, UI labels in <strong>')
+    for k, blk in s['blocks'].items():
+        if k == 'title' or blk['kind'] != 'text':
+            continue
+        text = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', blk['inner'])).split()).replace(OPENER, '')
+        if (ref := OTHER_LAB.search(text)):
+            add(f'block "{k}" points at another lab ("{ref.group(0)}"); say it in the notes, not on the slide')
     if s['notes'] and NOTES_RESIDUE.search(s['notes']):
         add(f'notes contain authoring history ("{NOTES_RESIDUE.search(s["notes"]).group(0)}"); notes are for delivery only')
     title = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', s['blocks'].get('title', {}).get('inner', ''))).split())

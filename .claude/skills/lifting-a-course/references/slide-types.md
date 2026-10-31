@@ -27,6 +27,7 @@ The type is declared on the slide as `<section data-template="<type>">`, and the
 - Words in text blocks, the title not counted, stay within the type's maximum.
 - Exercise titles read `Exercise N - <step>`. An exercise is one unbroken run: a theory slide placed inside it (the fix explained between measure-before and the change) is titled `Exercise N - …` too.
 - No tables.
+- Slide text never points at another lab or exercise ("Lab 2", "exercise 3", "the next exercise"). That belongs in the notes. The opener "Not happy with the result of the previous exercise?" is the one exception.
 - Speaker notes exist (not on `title` and `statement`), have a short cue, a blank line, then the talk script, and hold no authoring history ("cut from the slide", "so it fits").
 - Per course: at most 50 visible slides, and a `MEASURED.md` next to `slides/`.
 
