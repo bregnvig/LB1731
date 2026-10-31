@@ -1,3 +1,64 @@
+@import "src/scss/variables";
+
+.controls {
+  position: sticky;
+  top: .75rem;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: .5rem .5rem .5rem 1.25rem;
+  border-radius: 999px;
+  background: $navy;
+  color: $white;
+  box-shadow: $stage-shadow;
+
+  .form-check {
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  // Phones: the switch and the button stack in a rounded panel
+  @media (max-width: 575.98px) {
+    flex-wrap: wrap;
+    gap: .75rem;
+    padding: .75rem 1rem;
+    border-radius: $border-radius-lg;
+  }
+
+  .form-check-input {
+    width: 2.75rem;
+    height: 1.5rem;
+    margin-top: 0;
+    margin-right: .625rem;
+  }
+}
+
+// What ngFor exposes for the row, as a strip of chips
+.card {
+  margin: .75rem 0 0 !important;
+  box-shadow: none;
+  background: none;
+
+  .card-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+    padding: 0;
+  }
+}
+
 p {
   margin: 0;
+  padding: .125rem .625rem;
+  border-radius: 999px;
+  background: $canvas;
+  color: $gray-700;
+  font: .8125rem $font-family-monospace;
+
+  &:first-child {
+    background: $navy;
+    color: $white;
+  }
 }

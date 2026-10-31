@@ -1,29 +1,40 @@
-<div class="row form-group">
+<div class="controls">
   <!-- <div class="col-auto" *ngFor="let link of links" ><a [routerLink]="link.url">{{link.label}}</a></div> -->
-  <div class="col-auto"><a [routerLink]="[{}]">Show all</a></div>
-  <div class="col-auto"><a [routerLink]="[{row: 1}]">Show 1</a></div>
-  <div class="col-auto"><a [routerLink]="[{row: 2}]">Show 2</a></div>
-  <div class="col-auto"><a [routerLink]="[{row: 3}]">Show 3</a></div>
-  <div class="col-auto"><button class="btn btn-primary" (click)="goto(undefined)">Show all</button></div>
-  <div class="col-auto"><button class="btn btn-primary" (click)="goto(1)">Show 1</button></div>
-  <div class="col-auto"><button class="btn btn-primary" (click)="goto(2)">Show 2</button></div>
-  <div class="col-auto"><button class="btn btn-primary" (click)="goto(3)">Show 3</button></div>
+  <div class="group">
+    <span class="group-label">routerLink</span>
+    <a [routerLink]="[{}]">Show all</a>
+    <a [routerLink]="[{row: 1}]">Show 1</a>
+    <a [routerLink]="[{row: 2}]">Show 2</a>
+    <a [routerLink]="[{row: 3}]">Show 3</a>
+  </div>
+  <div class="group">
+    <span class="group-label">router.navigate()</span>
+    <button class="btn btn-primary btn-sm" (click)="goto(undefined)">Show all</button>
+    <button class="btn btn-primary btn-sm" (click)="goto(1)">Show 1</button>
+    <button class="btn btn-primary btn-sm" (click)="goto(2)">Show 2</button>
+    <button class="btn btn-primary btn-sm" (click)="goto(3)">Show 3</button>
+  </div>
 </div>
-<ul class="list-group">
-  @if (showRow(1)) {
-    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-primary">This is first row!</li>
-  }
-  @if (showRow(2)) {
-    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-secondary">This is second row!</li>
-  }
-  @if (showRow(3)) {
-    <li [ngClass]="(transform$ | async) || ''" class="list-group-item list-group-item-success">This is third row!</li>
-  }
-</ul>
-<div class="row form-group mt-3">
-  <div class="col-auto"><a class="btn btn-outline-secondary" routerLink="../none" routerLinkActive="active">No transform</a></div>
-  <div class="col-auto"><a class="btn btn-outline-secondary text-lowercase" routerLink="../lowercase" routerLinkActive="active">Lowercase</a></div>
-  <div class="col-auto"><a class="btn btn-outline-secondary text-uppercase" routerLink="../uppercase" routerLinkActive="active">Uppercase</a></div>
-  <div class="col-auto"><a class="btn btn-outline-secondary" routerLink="../capitalize" routerLinkActive="active">Capitalize</a></div>
-  <div class="col-auto"><a class="btn btn-outline-secondary text-monospace" routerLink="../monospace" routerLinkActive="active">Mono space</a></div>
-</div>
+<section class="outlet-panel">
+  <div class="panel-bar">
+    <span class="panel-label">recap/:transform</span>
+    <nav class="segmented" aria-label="Transform">
+      <a class="btn btn-outline-secondary" routerLink="../none" routerLinkActive="active">No transform</a>
+      <a class="btn btn-outline-secondary text-lowercase" routerLink="../lowercase" routerLinkActive="active">Lowercase</a>
+      <a class="btn btn-outline-secondary text-uppercase" routerLink="../uppercase" routerLinkActive="active">Uppercase</a>
+      <a class="btn btn-outline-secondary" routerLink="../capitalize" routerLinkActive="active">Capitalize</a>
+      <a class="btn btn-outline-secondary font-monospace" routerLink="../monospace" routerLinkActive="active">Mono space</a>
+    </nav>
+  </div>
+  <ul class="demo-surface rows">
+    @if (showRow(1)) {
+      <li [ngClass]="(transform$ | async) || ''" class="row-card"><span class="no">1</span>This is first row!</li>
+    }
+    @if (showRow(2)) {
+      <li [ngClass]="(transform$ | async) || ''" class="row-card"><span class="no">2</span>This is second row!</li>
+    }
+    @if (showRow(3)) {
+      <li [ngClass]="(transform$ | async) || ''" class="row-card"><span class="no">3</span>This is third row!</li>
+    }
+  </ul>
+</section>

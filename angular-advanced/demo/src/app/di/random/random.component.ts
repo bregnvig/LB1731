@@ -4,9 +4,18 @@ import { RandomService } from '../service/random.service';
 @Component({
   selector: 'loop-random',
   template: `
-    {{service.no || "I have no random service 😢"}}<br>
-    {{rootService.no || "I have no random service 😢"}}<br>
-    {{hostService?.no || "I have no random host service 😢"}}
+    <dl class="readout">
+      <dt>self</dt>
+      <dd>{{service.no || "I have no random service 😢"}}</dd>
+      <dt>skipSelf</dt>
+      <dd>{{rootService.no || "I have no random service 😢"}}</dd>
+      <dt>host, skipSelf</dt>
+      <dd>{{hostService?.no || "I have no random host service 😢"}}</dd>
+    </dl>
+  `,
+  styles: `
+    dt { font-family: var(--bs-font-monospace); font-size: .8125rem; }
+    dd { font-size: 1rem; font-weight: 600; }
   `,
   providers: [RandomService],
   changeDetection: ChangeDetectionStrategy.Eager,

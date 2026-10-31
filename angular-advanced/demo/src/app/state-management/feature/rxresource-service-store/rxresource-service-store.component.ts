@@ -7,29 +7,19 @@ import { RxresourcePlaygroundStore } from "./rxresource-playground.store";
 @Component({
   selector: 'loop-rxresource-service-store-item',
   standalone: true,
-  styles: `
-    @keyframes scalePulse {
-      0%   { transform: scale(1); }
-      30%  { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .update-effect {
-      animation: scalePulse 0.3s ease-out;
-    }
-  `,
+  styleUrl: '../store-item.scss',
   imports: [FormsModule],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <form class="d-flex">
-      <div class="input-group mb-3">
+    <form class="store-row">
+      <div class="input-group">
         <span class="input-group-text">Name</span>
         <input type="text" name="name" [(ngModel)]="name" class="form-control" [class.update-effect]="animate">
         <span class="input-group-text">Description</span>
         <input type="text" name="description" [(ngModel)]="description" [class.update-effect]="animate" class="form-control">
       </div>
       <div>
-        <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary" (click)="save()">Save</button>
       </div>
     </form>
   `,
@@ -69,13 +59,17 @@ export class RxresourceServiceStoreItemComponent implements OnInit {
 
 @Component({
   selector: 'loop-rxresource-service-store-list',
+  styleUrl: '../store-list.scss',
   standalone: true,
   imports: [RxresourceServiceStoreItemComponent],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if(store.playgroundsLoading()) {
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div class="loading">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <span aria-hidden="true">Loading...</span>
       </div>
     }
     @if(store.playgroundsError()) {

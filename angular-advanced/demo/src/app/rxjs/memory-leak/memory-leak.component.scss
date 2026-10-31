@@ -1,0 +1,36 @@
+@import "src/scss/variables";
+
+:host { display: block; }
+
+// Each emitted number lands as a chip, so a second (leaked) stream is easy to spot
+.ticks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  &:empty { display: none; }
+
+  li {
+    min-width: 2.75rem;
+    padding: .375rem .625rem;
+    border-radius: $border-radius-sm;
+    background: $canvas;
+    font-family: $font-family-monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: $navy;
+    animation: tick-in .3s ease-out;
+
+    &:last-child {
+      background: $navy;
+      color: $white;
+    }
+  }
+}
+
+@keyframes tick-in {
+  from { transform: scale(.6); opacity: 0; }
+}

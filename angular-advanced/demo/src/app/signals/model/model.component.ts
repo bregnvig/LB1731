@@ -10,6 +10,7 @@ import { PaginationComponent } from './pagination.compont';
 @Component({
   selector: 'loop-model',
   templateUrl: './model.component.html',
+  styleUrl: './model.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PaginationComponent, LeafletModule]
 })

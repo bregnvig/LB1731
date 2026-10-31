@@ -1,0 +1,34 @@
+@import "../level3";
+
+// The id field is this level's nav: compact, white, on the outlet panel
+.goto {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 26rem;
+  margin: 0;
+}
+
+fa-icon {
+  position: absolute;
+  left: .875rem;
+  font-size: .8125rem;
+  color: $cobalt;
+}
+
+kbd {
+  position: absolute;
+  right: .5rem;
+  padding: .125rem .375rem;
+  background: $canvas-deep;
+  color: $navy;
+  font-size: .6875rem;
+}
+
+.form-control {
+  padding: .4375rem 4.5rem .4375rem 2.25rem;
+  border-radius: 999px;
+  background: $white;
+  font: .875rem $font-family-monospace;
+}

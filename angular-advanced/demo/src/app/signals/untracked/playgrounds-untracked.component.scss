@@ -1,0 +1,90 @@
+@import "src/scss/variables";
+
+.signals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+// A signal as a tile on the stage: its name, whether the effect tracks it, its value
+.signal-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: $border-radius-lg;
+  background: rgba($white, .12);
+  box-shadow: inset 0 0 0 1px rgba($white, .25);
+
+  h6 {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    margin: 0;
+    color: $white;
+
+    code {
+      background: $white;
+      color: $navy;
+      font-size: 1rem;
+    }
+
+    span {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+  }
+
+  // the value, in the tile itself and in the user child component
+  ::ng-deep .alert {
+    align-self: stretch;
+    margin: 0 !important; // the user child adds mt-3
+    padding: 1rem 1.25rem;
+    border: 0;
+    border-radius: $border-radius;
+    background: $white;
+    color: $navy;
+    font-family: $font-family-monospace;
+    font-size: 1rem;
+  }
+}
+
+// Each effect run posts once: a request log
+.log {
+  counter-reset: post;
+  font-family: $font-family-monospace;
+  font-size: .875rem;
+
+  .list-group-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    counter-increment: post;
+    animation: posted .35s ease-out;
+
+    &::before {
+      content: counter(post, decimal-leading-zero) "  POST";
+      white-space: pre;
+      padding: .125rem .5rem;
+      border-radius: $border-radius-sm;
+      background: $canvas-deep;
+      color: $cobalt;
+      font-weight: 600;
+      font-size: .75rem;
+    }
+  }
+}
+
+@keyframes posted {
+  from {
+    background: rgba($azure, .12);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .signals {
+    grid-template-columns: 1fr;
+  }
+}

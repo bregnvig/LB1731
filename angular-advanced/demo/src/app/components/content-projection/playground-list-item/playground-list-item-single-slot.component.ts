@@ -15,6 +15,7 @@ import { Playground } from 'src/app/shared';
       </div>
     </li>
   `,
+  styles: `@import "src/app/components/content-projection/slots";`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaygroundListItemSingleSlotComponent {

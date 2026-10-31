@@ -16,18 +16,45 @@ const newPlaygrounds = () => Array.from({ length: 5 }, () => getRandomPlayground
         <button class="btn btn-outline-primary" (click)="shuffle()">Shuffle</button>
         <button class="btn btn-outline-primary" (click)="replace()">New playgrounds</button>
       </div>
-      <div class="row">
-        <div class="col">
+      <div class="demo-surface picks">
+        <div class="pick">
           <h6>Short form: resets to the first</h6>
           <loop-shared-playground-li [playground]="selected()"/>
         </div>
-        <div class="col">
+        <div class="pick">
           <h6>Long form: keeps the selection if it's still there</h6>
           <loop-shared-playground-li [playground]="kept()"/>
         </div>
       </div>
-      <loop-shared-playground-ul class="mt-3" [playgrounds]="playgrounds()"/>
+      <loop-shared-playground-ul class="mt-3 p-0 border-0" [playgrounds]="playgrounds()"/>
     </div>
+  `,
+  styles: `
+    @import "src/scss/variables";
+
+    .picks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+      gap: 1.5rem;
+    }
+
+    // The two linked signals' current values, as selected cards on the stage
+    .pick {
+      h6 {
+        color: $white;
+      }
+
+      loop-shared-playground-li {
+        display: block;
+        min-height: 7.5rem;
+        padding: 1rem 1.25rem;
+        border: 0;
+        background: $white;
+        color: $ink;
+        border-radius: $border-radius-lg;
+        box-shadow: $lift-shadow;
+      }
+    }
   `
 })
 export class LinkedSignalComponent {

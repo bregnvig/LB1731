@@ -8,6 +8,7 @@ import { Playground, PlaygroundService } from 'src/app/shared';
 @Component({
   selector: 'loop-non-template-outlet',
   templateUrl: './non-template-outlet.component.html',
+  styles: `@import "src/app/components/template-outlet/search-list";`,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, ReactiveFormsModule]
 })

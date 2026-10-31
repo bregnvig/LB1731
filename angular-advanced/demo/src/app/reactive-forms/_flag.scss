@@ -1,0 +1,38 @@
+// A true/false pill that reads at a glance: hollow when false, lit when true.
+// After the True/False segmented toggle in Framer's properties panel.
+.flag {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .1875rem .875rem .1875rem .625rem;
+  border: 1px solid $gray-400;
+  border-radius: 999px;
+  color: $muted;
+  font-family: $font-family-monospace;
+  font-size: .875rem;
+  transition: background-color .2s, border-color .2s, color .2s;
+
+  &::before {
+    content: "";
+    width: .5rem;
+    height: .5rem;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+  }
+
+  &.on {
+    --flag: #{$cobalt};
+    border-color: var(--flag);
+    background: var(--flag);
+    color: $white;
+    font-weight: 600;
+
+    &::before {
+      border-color: $white;
+      background: $white;
+    }
+  }
+
+  &.good.on { --flag: #{$green}; }
+  &.bad.on { --flag: #{$red}; }
+}

@@ -1,43 +1,25 @@
-<div class="d-flex min-vh-100">
-  <div class="px-0 d-flex">
-    <ul ngbNav #nav="ngbNav" class="nav-pills" orientation="vertical">
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/rxjs" routerLinkActive="active">RxJS</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/di" routerLinkActive="active">DI</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/components" routerLinkActive="active">Components</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/reactive-forms" routerLinkActive="active">Reactive forms</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/routing" routerLinkActive="active">Routing</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/pipes" routerLinkActive="active">Pipes</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/signals" routerLinkActive="active">Signals</a>
-      </li>
-      <li ngbNavItem>
-        <a ngbNavLink routerLink="/state-management" routerLinkActive="active">State management</a>
-      </li>
-      <li ngbNavItem [disabled]="true">
-        <a ngbNavLink>Directives</a>
-      </li>
-      <li ngbNavItem>
-        <a class="ml-3" ngbNavLink routerLink="/directives/attribute" routerLinkActive="active">Attribute</a>
-      </li>
-      <li ngbNavItem>
-        <a class="ml-3" ngbNavLink routerLink="/directives/structural" routerLinkActive="active">Structural</a>
-      </li>
-    </ul>
+<header class="band">
+  <div class="bar">
+    <a class="brand" routerLink="/">
+      <img class="rainbow-hover" src="assets/angular.png" alt="" height="30">
+      Angular Advanced
+    </a>
+    <nav aria-label="Topics">
+      @for (topic of topics; track topic.path) {
+        <a [routerLink]="topic.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ topic.label }}</a>
+      }
+    </nav>
   </div>
-  <div class="m-5 col">
-    <router-outlet></router-outlet>
-  </div>
-</div>
-<img class="rainbow-hover d-none d-lg-block" style="user-select: none;" loading="eager" [style.z-index]="1000" height="200" src="assets/angular.png">
+
+  @if (topic(); as topic) {
+    <div class="title">
+      <fa-icon [icon]="topic.icon" />
+      <h1>{{ topic.label }}</h1>
+      <p>{{ topic.description }}</p>
+    </div>
+  }
+</header>
+
+<main class="stage">
+  <router-outlet />
+</main>

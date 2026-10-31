@@ -1,0 +1,50 @@
+@import "src/scss/variables";
+
+// The map is the stage; the paginated playground card and the city switch
+// float on it, like a maps app
+.map-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius-xl;
+  box-shadow: $stage-shadow;
+}
+
+loop-pagination {
+  position: absolute;
+  z-index: 1000;
+  top: 1rem;
+  left: 4rem;
+  width: 24rem;
+}
+
+.city {
+  position: absolute;
+  z-index: 1000;
+  top: 1rem;
+  right: 1rem;
+  padding: .25rem;
+  border-radius: 999px;
+  background: $white;
+  box-shadow: $lift-shadow;
+
+  .btn {
+    border: 0;
+    border-radius: 999px !important;
+    color: $gray-700;
+
+    &.active {
+      background: $navy;
+      color: $white;
+    }
+  }
+}
+
+// Phones: the card sits below the zoom buttons and fits the map
+@media (max-width: 767.98px) {
+  loop-pagination {
+    top: 5.25rem;
+    left: .75rem;
+    right: .75rem;
+    width: auto;
+  }
+}

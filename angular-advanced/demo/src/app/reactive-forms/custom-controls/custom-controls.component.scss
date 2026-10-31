@@ -1,0 +1,51 @@
+@import "src/scss/variables";
+
+.owner {
+  display: grid;
+  grid-template-columns: minmax(0, 24rem) auto;
+  align-items: end;
+  gap: .5rem 1.5rem;
+  margin-bottom: 1.5rem;
+
+  label[for="name"] {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .form-check {
+    margin-bottom: .5rem;
+  }
+}
+
+.addresses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+legend {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+// One custom control, five inputs inside: framed as a single unit, and it
+// follows the same ng-invalid.ng-touched rule a plain input does
+loop-address-control {
+  display: block;
+  padding: 1.25rem 1.25rem .25rem;
+  border-radius: $border-radius-xl;
+  background: $canvas;
+  box-shadow: inset 0 0 0 1px $gray-300;
+  transition: box-shadow .2s, opacity .2s;
+
+  &.ng-invalid.ng-touched {
+    box-shadow: inset 0 0 0 2px $danger;
+  }
+
+  &:has(input:disabled) {
+    opacity: .45;
+  }
+}

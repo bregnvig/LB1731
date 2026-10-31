@@ -1,0 +1,60 @@
+// A titled panel around a live list or value: a header bar naming the source
+// (mono) and a status pill, the content below.
+.feed {
+  overflow: hidden;
+  border-radius: $border-radius-xl;
+  background: $white;
+  box-shadow: $stage-shadow;
+
+  > header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    padding: .875rem 1.25rem;
+    background: $navy;
+    color: $white;
+
+    h4,
+    h5 {
+      margin: 0;
+      color: $white;
+      font-stretch: 80%;
+    }
+
+    code {
+      background: rgba($white, .12);
+      color: #9eeeff;
+    }
+  }
+
+  > .body {
+    padding: 1.25rem;
+  }
+
+  // the shared list component renders as one list-group-item holding a ul
+  ::ng-deep loop-shared-playground-ul {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-left: auto;
+  color: rgba($white, .75);
+  font-size: .8125rem;
+  font-weight: 600;
+
+  &::before {
+    content: "";
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: #3ee08f;
+    box-shadow: 0 0 0 3px rgba(#3ee08f, .25);
+  }
+}

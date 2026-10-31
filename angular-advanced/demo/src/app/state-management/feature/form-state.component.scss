@@ -1,0 +1,56 @@
+@import "src/scss/variables";
+@import "src/app/reactive-forms/flag";
+
+.playground {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: 2rem;
+  align-items: start;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-stretch: 85%;
+}
+
+.field {
+  margin-bottom: 1.25rem;
+
+  .input-group {
+    max-width: 28rem;
+  }
+}
+
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  margin-top: .5rem;
+}
+
+.filter {
+  max-width: 28rem;
+}
+
+.inspector {
+  position: sticky;
+  top: 1rem;
+  padding: 1.25rem;
+  border-radius: $border-radius-xl;
+  background: $white;
+  box-shadow: $stage-shadow;
+
+  p {
+    margin-bottom: .375rem;
+  }
+
+  .readout {
+    align-items: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .playground {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

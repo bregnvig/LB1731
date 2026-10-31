@@ -1,21 +1,26 @@
-<article>
-  <div class="d-flex justify-content-center align-items-center" [ngSwitch]="selectedNumber">
-    <span *ngSwitchCase="1">1</span>
-    <span *ngSwitchCase="2">2</span>
-    <span *ngSwitchCase="0">3</span>
-    <span *ngSwitchDefault>?</span>
+<article class="row g-4">
+  <div class="col-lg-4">
+    <div class="demo-surface stage">
+      <div class="d-flex justify-content-center align-items-center" [ngSwitch]="selectedNumber">
+        <span *ngSwitchCase="1">1</span>
+        <span *ngSwitchCase="2">2</span>
+        <span *ngSwitchCase="0">3</span>
+        <span *ngSwitchDefault>?</span>
+      </div>
+      <span class="caption">selectedNumber <b>{{ selectedNumber ?? 'undefined' }}</b></span>
+    </div>
   </div>
-  <pre>
+  <div class="col">
     <code>
-    &lt;article&gt;
-      &lt;div class=&quot;d-flex justify-content-center align-items-center&quot; 
-        <span class="font-weight-bolder">[ngSwitch]=&quot;selectedNumber&quot;</span>&gt;
-        <span [class.font-weight-bolder]="selectedNumber === 1">&lt;span *ngSwitchCase=&quot;1&quot;&gt;1&lt;/span&gt;</span>
-        <span [class.font-weight-bolder]="selectedNumber === 2">&lt;span *ngSwitchCase=&quot;2&quot;&gt;2&lt;/span&gt;</span>
-        <span [class.font-weight-bolder]="selectedNumber === 0">&lt;span *ngSwitchCase=&quot;0&quot;&gt;3&lt;/span&gt;</span>
-        <span [class.font-weight-bolder]="selectedNumber === undefined">&lt;span *ngSwitchDefault&gt;?&lt;/span&gt;</span>
-      &lt;/div&gt;
-    &lt;/article&gt;      
+      <pre class="fs-5">
+&lt;div class=&quot;d-flex justify-content-center align-items-center&quot;
+  <span class="fw-bold">[ngSwitch]=&quot;selectedNumber&quot;</span>&gt;
+  <span [class.fw-bold]="selectedNumber === 1">&lt;span *ngSwitchCase=&quot;1&quot;&gt;1&lt;/span&gt;</span>
+  <span [class.fw-bold]="selectedNumber === 2">&lt;span *ngSwitchCase=&quot;2&quot;&gt;2&lt;/span&gt;</span>
+  <span [class.fw-bold]="selectedNumber === 0">&lt;span *ngSwitchCase=&quot;0&quot;&gt;3&lt;/span&gt;</span>
+  <span [class.fw-bold]="selectedNumber === undefined">&lt;span *ngSwitchDefault&gt;?&lt;/span&gt;</span>
+&lt;/div&gt;
+      </pre>
     </code>
-  </pre>
+  </div>
 </article>

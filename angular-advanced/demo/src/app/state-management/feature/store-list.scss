@@ -1,0 +1,29 @@
+@import "src/scss/variables";
+
+:host {
+  display: block;
+  counter-reset: row;
+  overflow: hidden;
+  border-radius: $border-radius-xl;
+  background: $white;
+  box-shadow: $stage-shadow;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: 2.5rem;
+  color: $muted;
+  font-weight: 600;
+
+  .spinner-border {
+    color: $azure;
+  }
+}
+
+.alert-danger {
+  margin: 1rem;
+  font-family: $font-family-monospace;
+}
