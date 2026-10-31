@@ -67,14 +67,12 @@ body,
   text-transform: uppercase;
 }
 
-/* Code names, units and UI strings keep their case inside uppercase headings. */
-.reveal .block :is(h1, h2, h3) code,
-.reveal .block :is(h1, h2, h3).keep-case {
+/* Typed slides: code names keep their case inside uppercase headings, and inline code never breaks mid-name. */
+.reveal section[data-template] .block :is(h1, h2, h3) code {
   text-transform: none;
 }
 
-/* Inline code never breaks mid-name. */
-.reveal .block :not(pre) > code {
+.reveal section[data-template] .block :not(pre) > code {
   white-space: nowrap;
 }
 
