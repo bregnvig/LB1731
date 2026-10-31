@@ -5,12 +5,12 @@
   <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
 <li><code>track playground.id</code>: a new list, same ids: 25.6 ms, 0 rows recreated</li>
-<li><code>track playground</code>: <span style="color:#ff8c00">58.0 ms</span>, all 133 rows recreated</li>
+<li><code>track playground</code>: <span class="accent">58.0 ms</span>, all 133 rows recreated</li>
 <li>Per-row values: <code>computed</code>, not a method call in the template</li>
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
-    <pre style="font-size:22px;line-height:30px"><code class="language-html" data-line-numbers="2">@for (playground of playgrounds();
+    <pre><code class="language-html" data-line-numbers="2">@for (playground of playgrounds();
      track playground.id) {
   &lt;loop-sidebar-list-item
     [playground]="playground"

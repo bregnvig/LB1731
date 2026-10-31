@@ -3,13 +3,13 @@
     <h2>Exercise 1 - Bonus: try it, then revert</h2>
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
-    <ol style="font-size:0.85em;line-height:1.35">
+    <ol>
 <li>In <code>src/app/footer/footer.component.ts</code>, run the <code>setInterval</code> outside the zone too</li>
 <li>Record in the Profiler, and look at the footer</li>
 </ol>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
-    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">constructor() {
+    <pre><code class="language-typescript">constructor() {
   inject(NgZone).runOutsideAngular(() =&gt;
     setInterval(() =&gt; this.seconds =
       Math.round((Date.now() - this.loadedAt)
@@ -18,7 +18,7 @@
 </code></pre>
   </div>
   <div class="block" data-type="text" data-name="callout" style="left:64px;top:338px;width:540px;height:auto;z-index:13;text-align:left">
-    <p style="font-size:0.85em;line-height:1.35">You should see: the footer's bars are gone, and the counter stops. <span style="color:#ff8c00">Experiment only:</span> undo it. Done? Come back to the room.</p>
+    <p>You should see: the footer's bars are gone, and the counter stops. <span class="accent">Experiment only:</span> undo it. Done? Come back to the room.</p>
   </div>
   <aside class="notes">Try and revert, not part of the solution. Footer interval outside the zone, record, look at the footer.
 

@@ -3,13 +3,13 @@
     <h2>Exercise 2 - Remove Eager</h2>
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
-    <ol style="font-size:0.85em;line-height:1.35">
+    <ol>
 <li>Delete <code>changeDetection: ChangeDetectionStrategy.Eager</code> in all seven components, and <code>ChangeDetectionStrategy</code> from each import</li>
 <li>Search for <code>ChangeDetectionStrategy.Eager</code> to find them</li>
 </ol>
   </div>
   <div class="block" data-type="text" data-name="callout" style="left:64px;top:306px;width:1150px;height:auto;z-index:12;text-align:left">
-    <p style="font-size:0.85em;line-height:1.35"><span style="color:#ff8c00">Trap:</span> only remove <code>ChangeDetectionStrategy</code> from the import. The other names on that line stay.</p>
+    <p><span class="accent">Trap:</span> only remove <code>ChangeDetectionStrategy</code> from the import. The other names on that line stay.</p>
   </div>
   <aside class="notes">Seven files: app, home, sidebar, sidebar-list-item, playground-detail, leaflet, footer. Only ChangeDetectionStrategy leaves each import.
 
