@@ -12,15 +12,29 @@ Every slide is exactly one of the types below. A slide that fits none of them is
 
 The type is declared on the slide as `<section data-template="<type>">`, and the slide editor keeps it when it saves.
 
+## Type scale
+
+Every typed slide (`<section data-template>`) gets its text sizes from the theme (`slides/src/theme/deck.css`), never from inline styles:
+
+| Style | How you write it | Size | Use it for |
+|---|---|---|---|
+| display | `<h1>` in `title` / `statement` | 49px | Course name, one-line statements |
+| title | `<h2>` in the `title` block | 32px, uppercase | Slide titles |
+| lead | `<p class="lead">` | 28px bold | Reveal-list lines, results, the line the room should remember |
+| body | plain `<p>`, `<ul>`, `<ol>` | 24px, line-height 1.35 | Claims, steps, callouts, punchlines, why lines |
+| accent | `<span class="accent">` (or `class="lead accent"`) | orange, size of its text | The one term or number to look at, and "Trap:" |
+| code | code blocks | 22px | All code blocks |
+
+Inline `<code>` is white monospace at the size of its text. UI labels are `<strong>`.
+
 ## What the checker enforces
 
 - `data-template` names a type below.
 - Only that type's blocks, by `data-name`, each the right kind (text, code, image), at the template's `left`, `top` and `width`. Blocks without a fixed `top` (punchline, why, callout, note) sit 48px below the block above them; check that on the render.
 - Required blocks are there. Blocks marked "(click)" are fragments; the others are not, unless the template allows both.
-- Inline font sizes are only the ones the template uses. Exercise text is 0.85em with line-height 1.35.
-- Code is at least 22px and at most 8 lines (elide with `// …`). `data-line-numbers` only with lines to highlight.
-- Result headings (`result-1`, `result-2`) have `class="keep-case"`, so names and units keep their case.
-- At most two orange spans per slide, plus the "Trap:" label. Paths and identifiers go in white `<code>`, UI labels in `<strong>`.
+- Code is at most 8 lines (elide with `// …`). `data-line-numbers` only with lines to highlight.
+- Text sizes and colours come only from the type scale (below). No inline `font-size`, `line-height` or `color`, in text or code.
+- At most two `accent`s per slide, plus the "Trap:" label. Paths and identifiers go in white `<code>`, UI labels in `<strong>`.
 - A numbered list stays on one slide (no `<ol start=…>`).
 - The `title` image's bottom-right corner is at 1200,648 and its longest side is 288px. Use the course's own image, named `<course>-1.png` or `.svg`.
 - An image block's height matches its image's aspect ratio, so a screenshot is never letterboxed small.

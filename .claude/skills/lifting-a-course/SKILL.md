@@ -102,7 +102,7 @@ How each number was measured, and the full Monday sentence, go in the notes.
 
 Over the type's word limit: cut to the claim and move the explanation to the notes, or split the slide. Never shrink the text. The room reads the slide instead of listening when there is more.
 
-Orange (`#FF8C00`) on at most two things per slide, the key term or number, plus the "Trap:" label. Paths and identifiers are white `<code>`, UI labels `<strong>`.
+Text sizes and colours come from the type scale in slide-types.md: title, lead, body, accent, code. No inline sizes or colours. Accent (orange) on at most two things per slide plus the "Trap:" label. Paths and identifiers are white `<code>`, UI labels `<strong>`.
 
 **No tables.** No `<table>`, no `table` block, and no columns faked with spaces in a code block. A table makes the room read rows instead of listening. Use one of these instead:
 

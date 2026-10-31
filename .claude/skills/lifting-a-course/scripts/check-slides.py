@@ -13,21 +13,20 @@ Usage:
 import html, json, re, subprocess, sys
 from pathlib import Path
 
-O = '<span style="color:#ff8c00">{}</span>'
-C = '<code><span style="color:#ff8c00">{}</span></code>'
+O = '<span class="accent">{}</span>'
+C = '<code>{}</code>'
 
-def b(name, kind, left, top, width, *, fragment=False, required=True, fonts=(), sample='', h1=False, height=None, corner=None):
-    """One block of a slide type. top=None: any top. fragment=None: either. fonts: allowed inline font-size values."""
+def b(name, kind, left, top, width, *, fragment=False, required=True, sample='', h1=False, height=None, corner=None):
+    """One block of a slide type. top=None: any top. fragment=None: either."""
     return dict(name=name, kind=kind, left=left, top=top, width=width, fragment=fragment, required=required,
-                fonts=set(fonts), sample=sample, height=height, corner=corner)
+                sample=sample, height=height, corner=corner)
 
 THEORY_TITLE = lambda text: b('title', 'text', 64, 96, 1150, sample=f'<h2>{text}</h2>')
 EX_TITLE = lambda text: b('title', 'text', 64, 96, 1150, sample=f'<h2>{text}</h2>')
-STEP = 'style="font-size:0.85em;line-height:1.35"'
-EX = lambda s: f'<p {STEP}>{s}</p>'
-LINE = lambda s: f'<p style="font-size:1.6em"><strong>{s}</strong></p>'
-RESULT = lambda s: f'<h2 class="keep-case">{O.format(s)}</h2>'
-STEPS = lambda *items: f'<ol {STEP}>\n' + '\n'.join(f'<li>{i}</li>' for i in items) + '\n</ol>'
+EX = lambda s: f'<p>{s}</p>'
+LINE = lambda s: f'<p class="lead">{s}</p>'
+RESULT = lambda s: f'<p class="lead accent">{s}</p>'
+STEPS = lambda *items: '<ol>\n' + '\n'.join(f'<li>{i}</li>' for i in items) + '\n</ol>'
 
 TYPES = {
     'title': dict(
@@ -44,11 +43,11 @@ TYPES = {
         what='Three to five short phrases, one per click, then an optional punchline 48px below the last line. For categories and lists.',
         words=40, line_words=8,
         blocks=[THEORY_TITLE('What does "slow" mean?'),
-                b('line-1', 'text', 64, 200, 1150, fragment=True, fonts={'1.6em'}, sample=LINE('Slow to respond')),
-                b('line-2', 'text', 64, 280, 1150, fragment=True, fonts={'1.6em'}, sample=LINE('Slow to start')),
-                b('line-3', 'text', 64, 360, 1150, fragment=True, fonts={'1.6em'}, sample=LINE('Slower over time')),
-                b('line-4', 'text', 64, 440, 1150, fragment=True, fonts={'1.6em'}, required=False),
-                b('line-5', 'text', 64, 520, 1150, fragment=True, fonts={'1.6em'}, required=False),
+                b('line-1', 'text', 64, 200, 1150, fragment=True, sample=LINE('Slow to respond')),
+                b('line-2', 'text', 64, 280, 1150, fragment=True, sample=LINE('Slow to start')),
+                b('line-3', 'text', 64, 360, 1150, fragment=True, sample=LINE('Slower over time')),
+                b('line-4', 'text', 64, 440, 1150, fragment=True, required=False),
+                b('line-5', 'text', 64, 520, 1150, fragment=True, required=False),
                 b('punchline', 'text', 64, None, 1150, fragment=True, required=False,
                   sample=f'<p>Each has its own number. {O.format("Measure it before you fix it.")}</p>')]),
     'claim-code': dict(
@@ -93,37 +92,37 @@ TYPES = {
         what='First slide of exercise 1: path, npm install, npm start, what the exercise is for, the running app on the right.',
         words=55, exercise=True,
         blocks=[b('title', 'text', 64, 96, 1150, sample='<h2>Exercise 1 - Getting started</h2>'),
-                b('steps', 'text', 64, 160, 540, fonts={'0.85em'}, sample=STEPS('Open <code>labs/&lt;course&gt;/exercise-1</code>', 'Run <code>npm install</code>, then <code>npm start</code>')),
+                b('steps', 'text', 64, 160, 540, sample=STEPS('Open <code>labs/&lt;course&gt;/exercise-1</code>', 'Run <code>npm install</code>, then <code>npm start</code>')),
                 b('image-2', 'image', 64, None, 380, required=False),
-                b('note', 'text', 64, None, 540, fonts={'0.85em'}, required=False, sample=EX('What this exercise is for, in one line.')),
+                b('note', 'text', 64, None, 540, required=False, sample=EX('What this exercise is for, in one line.')),
                 b('image-1', 'image', 630, 160, 630, sample='images/app-step-1.jpg')]),
     'exercise-step': dict(
         what='One step of an exercise with nothing to show on the right: 1-4 numbered instructions, then an optional callout 48px below: a trap ("Trap: …") or what they should see ("You should see: …").',
         words=60, exercise=True,
         blocks=[EX_TITLE('Exercise 2 - Measure before'),
-                b('steps', 'text', 64, 160, 1150, fonts={'0.85em'}, sample=STEPS(f'Open DevTools, <strong>Profiler</strong>, press <strong>Record</strong>', 'Write the number down')),
-                b('callout', 'text', 64, None, 1150, fonts={'0.85em'}, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong and what you see.'))]),
+                b('steps', 'text', 64, 160, 1150, sample=STEPS(f'Open DevTools, <strong>Profiler</strong>, press <strong>Record</strong>', 'Write the number down')),
+                b('callout', 'text', 64, None, 1150, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong and what you see.'))]),
     'exercise-step-code': dict(
         what='One step of an exercise: short instructions on the left, the code to write on the right.',
         words=50, exercise=True, code_lines=8,
         blocks=[EX_TITLE('Exercise 2 - Defer the map'),
-                b('steps', 'text', 64, 160, 540, fonts={'0.85em'}, sample=STEPS('In <code>home.component.ts</code>, wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code>')),
+                b('steps', 'text', 64, 160, 540, sample=STEPS('In <code>home.component.ts</code>, wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code>')),
                 b('code-1', 'code', 630, 160, 630, sample='@defer (on idle) {\n  <leaflet/>\n}'),
-                b('callout', 'text', 64, None, 540, fonts={'0.85em'}, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
+                b('callout', 'text', 64, None, 540, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
     'exercise-step-image': dict(
         what='One step of an exercise: short instructions on the left, a screenshot of what they should see on the right.',
         words=45, exercise=True,
         blocks=[EX_TITLE('Exercise 2 - Watch the chunks load'),
-                b('steps', 'text', 64, 160, 540, fonts={'0.85em'}, sample=STEPS('DevTools, <strong>Network</strong>, filter <strong>JS</strong>, reload')),
+                b('steps', 'text', 64, 160, 540, sample=STEPS('DevTools, <strong>Network</strong>, filter <strong>JS</strong>, reload')),
                 b('image-1', 'image', 630, 160, 630, sample='images/devtools-network-chunks.jpg'),
-                b('callout', 'text', 64, None, 540, fonts={'0.85em'}, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
+                b('callout', 'text', 64, None, 540, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
     'exercise-result': dict(
         what='What the exercise measured: one or two big results, one line on why, 48px below.',
         words=25, exercise=True,
         blocks=[EX_TITLE('Exercise 2 - What we measured'),
                 b('result-1', 'text', 64, 180, 1150, fragment=None, sample=RESULT('5 s of mouse moves: ~290 bars')),
                 b('result-2', 'text', 64, 280, 1150, fragment=True, required=False, sample=RESULT('1 bar = the whole app')),
-                b('why', 'text', 64, None, 1150, fragment=None, fonts={'0.85em'}, required=False, sample=EX('Why, in one line.'))]),
+                b('why', 'text', 64, None, 1150, fragment=None, required=False, sample=EX('Why, in one line.'))]),
 }
 
 STEP_TYPES = {'exercise-start', 'exercise-step', 'exercise-step-code', 'exercise-step-image'}
@@ -176,10 +175,12 @@ def check(path):
                 add(f'block "{name}" {k} is {blk["geo"].get(k)}, template says {x[k]}')
         if x['fragment'] is not None and blk['fragment'] != x['fragment']:
             add(f'block "{name}" must {"" if x["fragment"] else "not "}be a fragment')
-        if blk['kind'] == 'text':
-            fonts = set(re.findall(r'font-size:\s*([\d.]+em)', blk['inner']))
-            if fonts - x['fonts']:
-                add(f'block "{name}" uses font-size {", ".join(sorted(fonts - x["fonts"]))}; allowed: {", ".join(sorted(x["fonts"])) or "none"}')
+        if blk['kind'] == 'text' and name != 'title':
+            inline = sorted(set(re.findall(r'(font-size|line-height|color)\s*:', blk['inner'])))
+            if inline:
+                add(f'block "{name}" sets {", ".join(inline)} inline; use the type scale: class="lead", class="accent", plain text is body')
+            if name.startswith(('result-', 'line-')) and 'class="lead' not in blk['inner'] and s['template'] != 'wrap':
+                add(f'block "{name}" must use class="lead"')
         if x.get('corner'):
             right, bottom, side = x['corner']
             g, h = blk['geo'], re.search(r'height:([\d.]+)px', blk['style'])
@@ -201,14 +202,11 @@ def check(path):
             n = len(code.group(2).rstrip('\n').split('\n')) if code else 0
             if n > t.get('code_lines', 8):
                 add(f'block "{name}" has {n} code lines (max {t.get("code_lines", 8)}); elide with // …')
-            px = re.search(r'<pre[^>]*font-size:\s*([\d.]+)px', blk['inner'])
-            if not px or float(px.group(1)) < MIN_CODE_PX:
-                add(f'block "{name}" code font is {px.group(1) + "px" if px else "not set"}; at least {MIN_CODE_PX}px')
+            if re.search(r'<pre[^>]*(font-size|line-height)', blk['inner']):
+                add(f'block "{name}" sets the code size inline; the theme sets code to {MIN_CODE_PX}px')
             ln = re.search(r'data-line-numbers(="([^"]*)")?', blk['inner'])
             if ln and not (ln.group(2) or '').strip():
                 add(f'block "{name}" shows line numbers without highlighting any; drop data-line-numbers')
-        if name.startswith('result-') and '<h2' in blk['inner'] and 'keep-case' not in blk['inner']:
-            add(f'block "{name}" heading needs class="keep-case" so names and units keep their case')
         if re.search(r'<ol[^>]*\bstart=', blk['inner']):
             add(f'block "{name}" continues a numbered list from another slide; keep each list on one slide')
     for name, x in spec.items():
@@ -222,9 +220,9 @@ def check(path):
             if k.startswith('line-') and len(words_of(blk['inner'])) > t['line_words']:
                 add(f'block "{k}" has more than {t["line_words"]} words')
     orange = [m for k, b in s['blocks'].items() if k != 'title' and b['kind'] == 'text'
-              for m in re.findall(r'color:\s*#ff8c00[^>]*>([^<]*)', b['inner'], re.I) if not m.strip().lower().startswith('trap')]
+              for m in re.findall(r'class="[^"]*\baccent\b[^"]*"[^>]*>([^<]*)', b['inner']) if not m.strip().lower().startswith('trap')]
     if len(orange) > ORANGE_MAX:
-        add(f'{len(orange)} orange spans (max {ORANGE_MAX} plus "Trap:"); paths and names go in white <code>, UI labels in <strong>')
+        add(f'{len(orange)} accents (max {ORANGE_MAX} plus "Trap:"); paths and names go in white <code>, UI labels in <strong>')
     for k, blk in s['blocks'].items():
         if k == 'title' or blk['kind'] != 'text':
             continue
@@ -256,7 +254,7 @@ def write_templates(out):
                          f'    {x["sample"]}', '  </div>']
             elif x['kind'] == 'code':
                 rows += [f'  <div class="{cls}" data-type="code" data-name="{x["name"]}" data-theme="dark" data-auto-height style="left:{left}px;top:{top}px;width:{width}px;height:auto;z-index:{10 + z}">',
-                         f'    <pre style="font-size:{MIN_CODE_PX}px;line-height:30px"><code class="language-typescript">{html.escape(x["sample"], quote=False)}\n</code></pre>', '  </div>']
+                         f'    <pre><code class="language-typescript">{html.escape(x["sample"], quote=False)}\n</code></pre>', '  </div>']
             else:
                 rows += [f'  <div class="{cls}" data-type="image" data-name="{x["name"]}" data-keep-ratio style="left:{left}px;top:{top}px;width:{width}px;height:{width if x.get('corner') else 338}px;z-index:{10 + z}">',
                          f'    <img src="{x["sample"]}" alt="">', '  </div>']

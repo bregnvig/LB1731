@@ -105,7 +105,7 @@ export function renderBlock(b: Block, baseUrl: string): string {
 export const slideFolder = (path: string) => path.slice(0, path.lastIndexOf('/'));
 
 export function renderSlide(slide: Slide, baseUrl = `/content/${slideFolder(slide.path)}`): string {
-  const attrs = [`data-path="${esc(slide.path)}"`, ...(slide.autoAnimate ? ['data-auto-animate'] : []), ...(slide.hidden ? ['data-visibility="hidden"'] : [])];
+  const attrs = [`data-path="${esc(slide.path)}"`, ...(slide.template ? [`data-template="${esc(slide.template)}"`] : []), ...(slide.autoAnimate ? ['data-auto-animate'] : []), ...(slide.hidden ? ['data-visibility="hidden"'] : [])];
   const notes = slide.notes ? `<aside class="notes">${esc(slide.notes)}</aside>` : '';
   return `<section ${attrs.join(' ')}>${slide.blocks.map(b => renderBlock(b, baseUrl)).join('')}${notes}</section>`;
 }
