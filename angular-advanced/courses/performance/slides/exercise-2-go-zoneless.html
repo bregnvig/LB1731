@@ -11,14 +11,8 @@
 	<li><span style="font-size:0.7em"><code><span style="color:#ff8c00">src/main.ts</span></code>: <code><span style="color:#ff8c00">provideZoneChangeDetection()</span></code> becomes <code><span style="color:#ff8c00">provideZonelessChangeDetection()</span></code>, in the import too. Default since v21; we keep it explicit</span></li>
 </ol>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:590px;top:149.8px;width:670px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-text" data-line-numbers="4">Initial chunk files   | Names         |  Raw size | Estimated transfer size
-main-3ECWWERD.js      | main          |   1.53 MB |               357.55 kB
-styles-TMTHUCME.css   | styles        | 242.57 kB |                25.55 kB
-polyfills-BHOTQAFE.js | polyfills     |  35.09 kB |                11.52 kB
-
-                      | Initial total |   1.81 MB |               394.62 kB
-</code></pre>
+  <div class="block" data-type="text" data-name="text-3" style="left:590px;top:150px;width:670px;height:auto;z-index:12;text-align:left">
+    <p>Before: <code>polyfills</code> <span style="color:#ff8c00">35.09 kB</span></p>
   </div>
   <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:590px;top:290px;width:670px;height:auto;z-index:13">
     <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">// angular.json
@@ -29,14 +23,15 @@ polyfills-BHOTQAFE.js | polyfills     |  35.09 kB |                11.52 kB
 </code></pre>
   </div>
   <div class="block" data-type="text" data-name="text-2" style="left:590px;top:440px;width:670px;height:auto;z-index:14;text-align:left">
-    <p><span style="font-size:0.7em">Restart <code><span style="color:#ff8c00">npm start</span></code>. The footer counter is stuck. That's the setInterval row in the zoneless table.</span></p>
+    <p><span style="font-size:0.7em">Restart <code><span style="color:#ff8c00">npm start</span></code>. The footer counter is stuck. <code><span style="color:#ff8c00">setInterval</span></code> is on the "Only zone.js" list.</span></p>
   </div>
   <aside class="notes">labs/performance/exercise-2. Before: polyfills 35.09 kB, one footer bar per second, each refreshes all 6 components. One list click: 43 bars.
 Change: zone.js out of polyfills, provideZonelessChangeDetection in main.ts.
 Expect: the counter freezes. Next slide fixes it.
+Full build before, cut from the slide (raw / transfer): main 1.53 MB / 357.55 kB, styles 242.57 kB / 25.55 kB, polyfills 35.09 kB / 11.52 kB, Initial total 1.81 MB / 394.62 kB.
 
 Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
 Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer's timer, and clicking a bar shows it refreshed all six components. Then record one click on a playground in the list. We got 43 bars for that one click: Leaflet's pan, started from inside the zone.
 Now the change. In angular.json delete the zone.js line from polyfills. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, in the import too. Since v21 zoneless is the default, so deleting the line would do the same; the solution keeps provideZonelessChangeDetection so the next reader sees the choice. Leave runOutsideAngular from exercise 1 where it is.
-Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. That's the setInterval row in the zoneless table. Next slide fixes it.</aside>
+Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. setInterval is on the "Only zone.js" list. Next slide fixes it.</aside>
 </section>

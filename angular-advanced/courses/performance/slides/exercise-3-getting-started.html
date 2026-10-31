@@ -9,16 +9,11 @@
 <p><span style="font-size:0.7em">Then four changes, one at a time. Build after each one and write <code><span style="color:#ff8c00">Initial total</span></code> down.</span></p>
 <p><span style="font-size:0.7em">Guess first: which change will move it most?</span></p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:600px;top:160px;width:660px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-text">Initial chunk files   | Names         |  Raw size | Estimated transfer size
-main-A7GXUQUP.js      | main          |   1.53 MB |               357.12 kB
-styles-TMTHUCME.css   | styles        | 242.57 kB |                25.55 kB
-polyfills-J74PZYSW.js | polyfills     | 494 bytes |               494 bytes
-
-                      | Initial total |   1.77 MB |               383.17 kB
-</code></pre>
+  <div class="block" data-type="text" data-name="text-2" style="left:620px;top:160px;width:620px;height:auto;z-index:12;text-align:left">
+    <p><span style="color:#FF8C00"><code>Initial total</code></span>: <strong>1.77 MB</strong></p>
   </div>
   <aside class="notes">Lab exercise-3. npm run build before any change. Expect Initial total 1.77 MB / 383.17 kB, main 1.53 MB.
+Full output, cut from the slide (raw / transfer): main 1.53 MB / 357.12 kB, styles 242.57 kB / 25.55 kB, polyfills 494 bytes / 494 bytes, Initial total 1.77 MB / 383.17 kB.
 Everyone writes their guess down: which of the four changes wins?
 
 New exercise, and this one is about the first download. Go to labs/performance/exercise-3, npm install, and before you touch any code, npm run build.

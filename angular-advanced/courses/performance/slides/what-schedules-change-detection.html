@@ -3,35 +3,30 @@
     <h2>Zoneless: what schedules change detection?</h2>
   </div>
   <div class="block" data-type="text" data-name="text-1" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
-    <table style="table-layout:fixed;width:1100px"><colgroup><col style="width:520px"><col style="width:400px"><col style="width:180px"></colgroup>
-      <thead>
-        <tr><th style="padding:6px 48px 6px 0">Trigger</th><th style="padding:6px 48px 6px 0">Zone.js</th><th style="padding:6px 0">Zoneless</th></tr>
-      </thead>
-      <tbody>
-        <tr><td style="padding:6px 48px 6px 0">A <span style="color:#FF8C00"><code>signal</code></span> read in a template changes</td><td style="padding:6px 48px 6px 0">yes</td><td style="padding:6px 0">yes</td></tr>
-        <tr><td style="padding:6px 48px 6px 0">A template or host listener fires</td><td style="padding:6px 48px 6px 0">yes</td><td style="padding:6px 0">yes</td></tr>
-        <tr><td style="padding:6px 48px 6px 0"><span style="color:#FF8C00"><code>markForCheck()</code></span>, the <code>async</code> pipe</td><td style="padding:6px 48px 6px 0">yes</td><td style="padding:6px 0">yes</td></tr>
-      </tbody>
-    </table>
+    <p><strong>Both schedule a check:</strong></p>
+<ul>
+  <li>A <span style="color:#FF8C00"><code>signal</code></span> read in a template changes</li>
+  <li>A template or host listener fires</li>
+  <li><span style="color:#FF8C00"><code>markForCheck()</code></span>, the <code>async</code> pipe</li>
+</ul>
   </div>
-  <div class="block fragment" data-type="text" data-name="text-2" style="left:64px;top:420px;width:1150px;height:auto;z-index:12;text-align:left">
-    <table style="table-layout:fixed;width:1100px"><colgroup><col style="width:520px"><col style="width:400px"><col style="width:180px"></colgroup>
-      <tbody>
-        <tr><td style="padding:6px 48px 6px 0"><span style="color:#FF8C00"><code>setTimeout</code></span>, <span style="color:#FF8C00"><code>setInterval</code></span></td><td style="padding:6px 48px 6px 0">yes</td><td style="padding:6px 0"><strong>no</strong></td></tr>
-        <tr><td style="padding:6px 48px 6px 0">A promise or request finishes</td><td style="padding:6px 48px 6px 0">yes</td><td style="padding:6px 0"><strong>no</strong></td></tr>
-      </tbody>
-    </table>
+  <div class="block fragment" data-type="text" data-name="text-2" style="left:64px;top:410px;width:1150px;height:auto;z-index:12;text-align:left">
+    <p><strong>Only zone.js:</strong></p>
+<ul>
+  <li><span style="color:#FF8C00"><code>setTimeout</code></span>, <span style="color:#FF8C00"><code>setInterval</code></span></li>
+  <li>A promise or request finishes</li>
+</ul>
   </div>
   <div class="block fragment" data-type="text" data-name="text-3" style="left:64px;top:600px;width:1150px;height:auto;z-index:13;text-align:left">
     <p>If the screen should change, change a <span style="color:#FF8C00"><code>signal</code></span>.</p>
   </div>
   <aside class="notes">Demo: /performance/change-detection. All OnPush, signal on B: only B flashes. setTimeout on B: nothing flashes, B keeps field 0; click "click" on B: A and B flash, field jumps to 1.
 The demo still runs zone.js: setTimeout on B does start a cycle, OnPush just skips B. Zoneless, no cycle would start at all.
-Click: the rows zoneless does NOT schedule. Click: the rule.
-Dropped row, say it: assigning a plain field never scheduled anything, not even with zone.js. The next cycle just happened to show it.
+Click: "Only zone.js", the two that zoneless does NOT schedule. Click: the rule.
+Not on the slide, say it: assigning a plain field never scheduled anything, not even with zone.js. The next cycle just happened to show it.
 
-Here's the list to keep in your head. Top three: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you. Those schedule a cycle with or without Zone.js.
-Click. The bottom two used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
+Here's the list to keep in your head. Both schedule a check, with or without Zone.js: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you. Those schedule a cycle with or without Zone.js.
+Click. Only zone.js. These two used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
 Switch to the demo. All OnPush, Reset. Click signal on B: only B flashes. Click setTimeout on B: nothing flashes, B still shows field 0. Click "click" on B: A and B flash, and now the field jumps to 1. The value was there all along, nobody asked Angular to look.
 Be precise about what you just saw: the demo app still has zone.js. The timer did start a cycle, and OnPush skipped B because nothing marked it. Zoneless, there wouldn't even be a cycle. Same screen, one step further from an update.
 Click. The rule of thumb: if the screen should change, change a signal.</aside>
