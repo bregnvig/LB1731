@@ -1,4 +1,87 @@
-div.col-6 {
-  height: 100px;
+@import "src/scss/variables";
 
+// Two zones side by side on the gradient: the left one is watched by Angular
+.zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.zone {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .375rem;
+  min-height: 11rem;
+  padding: 1.5rem;
+  border-radius: $border-radius-lg;
+  cursor: crosshair;
+
+  code {
+    margin-bottom: auto;
+    background: rgba($white, .9);
+    color: $navy;
+  }
+
+  strong {
+    font-size: 1.75rem;
+    font-stretch: 75%;
+    line-height: 1.1;
+  }
+
+  span {
+    opacity: .85;
+  }
+}
+
+.inside {
+  background: $white;
+  color: $navy;
+  box-shadow: 0 12px 32px -12px rgba($navy, .5);
+
+  code {
+    background: $canvas;
+    color: $azure;
+  }
+}
+
+.outside {
+  border: 2px dashed rgba($white, .6);
+  background: rgba($navy, .18);
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  h5 {
+    margin: 0;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-stretch: 80%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+
+  &.two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .zones,
+  .cards,
+  .cards.two {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

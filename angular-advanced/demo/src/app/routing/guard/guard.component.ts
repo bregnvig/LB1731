@@ -4,13 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'loop-guard',
   template: `
-  <div class="row form-group">
-    <div class="col">
-      <input #playgroundId type="text" class="form-control" placeholder="Enter playground id" (keydown.enter)="gotoPlayground(playgroundId.value)">
+  <section class="outlet-panel">
+    <div class="panel-bar">
+      <label class="goto">
+        <fa-icon [icon]="['fas', 'location-arrow']"/>
+        <input #playgroundId type="text" class="form-control" placeholder="Enter playground id" aria-label="Playground id" (keydown.enter)="gotoPlayground(playgroundId.value)">
+        <kbd>Enter</kbd>
+      </label>
+      <span class="panel-label">guard/:id</span>
     </div>
-  </div>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </section>
   `,
+  styleUrl: './guard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

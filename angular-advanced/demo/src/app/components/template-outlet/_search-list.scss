@@ -1,0 +1,45 @@
+// A search field over a results panel (after the Xero and Sprig list filters)
+@import "src/scss/variables";
+
+:host {
+  display: block;
+  max-width: 48rem;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-control {
+  height: 3.25rem;
+  padding-left: 3rem;
+  border-radius: 999px;
+  font-size: 1.0625rem;
+  background: $gray-100 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%236a5f80' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cpath d='m13 13 5 5'/%3E%3C/svg%3E") no-repeat 1.125rem center;
+
+  &:focus {
+    background-color: $white;
+  }
+}
+
+.list-group {
+  margin-top: .75rem;
+  padding: .375rem;
+  border-radius: $border-radius-xl;
+  background: $white;
+}
+
+.list-group-item {
+  padding: .75rem 1rem;
+  border: 0;
+  border-radius: $border-radius !important;
+  font-weight: 500;
+
+  & + & {
+    border-top: 0;
+  }
+
+  &:nth-child(odd) {
+    background: $gray-100;
+  }
+}

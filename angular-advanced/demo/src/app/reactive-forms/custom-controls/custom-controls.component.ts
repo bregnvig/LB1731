@@ -5,6 +5,7 @@ import { AbstractSubscribeUnsubscribeDirective } from 'src/app/rxjs/rxjs-utils';
 @Component({
     selector: 'loop-custom-controls',
     templateUrl: './custom-controls.component.html',
+    styleUrl: './custom-controls.component.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })

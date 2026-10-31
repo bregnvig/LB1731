@@ -12,13 +12,36 @@ import { OnChangeDisplayListComponent } from './on-change-display-list/on-change
       </div>
       <article class="row">
         <section class="col-6">
+          <h6><code>items1 = [...items1, value]</code></h6>
           <loop-on-change-display-list [inputItems]="items1" />
         </section>
         <section class="col-6">
+          <h6><code>items2.push(value)</code></h6>
           <loop-on-change-display-list [inputItems]="items2" />
         </section>
       </article>
       `,
+    styles: `
+      @import "src/scss/variables";
+
+      section {
+        padding-top: .25rem;
+      }
+
+      h6 {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem;
+        margin-bottom: .75rem;
+        color: $muted;
+        font-weight: 500;
+      }
+
+      code {
+        font-size: .875rem;
+      }
+    `,
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [FormsModule, ReactiveFormsModule, OnChangeDisplayListComponent]
 })

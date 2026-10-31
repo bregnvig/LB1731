@@ -16,6 +16,13 @@ import { Playground } from 'src/app/shared';
       </div>
     </li>
   `,
+  styles: `
+    @import "src/app/components/content-projection/slots";
+
+    .btn-group::before {
+      content: '<ng-content select="button,a">';
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaygroundListItemComponent {

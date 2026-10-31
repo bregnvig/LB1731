@@ -1,8 +1,200 @@
-img {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
+@import "src/scss/variables";
+
+:host {
+  display: block;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  background: $canvas;
 }
-ul {
-  background-color: #464543;
+
+// Navy band on a faint cyan grid: brand and topic nav on top, the topic title below
+
+.band {
+  position: relative;
+  padding: 0 2.5rem 7.5rem;
+  background-color: $navy;
+  background-image:
+    linear-gradient(rgba($signal, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($signal, .06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: $white;
+  overflow: hidden;
+
+  // The signal gradient as a hairline along the top edge
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: $signal-gradient;
+  }
 }
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.25rem 0;
+}
+
+.brand {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: .625rem;
+  color: $white;
+  font-weight: 700;
+  font-stretch: 85%;
+  font-size: 1.0625rem;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .125rem;
+
+  a {
+    padding: .375rem .75rem;
+    border-radius: .3rem;
+    color: rgba($white, .65);
+    font-family: $font-family-monospace;
+    font-weight: 500;
+    font-size: .8125rem;
+    white-space: nowrap;
+    text-decoration: none;
+
+    &:hover {
+      color: $white;
+      background: rgba($white, .08);
+    }
+
+    &.active {
+      color: $navy;
+      background: $signal;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $signal;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.title {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  align-items: end;
+  max-width: 84rem;
+  margin: 3rem auto 0;
+
+  fa-icon {
+    grid-row: span 2;
+    align-self: start;
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: $border-radius-xl;
+    background: $signal-gradient;
+    color: $navy;
+    font-size: 1.75rem;
+    box-shadow: 0 0 32px -4px rgba($signal, .7);
+  }
+
+  h1 {
+    margin: 0;
+    color: $white;
+    font-size: clamp(2.75rem, 5vw + 1rem, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -.035em;
+    line-height: .9;
+  }
+
+  p {
+    max-width: 62ch;
+    margin: .875rem 0 0;
+    color: rgba($white, .7);
+    font-size: 1.0625rem;
+  }
+}
+
+// The stage overlaps the band
+
+.stage {
+  position: relative;
+  max-width: 84rem;
+  margin: -5rem auto 0;
+  background: $white;
+  border-radius: $border-radius-xl;
+  padding: 2.25rem 2.25rem 2.75rem;
+  box-shadow: $stage-shadow;
+}
+
+@media (max-width: 1440px) {
+  .stage {
+    margin-inline: 2.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .band {
+    padding: 0 1rem 5rem;
+  }
+
+  .bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .5rem;
+  }
+
+  // Every topic stays visible on a phone: the links wrap instead of
+  // scrolling the current one out of sight
+  nav {
+    flex-wrap: wrap;
+    gap: .25rem;
+  }
+
+  nav a {
+    padding: .1875rem .5rem;
+    font-size: .75rem;
+  }
+
+  .title {
+    column-gap: .875rem;
+    align-items: center;
+    margin-top: 1rem;
+
+    fa-icon {
+      grid-row: auto;
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 1.125rem;
+      border-radius: $border-radius-lg;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      grid-column: 1 / -1;
+      margin-top: .5rem;
+      font-size: .875rem;
+    }
+  }
+
+  .stage {
+    margin-inline: .5rem;
+    padding: 1rem;
+    border-radius: $border-radius-lg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand img {
+    animation: none;
+  }
+}
+

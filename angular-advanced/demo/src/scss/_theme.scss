@@ -1,0 +1,239 @@
+// Component polish on top of Bootstrap, loaded after bootstrap/scss/bootstrap.
+
+// Sub-demo tabs: a row of pills on a steel track
+
+.nav-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  padding: .3125rem;
+  margin-bottom: 1.75rem !important;
+  border: 0;
+  border-radius: $border-radius-lg;
+  background: $canvas;
+
+  .nav-link {
+    padding: .4375rem .9375rem;
+    margin: 0;
+    border: 0;
+    border-radius: $border-radius;
+    font-size: .875rem;
+    color: $muted;
+
+    &:hover {
+      color: $ink;
+      background: rgba($white, .6);
+    }
+
+    &.active {
+      color: $white;
+      background: $navy;
+      box-shadow: inset 0 -2px 0 $signal, 0 2px 8px -2px rgba($navy, .5);
+    }
+  }
+
+  // Up to 11 sub-demos per topic: they wrap, so none hide on a projector or
+  // a phone
+  @media (max-width: 767.98px) {
+    display: flex;
+
+    gap: .125rem;
+    margin-bottom: 1.25rem !important;
+
+    .nav-link {
+      padding: .25rem .625rem;
+      font-size: .8125rem;
+    }
+  }
+}
+
+// Buttons
+
+.btn-primary {
+  --bs-btn-hover-bg: #{shade-color($azure, 12%)};
+  --bs-btn-active-bg: #{shade-color($azure, 20%)};
+  box-shadow: 0 1px 2px rgba($azure, .3), inset 0 1px 0 rgba($white, .15);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-warning,
+.btn-light {
+  --bs-btn-color: #{$ink};
+  --bs-btn-bg: #{$white};
+  --bs-btn-border-color: #{$gray-300};
+  --bs-btn-hover-color: #{$ink};
+  --bs-btn-hover-bg: #{$canvas};
+  --bs-btn-hover-border-color: #{$gray-400};
+  --bs-btn-active-color: #{$white};
+  --bs-btn-active-bg: #{$navy};
+  --bs-btn-active-border-color: #{$navy};
+  --bs-btn-disabled-color: #{$gray-500};
+  --bs-btn-disabled-bg: #{$white};
+  --bs-btn-disabled-border-color: #{$gray-300};
+}
+
+.btn-secondary {
+  --bs-btn-bg: #{$navy};
+  --bs-btn-border-color: #{$navy};
+  --bs-btn-hover-bg: #{$navy-2};
+  --bs-btn-hover-border-color: #{$navy-2};
+}
+
+.btn-group > .btn {
+  border-radius: 0;
+
+  &:first-child { border-radius: 999px 0 0 999px; }
+  &:last-child { border-radius: 0 999px 999px 0; }
+  &:only-child { border-radius: 999px; }
+}
+
+// Surfaces
+
+.card,
+.list-group,
+.accordion {
+  box-shadow: $lift-shadow;
+  border: 0;
+}
+
+.card-title {
+  font-weight: 650;
+}
+
+.list-group-item {
+  border-color: $gray-200;
+}
+
+.form-control,
+.form-select {
+  background-color: $gray-100;
+
+  &:focus {
+    background-color: $white;
+  }
+}
+
+.input-group-text {
+  color: $muted;
+  background: $canvas;
+}
+
+.table {
+  > thead th {
+    color: $muted;
+    font-size: .8125rem;
+  }
+}
+
+.list-group-item.d-flex > .badge {
+  align-self: center;
+}
+
+// Badges: steel pills, whatever bg utility the template asks for
+
+.badge[class*="bg-"] {
+  background: $canvas-deep !important;
+  color: $navy;
+  font-family: $font-family-monospace;
+  font-weight: 500;
+}
+
+.alert {
+  border: 0;
+  border-left: 4px solid currentColor;
+}
+
+// Bootstrap 4 class still used by the course templates
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+// Code: inline chips, and navy panels for <pre> (templates wrap it as <code><pre>)
+
+code {
+  padding: .125rem .4375rem;
+  border-radius: $border-radius-sm;
+  background: $canvas;
+  color: $cobalt;
+  overflow-wrap: anywhere;
+}
+
+code:has(pre) {
+  display: block;
+  padding: 0;
+  background: none;
+}
+
+pre {
+  position: relative;
+  padding: 1.125rem 1.375rem;
+  border-radius: $border-radius-lg;
+  background: $navy;
+  color: #cfe3f5;
+  font-size: .875rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  box-shadow: inset 0 0 0 1px rgba($signal, .15);
+
+  // Templates mark the active line with one of these. When one is present the
+  // other lines dim and the marked line gets a lit band.
+  &:has(strong, .fw-bold, .text-black) {
+    color: rgba(#cfe3f5, .45);
+  }
+
+  strong,
+  .fw-bold,
+  .text-black {
+    color: $white !important;
+    font-weight: 600;
+    background: rgba($signal, .16);
+    box-shadow: -.5rem 0 0 rgba($signal, .16), .5rem 0 0 rgba($signal, .16);
+    border-radius: 2px;
+  }
+}
+
+.alert:has(pre) {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+// Shared demo pieces
+
+// The stage for a visual demo: a HUD screen, with the demo's objects sitting
+// on it in white or lit up (after the Framer Motion playground)
+.demo-surface {
+  position: relative;
+  padding: 2rem;
+  border-radius: $border-radius-xl;
+  background: $surface-bg;
+  color: $white;
+  box-shadow: inset 0 0 0 1px rgba($signal, .25), 0 0 40px -12px rgba($signal, .35);
+}
+
+// Label/value pairs for showing live state
+.readout {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: .375rem 1.5rem;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-radius: $border-radius-lg;
+  background: $canvas;
+
+  dt {
+    font-weight: 500;
+    color: $muted;
+  }
+
+  dd {
+    margin: 0;
+    font-family: $font-family-monospace;
+    font-size: .875rem;
+    color: $ink;
+    overflow-wrap: anywhere;
+  }
+}
+

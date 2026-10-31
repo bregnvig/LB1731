@@ -3,7 +3,7 @@
 </ng-template>
 <div class="form-group row">
   <div class="col">
-    <input id="filter" type="text" class="form-control" [formControl]="filterControl">
+    <input id="filter" type="text" placeholder="Filter playgrounds" class="form-control" [formControl]="filterControl">
   </div>
 </div>
 <div class="row mt-2">
@@ -17,8 +17,8 @@
               [ngTemplateOutletContext]="{$implicit: item}" />
           </li>
         } @placeholder (minimum 200ms) {
-          <div class="d-flex">
-            <img class="rainbow me-3" style="user-select: none;" loading="eager" [style.z-index]="1000" height="200" src="assets/angular.png">
+          <div class="placeholder-row">
+            <img class="rainbow" style="user-select: none;" loading="eager" [style.z-index]="1000" height="200" src="assets/angular.png">
             <p>Loading</p>
           </div>
         }

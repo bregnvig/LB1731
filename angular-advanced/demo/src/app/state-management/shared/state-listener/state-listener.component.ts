@@ -5,13 +5,13 @@ import { StateListenerService } from "./state-listener.service";
 @Component({
     selector: 'loop-state-listener',
     template: `
-      <div>
-        <p>Subscriber: {{ name() }}</p>
-        <p>State: {{ $safeNavigationMigration(state?.()) | json }}</p>
-        <button class="btn btn-primary" [disabled]="isRegistered()" (click)="register()">Register</button>
-  
+      <div class="listener">
+        <p class="name">Subscriber: <strong>{{ name() }}</strong></p>
+        <p class="state">State: <code>{{ $safeNavigationMigration(state?.()) | json }}</code></p>
+        <button class="btn btn-primary btn-sm" [disabled]="isRegistered()" (click)="register()">Register</button>
       </div>
     `,
+    styleUrl: './state-listener.component.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [JsonPipe],
 })

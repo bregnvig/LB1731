@@ -7,24 +7,28 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'loop-dynamic-view-container-ref-component',
   template: `
-    <div class="list-group list-group-action">
-      @for (playground of playgrounds$ | async; track playground) {
-        <button 
-          class="list-group-item list-group-item-action">
-          <span container="body" [ngbPopover]="popoverContent" (shown)="createPopover(playground)">{{playground.name}}</span>
-          <ng-template #popoverContent>
-            <ng-container #dynamicContainer/>
-          </ng-template>
-        </button>
-      }
-    </div>
-    `,
+    <section class="demo-surface">
+      <p class="mechanism"><code>container.createComponent(popover, &#123; bindings &#125;)</code></p>
+      <div class="list-group list-group-action">
+        @for (playground of playgrounds$ | async; track playground) {
+          <button 
+            class="list-group-item list-group-item-action">
+            <span container="body" [ngbPopover]="popoverContent" (shown)="createPopover(playground)">{{playground.name}}</span>
+            <ng-template #popoverContent>
+              <ng-container #dynamicContainer/>
+            </ng-template>
+          </button>
+        }
+      </div>
+    </section>
+  `,
   providers: [
   // {
   //   provide: PopoverService,
   //   useClass: FancyPopoverService,
   // }
   ],
+  styles: `@import "src/app/components/dynamic-component/launcher";`,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgbPopover, AsyncPipe]
 })

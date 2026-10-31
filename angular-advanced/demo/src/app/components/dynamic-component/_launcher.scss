@@ -1,0 +1,49 @@
+// The playground list sits on the gradient; each name opens a popover whose
+// body is created dynamically.
+@import "src/scss/variables";
+
+.demo-surface {
+  padding: 1.5rem;
+}
+
+.mechanism {
+  margin: 0 0 1.25rem;
+
+  code {
+    background: rgba($white, .92);
+    color: $navy;
+    font-size: .875rem;
+  }
+}
+
+.list-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: .5rem;
+  max-height: 34rem;
+  padding: .25rem;
+  overflow-y: auto;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.list-group-item {
+  padding: .625rem .875rem;
+  border: 1px solid rgba($white, .25) !important;
+  border-radius: $border-radius !important;
+  background: rgba($white, .12);
+  color: $white;
+  font-weight: 500;
+  text-align: left;
+
+  &:hover,
+  &:focus-visible {
+    background: $white;
+    color: $navy;
+  }
+
+  span {
+    cursor: pointer;
+  }
+}

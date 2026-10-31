@@ -1,0 +1,110 @@
+// Playground search-and-results panel, shared by the RxJS, DI and routing
+// demos (after the Threads place picker and Plane's search list).
+@import "src/scss/variables";
+
+.search-list {
+  display: block;
+  overflow: hidden;
+  border-radius: $border-radius-lg;
+  background: $white;
+  box-shadow: $lift-shadow;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: .875rem 1.125rem;
+  border-bottom: 1px solid $gray-200;
+  color: $muted;
+  cursor: text;
+
+  &:focus-within {
+    color: $cobalt;
+    box-shadow: inset 0 -2px 0 $cobalt;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: none;
+    font-size: 1.0625rem;
+    color: $ink;
+
+    &::placeholder { color: $gray-500; }
+  }
+}
+
+.results {
+  margin: 0;
+  padding: .375rem;
+  list-style: none;
+  max-height: 60vh;
+  overflow-y: auto;
+
+  // Nothing rendered: say so instead of showing a blank box
+  &:not(:has(.result))::after {
+    content: "Nothing to show yet";
+    display: block;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: $muted;
+  }
+}
+
+.result {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .625rem .75rem;
+  border-radius: $border-radius;
+  color: $ink;
+  text-decoration: none;
+
+  & + & { box-shadow: 0 -1px 0 $gray-200; }
+
+  ngb-highlight { flex: 1; }
+
+  ::ng-deep .ngb-highlight {
+    padding: 0 .0625rem;
+    border-radius: 3px;
+    background: rgba($azure, .14);
+    color: $azure;
+    font-weight: 600;
+  }
+}
+
+a.result:hover {
+  background: $canvas;
+  text-decoration: none;
+}
+
+.distance {
+  font-family: $font-family-monospace;
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+  color: $muted;
+  white-space: nowrap;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .375rem .875rem;
+  border-radius: 999px;
+  background: $canvas;
+  font-size: .875rem;
+  color: $muted;
+}

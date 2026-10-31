@@ -3,29 +3,33 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'loop-key-value',
   template: `
-    <article>
-      <h5>My object</h5>
-      <div class="row mt-3">
-        <div class="col">
+    <article class="row g-4">
+      <section class="col-md-6">
+        <h5>My object</h5>
+        <dl class="readout mt-3">
           @for (entry of myObject | keyvalue; track entry) {
-            <p>
-              {{entry.key | uppercase}}: {{entry.value}}
-            </p>
+            <dt>{{entry.key | uppercase}}</dt>
+            <dd>{{entry.value}}</dd>
           }
-        </div>
-      </div>
-      <h5>My map</h5>
-      <div class="row mt-3">
-        <div class="col">
+        </dl>
+      </section>
+      <section class="col-md-6">
+        <h5>My map</h5>
+        <dl class="readout mt-3">
           @for (entry of myMap | keyvalue; track entry) {
-            <p>
-              {{entry.key | uppercase}}: {{entry.value}}
-            </p>
+            <dt>{{entry.key | uppercase}}</dt>
+            <dd>{{entry.value}}</dd>
           }
-        </div>
-      </div>
+        </dl>
+      </section>
     </article>
 `,
+  styles: `
+    .readout { gap: 0 1.5rem; padding: .5rem 1.25rem; }
+    dt, dd { padding: .625rem 0; }
+    dt:not(:first-of-type), dt:not(:first-of-type) + dd { border-top: 1px solid #d3dbe6; }
+    dt { font: 600 1rem var(--bs-font-monospace); color: #0b7fc4; }
+  `,
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })

@@ -1,0 +1,25 @@
+@import "src/scss/variables";
+
+li {
+  gap: 0;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+}
+
+// The open card: its state lives in this component, which trackBy keeps
+.card {
+  border-left: 4px solid $cobalt;
+
+  .card-title {
+    font-stretch: 75%;
+    font-size: 1.25rem;
+  }
+}
+
+li > .col-md-4 {
+  padding-right: 1.5rem;
+
+  @media (max-width: 767.98px) {
+    padding: 0 0 .75rem;
+  }
+}

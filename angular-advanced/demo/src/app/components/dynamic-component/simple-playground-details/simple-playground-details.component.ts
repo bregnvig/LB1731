@@ -11,6 +11,36 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
       <fa-icon class="ms-2" role="button" size="2x" [icon]="['far', 'thumbs-down']" (click)="emit('down')"/>
     </p>
   `,
+  styles: `
+    @import "src/scss/variables";
+
+    :host {
+      display: block;
+      max-width: 18rem;
+    }
+
+    p:first-child {
+      margin: 0;
+      color: $ink;
+      font-size: .9375rem;
+    }
+
+    // Vote buttons: round steel targets
+    fa-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: $canvas;
+      color: $cobalt;
+
+      &:hover {
+        background: $cobalt;
+        color: $white;
+      }
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FaIconComponent]
 })

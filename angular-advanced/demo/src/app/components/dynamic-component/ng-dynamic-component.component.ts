@@ -9,24 +9,28 @@ import { ComponentOutletInjectorDirective, DynamicIoDirective } from 'ng-dynamic
 @Component({
   selector: 'loop-ng-dynamic-component',
   template: `
-    <div class="list-group">
-      @for (playground of playgrounds(); track playground.id) {
-        <button class="list-group-item list-group-item-action">
-          <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
-          <ng-template #popoverContent>
-            <ng-template 
-              [ngComponentOutlet]="component" 
-              [ndcDynamicInputs]="{ playground }" 
-              [ndcDynamicOutputs]="{
-                vote: {
-                  handler: $any(vote), args: ['$event', playground]
-                }
-              }"/>
-          </ng-template>
-        </button>
-      }
-    </div>
+    <section class="demo-surface">
+      <p class="mechanism"><code>[ngComponentOutlet] + [ndcDynamicInputs] + [ndcDynamicOutputs]</code></p>
+      <div class="list-group">
+        @for (playground of playgrounds(); track playground.id) {
+          <button class="list-group-item list-group-item-action">
+            <span container="body" [ngbPopover]="popoverContent">{{playground.name}}</span>
+            <ng-template #popoverContent>
+              <ng-template 
+                [ngComponentOutlet]="component" 
+                [ndcDynamicInputs]="{ playground }" 
+                [ndcDynamicOutputs]="{
+                  vote: {
+                    handler: $any(vote), args: ['$event', playground]
+                  }
+                }"/>
+            </ng-template>
+          </button>
+        }
+      </div>
+    </section>
   `,
+  styles: `@import "src/app/components/dynamic-component/launcher";`,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgbPopover, NgComponentOutlet, ComponentOutletInjectorDirective, DynamicIoDirective]
 })

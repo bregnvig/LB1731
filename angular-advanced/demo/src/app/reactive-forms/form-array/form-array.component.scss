@@ -1,0 +1,63 @@
+@import "src/scss/variables";
+
+form {
+  max-width: 48rem;
+}
+
+.adder {
+  margin-bottom: 1.5rem;
+}
+
+// The array: an indexed stack of controls, each slot numbered like arr[i]
+.array {
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-radius: $border-radius-xl;
+  background: $canvas;
+
+  h5 {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+  }
+
+  code {
+    background: $white;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.input-group {
+  animation: slot-in .3s ease-out;
+  box-shadow: $lift-shadow;
+  border-radius: $border-radius;
+
+  .input-group-text {
+    justify-content: center;
+    min-width: 3.25rem;
+    border: 0;
+    background: $signal-gradient;
+    color: $white;
+    font-family: $font-family-monospace;
+    font-weight: 600;
+  }
+
+  .form-control {
+    border-color: transparent;
+    font-family: $font-family-monospace;
+    font-size: .875rem;
+  }
+}
+
+@keyframes slot-in {
+  from {
+    opacity: 0;
+    transform: translateY(-.5rem);
+  }
+}

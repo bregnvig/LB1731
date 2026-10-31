@@ -11,8 +11,21 @@ import { SharedPlaygroundUlComponent } from "../../shared/component/shared-playg
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
-      <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
+      <section class="feed">
+        <header>
+          <h5>Playgrounds</h5>
+          <code>toSignal(timer(0, 1000).pipe(switchMap(...)))</code>
+          <span class="live">Refetched every second</span>
+        </header>
+        <div class="body">
+          <loop-shared-playground-ul [playgrounds]="playgrounds()"/>
+        </div>
+      </section>
     </div>
+  `,
+  styles: `
+    @import "src/scss/variables";
+    @import "../feed";
   `
 })
 export class PlaygroundsEqualityComponent {

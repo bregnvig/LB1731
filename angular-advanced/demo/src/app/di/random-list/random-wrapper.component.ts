@@ -4,10 +4,14 @@ import { RandomService } from '../service/random.service';
 @Component({
   selector: 'loop-random-wrapper',
   template: `
-    <p>
-      I'm a wrapped random component<br>
+    <figure>
+      <figcaption>I'm a wrapped random component</figcaption>
       <ng-content/>
-    </p>
+    </figure>
+  `,
+  styles: `
+    figure { margin: 0; padding: .5rem; border: 2px dashed #8fb4d9; border-radius: 1rem; }
+    figcaption { padding: .25rem .5rem .5rem; font-size: .8125rem; font-weight: 600; color: #0a6aa6; }
   `,
   providers: [RandomService],
   changeDetection: ChangeDetectionStrategy.Eager,

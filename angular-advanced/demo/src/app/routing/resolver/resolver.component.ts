@@ -17,6 +17,7 @@ import { Playground } from 'src/app/shared';
       </div>
     }
     `,
+    styleUrl: './resolver.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
