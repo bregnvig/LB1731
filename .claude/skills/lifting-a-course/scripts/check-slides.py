@@ -276,6 +276,15 @@ def main(argv):
         visible = sum(1 for x in deck['slides'] if not x.get('hidden'))
         if visible > VISIBLE_MAX:
             total += 1; print(f'{course.name}: {visible} visible slides (max {VISIBLE_MAX})')
+        # An exercise is one unbroken run: every visible slide between its first and last slide carries its name.
+        shown = [x['file'] for x in deck['slides'] if not x.get('hidden')]
+        titles = [' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', parse(course / 'slides' / f)['blocks'].get('title', {}).get('inner', ''))).split()) for f in shown]
+        ex = [int(m.group(1)) if (m := re.match(r'Exercise (\d+) - ', t)) else None for t in titles]
+        for n in sorted({e for e in ex if e}):
+            first, last = ex.index(n), len(ex) - 1 - ex[::-1].index(n)
+            for i in range(first, last + 1):
+                if ex[i] != n:
+                    total += 1; print(f'{course.name}/{shown[i]}: sits inside exercise {n}; title it "Exercise {n} - …" or move it out')
         if not (course / 'MEASURED.md').exists():
             total += 1; print(f'{course.name}: no MEASURED.md (every number on a slide needs its command and result there)')
         for slide in deck['slides']:
