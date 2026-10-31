@@ -72,6 +72,9 @@
       "file": "on-angular-15-to-19.html"
     },
     {
+      "file": "lists-track-and-computed.html"
+    },
+    {
       "file": "exercise-2-measure-before.html"
     },
     {
@@ -88,9 +91,6 @@
     },
     {
       "file": "exercise-2-measure-after.html"
-    },
-    {
-      "file": "lists-track-and-computed.html"
     },
     {
       "file": "exercise-2-in-your-app.html"
