@@ -6,7 +6,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `performance.html` · type `title`
 
-![performance.html](slides/01-performance.jpg?v=202610311443)
+![performance.html](slides/01-performance.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -24,7 +24,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `what-slow-means.html` · type `reveal-list`
 
-![what-slow-means.html](slides/02-what-slow-means.jpg?v=202610311443)
+![what-slow-means.html](slides/02-what-slow-means.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -44,7 +44,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `change-detection-in-one-minute.html` · type `claim-image`
 
-![change-detection-in-one-minute.html](slides/03-change-detection-in-one-minute.jpg?v=202610311443)
+![change-detection-in-one-minute.html](slides/03-change-detection-in-one-minute.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -61,82 +61,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 4. Exercise 1 - Getting started
-
-`exercise-1-getting-started.html` · type `exercise-start`
-
-![exercise-1-getting-started.html](slides/04-exercise-1-getting-started.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Angular DevTools installed? (pre-course requirement). labs/performance/exercise-1, npm install, npm start, http://localhost:4200.
-> Location: allow it, the list waits. Blocked? "Loading playgrounds" forever, like the small picture: reset the site permission and reload.
-> No Angular DevTools on a machine? Plan B is Chrome's Performance panel with the Angular track, two slides on.
->
-> Time for exercise 1. Angular DevTools, the Chrome extension, was on the list of things to install before the course. Check that everyone has the Angular tab in DevTools now. Anyone who can't install extensions uses plan B, Chrome's own Performance panel, which I show in a moment.
-> Go to labs/performance/exercise-1, npm install, npm start, open localhost:4200. The browser asks for your location: allow it, the playground list waits for it. If you blocked it by accident, the card says Loading playgrounds forever, like the small picture. Click the icon left of the address, reset the location permission and reload.
-> The backend is slow on purpose, so you see a spinner for about three seconds. Then you get the map, the list and the footer counting seconds, like the screenshot.
-> Ask the room: move the mouse over the map. Does it feel slow? It doesn't, on your laptop. That's why we measure.
-
-</details>
-
-## 5. Exercise 1 - Measure before
-
-`exercise-1-measure-before.html` · type `exercise-step`
-
-![exercise-1-measure-before.html](slides/05-exercise-1-measure-before.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Record exactly 5 s, mouse moving slowly over the map, no clicks, Stop. Count the bars, write the count down, click one bar.
->
-> Measure before. Wait until the list is there, open DevTools, the Angular tab, Profiler, press Record. Move the mouse slowly over the map, no clicks, no zoom, and stop after exactly five seconds. A fixed time is what makes before and after comparable.
-> Every bar in the Profiler is one change detection cycle. Count them and write your number down. Then click one of the bars: the Profiler lists the components that were checked in that cycle and how long each took.
-> Don't say a number yet. Let them count, then the next slide but one has ours.
-
-</details>
-
-## 6. Exercise 1 - Plan B: the Angular track in Chrome
-
-`chrome-performance-angular-track.html` · type `claim-code`
-
-![chrome-performance-angular-track.html](slides/06-chrome-performance-angular-track.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Plan B for anyone without Angular DevTools, and the view when you want milliseconds. Dev build (npm start).
-> Console: ng.enableProfiling(). Performance, Record, use the app, Stop. Track "🅰️ Angular" next to Main.
-> Colours, from Angular's source: "primary" family for change detection cycles and component names, "secondary" for template functions and host bindings, "tertiary" for lifecycle hooks, listeners and DI.
->
-> The second tool lives in Chrome's own Performance panel, so it works without the extension. Angular writes its work into the timeline, but you switch it on yourself: type ng.enableProfiling() in the console of a dev build.
-> Then record as usual. Next to the usual tracks there's an Angular track: each change detection cycle, and inside it the components that were checked, with their time in milliseconds.
-> Click. Angular colours the entries by kind: one colour family for cycles and components, one for template code, one for lifecycle hooks, listeners and dependency injection. The exact colours depend on the DevTools theme, so read the label, not the colour.
-> Which one to use? The Angular DevTools Profiler is simplest for counting cycles. The Performance panel is better when you want milliseconds next to everything else the browser does: layout, paint, long tasks. Our millisecond numbers today come from there.
-
-</details>
-
-## 7. Exercise 1 - What we measured
-
-`exercise-1-measure-before-2.html` · type `exercise-result`
-
-![exercise-1-measure-before-2.html](slides/07-exercise-1-measure-before-2.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Click: ~300 bars (our runs: 298, 301, 300, 301). Click: one bar checked all 6 components and all 133 list rows. Click: why.
-> 6 components, not 7: PlaygroundDetailComponent only exists on /legeplads/:id.
->
-> In our runs, five seconds gave about 300 bars. Chrome sends roughly one mousemove per frame while the mouse moves, and every one is a cycle, plus five from the footer's one-second timer. Your number depends on your mouse and your screen, so compare with the one you wrote down.
-> Click. One of those bars checked all six components on the page and all 133 rows in the sidebar, because a mouse moved over a map. Ask the room: the app has seven components, why six? The seventh is the detail page, and it only exists on /legeplads/:id.
-> Ask the room: what on this page needs to know where the mouse is? Nothing. Click. Leaflet adds its mousemove, drag and zoom listeners when it creates the map, and we create it inside Angular's zone, so zone.js patches them and runs change detection after each one.
-
-</details>
-
-## 8. Exercise 1 - Running outside zone.js
+## 4. Running outside zone.js
 
 `running-outside-zone-js.html` · type `claim-code`
 
-![running-outside-zone-js.html](slides/08-running-outside-zone-js.jpg?v=202610311443)
+![running-outside-zone-js.html](slides/04-running-outside-zone-js.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -151,108 +80,152 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 9. Exercise 1 - Leave the zone
+## 5. Plan B: the Angular track in Chrome
+
+`chrome-performance-angular-track.html` · type `claim-code`
+
+![chrome-performance-angular-track.html](slides/05-chrome-performance-angular-track.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Plan B for anyone without Angular DevTools, and the view when you want milliseconds. Dev build (npm start).
+> Console: ng.enableProfiling(). Performance, Record, use the app, Stop. Track "🅰️ Angular" next to Main.
+> Colours, from Angular's source: "primary" family for change detection cycles and component names, "secondary" for template functions and host bindings, "tertiary" for lifecycle hooks, listeners and DI.
+>
+> The second tool lives in Chrome's own Performance panel, so it works without the extension. Angular writes its work into the timeline, but you switch it on yourself: type ng.enableProfiling() in the console of a dev build.
+> Then record as usual. Next to the usual tracks there's an Angular track: each change detection cycle, and inside it the components that were checked, with their time in milliseconds.
+> Click. Angular colours the entries by kind: one colour family for cycles and components, one for template code, one for lifecycle hooks, listeners and dependency injection. The exact colours depend on the DevTools theme, so read the label, not the colour.
+> Which one to use? The Angular DevTools Profiler is simplest for counting cycles. The Performance panel is better when you want milliseconds next to everything else the browser does: layout, paint, long tasks. Our millisecond numbers today come from there.
+
+</details>
+
+## 6. Exercise 1 - Getting started
+
+`exercise-1-getting-started.html` · type `exercise-start`
+
+![exercise-1-getting-started.html](slides/06-exercise-1-getting-started.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Send the groups out. Angular DevTools installed? (pre-course requirement). No extension on a machine: plan B, the Angular track, from the theory.
+>
+> Before they leave: everyone has the Angular tab in DevTools, or knows plan B. labs/performance/exercise-1, npm install, npm start, http://localhost:4200, allow location.
+> Helping a group: "Loading playgrounds" forever means they blocked location. Icon left of the address, reset the permission, reload. The spinner for about three seconds is the slow backend, on purpose.
+
+</details>
+
+## 7. Exercise 1 - Measure before
+
+`exercise-1-measure-before.html` · type `exercise-step`
+
+![exercise-1-measure-before.html](slides/07-exercise-1-measure-before.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Exactly 5 s, mouse moving slowly over the map, no clicks. Count, write it down, click one bar.
+>
+> Helping a group: no bars at all usually means they recorded before the list loaded, or on the wrong tab. A fixed 5 s is what makes before and after comparable, so make them redo a sloppy recording. Don't give them our number; it's in the debrief.
+
+</details>
+
+## 8. Exercise 1 - Leave the zone
 
 `exercise-1-leave-the-zone.html` · type `exercise-step-code`
 
-![exercise-1-leave-the-zone.html](slides/09-exercise-1-leave-the-zone.jpg?v=202610311443)
+![exercise-1-leave-the-zone.html](slides/08-exercise-1-leave-the-zone.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Inject NgZone, wrap createMap(...) only. Mind the closing })). Reload, record 5 s again, write it down.
+> Inject NgZone as zone, wrap createMap(...) only, add inject and NgZone to the import. Mind the closing })).
 >
-> Now the fix. Open leaflet.component.ts. Inject NgZone into a field called zone, and add inject and NgZone to the import from @angular/core. In ngAfterViewInit wrap just the call that creates the map. It's one expression, so it becomes an arrow function that returns the map. Watch the closing: two parentheses after the options object.
-> Measure after. Reload, record exactly five seconds of mouse moves again, and write the number next to the first one.
+> Helping a group: createMap is one expression, so it becomes an arrow function that returns the map, and const _map still works. A compile error near the options object is nearly always the closing: two parentheses after the object.
 
 </details>
 
-## 10. Exercise 1 - Measure after
+## 9. Exercise 1 - Measure after
 
-`exercise-1-measure-after.html` · type `exercise-result`
+`exercise-1-measure-after.html` · type `exercise-step`
 
-![exercise-1-measure-after.html](slides/10-exercise-1-measure-after.jpg?v=202610311443)
+![exercise-1-measure-after.html](slides/09-exercise-1-measure-after.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> ~300 -> 5 bars (5, 5, 5 in our runs). Click: 229 -> 6 ms of change detection in those 5 s (median of 3, CPU 4x slowdown, Angular track timing).
-> The 5 left are the footer timer, one per second.
+> The same 5 s recording as before, after the change. Write the count next to the first.
 >
-> Five bars, where you had about 300. They're the footer's one-second timer, one per second, and that's exercise 2.
-> Click. In milliseconds: with the CPU slowed down four times, like a mid-range phone, change detection took 229 ms of those five seconds before and 6 ms after. That's time the main thread didn't have for anything else.
-> Ask the room: why is wrapping creation enough, when the mouse moves long after? Because Leaflet registers its listeners at creation. Created outside the zone, never patched.
-> If someone asks: the zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's a click, not a stream. And clicking a playground in the list still gives a burst of bars: that's the bonus.
+> Helping a group: still a stream of bars? Check that they wrapped the createMap call itself and reloaded the page. A few bars are left whatever they do, and the debrief explains them.
 
 </details>
 
-## 11. Exercise 1 - Bonus: the list click
+## 10. Exercise 1 - Bonus: the list click
 
 `exercise-1-bonus-list-click.html` · type `exercise-step-code`
 
-![exercise-1-bonus-list-click.html](slides/11-exercise-1-bonus-list-click.jpg?v=202610311443)
+![exercise-1-bonus-list-click.html](slides/10-exercise-1-bonus-list-click.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Bonus, not in the solution: exercise 2 fixes it for the whole app. Record one list click, wrap setZoom/setView in runOutsideAngular, record again.
+> Bonus, not in the solution: zoneless fixes the click path for the whole app. Record one list click, wrap setZoom/setView, record again.
 >
-> For the fast ones. Click a playground in the list and record it: you get a burst of bars, not one. The click itself is one cycle, but the two center$ subscriptions call setZoom and setView inside the zone, and Leaflet animates the pan from there: every animation frame is a patched task.
-> Wrap those two calls in runOutsideAngular, the same trick, and record the same click again. Compare the two counts.
-> It's not in the solution, on purpose: in exercise 2 we take zone.js out, and then this problem is gone for the whole app at once.
+> Helping a group: the burst after a list click comes from the two center$ subscriptions calling setZoom and setView inside the zone; Leaflet animates the pan from there. Wrapping both calls is enough. It stays out of the solution on purpose.
 
 </details>
 
-## 12. Exercise 1 - Bonus: try it, then revert
+## 11. Exercise 1 - Bonus: try it, then revert
 
 `exercise-1-bonus.html` · type `exercise-step-code`
 
-![exercise-1-bonus.html](slides/12-exercise-1-bonus.jpg?v=202610311443)
+![exercise-1-bonus.html](slides/11-exercise-1-bonus.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> TRY AND REVERT. Not part of the solution. Footer interval outside the zone, record, look at the footer.
+> Try and revert, not part of the solution. Footer interval outside the zone, record, look at the footer.
 >
-> A second bonus, and this one is a try and revert experiment. Do not keep this change.
-> The footer counts seconds with a setInterval that writes a plain field. Wrap that interval in runOutsideAngular, the same trick as for the map. Then record in the Profiler and look at the page. Ask the room before the next slide: what do you expect?
+> Helping a group: the counter freezing is the expected result, not a bug. Make sure they undo the change before they come back. It's the lead-in to the debrief and to zoneless.
 
 </details>
 
-## 13. Exercise 1 - Bonus: try it, then revert
+## 12. Exercise 1 - What we measured
 
-`exercise-1-bonus-2.html` · type `exercise-result`
+`exercise-1-what-we-measured.html` · type `exercise-result`
 
-![exercise-1-bonus-2.html](slides/13-exercise-1-bonus-2.jpg?v=202610311443)
+![exercise-1-what-we-measured.html](slides/12-exercise-1-what-we-measured.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Bars gone, counter frozen (it only moves when something else runs a cycle, like a click on a playground).
-> Point: zone.js was the trigger. Plain field + no zone = no update. Lead-in to exercise 2. Revert before the break.
+> Ask for their two counts first. ~300 -> 5 bars (before 298, 301, 300, 301; after 5, 5, 5). Click: 229 -> 6 ms of change detection in 5 s (median of 3, CPU 4x, Angular track timing). Click: why.
+> Before, each bar: all 6 components (App, Home, Leaflet, Sidebar, SidebarListItem, Footer) and 133 list rows. 6, not 7: PlaygroundDetailComponent only exists on /legeplads/:id.
 >
-> Look at the profiler: the footer's bars are gone. Great? Click. Look at the page. The counter has stopped. The field still changes every second, but the screen doesn't, because nothing tells Angular to check the footer. It only moves if something else triggers a cycle, for example a click on a playground.
-> Click. That's the whole lesson: zone.js was the only one telling Angular, and now nobody does.
-> Now undo it, so you start the break with the working footer. After the break we remove zone.js for the whole app, the same thing happens everywhere, and then we fix it the right way.
+> Welcome back. Ask two or three groups for their before and after counts and write them on the board. Ours: about 300 bars in five seconds before, five after. Chrome sends roughly one mousemove per frame while the mouse moves, and every one was a cycle. Your number depends on your mouse and your screen, so the ratio is what counts.
+> Ask the room: what on this page needs to know where the mouse is? Nothing. Leaflet adds its mousemove, drag and zoom listeners when it creates the map, and we created it inside Angular's zone, so zone.js patched them and ran change detection after each one. Created outside the zone, they're never patched, which is why wrapping creation is enough.
+> Click. In milliseconds: with the CPU slowed down four times, like a mid-range phone, change detection took 229 ms of those five seconds before and 6 ms after. That's time the main thread didn't have for anything else.
+> Click. And each of those 300 bars checked all six components and all 133 rows in the sidebar, because a mouse moved over a map. The five left are the footer's one-second timer.
+> The footer bonus: who tried it? The bars went, and so did the counter. The field still changed every second, but nothing told Angular any more. zone.js was the only one telling Angular, and with no zone nobody does. That's exactly what happens to the whole app when we go zoneless, next.
+> If someone asks: the zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's a click, not a stream.
 
 </details>
 
-## 14. Exercise 1 - In your app
+## 13. In your app: leaving the zone
 
-`exercise-1-in-your-app.html` · type `exercise-step`
+`exercise-1-in-your-app.html` · type `reveal-list`
 
-![exercise-1-in-your-app.html](slides/14-exercise-1-in-your-app.jpg?v=202610311443)
+![exercise-1-in-your-app.html](slides/13-exercise-1-in-your-app.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Monday homework for lab 1: Profiler on their own slowest screen, then grep for listeners and timers.
+> Monday homework for runOutsideAngular. Click through the four lines.
 >
-> Here's exercise 1 in your own app. Open the screen your users call slow, record five seconds of what they normally do there, and count the bars. Click the biggest bar and look at what was checked.
-> If the app still runs zone.js, look for the things that fire often: addEventListener, setInterval, and third-party widgets like maps, charts and editors that add their own listeners. Wrap where they're created in runOutsideAngular, and measure again.
+> Here's the same exercise in your own app. Click. Open the screen your users call slow and record five seconds of what they normally do there. Click. Count the bars, click the biggest one and look at what was checked.
+> Click. If the app still runs zone.js, look for the things that fire often: addEventListener, setInterval, and third-party widgets like maps, charts and editors that add their own listeners.
+> Click. Wrap where they're created in runOutsideAngular, and measure again. If a template shows something from in there, set a signal.
 > Ask the room: who has a map, a chart or a drag-and-drop library in their app?
 
 </details>
 
-## 15. From zone.js to zoneless
+## 14. From zone.js to zoneless
 
 `from-zone-js-to-zoneless.html` · type `claim-code`
 
-![from-zone-js-to-zoneless.html](slides/15-from-zone-js-to-zoneless.jpg?v=202610311443)
+![from-zone-js-to-zoneless.html](slides/14-from-zone-js-to-zoneless.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -265,11 +238,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 16. Zoneless: what schedules change detection?
+## 15. Zoneless: what schedules change detection?
 
 `what-schedules-change-detection.html` · type `reveal-list`
 
-![what-schedules-change-detection.html](slides/16-what-schedules-change-detection.jpg?v=202610311443)
+![what-schedules-change-detection.html](slides/15-what-schedules-change-detection.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -284,11 +257,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 17. OnPush is the default (v22)
+## 16. OnPush is the default (v22)
 
 `onpush-is-the-default.html` · type `claim-code`
 
-![onpush-is-the-default.html](slides/17-onpush-is-the-default.jpg?v=202610311443)
+![onpush-is-the-default.html](slides/16-onpush-is-the-default.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -303,30 +276,115 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 18. On Angular 15–19?
+## 17. Exercise 2 - Measure before
 
-`on-angular-15-to-19.html` · type `reveal-list`
+`exercise-2-measure-before.html` · type `exercise-step`
 
-![on-angular-15-to-19.html](slides/18-on-angular-15-to-19.jpg?v=202610311443)
+![exercise-2-measure-before.html](slides/17-exercise-2-measure-before.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> For everyone not on 22 yet. Before v22 OnPush was opt-in per component. Signals from v16 (stable in v17). Zoneless stable in v20, default for new apps in v21.
+> labs/performance/exercise-2 for a clean start. Build: polyfills line. Profiler: 10 quiet s, then one list click (3 s). Three numbers on paper before any change.
 >
-> Not everyone here is on Angular 22 at work, so here's today in older versions.
-> Click. OnPush exists in every version, but before 22 you opt in, one component at a time: changeDetection: ChangeDetectionStrategy.OnPush. Start with the leaves that render a lot, like list rows.
-> Click. Then the component has to be told when to update: the async pipe, markForCheck, and from Angular 16 signals in the template.
-> Click. Your app runs zone.js, so runOutsideAngular from exercise 1 is the cheapest win you have: it works in every version.
-> Click. Zoneless needs Angular 20 to be stable, and 21 makes it the default for new apps. If you're on 19, it's still experimental there.
-> Click. Same ideas as today, you just opt in instead of getting them by default. Ask the room: which version is your app on?
+> Helping a group: "quiet" means hands off the mouse. Clicking a bar shows the components it checked in the panel next to the bars. They write the polyfills line raw and transfer.
 
 </details>
 
-## 19. Lists: track and computed
+## 18. Exercise 2 - Go zoneless
+
+`exercise-2-go-zoneless.html` · type `exercise-step-code`
+
+![exercise-2-go-zoneless.html](slides/18-exercise-2-go-zoneless.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> zone.js out of polyfills, provideZonelessChangeDetection() in main.ts and its import. Restart. Expected: the footer counter freezes.
+>
+> Helping a group: the frozen counter is the expected result, not a bug; the next step fixes it. runOutsideAngular from exercise 1 stays where it is. No restart, no change: angular.json is only read at start.
+
+</details>
+
+## 19. Exercise 2 - Fix the footer with a signal
+
+`exercise-2-fix-the-footer.html` · type `exercise-step-code`
+
+![exercise-2-fix-the-footer.html](slides/19-exercise-2-fix-the-footer.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> footer: seconds = signal(0), .set(...) in the interval, seconds() in the template, signal in the import. Eager stays everywhere. Then 10 quiet s and one list click.
+>
+> Helping a group: counter still frozen? The template must call seconds(); without the parentheses it shows the function, not the number. No markForCheck needed: the template reads the signal.
+
+</details>
+
+## 20. Exercise 2 - Remove Eager
+
+`exercise-2-remove-eager.html` · type `exercise-step`
+
+![exercise-2-remove-eager.html](slides/20-exercise-2-remove-eager.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Seven files: app, home, sidebar, sidebar-list-item, playground-detail, leaflet, footer. Only ChangeDetectionStrategy leaves each import.
+>
+> Helping a group: a compile error after this is almost always an import line where they deleted Component or inject along with ChangeDetectionStrategy.
+
+</details>
+
+## 21. Exercise 2 - Measure after
+
+`exercise-2-measure-after.html` · type `exercise-step`
+
+![exercise-2-measure-after.html](slides/21-exercise-2-measure-after.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> The same three measurements as at the start of the exercise, plus clicking each bar.
+>
+> Helping a group: they compare three things with their first numbers: bars in 10 quiet s and what one bar checks, bars for one list click, and the polyfills line. Our numbers are in the debrief, not here.
+
+</details>
+
+## 22. Exercise 2 - What we measured
+
+`exercise-2-what-we-measured.html` · type `exercise-result`
+
+![exercise-2-what-we-measured.html](slides/22-exercise-2-what-we-measured.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Ask for their numbers first. Before (zone.js): one list click = 46 bars in 3 s (46, 47, 46). Zoneless + signal, Eager kept: 5 bars in 3 s = 2 from the click + 3 timer bars, every bar still 6 components / 133 rows. 10 quiet s: still 10 bars, each 6 / 133.
+>
+> Welcome back. Ask a group for their list click before and after going zoneless.
+> Click. Under zone.js one click gave us 46 bars, because Leaflet's pan animation ran inside the zone. Zoneless, the click makes two bars, plus the footer's one per second. Nobody wrapped anything: there is no zone left to patch the animation. That's the exercise 1 bonus, for free.
+> Click. But at that point every bar still checked all six components and all 133 rows, the footer tick too. Ask the room: why? Every component still said Eager, and Eager means "check me whenever a cycle runs".
+> Click. So zoneless decides when a cycle runs. Eager versus OnPush decides how much of the tree it checks. That's why the Eager lines had to go.
+
+</details>
+
+## 23. Exercise 2 - What we measured
+
+`exercise-2-what-we-measured-2.html` · type `exercise-result`
+
+![exercise-2-what-we-measured-2.html](slides/23-exercise-2-what-we-measured-2.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Timer bar = FooterComponent only (1 component, 0 rows), was 6 components / 133 rows. Click: polyfills 35.09 kB -> 494 bytes (Initial total 1.81 MB -> 1.77 MB). Click: the list click.
+> List click: 2 bars + timer bars. First: 6 components / 133 rows (new Home). Second: 5 components. A second click ':id' -> ':id' reuses Home: 1 bar, 2 rows.
+>
+> After removing Eager. Quiet: still one bar per second, because the number really does change every second. But click the bar: only FooterComponent. Before, that tick checked all six components and 133 rows.
+> Click. And the build: polyfills from 35 kilobytes to 494 bytes. main is practically the same, so the saving is zone.js itself.
+> Click. The list click is still two bars, and the first one checks everything. That's not the signals failing. Look at app.routes.ts: the empty path and ':id' are two route entries that both show HomeComponent. Going from one to the other, the router destroys Home and builds a new one, and a new Home renders all 133 rows. Ask the room: what happens on a second click, from one playground to another? Same route entry, so Home is reused, and that bar checks 2 rows: the one you left and the one you picked.
+
+</details>
+
+## 24. Lists: track and computed
 
 `lists-track-and-computed.html` · type `claim-code`
 
-![lists-track-and-computed.html](slides/19-lists-track-and-computed.jpg?v=202610311443)
+![lists-track-and-computed.html](slides/24-lists-track-and-computed.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -340,123 +398,29 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 20. Exercise 2 - Measure before
+## 25. In your app: zoneless and OnPush
 
-`exercise-2-measure-before.html` · type `exercise-step`
+`exercise-2-in-your-app.html` · type `reveal-list`
 
-![exercise-2-measure-before.html](slides/20-exercise-2-measure-before.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> labs/performance/exercise-2. Build: write down polyfills. Profiler: 10 quiet s, then one list click (3 s). Write everything down, no numbers from me yet.
->
-> Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
-> Run npm run build and write down the polyfills line, raw and transfer. Then npm start and record ten quiet seconds in the Profiler: count the bars and click one to see how many components it checked. Then record one click on a playground in the list, about three seconds, and count again.
-> Three numbers on your paper before we touch anything.
-
-</details>
-
-## 21. Exercise 2 - Go zoneless
-
-`exercise-2-go-zoneless.html` · type `exercise-step-code`
-
-![exercise-2-go-zoneless.html](slides/21-exercise-2-go-zoneless.jpg?v=202610311443)
+![exercise-2-in-your-app.html](slides/25-exercise-2-in-your-app.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Change: zone.js out of polyfills, provideZonelessChangeDetection in main.ts. Expect: the counter freezes.
+> Monday homework for zoneless and signals. Click through the five lines.
 >
-> Now the change. In angular.json delete the zone.js line from polyfills. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, in the import too. Since v21 zoneless is the default, so deleting the line would do the same; the solution keeps provideZonelessChangeDetection so the next reader sees the choice. Leave runOutsideAngular from exercise 1 where it is.
-> Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. setInterval is on the "Only zone.js" list. Next slide fixes it.
+> Click. Search the code for ChangeDetectionStrategy.Eager and Default. If you ran ng update to 22, every component has one: that's your to-do list.
+> Click. Record one timer tick or one click and look at what a single bar checks. If it's the whole tree, you've found your lever.
+> Click. Anything a timer, a promise or a request writes that the screen shows: make it a signal, like the footer.
+> Click. Before you go zoneless, search for fakeAsync in the tests and onStable in the code: those depend on zone.js.
+> Click. And while you're in the templates, check your @for track expressions and any method calls in bindings.
 
 </details>
 
-## 22. Exercise 2 - Fix the footer with a signal
-
-`exercise-2-fix-the-footer.html` · type `exercise-step-code`
-
-![exercise-2-fix-the-footer.html](slides/22-exercise-2-fix-the-footer.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> footer: signal(0), .set(), seconds() in the template; signal in the import. Eager stays everywhere for now. Then measure: 10 quiet s, one list click.
->
-> The fix is small. Make seconds a signal, set it in the interval, call it in the template, and add signal to the import. Step through the highlights: the template call, the signal, the set.
-> Ask the room: why does the counter work without markForCheck? The template reads the signal. When the interval sets a new value, Angular marks that view and schedules a cycle.
-> Leave the Eager lines in for now, so we can see what zoneless does on its own. Record ten quiet seconds and one list click again, and write both down.
-
-</details>
-
-## 23. Exercise 2 - What we measured
-
-`exercise-2-zoneless-result.html` · type `exercise-result`
-
-![exercise-2-zoneless-result.html](slides/23-exercise-2-zoneless-result.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Before (zone.js): one list click = 46 bars in 3 s (46, 47, 46). Zoneless + signal, Eager kept: 5 bars in 3 s = 2 from the click + 3 timer bars, every bar still 6 components / 133 rows. 10 quiet s: still 10 bars, each 6 / 133.
->
-> Click. The list click. Under zone.js it gave us 46 bars, because Leaflet's pan animation ran inside the zone. Zoneless, the click makes two bars, plus the footer's one per second. Nobody wrapped anything: there is no zone left to patch the animation.
-> Click. But click any bar: it still checks all six components and all 133 rows, the footer tick too. Ask the room: why? Every component still says Eager, and Eager means "check me whenever a cycle runs".
-> Click. So zoneless decides when a cycle runs. Eager versus OnPush decides how much of the tree it checks. Next step: the Eager lines go.
-
-</details>
-
-## 24. Exercise 2 - Remove Eager
-
-`exercise-2-remove-eager.html` · type `exercise-step`
-
-![exercise-2-remove-eager.html](slides/24-exercise-2-remove-eager.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Seven files: app, home, sidebar, sidebar-list-item, playground-detail, leaflet, footer. Then the same recordings, plus npm run build.
->
-> Now the Eager line goes, in all seven components: app, home, sidebar, list item, detail page, the Leaflet wrapper and the footer. Search for ChangeDetectionStrategy.Eager to find them. Only remove ChangeDetectionStrategy from the import, the other names on that line stay.
-> Then measure the same way: ten quiet seconds, one click in the list, and build again for the polyfills line.
-
-</details>
-
-## 25. Exercise 2 - Measure after
-
-`exercise-2-measure-after.html` · type `exercise-result`
-
-![exercise-2-measure-after.html](slides/25-exercise-2-measure-after.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Click: timer bar = FooterComponent only (1 component, 0 rows), was 6 components / 133 rows. Click: polyfills 35.09 kB -> 494 bytes (Initial total 1.81 MB -> 1.77 MB).
-> List click: 2 bars + timer bars. First: 6 components / 133 rows (new Home). Second: 5 components. A second click ':id' -> ':id' reuses Home: 1 bar, 2 rows.
->
-> Click. Quiet: still one bar per second, because the number really does change every second. But click the bar: only FooterComponent. Before, that tick checked all six components and 133 rows.
-> Click. And the build: polyfills from 35 kilobytes to 494 bytes. main is practically the same, so the saving is zone.js itself.
-> Click. The list click is still two bars, and the first one checks everything. That's not the signals failing. Look at app.routes.ts: the empty path and ':id' are two route entries that both show HomeComponent. Going from one to the other, the router destroys Home and builds a new one, and a new Home renders all 133 rows. Ask the room: what happens on a second click, from one playground to another? Same route entry, so Home is reused, and that bar checks 2 rows: the one you left and the one you picked.
-
-</details>
-
-## 26. Exercise 2 - In your app
-
-`exercise-2-in-your-app.html` · type `exercise-step`
-
-![exercise-2-in-your-app.html](slides/26-exercise-2-in-your-app.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Monday homework for lab 2: grep for Eager/Default, profile one bar, check fakeAsync/onStable before going zoneless.
->
-> Exercise 2 in your own app. Search the code for ChangeDetectionStrategy.Eager and Default. If you ran ng update to 22, every component has one: that's the list of components to move to signals and OnPush.
-> Then record one timer tick or one click and look at what a single bar checks. If it's the whole tree, you've found your lever.
-> Before you go zoneless, search for fakeAsync in the tests and onStable in the code: those depend on zone.js.
-> And while you're in the templates, check your @for track expressions and any method calls in bindings.
-
-</details>
-
-## 27. What ends up in main?
+## 26. What ends up in main?
 
 `what-ends-up-in-main.html` · type `claim-code`
 
-![what-ends-up-in-main.html](slides/27-what-ends-up-in-main.jpg?v=202610311443)
+![what-ends-up-in-main.html](slides/26-what-ends-up-in-main.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -470,11 +434,11 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 28. @defer and its triggers
+## 27. @defer and its triggers
 
 `defer-triggers.html` · type `claim-code`
 
-![defer-triggers.html](slides/28-defer-triggers.jpg?v=202610311443)
+![defer-triggers.html](slides/27-defer-triggers.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -490,145 +454,126 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 29. Exercise 3 - Measure the build
+## 28. Exercise 3 - Measure the build
 
 `exercise-3-getting-started.html` · type `exercise-step`
 
-![exercise-3-getting-started.html](slides/29-exercise-3-getting-started.jpg?v=202610311443)
+![exercise-3-getting-started.html](slides/28-exercise-3-getting-started.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> labs/performance/exercise-3, npm install. npm run build: write down Initial total, both numbers. Everyone writes a guess for what's in main.
+> labs/performance/exercise-3 for a clean start. npm run build: Initial total, raw and transfer. A written guess for what's in main.
 >
-> New exercise, and this one is about the first download. If exercise 2 isn't working, go to labs/performance/exercise-3 and npm install.
-> Before you touch any code, npm run build. Find the line Initial total and write down both numbers, raw and estimated transfer. Raw is the file on disk, transfer is what goes over the wire after compression. That's your before.
-> Then a guess on paper: what makes main so big? Next slide, we stop guessing.
+> Helping a group: raw is the file on disk, transfer is the estimate after compression. Both go on paper; the guess too, so they can check it on the next slide.
 
 </details>
 
-## 30. Exercise 3 - What is in main?
+## 29. Exercise 3 - What is in main?
 
 `exercise-3-whats-in-main.html` · type `exercise-step-image`
 
-![exercise-3-whats-in-main.html](slides/30-exercise-3-whats-in-main.jpg?v=202610311443)
+![exercise-3-whats-in-main.html](slides/29-exercise-3-whats-in-main.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> npm run build -- --stats-json. Analyzer: https://esbuild.github.io/analyze/, "Import your metafile...", dist/performance/browser-stats.json.
-> Expect: Initial total 1.77 MB / 383.17 kB; main 1.5 mb, @fortawesome 1.1 mb of it (free-solid 872.7 kb, free-regular 115.5 kb, svg-core 88.1 kb), @angular 229.7 kb, leaflet 146.5 kb. Analyzer units are KiB.
+> npm run build -- --stats-json. https://esbuild.github.io/analyze/, "Import your metafile...", dist/performance/browser-stats.json. Expect: main 1.5 mb, @fortawesome 1.1 mb of it.
 >
-> Build again with the stats flag: npm run build, two dashes, --stats-json.
-> Then open the esbuild analyzer page. It runs in your browser, nothing is uploaded. Import your metafile, pick browser-stats.json in dist/performance. Click into main.
-> Ask the room: who expected the map to be the big one? Leaflet is a thin strip on the right. The big yellow block is FontAwesome's solid icon pack, and below it the regular pack. The app shows exactly one icon: the spinner.
-> Keep that picture in mind. The next four slides are four changes. Make them one at a time, build after each, write down Initial total each time.
+> Helping a group: the file is dist/performance/browser-stats.json, next to the browser folder, not inside it. Analyzer units are KiB. Nothing is uploaded: the page runs locally.
 
 </details>
 
-## 31. Exercise 3 - Lazy detail route
+## 30. Exercise 3 - Lazy detail route
 
 `exercise-3-lazy-route.html` · type `exercise-step-code`
 
-![exercise-3-lazy-route.html](slides/31-exercise-3-lazy-route.jpg?v=202610311443)
+![exercise-3-lazy-route.html](slides/30-exercise-3-lazy-route.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Change 1: app.routes.ts. The import() path is the full 'src/app/playground-detail/playground-detail.component' from the static import line, which then goes. Lazy table: playground-detail-component, about 1 kB.
+> Change 1: app.routes.ts. The import() path is 'src/app/playground-detail/playground-detail.component', copied from the static import line, which then goes. Lazy table: playground-detail-component, about 1 kB.
 >
-> One change per slide, build after each.
-> The detail route. In app.routes.ts, replace component with loadComponent and an import(). The path in the import() is the same string as in the import line at the top, src/app/playground-detail/playground-detail.component, so copy it from there and then delete that line. Build, and a second table shows up: lazy chunk files, with playground-detail-component in it. About one kilobyte. Small, but the table is the proof it worked. If anything still uses the class the normal way, there's no chunk.
-> Ask the room after the build: did Initial total move?
+> Helping a group: no lazy table in the build output means the class is still imported somewhere the normal way. Initial total barely moving is expected; the chunk is the proof.
 
 </details>
 
-## 32. Exercise 3 - Defer the map
+## 31. Exercise 3 - Defer the map
 
 `exercise-3-defer-map.html` · type `exercise-step-code`
 
-![exercise-3-defer-map.html](slides/32-exercise-3-defer-map.jpg?v=202610311443)
+![exercise-3-defer-map.html](slides/31-exercise-3-defer-map.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
 > Change 2: home.component.ts, @defer (on idle) around leaflet, placeholder an empty vh-100 vw-100 div. Lazy table: leaflet-component, about 155 kB.
 >
-> The map. In home.component.ts, wrap the leaflet element in @defer on idle, and give it a placeholder: an empty div with vh-100 vw-100, so the page doesn't jump. Build again: a leaflet-component chunk of about 155 kilobytes.
-> The trap: if anything in Home touches LeafletComponent outside the block, a viewChild for example, it stays eager and you get no chunk at all. Look for the chunk in the lazy table every time.
-> Ask the room: the map now paints later than the list. Is that a problem? We'll measure that after the exercise.
+> Helping a group: no leaflet-component chunk means something in Home still uses LeafletComponent outside the block. The map painting a moment later is expected; the debrief measures what it costs.
 
 </details>
 
-## 33. Exercise 3 - Defer the footer, then revert
+## 32. Exercise 3 - Defer the footer, then revert
 
 `exercise-3-defer-footer.html` · type `exercise-step-code`
 
-![exercise-3-defer-footer.html](slides/33-exercise-3-defer-footer.jpg?v=202610311443)
+![exercise-3-defer-footer.html](slides/32-exercise-3-defer-footer.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Change 3: try, measure, revert. @defer (on viewport) around loop-footer, placeholder <footer>&nbsp;</footer> (absolutely positioned like the real footer, so it takes its place at the bottom and is in view at once).
-> Expect Initial total to go UP (1.62 -> 1.64 MB on top of the map). Why: on the results slide. Then revert.
+> Change 3: try, measure, revert. @defer (on viewport) around loop-footer, placeholder <footer>&nbsp;</footer>.
 >
-> The footer. Same file, wrap loop-footer in @defer on viewport. The placeholder is an empty footer element with a non-breaking space. Our footer is absolutely positioned at the bottom of the screen, so the placeholder gets the same styling and sits exactly where the real footer will appear.
-> Build and write the number down. Ask the room: did it go down? Then revert it, the solution keeps the footer eager. We'll see why on the results slide.
+> Helping a group: Initial total going up is the expected result, not a mistake. Don't explain it, the debrief does. Make sure they revert before the next change.
 
 </details>
 
-## 34. Exercise 3 - Register one icon
+## 33. Exercise 3 - Register one icon
 
 `exercise-3-one-icon.html` · type `exercise-step-code`
 
-![exercise-3-one-icon.html](slides/34-exercise-3-one-icon.jpg?v=202610311443)
+![exercise-3-one-icon.html](slides/33-exercise-3-one-icon.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
 > Change 4: main.ts. Delete initializeFontAwesomeFactory and the fas/far imports; provideAppInitializer(() => inject(FaIconLibrary).addIcons(faSpinner)).
-> Forget addIcons: no spinner, console "Could not find icon with iconName=spinner and prefix=fas in the icon library."
 >
-> The icons, the thing the analyzer showed you. Open main.ts. The app registers every icon in two FontAwesome packs, solid and regular, through initializeFontAwesomeFactory. The app shows one: the spinner. So delete the factory and the two pack imports, import faSpinner, and in provideAppInitializer call addIcons with just that one.
-> If you remove the packs and forget addIcons, the spinners disappear and the console tells you it can't find the spinner icon.
-> Build, write the number down. Then the next slide: watch the chunks load.
+> Helping a group: spinners gone and "Could not find icon with iconName=spinner and prefix=fas in the icon library" in the console means addIcons is missing. inject and FaIconLibrary need imports too.
 
 </details>
 
-## 35. Exercise 3 - Watch the chunks load
+## 34. Exercise 3 - Watch the chunks load
 
 `exercise-3-see-it-load.html` · type `exercise-step-image`
 
-![exercise-3-see-it-load.html](slides/35-exercise-3-see-it-load.jpg?v=202610311443)
+![exercise-3-see-it-load.html](slides/34-exercise-3-see-it-load.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> npm run start:no-hmr. Network, JS, filter box /main\.js|component/ (slashes included: a regex), reload. leaflet.component right after main (initiator main.js). Detaljer: playground-detail.component (initiator app.routes.ts).
+> npm run start:no-hmr. Network, JS, filter /main\.js|component/ (slashes included: a regex), reload. leaflet.component right after main; playground-detail.component only after Detaljer.
 >
-> The build table told us the chunks exist. Now we watch them load.
-> Stop the dev server and start it with npm run start:no-hmr. Hot module replacement loads every defer chunk up front, so with plain npm start the Network tab shows nothing interesting and you'd think defer is broken.
-> Network tab, JS. The dev server serves a lot of small vendor files, so type /main\.js|component/ in the filter box, slashes included: that's a regular expression. Reload.
-> Right after main you see leaflet.component, started by main.js: on idle fires fast on an idle laptop. Now click a playground and then Detaljer. Only then does playground-detail.component show up, and its initiator is app.routes.ts. That's the lazy route.
-> Ask the room: on a phone on a slow network, which of those would you rather have the user wait for?
+> Helping a group: every chunk at once means they still run plain npm start, whose hot module replacement loads defer chunks eagerly. An empty list means the filter is missing its slashes.
 
 </details>
 
-## 36. Exercise 3 - What did you measure?
+## 35. Exercise 3 - What we measured
 
 `exercise-3-what-we-measured.html` · type `exercise-result`
 
-![exercise-3-what-we-measured.html](slides/36-exercise-3-what-we-measured.jpg?v=202610311443)
+![exercise-3-what-we-measured.html](slides/35-exercise-3-what-we-measured.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
 > Raw Initial total, cumulative in slide order: start 1.77 MB / 383.17 kB, + route 1.77 MB / 383.58 kB, + map 1.62 MB / 346.92 kB, + icons (footer reverted) 615.00 kB / 125.46 kB. The solution (with the hidden Om appen bonus): 620.49 kB / 123.67 kB.
 > Footer on top of route + map: 1.62 -> 1.64 MB (1,639.49 kB / 347.37 kB). Alone on the start: 1.77 -> 1.78 MB, +7,678 B: defer runtime + viewport trigger in, footer (920 B) out.
 >
-> Let's compare. Click. Your numbers, each build on top of the last: the lazy route barely moves it, the map takes it from 1.77 to 1.62 megabytes, and the icons take it from 1.62 megabytes to 615 kilobytes. Ask the room: who guessed the icons before the analyzer?
+> Welcome back. Ask a group for their Initial totals, one per change. Ours, each build on top of the last: the lazy route barely moves it, the map takes it from 1.77 to 1.62 megabytes, and the icons take it from 1.62 megabytes to 615 kilobytes. Ask the room: who guessed the icons before the analyzer?
 > Click. And the footer. It made Initial total go up. The first @defer in an app pulls in Angular's defer runtime and, for on viewport, the IntersectionObserver trigger. The footer component that moves out is 920 bytes. So you pay more than you save, and on top of that the footer is in view from the first frame, so the chunk is fetched straight away.
 > Click. That's why the solution reverts it. Defer what's heavy and below the fold or behind a click, not what's small and in view. The solution, with the four changes minus the footer, is 620 kilobytes.
 
 </details>
 
-## 37. Exercise 3 - On a slow phone
+## 36. Exercise 3 - On a slow phone
 
 `exercise-3-cold-load.html` · type `exercise-result`
 
-![exercise-3-cold-load.html](slides/37-exercise-3-cold-load.jpg?v=202610311443)
+![exercise-3-cold-load.html](slides/36-exercise-3-cold-load.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -642,27 +587,27 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 38. Exercise 3 - In your app
+## 37. In your app: the first download
 
-`exercise-3-in-your-app.html` · type `exercise-step`
+`exercise-3-in-your-app.html` · type `reveal-list`
 
-![exercise-3-in-your-app.html](slides/38-exercise-3-in-your-app.jpg?v=202610311443)
+![exercise-3-in-your-app.html](slides/37-exercise-3-in-your-app.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Monday homework for lab 3: Initial total, analyzer, biggest three, then the cheapest change first.
+> Monday homework for loading less. Click through the five lines.
 >
-> Exercise 3 in your own app. Build it and write down Initial total. Then the stats flag and the analyzer, and name the three biggest things in main.
-> Then work down the list: something registered whole, like icons or locales, becomes one-by-one. Routes almost nobody visits get loadComponent. Heavy components below the fold or behind a click get @defer. Build after each change.
+> Click. Build your own app and write down Initial total. Click. Then the stats flag and the analyzer, and name the three biggest things in main.
+> Then work down the list, cheapest first. Click. Something registered whole, like icons or locales, becomes one by one. Click. Routes almost nobody visits get loadComponent. Click. Heavy components below the fold or behind a click get @defer, but not small things that are in view from the start: you saw what the footer cost. Build after each change.
 > Ask the room: who will open the analyzer on their own app this week?
 
 </details>
 
-## 39. Leaks in Angular apps
+## 38. Leaks in Angular apps
 
 `leaks-in-angular-apps.html` · type `claim-image`
 
-![leaks-in-angular-apps.html](slides/39-leaks-in-angular-apps.jpg?v=202610311443)
+![leaks-in-angular-apps.html](slides/38-leaks-in-angular-apps.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -678,81 +623,31 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 40. Exercise 4 - Find the leaks
+## 39. Reading a heap snapshot
 
-`exercise-4-find-the-leaks.html` · type `exercise-step`
+`reading-a-heap-snapshot.html` · type `reveal-list`
 
-![exercise-4-find-the-leaks.html](slides/40-exercise-4-find-the-leaks.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> labs/performance/exercise-4. Memory, Heap snapshot, snapshot 1 on home; 5 rounds (select, Detaljer, Tilbage til kortet); snapshot 2.
-> A snapshot always runs a garbage collection first. Quicker first look: the "Detached elements" profile type in the same panel lists detached DOM trees.
->
-> Last exercise, and this time we don't fix anything until we've measured. If you want a clean start, labs/performance/exercise-4, npm install, npm start.
-> Open DevTools, Memory, Heap snapshot. On the home page, take snapshot one. A snapshot always collects garbage before it's taken, so what's in it is really being held.
-> Now five rounds. Select a playground in the list, click Detaljer in the footer, and click Tilbage til kortet on the detail page. Five times, and count them: the numbers only make sense if you know how many rounds you did. Then take snapshot two.
-> If you want a quicker look in your own app later: the same panel has a profile type called Detached elements, which lists detached DOM trees straight away. Today we use the snapshot, because it also shows us the components.
-
-</details>
-
-## 41. Exercise 4 - Read the snapshot
-
-`exercise-4-read-the-snapshot.html` · type `exercise-step`
-
-![exercise-4-read-the-snapshot.html](slides/41-exercise-4-read-the-snapshot.jpg?v=202610311443)
+![reading-a-heap-snapshot.html](slides/39-reading-a-heap-snapshot.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Class filter: Detached <leaflet>, then FooterComponent. Count, write down. Then Retainers on one detached leaflet. Answers on the next slide.
-> There's no single "Detached" total in DevTools: one row per tag. Read the leaflet row.
+> The tool for exercise 4, before they leave. DevTools, Memory, Heap snapshot, Take snapshot. Click through the four lines, then the trap.
 >
-> In snapshot two, type Detached in the class filter, and you'll see one row per tag: Detached div, Detached button, and so on. DevTools has no total for all of them, so read one row that means something: Detached <leaflet>. Write the count down. Then type FooterComponent and write that count down too.
-> Then open the Detached <leaflet> row, click one of them and look at the Retainers pane underneath: the chain of references that keeps it alive. Follow it until you hit something you wrote, or a library you called. Ask the room to guess before they look.
-> The trap: if you click around in the Elements panel or log a node to the console, DevTools itself holds on to it, and it shows up with DevTools console as its retainer. That's not your app. Clear the console and take the snapshot from a fresh tab.
+> Here's how you read the Memory panel, because in the exercise you're on your own with it.
+> Click. Open DevTools, Memory, pick Heap snapshot and take one. Then do the navigation you suspect, a fixed number of times, and take a second one. A snapshot always collects garbage first, so what's in it is really held.
+> Click. The class filter at the top of the Summary narrows the rows. Type a component's class name and you get its count. Type Detached and you get one row per tag: Detached div, Detached button, and so on. DevTools has no total for all of them, so read the row for an element you know.
+> Click. One count on its own means nothing. A count that grows with the number of rounds is a leak. That's why you count your rounds.
+> Click. Open the row, click one object, and the Retainers pane underneath shows the chain of references that keeps it alive. Read it from the bottom: start at something long-lived, like Window or a timer, and follow it up to your object.
+> Click. The trap: if you clicked a node in the Elements panel or logged it, DevTools itself holds on to it, and the retainer says DevTools console. That's not your app. Clear the console, or snapshot from a fresh tab.
+> If you want a quicker look in your own app later: the same panel has a profile type called Detached elements. Today we use the snapshot, because it shows the components too.
 
 </details>
 
-## 42. Exercise 4 - What we found
-
-`exercise-4-what-we-found.html` · type `exercise-result`
-
-![exercise-4-what-we-found.html](slides/42-exercise-4-what-we-found.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> After 5 rounds (3 of 3 runs): Detached <leaflet> 10, FooterComponent 11 (1 live + 10), Detached <loop-sidebar-list-item> 1,330 (10 x 133). HomeComponent 1, LeafletComponent 1.
-> Retainers: Window -> _leaflet_events -> resize handler -> L.Map (_container) -> div.leaflet-container. Next slide shows it.
->
-> Click. Ten detached leaflet elements, eleven footers: one on screen, ten that should be gone. If you want a bigger number, Detached <loop-sidebar-list-item> says 1,330: ten old lists of 133 rows.
-> Click. Two culprits. Leaflet's map listens for resize on window, and only map.remove() takes that listener off. And the footer's setInterval callback runs every second and holds the footer.
-> Click. Why ten? Look at app.routes.ts: the empty path and ':id' are two route entries with the same HomeComponent. Selecting a playground goes from one to the other, and the router builds a new Home. Tilbage til kortet goes back to the empty path: another new Home. Two per round, five rounds, ten.
-
-</details>
-
-## 43. Exercise 4 - What holds the old DOM
-
-`what-holds-the-old-dom.html` · type `claim-image`
-
-![what-holds-the-old-dom.html](slides/43-what-holds-the-old-dom.jpg?v=202610311443)
-
-<details><summary>Speaker notes</summary>
-
-> Retainers pane on a Detached <leaflet>, step-4 after 5 rounds (real DevTools). Read bottom-up: Window._leaflet_events -> resize handler -> its closure -> the map (NewClass, _container) -> div.leaflet-container -> the detached tree.
-> HomeComponent count stays 1: Angular keeps a numeric LView id on DOM nodes, not a pointer to the component, so the old DOM stays alive, not the old Home instance.
->
-> Here's what the Retainers pane shows. Read it from the bottom: Window has a _leaflet_events object, Leaflet's own bookkeeping. In it a resize handler. The handler's closure has the map, the map has its container div, and a detached node keeps its whole tree, up through the leaflet element to the old page.
-> Be precise about what leaks. It's the old DOM tree, all 133 rows of the old list included. The old HomeComponent object is gone: the snapshot has exactly one. Angular stores a number on DOM nodes to find its view, not the component itself, so the DOM doesn't drag the component along.
-> The footer is different: its setInterval callback is an arrow function that uses this, so the browser's timer list holds the footer component itself. That's the eleven.
-> Ask the room: who put a listener on window? We didn't. Leaflet did, and it only takes it off in map.remove().
-
-</details>
-
-## 44. Exercise 4 - Cleaning up with DestroyRef
+## 40. Cleaning up with DestroyRef
 
 `cleaning-up-with-destroyref.html` · type `claim-code`
 
-![cleaning-up-with-destroyref.html](slides/44-cleaning-up-with-destroyref.jpg?v=202610311443)
+![cleaning-up-with-destroyref.html](slides/40-cleaning-up-with-destroyref.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -767,66 +662,126 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 </details>
 
-## 45. Exercise 4 - Fix the leaks
+## 41. Exercise 4 - Find the leaks
+
+`exercise-4-find-the-leaks.html` · type `exercise-step`
+
+![exercise-4-find-the-leaks.html](slides/41-exercise-4-find-the-leaks.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> labs/performance/exercise-4 for a clean start. Memory, Heap snapshot, snapshot 1 on home; 5 rounds (select, Detaljer, Tilbage til kortet); snapshot 2.
+>
+> Helping a group: Detaljer is in the footer once a playground is selected; Tilbage til kortet is on the detail page. Make them count the rounds: the numbers only make sense with exactly five.
+
+</details>
+
+## 42. Exercise 4 - Read the snapshot
+
+`exercise-4-read-the-snapshot.html` · type `exercise-step`
+
+![exercise-4-read-the-snapshot.html](slides/42-exercise-4-read-the-snapshot.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Class filter: Detached <leaflet>, then FooterComponent. Count, write down. Then Retainers on one detached leaflet.
+>
+> Helping a group: there's no single Detached total, one row per tag; they read the leaflet row. A retainer chain ending in DevTools console is the trap on the slide: clear the console, fresh tab, again.
+
+</details>
+
+## 43. Exercise 4 - Fix the leaks
 
 `exercise-4-fix-the-leaks.html` · type `exercise-step-code`
 
-![exercise-4-fix-the-leaks.html](slides/45-exercise-4-fix-the-leaks.jpg?v=202610311443)
+![exercise-4-fix-the-leaks.html](slides/43-exercise-4-fix-the-leaks.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Footer: const id = setInterval(...); inject(DestroyRef).onDestroy(() => clearInterval(id)). Leaflet: field destroyRef, onDestroy(() => _map.remove()) right after the map is created. Then reload, snapshot, 5 rounds, snapshot.
+> Footer: const id = setInterval(...); inject(DestroyRef).onDestroy(() => clearInterval(id)). Leaflet: field destroyRef, onDestroy(() => _map.remove()) right after the map is created.
 >
-> Two leaks, two fixes, both with DestroyRef, like on the slide a moment ago.
-> In footer.component.ts: keep the id that setInterval returns, and register inject(DestroyRef).onDestroy with a clearInterval of that id, right there in the constructor.
-> In leaflet.component.ts: inject DestroyRef into a field, and right after the map is created, register a callback that calls remove on the map. Import DestroyRef from @angular/core in both files.
-> Then reload and measure exactly the same way: snapshot one, five rounds, snapshot two. Clear the console first, or DevTools console keeps old nodes alive and your after number lies.
+> Helping a group: register the callbacks right where the interval and the map are created, not in ngOnDestroy. NG0911 in the console means they registered after the component was destroyed, for example after an await.
 
 </details>
 
-## 46. Exercise 4 - Measure after
+## 44. Exercise 4 - Measure after
 
-`exercise-4-measure-after.html` · type `exercise-result`
+`exercise-4-measure-after.html` · type `exercise-step`
 
-![exercise-4-measure-after.html](slides/46-exercise-4-measure-after.jpg?v=202610311443)
+![exercise-4-measure-after.html](slides/44-exercise-4-measure-after.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Click: Detached <leaflet> 10 -> 0 (the row is gone). FooterComponent 11 -> 1. No Detached <loop-sidebar-list-item>, <loop-home>, <loop-footer> or <footer> rows either (3 of 3 runs, step-5).
+> The same measurement as before the fix: snapshot, exactly 5 rounds, snapshot, the same two filters.
 >
-> Click. Detached <leaflet> goes from 10 to nothing, the row is gone. And one FooterComponent, the one on screen. The detached lists are gone too: no more 1,330 old rows.
-> Ask the room: if you still saw FooterComponents growing, what would you read next? The Retainers pane, again.
+> Helping a group: a count that still grows? Retainers on one of them again; if it says DevTools console, clear the console and repeat from a fresh tab.
 
 </details>
 
-## 47. Exercise 4 - Bonus: takeUntilDestroyed
+## 45. Exercise 4 - Bonus: takeUntilDestroyed
 
 `exercise-4-bonus-take-until-destroyed.html` · type `exercise-step-code`
 
-![exercise-4-bonus-take-until-destroyed.html](slides/47-exercise-4-bonus-take-until-destroyed.jpg?v=202610311443)
+![exercise-4-bonus-take-until-destroyed.html](slides/45-exercise-4-bonus-take-until-destroyed.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
 > Bonus, in the solution (step-5). takeUntilDestroyed from @angular/core/rxjs-interop, this.destroyRef in all three pipes. The subscriptions array, ngOnDestroy, OnDestroy and the Subscription import go.
 >
-> For the fast ones. The Leaflet component still collects its three subscriptions in an array and unsubscribes in ngOnDestroy. That works, but it's the old pattern. Give each of the three pipes takeUntilDestroyed as its last operator, imported from @angular/core/rxjs-interop, and delete the array, ngOnDestroy, OnDestroy from implements and the Subscription import.
-> Pass this.destroyRef. We're in ngAfterViewInit, which is not an injection context, so takeUntilDestroyed without an argument throws.
-> It's in the solution, so compare with that afterwards.
+> Helping a group: "takeUntilDestroyed() can only be used within an injection context" means they left out this.destroyRef. They can compare with the solution afterwards.
 
 </details>
 
-## 48. Exercise 4 - In your app
+## 46. Exercise 4 - What we measured
 
-`exercise-4-in-your-app.html` · type `exercise-step`
+`exercise-4-what-we-measured.html` · type `exercise-result`
 
-![exercise-4-in-your-app.html](slides/48-exercise-4-in-your-app.jpg?v=202610311443)
+![exercise-4-what-we-measured.html](slides/46-exercise-4-what-we-measured.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
-> Monday homework for lab 4: two snapshots around the leakiest navigation, then grep.
+> Ask for their counts first. Before, after 5 rounds (3 of 3 runs): Detached <leaflet> 10, FooterComponent 11 (1 live + 10), Detached <loop-sidebar-list-item> 1,330 (10 x 133); HomeComponent 1, LeafletComponent 1. After (step-5): no Detached <leaflet>, <loop-sidebar-list-item>, <loop-home>, <loop-footer> or <footer> rows; FooterComponent 1.
 >
-> Exercise 4 in your own app. Pick the navigation your users do over and over: open a record, back to the list. Snapshot, five rounds, snapshot. Filter on your page components and on Detached: if a count grows with the number of rounds, you've got a leak, and the Retainers pane tells you who holds it.
-> Then search for the usual suspects: setInterval, addEventListener and subscribe calls without a takeUntilDestroyed or other cleanup. Fix with DestroyRef, and count again.
+> Welcome back. Ask a group for their before and after counts.
+> Ours: ten detached leaflet elements before, and the row is gone after. If you want a bigger number, Detached <loop-sidebar-list-item> said 1,330 before: ten old lists of 133 rows. After, gone too.
+> Click. Eleven footers before: one on screen, ten that should have been gone. After, one.
+> Click. Why ten, after five rounds? Look at app.routes.ts: the empty path and ':id' are two route entries with the same HomeComponent. Selecting a playground goes from one to the other, and the router builds a new Home. Tilbage til kortet goes back to the empty path: another new Home. Two per round, five rounds, ten.
+> Ask the room: who found what held the map? Next slide.
+
+</details>
+
+## 47. What holds the old DOM
+
+`what-holds-the-old-dom.html` · type `claim-image`
+
+![what-holds-the-old-dom.html](slides/47-what-holds-the-old-dom.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Retainers pane on a Detached <leaflet>, step-4 after 5 rounds (real DevTools). Read bottom-up: Window._leaflet_events -> resize handler -> its closure -> the map (NewClass, _container) -> div.leaflet-container -> the detached tree.
+> HomeComponent count stays 1: Angular keeps a numeric LView id on DOM nodes, not a pointer to the component, so the old DOM stays alive, not the old Home instance.
+>
+> Here's what the Retainers pane shows. Read it from the bottom: Window has a _leaflet_events object, Leaflet's own bookkeeping. In it a resize handler. The handler's closure has the map, the map has its container div, and a detached node keeps its whole tree, up through the leaflet element to the old page.
+> Be precise about what leaks. It's the old DOM tree, all 133 rows of the old list included. The old HomeComponent object is gone: the snapshot has exactly one. Angular stores a number on DOM nodes to find its view, not the component itself, so the DOM doesn't drag the component along.
+> The footer is different: its setInterval callback is an arrow function that uses this, so the browser's timer list holds the footer component itself. That's the eleven.
+> Ask the room: who put a listener on window? We didn't. Leaflet did, and it only takes it off in map.remove(). That's why the fix was two onDestroy callbacks: map.remove() and clearInterval. Leave the interval running and the browser holds the footer; skip remove() and window holds the old page.
+
+</details>
+
+## 48. In your app: leaks
+
+`exercise-4-in-your-app.html` · type `reveal-list`
+
+![exercise-4-in-your-app.html](slides/48-exercise-4-in-your-app.jpg?v=202610311543)
+
+<details><summary>Speaker notes</summary>
+
+> Monday homework for DestroyRef. Click through the five lines.
+>
+> Click. Pick the navigation your users do over and over: open a record, back to the list. Five rounds of it. Click. Snapshot before and after, filter on your page components and on Detached: if a count grows with the rounds, you've got a leak.
+> Click. The Retainers pane tells you who holds it.
+> Click. Then search for the usual suspects: setInterval, addEventListener, and subscribe calls without takeUntilDestroyed or other cleanup.
+> Click. Clean up in DestroyRef.onDestroy, right next to what you started, and count again.
 
 </details>
 
@@ -834,7 +789,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `wrap-the-fixes-of-the-day.html` · type `wrap`
 
-![wrap-the-fixes-of-the-day.html](slides/49-wrap-the-fixes-of-the-day.jpg?v=202610311443)
+![wrap-the-fixes-of-the-day.html](slides/49-wrap-the-fixes-of-the-day.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
@@ -854,7 +809,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `time-for-questions.html` · type `statement`
 
-![time-for-questions.html](slides/50-time-for-questions.jpg?v=202610311443)
+![time-for-questions.html](slides/50-time-for-questions.jpg?v=202610311543)
 
 <details><summary>Speaker notes</summary>
 
