@@ -1,0 +1,17 @@
+<section data-template="exercise-step">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - In your app</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>Pick the navigation your users repeat most. Snapshot, 5 rounds, snapshot</li>
+<li>Filter your page components and <strong>Detached</strong>: does a count grow with the rounds?</li>
+<li>Search for <code>setInterval</code>, <code>addEventListener</code> and <code>subscribe(</code> without cleanup</li>
+<li>Clean up in <code>DestroyRef.onDestroy</code>, then count again</li>
+</ol>
+  </div>
+  <aside class="notes">Monday homework for lab 4: two snapshots around the leakiest navigation, then grep.
+
+Exercise 4 in your own app. Pick the navigation your users do over and over: open a record, back to the list. Snapshot, five rounds, snapshot. Filter on your page components and on Detached: if a count grows with the number of rounds, you've got a leak, and the Retainers pane tells you who holds it.
+Then search for the usual suspects: setInterval, addEventListener and subscribe calls without a takeUntilDestroyed or other cleanup. Fix with DestroyRef, and count again.</aside>
+</section>

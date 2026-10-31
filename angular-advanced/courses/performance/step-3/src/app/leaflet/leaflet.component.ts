@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, inject, Input, NgZone, OnDestroy } from '@angular/core';
-import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
+import { control, latLng, map as createMap, tileLayer } from 'leaflet';
 import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
@@ -31,7 +31,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const _map = this.zone.runOutsideAngular(() => mapContructor(this.mapId, {
+    const _map = this.zone.runOutsideAngular(() => createMap(this.mapId, {
       zoomControl: false,
       center: undefined,
       zoom: 7,

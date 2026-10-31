@@ -29,11 +29,7 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       [(selectedPlayground)]="playground"
       (selectedPlaygroundChange)="navigate($event)"
       [location]="location()"/>
-    @defer (on viewport) {
-      <loop-footer [playground]="playground()" [loadedAt]="loadedAt()"/>
-    } @placeholder {
-      <footer>&nbsp;</footer>
-    }
+    <loop-footer [playground]="playground()" [loadedAt]="loadedAt()"/>
   `,
     imports: [
         LeafletComponent,

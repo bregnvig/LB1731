@@ -1,16 +1,18 @@
 <section data-template="exercise-step">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 2 - Measure before</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.85em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>.</span></p>
-<ol>
-<li><span style="font-size:0.85em">Run <code><span style="color:#ff8c00">npm run build</span></code>. Write down <code>polyfills</code>: <span style="color:#ff8c00">35.09 kB</span></span></li>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35">Not happy with the result of the previous exercise? Go to the <code>labs/performance/exercise-2</code> directory and run <code>npm install</code>, then <code>npm start</code>.</p>
+<ol style="font-size:0.85em;line-height:1.35">
+<li>Run <code>npm run build</code>. Write down the <code>polyfills</code> line</li>
+<li><code>npm start</code>, record 10 quiet seconds. Count the bars, click one: how many components?</li>
+<li>Record one click on a playground in the list, 3 s. Count the bars</li>
 </ol>
   </div>
-  <aside class="notes">labs/performance/exercise-2. Before: polyfills 35.09 kB.
-Full build before, cut from the slide (raw / transfer): main 1.53 MB / 357.55 kB, styles 242.57 kB / 25.55 kB, polyfills 35.09 kB / 11.52 kB, Initial total 1.81 MB / 394.62 kB.
+  <aside class="notes">labs/performance/exercise-2. Build: write down polyfills. Profiler: 10 quiet s, then one list click (3 s). Write everything down, no numbers from me yet.
 
 Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
-Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js.</aside>
+Run npm run build and write down the polyfills line, raw and transfer. Then npm start and record ten quiet seconds in the Profiler: count the bars and click one to see how many components it checked. Then record one click on a playground in the list, about three seconds, and count again.
+Three numbers on your paper before we touch anything.</aside>
 </section>

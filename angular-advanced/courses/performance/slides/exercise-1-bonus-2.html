@@ -1,21 +1,20 @@
 <section data-template="exercise-result">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Bonus: try it, then revert</h2>
   </div>
-  <div class="block" data-type="text" data-name="result-1" style="left:38px;top:200px;width:1200px;height:auto;z-index:11;text-align:left">
-    <h2><span style="color:#ff8c00">Footer bars: gone</span></h2>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">Footer bars: gone</span></h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-2" style="left:38px;top:330px;width:1200px;height:auto;z-index:12;text-align:left">
-    <h2><span style="color:#ff8c00"><em>Opdateret for N sekunder siden</em></span>: stops counting</h2>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">The counter stops counting</span></h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="why" style="left:38px;top:520px;width:1200px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.85em">Why: the number still changes, but only zone.js told Angular. Undo it.</span></p>
+  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:370px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35">zone.js was the only one telling Angular, and now nobody does. Undo it.</p>
   </div>
-  <aside class="notes">Bars gone, counter frozen (updates only when something else runs CD, like a click on a playground).
-Point: zone.js was the trigger. Plain field + no zone = no update. Lead-in to exercise 2.
-Revert before the break.
+  <aside class="notes">Bars gone, counter frozen (it only moves when something else runs a cycle, like a click on a playground).
+Point: zone.js was the trigger. Plain field + no zone = no update. Lead-in to exercise 2. Revert before the break.
 
-Look at the profiler: the footer's bars are gone. Great? Click. Look at the page. The counter has stopped. The field is still updating, but the screen is not, because nothing tells Angular to check the footer. It only moves if something else triggers a cycle, for example if you click a playground.
-Click. That is the whole lesson: the only reason the counter ever updated was zone.js, running a cycle after each timer tick. Runs outside the zone, no cycle, no update.
-Now undo it, so you start the break with the working footer. After the break we remove zone.js completely and the same thing will happen to the whole app, and then we fix it the right way.</aside>
+Look at the profiler: the footer's bars are gone. Great? Click. Look at the page. The counter has stopped. The field still changes every second, but the screen doesn't, because nothing tells Angular to check the footer. It only moves if something else triggers a cycle, for example a click on a playground.
+Click. That's the whole lesson: zone.js was the only one telling Angular, and now nobody does.
+Now undo it, so you start the break with the working footer. After the break we remove zone.js for the whole app, the same thing happens everywhere, and then we fix it the right way.</aside>
 </section>

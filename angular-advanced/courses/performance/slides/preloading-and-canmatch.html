@@ -1,32 +1,27 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Preloading and canMatch</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
 <li>Lazy: the first visit waits for the chunk</li>
-<li><code><span style="color:#ff8c00">withPreloading</span></code> fetches chunks in the background. A custom <code><span style="color:#ff8c00">PreloadingStrategy</span></code> picks routes</li>
-<li><code><span style="color:#ff8c00">canMatch</span></code> false: the chunk is never downloaded</li>
+<li><code>withPreloading</code> fetches chunks in the background</li>
+<li><code>canMatch</code> false: the chunk is never downloaded</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">provideRouter(AppRoutes, withPreloading(PreloadAllModules)),
-
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">provideRouter(AppRoutes,
+  withPreloading(PreloadAllModules)),
 // a lazy route behind a guard
 {
   path: 'admin',
   canMatch: [() =&gt; inject(Auth).isAdmin()],
-  loadChildren: () =&gt; import('./admin/admin.routes'),
+  // …
 },
 </code></pre>
   </div>
-  <aside class="notes">Lazy means the first navigation to it waits for the chunk.
-PreloadAllModules: fetch every lazy route after the first render, in the background.
-Custom PreloadingStrategy for "only these".
-canMatch, not canLoad: the guard runs before the chunk is fetched.
+  <aside class="notes">Only if asked. PreloadAllModules: fetch every lazy route after the first render. canMatch, not canLoad: runs before the chunk is fetched.
 
-The price of a lazy route is a wait the first time the user goes there. Preloading removes that wait without making the start slower: after the app is up, the router fetches the lazy chunks in the background.
-withPreloading(PreloadAllModules) is the simple version: everything lazy. If that is too greedy, write your own PreloadingStrategy and pick the routes, for instance with a data flag on the route.
-The default is NoPreloading.
-Guards: canLoad is the old guard for lazy routes. Use canMatch. It runs when the router matches the route, so if it returns false the chunk is not downloaded and the router tries the next matching route. That also lets you have two different components for the same path, depending on a condition, like a logged in user.</aside>
+The price of a lazy route is a wait the first time the user goes there. Preloading removes that wait without making the start slower: after the app is up, the router fetches the lazy chunks in the background. If that's too greedy, write your own PreloadingStrategy.
+Guards: use canMatch. It runs when the router matches the route, so if it returns false the chunk is not downloaded.</aside>
 </section>

@@ -1,35 +1,32 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
-    <h2>Running outside Zone.js</h2>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Running outside zone.js</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li>Code started in <code><span style="color:#ff8c00">runOutsideAngular()</span></code> triggers no change detection</li>
-<li>For third-party code that fires often, like a map</li>
-<li>The catch: Angular isn't told about changes in there. Set a <code><span style="color:#ff8c00">signal</span></code></li>
+<li><code>runOutsideAngular</code>: zone.js stops triggering change detection for it; signals and <code>markForCheck</code> still do</li>
+<li>For a map or chart: wrap where it adds listeners</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2|4,11">export class LeafletComponent implements AfterViewInit, OnDestroy {
-  private zone = inject(NgZone);
-  ngAfterViewInit() {
-    const _map = this.zone.runOutsideAngular(() =&gt; mapContructor(this.mapId, {
-      zoomControl: false,
-      center: undefined,
-      zoom: 7,
-      minZoom: 4,
-      maxZoom: 19,
-      layers: [...]
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript" data-line-numbers="1|4-5">private zone = inject(NgZone);
+
+ngAfterViewInit() {
+  const _map = this.zone.runOutsideAngular(
+    () =&gt; createMap(this.mapId, {
+      // …
     }));
-    control.zoom({ position: 'topleft' }).addTo(_map);
 </code></pre>
   </div>
-  <aside class="notes">Demo: /performance/change-detection. All Eager, click setTimeout on B: every node flashes, checks 2 each (zone entry + timer). Reset, click "outside zone" on B: nothing flashes, B's field stays stale.
-The function returns the map, so const _map stays.
-Code: the two blank lines are gone so it fits; the highlight steps are the same lines (zone, then the wrapped call).
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:488px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>Still on zone.js? This is your <span style="color:#ff8c00">cheapest fix</span>. Zoneless? Lab 2.</p>
+  </div>
+  <aside class="notes">Demo: /performance/change-detection. All Eager, Reset, click setTimeout on B: every node flashes, checks 2 each (zone entry + timer). Reset, click "outside zone" on B: nothing flashes, B's field stays stale.
+Click through the highlights: the injected zone, then the wrapped createMap call. Click: the punchline.
 
-Here's the tool. NgZone.runOutsideAngular takes a function and runs it outside the zone. Anything it starts, event listeners and timers, isn't patched, so Angular doesn't run change detection after them.
+Here's the tool. NgZone.runOutsideAngular takes a function and runs it outside the zone. Anything it starts, event listeners and timers, isn't patched, so zone.js doesn't trigger change detection after them. Be precise: only zone.js stops. A signal you set in there, or a markForCheck, still schedules a check.
 Switch to the demo. All Eager, Reset counters, click setTimeout on B. Every node flashes, and the counters say two checks each: one for the click, one for the timer. Reset, click outside zone on B. Nothing flashes. B's field did change, but the screen still shows the old value. Ask the room: when will B show the new number? At the next cycle, whatever starts it.
-That's the catch. You're cutting the wire between this code and Angular. Fine for a map that draws its own DOM. If a template depends on it, set a signal.
-The code is exercise 1. Click: the map is created inside runOutsideAngular, and the arrow function returns it, so const _map still works. Leaflet adds its listeners when the map is created, so wrapping creation is enough.</aside>
+That's the catch. Fine for a map that draws its own DOM. If a template depends on something in there, set a signal.
+The code is exercise 1. The map is created inside runOutsideAngular, and the arrow function returns it, so const _map still works. Leaflet adds its listeners when the map is created, so wrapping creation is enough.
+Click. If your app at work still runs zone.js, this is the cheapest fix you'll find today: one wrapper, no refactoring. If it's already zoneless, you get this for free, and that's lab 2.</aside>
 </section>

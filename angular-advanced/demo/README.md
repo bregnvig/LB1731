@@ -188,8 +188,9 @@ A node flashes yellow and its **checks** counter goes up when Angular checks it 
 5. Click **Downloaded already. Click me** — it renders, and no new request: `prefetch on idle` already fetched it in step 1.
 6. Scroll down — `viewport-loaded…` loads when its box comes into view.
 7. Throttle to **Slow 4G**, reload, click **Click me** — **Loading ...** shows for about a second before the card. Locally a chunk arrives in well under 100 ms, so `@loading (after 100ms)` never shows without throttling.
+8. Set throttling back to **No throttling**.
 
-**Talking point:** wrap the heavy thing below the fold in `@defer (on viewport)` and it leaves `main`. In lab 3 that's the map.
+**Talking point:** wrap the heavy thing below the fold or behind a click in `@defer` and it leaves `main`. In lab 3 that's the map, with `@defer (on idle)`; the footer, which is small and in view, gets bigger when deferred.
 
 ### 3. ngSrc — `/performance/images` (optional, slide hidden)
 

@@ -1,17 +1,21 @@
 <section data-template="exercise-result">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Measure after</h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-1" style="left:38px;top:200px;width:1200px;height:auto;z-index:11;text-align:left">
-    <h2><span style="color:#ff8c00">5 s of mouse moves: 5 bars</span></h2>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">5 s of mouse moves: ~300 → 5 bars</span></h2>
   </div>
-  <div class="block" data-type="text" data-name="why" style="left:38px;top:520px;width:1200px;height:auto;z-index:12;text-align:left">
-    <p><span style="font-size:0.85em">Was ~290. The ones left are the footer's timer: exercise 2.</span></p>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">Change detection, CPU 4x: 229 → 6 ms</span></h2>
   </div>
-  <aside class="notes">Click: 5 s of mouse moves = 5 bars, was ~290. The 5 left are the footer timer, one per second.
-Not on the slide: zoom buttons, and the setView/setZoom calls from the center$ subscriptions (leaflet.component.ts:48-49), still run in the zone. That's where the bars after a list click come from (43 in our run). Zoneless, exercise 2, is the real fix.
+  <div class="block" data-type="text" data-name="why" style="left:64px;top:370px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35">The 5 left: the footer's 1 s timer. Exercise 2.</p>
+  </div>
+  <aside class="notes">~300 -&gt; 5 bars (5, 5, 5 in our runs). Click: 229 -&gt; 6 ms of change detection in those 5 s (median of 3, CPU 4x slowdown, Angular track timing).
+The 5 left are the footer timer, one per second.
 
-Click. Five bars, where you had about 290. They are the footer's one-second timer, one per second, and that's exercise 2.
+Five bars, where you had about 300. They're the footer's one-second timer, one per second, and that's exercise 2.
+Click. In milliseconds: with the CPU slowed down four times, like a mid-range phone, change detection took 229 ms of those five seconds before and 6 ms after. That's time the main thread didn't have for anything else.
 Ask the room: why is wrapping creation enough, when the mouse moves long after? Because Leaflet registers its listeners at creation. Created outside the zone, never patched.
-Two caveats, if someone asks. The zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's fine, it's a click, not a stream. And click a playground in the list: you still get a burst of bars, 43 in our run. The center$ subscriptions on lines 48 and 49 call setView and setZoom inside the zone, and Leaflet's pan animation runs from there. You could wrap those too, but zoneless in exercise 2 fixes it for the whole app at once.</aside>
+If someone asks: the zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's a click, not a stream. And clicking a playground in the list still gives a burst of bars: that's the bonus.</aside>
 </section>

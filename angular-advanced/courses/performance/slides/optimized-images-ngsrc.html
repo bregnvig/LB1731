@@ -1,29 +1,28 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Images: ngSrc</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li><code><span style="color:#ff8c00">ngSrc</span></code> instead of <code><span style="color:#ff8c00">src</span></code> (<code><span style="color:#ff8c00">NgOptimizedImage</span></code>)</li>
-<li><code><span style="color:#ff8c00">priority</span></code> on the <span style="color:#ff8c00">LCP</span> image (Largest Contentful Paint). Without it, dev mode logs <code><span style="color:#ff8c00">NG02955</span></code></li>
-<li><code><span style="color:#ff8c00">width</span></code> + <code><span style="color:#ff8c00">height</span></code>, or <code><span style="color:#ff8c00">fill</span></code></li>
+<li><code>ngSrc</code> instead of <code>src</code> (<code>NgOptimizedImage</code>)</li>
+<li><code>priority</code> on the LCP image. Without it, dev mode logs <code>NG02955</code></li>
+<li><code>width</code> + <code>height</code>, or <code>fill</code></li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 24px; tab-size: 4;"><code class="language-html">&lt;img ngSrc="/assets/performance/hero.webp"
-     width="2400" height="1200" priority&gt;
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-html">&lt;img ngSrc="/assets/performance/hero.webp"
+  width="2400" height="1200" priority&gt;
 
 &lt;div class="fill-box"&gt;
-  &lt;img ngSrc="/assets/performance/sandbox.webp" fill&gt;
+  &lt;img ngSrc="/assets/performance/sandbox.webp"
+    fill&gt;
 &lt;/div&gt;
 </code></pre>
   </div>
   <aside class="notes">Demo: /performance/images. Console open, click Reload without priority: error NG02955 for hero.webp. Click Reload with priority: console clean.
-30 seconds. The playground app has no big images, so there's no exercise. Know it for when you do.
+Only if asked: the playground app has no big images, so there's no exercise.
 
-Replace src with ngSrc and import NgOptimizedImage. You get lazy loading by default, a srcset when you configure an image loader, and dev mode warnings for the usual mistakes.
-It matters most for LCP, Largest Contentful Paint: the time until the biggest thing above the fold has rendered. Often that's a hero image. Put priority on that one: it gets fetch priority high, isn't lazy, and with server-side rendering it's preloaded.
-Let me show you. Console open, Reload without priority: NG02955, Angular telling us the LCP image has no priority. Reload with priority: clean.
-Width and height are required, so the browser reserves the space and the page doesn't jump. If you don't know the size, use fill with a positioned parent, like the second image here.
-Ask the room: which image on your own start page is the LCP element? Don't put priority on everything, then it means nothing. One image per page, usually.</aside>
+Replace src with ngSrc and import NgOptimizedImage. You get lazy loading by default and dev mode warnings for the usual mistakes.
+Put priority on the LCP image, the biggest thing above the fold. Console open, Reload without priority: NG02955. Reload with priority: clean.
+Width and height are required, so the browser reserves the space. If you don't know the size, use fill with a positioned parent.</aside>
 </section>

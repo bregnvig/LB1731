@@ -1,30 +1,28 @@
 <section data-template="reveal-list">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Zoneless: what schedules change detection?</h2>
   </div>
   <div class="block fragment" data-type="text" data-name="line-1" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:1.6em"><strong>A <code><span style="color:#ff8c00">signal</span></code> read in a template</strong></p>
+    <p style="font-size:1.6em"><strong>A <code>signal</code> read in a template</strong></p>
   </div>
   <div class="block fragment" data-type="text" data-name="line-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
     <p style="font-size:1.6em"><strong>A template or host listener</strong></p>
   </div>
   <div class="block fragment" data-type="text" data-name="line-3" style="left:64px;top:360px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p style="font-size:1.6em"><strong><code><span style="color:#ff8c00">markForCheck()</span></code>, the <code>async</code> pipe</strong></p>
+    <p style="font-size:1.6em"><strong><code>markForCheck()</code>, the <code>async</code> pipe</strong></p>
   </div>
   <div class="block fragment" data-type="text" data-name="line-4" style="left:64px;top:440px;width:1150px;height:auto;z-index:14;text-align:left">
     <p style="font-size:1.6em"><strong>Only zone.js: timers, promises, requests</strong></p>
   </div>
-  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:620px;width:1150px;height:auto;z-index:15;text-align:left">
-    <p>If the screen should change, change a <code><span style="color:#ff8c00">signal</span></code>.</p>
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:546px;width:1150px;height:auto;z-index:15;text-align:left">
+    <p>If the screen should change, <span style="color:#ff8c00">change a signal</span>.</p>
   </div>
   <aside class="notes">Clicks 1-3: the three that schedule a check, with or without zone.js. Click 4: the ones only zone.js schedules (setTimeout, setInterval, a promise or request finishing). Click: the rule.
 Demo: /performance/change-detection. All OnPush, signal on B: only B flashes. setTimeout on B: nothing flashes, B keeps field 0; click "click" on B: A and B flash, field jumps to 1.
-The demo still runs zone.js: setTimeout on B does start a cycle, OnPush just skips B. Zoneless, no cycle would start at all.
-Not on the slide, say it: assigning a plain field never scheduled anything, not even with zone.js. The next cycle just happened to show it.
 
-Here's the list to keep in your head. Click, click, click. These three schedule a check, with or without Zone.js: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you. Those schedule a cycle with or without Zone.js.
+Here's the list to keep in your head. Click, click, click. These three schedule a check, with or without zone.js: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you.
 Click. Only zone.js: timers, promises, requests. These used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
 Switch to the demo. All OnPush, Reset. Click signal on B: only B flashes. Click setTimeout on B: nothing flashes, B still shows field 0. Click "click" on B: A and B flash, and now the field jumps to 1. The value was there all along, nobody asked Angular to look.
-Be precise about what you just saw: the demo app still has zone.js. The timer did start a cycle, and OnPush skipped B because nothing marked it. Zoneless, there wouldn't even be a cycle. Same screen, one step further from an update.
+Be precise about what you just saw: the demo app still has zone.js. The timer did start a cycle, and OnPush skipped B because nothing marked it. Zoneless, there wouldn't even be a cycle.
 Click. The rule of thumb: if the screen should change, change a signal.</aside>
 </section>

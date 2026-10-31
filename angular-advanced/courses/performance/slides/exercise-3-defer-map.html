@@ -1,27 +1,28 @@
 <section data-template="exercise-step-code">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - Defer the map</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/home/home.component.ts</span></code>, wrap <code><span style="color:#ff8c00">&lt;leaflet&gt;</span></code> in <code><span style="color:#ff8c00">@defer (on idle)</span></code> with an empty full-size <code><span style="color:#ff8c00">@placeholder</span></code>.</span></p>
-<p><span style="font-size:0.7em">Build: a <code><span style="color:#ff8c00">leaflet-component</span></code> chunk of about 155 kB. Write down <code><span style="color:#ff8c00">Initial total</span></code>.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>In <code>src/app/home/home.component.ts</code>, wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code> with an empty full-size <code>@placeholder</code></li>
+<li>Build. Find <code>leaflet-component</code> under <strong>Lazy chunk files</strong>. Write down <code>Initial total</code></li>
+</ol>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 15px; line-height: 20px; tab-size: 4;"><code class="language-html">@defer (on idle) {
-  &lt;leaflet [center]="center()" [markers]="markers()"/&gt;
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-html">@defer (on idle) {
+  &lt;leaflet [center]="center()"
+    [markers]="markers()"/&gt;
 } @placeholder {
   &lt;div class="vh-100 vw-100"&gt;&lt;/div&gt;
 }
 </code></pre>
   </div>
-  <div class="block" data-type="text" data-name="callout" style="left:38px;top:520px;width:440px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> use <code><span style="color:#ff8c00">LeafletComponent</span></code> outside the block, even a <code><span style="color:#ff8c00">viewChild</span></code>, and there's no chunk.</span></p>
+  <div class="block" data-type="text" data-name="callout" style="left:64px;top:370px;width:540px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35"><span style="color:#ff8c00">Trap:</span> use <code>LeafletComponent</code> outside the block, even as a <code>viewChild</code>, and there's no chunk.</p>
   </div>
   <aside class="notes">Change 2: home.component.ts, @defer (on idle) around leaflet, placeholder an empty vh-100 vw-100 div. Lazy table: leaflet-component, about 155 kB.
-Measured on a copy: viewChild(LeafletComponent) in Home on top of the defer = no leaflet chunk, 1.79 MB.
-Cut from the slide: with no chunk, Leaflet stays in main.
 
 The map. In home.component.ts, wrap the leaflet element in @defer on idle, and give it a placeholder: an empty div with vh-100 vw-100, so the page doesn't jump. Build again: a leaflet-component chunk of about 155 kilobytes.
 The trap: if anything in Home touches LeafletComponent outside the block, a viewChild for example, it stays eager and you get no chunk at all. Look for the chunk in the lazy table every time.
-Ask the room: did Initial total move as much as you expected?</aside>
+Ask the room: the map now paints later than the list. Is that a problem? We'll measure that after the exercise.</aside>
 </section>

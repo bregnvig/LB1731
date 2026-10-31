@@ -1,30 +1,29 @@
 <section data-template="exercise-step-code">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - Register one icon</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><code><span style="color:#ff8c00">src/main.ts</span></code> registers two FontAwesome packs for one icon: the spinner.</span></p>
-<p><span style="font-size:0.7em">Delete <code><span style="color:#ff8c00">initializeFontAwesomeFactory</span></code> and <code><span style="color:#ff8c00">fas</span></code>/<code><span style="color:#ff8c00">far</span></code> imports. Register <code><span style="color:#ff8c00">faSpinner</span></code> with <code><span style="color:#ff8c00">addIcons</span></code>. Build, write down <code><span style="color:#ff8c00">Initial total</span></code>.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>In <code>src/main.ts</code>, delete <code>initializeFontAwesomeFactory</code> and the <code>fas</code>/<code>far</code> imports</li>
+<li>Register only <code>faSpinner</code>, as on the right</li>
+<li>Build. Write down <code>Initial total</code></li>
+</ol>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-...
-  providers: [
-    ...
-    provideAppInitializer(() =&gt;
-      inject(FaIconLibrary).addIcons(faSpinner)),
-  ],
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">import { faSpinner }
+  from '@fortawesome/free-solid-svg-icons';
+// …
+provideAppInitializer(() =&gt;
+  inject(FaIconLibrary).addIcons(faSpinner)),
 </code></pre>
   </div>
-  <div class="block" data-type="text" data-name="callout" style="left:38px;top:520px;width:440px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> forget <code><span style="color:#ff8c00">addIcons(faSpinner)</span></code> and the spinners are gone: <em>Could not find icon</em> in the console.</span></p>
+  <div class="block" data-type="text" data-name="callout" style="left:64px;top:370px;width:540px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35"><span style="color:#ff8c00">Trap:</span> forget <code>addIcons(faSpinner)</code> and the spinners are gone: <em>Could not find icon</em> in the console.</p>
   </div>
   <aside class="notes">Change 4: main.ts. Delete initializeFontAwesomeFactory and the fas/far imports; provideAppInitializer(() =&gt; inject(FaIconLibrary).addIcons(faSpinner)).
 Forget addIcons: no spinner, console "Could not find icon with iconName=spinner and prefix=fas in the icon library."
-Still don't say which wins. That's "What did you measure?", after the bonus slide.
-Cut from the slide: "Which change moved it most?" Ask it out loud.
 
-The icons. Open main.ts. The app registers every icon in two FontAwesome packs, solid and regular, through that initializeFontAwesomeFactory. Ask the room: how many icons does the app actually show? One. The spinner. So delete the factory and the two pack imports, import faSpinner, and in provideAppInitializer call addIcons with just that one.
+The icons, the thing the analyzer showed you. Open main.ts. The app registers every icon in two FontAwesome packs, solid and regular, through initializeFontAwesomeFactory. The app shows one: the spinner. So delete the factory and the two pack imports, import faSpinner, and in provideAppInitializer call addIcons with just that one.
 If you remove the packs and forget addIcons, the spinners disappear and the console tells you it can't find the spinner icon.
-Build, write the number down, and compare the four numbers you have. Which one moved it most?</aside>
+Build, write the number down. Then the next slide: watch the chunks load.</aside>
 </section>

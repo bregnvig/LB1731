@@ -1,0 +1,19 @@
+<section data-template="exercise-step">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 2 - In your app</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>Search for <code>ChangeDetectionStrategy.Eager</code> and <code>ChangeDetectionStrategy.Default</code>: your to-do list</li>
+<li>Record a timer tick or a click: how many components does one bar check?</li>
+<li>Going zoneless: also search for <code>fakeAsync</code> and <code>onStable</code></li>
+<li>Lists: <code>track</code> an id, derive with <code>computed</code></li>
+</ol>
+  </div>
+  <aside class="notes">Monday homework for lab 2: grep for Eager/Default, profile one bar, check fakeAsync/onStable before going zoneless.
+
+Exercise 2 in your own app. Search the code for ChangeDetectionStrategy.Eager and Default. If you ran ng update to 22, every component has one: that's the list of components to move to signals and OnPush.
+Then record one timer tick or one click and look at what a single bar checks. If it's the whole tree, you've found your lever.
+Before you go zoneless, search for fakeAsync in the tests and onStable in the code: those depend on zone.js.
+And while you're in the templates, check your @for track expressions and any method calls in bindings.</aside>
+</section>

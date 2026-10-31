@@ -1,27 +1,26 @@
 <section data-template="claim-image">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Change detection in one minute</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:520px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:520px;height:auto;z-index:11;text-align:left">
     <ul>
-<li>Compares every binding with its old value</li>
-<li><strong>When</strong>: zone.js, after every event, timer, promise</li>
-<li><strong>Which</strong>: <code><span style="color:#ff8c00">Eager</span></code> all, <code><span style="color:#ff8c00">OnPush</span></code> only dirty</li>
+<li>Checks bindings against their old values</li>
+<li><strong>When</strong>, here: zone.js, after every event and timer. Since v21: zoneless</li>
+<li><strong>Which</strong>: <span style="color:#ff8c00">Eager</span> (was Default): all. <span style="color:#ff8c00">OnPush</span>: dirty ones</li>
 </ul>
+<p><em>Demo after Matthieu Riegler</em></p>
   </div>
-  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:239px;width:614px;height:267.1px;z-index:12">
-    <img src="images/demo-cd-tree.jpg" alt="The /performance/change-detection demo: components A to G as a tree, each Eager, checks 0">
-  </div>
-  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:600px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p>Zone.js knows a task <em>finished</em>, not that state <em>changed</em> 🤔</p>
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:220px;width:614px;height:414.0px;z-index:12">
+    <img src="images/demo-cd-tree.jpg" alt="The /performance/change-detection demo, all OnPush, after two clicks on E: E, B and A flash yellow with checks 2, D stays at checks 0">
   </div>
   <aside class="notes">Before class: npm run start:no-hmr in demo/, open http://localhost:4201/performance/change-detection, press Reset counters.
-Demo: /performance/change-detection. All Eager, click "click" on E: all seven nodes flash, checks 1 each. All OnPush, Reset, same click: only E, B, A flash.
-Cost = components checked x bindings, per cycle. When: zone.js. Which: Eager vs OnPush.
-Cut from the slide: Eager is the old Default. Eager checks every component, OnPush only what is marked dirty.
+Demo: All Eager, click "click" on E: all seven nodes flash, checks 1 each. All OnPush, Reset, same click: only E, B, A flash (the screenshot, after two clicks).
+Credit: the demo is modelled on Matthieu Riegler's Angular change detection demo, https://jeanmeche.github.io/angular-change-detection/
 
 Change detection keeps the screen in sync with your data. After something happens, Angular walks the tree from the root and compares every binding with its old value.
 So the cost is easy to state: how many components are checked, times how many bindings they have, once per cycle. Two levers: how often does a cycle run, and how many components does each one check?
-Switch to the demo. All Eager, Reset counters, click "click" on E. Every node flashes yellow, seven checks for one click on a leaf. Now All OnPush, Reset, the same click: only E, B and A. Ask the room: why A and B, when nobody clicked them? They're on the path from E to the root.
-Click for the last line. Zone.js decides when cycles run in today's app. It patches events, timers and promises, and runs a cycle after every one. It knows a task finished, not that anything changed. Remember that for the map in exercise 1.</aside>
+When: in today's app, zone.js decides. It patches events, timers and promises, and runs a cycle after every one. It knows a task finished, not that anything changed. New apps since Angular 21 are zoneless, and that's exercise 2.
+Which: Eager is the old Default, renamed: checked every time the walk passes. OnPush: only when something marked it dirty.
+Switch to the demo. All Eager, Reset counters, click "click" on E. Every node flashes yellow, seven checks for one click on a leaf. Now All OnPush, Reset, the same click: only E, B and A, like the screenshot. Ask the room: why A and B, when nobody clicked them? They're on the path from E to the root.
+The demo is built on Matthieu Riegler's change detection demo from the Angular team, so the credit goes to him.</aside>
 </section>

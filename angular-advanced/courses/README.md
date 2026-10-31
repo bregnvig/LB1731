@@ -229,20 +229,24 @@ Patterns and libraries for managing application state in Angular.
 
 Finding and fixing what makes the playground app slow, with one rule for every lab: measure, change, measure again.
 
+**Before the course:** install [Angular DevTools](https://chromewebstore.google.com/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) in Chrome. Plan B without the extension: Chrome's Performance panel with the Angular track (`ng.enableProfiling()` in the console).
+
 **Topics covered:**
 - What "slow" means for a user: startup, interaction, memory
-- Change detection and zone.js: patched async APIs, a cycle after every task; `NgZone.runOutsideAngular`
-- **Tools:** Angular DevTools Profiler, `ng build` output, Chrome Memory panel heap snapshots
-- **Zoneless:** what schedules change detection without zone.js, what breaks without it, OnPush as the default (old default `Eager`), signals instead of plain fields
-- **Loading less up front:** reading `ng build` output, lazy routes (`loadComponent`, `loadChildren`), `@defer` triggers and placeholders, lazily loaded dynamic components
-- **Memory and the DOM:** leaks from intervals, listeners and third-party objects (`DestroyRef`), detached nodes and retainers in heap snapshots
-- `ngSrc` has a hidden slide and a demo page, no lab
+- Change detection and zone.js: a cycle after every task; Eager (was Default) vs OnPush; `NgZone.runOutsideAngular`
+- **Tools:** Angular DevTools Profiler, Chrome Performance panel (Angular track), `ng build` output, the esbuild bundle analyzer (`npm run build -- --stats-json`), Chrome Memory panel heap snapshots
+- **Zoneless:** what schedules change detection without zone.js, OnPush as the default in v22, signals instead of plain fields, what to do on Angular 15–19; lists with `@for` `track` and `computed`
+- **Loading less up front:** what ends up in `main` (whole icon packs defeat tree-shaking), lazy routes (`loadComponent`), `@defer` triggers and placeholders, when `@defer` costs more than it saves
+- **Memory and the DOM:** leaks from intervals, listeners and third-party objects, detached DOM trees and retainers in heap snapshots, `DestroyRef` and `takeUntilDestroyed`
+- `ngSrc`, preloading, virtual scroll and `WeakMap` have hidden slides, no lab
+
+Every exercise ends with an "In your app" slide: what to measure and try in your own app.
 
 **Exercises:**
-1. **Measure and leave the zone** - Profile the map and the ticking footer; create the Leaflet map with `runOutsideAngular`; profile again; bonus: run the footer interval outside the zone and see it freeze
-2. **Go zoneless and move to signals** - Remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and drop `Eager` in all seven components; compare the build output
-3. **Load less up front** - `loadComponent` for the detail route, `@defer` around the map and the footer, register only the used icons; compare initial and lazy chunks; bonus: lazily loaded "Om appen" panel with `NgComponentOutlet`
-4. **Memory and the DOM** - Heap snapshots before and after navigating home and detail; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`
+1. **Measure and leave the zone** - Profile 5 s of mouse moves over the map; create the Leaflet map with `runOutsideAngular`; profile again; bonus: wrap the `center$` `setZoom`/`setView` calls (slides only), and run the footer interval outside the zone to see it freeze (try, then revert)
+2. **Go zoneless and move to signals** - Measure the build and the Profiler; remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and measure; drop `Eager` in all seven components and measure again
+3. **Load less up front** - Find what is in `main` with the esbuild analyzer; `loadComponent` for the detail route, `@defer (on idle)` around the map, try `@defer (on viewport)` on the footer, measure and revert, register only the used icon; compare Initial total after each change. The solution also has a lazily loaded "Om appen" panel (`NgComponentOutlet`); its slides are hidden
+4. **Memory and the DOM** - Heap snapshots before and after 5 rounds of home and detail; read the retainers; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`; bonus: `takeUntilDestroyed(this.destroyRef)` on the map's three subscriptions
 
 ---
 

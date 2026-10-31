@@ -1,40 +1,28 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Lazy routes</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li><code><span style="color:#ff8c00">loadComponent</span></code> for one standalone component</li>
-<li><code><span style="color:#ff8c00">loadChildren</span></code> for a route tree</li>
-<li>The bundler splits at the <code><span style="color:#ff8c00">import()</span></code></li>
+<li><code>loadComponent</code> for one standalone component</li>
+<li><code>loadChildren</code> for a route tree</li>
+<li>The bundler splits at the <code>import()</code></li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">{
-  path: 'legeplads/:id',
-  loadComponent: () =&gt;
-    import('src/app/playground-detail/playground-detail.component')
-      .then(m =&gt; m.PlaygroundDetailComponent),
-},
-{
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">{
   path: 'admin',
   loadChildren: () =&gt;
-    import('./admin/admin.routes').then(m =&gt; m.ADMIN_ROUTES),
+    import('./admin/admin.routes')
+      .then(m =&gt; m.ADMIN_ROUTES),
 },
 </code></pre>
   </div>
-  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:600px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p><span style="color:#ff8c00">The catch:</span> delete the static <code><span style="color:#ff8c00">import</span></code>. Any other use keeps it in <code><span style="color:#ff8c00">main</span></code></p>
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:458px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p><span style="color:#ff8c00">The catch:</span> any other use of the class keeps it in <code>main</code></p>
   </div>
-  <aside class="notes">loadComponent for one component, loadChildren for a whole route tree.
-Both take a function returning import(). The bundler splits at the import.
-The detail route in the exercise gets a chunk of about 1 kB: small, but the pattern is the point.
-Click: the trap, the static import at the top must go.
+  <aside class="notes">Only if asked: loadChildren for a route tree. The lab uses loadComponent (exercise 3 slide).
 
-A lazy route is a route whose code isn't in the first download. You give the router a function that calls import(), and the build puts that file in its own chunk.
-loadComponent is for one standalone component. That's what you do in the exercise for the detail route, legeplads/:id.
 loadChildren is for a group of routes, say everything under /admin. The imported file exports a Routes array, and if it's the default export you don't even need the then.
-The catch: it only works if nothing imports the component the normal way. Leave a real use of the class in another file and the chunk is right back in main. The build won't warn you, so you check the lazy table.
-Ask the room: which routes in your app does almost nobody visit? Those are your first loadComponent candidates.
-The functions run in an injection context, so you can call inject() inside them if you need to.</aside>
+The catch: it only works if nothing imports the component the normal way. The build won't warn you, so you check the lazy table.</aside>
 </section>

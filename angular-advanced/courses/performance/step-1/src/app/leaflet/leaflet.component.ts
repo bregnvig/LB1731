@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
+import { control, latLng, map as createMap, tileLayer } from 'leaflet';
 import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
@@ -31,7 +31,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const _map = mapContructor(this.mapId, {
+    const _map = createMap(this.mapId, {
       zoomControl: false,
       center: undefined,
       zoom: 7,

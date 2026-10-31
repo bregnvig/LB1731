@@ -1,38 +1,30 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>WeakMap as a cache</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li><code><span style="color:#ff8c00">WeakMap&lt;object, V&gt;</span></code>: entries vanish with their key object</li>
+<li><code>WeakMap&lt;object, V&gt;</code>: entries vanish with their key object</li>
 <li>Fits: a result that depends on the object only</li>
-<li><span style="color:#ff8c00">Not used here:</span> distance also depends on the location</li>
+<li>Not here: distance also depends on the location</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">const labels = new WeakMap&lt;Playground, string&gt;();
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">const labels = new WeakMap&lt;Playground, string&gt;();
 
 function label(p: Playground) {
-  let v = labels.get(p);
-  if (!v) {
-    v = `${p.name}, ${p.addressDescription}`;
-    labels.set(p, v);
+  if (!labels.has(p)) {
+    labels.set(p, p.name.toUpperCase());
   }
-  return v;
+  return labels.get(p)!;
 }
 </code></pre>
   </div>
-  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:600px;width:1150px;height:auto;z-index:13;text-align:left">
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:518px;width:1150px;height:auto;z-index:13;text-align:left">
     <p>The key must capture everything the value depends on</p>
   </div>
-  <aside class="notes">WeakMap&lt;object, V&gt;: keys are held weakly. When the key object is gone, the entry goes too.
-Good for: data computed per object that should live exactly as long as the object.
-Not used in the exercise: distance per row is already a memoised computed. A long-lived WeakMap would serve stale distances after the location changes.
-WeakRef: for optional references.
-Cut from the slide: distance is already a memoised computed; a long-lived cache would serve stale distances. Click: the rule.
+  <aside class="notes">Only if asked. Demo: /performance/leaks, step 5 (Map vs WeakMap).
 
-A WeakMap is a map whose keys are objects held weakly. If nobody else references the key object, it is garbage collected and its entry disappears. So the cache cannot keep stale objects alive, which a normal Map would.
-It fits when you compute something from an object and the result is valid as long as that object exists: a parsed version, a formatted label, a layout measurement.
-Why we did not use it in the lab. The idea was to cache each playground's distance. But in this app the distance is already a computed in each list item, remembered per playground and location. It only re-runs when the location changes, and then you need a new distance anyway. A WeakMap keyed by playground would hand back the old distance after the location changed. A cache is only correct when the key captures everything the value depends on.
-WeakMap lives on this slide only.</aside>
+A WeakMap is a map whose keys are objects held weakly. If nobody else references the key object, it's garbage collected and its entry disappears. So the cache cannot keep stale objects alive, which a normal Map would.
+In this app the distance per row is already a computed. A WeakMap keyed by playground would hand back the old distance after the location changed. A cache is only correct when the key captures everything the value depends on.</aside>
 </section>

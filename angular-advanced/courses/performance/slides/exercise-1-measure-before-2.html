@@ -1,22 +1,20 @@
 <section data-template="exercise-result">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - What we measured</h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-1" style="left:38px;top:200px;width:1200px;height:auto;z-index:11;text-align:left">
-    <h2><span style="color:#ff8c00">5 s of mouse moves: ~290 bars</span></h2>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">5 s of mouse moves: ~300 bars</span></h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-2" style="left:38px;top:330px;width:1200px;height:auto;z-index:12;text-align:left">
-    <h2><span style="color:#ff8c00">1 bar = the whole app</span></h2>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00">1 bar = all 6 components, 133 rows</span></h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="why" style="left:38px;top:520px;width:1200px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.85em"><span style="color:#ff8c00">Leaflet</span> is created inside Angular's zone, so every Leaflet event runs a cycle.</span></p>
+  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:370px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35">Leaflet adds its listeners inside the zone: every event, a cycle.</p>
   </div>
-  <aside class="notes">Click: ~290 bars in 5 s (our runs: 290 and 295). Click: one bar refreshed all 6 components and all 133 rows. Click: why.
-Why: Leaflet registers its listeners when the map is created, inside the zone.
+  <aside class="notes">Click: ~300 bars (our runs: 298, 301, 300, 301). Click: one bar checked all 6 components and all 133 list rows. Click: why.
 6 components, not 7: PlaygroundDetailComponent only exists on /legeplads/:id.
-Cut from the slide, say it: one bar per mouse move, plus one per second from the footer (Opdateret for N sekunder siden). One bar = all 6 components, all 133 list rows, even FooterComponent.
 
-Click. In our runs, five seconds gave about 290 bars. Chrome sends roughly one mousemove per frame while the mouse moves, and every one is a cycle, plus five from the footer's one-second timer. Your number depends on your mouse and your screen, so compare with the one you wrote down.
-Click. One of those bars refreshed all six components on the page and all 133 rows in the sidebar, because a mouse moved over a map. Ask the room: the app has seven components, why six? The seventh is the detail page, and it only exists on /legeplads/:id.
-Ask the room: what on this page needs to know where the mouse is? Nothing. Click. Leaflet adds its mousemove, drag and zoom listeners when it creates the map, and we create it inside Angular's zone, so zone.js patches them and runs change detection after each one. Next slide: how to step outside the zone.</aside>
+In our runs, five seconds gave about 300 bars. Chrome sends roughly one mousemove per frame while the mouse moves, and every one is a cycle, plus five from the footer's one-second timer. Your number depends on your mouse and your screen, so compare with the one you wrote down.
+Click. One of those bars checked all six components on the page and all 133 rows in the sidebar, because a mouse moved over a map. Ask the room: the app has seven components, why six? The seventh is the detail page, and it only exists on /legeplads/:id.
+Ask the room: what on this page needs to know where the mouse is? Nothing. Click. Leaflet adds its mousemove, drag and zoom listeners when it creates the map, and we create it inside Angular's zone, so zone.js patches them and runs change detection after each one.</aside>
 </section>

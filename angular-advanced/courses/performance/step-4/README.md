@@ -20,5 +20,5 @@ Open `http://localhost:4200/`. Clicking a playground selects it; the footer's `D
 The dev server's hot module replacement loads every `@defer` chunk up front. To see the chunks load lazily in the Network tab, start without it:
 
 ```bash
-npm start -- --no-hmr
+npm run start:no-hmr
 ```

@@ -1,0 +1,30 @@
+<section data-template="claim-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Lists: track and computed</h2>
+  </div>
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li><code>track playground.id</code>: a new list, same ids: 25.6 ms, 0 rows recreated</li>
+<li><code>track playground</code>: <span style="color:#ff8c00">58.0 ms</span>, all 133 rows recreated</li>
+<li>Per-row values: <code>computed</code>, not a method call in the template</li>
+</ul>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-html" data-line-numbers="2">@for (playground of playgrounds();
+     track playground.id) {
+  &lt;loop-sidebar-list-item
+    [playground]="playground"
+    [location]="location()" …/&gt;
+}
+// sidebar-list-item.component.ts
+description = computed(() =&gt; …);
+</code></pre>
+  </div>
+  <aside class="notes">Not a lab: the app already does it right. Numbers from a copy of step-3, dev build, CPU 4x: the server list (new objects, same ids) replaces the cached list.
+track playground.id: 25.6 ms median, 0 rows created. track playground (object identity): 58.0 ms median, 133 rows destroyed + 133 created.
+
+One slide on lists, because every app has one. The list in our app is already done right, so this is to check in yours.
+@for needs a track expression. It tells Angular which row is which when the list changes. The app tracks by id. When the server answer replaces the cached list, every object is new but the ids are the same, so Angular keeps all 133 rows and only updates bindings: 25.6 milliseconds with the CPU slowed down.
+Track the object itself, and every new object is a new row: 133 rows destroyed and 133 created, 58 milliseconds. Ask the room: what does your API return on a refresh, the same objects or new ones?
+Second rule: anything a row derives, put it in a computed, like description and distance here. A method call in a template runs on every check of that row; a computed runs only when what it reads changes.</aside>
+</section>

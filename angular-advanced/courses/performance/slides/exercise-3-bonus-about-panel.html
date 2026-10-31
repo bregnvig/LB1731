@@ -1,16 +1,15 @@
 <section data-template="exercise-step">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - Bonus: Om appen</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.85em"><code><span style="color:#ff8c00">import()</span></code> + <code><span style="color:#ff8c00">NgComponentOutlet</span></code>: for a type chosen at runtime, like a dialog service. A fixed panel? <code><span style="color:#ff8c00">@defer (on interaction)</span></code> or <code><span style="color:#ff8c00">(when open())</span></code> is simpler.</span></p>
-<ol>
-<li><span style="font-size:0.85em">New file <code><span style="color:#ff8c00">src/app/about/about.component.ts</span></code>: a standalone <code><span style="color:#ff8c00">AboutComponent</span></code> with <code><span style="color:#ff8c00">&lt;h4&gt;Om appen&lt;/h4&gt;</span></code> and a sentence</span></li>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35"><code>import()</code> + <code>NgComponentOutlet</code>: for a type chosen at runtime, like a dialog service. A fixed panel? <code>@defer (on interaction)</code> is simpler.</p>
+<ol style="font-size:0.85em;line-height:1.35">
+<li>New file <code>src/app/about/about.component.ts</code>: a standalone <code>AboutComponent</code> with <code>&lt;h4&gt;Om appen&lt;/h4&gt;</code> and a sentence</li>
 </ol>
   </div>
-  <aside class="notes">Lazy dynamic component: await import + NgComponentOutlet.
-Premise: for a fixed panel behind a button, @defer (on interaction) or (when open()) is simpler. import() + NgComponentOutlet is for when code decides the type at runtime: a dialog service, a CMS-driven widget, a plugin list.
+  <aside class="notes">Hidden: the Om appen bonus is in the solution (step-4) but not taught. Lazy dynamic component: await import + NgComponentOutlet.
 
-For those who are done. First, be honest about when you'd use this. If the panel is always the same component behind the same button, @defer on interaction, or when with a signal that the button sets, does it in the template and you're done. This bonus is for the other case: the component type is decided in code. A dialog service that gets a component to open, a dashboard that builds widgets from a config. Our Om appen panel is the smallest place to practise that by hand.
+If the panel is always the same component behind the same button, @defer on interaction does it in the template. This bonus is for the other case: the component type is decided in code. A dialog service that gets a component to open, a dashboard that builds widgets from a config.
 Step one: a small AboutComponent in its own file.</aside>
 </section>

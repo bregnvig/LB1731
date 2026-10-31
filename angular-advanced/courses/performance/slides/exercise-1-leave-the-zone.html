@@ -1,35 +1,29 @@
 <section data-template="exercise-step-code">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Leave the zone</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">Open <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code></span></p>
-<ol>
-<li><span style="font-size:0.7em">Inject <code><span style="color:#ff8c00">NgZone</span></code> as <code><span style="color:#ff8c00">zone</span></code> (import <code><span style="color:#ff8c00">inject</span></code>, <code><span style="color:#ff8c00">NgZone</span></code> from <code>@angular/core</code>)</span></li>
-<li><span style="font-size:0.7em">Wrap only the <code><span style="color:#ff8c00">mapContructor(...)</span></code> call in <code><span style="color:#ff8c00">this.zone.runOutsideAngular(() =&gt; ...)</span></code></span></li>
-<li><span style="font-size:0.7em"><strong>Measure after:</strong> reload, record exactly 5 seconds of mouse moves</span></li>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>In <code>leaflet.component.ts</code> (<code>src/app/leaflet</code>), inject <code>NgZone</code> as <code>zone</code></li>
+<li>Wrap only the <code>createMap(...)</code> call in <code>runOutsideAngular</code>, as on the right</li>
+<li>Reload, record 5 s of mouse moves again. Write down your count</li>
 </ol>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1,3-4,11">  private zone = inject(NgZone);
-  ngAfterViewInit() {
-    const _map = this.zone.runOutsideAngular(() =&gt;
-      mapContructor(this.mapId, {
-        zoomControl: false,
-        center: undefined,
-        zoom: 7,
-        minZoom: 4,
-        maxZoom: 19,
-        layers: [...]
-      }));
-    control.zoom({ position: 'topleft' }).addTo(_map);
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript" data-line-numbers="1,4-5,7">private zone = inject(NgZone);
+// …
+ngAfterViewInit() {
+  const _map = this.zone.runOutsideAngular(
+    () =&gt; createMap(this.mapId, {
+      // …
+    }));
 </code></pre>
   </div>
-  <div class="block" data-type="text" data-name="callout" style="left:38px;top:520px;width:440px;height:auto;z-index:13;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Trap:</span> mind the closing <code><span style="color:#ff8c00">}))</span></code></span></p>
+  <div class="block" data-type="text" data-name="callout" style="left:64px;top:402px;width:540px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35"><span style="color:#ff8c00">Trap:</span> mind the closing <code>}))</code></p>
   </div>
-  <aside class="notes">Inject NgZone, wrap mapContructor(...) only. Mind the closing })). Reload, record 5 s again.
+  <aside class="notes">Inject NgZone, wrap createMap(...) only. Mind the closing })). Reload, record 5 s again, write it down.
 
-Now the fix. Open leaflet.component.ts. Inject NgZone, and in ngAfterViewInit wrap just the call that creates the map. It's one expression, so it becomes an arrow function that returns the map. Watch the closing: two parentheses after the options object. Add inject and NgZone to the import from @angular/core.
-Measure after. Reload, record exactly five seconds of mouse moves again. Next slide: what you should get.</aside>
+Now the fix. Open leaflet.component.ts. Inject NgZone into a field called zone, and add inject and NgZone to the import from @angular/core. In ngAfterViewInit wrap just the call that creates the map. It's one expression, so it becomes an arrow function that returns the map. Watch the closing: two parentheses after the options object.
+Measure after. Reload, record exactly five seconds of mouse moves again, and write the number next to the first one.</aside>
 </section>

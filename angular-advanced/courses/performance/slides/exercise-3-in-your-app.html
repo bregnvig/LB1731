@@ -1,0 +1,18 @@
+<section data-template="exercise-step">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - In your app</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li><code>npm run build</code>: write down <code>Initial total</code></li>
+<li><code>npm run build -- --stats-json</code>, open it in the analyzer: the three biggest things in <code>main</code>?</li>
+<li>Registered whole? Make it one by one. Rarely visited route? Load it lazily</li>
+<li>Heavy and below the fold? <code>@defer</code> it, then build again</li>
+</ol>
+  </div>
+  <aside class="notes">Monday homework for lab 3: Initial total, analyzer, biggest three, then the cheapest change first.
+
+Exercise 3 in your own app. Build it and write down Initial total. Then the stats flag and the analyzer, and name the three biggest things in main.
+Then work down the list: something registered whole, like icons or locales, becomes one-by-one. Routes almost nobody visits get loadComponent. Heavy components below the fold or behind a click get @defer. Build after each change.
+Ask the room: who will open the analyzer on their own app this week?</aside>
+</section>

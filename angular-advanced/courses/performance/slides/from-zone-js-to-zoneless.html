@@ -1,32 +1,29 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
-    <h2>From Zone.js to zoneless</h2>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>From zone.js to zoneless</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li>Zone.js guesses: something async finished, so check</li>
+<li>zone.js guesses: something async finished, so check</li>
 <li>Zoneless is told: a signal changed, check that view</li>
-<li>New apps since v21 are zoneless. This app opts in to Zone.js. Today we opt out</li>
+<li>Stable in v20, the default since v21. This app opts in to zone.js</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">// src/main.ts, exercise 2
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript">// src/main.ts, exercise 2
 providers: [
   provideZoneChangeDetection(),
-  ...
+  // …
 ]
 
-// After exercise 2
-providers: [
-  provideZonelessChangeDetection(),
-  ...
-]
+// after exercise 2
+provideZonelessChangeDetection(),
 </code></pre>
   </div>
-  <aside class="notes">Recap from signals. Guesses vs is told.
-runOutsideAngular from exercise 1 can stay: it still compiles and does nothing harmful zoneless.
+  <aside class="notes">Recap from signals. Guesses vs is told. Versions: zoneless stable in v20, default in v21.
+runOutsideAngular from exercise 1 can stay: it still compiles and does no harm zoneless.
 
-You saw this slide in the signals course, so one minute. Zone.js guesses: an event or a timer finished, so maybe something changed, check. Zoneless is told: a signal a template reads changed, so refresh that view.
-New apps since v21 are zoneless and write nothing in main.ts. Our app still says provideZoneChangeDetection. In exercise 2 you swap it for provideZonelessChangeDetection and take zone.js out of the build.
+You saw this in the signals course, so one minute. zone.js guesses: an event or a timer finished, so maybe something changed, check. Zoneless is told: a signal a template reads changed, so refresh that view.
+Zoneless became stable in Angular 20 and is the default for new apps since 21: they write nothing in main.ts. Our app still says provideZoneChangeDetection. In exercise 2 you swap it for provideZonelessChangeDetection and take zone.js out of the build.
 Your runOutsideAngular from exercise 1 can stay. Ask the room: what will happen to the footer counter when the zone is gone? Hold that thought, next slide.</aside>
 </section>

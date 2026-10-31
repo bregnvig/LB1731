@@ -15,17 +15,13 @@
       "hidden": true
     },
     {
-      "file": "angular-devtools-profiler.html"
-    },
-    {
-      "file": "chrome-performance-angular-track.html",
-      "hidden": true
-    },
-    {
       "file": "exercise-1-getting-started.html"
     },
     {
       "file": "exercise-1-measure-before.html"
+    },
+    {
+      "file": "chrome-performance-angular-track.html"
     },
     {
       "file": "exercise-1-measure-before-2.html"
@@ -40,10 +36,16 @@
       "file": "exercise-1-measure-after.html"
     },
     {
+      "file": "exercise-1-bonus-list-click.html"
+    },
+    {
       "file": "exercise-1-bonus.html"
     },
     {
       "file": "exercise-1-bonus-2.html"
+    },
+    {
+      "file": "exercise-1-in-your-app.html"
     },
     {
       "file": "from-zone-js-to-zoneless.html"
@@ -63,13 +65,14 @@
       "hidden": true
     },
     {
-      "file": "zoneless-what-breaks.html"
+      "file": "zoneless-what-breaks.html",
+      "hidden": true
+    },
+    {
+      "file": "on-angular-15-to-19.html"
     },
     {
       "file": "exercise-2-measure-before.html"
-    },
-    {
-      "file": "exercise-2-measure-before-2.html"
     },
     {
       "file": "exercise-2-go-zoneless.html"
@@ -78,25 +81,30 @@
       "file": "exercise-2-fix-the-footer.html"
     },
     {
-      "file": "exercise-2-fix-the-footer-2.html"
+      "file": "exercise-2-zoneless-result.html"
+    },
+    {
+      "file": "exercise-2-remove-eager.html"
     },
     {
       "file": "exercise-2-measure-after.html"
     },
     {
-      "file": "exercise-2-profiler-after.html"
+      "file": "lists-track-and-computed.html"
     },
     {
-      "file": "exercise-2-measure-after-2.html"
+      "file": "exercise-2-in-your-app.html"
     },
     {
-      "file": "reading-the-ng-build-output.html"
+      "file": "reading-the-ng-build-output.html",
+      "hidden": true
     },
     {
-      "file": "reading-the-ng-build-output-2.html"
+      "file": "what-ends-up-in-main.html"
     },
     {
-      "file": "lazy-routes.html"
+      "file": "lazy-routes.html",
+      "hidden": true
     },
     {
       "file": "preloading-and-canmatch.html",
@@ -106,17 +114,14 @@
       "file": "defer-triggers.html"
     },
     {
-      "file": "defer-placeholder-and-loading.html"
-    },
-    {
-      "file": "defer-what-cant-be-deferred.html"
-    },
-    {
       "file": "optimized-images-ngsrc.html",
       "hidden": true
     },
     {
       "file": "exercise-3-getting-started.html"
+    },
+    {
+      "file": "exercise-3-whats-in-main.html"
     },
     {
       "file": "exercise-3-lazy-route.html"
@@ -134,34 +139,32 @@
       "file": "exercise-3-see-it-load.html"
     },
     {
-      "file": "exercise-3-see-it-load-2.html"
+      "file": "exercise-3-bonus-about-panel.html",
+      "hidden": true
     },
     {
-      "file": "exercise-3-bonus-about-panel.html"
+      "file": "exercise-3-bonus-about-panel-footer.html",
+      "hidden": true
     },
     {
-      "file": "exercise-3-bonus-about-panel-footer.html"
-    },
-    {
-      "file": "exercise-3-bonus-about-panel-2.html"
+      "file": "exercise-3-bonus-about-panel-2.html",
+      "hidden": true
     },
     {
       "file": "exercise-3-what-we-measured.html"
     },
     {
-      "file": "exercise-3-each-change-alone.html"
+      "file": "exercise-3-each-change-alone.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-3-cold-load.html"
+    },
+    {
+      "file": "exercise-3-in-your-app.html"
     },
     {
       "file": "leaks-in-angular-apps.html"
-    },
-    {
-      "file": "cleaning-up-with-destroyref.html"
-    },
-    {
-      "file": "heap-snapshots.html"
-    },
-    {
-      "file": "heap-snapshots-2.html"
     },
     {
       "file": "virtual-scroll.html",
@@ -175,16 +178,16 @@
       "file": "exercise-4-find-the-leaks.html"
     },
     {
-      "file": "exercise-4-find-the-leaks-2.html"
-    },
-    {
       "file": "exercise-4-read-the-snapshot.html"
     },
     {
-      "file": "exercise-4-read-the-retainers.html"
+      "file": "exercise-4-what-we-found.html"
     },
     {
-      "file": "exercise-4-read-the-retainers-2.html"
+      "file": "what-holds-the-old-dom.html"
+    },
+    {
+      "file": "cleaning-up-with-destroyref.html"
     },
     {
       "file": "exercise-4-fix-the-leaks.html"
@@ -193,19 +196,10 @@
       "file": "exercise-4-measure-after.html"
     },
     {
-      "file": "exercise-4-measure-after-2.html"
+      "file": "exercise-4-bonus-take-until-destroyed.html"
     },
     {
-      "file": "exercise-4-bonus-content-visibility.html",
-      "hidden": true
-    },
-    {
-      "file": "exercise-4-bonus-content-visibility-2.html",
-      "hidden": true
-    },
-    {
-      "file": "exercise-4-bonus-content-visibility-3.html",
-      "hidden": true
+      "file": "exercise-4-in-your-app.html"
     },
     {
       "file": "wrap-the-fixes-of-the-day.html"

@@ -1,0 +1,18 @@
+<section data-template="exercise-step">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - In your app</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li>Open your slowest screen. <strong>Profiler</strong>, record 5 s of what users do there</li>
+<li>Count the bars. Click the biggest: what was checked?</li>
+<li>Still on zone.js? Search for <code>addEventListener</code>, <code>setInterval</code> and map or chart libraries</li>
+<li>Wrap the busy ones in <code>runOutsideAngular</code>, then measure again</li>
+</ol>
+  </div>
+  <aside class="notes">Monday homework for lab 1: Profiler on their own slowest screen, then grep for listeners and timers.
+
+Here's exercise 1 in your own app. Open the screen your users call slow, record five seconds of what they normally do there, and count the bars. Click the biggest bar and look at what was checked.
+If the app still runs zone.js, look for the things that fire often: addEventListener, setInterval, and third-party widgets like maps, charts and editors that add their own listeners. Wrap where they're created in runOutsideAngular, and measure again.
+Ask the room: who has a map, a chart or a drag-and-drop library in their app?</aside>
+</section>

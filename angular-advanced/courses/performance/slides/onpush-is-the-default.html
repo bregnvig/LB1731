@@ -1,30 +1,30 @@
 <section data-template="claim-code">
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>OnPush is the default (v22)</h2>
   </div>
-  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
 <li>Every component is OnPush unless it opts out</li>
-<li>The old default is now called <code><span style="color:#ff8c00">Eager</span></code></li>
-<li>OnPush is checked when an input changes, an event fires in its template, or a signal its template reads changes</li>
+<li>The opt-out: <span style="color:#ff8c00">Eager</span>, the old Default</li>
+<li>Checked on a new input, a template event, a signal it reads. <span style="color:#ff8c00">A mutated input object</span> is no new input</li>
 </ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">@Component({
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
+    <pre style="font-size:22px;line-height:30px"><code class="language-typescript" data-line-numbers="3-4">@Component({
   selector: 'loop-footer',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  template: `...`,
-  imports: [RouterLink],
+  changeDetection:
+    ChangeDetectionStrategy.Eager,
+  // …
 })
 export class FooterComponent {
 </code></pre>
   </div>
-  <aside class="notes">Recap from signals. Eager = the old Default: checked whenever the traversal reaches it.
-Exercise 2: footer counter becomes a signal, then the Eager line goes, in all seven components.
-Cut from the slide: ng update adds Eager to every component, so every component in this app has it.
+  <aside class="notes">Recap from signals. Eager = the old Default: checked whenever the walk reaches it. ng update to 22 adds Eager to every component.
+Mutated input object: same reference, so OnPush sees no change. That's an OnPush rule, with or without zone.js.
 
 Since Angular 22 every component is OnPush unless it says otherwise. The old default is now called Eager, and Default is a deprecated alias for it.
-Eager means: check me every time change detection walks past. That's how the footer's plain field works under Zone.js: the zone runs a cycle every second, the footer is checked, the new number shows. ng update adds Eager to every component so nothing changes behaviour, and our app looks exactly like that.
-An OnPush component is checked when an input changes, an event fires in its template, or a signal its template reads changes. The third one is exercise 2: make the counter a signal, then the Eager lines can go.
-Ask the room: in your own app after ng update to 22, how many Eager lines are there? That's your to-do list.</aside>
+Eager means: check me every time change detection walks past. That's how the footer's plain field works under zone.js: the zone runs a cycle every second, the footer is checked, the new number shows. ng update adds Eager to every component so nothing changes behaviour, and our app looks exactly like that.
+An OnPush component is checked when an input gets a new value, an event fires in its template, or a signal its template reads changes.
+The catch with inputs: a new value means a new reference. Push to an array that a child gets as an input, and the reference is the same, so OnPush sees nothing and the child stays stale. Pass a new array or object, or make it a signal. That's OnPush, it has nothing to do with zone.js.
+In exercise 2 you make the counter a signal, then the Eager lines can go. Ask the room: in your own app after ng update to 22, how many Eager lines are there? That's your to-do list.</aside>
 </section>

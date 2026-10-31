@@ -1,19 +1,17 @@
 <section data-template="exercise-step-image">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - Bonus: Om appen</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><code><span style="color:#ff8c00">npm run build</span></code>: a new lazy <code><span style="color:#ff8c00">about-component</span></code> chunk of 481 bytes.</span></p>
-<p><span style="font-size:0.7em">With <code><span style="color:#ff8c00">npm start -- --no-hmr</span></code> and the Network tab open: it loads on the first click only.</span></p>
-<p><span style="font-size:0.7em">Already in the solution: read its footer.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol style="font-size:0.85em;line-height:1.35">
+<li><code>npm run build</code>: a new lazy <code>about-component</code> chunk of 477 bytes</li>
+<li><code>npm run start:no-hmr</code>, Network open: it loads on the first click only</li>
+</ol>
   </div>
-  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:510px;top:160px;width:750px;height:468.8px;z-index:12">
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:630px;top:160px;width:630px;height:393.8px;z-index:12">
     <img src="images/app-om-appen.jpg" alt="The Om appen panel open in the footer">
   </div>
-  <aside class="notes">Already in solution 3 (labs/performance/exercise-4 has it).
-Build: about-component 481 bytes in the lazy table. --no-hmr Network: about.component-….js on the first click, nothing on the next ones.
+  <aside class="notes">Hidden. Build: about-component 477 B in the lazy table. start:no-hmr, Network: about.component-….js on the first click, nothing on the next ones.
 
-Build and you get a tiny lazy chunk, about-component, 481 bytes. In the browser with no HMR, open Network, click Om appen: one request. Close it and open it again: no new request.
-It's already in the solution, so if you didn't get to it, open the footer there.
-Ask the room: where in your app does code, not a template, decide which component to show?</aside>
+Build and you get a tiny lazy chunk, about-component, 477 bytes. In the browser with no HMR, open Network, click Om appen: one request. Close it and open it again: no new request.</aside>
 </section>

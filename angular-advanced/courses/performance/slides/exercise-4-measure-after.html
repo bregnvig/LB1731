@@ -1,18 +1,18 @@
-<section data-template="exercise-step">
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+<section data-template="exercise-result">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 4 - Measure after</h2>
   </div>
-  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
-    <ol>
-<li><span style="font-size:0.85em">Reload the page</span></li>
-<li><span style="font-size:0.85em">The same as before: trash icon, snapshot 1, 5 rounds, trash icon, snapshot 2</span></li>
-</ol>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00"><code>Detached &lt;leaflet&gt;</code> 10 → 0</span></h2>
   </div>
-  <div class="block" data-type="text" data-name="callout" style="left:38px;top:560px;width:1150px;height:auto;z-index:12;text-align:left">
-    <p><span style="font-size:0.85em"><span style="color:#ff8c00">Same trap as before:</span> clear the console and don't select old nodes before snapshot 2, or <strong>DevTools console</strong> keeps them alive.</span></p>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <h2 class="keep-case"><span style="color:#ff8c00"><code>FooterComponent</code> 11 → 1</span></h2>
   </div>
-  <aside class="notes">Measure as before. Trap: clear the console, don't select old nodes.
+  <div class="block" data-type="text" data-name="why" style="left:64px;top:371px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:0.85em;line-height:1.35">After 5 rounds. The old DOM trees are gone too.</p>
+  </div>
+  <aside class="notes">Click: Detached &lt;leaflet&gt; 10 -&gt; 0 (the row is gone). FooterComponent 11 -&gt; 1. No Detached &lt;loop-sidebar-list-item&gt;, &lt;loop-home&gt;, &lt;loop-footer&gt; or &lt;footer&gt; rows either (3 of 3 runs, step-5).
 
-Then reload and measure exactly the same way: trash can, snapshot one, five rounds, trash can, snapshot two.
-The trap from the snapshot slide bites hardest here: clear the console and don't select old nodes before snapshot two, or DevTools console keeps them alive and your after number lies.</aside>
+Click. Detached &lt;leaflet&gt; goes from 10 to nothing, the row is gone. And one FooterComponent, the one on screen. The detached lists are gone too: no more 1,330 old rows.
+Ask the room: if you still saw FooterComponents growing, what would you read next? The Retainers pane, again.</aside>
 </section>

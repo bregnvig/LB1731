@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, DestroyRef, inject, Input, NgZone, OnDestroy } from '@angular/core';
-import { control, latLng, map as mapContructor, tileLayer } from 'leaflet';
-import { ReplaySubject, Subscription, filter, map, pairwise, startWith } from 'rxjs';
+import { AfterViewInit, Component, DestroyRef, inject, Input, NgZone } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { control, latLng, map as createMap, tileLayer } from 'leaflet';
+import { ReplaySubject, filter, map, pairwise, startWith } from 'rxjs';
 import { Center } from './center';
 import { Marker } from './marker';
 import { MarkerFactory } from './marker-factory';
@@ -13,13 +14,12 @@ const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
     selector: 'leaflet',
     template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId"></div>',
 })
-export class LeafletComponent implements AfterViewInit, OnDestroy {
+export class LeafletComponent implements AfterViewInit {
 
   @Input() mapId = 'leafletMap';
 
   private zone = inject(NgZone);
   private destroyRef = inject(DestroyRef);
-  private subscriptions: Subscription[] = [];
   private center$ = new ReplaySubject<Center | undefined | null>(1);
   private markers$ = new ReplaySubject<Marker[] | undefined>(1);
 
@@ -32,7 +32,7 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const _map = this.zone.runOutsideAngular(() => mapContructor(this.mapId, {
+    const _map = this.zone.runOutsideAngular(() => createMap(this.mapId, {
       zoomControl: false,
       center: undefined,
       zoom: 7,
@@ -45,23 +45,25 @@ export class LeafletComponent implements AfterViewInit, OnDestroy {
     this.destroyRef.onDestroy(() => _map.remove());
     control.zoom({ position: 'topleft' }).addTo(_map);
     control.scale().addTo(_map);
-    this.subscriptions.push(
-      this.center$.pipe(map(center => center?.zoom), filter(zoom => !!zoom)).subscribe(zoom => _map.setZoom(zoom!)),
-      this.center$.pipe(filter(center => !!center)).subscribe(center => _map.setView(latLng(center!.lat, center!.lng))),
-      this.markers$.pipe(
-        startWith([]),
-        map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
-        map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
-        pairwise(),
-      ).subscribe(([previous, current]) => {
-        previous?.forEach(m => m && _map.removeLayer(m));
-        current?.forEach(m => m && m.addTo(_map));
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
+    this.center$.pipe(
+      map(center => center?.zoom),
+      filter(zoom => !!zoom),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(zoom => _map.setZoom(zoom!));
+    this.center$.pipe(
+      filter(center => !!center),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(center => _map.setView(latLng(center!.lat, center!.lng)));
+    this.markers$.pipe(
+      startWith([]),
+      map(markers => (markers?.filter(isMarker) ?? []) as Marker[]),
+      map(markers => markers?.map(m => m && MarkerFactory.newMarker(latLng(m.lat, m.lng), false, m.message ?? ''))),
+      pairwise(),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(([previous, current]) => {
+      previous?.forEach(m => m && _map.removeLayer(m));
+      current?.forEach(m => m && m.addTo(_map));
+    });
   }
 
 }
