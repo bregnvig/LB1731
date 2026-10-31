@@ -1,0 +1,30 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
+    <h2>Leaks in Angular apps</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:239px;width:520px;height:auto;z-index:11;text-align:left">
+    <p>A leak: something that lives longer than your component still points at it</p>
+<ul>
+	<li><span style="color:#FF8C00"><code>setInterval</code></span> and timers</li>
+	<li>listeners on <span style="color:#FF8C00"><code>window</code></span> / <span style="color:#FF8C00"><code>document</code></span></li>
+	<li>third-party objects: a Leaflet map</li>
+	<li>a manual <span style="color:#FF8C00"><code>subscribe</code></span> to something long-lived</li>
+</ul>
+  </div>
+  <div class="block fragment fade-down" data-type="text" data-name="text-2" style="left:64px;top:520px;width:520px;height:auto;z-index:12;text-align:left">
+    <p>Navigate away ten times: ten components nobody can see, still in memory</p>
+  </div>
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:640px;top:239px;width:614px;height:180.1px;z-index:13">
+    <img src="images/demo-leaks-counters.jpg" alt="The /performance/leaks demo: Created 11, Collected 0, Still alive 11">
+  </div>
+  <aside class="notes">Demo: /performance/leaks. Mount a playground card, Unmount, Mount + unmount 10 times: Created 11, Still alive 11; Memory → Collect garbage: still 11. Reload, tick Use the fix, Mount + unmount 10 times, collect garbage: Created 10, Collected 10, Still alive 0.
+Click: ten components nobody can see.
+
+Garbage collection frees what nothing points to. A leak is when something that lives longer than your component still points at it. In a single page app the page lives for hours, so every navigation can add one more.
+The usual suspects. setInterval: the browser holds your callback, and the callback holds the component. Listeners you put on window or document yourself. Third-party objects like a Leaflet map, which adds its own listener on window. And a subscribe you made by hand to something that outlives the component.
+Let me show you. /performance/leaks. Mount a card, unmount it, then Mount + unmount 10 times. Created 11, Still alive 11. Open the Memory tab and click Collect garbage: still 11. Nothing lets go of them.
+Reload, tick Use the fix, same clicks, collect garbage: Created 10, Collected 10, Still alive 0.
+Click. That's the leak in one sentence: ten components nobody can see, still in memory.
+Ask the room: where in your own app do you call setInterval or addEventListener, and who stops it?
+Two of these suspects are in our app on purpose, the footer's interval and the map. That's exercise 4.</aside>
+</section>

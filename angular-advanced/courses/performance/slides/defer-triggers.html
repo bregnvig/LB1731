@@ -1,0 +1,32 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>@defer and its triggers</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:540px;height:auto;z-index:11;text-align:left">
+    <p>Components, directives and pipes used only in the block move to a lazy chunk</p>
+<p>Default trigger: <span style="color:#FF8C00"><code>on idle</code></span></p>
+<p>Combine with <span style="color:#FF8C00"><code>;</code></span>, any one fires</p>
+<p><span style="color:#FF8C00"><code>prefetch on ...</code></span> downloads early, renders later</p>
+<p><span style="color:#FF8C00"><code>when</code></span> is one-shot</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:240px;width:620px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 24px; tab-size: 4;"><code class="language-html">@defer (on idle) { ... }
+@defer (on viewport) { ... }
+@defer (on interaction(btn)) { ... }
+@defer (on hover(btn)) { ... }
+@defer (on timer(5s)) { ... }
+@defer (when loggedIn()) { ... }
+
+@defer (on interaction(btn); prefetch on idle) { ... }
+</code></pre>
+  </div>
+  <aside class="notes">Demo: /performance/defer. Network, filter JS, reload: idle + prefetch chunks at once, timer at 3 s; hover "Hover me": hover-loaded chunk. Click "Downloaded already. Click me": renders with no new request.
+Each card names the chunk it came from.
+No reference, as in "on viewport" or "on hover": the trigger watches the @placeholder, which then needs exactly one root element.
+
+@defer is lazy loading for part of a template. Everything inside the block that's only used there, components, directives, pipes, goes into its own chunk and is fetched when the trigger fires.
+Let me show you. Network tab, filter JS, reload. The idle card and the prefetch chunk come in right away, the timer card three seconds later. Ask the room: what do you think happens when I hover "Hover me"? A new request, hover-loaded. Now the prefetch card: "Downloaded already. Click me". I click, it renders, and there's no new request. That's prefetch: download early, show later.
+Triggers: on idle waits for the browser to be idle, and it's the default. On viewport waits for the placeholder to scroll into view. Without a reference, viewport, hover and interaction watch the placeholder, so the placeholder needs exactly one root element. That's why the footer's placeholder in the exercise is a single empty footer. On interaction and on hover react to the user. On timer waits a fixed time. When takes any condition, and it's one-shot: once true, the block stays.
+Several triggers are combined with a semicolon and any one of them fires.
+In the exercise you wrap the map in on idle and the footer in on viewport. Don't guess which change is the biggest win: measure it.</aside>
+</section>

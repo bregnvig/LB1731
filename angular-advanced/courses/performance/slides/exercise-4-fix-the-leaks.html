@@ -1,0 +1,33 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Fix the leaks</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>: keep the id from <code><span style="color:#ff8c00">setInterval</span></code> and call <code><span style="color:#ff8c00">clearInterval</span></code> in <code><span style="color:#ff8c00">inject(DestroyRef).onDestroy</span></code>.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code>: inject <code><span style="color:#ff8c00">DestroyRef</span></code> and call <code><span style="color:#ff8c00">remove()</span></code> on the map from <code><span style="color:#ff8c00">onDestroy</span></code>, right after the map is created.</span></p><p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure after:</span> reload the page, then the same as before: trash icon, snapshot 1, 5 rounds, trash icon, snapshot 2.</span></p><p><span style="font-size:0.7em"><span style="color:#FF8C00">Same trap as before:</span> clear the console and don't select old nodes before snapshot 2, or <strong>DevTools console</strong> keeps them alive.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:160px;width:602px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.7em">After 5 rounds:</span></p>
+    <table>
+      <thead>
+        <tr><th style="padding:6px 24px 6px 0"></th><th style="padding:6px 24px 6px 0"><span style="font-size:0.7em">Before</span></th><th style="padding:6px 24px 6px 0"><span style="font-size:0.7em">After</span></th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em"><code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code></span></td><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em">10</span></td><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em;color:#FF8C00"><strong>0</strong></span></td></tr>
+        <tr><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em"><code><span style="color:#ff8c00">FooterComponent</span></code></span></td><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em">11</span></td><td style="padding:6px 24px 6px 0"><span style="font-size:0.7em;color:#FF8C00"><strong>1</strong></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="notes">Two fixes, both DestroyRef.onDestroy: clearInterval in footer.component.ts, map.remove() in leaflet.component.ts.
+After 5 rounds: Detached &lt;leaflet&gt; 10 -&gt; 0, FooterComponent 11 -&gt; 1 (DevTools Memory panel, step-4 vs step-5). Trap: clear the console, don't select old nodes.
+After the fix one small "Detached &lt;footer&gt;" can stay: the @defer placeholder of the footer, held by the on viewport IntersectionObserver. One, not one per round.
+Cut from the slide: live intervals 12 -&gt; 2 (counted with a wrapper around setInterval; after the fix the footer's plus one the dev build starts itself, a production build has only the footer's).
+
+Two leaks, two fixes, both with DestroyRef, like on the slide a moment ago.
+In footer.component.ts: keep the id that setInterval returns, and register inject(DestroyRef).onDestroy with a clearInterval of that id.
+In leaflet.component.ts: inject DestroyRef too, and right after the map is created, register a callback that calls remove on the map. The ngOnDestroy that unsubscribes can stay.
+Then reload and measure exactly the same way: trash can, snapshot one, five rounds, trash can, snapshot two.
+You should see Detached &lt;leaflet&gt; go from 10 to nothing, the row is gone, and one FooterComponent, the one on screen. With Detached in the filter you may still see one Detached &lt;footer&gt;: that's the placeholder of the footer's @defer, kept by the viewport observer. One, however many rounds you do.
+The trap from the last slide bites hardest here: clear the console and don't select old nodes before snapshot two, or DevTools console keeps them alive and your after number lies.
+If you're curious about intervals: we counted them with a small wrapper, 12 before and 2 after in a dev build, the footer's and one the dev build starts itself.
+Ask the room: if you still see FooterComponents growing, what would you read next? The Retainers pane, again.</aside>
+</section>

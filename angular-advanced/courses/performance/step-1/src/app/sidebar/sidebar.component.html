@@ -1,0 +1,18 @@
+<aside tabindex="1">
+  <nav>
+    <div class="list-group">
+      @for (playground of playgrounds(); track playground.id) {
+        <loop-sidebar-list-item 
+          [playground]="playground" 
+          [location]="location()" 
+          [active]="playground === selectedPlayground()" 
+          (click)="selectedPlayground.set(playground)"/>
+      } @empty {
+        <div class="list-group-item d-flex justify-content-between">
+          <span>Loading playgrounds</span>
+          <fa-icon size="lg" [icon]="['fas', 'spinner']" animation="spin"/>
+        </div>
+      }
+    </div>
+  </nav>
+</aside>

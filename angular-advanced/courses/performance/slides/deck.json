@@ -1,0 +1,142 @@
+{
+  "title": "Performance & Change Detection",
+  "slides": [
+    {
+      "file": "performance.html"
+    },
+    {
+      "file": "what-slow-means.html"
+    },
+    {
+      "file": "change-detection-in-one-minute.html"
+    },
+    {
+      "file": "what-is-zone-js.html",
+      "hidden": true
+    },
+    {
+      "file": "angular-devtools-profiler.html"
+    },
+    {
+      "file": "chrome-performance-angular-track.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-1-getting-started.html"
+    },
+    {
+      "file": "exercise-1-measure-before.html"
+    },
+    {
+      "file": "running-outside-zone-js.html"
+    },
+    {
+      "file": "exercise-1-leave-the-zone.html"
+    },
+    {
+      "file": "exercise-1-bonus.html"
+    },
+    {
+      "file": "from-zone-js-to-zoneless.html"
+    },
+    {
+      "file": "what-schedules-change-detection.html"
+    },
+    {
+      "file": "onpush-is-the-default.html"
+    },
+    {
+      "file": "moving-to-signals.html",
+      "hidden": true
+    },
+    {
+      "file": "zoneless-what-breaks.html"
+    },
+    {
+      "file": "exercise-2-go-zoneless.html"
+    },
+    {
+      "file": "exercise-2-fix-the-footer.html"
+    },
+    {
+      "file": "exercise-2-measure-after.html"
+    },
+    {
+      "file": "reading-the-ng-build-output.html"
+    },
+    {
+      "file": "lazy-routes.html"
+    },
+    {
+      "file": "preloading-and-canmatch.html",
+      "hidden": true
+    },
+    {
+      "file": "defer-triggers.html"
+    },
+    {
+      "file": "defer-placeholder-and-loading.html"
+    },
+    {
+      "file": "defer-what-cant-be-deferred.html"
+    },
+    {
+      "file": "optimized-images-ngsrc.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-3-getting-started.html"
+    },
+    {
+      "file": "exercise-3-load-less.html"
+    },
+    {
+      "file": "exercise-3-load-less-2.html"
+    },
+    {
+      "file": "exercise-3-see-it-load.html"
+    },
+    {
+      "file": "exercise-3-bonus-about-panel.html"
+    },
+    {
+      "file": "exercise-3-what-we-measured.html"
+    },
+    {
+      "file": "leaks-in-angular-apps.html"
+    },
+    {
+      "file": "cleaning-up-with-destroyref.html"
+    },
+    {
+      "file": "heap-snapshots.html"
+    },
+    {
+      "file": "virtual-scroll.html",
+      "hidden": true
+    },
+    {
+      "file": "weakmap-caches.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-4-find-the-leaks.html"
+    },
+    {
+      "file": "exercise-4-read-the-snapshot.html"
+    },
+    {
+      "file": "exercise-4-fix-the-leaks.html"
+    },
+    {
+      "file": "exercise-4-bonus-content-visibility.html",
+      "hidden": true
+    },
+    {
+      "file": "wrap-the-fixes-of-the-day.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

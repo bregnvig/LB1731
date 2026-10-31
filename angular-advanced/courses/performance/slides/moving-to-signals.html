@@ -1,0 +1,28 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Moving to signals: good and bad</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:200px;width:560px;height:auto;z-index:11;text-align:left">
+    <h3 style="color:#3cb371">Good</h3>
+<ul>
+	<li><strong>No markForCheck</strong>: a signal read in a template schedules the update itself</li>
+	<li><strong>No cleanup</strong>: <code>toSignal</code> unsubscribes and <code>effect</code> is destroyed with the component</li>
+	<li><code>computed</code> is <strong>lazy</strong> and memoised: it only runs when read</li>
+</ul>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:680px;top:200px;width:540px;height:auto;z-index:12;text-align:left">
+    <h3 style="color:#ff6b6b">Bad</h3>
+<ul>
+	<li><code>effect</code> is <strong>eager</strong>: it runs even if nobody needs the result</li>
+	<li><code>toSignal</code> is <strong>eager</strong>: it subscribes straight away, even if the signal is never read (an HTTP request still goes out)</li>
+</ul>
+<p><span style="font-size:0.7em;color:#a9a9a9">Use <code>computed</code> for derived values, <code>effect</code> for side effects only.</span></p>
+  </div>
+  <aside class="notes">Good: no markForCheck, no cleanup (injection context destroy), computed lazy + memoised.
+Bad: effect and toSignal are eager. effect runs during CD at least once; toSignal subscribes immediately.
+Rule: derive with computed, side effects only in effect.
+
+Moving to signals is mostly good news. A signal read in a template tells Angular to update that view, so no markForCheck. toSignal unsubscribes when its injection context is destroyed, and an effect is destroyed with it, so there is no cleanup code. And computed is lazy and memoised: if nobody reads it, the function never runs, and if the inputs did not change, it does not run again.
+Now the bad news, which is a performance point. effect and toSignal are eager. An effect runs during change detection whether or not anyone needs what it does. toSignal subscribes immediately, even if you never read the signal, so an HTTP request you forgot about still goes out.
+So the guidance: derive values with computed, because it only costs when read, and keep effect for real side effects. Do not use an effect to copy state, we covered that in the signals module.</aside>
+</section>
