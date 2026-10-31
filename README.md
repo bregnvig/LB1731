@@ -202,11 +202,11 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 
 > Demo: /performance/change-detection. All OnPush, signal on B: only B flashes. setTimeout on B: nothing flashes, B keeps field 0; click "click" on B: A and B flash, field jumps to 1.
 > The demo still runs zone.js: setTimeout on B does start a cycle, OnPush just skips B. Zoneless, no cycle would start at all.
-> Click: the rows zoneless does NOT schedule. Click: the rule.
-> Dropped row, say it: assigning a plain field never scheduled anything, not even with zone.js. The next cycle just happened to show it.
+> Click: "Only zone.js", the two that zoneless does NOT schedule. Click: the rule.
+> Not on the slide, say it: assigning a plain field never scheduled anything, not even with zone.js. The next cycle just happened to show it.
 >
-> Here's the list to keep in your head. Top three: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you. Those schedule a cycle with or without Zone.js.
-> Click. The bottom two used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
+> Here's the list to keep in your head. Both schedule a check, with or without Zone.js: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you. Those schedule a cycle with or without Zone.js.
+> Click. Only zone.js. These two used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
 > Switch to the demo. All OnPush, Reset. Click signal on B: only B flashes. Click setTimeout on B: nothing flashes, B still shows field 0. Click "click" on B: A and B flash, and now the field jumps to 1. The value was there all along, nobody asked Angular to look.
 > Be precise about what you just saw: the demo app still has zone.js. The timer did start a cycle, and OnPush skipped B because nothing marked it. Zoneless, there wouldn't even be a cycle. Same screen, one step further from an update.
 > Click. The rule of thumb: if the screen should change, change a signal.
@@ -240,14 +240,15 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 
 <details><summary>Speaker notes</summary>
 
+> Four clicks, one line each: what stops working → what to do instead.
 > Four things that break when zone.js goes. Only the first one is in our app: the footer.
 > Inputs: under OnPush a mutated object has the same reference, so nothing marks the child. fakeAsync needs zone.js/testing. NgZone.onStable and onMicrotaskEmpty never emit zoneless.
 >
 > Before you take zone.js out in exercise 2, here's what to look for in your own code.
-> First row, the one you'll hit today: a plain field written in setTimeout, setInterval, a promise or a subscribe. With zone.js, the cycle after the task picked it up. Zoneless, nothing schedules a cycle, so the screen stays where it was. Make it a signal. That's exactly the footer counter in a minute.
-> Second: an input object you mutate in place, like pushing to an array a child gets as an input. Same reference, so OnPush sees no change and the child stays stale. Pass a new array or a new object, or make it a signal.
-> Third, tests. fakeAsync and tick are built on zone.js. Keep zone.js/testing in the test polyfills for those specs, or move them to real timers or your test runner's fake timers.
-> Fourth: code that waits for the zone to settle, NgZone.onStable or onMicrotaskEmpty, often in third-party wrappers or old directives. Zoneless, those never emit. If what you want is "after Angular has rendered", that's afterNextRender.
+> Click. First, the one you'll hit today: a plain field written in setTimeout, setInterval, a promise or a subscribe. With zone.js, the cycle after the task picked it up. Zoneless, nothing schedules a cycle, so the screen stays where it was. Make it a signal. That's exactly the footer counter in a minute.
+> Click. Second: an input object you mutate in place, like pushing to an array a child gets as an input. Same reference, so OnPush sees no change and the child stays stale. Pass a new array or a new object, or make it a signal.
+> Click. Third, tests. fakeAsync and tick are built on zone.js. Keep zone.js/testing in the test polyfills for those specs, or move them to real timers or your test runner's fake timers.
+> Click. Fourth: code that waits for the zone to settle, NgZone.onStable or onMicrotaskEmpty, often in third-party wrappers or old directives. Zoneless, those never emit. If what you want is "after Angular has rendered", that's afterNextRender.
 > Ask the room: grep your app for fakeAsync and onStable. How many hits?
 
 </details>
@@ -263,11 +264,12 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 > labs/performance/exercise-2. Before: polyfills 35.09 kB, one footer bar per second, each refreshes all 6 components. One list click: 43 bars.
 > Change: zone.js out of polyfills, provideZonelessChangeDetection in main.ts.
 > Expect: the counter freezes. Next slide fixes it.
+> Full build before, cut from the slide (raw / transfer): main 1.53 MB / 357.55 kB, styles 242.57 kB / 25.55 kB, polyfills 35.09 kB / 11.52 kB, Initial total 1.81 MB / 394.62 kB.
 >
 > Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
 > Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer's timer, and clicking a bar shows it refreshed all six components. Then record one click on a playground in the list. We got 43 bars for that one click: Leaflet's pan, started from inside the zone.
 > Now the change. In angular.json delete the zone.js line from polyfills. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, in the import too. Since v21 zoneless is the default, so deleting the line would do the same; the solution keeps provideZonelessChangeDetection so the next reader sees the choice. Leave runOutsideAngular from exercise 1 where it is.
-> Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. That's the setInterval row in the zoneless table. Next slide fixes it.
+> Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. setInterval is on the "Only zone.js" list. Next slide fixes it.
 
 </details>
 
@@ -300,6 +302,7 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 > Click: idle / mouse = 1 bar per second, Footer only (was all 6).
 > Click: a list click is 3 bars, was 43. The first bar refreshes the whole tree because '' -> ':id' builds a new Home (two route entries, same component). A second click, ':id' -> ':id', reuses Home: that bar refreshes 2 of the 133 rows.
 > Click: polyfills 35.09 kB -> 494 bytes. main is about the same: the saving is zone.js.
+> Full build, cut from the slide (raw / transfer): main 1.53 MB / 357.12 kB, styles 242.57 kB / 25.55 kB, polyfills 494 bytes / 494 bytes, Initial total 1.77 MB / 383.17 kB.
 >
 > Measure after, the same way as before. Ten quiet seconds, then five seconds of mouse moves over the map, then a click in the list.
 > Click. Quiet: still one bar per second, because the number really does change every second. But click the bar: only FooterComponent. Before, that tick refreshed all six components and 133 rows. Mouse over the map: nothing new.
@@ -320,10 +323,11 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 > Initial = downloaded before anything shows. Lazy = fetched later (no lazy table yet).
 > Raw is the file, transfer is the estimate after compression. Look at both.
 > This is the exercise 3 starting point: zoneless, nothing lazy. Initial total 1.77 MB / 383.17 kB, main 1.53 MB.
+> Full output, cut from the slide (raw / transfer): main 1.53 MB / 357.12 kB, styles 242.57 kB / 25.55 kB, polyfills 494 bytes / 494 bytes, Initial total 1.77 MB / 383.17 kB.
 > Optional: ng build --stats-json writes stats.json for a bundle analyzer.
 >
-> Before we change anything, we learn to read what the build tells us. npm run build, and look at this table.
-> It's the initial chunk files: everything the browser has to download and run before the app starts. The Initial total line is the number we want to push down.
+> Before we change anything, we learn to read what the build tells us. npm run build, and look at the table it prints. On the slide are the two lines we care about.
+> The first table is the initial chunk files: everything the browser has to download and run before the app starts. The Initial total line is the number we want to push down.
 > Raw size is the file on disk. Estimated transfer size is what goes over the wire after compression. Users on a slow connection feel the second one; parsing and running cost the first one.
 > Once something is lazy, a second table shows up: lazy chunk files. You'll see it appear in the exercise.
 > Ask the room: main is 1.53 MB. What do you think is in there? Write your guess down, we'll check it after the exercise.
@@ -423,6 +427,7 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 <details><summary>Speaker notes</summary>
 
 > Lab exercise-3. npm run build before any change. Expect Initial total 1.77 MB / 383.17 kB, main 1.53 MB.
+> Full output, cut from the slide (raw / transfer): main 1.53 MB / 357.12 kB, styles 242.57 kB / 25.55 kB, polyfills 494 bytes / 494 bytes, Initial total 1.77 MB / 383.17 kB.
 > Everyone writes their guess down: which of the four changes wins?
 >
 > New exercise, and this one is about the first download. Go to labs/performance/exercise-3, npm install, and before you touch any code, npm run build.
@@ -525,9 +530,10 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 
 <details><summary>Speaker notes</summary>
 
-> Show after the exercise, compare with the sticky-note guesses. Click once to reveal the icon row and the punchline.
-> Each row is one change alone on a copy of the exercise 3 start (npm run build, 2026-10-30). Solution row = build of solution 3, bonus included.
-> Bottom line = their cumulative numbers, slide order, raw / transfer: route 1.77 MB / 383.35 kB, + map 1.62 MB / 346.89 kB, + footer 1.64 MB / 347.57 kB, + icons 618.31 kB / 125.49 kB (no bonus; the solution row has the Om appen bonus).
+> Show after the exercise, compare with the sticky-note guesses. Click once to reveal the two icon lines and the punchline.
+> Each line is one change alone on a copy of the exercise 3 start (npm run build, 2026-10-30). Solution line = build of solution 3, bonus included.
+> Transfer sizes, cut from the slide: before 383.17 kB, lazy detail route 383.35 kB, @defer footer 386.49 kB, @defer map 346.49 kB, only faSpinner 161.12 kB, the solution 126.18 kB.
+> Bottom line = their cumulative numbers, slide order, raw / transfer: route 1.77 MB / 383.35 kB, + map 1.62 MB / 346.89 kB, + footer 1.64 MB / 347.57 kB, + icons 618.31 kB / 125.49 kB (no bonus; the solution line has the Om appen bonus).
 >
 > Let's compare. Your own numbers are the bottom line: each build on top of the last. Ask the room: did the footer make it go up? It did, 1.62 to 1.64. To see what each change is worth by itself, I made each one alone on a copy of the starting point.
 > The lazy route: a one-kilobyte chunk, and Initial total doesn't move. The footer: same story, it even grows a little: splitting has a small cost of its own. Those two are about the pattern, not the bytes.
