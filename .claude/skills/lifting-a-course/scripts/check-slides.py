@@ -126,6 +126,8 @@ TYPES = {
                 b('why', 'text', 64, None, 1150, fragment=None, fonts={'0.85em'}, required=False, sample=EX('Why, in one line.'))]),
 }
 
+STEP_TYPES = {'exercise-start', 'exercise-step', 'exercise-step-code', 'exercise-step-image'}
+
 # Notes are for delivery. These phrases are authoring history and fail the check.
 NOTES_RESIDUE = re.compile(r'cut from the slide|not on the slide any ?more|so it fits|older notes|was moved|moved (here|to the notes)|previous version|we changed', re.I)
 # Slide text stays on the current step. The house opener is the one allowed reference to another exercise.
@@ -285,15 +287,28 @@ def main(argv):
         visible = sum(1 for x in deck['slides'] if not x.get('hidden'))
         if visible > VISIBLE_MAX:
             total += 1; print(f'{course.name}: {visible} visible slides (max {VISIBLE_MAX})')
-        # An exercise is one unbroken run: every visible slide between its first and last slide carries its name.
+        # Groups do an exercise on their own, outside the room: its step slides are one unbroken run with nothing
+        # to present, the last one sends them back, and the results (debrief) come after the run.
         shown = [x['file'] for x in deck['slides'] if not x.get('hidden')]
-        titles = [' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', parse(course / 'slides' / f)['blocks'].get('title', {}).get('inner', ''))).split()) for f in shown]
+        parsed = [parse(course / 'slides' / f) for f in shown]
+        titles = [' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', p['blocks'].get('title', {}).get('inner', ''))).split()) for p in parsed]
         ex = [int(m.group(1)) if (m := re.match(r'Exercise (\d+) - ', t)) else None for t in titles]
+        is_step = [p['template'] in STEP_TYPES for p in parsed]
         for n in sorted({e for e in ex if e}):
-            first, last = ex.index(n), len(ex) - 1 - ex[::-1].index(n)
-            for i in range(first, last + 1):
-                if ex[i] != n:
-                    total += 1; print(f'{course.name}/{shown[i]}: sits inside exercise {n}; title it "Exercise {n} - …" or move it out')
+            steps = [i for i in range(len(shown)) if ex[i] == n and is_step[i]]
+            if not steps:
+                continue
+            for i in range(steps[0], steps[-1] + 1):
+                if not (ex[i] == n and is_step[i]):
+                    total += 1; print(f'{course.name}/{shown[i]}: breaks up exercise {n}; groups work through it alone, so put this before the exercise or in the debrief after it')
+            for i in steps:
+                if any(b['fragment'] for b in parsed[i]['blocks'].values()):
+                    total += 1; print(f'{course.name}/{shown[i]}: exercise step with a click reveal; nobody presents it, show everything')
+            if not re.search(r'come back', parsed[steps[-1]]['body'], re.I):
+                total += 1; print(f'{course.name}/{shown[steps[-1]]}: last step of exercise {n} must tell the group to come back to the room')
+            for i in range(steps[0]):
+                if ex[i] == n and parsed[i]['template'] == 'exercise-result':
+                    total += 1; print(f'{course.name}/{shown[i]}: result of exercise {n} before its steps; results go in the debrief after the run')
         if not (course / 'MEASURED.md').exists():
             total += 1; print(f'{course.name}: no MEASURED.md (every number on a slide needs its command and result there)')
         for slide in deck['slides']:

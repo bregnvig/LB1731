@@ -25,7 +25,8 @@ The type is declared on the slide as `<section data-template="<type>">`, and the
 - The `title` image's bottom-right corner is at 1200,648 and its longest side is 288px. Use the course's own image, named `<course>-1.png` or `.svg`.
 - An image block's height matches its image's aspect ratio, so a screenshot is never letterboxed small.
 - Words in text blocks, the title not counted, stay within the type's maximum.
-- Exercise titles read `Exercise N - <step>`. An exercise is one unbroken run: a theory slide placed inside it (the fix explained between measure-before and the change) is titled `Exercise N - …` too.
+- Exercise titles read `Exercise N - <step>`.
+- An exercise's step slides (`exercise-start`, `exercise-step*`) are one unbroken run with no click reveals, and the last one tells the group to come back to the room. `exercise-result` slides for that exercise come after the run, in the debrief.
 - No tables.
 - Slide text never points at another lab or exercise ("Lab 2", "exercise 3", "the next exercise"). That belongs in the notes. The opener "Not happy with the result of the previous exercise?" is the one exception.
 - Speaker notes exist (not on `title` and `statement`), have a short cue, a blank line, then the talk script, and hold no authoring history ("cut from the slide", "so it fits").
@@ -56,5 +57,6 @@ This table is the output of `python3 scripts/check-slides.py --describe`. The nu
 - Theory with code to show: `claim-code`. With a screenshot: `claim-image`. Two pieces of code that belong together: `code-pair`.
 - A list of kinds, steps or items: `reveal-list`. Never a table.
 - A number the room should remember: `number` (theory) or `exercise-result` (after an exercise).
-- An exercise is a run of slides, one step each: `exercise-start` for the first slide of exercise 1, then `exercise-step`, `exercise-step-code` or `exercise-step-image`, ending with `exercise-result` when the exercise measured something. Exercises 2 to 4 open with an `exercise-step` that starts "Not happy with the result of the previous exercise?".
+- An exercise is a run of step slides, one step each: `exercise-start` for the first slide of exercise 1, then `exercise-step`, `exercise-step-code` or `exercise-step-image`. Exercises 2 to 4 open with an `exercise-step` that starts "Not happy with the result of the previous exercise?". The last step ends with "Done? Come back to the room."
+- After the run, the debrief: `exercise-result` slides ("Exercise N - What we measured"), then any theory that explains what they found, then the "In your app" homework as a `reveal-list` titled "In your app: …".
 - Too many words for the type: split at the next step or idea. Never shrink the text.

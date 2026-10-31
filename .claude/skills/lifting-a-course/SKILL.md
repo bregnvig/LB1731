@@ -60,6 +60,21 @@ Stop after the report unless the user already asked to apply the lift.
 
 ## 2. Spine
 
+**How a course runs.** The instructor presents theory, the groups leave the room to do the exercise, then come back for the debrief, then the next theory:
+
+```
+theory (instructor) → exercise N (groups, alone) → debrief (instructor) → theory → …
+```
+
+A group works through the exercise on one shared screen without the instructor. So:
+
+- Theory before an exercise gives the group everything the exercise needs, including the fix they will write. No theory inside an exercise.
+- The exercise slides are steps only, in the order the group works: getting started or "Not happy…", measure before ("write down your number"), each change, measure after, bonus. No click reveals. The last step says "Done? Come back to the room."
+- The debrief is presented after the exercise: what we measured, why, what it means. Answers live here, so nobody sees them before they measure. "In your app" homework goes here too.
+
+`check-slides.py` enforces the run, the reveals, the "come back" and the order of results.
+
+
 Three or four labs. Each lab is one Monday technique with one number that shows it worked. A slide stays only if it serves a lab, a live demo of that technique, or a 30-second "don't do this".
 
 **Budget:** 35–50 visible slides, 60 files at most including hidden ones (siblings run 40–59 files). Over budget means cut, not shrink the type.
