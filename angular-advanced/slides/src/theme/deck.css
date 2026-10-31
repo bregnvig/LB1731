@@ -67,6 +67,17 @@ body,
   text-transform: uppercase;
 }
 
+/* Code names, units and UI strings keep their case inside uppercase headings. */
+.reveal .block :is(h1, h2, h3) code,
+.reveal .block :is(h1, h2, h3).keep-case {
+  text-transform: none;
+}
+
+/* Inline code never breaks mid-name. */
+.reveal .block :not(pre) > code {
+  white-space: nowrap;
+}
+
 .reveal .block h1 { font-size: 1.75em; letter-spacing: 0.015em; }
 .reveal .block h2 { font-size: 1.15em; letter-spacing: 0.03666em; }
 .reveal .block h3 { font-size: 1em; letter-spacing: 0.041em; }

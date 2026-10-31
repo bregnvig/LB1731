@@ -6,7 +6,10 @@
 }
 
 .reveal [data-theme='dark'] :is(.hljs-attribute, .hljs-built_in, .hljs-class, .hljs-name) { color: #9fca56; }
-.reveal [data-theme='dark'] .hljs-comment { color: #41535b; }
+.reveal [data-theme='dark'] .hljs-comment { color: #8b949e; }
+
+/* Lines outside the current highlight stay readable on a projector. */
+.reveal .hljs.has-highlights tr:not(.highlight-line) { opacity: 0.6; }
 .reveal [data-theme='dark'] .hljs-keyword { color: #e6cd69; }
 .reveal [data-theme='dark'] :is(.hljs-literal, .hljs-number) { color: #cd3f45; }
 .reveal [data-theme='dark'] :is(.hljs-meta, .hljs-params, .hljs-string, .hljs-subst, .hljs-symbol, .hljs-tag, .hljs-title) { color: #55b5db; }

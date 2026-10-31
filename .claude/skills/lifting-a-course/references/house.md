@@ -34,7 +34,7 @@ rxjs is the exception: `labs/` + `solutions/` instead of `step-N`.
 
 ## Slide HTML
 
-Follow `slides/README.md`. Canvas is 1280×720. Blocks are absolutely positioned. Unique `data-name` per slide. Types: `text`, `code`, `shape`, `line`, `image`, `table`, `drawing`, `group`.
+Follow `slides/README.md`. Canvas is 1280×720. Blocks are absolutely positioned. Unique `data-name` per slide. Types: `text`, `code`, `shape`, `line`, `image`, `table`, `drawing`, `group`. Never use `table` or an HTML `<table>`; see SKILL.md, No tables.
 
 House habits sampled from signals:
 
@@ -46,6 +46,16 @@ House habits sampled from signals:
 - End of module: `time-for-questions.html` with `h1` "Time for questions" (🤓 is in the house)
 
 Do not add "Learning objectives", "Agenda", or "By the end of this module". Title slide is the course name plus a short italic line.
+
+House slides (title, `time-for-questions.html`, exercise time) are copied from a sibling under the same file name and changed only where the course name or screenshot differs. A content slide copied from a sibling counts as new: its code, names, and screenshots come from this course's steps.
+
+## Images
+
+- App screenshots: JPEG, quality 85, from the playground app at a 1280×720 viewport, cropped to what the slide talks about.
+- Diagrams, terminal output, flat UI with few colours: PNG. Drawn diagrams: SVG.
+- 300 kB per new image at most. Convert with `magick in.png -quality 85 out.jpg`.
+- Text the slide quotes (build output, console lines) is kept as `.txt` next to the image, so the number can be checked.
+- Name images after what they show (`app-detail.jpg`, `build-step-3.txt`), not `image-1.png`.
 
 ## Speaker notes
 
@@ -70,7 +80,7 @@ Canonical: `courses/signals/slides/exercise-*.html`.
 Getting started:
 
 - Path `labs/<course>/exercise-N` in orange
-- `npm install` then `npm start` (some older slides say `ng serve` — prefer `npm start` to match `package.json`)
+- `npm install` then `npm start` (some older slides say `ng serve`; new slides always say `npm start` to match `package.json`)
 - Screenshot of the running app
 - Location permission if the list waits on geolocation, including how to recover if they blocked it
 - What the exercise is *for*, in one short paragraph, then "take the next slides as your checklist"
@@ -83,7 +93,7 @@ Later exercises:
 - What should happen (loader appears, terminal clean, NG8109, blank page means missing `()`)
 - Optional `?` gist link, as in components — only if the gist matches the lab
 
-Split a long exercise across two or three slides rather than shrinking the type to unreadability.
+An exercise is a run of slides, one step each, each slide one of the exercise types in slide-types.md.
 
 ## Labs
 
@@ -133,7 +143,7 @@ Write English the siblings write: contractions, direct address, no marketing.
 
 ## Monday test
 
-Every lab ends with an unspoken sentence the wrap slide says out loud:
+Write this sentence for each lab during diagnosis. Lab slides do not print it. The wrap slide prints a short form of it (at most 12 words, e.g. "Start with the slow your users feel. Measure it before you fix it."), and the notes read out the full sentence:
 
 > In your own app, you would __. The first thing you measure is __.
 
