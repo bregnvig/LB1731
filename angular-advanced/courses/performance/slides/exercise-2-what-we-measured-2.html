@@ -2,13 +2,15 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 2 - What we measured</h2>
   </div>
-  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p class="lead accent">Timer bar: <code>FooterComponent</code> only (was 6)</p>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:260px;width:560px;height:auto;z-index:11;text-align:left">
+    <p class="stat">6 → <span class="accent">1</span></p>
+<p>components checked per timer bar</p>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
-    <p class="lead accent"><code>polyfills</code>: 35.09 kB → 494 bytes</p>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:656px;top:260px;width:560px;height:auto;z-index:12;text-align:left">
+    <p class="stat">35.09 kB → <span class="accent">494 B</span></p>
+<p><code>polyfills</code> in the build</p>
   </div>
-  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:371px;width:1150px;height:auto;z-index:13;text-align:left">
+  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:470px;width:1150px;height:auto;z-index:13;text-align:left">
     <p>A list click: still 2 bars. <code>&#39;&#39;</code> → <code>&#39;:id&#39;</code> builds a new Home.</p>
   </div>
   <aside class="notes">Timer bar = FooterComponent only (1 component, 0 rows), was 6 components / 133 rows. Click: polyfills 35.09 kB -&gt; 494 bytes (Initial total 1.81 MB -&gt; 1.77 MB). Click: the list click.

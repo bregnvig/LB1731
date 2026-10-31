@@ -2,16 +2,14 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Moving to signals: the good</h2>
   </div>
-  <div class="block fragment" data-type="text" data-name="line-1" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p class="lead">No <code>markForCheck</code></p>
+  <div class="block" data-type="text" data-name="items" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li class="fragment">No <code>markForCheck</code></li>
+<li class="fragment">No cleanup: <code>toSignal</code>, <code>effect</code></li>
+<li class="fragment"><code>computed</code> is lazy and memoised</li>
+</ul>
   </div>
-  <div class="block fragment" data-type="text" data-name="line-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
-    <p class="lead">No cleanup: <code>toSignal</code>, <code>effect</code></p>
-  </div>
-  <div class="block fragment" data-type="text" data-name="line-3" style="left:64px;top:360px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p class="lead"><code>computed</code> is lazy and memoised</p>
-  </div>
-  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:467px;width:1150px;height:auto;z-index:14;text-align:left">
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:374px;width:1150px;height:auto;z-index:12;text-align:left">
     <p>A signal read in a template schedules the update itself.</p>
   </div>
   <aside class="notes">Only if asked. Good: no markForCheck, no cleanup (toSignal and effect end with their injection context), computed lazy + memoised.

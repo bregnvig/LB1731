@@ -2,14 +2,16 @@
   <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - On a slow phone</h2>
   </div>
-  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:180px;width:1150px;height:auto;z-index:11;text-align:left">
-    <p class="lead accent">Slow 4G, CPU 4x: FCP 4.4 s → 2.3 s</p>
+  <div class="block" data-type="text" data-name="result-1" style="left:64px;top:260px;width:560px;height:auto;z-index:11;text-align:left">
+    <p class="stat">4.4 → <span class="accent">2.3 s</span></p>
+<p>first contentful paint, Slow 4G, CPU 4x</p>
   </div>
-  <div class="block fragment" data-type="text" data-name="result-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
-    <p class="lead accent">LCP 9.4 s → 7.4 s</p>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:656px;top:260px;width:560px;height:auto;z-index:12;text-align:left">
+    <p class="stat">9.4 → <span class="accent">7.4 s</span></p>
+<p>largest contentful paint, a map tile</p>
   </div>
-  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:370px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p><code>@defer</code>: a later map paint, yet LCP (a tile) wasn't later.</p>
+  <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:470px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>Deferring the map didn't delay LCP: it came 80 ms earlier.</p>
   </div>
   <aside class="notes">Production builds, step-3 vs step-4, npx serve with gzip, fresh context, cache off, CPU 4x, DevTools Slow 4G preset. Medians of 3: FCP 4.4 s -&gt; 2.3 s, LCP 9.4 s -&gt; 7.4 s. JS transferred 477 kB -&gt; 160 kB.
 LCP element is always a map tile. Step-4 with vs without the map @defer: LCP 80 ms earlier with it (Slow 4G), 84 ms (Fast 4G).
