@@ -192,7 +192,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 <details><summary>Speaker notes</summary>
 
-> Bonus, not in the solution. Record one list click, wrap setZoom/setView in runOutsideAngular, record again.
+> Bonus, not in the solution: exercise 2 fixes it for the whole app. Record one list click, wrap setZoom/setView in runOutsideAngular, record again.
 >
 > For the fast ones. Click a playground in the list and record it: you get a burst of bars, not one. The click itself is one cycle, but the two center$ subscriptions call setZoom and setView inside the zone, and Leaflet animates the pan from there: every animation frame is a patched task.
 > Wrap those two calls in runOutsideAngular, the same trick, and record the same click again. Compare the two counts.
