@@ -37,7 +37,13 @@
       "file": "exercise-1-leave-the-zone.html"
     },
     {
+      "file": "exercise-1-measure-after.html"
+    },
+    {
       "file": "exercise-1-bonus.html"
+    },
+    {
+      "file": "exercise-1-bonus-2.html"
     },
     {
       "file": "from-zone-js-to-zoneless.html"
@@ -53,10 +59,17 @@
       "hidden": true
     },
     {
+      "file": "moving-to-signals-2.html",
+      "hidden": true
+    },
+    {
       "file": "zoneless-what-breaks.html"
     },
     {
       "file": "exercise-2-measure-before.html"
+    },
+    {
+      "file": "exercise-2-measure-before-2.html"
     },
     {
       "file": "exercise-2-go-zoneless.html"
@@ -65,13 +78,22 @@
       "file": "exercise-2-fix-the-footer.html"
     },
     {
+      "file": "exercise-2-fix-the-footer-2.html"
+    },
+    {
       "file": "exercise-2-measure-after.html"
+    },
+    {
+      "file": "exercise-2-profiler-after.html"
     },
     {
       "file": "exercise-2-measure-after-2.html"
     },
     {
       "file": "reading-the-ng-build-output.html"
+    },
+    {
+      "file": "reading-the-ng-build-output-2.html"
     },
     {
       "file": "lazy-routes.html"
@@ -112,13 +134,22 @@
       "file": "exercise-3-see-it-load.html"
     },
     {
+      "file": "exercise-3-see-it-load-2.html"
+    },
+    {
       "file": "exercise-3-bonus-about-panel.html"
+    },
+    {
+      "file": "exercise-3-bonus-about-panel-footer.html"
     },
     {
       "file": "exercise-3-bonus-about-panel-2.html"
     },
     {
       "file": "exercise-3-what-we-measured.html"
+    },
+    {
+      "file": "exercise-3-each-change-alone.html"
     },
     {
       "file": "leaks-in-angular-apps.html"
@@ -128,6 +159,9 @@
     },
     {
       "file": "heap-snapshots.html"
+    },
+    {
+      "file": "heap-snapshots-2.html"
     },
     {
       "file": "virtual-scroll.html",
@@ -141,10 +175,16 @@
       "file": "exercise-4-find-the-leaks.html"
     },
     {
+      "file": "exercise-4-find-the-leaks-2.html"
+    },
+    {
       "file": "exercise-4-read-the-snapshot.html"
     },
     {
       "file": "exercise-4-read-the-retainers.html"
+    },
+    {
+      "file": "exercise-4-read-the-retainers-2.html"
     },
     {
       "file": "exercise-4-fix-the-leaks.html"
@@ -153,7 +193,18 @@
       "file": "exercise-4-measure-after.html"
     },
     {
+      "file": "exercise-4-measure-after-2.html"
+    },
+    {
       "file": "exercise-4-bonus-content-visibility.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-4-bonus-content-visibility-2.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-4-bonus-content-visibility-3.html",
       "hidden": true
     },
     {

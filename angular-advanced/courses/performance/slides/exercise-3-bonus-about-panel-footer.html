@@ -1,0 +1,27 @@
+<section data-template="exercise-step-code">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Bonus: Om appen</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
+    <ol start="2">
+<li><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>: a signal holds the type, <code><span style="color:#ff8c00">await import(...)</span></code> on click, <code><span style="color:#ff8c00">*ngComponentOutlet</span></code> shows it (add <code><span style="color:#ff8c00">NgComponentOutlet</span></code> to <code><span style="color:#ff8c00">imports</span></code>)</span></li>
+</ol>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
+    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript">about = signal&lt;Type&lt;unknown&gt; | null&gt;(null);
+
+async toggleAbout() {
+  if (this.about()) {
+    this.about.set(null);
+  } else {
+    const { AboutComponent } = await import('../about/about.component');
+    this.about.set(AboutComponent);
+  }
+}
+</code></pre>
+  </div>
+  <aside class="notes">Template: &lt;ng-container *ngComponentOutlet="about()"/&gt;. Alternative: ViewContainerRef.createComponent.
+
+Step two: await import() gives you the file, and from it the component class. The bundler puts that file in its own chunk, so nothing is downloaded until that line runs.
+Step three: render it. NgComponentOutlet takes a component type and renders it, and with null it renders nothing. The signal holds the type, so it works zoneless too. The other way is createComponent on a ViewContainerRef; NgComponentOutlet is shorter.</aside>
+</section>

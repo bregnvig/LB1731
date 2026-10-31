@@ -1,0 +1,22 @@
+<section data-template="reveal-list">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Moving to signals: the bad</h2>
+  </div>
+  <div class="block fragment" data-type="text" data-name="line-1" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:1.6em"><strong><code><span style="color:#ff8c00">effect</span></code> is eager</strong></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="line-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <p style="font-size:1.6em"><strong><code><span style="color:#ff8c00">toSignal</span></code> subscribes straight away</strong></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="line-3" style="left:64px;top:360px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:1.6em"><strong>Unread, the request still goes out</strong></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:620px;width:1150px;height:auto;z-index:14;text-align:left">
+    <p>Use <code><span style="color:#ff8c00">computed</span></code> for derived values, <code><span style="color:#ff8c00">effect</span></code> for side effects only.</p>
+  </div>
+  <aside class="notes">Bad: effect and toSignal are eager. effect runs during CD at least once; toSignal subscribes immediately.
+Rule: derive with computed, side effects only in effect.
+
+Now the bad news, which is a performance point. effect and toSignal are eager. An effect runs during change detection whether or not anyone needs what it does. toSignal subscribes immediately, even if you never read the signal, so an HTTP request you forgot about still goes out.
+So the guidance: derive values with computed, because it only costs when read, and keep effect for real side effects. Do not use an effect to copy state, we covered that in the signals module.</aside>
+</section>

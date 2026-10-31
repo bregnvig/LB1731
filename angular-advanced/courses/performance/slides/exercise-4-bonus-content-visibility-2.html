@@ -1,0 +1,22 @@
+<section data-template="exercise-step-code">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Bonus: content-visibility</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Change:</span> in <code><span style="color:#ff8c00">src/app/sidebar/sidebar-list-item/sidebar-list-item.component.ts</span></code>, add the <code><span style="color:#ff8c00">styles</span></code> on the right.</span></p>
+<p><span style="font-size:0.7em"><span style="color:#ff8c00">Measure after:</span> run the count again.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
+    <pre style="font-size: 18px; line-height: 22px; tab-size: 4;"><code class="language-typescript">styles: `
+  :host {
+    display: block;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 66px;
+  }
+`,</code></pre>
+  </div>
+  <aside class="notes">The styles block on the list item host. Then count again.
+
+Then the change: a styles block on the list item's host, the one on the right. content-visibility auto, and contain-intrinsic-size so the scrollbar doesn't jump while rows are skipped.
+Ask the room: what will the count be after the change?</aside>
+</section>

@@ -1,15 +1,15 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+<section data-template="claim-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>@defer and its triggers</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:540px;height:auto;z-index:11;text-align:left">
-    <p>Components, directives and pipes used only in the block move to a lazy chunk</p>
-<p>Default trigger: <span style="color:#FF8C00"><code>on idle</code></span></p>
-<p>Combine with <span style="color:#FF8C00"><code>;</code></span>, any one fires</p>
-<p><span style="color:#FF8C00"><code>prefetch on ...</code></span> downloads early, renders later</p>
-<p><span style="color:#FF8C00"><code>when</code></span> is one-shot</p>
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li>Components, directives and pipes used only in the block move to a lazy chunk</li>
+<li>Default: <code><span style="color:#ff8c00">on idle</span></code>. Combine with <code><span style="color:#ff8c00">;</span></code>, any one fires</li>
+<li><code><span style="color:#ff8c00">prefetch on ...</span></code> downloads early, renders later. <code><span style="color:#ff8c00">when</span></code> is one-shot</li>
+</ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:640px;top:240px;width:620px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
     <pre style="font-size: 18px; line-height: 24px; tab-size: 4;"><code class="language-html">@defer (on idle) { ... }
 @defer (on viewport) { ... }
 @defer (on interaction(btn)) { ... }

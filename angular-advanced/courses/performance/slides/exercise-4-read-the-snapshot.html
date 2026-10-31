@@ -1,10 +1,14 @@
-<section>
+<section data-template="exercise-step">
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 4 - Read the snapshot</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:1000px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Measure before:</span> in snapshot 2, type in the class filter and write the numbers down:</span></p><ul><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">Detached</span></code>: no single total. Read the row <code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code>: <strong>×10</strong>, one per old Home</span></li><li><span style="font-size:0.7em"><code><span style="color:#ff8c00">FooterComponent</span></code>: <strong>11</strong>, the one on screen plus 10 leaked</span></li></ul>
-<p><span style="font-size:0.7em">Why 10? <code><span style="color:#ff8c00">''</span></code> and <code><span style="color:#ff8c00">':id'</span></code> both show <code><span style="color:#ff8c00">HomeComponent</span></code>: every navigation builds a new Home, 2 per round.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.85em"><span style="color:#ff8c00">Measure before:</span> in snapshot 2, filter and write down:</span></p>
+<ol>
+<li><span style="font-size:0.85em"><code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code>: <strong>×10</strong>, one per old Home. No single <code><span style="color:#ff8c00">Detached</span></code> total</span></li>
+<li><span style="font-size:0.85em"><code><span style="color:#ff8c00">FooterComponent</span></code>: <strong>11</strong>, one on screen plus 10 leaked</span></li>
+</ol>
+<p><span style="font-size:0.85em">Why 10? <code><span style="color:#ff8c00">''</span></code> and <code><span style="color:#ff8c00">':id'</span></code> both show <code><span style="color:#ff8c00">HomeComponent</span></code>: a new Home per navigation, 2 per round.</span></p>
   </div>
   <aside class="notes">Before numbers after 5 rounds: Detached &lt;leaflet&gt; ×10 (and Detached &lt;loop-sidebar-list-item&gt; ×1,330 = 10 × 133), FooterComponent ×11 (1 live + 10 leaked).
 Two Homes per round: select goes '' -&gt; ':id', a different route entry, so a new Home; Tilbage til kortet goes back to '', another new Home. 5 rounds = 10.

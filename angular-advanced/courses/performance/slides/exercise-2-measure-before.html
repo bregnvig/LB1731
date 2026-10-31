@@ -1,18 +1,16 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1000px;height:auto;z-index:10;text-align:left">
+<section data-template="exercise-step">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 2 - Measure before</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1000px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.85em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-2</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>.</span></p>
 <ol>
-	<li><span style="font-size:0.7em">Run <code><span style="color:#ff8c00">npm run build</span></code>. Write down <code>polyfills</code>: <span style="color:#ff8c00">35.09 kB</span></span></li>
-	<li><span style="font-size:0.7em"><code><span style="color:#ff8c00">npm start</span></code>, record 10 quiet seconds: one bar per second. Click one: all 6 components</span></li>
-	<li><span style="font-size:0.7em">Record one click on a playground in the list: we got <span style="color:#ff8c00">43</span> bars</span></li>
+<li><span style="font-size:0.85em">Run <code><span style="color:#ff8c00">npm run build</span></code>. Write down <code>polyfills</code>: <span style="color:#ff8c00">35.09 kB</span></span></li>
 </ol>
   </div>
-  <aside class="notes">labs/performance/exercise-2. Before: polyfills 35.09 kB, one footer bar per second, each refreshes all 6 components. One list click: 43 bars.
+  <aside class="notes">labs/performance/exercise-2. Before: polyfills 35.09 kB.
 Full build before, cut from the slide (raw / transfer): main 1.53 MB / 357.55 kB, styles 242.57 kB / 25.55 kB, polyfills 35.09 kB / 11.52 kB, Initial total 1.81 MB / 394.62 kB.
 
 Exercise 2 starts with a measurement, as always. If your exercise 1 isn't working, go to labs/performance/exercise-2 and run npm install.
-Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js. Then npm start and record ten quiet seconds in the profiler: one bar per second, the footer's timer, and clicking a bar shows it refreshed all six components. Then record one click on a playground in the list. We got 43 bars for that one click: Leaflet's pan, started from inside the zone.</aside>
+Run npm run build and look at the polyfills line: 35 kilobytes, 11.5 over the wire. That's zone.js.</aside>
 </section>

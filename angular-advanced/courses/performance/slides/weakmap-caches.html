@@ -1,14 +1,15 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+<section data-template="claim-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>WeakMap as a cache</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:500px;height:auto;z-index:11;text-align:left">
-    <p><span style="color:#FF8C00"><code>WeakMap&lt;object, V&gt;</code></span>: entries vanish with their key object</p>
-<p>Fits: a result that depends on the object only</p>
-<p><span style="color:#FF8C00">Not used here:</span> distance is already a memoised <span style="color:#FF8C00"><code>computed</code></span>, and it depends on the location too. A long-lived cache would serve stale distances</p>
-<p>The key must capture everything the value depends on</p>
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li><code><span style="color:#ff8c00">WeakMap&lt;object, V&gt;</span></code>: entries vanish with their key object</li>
+<li>Fits: a result that depends on the object only</li>
+<li><span style="color:#ff8c00">Not used here:</span> distance also depends on the location</li>
+</ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:600px;top:260px;width:680px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">const labels = new WeakMap&lt;Playground, string&gt;();
 
 function label(p: Playground) {
@@ -21,10 +22,14 @@ function label(p: Playground) {
 }
 </code></pre>
   </div>
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:600px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p>The key must capture everything the value depends on</p>
+  </div>
   <aside class="notes">WeakMap&lt;object, V&gt;: keys are held weakly. When the key object is gone, the entry goes too.
 Good for: data computed per object that should live exactly as long as the object.
 Not used in the exercise: distance per row is already a memoised computed. A long-lived WeakMap would serve stale distances after the location changes.
 WeakRef: for optional references.
+Cut from the slide: distance is already a memoised computed; a long-lived cache would serve stale distances. Click: the rule.
 
 A WeakMap is a map whose keys are objects held weakly. If nobody else references the key object, it is garbage collected and its entry disappears. So the cache cannot keep stale objects alive, which a normal Map would.
 It fits when you compute something from an object and the result is valid as long as that object exists: a parsed version, a formatted label, a layout measurement.

@@ -1,22 +1,18 @@
-<section>
+<section data-template="exercise-step">
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 4 - Measure after</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em"><span style="color:#FF8C00">Measure after:</span> reload the page, then the same as before: trash icon, snapshot 1, 5 rounds, trash icon, snapshot 2.</span></p><p><span style="font-size:0.7em"><span style="color:#FF8C00">Same trap as before:</span> clear the console and don't select old nodes before snapshot 2, or <strong>DevTools console</strong> keeps them alive.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol>
+<li><span style="font-size:0.85em">Reload the page</span></li>
+<li><span style="font-size:0.85em">The same as before: trash icon, snapshot 1, 5 rounds, trash icon, snapshot 2</span></li>
+</ol>
   </div>
-  <div class="block fragment" data-type="text" data-name="text-2" style="left:640px;top:160px;width:602px;height:auto;z-index:12;text-align:left">
-    <p><span style="font-size:0.7em">After 5 rounds:</span></p>
-    <p><code><span style="color:#ff8c00">Detached &lt;leaflet&gt;</span></code> 10 → <span style="color:#FF8C00"><strong>0</strong></span></p>
-    <p><code><span style="color:#ff8c00">FooterComponent</span></code> 11 → <span style="color:#FF8C00"><strong>1</strong></span></p>
+  <div class="block" data-type="text" data-name="callout" style="left:38px;top:560px;width:1150px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.85em"><span style="color:#ff8c00">Same trap as before:</span> clear the console and don't select old nodes before snapshot 2, or <strong>DevTools console</strong> keeps them alive.</span></p>
   </div>
-  <aside class="notes">Measure as before. After 5 rounds: Detached &lt;leaflet&gt; 10 -&gt; 0, FooterComponent 11 -&gt; 1 (DevTools Memory panel, step-4 vs step-5). Trap: clear the console, don't select old nodes.
-After the fix one small "Detached &lt;footer&gt;" can stay: the @defer placeholder of the footer, held by the on viewport IntersectionObserver. One, not one per round.
-Cut from the slide: live intervals 12 -&gt; 2 (counted with a wrapper around setInterval; after the fix the footer's plus one the dev build starts itself, a production build has only the footer's).
+  <aside class="notes">Measure as before. Trap: clear the console, don't select old nodes.
 
 Then reload and measure exactly the same way: trash can, snapshot one, five rounds, trash can, snapshot two.
-The trap from the snapshot slide bites hardest here: clear the console and don't select old nodes before snapshot two, or DevTools console keeps them alive and your after number lies.
-Click. You should see Detached &lt;leaflet&gt; go from 10 to nothing, the row is gone, and one FooterComponent, the one on screen. With Detached in the filter you may still see one Detached &lt;footer&gt;: that's the placeholder of the footer's @defer, kept by the viewport observer. One, however many rounds you do.
-If you're curious about intervals: we counted them with a small wrapper, 12 before and 2 after in a dev build, the footer's and one the dev build starts itself.
-Ask the room: if you still see FooterComponents growing, what would you read next? The Retainers pane, again.</aside>
+The trap from the snapshot slide bites hardest here: clear the console and don't select old nodes before snapshot two, or DevTools console keeps them alive and your after number lies.</aside>
 </section>

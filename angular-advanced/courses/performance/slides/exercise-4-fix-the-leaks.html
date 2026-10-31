@@ -1,9 +1,12 @@
-<section>
+<section data-template="exercise-step">
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 4 - Fix the leaks</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:560px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>: keep the id from <code><span style="color:#ff8c00">setInterval</span></code> and call <code><span style="color:#ff8c00">clearInterval</span></code> in <code><span style="color:#ff8c00">inject(DestroyRef).onDestroy</span></code>.</span></p><p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code>: inject <code><span style="color:#ff8c00">DestroyRef</span></code> and call <code><span style="color:#ff8c00">remove()</span></code> on the map from <code><span style="color:#ff8c00">onDestroy</span></code>, right after the map is created.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol>
+<li><span style="font-size:0.85em">In <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>: keep the id from <code><span style="color:#ff8c00">setInterval</span></code> and call <code><span style="color:#ff8c00">clearInterval</span></code> in <code><span style="color:#ff8c00">inject(DestroyRef).onDestroy</span></code></span></li>
+<li><span style="font-size:0.85em">In <code><span style="color:#ff8c00">src/app/leaflet/leaflet.component.ts</span></code>: inject <code><span style="color:#ff8c00">DestroyRef</span></code> and call <code><span style="color:#ff8c00">remove()</span></code> on the map from <code><span style="color:#ff8c00">onDestroy</span></code>, right after the map is created</span></li>
+</ol>
   </div>
   <aside class="notes">Two fixes, both DestroyRef.onDestroy: clearInterval in footer.component.ts, map.remove() in leaflet.component.ts.
 

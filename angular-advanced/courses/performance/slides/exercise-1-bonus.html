@@ -1,27 +1,25 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:880px;height:auto;z-index:10;text-align:left">
+<section data-template="exercise-step-code">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 1 - Bonus: try it, then revert</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1200px;height:auto;z-index:11;text-align:left">
-    <p style="font-size:0.7em">In <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>, open <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>. Run the footer's <code><span style="color:#ff8c00">setInterval</span></code> outside the zone too.</p>
-<p style="font-size:0.7em"><strong>Measure:</strong> the footer bars disappear from the profiler. But look at the page: <em>Opdateret for N sekunder siden</em> stops counting.</p>
-<p style="font-size:0.7em">Why: the number still changes, but only zone.js told Angular.</p>
-<p style="font-size:0.7em"><strong>Experiment only: undo it afterwards.</strong> Exercise 2 fixes the counter properly.</p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em">In <code><span style="color:#ff8c00">labs/performance/exercise-1</span></code>, open <code><span style="color:#ff8c00">src/app/footer/footer.component.ts</span></code>. Run the footer's <code><span style="color:#ff8c00">setInterval</span></code> outside the zone too.</span></p>
+<p><span style="font-size:0.7em"><strong>Measure:</strong> record in the Profiler, and look at the page.</span></p>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:320px;width:1200px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:160px;width:750px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 20px; tab-size: 4;"><code class="language-typescript">constructor() {
   inject(NgZone).runOutsideAngular(() =&gt;
-    setInterval(() =&gt; this.seconds = Math.round((Date.now() - this.loadedAt) / 1000), 1000));
+    setInterval(() =&gt; this.seconds = Math.round(
+      (Date.now() - this.loadedAt) / 1000), 1000));
 }
 </code></pre>
   </div>
+  <div class="block" data-type="text" data-name="callout" style="left:38px;top:520px;width:440px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em"><span style="color:#ff8c00">Experiment only: undo it afterwards.</span> Exercise 2 fixes the counter properly.</span></p>
+  </div>
   <aside class="notes">TRY AND REVERT. Not part of the solution.
-Footer interval outside the zone: bars gone, counter frozen (updates only when something else runs CD, like a click on a playground).
-Point: zone.js was the trigger. Plain field + no zone = no update. Lead-in to exercise 2.
-Revert before the break.
+Footer interval outside the zone. Next slide: what they see.
 
 A bonus for the fast ones, and it is a try and revert experiment. Do not keep this change.
-The footer counts seconds with a setInterval that writes a plain field. Wrap that interval in runOutsideAngular, the same trick as for the map. Look at the profiler: the footer's bars are gone. Great? Look at the page. The counter has stopped. The field is still updating, but the screen is not, because nothing tells Angular to check the footer. It only moves if something else triggers a cycle, for example if you click a playground.
-That is the whole lesson: the only reason the counter ever updated was zone.js, running a cycle after each timer tick. Runs outside the zone, no cycle, no update.
-Now undo it, so you start the break with the working footer. After the break we remove zone.js completely and the same thing will happen to the whole app, and then we fix it the right way.</aside>
+The footer counts seconds with a setInterval that writes a plain field. Wrap that interval in runOutsideAngular, the same trick as for the map. Then record in the Profiler and look at the page.</aside>
 </section>

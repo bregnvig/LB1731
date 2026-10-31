@@ -1,0 +1,18 @@
+<section data-template="exercise-step-image">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Watch the chunks load</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:440px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><code><span style="color:#ff8c00">footer.component-….js</span></code> and <code><span style="color:#ff8c00">leaflet.component-….js</span></code> come in right after <code><span style="color:#ff8c00">main.js</span></code>.</span></p>
+<p><span style="font-size:0.7em">Click a playground, then <strong>Detaljer</strong>. Only now does <code><span style="color:#ff8c00">playground-detail.component-….js</span></code> load.</span></p>
+  </div>
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:510px;top:160px;width:750px;height:297.5px;z-index:12">
+    <img src="images/devtools-network-chunks.jpg" alt="DevTools Network, JS filter: main.js, then footer.component and leaflet.component started by main.js, then playground-detail.component started by app.routes.ts">
+  </div>
+  <aside class="notes">footer.component and leaflet.component right after main. Detaljer: playground-detail.component loads on the click.
+Screenshot: real DevTools (frontend from Chromium's remote debugging port, zoomed 1.5x), step-4 on npm start -- --no-hmr, after select + Detaljer. Initiator column: main.js for footer and leaflet, app.routes.ts:11 for the detail page.
+
+Right after main you see footer.component and leaflet.component, and the Initiator column says main.js started them. On idle fires fast on an idle laptop, and the footer's placeholder is on screen from the start, so on viewport fires at once too.
+Now click a playground and then Detaljer. Only then does playground-detail.component show up in the list, and its initiator is app.routes.ts. That's the lazy route.
+Ask the room: on a phone on a slow network, which of those would you rather have the user wait for?</aside>
+</section>

@@ -1,17 +1,17 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:682px;height:auto;z-index:10;text-align:left">
+<section data-template="claim-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Running outside Zone.js</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
-    <p>Code started in <span style="color:#FF8C00"><code>runOutsideAngular()</code></span> triggers no change detection</p>
-<p>For third-party code that fires often, like a map</p>
-<p>The catch: Angular isn't told about changes in there. Set a <span style="color:#FF8C00"><code>signal</code></span></p>
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li>Code started in <code><span style="color:#ff8c00">runOutsideAngular()</span></code> triggers no change detection</li>
+<li>For third-party code that fires often, like a map</li>
+<li>The catch: Angular isn't told about changes in there. Set a <code><span style="color:#ff8c00">signal</span></code></li>
+</ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
-    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3|6,13">export class LeafletComponent implements AfterViewInit, OnDestroy {
-
+    <pre style="font-size: 14px; line-height: 18px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2|4,11">export class LeafletComponent implements AfterViewInit, OnDestroy {
   private zone = inject(NgZone);
-
   ngAfterViewInit() {
     const _map = this.zone.runOutsideAngular(() =&gt; mapContructor(this.mapId, {
       zoomControl: false,
@@ -26,6 +26,7 @@
   </div>
   <aside class="notes">Demo: /performance/change-detection. All Eager, click setTimeout on B: every node flashes, checks 2 each (zone entry + timer). Reset, click "outside zone" on B: nothing flashes, B's field stays stale.
 The function returns the map, so const _map stays.
+Code: the two blank lines are gone so it fits; the highlight steps are the same lines (zone, then the wrapped call).
 
 Here's the tool. NgZone.runOutsideAngular takes a function and runs it outside the zone. Anything it starts, event listeners and timers, isn't patched, so Angular doesn't run change detection after them.
 Switch to the demo. All Eager, Reset counters, click setTimeout on B. Every node flashes, and the counters say two checks each: one for the click, one for the timer. Reset, click outside zone on B. Nothing flashes. B's field did change, but the screen still shows the old value. Ask the room: when will B show the new number? At the next cycle, whatever starts it.

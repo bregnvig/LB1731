@@ -1,0 +1,18 @@
+<section data-template="exercise-result">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Bonus: content-visibility</h2>
+  </div>
+  <div class="block fragment" data-type="text" data-name="result-1" style="left:38px;top:200px;width:1200px;height:auto;z-index:11;text-align:left">
+    <h2><span style="color:#ff8c00">Same count, give or take one: 1023</span></h2>
+  </div>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:38px;top:330px;width:1200px;height:auto;z-index:12;text-align:left">
+    <h2><code><span style="color:#ff8c00">Performance</span></code> panel: compare Rendering time</h2>
+  </div>
+  <div class="block" data-type="text" data-name="why" style="left:38px;top:520px;width:1200px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.85em"><code><span style="color:#ff8c00">content-visibility: auto</span></code> keeps every node, but skips layout and paint off screen.</span></p>
+  </div>
+  <aside class="notes">Click: count unchanged. It saves render work, not nodes. Click: where to see it.
+
+Click. The same, 1023 against 1022. content-visibility doesn't remove a single node. It tells the browser not to lay out or paint rows that are off screen. If you want to see that, record a reload in the Performance panel before and after and compare the Rendering time; a CPU slowdown makes the difference easier to see.
+Fewer nodes would be a different fix: fewer elements per row, or virtual scroll.</aside>
+</section>

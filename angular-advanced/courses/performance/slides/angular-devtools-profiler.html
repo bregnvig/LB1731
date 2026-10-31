@@ -1,25 +1,27 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+<section data-template="reveal-list">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Angular DevTools: the Profiler</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:200px;width:560px;height:auto;z-index:11;text-align:left">
-    <ol>
-	<li>Open DevTools (<span style="color:#FF8C00">F12</span>), <strong>Angular</strong> tab, <strong>Profiler</strong></li>
-	<li>Press <strong>Record</strong>, use the app, press <strong>Stop</strong></li>
-</ol>
+  <div class="block fragment" data-type="text" data-name="line-1" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p style="font-size:1.6em"><strong><span style="color:#ff8c00">F12</span>, Angular tab, Profiler</strong></p>
   </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:680px;top:200px;width:540px;height:auto;z-index:12;text-align:left">
-    <ul>
-	<li>One bar = one change detection cycle</li>
-	<li>Click a bar: which components were refreshed, how long each took</li>
-</ul>
+  <div class="block fragment" data-type="text" data-name="line-2" style="left:64px;top:280px;width:1150px;height:auto;z-index:12;text-align:left">
+    <p style="font-size:1.6em"><strong>Record, use the app, Stop</strong></p>
   </div>
-  <div class="block fragment" data-type="text" data-name="text-3" style="left:64px;top:500px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p>Count the <span style="color:#FF8C00">bars</span> in 5 seconds of mouse moves, and <span style="color:#FF8C00">which components</span> one bar refreshed.</p>
+  <div class="block fragment" data-type="text" data-name="line-3" style="left:64px;top:360px;width:1150px;height:auto;z-index:13;text-align:left">
+    <p style="font-size:1.6em"><strong>One bar = one cycle</strong></p>
   </div>
-  <aside class="notes">F12, Angular tab, Profiler, Record, use the app, Stop.
+  <div class="block fragment" data-type="text" data-name="line-4" style="left:64px;top:440px;width:1150px;height:auto;z-index:14;text-align:left">
+    <p style="font-size:1.6em"><strong>Click a bar: what was refreshed</strong></p>
+  </div>
+  <div class="block fragment" data-type="text" data-name="punchline" style="left:64px;top:620px;width:1150px;height:auto;z-index:15;text-align:left">
+    <p>Count the <span style="color:#ff8c00">bars</span> in 5 seconds of mouse moves, and <span style="color:#ff8c00">which components</span> one bar refreshed.</p>
+  </div>
+  <aside class="notes">Four clicks, then the punchline.
+F12, Angular tab, Profiler, Record, use the app, Stop.
 One bar = one cycle. Click a bar: components refreshed + time.
 Not on the slide any more: install Angular DevTools from the Chrome Web Store (exercise 1 says it too). Dev builds only: npm start.
+Cut from the slide: a clicked bar also shows how long each component took.
 
 Our first tool. Angular DevTools is a Chrome extension. Check that everyone has it now, it's a one-minute install and you can't do the first two labs without it.
 Open DevTools, there's an Angular tab, and inside it a Profiler. Press Record, do something in the app, press Stop. Every bar is one change detection cycle. Click a bar and you see which components were refreshed and how long each took.

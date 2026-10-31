@@ -1,14 +1,15 @@
-<section>
-  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1100px;height:auto;z-index:10;text-align:left">
+<section data-template="claim-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Preloading and canMatch</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:500px;height:auto;z-index:11;text-align:left">
-    <p>Lazy = first visit waits for the chunk</p>
-<p><span style="color:#FF8C00"><code>withPreloading</code></span> fetches them in the background after start</p>
-<p>Custom <span style="color:#FF8C00"><code>PreloadingStrategy</code></span> to pick routes</p>
-<p>Guard a lazy route with <span style="color:#FF8C00"><code>canMatch</code></span>: false means the chunk is never downloaded</p>
+  <div class="block" data-type="text" data-name="claims" style="left:64px;top:239px;width:420px;height:auto;z-index:11;text-align:left">
+    <ul>
+<li>Lazy: the first visit waits for the chunk</li>
+<li><code><span style="color:#ff8c00">withPreloading</span></code> fetches chunks in the background. A custom <code><span style="color:#ff8c00">PreloadingStrategy</span></code> picks routes</li>
+<li><code><span style="color:#ff8c00">canMatch</span></code> false: the chunk is never downloaded</li>
+</ul>
   </div>
-  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:600px;top:230px;width:680px;height:auto;z-index:12">
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:510px;top:239px;width:750px;height:auto;z-index:12">
     <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">provideRouter(AppRoutes, withPreloading(PreloadAllModules)),
 
 // a lazy route behind a guard

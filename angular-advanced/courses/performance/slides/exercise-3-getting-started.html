@@ -1,19 +1,19 @@
-<section>
+<section data-template="exercise-step">
   <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
     <h2>Exercise 3 - Measure the build</h2>
   </div>
-  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
-    <p><span style="font-size:0.7em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-3</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code></span></p>
-<p><span style="font-size:0.7em">Before any change, run <code><span style="color:#ff8c00">npm run build</span></code>. Write down <code><span style="color:#ff8c00">Initial total</span></code>, both numbers.</span></p>
-<p><span style="font-size:0.7em">Then four changes, one at a time. Guess: which moves it most?</span></p>
-  </div>
-  <div class="block" data-type="text" data-name="text-2" style="left:620px;top:160px;width:620px;height:auto;z-index:12;text-align:left">
-    <p><span style="color:#FF8C00"><code>Initial total</code></span>: <strong>1.77 MB</strong></p>
-<p><span style="font-size:0.7em">383.17 kB transfer. <code><span style="color:#ff8c00">main</span></code> alone is 1.53 MB.</span></p>
+  <div class="block" data-type="text" data-name="steps" style="left:38px;top:160px;width:1150px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.85em">Not happy with the result of the previous exercise? Go to the <code><span style="color:#ff8c00">labs/performance/exercise-3</span></code> directory and run <code><span style="color:#ff8c00">npm install</span></code>.</span></p>
+<ol>
+<li><span style="font-size:0.85em">Before any change, run <code><span style="color:#ff8c00">npm run build</span></code></span></li>
+<li><span style="font-size:0.85em">Write down <code><span style="color:#ff8c00">Initial total</span></code>, both numbers: <span style="color:#ff8c00">1.77 MB</span>, <span style="color:#ff8c00">383.17 kB</span></span></li>
+<li><span style="font-size:0.85em">Four changes, one at a time. Guess: which moves most?</span></li>
+</ol>
   </div>
   <aside class="notes">Lab exercise-3. npm run build before any change. Expect Initial total 1.77 MB / 383.17 kB, main 1.53 MB.
 Full output, cut from the slide (raw / transfer): main 1.53 MB / 357.12 kB, styles 242.57 kB / 25.55 kB, polyfills 494 bytes / 494 bytes, Initial total 1.77 MB / 383.17 kB.
 Everyone writes their guess down: which of the four changes wins?
+Cut from the slide: main alone is 1.53 MB.
 
 New exercise, and this one is about the first download. Go to labs/performance/exercise-3, npm install, and before you touch any code, npm run build.
 Find the line Initial total and write down both numbers, raw and estimated transfer. You should see 1.77 MB and 383 kilobytes, the same as on my slide a minute ago. That's your before.

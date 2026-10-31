@@ -1,0 +1,22 @@
+<section data-template="exercise-result">
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Each change alone, from 1.77 MB</h2>
+  </div>
+  <div class="block" data-type="text" data-name="result-1" style="left:38px;top:200px;width:1200px;height:auto;z-index:11;text-align:left">
+    <h2><code><span style="color:#ff8c00">@defer</span></code> <span style="color:#ff8c00">map: 1.63 MB</span></h2>
+  </div>
+  <div class="block fragment" data-type="text" data-name="result-2" style="left:38px;top:330px;width:1200px;height:auto;z-index:12;text-align:left">
+    <h2><span style="color:#ff8c00">Only</span> <code><span style="color:#ff8c00">faSpinner</span></code><span style="color:#ff8c00">: 760.93 kB</span></h2>
+  </div>
+  <div class="block fragment" data-type="text" data-name="why" style="left:38px;top:520px;width:1200px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.85em">Route: 1.77 MB, footer: 1.78 MB. Not Leaflet: unused icon packs were most of <code><span style="color:#ff8c00">main</span></code>.</span></p>
+  </div>
+  <aside class="notes">Each line is one change alone on a copy of the exercise 3 start (npm run build, 2026-10-30), raw Initial total. Click once to reveal the icon line, again for the punchline.
+Transfer sizes, cut from the slide: before 383.17 kB, lazy detail route 383.35 kB, @defer footer 386.49 kB, @defer map 346.49 kB, only faSpinner 161.12 kB, the solution 126.18 kB.
+
+The lazy route: a one-kilobyte chunk, and Initial total doesn't move. The footer: same story, it even grows a little: splitting has a small cost of its own. Those two are about the pattern, not the bytes.
+The map: 1.77 down to 1.63 MB. Leaflet is the library everyone points at, and it's 155 kilobytes.
+Ask the room: who guessed the map? Hands up. Now click.
+Registering only the spinner: 1.77 MB down to 761 kilobytes, 383 down to 161 transferred. The biggest single win, and the change is two lines. Those two icon packs were most of main.
+So: don't guess where the weight is. Read the build, change the biggest thing first, and measure again.</aside>
+</section>
