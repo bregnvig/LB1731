@@ -29,14 +29,14 @@ Rendered from PR #24 (branch `performance`). 35 visible slides; hidden slides ar
 
 <details><summary>Speaker notes</summary>
 
-> Three kinds of slow, each with its own number.
-> Interaction: Angular DevTools Profiler, bars in 5 s of mouse moves (labs 1, 2). Startup: Initial total from npm run build, plus the Network tab (lab 3). Memory: Memory panel, live FooterComponent objects across two heap snapshots (lab 4).
-> Interaction: the screen answers late. Startup: the wait before you can use it. Memory: slower the longer you use it.
-> Click: the rule of the day. Every exercise has a measure before and a measure after.
+> Three clicks, three kinds of slow, then the rule.
+> Respond: Profiler bars in 5 s of mouse moves (labs 1, 2). Start: Initial total from npm run build (lab 3). Over time: live FooterComponent objects across two heap snapshots (lab 4).
 >
-> When a user says the app is slow, ask which slow. Interaction is lag: you move the mouse or click and the screen answers late, usually because Angular does too much work per event. Startup is the wait before you can use it: JavaScript to download, parse and run. Memory is slow over time: fine when you opened it, heavy an hour later because things were never cleaned up.
-> Each kind has its own tool, and a fix for one does nothing for the others. The right column is what you write down before you touch any code.
-> Click. That's the only rule today. Measure, change exactly one thing, measure again in exactly the same way. Developers are bad at guessing where time goes, and a fix that does nothing still feels like progress.
+> When a user says the app is slow, ask which slow.
+> Click. Slow to respond: you move the mouse or click, and the screen answers late. Usually Angular does too much work per event. We measure it with bars in the Angular DevTools Profiler, labs 1 and 2.
+> Click. Slow to start: the wait before you can use the app. JavaScript to download, parse and run. We measure it with Initial total in the build output, lab 3.
+> Click. Slower over time: fine when you opened it, heavy an hour later, because things were never cleaned up. We measure it by counting objects across two heap snapshots, lab 4.
+> Click. Each kind has its own number, and a fix for one does nothing for the others. That's the only rule today: measure, change exactly one thing, measure again the same way. Developers are bad at guessing where time goes, and a fix that does nothing still feels like progress.
 > Ask the room: which of the three did your last "the app is slow" ticket mean?
 
 </details>
