@@ -44,7 +44,7 @@ export type Block = TextBlock | CodeBlock | ShapeBlock | LineBlock | ImageBlock 
 export type BlockType = Block['type'];
 
 /** dropsMarkup: the file has markup or formatting that serializeSlide doesn't write back, so saving drops it. */
-export interface Slide { path: string; hidden: boolean; autoAnimate: boolean; blocks: Block[]; notes: string; etag: string; dropsMarkup?: boolean }
+export interface Slide { path: string; hidden: boolean; autoAnimate: boolean; template?: string; blocks: Block[]; notes: string; etag: string; dropsMarkup?: boolean }
 /** `etag` is the order file's (deck.json) as loaded, to detect changes on disk. */
 export interface Course { id: string; title: string; slides: Slide[]; etag?: string }
 export interface Deck { title: string; intro: Slide[]; courses: Course[]; etag?: string }

@@ -87,6 +87,7 @@ export function parseSlide(file: SlideFile): Slide {
   const slide: Slide = {
     path: file.path, hidden: file.hidden, etag: file.etag,
     autoAnimate: section.hasAttribute('data-auto-animate'),
+    ...(section.hasAttribute('data-template') && { template: section.getAttribute('data-template')! }),
     blocks: childBlocks(section),
     notes: section.querySelector(':scope > aside.notes')?.textContent ?? '',
   };
@@ -153,7 +154,8 @@ function serializeBlock(b: Block, indent: string): string {
 }
 
 export function serializeSlide(slide: Slide): string {
-  const open = slide.autoAnimate ? '<section data-auto-animate>' : '<section>';
+  const attrs = [slide.autoAnimate && 'data-auto-animate', slide.template && `data-template="${escapeAttr(slide.template)}"`].filter(Boolean);
+  const open = `<section${attrs.map(a => ' ' + a).join('')}>`;
   const notes = slide.notes ? [`  <aside class="notes">${escapeText(slide.notes)}</aside>`] : [];
   return [open, ...slide.blocks.map(b => serializeBlock(b, '  ')), ...notes, '</section>', ''].join('\n');
 }
