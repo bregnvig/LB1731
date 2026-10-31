@@ -19,8 +19,7 @@
   <div class="block" data-type="text" data-name="callout" style="left:64px;top:402px;width:540px;height:auto;z-index:13;text-align:left">
     <p style="font-size:0.85em;line-height:1.35">Restart <code>npm start</code>. You should see: the footer counter stops.</p>
   </div>
-  <aside class="notes">Change: zone.js out of polyfills, provideZonelessChangeDetection in main.ts. Expect: the counter freezes.
+  <aside class="notes">zone.js out of polyfills, provideZonelessChangeDetection() in main.ts and its import. Restart. Expected: the footer counter freezes.
 
-Now the change. In angular.json delete the zone.js line from polyfills. In main.ts swap provideZoneChangeDetection for provideZonelessChangeDetection, in the import too. Since v21 zoneless is the default, so deleting the line would do the same; the solution keeps provideZonelessChangeDetection so the next reader sees the choice. Leave runOutsideAngular from exercise 1 where it is.
-Restart and look at the footer. Ask the room: why did the counter stop? A timer writes a plain field, and nothing tells Angular. setInterval is on the "Only zone.js" list. Next slide fixes it.</aside>
+Helping a group: the frozen counter is the expected result, not a bug; the next step fixes it. runOutsideAngular from exercise 1 stays where it is. No restart, no change: angular.json is only read at start.</aside>
 </section>

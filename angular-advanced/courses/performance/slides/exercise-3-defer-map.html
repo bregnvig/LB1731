@@ -22,7 +22,5 @@
   </div>
   <aside class="notes">Change 2: home.component.ts, @defer (on idle) around leaflet, placeholder an empty vh-100 vw-100 div. Lazy table: leaflet-component, about 155 kB.
 
-The map. In home.component.ts, wrap the leaflet element in @defer on idle, and give it a placeholder: an empty div with vh-100 vw-100, so the page doesn't jump. Build again: a leaflet-component chunk of about 155 kilobytes.
-The trap: if anything in Home touches LeafletComponent outside the block, a viewChild for example, it stays eager and you get no chunk at all. Look for the chunk in the lazy table every time.
-Ask the room: the map now paints later than the list. Is that a problem? We'll measure that after the exercise.</aside>
+Helping a group: no leaflet-component chunk means something in Home still uses LeafletComponent outside the block. The map painting a moment later is expected; the debrief measures what it costs.</aside>
 </section>

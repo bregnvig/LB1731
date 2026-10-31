@@ -21,9 +21,6 @@ provideAppInitializer(() =&gt;
     <p style="font-size:0.85em;line-height:1.35"><span style="color:#ff8c00">Trap:</span> forget <code>addIcons(faSpinner)</code> and the spinners are gone: <em>Could not find icon</em> in the console.</p>
   </div>
   <aside class="notes">Change 4: main.ts. Delete initializeFontAwesomeFactory and the fas/far imports; provideAppInitializer(() =&gt; inject(FaIconLibrary).addIcons(faSpinner)).
-Forget addIcons: no spinner, console "Could not find icon with iconName=spinner and prefix=fas in the icon library."
 
-The icons, the thing the analyzer showed you. Open main.ts. The app registers every icon in two FontAwesome packs, solid and regular, through initializeFontAwesomeFactory. The app shows one: the spinner. So delete the factory and the two pack imports, import faSpinner, and in provideAppInitializer call addIcons with just that one.
-If you remove the packs and forget addIcons, the spinners disappear and the console tells you it can't find the spinner icon.
-Build, write the number down. Then the next slide: watch the chunks load.</aside>
+Helping a group: spinners gone and "Could not find icon with iconName=spinner and prefix=fas in the icon library" in the console means addIcons is missing. inject and FaIconLibrary need imports too.</aside>
 </section>

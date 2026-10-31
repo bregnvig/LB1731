@@ -235,12 +235,12 @@ Finding and fixing what makes the playground app slow, with one rule for every l
 - What "slow" means for a user: startup, interaction, memory
 - Change detection and zone.js: a cycle after every task; Eager (was Default) vs OnPush; `NgZone.runOutsideAngular`
 - **Tools:** Angular DevTools Profiler, Chrome Performance panel (Angular track), `ng build` output, the esbuild bundle analyzer (`npm run build -- --stats-json`), Chrome Memory panel heap snapshots
-- **Zoneless:** what schedules change detection without zone.js, OnPush as the default in v22, signals instead of plain fields, what to do on Angular 15–19; lists with `@for` `track` and `computed`
+- **Zoneless:** what schedules change detection without zone.js, OnPush as the default in v22, signals instead of plain fields; lists with `@for` `track` and `computed`
 - **Loading less up front:** what ends up in `main` (whole icon packs defeat tree-shaking), lazy routes (`loadComponent`), `@defer` triggers and placeholders, when `@defer` costs more than it saves
 - **Memory and the DOM:** leaks from intervals, listeners and third-party objects, detached DOM trees and retainers in heap snapshots, `DestroyRef` and `takeUntilDestroyed`
-- `ngSrc`, preloading, virtual scroll and `WeakMap` have hidden slides, no lab
+- `ngSrc`, preloading, virtual scroll, `WeakMap` and Angular 15–19 have hidden slides, no lab
 
-Every exercise ends with an "In your app" slide: what to measure and try in your own app.
+Each exercise is theory, then the exercise (groups work alone; the last step sends them back to the room), then a debrief with the measured numbers and an "In your app" slide: what to measure and try in your own app.
 
 **Exercises:**
 1. **Measure and leave the zone** - Profile 5 s of mouse moves over the map; create the Leaflet map with `runOutsideAngular`; profile again; bonus: wrap the `center$` `setZoom`/`setView` calls (slides only), and run the footer interval outside the zone to see it freeze (try, then revert)
