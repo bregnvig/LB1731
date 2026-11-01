@@ -324,6 +324,9 @@ def main(argv):
             for i in range(steps[0]):
                 if ex[i] == n and parsed[i]['template'] == 'exercise-result':
                     total += 1; print(f'{course.name}/{shown[i]}: result of exercise {n} before its steps; results go in the debrief after the run')
+        for x in deck['slides']:
+            if x.get('hidden'):
+                total += 1; print(f'{course.name}/{x["file"]}: hidden slide; put it in the talk or delete it (and any lab code only it asked for)')
         if not (course / 'MEASURED.md').exists():
             total += 1; print(f'{course.name}: no MEASURED.md (every number on a slide needs its command and result there)')
         for slide in deck['slides']:

@@ -19,7 +19,7 @@ Copy voice, density, orange, screenshot habit, and note shape from those files. 
 ## Layout
 
 ```
-courses/<course>/slides/deck.json     order; "hidden": true is allowed
+courses/<course>/slides/deck.json     order; the format allows "hidden": true, a lifted course has none
 courses/<course>/slides/*.html        one <section> per file
 courses/<course>/slides/images/       screenshots for that course
 courses/<course>/step-N/              lab N; step-(N+1) = solution N

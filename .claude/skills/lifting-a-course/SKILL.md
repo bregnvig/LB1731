@@ -77,14 +77,9 @@ A group works through the exercise on one shared screen without the instructor. 
 
 Three or four labs. Each lab is one Monday technique with one number that shows it worked. A slide stays only if it serves a lab, a live demo of that technique, or a 30-second "don't do this".
 
-**Budget:** 35–50 visible slides, 60 files at most including hidden ones (siblings run 40–59 files). Over budget means cut, not shrink the type.
+**Budget:** 35–50 slides (siblings run 40–57). Over budget means cut, not shrink the type.
 
-**Hide or delete:**
-
-| Slide is | Do |
-|----------|----|
-| Correct, but off the spine (background, an expected question) | Hide: `"hidden": true` in `deck.json` |
-| Wrong, outdated, duplicated, or replaced by a new slide | Delete the file and its `deck.json` entry |
+**No hidden slides.** A slide is in the talk or deleted, file and `deck.json` entry both. Background or an expected question goes in the notes of the nearest slide, or nowhere. Lab code that only a deleted slide asked for goes too, with its numbers in MEASURED.md re-measured.
 
 Every `.html` in `slides/` is listed in `deck.json`. No orphan files.
 
@@ -183,7 +178,7 @@ Each Monday technique has a theory slide, a demo or a measured before/after, a l
 
 ## 8. Verify
 
-1. `python3 scripts/check-slides.py --all <course dir>` prints `0 problem(s)`. `adv slides`: walk the stack. Notes readable in presenter view. Hidden slides stay hidden. Every `deck.json` entry has a file and every file has an entry.
+1. `python3 scripts/check-slides.py --all <course dir>` prints `0 problem(s)`. `adv slides`: walk the stack. Notes readable in presenter view. Every `deck.json` entry has a file and every file has an entry.
 2. Run exercise 1 from `step-1` as a student. Diff each `step-N` → `step-(N+1)` against its exercise slides, and each slide snippet against the solution file.
 3. Click every demo the notes mention, following the README and the start command in the notes.
 4. Check every slide number against the measured log.

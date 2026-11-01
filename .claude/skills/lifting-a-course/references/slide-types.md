@@ -45,7 +45,7 @@ Inline `<code>` is white monospace at the size of its text. UI labels are `<stro
 - No tables.
 - Slide text never points at another lab or exercise ("Lab 2", "exercise 3", "the next exercise"). That belongs in the notes. The opener "Not happy with the result of the previous exercise?" is the one exception.
 - Speaker notes exist (not on `title` and `statement`), have a short cue, a blank line, then the talk script, and hold no authoring history ("cut from the slide", "so it fits").
-- Per course: at most 50 visible slides, and a `MEASURED.md` next to `slides/`.
+- Per course: at most 50 slides, none hidden, and a `MEASURED.md` next to `slides/`.
 
 ## The types
 
