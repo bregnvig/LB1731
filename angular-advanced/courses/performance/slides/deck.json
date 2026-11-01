@@ -11,10 +11,6 @@
       "file": "change-detection-in-one-minute.html"
     },
     {
-      "file": "what-is-zone-js.html",
-      "hidden": true
-    },
-    {
       "file": "running-outside-zone-js.html"
     },
     {
@@ -42,10 +38,6 @@
       "file": "exercise-1-what-we-measured.html"
     },
     {
-      "file": "exercise-1-bonus-2.html",
-      "hidden": true
-    },
-    {
       "file": "exercise-1-in-your-app.html"
     },
     {
@@ -56,18 +48,6 @@
     },
     {
       "file": "onpush-is-the-default.html"
-    },
-    {
-      "file": "moving-to-signals.html",
-      "hidden": true
-    },
-    {
-      "file": "moving-to-signals-2.html",
-      "hidden": true
-    },
-    {
-      "file": "zoneless-what-breaks.html",
-      "hidden": true
     },
     {
       "file": "exercise-2-measure-before.html"
@@ -94,33 +74,13 @@
       "file": "lists-track-and-computed.html"
     },
     {
-      "file": "on-angular-15-to-19.html",
-      "hidden": true
-    },
-    {
       "file": "exercise-2-in-your-app.html"
-    },
-    {
-      "file": "reading-the-ng-build-output.html",
-      "hidden": true
     },
     {
       "file": "what-ends-up-in-main.html"
     },
     {
-      "file": "lazy-routes.html",
-      "hidden": true
-    },
-    {
-      "file": "preloading-and-canmatch.html",
-      "hidden": true
-    },
-    {
       "file": "defer-triggers.html"
-    },
-    {
-      "file": "optimized-images-ngsrc.html",
-      "hidden": true
     },
     {
       "file": "exercise-3-getting-started.html"
@@ -144,23 +104,7 @@
       "file": "exercise-3-see-it-load.html"
     },
     {
-      "file": "exercise-3-bonus-about-panel.html",
-      "hidden": true
-    },
-    {
-      "file": "exercise-3-bonus-about-panel-footer.html",
-      "hidden": true
-    },
-    {
-      "file": "exercise-3-bonus-about-panel-2.html",
-      "hidden": true
-    },
-    {
       "file": "exercise-3-what-we-measured.html"
-    },
-    {
-      "file": "exercise-3-each-change-alone.html",
-      "hidden": true
     },
     {
       "file": "exercise-3-cold-load.html"
@@ -170,14 +114,6 @@
     },
     {
       "file": "leaks-in-angular-apps.html"
-    },
-    {
-      "file": "virtual-scroll.html",
-      "hidden": true
-    },
-    {
-      "file": "weakmap-caches.html",
-      "hidden": true
     },
     {
       "file": "reading-a-heap-snapshot.html"

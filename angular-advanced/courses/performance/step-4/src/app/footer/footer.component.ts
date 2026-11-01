@@ -1,5 +1,4 @@
-import { NgComponentOutlet } from '@angular/common';
-import { Component, Input, signal, Type } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Playground } from '../model';
 
@@ -12,32 +11,18 @@ import { Playground } from '../model';
         <p>{{ playground.addressDescription }}</p>
         <p>{{ playground.description }} <a class="link-light" [routerLink]="['/legeplads', playground.id]">Detaljer</a></p>
       }
-      <p>
-        <small>Opdateret for {{ seconds() }} sekunder siden</small>
-        <button class="btn btn-sm btn-outline-light ms-2" (click)="toggleAbout()">Om appen</button>
-      </p>
-      <ng-container *ngComponentOutlet="about()"/>
+      <p><small>Opdateret for {{ seconds() }} sekunder siden</small></p>
     </footer>
   `,
-  imports: [RouterLink, NgComponentOutlet],
+  imports: [RouterLink],
 })
 export class FooterComponent {
 
   @Input() playground?: Playground;
   @Input({ required: true }) loadedAt = 0;
   seconds = signal(0);
-  about = signal<Type<unknown> | null>(null);
 
   constructor() {
     setInterval(() => this.seconds.set(Math.round((Date.now() - this.loadedAt) / 1000)), 1000);
-  }
-
-  async toggleAbout() {
-    if (this.about()) {
-      this.about.set(null);
-    } else {
-      const { AboutComponent } = await import('../about/about.component');
-      this.about.set(AboutComponent);
-    }
   }
 }

@@ -153,7 +153,7 @@ Start with `npm run start:no-hmr` for this one: with HMR (the `ng serve` default
 
 The route shell is `PerformanceComponent` (`performance.component.ts`), the same tab bar + `<router-outlet>` as state management. The demo app runs on zone.js and is not switched to zoneless, so the CD tree shows zone.js behaviour; the slides say what changes without it.
 
-Order to demo: **Change detection → @defer → Leaks**. Change detection goes with the intro and the theory of exercises 1–2, `@defer` with the theory of exercise 3, leaks with exercise 4. The ngSrc slide is hidden in the deck; show `/performance/images` only if someone asks about images.
+Order to demo: **Change detection → @defer → Leaks**. Change detection goes with the intro and the theory of exercises 1–2, `@defer` with the theory of exercise 3, leaks with exercise 4. Show `/performance/images` only if someone asks about images.
 
 ### 1. Change detection tree — `/performance/change-detection`
 
@@ -192,7 +192,7 @@ A node flashes yellow and its **checks** counter goes up when Angular checks it 
 
 **Talking point:** wrap the heavy thing below the fold or behind a click in `@defer` and it leaves `main`. In lab 3 that's the map, with `@defer (on idle)`; the footer, which is small and in view, gets bigger when deferred.
 
-### 3. ngSrc — `/performance/images` (optional, slide hidden)
+### 3. ngSrc — `/performance/images` (optional, no slide)
 
 **Files:** `images/images.component.ts`, `src/assets/performance/*.webp`
 
