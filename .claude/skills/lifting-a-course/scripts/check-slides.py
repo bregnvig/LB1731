@@ -99,11 +99,11 @@ TYPES = {
                 b('steps', 'text', 64, 160, 1150, sample=STEPS(f'Open DevTools, <strong>Profiler</strong>, press <strong>Record</strong>', 'Write the number down')),
                 b('callout', 'text', 64, None, 1150, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong and what you see.'))]),
     'exercise-step-code': dict(
-        what='One step of an exercise: short instructions on the left, the code to write on the right.',
-        words=50, exercise=True, code_lines=8,
+        what='One step of an exercise: short instructions on the left, the code to write on the right. The code starts with a comment naming the file, so the steps never spell out a path.',
+        words=50, exercise=True, code_lines=8, file_comment=True,
         blocks=[EX_TITLE('Exercise 2 - Defer the map'),
-                b('steps', 'text', 64, 160, 540, sample=STEPS('In <code>home.component.ts</code>, wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code>')),
-                b('code-1', 'code', 630, 160, 630, sample='@defer (on idle) {\n  <leaflet/>\n}'),
+                b('steps', 'text', 64, 160, 540, sample=STEPS('Wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code>')),
+                b('code-1', 'code', 630, 160, 630, sample='<!-- src/app/home/home.component.ts -->\n@defer (on idle) {\n  <leaflet/>\n}'),
                 b('callout', 'text', 64, None, 540, required=False, sample=EX(f'{O.format("Trap:")} what goes wrong.'))]),
     'exercise-step-image': dict(
         what='One step of an exercise: short instructions on the left, a screenshot of what they should see on the right.',
@@ -129,6 +129,9 @@ NOTES_RESIDUE = re.compile(r'cut from the slide|not on the slide any ?more|so it
 OPENER = 'Not happy with the result of the previous exercise?'
 OTHER_LAB = re.compile(r'\b(labs?|exercises?|øvelse[rn]?)\s+\d+|\b(next|previous|later|earlier|another) (lab|exercise)\b', re.I)
 MIN_CODE_PX, ORANGE_MAX, VISIBLE_MAX = 22, 2, 50
+# On a code step the file is named once, in the code's first line. A path in the steps wraps badly in the narrow column.
+FILE_COMMENT = re.compile(r'^\s*(//|<!--)\s*\S+\.(ts|html|json|s?css)\b')
+PATH_IN_TEXT = re.compile(r'<code>([^<]*\.(ts|html|json|s?css)|src/[^<]*)</code>')
 
 def words_of(fragment_html):
     text = html.unescape(re.sub(r'<[^>]+>', ' ', fragment_html))
@@ -200,7 +203,13 @@ def check(path):
                     add(f'block "{name}" height does not match the image ratio (letterboxed): set height to width × {out[1]}/{out[0]}')
         if blk['kind'] == 'code':
             code = re.search(r'<code([^>]*)>(.*?)</code>', blk['inner'], re.S)
-            n = len(code.group(2).rstrip('\n').split('\n')) if code else 0
+            lines = code.group(2).rstrip('\n').split('\n') if code else []
+            n = len(lines)
+            if t.get('file_comment'):
+                if not (lines and FILE_COMMENT.match(html.unescape(lines[0]))):
+                    add(f'block "{name}" must start with a comment naming the file, e.g. // src/app/home/home.component.ts')
+                else:
+                    n -= 1  # the file line is free
             if n > t.get('code_lines', 8):
                 add(f'block "{name}" has {n} code lines (max {t.get("code_lines", 8)}); elide with // …')
             if re.search(r'<pre[^>]*(font-size|line-height)', blk['inner']):
@@ -208,6 +217,8 @@ def check(path):
             ln = re.search(r'data-line-numbers(="([^"]*)")?', blk['inner'])
             if ln and not (ln.group(2) or '').strip():
                 add(f'block "{name}" shows line numbers without highlighting any; drop data-line-numbers')
+        if t.get('file_comment') and blk['kind'] == 'text' and PATH_IN_TEXT.search(blk['inner']):
+            add(f'block "{name}" names a file ({PATH_IN_TEXT.search(blk["inner"]).group(1)}); name it in the code\'s first-line comment instead')
         if re.search(r'<ol[^>]*\bstart=', blk['inner']):
             add(f'block "{name}" continues a numbered list from another slide; keep each list on one slide')
     for name, x in spec.items():

@@ -131,6 +131,8 @@ talk script, including the demo click and the question to the room
 
 **One step per exercise slide.** An exercise is a run of slides, one step each: getting started, measure before, each change, measure after, bonus. Title them `Exercise N - <step>` and name the files `exercise-N-<step>.html`. When a slide goes over its type's word limit or holds two steps, split it at the step boundary; never shrink the type. A step that still doesn't fit gets a `-2` slide with the same title.
 
+Check the render, not only the checker: a step on a code slide that wraps to three lines, or leaves one word alone on a line, gets shorter or splits into two steps. The file goes in the code's first-line comment, never in the step.
+
 **Exercise slides:** follow `courses/signals/slides/exercise-*.html` and house.md. Commands a student types are on the slide. "Ask for help if you get stuck" is allowed; "see if you can figure it out" needs a trap or a hint next to it.
 
 **Credit people.** A slide built on someone's idea, quote, or model names them on the slide (name, role, source). Notes carry the full citation (title, edition, publisher, year).

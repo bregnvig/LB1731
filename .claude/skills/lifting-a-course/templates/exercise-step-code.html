@@ -4,11 +4,12 @@
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
     <ol>
-<li>In <code>home.component.ts</code>, wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code></li>
+<li>Wrap <code>&lt;leaflet&gt;</code> in <code>@defer (on idle)</code></li>
 </ol>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
-    <pre><code class="language-typescript">@defer (on idle) {
+    <pre><code class="language-typescript">&lt;!-- src/app/home/home.component.ts --&gt;
+@defer (on idle) {
   &lt;leaflet/&gt;
 }
 </code></pre>

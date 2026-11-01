@@ -33,6 +33,7 @@ Inline `<code>` is white monospace at the size of its text. UI labels are `<stro
 - Only that type's blocks, by `data-name`, each the right kind (text, code, image), at the template's `left`, `top` and `width`. Blocks without a fixed `top` (punchline, why, callout, note) sit 48px below the block above them; check that on the render.
 - Required blocks are there. Blocks marked "(click)" are fragments; the others are not, unless the template allows both.
 - Code is at most 8 lines (elide with `// …`). `data-line-numbers` only with lines to highlight.
+- On `exercise-step-code`, the code's first line is a comment naming the file (`// src/app/home/home.component.ts`, or `<!-- … -->` in HTML), and that line doesn't count toward the 8. The steps never spell out a path: a long path in the narrow step column wraps into orphan words.
 - Text sizes and colours come only from the type scale (below). No inline `font-size`, `line-height` or `color`, in text or code.
 - At most two `accent`s per slide, plus the "Trap:" label. Paths and identifiers go in white `<code>`, UI labels in `<strong>`.
 - A numbered list stays on one slide (no `<ol start=…>`).
@@ -62,7 +63,7 @@ This table is the output of `python3 scripts/check-slides.py --describe`. The nu
 | `wrap` | Last content slide: one line per technique with this app's number, the Monday line, the question. | `title`, `line-1`, `line-2`, `line-3`*, `line-4`*, `monday`, `question` (click) | 50 |
 | `exercise-start` | First slide of exercise 1: path, npm install, npm start, what the exercise is for, the running app on the right. | `title`, `steps`, `image-2`*, `note`*, `image-1` | 55 |
 | `exercise-step` | One step of an exercise with nothing to show on the right: 1-4 numbered instructions, then an optional callout 48px below: a trap ("Trap: …") or what they should see ("You should see: …"). | `title`, `steps`, `callout`* | 60 |
-| `exercise-step-code` | One step of an exercise: short instructions on the left, the code to write on the right. | `title`, `steps`, `code-1`, `callout`* | 50, 8 code lines |
+| `exercise-step-code` | One step of an exercise: short instructions on the left, the code to write on the right. The code starts with a comment naming the file, so the steps never spell out a path. | `title`, `steps`, `code-1`, `callout`* | 50, 8 code lines |
 | `exercise-step-image` | One step of an exercise: short instructions on the left, a screenshot of what they should see on the right. | `title`, `steps`, `image-1`, `callout`* | 45 |
 | `exercise-result` | Debrief after an exercise: one or two measured results as big numbers, the before in white, the after in accent, a short label under each. Then one line on why. | `title`, `result-1`, `result-2`* (click), `why`* | 30 |
 
