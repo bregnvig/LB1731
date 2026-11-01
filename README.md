@@ -6,7 +6,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `performance.html` · type `title`
 
-![performance.html](slides/01-performance.jpg?v=1793523500)
+![performance.html](slides/01-performance.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -24,7 +24,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `what-slow-means.html` · type `reveal-list`
 
-![what-slow-means.html](slides/02-what-slow-means.jpg?v=1793523500)
+![what-slow-means.html](slides/02-what-slow-means.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -44,7 +44,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `change-detection-in-one-minute.html` · type `claim-image`
 
-![change-detection-in-one-minute.html](slides/03-change-detection-in-one-minute.jpg?v=1793523500)
+![change-detection-in-one-minute.html](slides/03-change-detection-in-one-minute.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -65,7 +65,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `running-outside-zone-js.html` · type `claim-code`
 
-![running-outside-zone-js.html](slides/04-running-outside-zone-js.jpg?v=1793523500)
+![running-outside-zone-js.html](slides/04-running-outside-zone-js.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -84,7 +84,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `chrome-performance-angular-track.html` · type `claim-code`
 
-![chrome-performance-angular-track.html](slides/05-chrome-performance-angular-track.jpg?v=1793523500)
+![chrome-performance-angular-track.html](slides/05-chrome-performance-angular-track.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -103,7 +103,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-getting-started.html` · type `exercise-start`
 
-![exercise-1-getting-started.html](slides/06-exercise-1-getting-started.jpg?v=1793523500)
+![exercise-1-getting-started.html](slides/06-exercise-1-getting-started.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -118,7 +118,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-measure-before.html` · type `exercise-step`
 
-![exercise-1-measure-before.html](slides/07-exercise-1-measure-before.jpg?v=1793523500)
+![exercise-1-measure-before.html](slides/07-exercise-1-measure-before.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -132,7 +132,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-leave-the-zone.html` · type `exercise-step-code`
 
-![exercise-1-leave-the-zone.html](slides/08-exercise-1-leave-the-zone.jpg?v=1793523500)
+![exercise-1-leave-the-zone.html](slides/08-exercise-1-leave-the-zone.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -146,7 +146,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-measure-after.html` · type `exercise-step`
 
-![exercise-1-measure-after.html](slides/09-exercise-1-measure-after.jpg?v=1793523500)
+![exercise-1-measure-after.html](slides/09-exercise-1-measure-after.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -160,7 +160,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-bonus-list-click.html` · type `exercise-step-code`
 
-![exercise-1-bonus-list-click.html](slides/10-exercise-1-bonus-list-click.jpg?v=1793523500)
+![exercise-1-bonus-list-click.html](slides/10-exercise-1-bonus-list-click.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -174,7 +174,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-bonus.html` · type `exercise-step-code`
 
-![exercise-1-bonus.html](slides/11-exercise-1-bonus.jpg?v=1793523500)
+![exercise-1-bonus.html](slides/11-exercise-1-bonus.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -188,7 +188,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-what-we-measured.html` · type `exercise-result`
 
-![exercise-1-what-we-measured.html](slides/12-exercise-1-what-we-measured.jpg?v=1793523500)
+![exercise-1-what-we-measured.html](slides/12-exercise-1-what-we-measured.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -208,7 +208,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-1-in-your-app.html` · type `reveal-list`
 
-![exercise-1-in-your-app.html](slides/13-exercise-1-in-your-app.jpg?v=1793523500)
+![exercise-1-in-your-app.html](slides/13-exercise-1-in-your-app.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -225,7 +225,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `from-zone-js-to-zoneless.html` · type `claim-code`
 
-![from-zone-js-to-zoneless.html](slides/14-from-zone-js-to-zoneless.jpg?v=1793523500)
+![from-zone-js-to-zoneless.html](slides/14-from-zone-js-to-zoneless.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -242,7 +242,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `what-schedules-change-detection.html` · type `reveal-list`
 
-![what-schedules-change-detection.html](slides/15-what-schedules-change-detection.jpg?v=1793523500)
+![what-schedules-change-detection.html](slides/15-what-schedules-change-detection.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -261,7 +261,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `onpush-is-the-default.html` · type `claim-code`
 
-![onpush-is-the-default.html](slides/16-onpush-is-the-default.jpg?v=1793523500)
+![onpush-is-the-default.html](slides/16-onpush-is-the-default.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -280,7 +280,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-measure-before.html` · type `exercise-step`
 
-![exercise-2-measure-before.html](slides/17-exercise-2-measure-before.jpg?v=1793523500)
+![exercise-2-measure-before.html](slides/17-exercise-2-measure-before.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -294,7 +294,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-go-zoneless.html` · type `exercise-step-code`
 
-![exercise-2-go-zoneless.html](slides/18-exercise-2-go-zoneless.jpg?v=1793523500)
+![exercise-2-go-zoneless.html](slides/18-exercise-2-go-zoneless.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -308,7 +308,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-fix-the-footer.html` · type `exercise-step-code`
 
-![exercise-2-fix-the-footer.html](slides/19-exercise-2-fix-the-footer.jpg?v=1793523500)
+![exercise-2-fix-the-footer.html](slides/19-exercise-2-fix-the-footer.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -322,7 +322,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-remove-eager.html` · type `exercise-step`
 
-![exercise-2-remove-eager.html](slides/20-exercise-2-remove-eager.jpg?v=1793523500)
+![exercise-2-remove-eager.html](slides/20-exercise-2-remove-eager.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -336,7 +336,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-measure-after.html` · type `exercise-step`
 
-![exercise-2-measure-after.html](slides/21-exercise-2-measure-after.jpg?v=1793523500)
+![exercise-2-measure-after.html](slides/21-exercise-2-measure-after.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -350,7 +350,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-what-we-measured.html` · type `exercise-result`
 
-![exercise-2-what-we-measured.html](slides/22-exercise-2-what-we-measured.jpg?v=1793523500)
+![exercise-2-what-we-measured.html](slides/22-exercise-2-what-we-measured.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -367,7 +367,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-what-we-measured-2.html` · type `exercise-result`
 
-![exercise-2-what-we-measured-2.html](slides/23-exercise-2-what-we-measured-2.jpg?v=1793523500)
+![exercise-2-what-we-measured-2.html](slides/23-exercise-2-what-we-measured-2.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -384,7 +384,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `lists-track-and-computed.html` · type `claim-code`
 
-![lists-track-and-computed.html](slides/24-lists-track-and-computed.jpg?v=1793523500)
+![lists-track-and-computed.html](slides/24-lists-track-and-computed.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -402,7 +402,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-2-in-your-app.html` · type `reveal-list`
 
-![exercise-2-in-your-app.html](slides/25-exercise-2-in-your-app.jpg?v=1793523500)
+![exercise-2-in-your-app.html](slides/25-exercise-2-in-your-app.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -420,7 +420,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `what-ends-up-in-main.html` · type `claim-code`
 
-![what-ends-up-in-main.html](slides/26-what-ends-up-in-main.jpg?v=1793523500)
+![what-ends-up-in-main.html](slides/26-what-ends-up-in-main.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -438,7 +438,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `defer-triggers.html` · type `claim-code`
 
-![defer-triggers.html](slides/27-defer-triggers.jpg?v=1793523500)
+![defer-triggers.html](slides/27-defer-triggers.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -458,7 +458,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-getting-started.html` · type `exercise-step`
 
-![exercise-3-getting-started.html](slides/28-exercise-3-getting-started.jpg?v=1793523500)
+![exercise-3-getting-started.html](slides/28-exercise-3-getting-started.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -472,7 +472,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-whats-in-main.html` · type `exercise-step-image`
 
-![exercise-3-whats-in-main.html](slides/29-exercise-3-whats-in-main.jpg?v=1793523500)
+![exercise-3-whats-in-main.html](slides/29-exercise-3-whats-in-main.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -486,7 +486,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-lazy-route.html` · type `exercise-step-code`
 
-![exercise-3-lazy-route.html](slides/30-exercise-3-lazy-route.jpg?v=1793523500)
+![exercise-3-lazy-route.html](slides/30-exercise-3-lazy-route.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -500,7 +500,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-defer-map.html` · type `exercise-step-code`
 
-![exercise-3-defer-map.html](slides/31-exercise-3-defer-map.jpg?v=1793523500)
+![exercise-3-defer-map.html](slides/31-exercise-3-defer-map.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -514,7 +514,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-defer-footer.html` · type `exercise-step-code`
 
-![exercise-3-defer-footer.html](slides/32-exercise-3-defer-footer.jpg?v=1793523500)
+![exercise-3-defer-footer.html](slides/32-exercise-3-defer-footer.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -528,7 +528,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-one-icon.html` · type `exercise-step-code`
 
-![exercise-3-one-icon.html](slides/33-exercise-3-one-icon.jpg?v=1793523500)
+![exercise-3-one-icon.html](slides/33-exercise-3-one-icon.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -542,7 +542,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-see-it-load.html` · type `exercise-step-image`
 
-![exercise-3-see-it-load.html](slides/34-exercise-3-see-it-load.jpg?v=1793523500)
+![exercise-3-see-it-load.html](slides/34-exercise-3-see-it-load.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -556,7 +556,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-what-we-measured.html` · type `exercise-result`
 
-![exercise-3-what-we-measured.html](slides/35-exercise-3-what-we-measured.jpg?v=1793523500)
+![exercise-3-what-we-measured.html](slides/35-exercise-3-what-we-measured.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -573,7 +573,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-cold-load.html` · type `exercise-result`
 
-![exercise-3-cold-load.html](slides/36-exercise-3-cold-load.jpg?v=1793523500)
+![exercise-3-cold-load.html](slides/36-exercise-3-cold-load.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -591,7 +591,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-3-in-your-app.html` · type `reveal-list`
 
-![exercise-3-in-your-app.html](slides/37-exercise-3-in-your-app.jpg?v=1793523500)
+![exercise-3-in-your-app.html](slides/37-exercise-3-in-your-app.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -607,7 +607,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `leaks-in-angular-apps.html` · type `claim-image`
 
-![leaks-in-angular-apps.html](slides/38-leaks-in-angular-apps.jpg?v=1793523500)
+![leaks-in-angular-apps.html](slides/38-leaks-in-angular-apps.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -627,7 +627,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `reading-a-heap-snapshot.html` · type `reveal-list`
 
-![reading-a-heap-snapshot.html](slides/39-reading-a-heap-snapshot.jpg?v=1793523500)
+![reading-a-heap-snapshot.html](slides/39-reading-a-heap-snapshot.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -647,7 +647,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `cleaning-up-with-destroyref.html` · type `claim-code`
 
-![cleaning-up-with-destroyref.html](slides/40-cleaning-up-with-destroyref.jpg?v=1793523500)
+![cleaning-up-with-destroyref.html](slides/40-cleaning-up-with-destroyref.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -666,7 +666,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-find-the-leaks.html` · type `exercise-step`
 
-![exercise-4-find-the-leaks.html](slides/41-exercise-4-find-the-leaks.jpg?v=1793523500)
+![exercise-4-find-the-leaks.html](slides/41-exercise-4-find-the-leaks.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -680,7 +680,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-read-the-snapshot.html` · type `exercise-step`
 
-![exercise-4-read-the-snapshot.html](slides/42-exercise-4-read-the-snapshot.jpg?v=1793523500)
+![exercise-4-read-the-snapshot.html](slides/42-exercise-4-read-the-snapshot.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -694,7 +694,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-fix-the-leaks.html` · type `exercise-step-code`
 
-![exercise-4-fix-the-leaks.html](slides/43-exercise-4-fix-the-leaks.jpg?v=1793523500)
+![exercise-4-fix-the-leaks.html](slides/43-exercise-4-fix-the-leaks.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -708,7 +708,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-measure-after.html` · type `exercise-step`
 
-![exercise-4-measure-after.html](slides/44-exercise-4-measure-after.jpg?v=1793523500)
+![exercise-4-measure-after.html](slides/44-exercise-4-measure-after.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -722,7 +722,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-bonus-take-until-destroyed.html` · type `exercise-step-code`
 
-![exercise-4-bonus-take-until-destroyed.html](slides/45-exercise-4-bonus-take-until-destroyed.jpg?v=1793523500)
+![exercise-4-bonus-take-until-destroyed.html](slides/45-exercise-4-bonus-take-until-destroyed.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -736,7 +736,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-what-we-measured.html` · type `exercise-result`
 
-![exercise-4-what-we-measured.html](slides/46-exercise-4-what-we-measured.jpg?v=1793523500)
+![exercise-4-what-we-measured.html](slides/46-exercise-4-what-we-measured.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -754,7 +754,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `what-holds-the-old-dom.html` · type `claim-image`
 
-![what-holds-the-old-dom.html](slides/47-what-holds-the-old-dom.jpg?v=1793523500)
+![what-holds-the-old-dom.html](slides/47-what-holds-the-old-dom.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -772,7 +772,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `exercise-4-in-your-app.html` · type `reveal-list`
 
-![exercise-4-in-your-app.html](slides/48-exercise-4-in-your-app.jpg?v=1793523500)
+![exercise-4-in-your-app.html](slides/48-exercise-4-in-your-app.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -789,7 +789,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `wrap-the-fixes-of-the-day.html` · type `wrap`
 
-![wrap-the-fixes-of-the-day.html](slides/49-wrap-the-fixes-of-the-day.jpg?v=1793523500)
+![wrap-the-fixes-of-the-day.html](slides/49-wrap-the-fixes-of-the-day.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
@@ -809,7 +809,7 @@ Rendered from PR #24 (branch `performance`) with the slides theme from PR #25. 5
 
 `time-for-questions.html` · type `statement`
 
-![time-for-questions.html](slides/50-time-for-questions.jpg?v=1793523500)
+![time-for-questions.html](slides/50-time-for-questions.jpg?v=1793524047)
 
 <details><summary>Speaker notes</summary>
 
