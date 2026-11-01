@@ -4,11 +4,12 @@
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
     <ol>
-<li>In <code>src/app/footer/footer.component.ts</code>: a signal holds the type, <code>await import(...)</code> on click, <code>*ngComponentOutlet</code> shows it</li>
+<li>A signal holds the type, <code>await import(...)</code> on click, <code>*ngComponentOutlet</code> shows it</li>
 </ol>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
-    <pre><code class="language-typescript">async toggleAbout() {
+    <pre><code class="language-typescript">// src/app/footer/footer.component.ts
+async toggleAbout() {
   if (this.about()) {
     this.about.set(null);
   } else {

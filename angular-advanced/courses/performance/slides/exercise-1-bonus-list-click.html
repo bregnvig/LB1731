@@ -10,7 +10,8 @@
 </ol>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
-    <pre><code class="language-typescript">.subscribe(zoom =&gt;
+    <pre><code class="language-typescript">// src/app/leaflet/leaflet.component.ts
+.subscribe(zoom =&gt;
   this.zone.runOutsideAngular(
     () =&gt; _map.setZoom(zoom!)));
 // …
