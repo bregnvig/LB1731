@@ -1,31 +1,61 @@
-.traffic-light-container {
-  max-width: 250px;
-  .trafic-light {
-    width: 100%;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    border: 2px solid #ddd;
-    background-color: #eee;
-    .light {
-      opacity: 0.5;
-      &.active {
-        opacity: 1;
-      }
-      &.red{
-        background-color: red;
-      }
-      &.yellow{
-        background-color: yellow;
-      }
-      &.green{
-        background-color: rgb(4, 209, 4);
-      }
-      flex: 1 1 auto;
-      margin: 1rem;
-      height: 200px;
-      border-radius: 50%;
-    }
+@import "src/scss/variables";
+
+// A traffic light drawn like a HUD readout: an outlined housing, a ring
+// per lamp and flat lamps that glow when on. Dimming is opacity, so the green
+// lamp (whose opacity the template sets) looks the same as the other two.
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 3rem 1.25rem;
+}
+
+.flex-item {
+  gap: .875rem;
+  padding: .875rem;
+  border: 1px solid rgba($signal, .35);
+  border-radius: 1.75rem;
+  background: rgba($navy, .6);
+}
+
+.trafic-light {
+  width: 5rem;
+  height: 5rem;
+  padding: .375rem;
+  border: 1px solid rgba($white, .14);
+  border-radius: 50%;
+}
+
+.light {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: .2;
+  background: var(--lamp);
+  box-shadow: 0 0 1.5rem var(--lamp);
+  transition: opacity .35s ease;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.red { --lamp: #ff3b4a; }
+  &.yellow { --lamp: #ffc21a; }
+  &.green { --lamp: #1fe28a; }
+}
+
+.state {
+  padding: .25rem .875rem;
+  border-radius: 999px;
+  background: rgba($white, .16);
+  font-family: $font-family-monospace;
+  font-size: .8125rem;
+  color: rgba($white, .85);
+
+  b {
+    font-weight: 600;
+    color: $white;
   }
 }

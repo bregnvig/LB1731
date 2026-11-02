@@ -1,0 +1,23 @@
+// A playground shown as a place card: gradient header with the name, details below
+@import "src/scss/variables";
+
+.card {
+  overflow: hidden;
+  max-width: 40rem;
+}
+
+.card-title {
+  margin: -1.25rem -1.25rem 1.25rem;
+  padding: 2.5rem 1.25rem 1.25rem;
+  background: $surface-bg;
+  color: $white;
+  font-size: 1.75rem;
+  font-stretch: 80%;
+}
+
+.card-text:last-child {
+  margin: 0;
+  padding-top: .75rem;
+  border-top: 1px solid $gray-200;
+  color: $muted;
+}

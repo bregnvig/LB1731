@@ -8,17 +8,18 @@ let creation = 0;
     selector: 'loop-memory-leak',
     template: `
     <button type="button" class="btn btn-primary" (click)="go()">Start</button>
-    <ul>
+    <ul class="ticks">
       @for (no of nos; track no) {
         <li>{{no}}</li>
       }
     </ul>
-    <ul>
+    <ul class="ticks">
       @for(no of nos$ | async; track no) {
       <li>{{no}}</li>
       }
     </ul>
     `,
+    styleUrl: './memory-leak.component.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })

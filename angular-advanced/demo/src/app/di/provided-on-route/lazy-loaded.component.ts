@@ -6,7 +6,15 @@ import { RouteProvidedService } from './route-provided.service';
   selector: 'loop-lazy-loaded',
   imports: [DatePipe],
   template: `
-  {{service.time | date: 'medium'}}
+  <div class="demo-surface">
+    <small>RouteProvidedService.time</small>
+    {{service.time | date: 'medium'}}
+  </div>
+  `,
+  styles: `
+    .demo-surface { display: grid; place-items: center; gap: .5rem; padding: 3.5rem 2rem;
+      font-size: 2.75rem; font-weight: 650; font-stretch: 75%; font-variant-numeric: tabular-nums; }
+    small { font: 500 .875rem var(--bs-font-monospace); opacity: .8; }
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
   providers: [

@@ -1,0 +1,53 @@
+// Level-3 navigation: a compact segmented control sitting on the inset panel
+// that holds the nested outlet it controls. A step below the pill tabs.
+@import "outlet-panel";
+
+.panel-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid $gray-300;
+  border-radius: 999px;
+  background: $white;
+
+  // Phones: one row that scrolls, so the pill outline stays a pill
+  @media (max-width: 767.98px) {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    .btn { white-space: nowrap; }
+  }
+
+  .btn {
+    --bs-btn-padding-y: .25rem;
+    --bs-btn-padding-x: .75rem;
+    --bs-btn-font-size: .8125rem;
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: #{$muted};
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: #{$ink};
+    --bs-btn-hover-bg: #{$gray-100};
+    --bs-btn-hover-border-color: transparent;
+    border-radius: 999px;
+  }
+
+  .btn.active {
+    color: $cobalt;
+    background: rgba($cobalt, .12);
+    border-color: transparent;
+  }
+}

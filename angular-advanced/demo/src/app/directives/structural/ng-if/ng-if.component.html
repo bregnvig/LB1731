@@ -1,57 +1,61 @@
 <article>
-  <div class="form-group row">
-    <div class="col">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="blue" [formControl]="blueControl">
-        <label class="form-check-label" for="blue">Make it blue</label>
-      </div>
-    </div>
+  <div class="form-check form-switch toggle mb-4">
+    <input class="form-check-input" type="checkbox" role="switch" id="blue" [formControl]="blueControl">
+    <label class="form-check-label" for="blue">Make it blue</label>
   </div>
-  <h5 class="mb-3">Using two ngIf</h5>
-  <div class="row">
-    <div *ngIf="!blueControl.value" class="col-auto">
-      <div class="box red"></div>
-    </div>
-    <div *ngIf="blueControl.value" class="col-auto">
-      <div class="box blue"></div>
+  <h5 class="eyebrow">Using two ngIf</h5>
+  <div class="row g-4 mb-5">
+    <div class="col-lg-4">
+      <div class="demo-surface stage row">
+        <div *ngIf="!blueControl.value" class="col-auto">
+          <div class="box red"></div>
+        </div>
+        <div *ngIf="blueControl.value" class="col-auto">
+          <div class="box blue"></div>
+        </div>
+      </div>
     </div>
     <div class="col">
       <code>
-        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="!blueControl.value">
 &lt;div *ngIf=&quot;!blueControl.value&quot; class=&quot;col-auto&quot;&gt;
   &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
         </pre>
-        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="blueControl.value">
 &lt;div *ngIf=&quot;blueControl.value&quot; class=&quot;col-auto&quot;&gt;
   &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
         </pre>
       </code>
     </div>
-  </div>  
-  <h5 class="mb-3">Using the new &commat;if</h5>
-  <div class="row">
-    @if(!blueControl.value) {
-      <div class="col-auto">
-        <div class="box red"></div>
+  </div>
+  <h5 class="eyebrow">Using the new &commat;if</h5>
+  <div class="row g-4 mb-5">
+    <div class="col-lg-4">
+      <div class="demo-surface stage row">
+        @if(!blueControl.value) {
+          <div class="col-auto">
+            <div class="box red"></div>
+          </div>
+        } @else {
+          <div class="col-auto">
+            <div class="box blue"></div>
+          </div>
+        }
       </div>
-    } @else {
-      <div class="col-auto">
-        <div class="box blue"></div>
-      </div>
-    }
+    </div>
     <div class="col">
       <code>
-        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="!blueControl.value">
 &commat;if(!blueControl.value) &#123;
   &lt;div class=&quot;col-auto&quot;&gt;
     &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
 &#125;
         </pre>
-        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
-&commat;else &#123;          
+        <pre class="fs-5 branch" [class.lit]="blueControl.value">
+&commat;else &#123;
 &lt;div class=&quot;col-auto&quot;&gt;
   &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -60,60 +64,68 @@
       </code>
     </div>
   </div>
-  <h5 class="mb-3">Using else</h5>
-  <div class="row">
+  <h5 class="eyebrow">Using else</h5>
+  <div class="row g-4 mb-5">
     <ng-template #useRed>
         <div class="box red"></div>
     </ng-template>
-    <div class="col-auto">
-      <div *ngIf="blueControl.value; else useRed" class="box blue"></div>
+    <div class="col-lg-4">
+      <div class="demo-surface stage row">
+        <div class="col-auto">
+          <div *ngIf="blueControl.value; else useRed" class="box blue"></div>
+        </div>
+      </div>
     </div>
     <div class="col">
       <code>
-        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="!blueControl.value">
 &lt;ng-template #useRed&gt;
   &lt;div class=&quot; box red&quot;&gt;&lt;/div&gt;
 &lt;/ng-template&gt;
         </pre>
-        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="blueControl.value">
 &lt;div class=&quot;col-auto&quot;&gt;
-  &lt;div *ngIf=&quot;blueControl.value; else <span [class.fw-normal]="blueControl.value" [class.fw-bolder]="!blueControl.value">useRed</span>&quot; 
+  &lt;div *ngIf=&quot;blueControl.value; else <span [class.fw-bold]="!blueControl.value">useRed</span>&quot;
     class=&quot;box blue&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
         </pre>
       </code>
     </div>
   </div>
-  <h5 class="mb-3">Using then/else</h5>
-  <div class="row">
+  <h5 class="eyebrow">Using then/else</h5>
+  <div class="row g-4">
     <ng-template #useRed>
         <div class="box red"></div>
     </ng-template>
     <ng-template #useBlue>
         <div class="box blue"></div>
     </ng-template>
-    <div class="col-auto">
-      <ng-container *ngIf="blueControl.value; then useBlue else useRed"></ng-container>
+    <div class="col-lg-4">
+      <div class="demo-surface stage row">
+        <div class="col-auto">
+          <ng-container *ngIf="blueControl.value; then useBlue else useRed"></ng-container>
+        </div>
+      </div>
     </div>
     <div class="col">
       <code>
-        <pre class="fs-5" [class.fw-bolder]="!blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="!blueControl.value">
 &lt;ng-template #useRed&gt;
   &lt;div class=&quot;box red&quot;&gt;&lt;/div&gt;
 &lt;/ng-template&gt;
         </pre>
-        <pre class="fs-5" [class.fw-bolder]="blueControl.value">
+        <pre class="fs-5 branch" [class.lit]="blueControl.value">
 &lt;ng-template #useBlue&gt;
   &lt;div class=&quot;box blue&quot;&gt;&lt;/div&gt;
 &lt;/ng-template&gt;
-        </pre>        
+        </pre>
         <pre class="fs-5">
 &lt;div class=&quot;col-auto&quot;&gt;
-  &lt;ng-container *ngIf=&quot;blueControl.value; 
-    <span [class.fw-normal]="!blueControl.value" [class.fw-bolder]="blueControl.value">then useBlue</span> <span [class.fw-normal]="blueControl.value" [class.fw-bolder]="!blueControl.value">else useRed</span>&quot;&gt;&lt;/ng-container&gt;
+  &lt;ng-container *ngIf=&quot;blueControl.value;
+    <span [class.fw-bold]="blueControl.value">then useBlue</span> <span [class.fw-bold]="!blueControl.value">else useRed</span>&quot;&gt;&lt;/ng-container&gt;
 &lt;/div&gt;
         </pre>
-      </code>      
+      </code>
     </div>
   </div>
 </article>

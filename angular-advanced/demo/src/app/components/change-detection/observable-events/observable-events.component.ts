@@ -4,12 +4,17 @@ import { Observable, interval, map } from 'rxjs';
 @Component({
   selector: 'loop-observable-events',
   template: `
-    <p>
-      Observable events: <span class="badge bg-warning">{{no}}</span>
-      <button class="btn btn-sm btn-primary mx-3" type="button" (click)="start()">Start</button>
-      <button class="btn btn-sm btn-primary" type="button" [disabled]="!running" (click)="noop()">Update UI</button>
+    <p class="cd-card on-push">
+      <span class="strategy">OnPush</span>
+      <span class="name">Observable events</span>
+      <span class="badge bg-warning">{{no}}</span>
+      <span class="actions">
+        <button class="btn btn-sm btn-primary" type="button" (click)="start()">Start</button>
+        <button class="btn btn-sm btn-primary" type="button" [disabled]="!running" (click)="noop()">Update UI</button>
+      </span>
     </p>
   `,
+  styles: `@import "src/app/components/change-detection/cd-card";`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObservableEventsComponent {

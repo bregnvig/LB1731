@@ -1,0 +1,54 @@
+// A playground card that shows where its <ng-content> slots sit: each slot is
+// a dashed outline with its selector written on it.
+@import "src/scss/variables";
+
+:host {
+  display: block;
+}
+
+.list-group-item {
+  flex-direction: column;
+  gap: .875rem;
+  height: 100%;
+  padding: 1rem 1.125rem;
+  border: 0;
+  border-radius: $border-radius-lg !important;
+  background: $white;
+  box-shadow: $lift-shadow;
+  font-weight: 600;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+small:empty,
+.btn-group {
+  position: relative;
+  display: flex;
+  gap: .375rem;
+  margin-top: .375rem;
+  padding: 1.375rem .5rem .5rem;
+  border: 2px dashed rgba($azure, .45);
+  border-radius: $border-radius;
+
+  &::before {
+    content: "<ng-content>";
+    position: absolute;
+    top: .25rem;
+    left: .5rem;
+    color: $azure;
+    font-family: $font-family-monospace;
+    font-size: .75rem;
+    font-weight: 500;
+  }
+}
+
+// An empty default slot: nothing was projected into it
+small:empty {
+  border-color: $gray-300;
+
+  &::before {
+    color: $muted;
+  }
+}

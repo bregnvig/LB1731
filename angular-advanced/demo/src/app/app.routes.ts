@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { DirectivesComponent } from './directives/directives.component';
 
 export const routes: Routes = [
   {
@@ -34,7 +35,13 @@ export const routes: Routes = [
   },
   {
     path: 'directives',
+    component: DirectivesComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'attribute'
+      },
       {
         path: 'attribute',
         loadChildren: () => import('./directives/attribute/attribute.module').then(m => m.AttributeModule)

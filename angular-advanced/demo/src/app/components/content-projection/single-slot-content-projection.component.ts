@@ -19,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
       }
     </ul>
     `,
+  styles: `@import "src/app/components/content-projection/list";`,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [PlaygroundListItemSingleSlotComponent, NgbPopover, FaIconComponent, AsyncPipe]
 })

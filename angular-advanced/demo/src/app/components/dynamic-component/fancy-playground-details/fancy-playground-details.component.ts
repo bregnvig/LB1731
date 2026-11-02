@@ -23,6 +23,23 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     </p>
     }
     `,
+  styles: `
+    @import "src/scss/variables";
+
+    :host {
+      display: block;
+    }
+
+    h5 {
+      font-stretch: 80%;
+    }
+
+    [leaflet] {
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+      box-shadow: $lift-shadow;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [LeafletModule, FaIconComponent]
 })

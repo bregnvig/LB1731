@@ -10,6 +10,7 @@ type Transform = 'lowercase' | 'uppercase' | 'capitalized' | 'monospace';
 @Component({
   selector: 'loop-recap',
   templateUrl: './recap.component.html',
+  styleUrl: './recap.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

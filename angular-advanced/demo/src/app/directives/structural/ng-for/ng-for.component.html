@@ -1,13 +1,11 @@
 <article>
-  <div class="form-group row">
-    <div class="col-auto">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="blue" [formControl]="trackByControl">
-        <label class="form-check-label" for="blue">Use track by</label>
-      </div>
+  <div class="controls mb-4">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="blue" [formControl]="trackByControl">
+      <label class="form-check-label" for="blue">Use track by</label>
     </div>
+    <button class="btn btn-primary" (click)="simulate()">Lets simulate new backend call...</button>
   </div>
-  <button class="btn btn-primary mb-3" (click)="simulate()">Lets simulate new backend call...</button>
   <ul class="list-group">
     <ng-container *ngIf="trackByControl.value; else noTrackBy">
       <loop-collapse-state *ngFor="let cardNo of numberOfCards; trackBy: trackByIndexFn; first as isFirst; last as isLast; index as i; count as count; odd as odd" [index]="cardNo.orderNo">

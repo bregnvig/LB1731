@@ -6,6 +6,7 @@ import { AarhusPlaygroundService } from '../service/playground.service';
 @Component({
   selector: 'loop-without-di',
   templateUrl: './without-di.component.html',
+  styleUrl: './without-di.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

@@ -11,47 +11,61 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   imports: [ReactiveFormsModule, JsonPipe],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div>
-      <h2>Reactive Form State</h2>
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="d-flex align-items-baseline">
-          <div class="input-group mb-3 w-25">
-            <span class="input-group-text">Name</span>
-            <input formControlName="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+    <div class="playground">
+      <section>
+        <h2>Reactive Form State</h2>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="field">
+            <div class="input-group">
+              <span class="input-group-text">Name</span>
+              <input formControlName="name" type="text" class="form-control" placeholder="Name" aria-label="Name">
+            </div>
+            @let nameControl = form.controls.name;
+            <div class="flags">
+              <span class="flag good" [class.on]="nameControl.valid">valid: {{ nameControl.valid }}</span>
+              <span class="flag bad" [class.on]="nameControl.invalid">invalid: {{ nameControl.invalid }}</span>
+              <span class="flag" [class.on]="nameControl.dirty">dirty: {{ nameControl.dirty }}</span>
+              <span class="flag" [class.on]="nameControl.touched">touched: {{ nameControl.touched }}</span>
+            </div>
           </div>
-          @let nameControl = form.controls.name;
-          <span class="ms-3">valid: {{ nameControl.valid }}, invalid: {{ nameControl.invalid }}, dirty: {{ nameControl.dirty }}, touched: {{ nameControl.touched }}</span>
-        </div>
-        <div class="d-flex align-items-baseline">
-          <div class="input-group mb-3 w-25">
-            <span class="input-group-text">Email</span>
-            <input formControlName="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+          <div class="field">
+            <div class="input-group">
+              <span class="input-group-text">Email</span>
+              <input formControlName="email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+            </div>
+            @let emailControl = form.controls.email;
+            <div class="flags">
+              <span class="flag good" [class.on]="emailControl.valid">valid: {{ emailControl.valid }}</span>
+              <span class="flag bad" [class.on]="emailControl.invalid">invalid: {{ emailControl.invalid }}</span>
+              <span class="flag" [class.on]="emailControl.dirty">dirty: {{ emailControl.dirty }}</span>
+              <span class="flag" [class.on]="emailControl.touched">touched: {{ emailControl.touched }}</span>
+            </div>
           </div>
-          @let emailControl = form.controls.email;
-          <span class="ms-3">valid: {{ emailControl.valid }}, invalid: {{ emailControl.invalid }}, dirty: {{ emailControl.dirty }}, touched: {{ emailControl.touched }}</span>
+          <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+        </form>
+
+        <h2 class="mt-5">Filter working with URL</h2>
+        <div class="input-group filter">
+          <span class="input-group-text">Filter</span>
+          <input [formControl]="filter" type="text" class="form-control" placeholder="filter" aria-label="filter">
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
-      </form>
+      </section>
 
-      <h2>Form State</h2>
-      <p><strong>Value:</strong></p>
-      <pre>{{ form.value | json }}</pre>
+      <aside class="inspector">
+        <h2>Form State</h2>
+        <p><strong>Value:</strong></p>
+        <pre>{{ form.value | json }}</pre>
 
-      <p><strong>Valid:</strong> {{ form.valid }}</p>
-      <p><strong>Invalid:</strong> {{ form.invalid }}</p>
-      <p><strong>Dirty:</strong> {{ form.dirty }}</p>
-      <p><strong>Touched:</strong> {{ form.touched }}</p>
-
-      <hr>
-
-      <h2>Filter working with URL</h2>
-      <div class="input-group mb-3 w-25">
-        <span class="input-group-text">Filter</span>
-        <input [formControl]="filter" type="text" class="form-control" placeholder="filter" aria-label="filter">
-      </div>
-
+        <dl class="readout">
+          <dt>Valid</dt><dd><span class="flag good" [class.on]="form.valid">{{ form.valid }}</span></dd>
+          <dt>Invalid</dt><dd><span class="flag bad" [class.on]="form.invalid">{{ form.invalid }}</span></dd>
+          <dt>Dirty</dt><dd><span class="flag" [class.on]="form.dirty">{{ form.dirty }}</span></dd>
+          <dt>Touched</dt><dd><span class="flag" [class.on]="form.touched">{{ form.touched }}</span></dd>
+        </dl>
+      </aside>
     </div>
   `,
+  styleUrl: './form-state.component.scss',
 })
 export class FormStateComponent {
   #activeRoute = inject(ActivatedRoute);

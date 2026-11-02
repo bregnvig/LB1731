@@ -1,0 +1,68 @@
+@import "src/scss/variables";
+
+// Level 3 nav: a compact segmented control, a step below the pill tabs,
+// sitting on top of the panel whose route state it changes
+.segmented {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  margin: 0 0 -1px 1.25rem;
+  padding: .25rem;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius $border-radius 0 0;
+  border-bottom-color: $white;
+  background: $white;
+
+  a {
+    padding: .3125rem .75rem;
+    border-radius: $border-radius-sm;
+    color: $gray-700;
+    font-size: .8125rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible,
+    &.active {
+      background: rgba($cobalt, .1);
+      color: $cobalt;
+    }
+  }
+}
+
+.route-panel {
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius-xl;
+  background: $white;
+
+  h2 {
+    margin-bottom: .75rem;
+    font-size: 1.125rem;
+    font-stretch: 85%;
+  }
+
+  .readout {
+    margin-bottom: 1.25rem;
+  }
+}
+
+// The nested outlet: inset one level deeper
+.outlet {
+  border-style: dashed;
+  border-color: $gray-400;
+  background: $canvas;
+
+  // the child's own readout, rendered inside the outlet
+  ::ng-deep .readout {
+    margin: 0;
+    background: $white;
+  }
+
+  h2 code {
+    margin-right: .5rem;
+    font-size: .8125rem;
+  }
+}

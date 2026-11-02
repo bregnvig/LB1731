@@ -1,0 +1,13 @@
+.output {
+  display: grid;
+  gap: .375rem;
+  font-size: 2rem;
+  font-weight: 650;
+  font-stretch: 80%;
+  overflow-wrap: anywhere;
+
+  small {
+    font: 500 .8125rem var(--bs-font-monospace);
+    opacity: .8;
+  }
+}

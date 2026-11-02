@@ -1,0 +1,91 @@
+@import "src/scss/variables";
+
+// One playground = one row of the store's list
+:host {
+  display: block;
+  counter-increment: row;
+}
+
+.store-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .625rem 1rem .625rem .75rem;
+  border-bottom: 1px solid $gray-300;
+  margin-bottom: -1px;
+
+  &::before {
+    content: counter(row, decimal-leading-zero);
+    min-width: 2rem;
+    color: $gray-500;
+    font-family: $font-family-monospace;
+    font-size: .8125rem;
+  }
+
+  .input-group-text {
+    border: 0;
+    background: none;
+    font-size: .8125rem;
+  }
+
+  // Inline-editable cells: an input only shows its frame on hover or focus
+  .form-control {
+    border-color: transparent;
+    border-radius: $border-radius !important;
+    background: transparent;
+
+    &:hover {
+      border-color: $gray-300;
+    }
+
+    &:focus {
+      border-color: $cobalt;
+      background: $white;
+    }
+  }
+
+  &:hover {
+    background: $gray-100;
+  }
+}
+
+// When the playground signal changes (e.g. after a save): the row's inputs flash
+.update-effect {
+  animation: stored .9s ease-out;
+}
+
+@keyframes stored {
+  0% {
+    border-color: $azure;
+    background: rgba($azure, .14);
+    box-shadow: 0 0 0 .25rem rgba($azure, .25);
+  }
+}
+
+// Phones: Save drops below and each label sits above its field, so names
+// stay editable
+@media (max-width: 767.98px) {
+  .store-row {
+    flex-wrap: wrap;
+
+    > div:last-child {
+      flex-basis: 100%;
+      text-align: end;
+    }
+  }
+
+  .store-row .input-group {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .store-row .input-group-text {
+    width: 100%;
+    padding: .25rem .75rem 0;
+  }
+
+  .store-row .form-control {
+    flex: 1 1 100%;
+  }
+}

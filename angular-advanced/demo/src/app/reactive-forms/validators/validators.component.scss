@@ -1,0 +1,65 @@
+@import "src/scss/variables";
+
+form {
+  max-width: 48rem;
+}
+
+// The nested group gets its own inset, so the group validator's error reads as
+// belonging to zipAndCity, not to a single field
+.group {
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1px dashed $gray-400;
+  border-radius: $border-radius-lg;
+
+  label code {
+    margin-left: .375rem;
+    font-weight: 400;
+  }
+}
+
+// Form status as a lamp. The colour comes from the ng-valid / ng-invalid /
+// ng-pending class Angular puts on the <form>.
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: .75rem .75rem .75rem 1.25rem;
+  border-radius: 999px;
+  background: $canvas;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-weight: 600;
+
+  code {
+    --lamp: #{$gray-500};
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem .875rem .25rem .625rem;
+    border-radius: 999px;
+    background: var(--lamp);
+    color: $white;
+    font-size: .875rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    transition: background-color .2s;
+
+    &::before {
+      content: "";
+      width: .5rem;
+      height: .5rem;
+      border-radius: 50%;
+      background: $white;
+      box-shadow: 0 0 0 3px rgba($white, .35);
+    }
+  }
+
+  .ng-valid & code { --lamp: #{$green}; }
+  .ng-invalid & code { --lamp: #{$red}; }
+  .ng-pending & code { --lamp: #{$orange}; }
+}

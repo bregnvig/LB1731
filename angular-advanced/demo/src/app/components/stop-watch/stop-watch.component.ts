@@ -5,7 +5,22 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'loop-stop-watch',
   template: `
-    {{(seconds$ | async)}} seconds
+    <span class="value">{{(seconds$ | async)}}</span> seconds
+  `,
+  styles: `
+    :host {
+      display: inline-flex;
+      align-items: baseline;
+      gap: .3em;
+    }
+
+    .value {
+      font-size: 2.5em;
+      font-weight: 700;
+      font-stretch: 75%;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [AsyncPipe]

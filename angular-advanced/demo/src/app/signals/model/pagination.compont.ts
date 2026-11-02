@@ -8,6 +8,7 @@ import { debounceTime, filter } from 'rxjs';
 @Component({
     selector: 'loop-pagination',
     templateUrl: 'pagination.compont.html',
+    styleUrl: 'pagination.compont.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, NgTemplateOutlet, FaIconComponent]
 })

@@ -1,19 +1,35 @@
-<article class="row w-100">
-  <div class="col">
-    <input type="text" placeholder="Filter playgrounds" class="w-100 form-control" autofocus [formControl]="filterControl">
-    <ul class="list-group mt-3">
-      @if (playgrounds$ | async; as playgrounds) {
-        @for (p of playgrounds; track trackById($index, p)) {
-          <a class="list-group-item" [routerLink]="[p.id]" [relativeTo]="route">
-            {{p.name}}
-          </a>
+<div class="row g-4">
+  <article class="col-lg-7">
+    <div class="search-list">
+      <label class="search-field">
+        <fa-icon [icon]="['fas', 'magnifying-glass']"/>
+        <input type="text" placeholder="Filter playgrounds" aria-label="Filter playgrounds" autofocus [formControl]="filterControl">
+      </label>
+      <ul class="results">
+        @if (playgrounds$ | async; as playgrounds) {
+          @for (p of playgrounds; track trackById($index, p)) {
+            <a class="result" [routerLink]="[p.id]" [relativeTo]="route">
+              {{p.name}}
+            </a>
+          }
         }
+      </ul>
+    </div>
+  </article>
+  <article class="col-lg-5">
+    <h6 class="params-title">Matrix params</h6>
+    <dl class="readout params">
+      @for (param of route.params | async | keyvalue; track param.key) {
+        <dt>;{{param.key}}</dt>
+        <dd>{{param.value}}</dd>
+      } @empty {
+        <dt>none</dt>
+        <dd></dd>
       }
-    </ul>
-  </div>
-</article>
-<article class="row w-100 mt-3">
-  <div class="col">
-    <router-outlet></router-outlet>
-  </div>
-</article>
+    </dl>
+    <section class="outlet-panel">
+      <span class="panel-label d-block mb-2">matrix/:playgroundId</span>
+      <router-outlet></router-outlet>
+    </section>
+  </article>
+</div>
