@@ -216,6 +216,30 @@ Patterns and libraries for managing application state in Angular.
 
 ---
 
+### 10. Performance & Change Detection
+
+Finding and fixing what makes the playground app slow, with one rule for every lab: measure, change, measure again.
+
+**Before the course:** install [Angular DevTools](https://chromewebstore.google.com/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh) in Chrome. Plan B without the extension: Chrome's Performance panel with the Angular track (`ng.enableProfiling()` in the console).
+
+**Topics covered:**
+- What "slow" means for a user: startup, interaction, memory
+- Change detection and zone.js: a cycle after every task; Eager (was Default) vs OnPush; `NgZone.runOutsideAngular`
+- **Tools:** Angular DevTools Profiler, Chrome Performance panel (Angular track), `ng build` output, the esbuild bundle analyzer (`npm run build -- --stats-json`), Chrome Memory panel heap snapshots
+- **Zoneless:** what schedules change detection without zone.js, OnPush as the default in v22, signals instead of plain fields; lists with `@for` `track` and `computed`
+- **Loading less up front:** what ends up in `main` (whole icon packs defeat tree-shaking), lazy routes (`loadComponent`), `@defer` triggers and placeholders, when `@defer` costs more than it saves
+- **Memory and the DOM:** leaks from intervals, listeners and third-party objects, detached DOM trees and retainers in heap snapshots, `DestroyRef` and `takeUntilDestroyed`
+
+Each exercise is theory, then the exercise (groups work alone; the last step sends them back to the room), then a debrief with the measured numbers and an "In your app" slide: what to measure and try in your own app.
+
+**Exercises:**
+1. **Measure and leave the zone** - Profile 5 s of mouse moves over the map; create the Leaflet map with `runOutsideAngular`; profile again; bonus: wrap the `center$` `setZoom`/`setView` calls (slides only), and run the footer interval outside the zone to see it freeze (try, then revert)
+2. **Go zoneless and move to signals** - Measure the build and the Profiler; remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and measure; drop `Eager` in all seven components and measure again
+3. **Load less up front** - Find what is in `main` with the esbuild analyzer; `loadComponent` for the detail route, `@defer (on idle)` around the map, try `@defer (on viewport)` on the footer, measure and revert, register only the used icon; compare Initial total after each change.
+4. **Memory and the DOM** - Heap snapshots before and after 5 rounds of home and detail; read the retainers; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`; bonus: `takeUntilDestroyed(this.destroyRef)` on the map's three subscriptions
+
+---
+
 ## Exercise Progression
 
 Each module builds on the same playground-finder application. Labs are organized as:
@@ -231,5 +255,6 @@ Each module builds on the same playground-finder application. Labs are organized
 | Pipes & Directives | `courses/pipes-and-directives` | 4 exercises |
 | Signals | `courses/signals` | 3 exercises |
 | State Management | `courses/state-management` | 3 exercises |
+| Performance | `courses/performance` | 4 exercises |
 
 The workspace these courses live in (steps, zips, the `adv` CLI, the slides) is described in [../README.md](../README.md).

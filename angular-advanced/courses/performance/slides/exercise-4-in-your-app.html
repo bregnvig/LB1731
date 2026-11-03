@@ -1,0 +1,20 @@
+<section data-template="reveal-list">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>In your app: leaks</h2>
+  </div>
+  <div class="block" data-type="text" data-name="items" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
+    <ol>
+<li class="fragment">Repeat your most common navigation 5 times</li>
+<li class="fragment">Two snapshots: does a count grow?</li>
+<li class="fragment">Retainers: who holds it?</li>
+<li class="fragment">Search <code>setInterval</code>, <code>subscribe(</code>, listeners</li>
+<li class="fragment">Clean up in <code>DestroyRef.onDestroy</code>, count again</li>
+</ol>
+  </div>
+  <aside class="notes">Monday homework for DestroyRef. Click through the five lines.
+
+Click. Pick the navigation your users do over and over: open a record, back to the list. Five rounds of it. Click. Snapshot before and after, filter on your page components and on Detached: if a count grows with the rounds, you've got a leak.
+Click. The Retainers pane tells you who holds it.
+Click. Then search for the usual suspects: setInterval, addEventListener, and subscribe calls without takeUntilDestroyed or other cleanup.
+Click. Clean up in DestroyRef.onDestroy, right next to what you started, and count again.</aside>
+</section>

@@ -1,0 +1,27 @@
+<section data-template="exercise-step-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - Bonus: try it, then revert</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol>
+<li>Run the <code>setInterval</code> outside the zone too</li>
+<li>Record in the Profiler, and look at the footer</li>
+</ol>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
+    <pre><code class="language-typescript">// src/app/footer/footer.component.ts
+constructor() {
+  inject(NgZone).runOutsideAngular(() =&gt;
+    setInterval(() =&gt; this.seconds =
+      Math.round((Date.now() - this.loadedAt)
+        / 1000), 1000));
+}
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="callout" style="left:64px;top:338px;width:540px;height:auto;z-index:13;text-align:left">
+    <p>You should see: the footer's bars are gone, and the counter stops. <span class="accent">Experiment only:</span> undo it. Done? Come back to the room.</p>
+  </div>
+  <aside class="notes">Try and revert, not part of the solution. Footer interval outside the zone, record, look at the footer.
+
+Helping a group: the counter freezing is the expected result, not a bug. Make sure they undo the change before they come back. It's the lead-in to the debrief and to zoneless.</aside>
+</section>

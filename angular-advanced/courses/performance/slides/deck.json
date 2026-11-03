@@ -1,0 +1,155 @@
+{
+  "title": "Performance & Change Detection",
+  "slides": [
+    {
+      "file": "performance.html"
+    },
+    {
+      "file": "what-slow-means.html"
+    },
+    {
+      "file": "change-detection-in-one-minute.html"
+    },
+    {
+      "file": "running-outside-zone-js.html"
+    },
+    {
+      "file": "chrome-performance-angular-track.html"
+    },
+    {
+      "file": "exercise-1-getting-started.html"
+    },
+    {
+      "file": "exercise-1-measure-before.html"
+    },
+    {
+      "file": "exercise-1-leave-the-zone.html"
+    },
+    {
+      "file": "exercise-1-measure-after.html"
+    },
+    {
+      "file": "exercise-1-bonus-list-click.html"
+    },
+    {
+      "file": "exercise-1-bonus.html"
+    },
+    {
+      "file": "exercise-1-what-we-measured.html"
+    },
+    {
+      "file": "exercise-1-in-your-app.html"
+    },
+    {
+      "file": "from-zone-js-to-zoneless.html"
+    },
+    {
+      "file": "what-schedules-change-detection.html"
+    },
+    {
+      "file": "onpush-is-the-default.html"
+    },
+    {
+      "file": "exercise-2-measure-before.html"
+    },
+    {
+      "file": "exercise-2-go-zoneless.html"
+    },
+    {
+      "file": "exercise-2-fix-the-footer.html"
+    },
+    {
+      "file": "exercise-2-remove-eager.html"
+    },
+    {
+      "file": "exercise-2-measure-after.html"
+    },
+    {
+      "file": "exercise-2-what-we-measured.html"
+    },
+    {
+      "file": "exercise-2-what-we-measured-2.html"
+    },
+    {
+      "file": "lists-track-and-computed.html"
+    },
+    {
+      "file": "exercise-2-in-your-app.html"
+    },
+    {
+      "file": "what-ends-up-in-main.html"
+    },
+    {
+      "file": "defer-triggers.html"
+    },
+    {
+      "file": "exercise-3-getting-started.html"
+    },
+    {
+      "file": "exercise-3-whats-in-main.html"
+    },
+    {
+      "file": "exercise-3-lazy-route.html"
+    },
+    {
+      "file": "exercise-3-defer-map.html"
+    },
+    {
+      "file": "exercise-3-defer-footer.html"
+    },
+    {
+      "file": "exercise-3-one-icon.html"
+    },
+    {
+      "file": "exercise-3-see-it-load.html"
+    },
+    {
+      "file": "exercise-3-what-we-measured.html"
+    },
+    {
+      "file": "exercise-3-cold-load.html"
+    },
+    {
+      "file": "exercise-3-in-your-app.html"
+    },
+    {
+      "file": "leaks-in-angular-apps.html"
+    },
+    {
+      "file": "reading-a-heap-snapshot.html"
+    },
+    {
+      "file": "cleaning-up-with-destroyref.html"
+    },
+    {
+      "file": "exercise-4-find-the-leaks.html"
+    },
+    {
+      "file": "exercise-4-read-the-snapshot.html"
+    },
+    {
+      "file": "exercise-4-fix-the-leaks.html"
+    },
+    {
+      "file": "exercise-4-measure-after.html"
+    },
+    {
+      "file": "exercise-4-bonus-take-until-destroyed.html"
+    },
+    {
+      "file": "exercise-4-what-we-measured.html"
+    },
+    {
+      "file": "what-holds-the-old-dom.html"
+    },
+    {
+      "file": "exercise-4-in-your-app.html"
+    },
+    {
+      "file": "wrap-the-fixes-of-the-day.html"
+    },
+    {
+      "file": "time-for-questions.html"
+    }
+  ]
+}

@@ -17,6 +17,7 @@
     "routing",
     "pipes-and-directives",
     "signals",
-    "state-management"
+    "state-management",
+    "performance"
   ]
 }

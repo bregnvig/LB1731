@@ -1,0 +1,27 @@
+<section data-template="exercise-step-code">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - Register one icon</h2>
+  </div>
+  <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
+    <ol>
+<li>Delete <code>initializeFontAwesomeFactory</code> and the <code>fas</code>/<code>far</code> imports</li>
+<li>Register only <code>faSpinner</code>, as on the right</li>
+<li>Build. Write down <code>Initial total</code></li>
+</ol>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
+    <pre><code class="language-typescript">// src/main.ts
+import { faSpinner }
+  from '@fortawesome/free-solid-svg-icons';
+// …
+provideAppInitializer(() =&gt;
+  inject(FaIconLibrary).addIcons(faSpinner)),
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="callout" style="left:64px;top:370px;width:540px;height:auto;z-index:13;text-align:left">
+    <p><span class="accent">Trap:</span> forget <code>addIcons(faSpinner)</code> and the spinners are gone: <em>Could not find icon</em> in the console.</p>
+  </div>
+  <aside class="notes">Change 4: main.ts. Delete initializeFontAwesomeFactory and the fas/far imports; provideAppInitializer(() =&gt; inject(FaIconLibrary).addIcons(faSpinner)).
+
+Helping a group: spinners gone and "Could not find icon with iconName=spinner and prefix=fas in the icon library" in the console means addIcons is missing. inject and FaIconLibrary need imports too.</aside>
+</section>

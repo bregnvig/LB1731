@@ -31,6 +31,7 @@ export class AppComponent {
     { path: '/pipes', label: 'Pipes', icon: 'filter', description: 'Built-in pipes, async, and writing your own pure and impure pipes.' },
     { path: '/signals', label: 'Signals', icon: 'signal', description: 'Equality, untracked reads, signal inputs, model, computed versus effect and linked signals.' },
     { path: '/state-management', label: 'State management', icon: 'database', description: 'Where state can live: globally, locally, in the URL, in a form or in a service store.' },
+    { path: '/performance', label: 'Performance', icon: 'gauge-high', description: 'A change detection tree you click, @defer triggers, a leak counter and optimized images.' },
     { path: '/directives', label: 'Directives', icon: 'wand-magic-sparkles', description: 'Attribute directives change how an element looks or behaves. Structural directives add and remove elements, from ngIf and ngFor to your own.' },
   ];
 
