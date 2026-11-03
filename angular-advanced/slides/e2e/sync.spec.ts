@@ -20,6 +20,17 @@ test('the presenter drives the presentation and shows notes', async ({ context }
   await expect(presenter.getByTestId('notes')).toHaveText('Ask before clicking.');
 });
 
+test('presenter notes have a quick and a description tab, and dock under the slides', async ({ page }) => {
+  await page.goto('/presenter');
+  await expect(page.getByTestId('notes')).toHaveText('Introduce yourself.');
+  await page.getByRole('tab', { name: 'Description' }).click();
+  await expect(page.getByTestId('notes')).toHaveText('Say your name and what you build at work.');
+  await page.getByRole('button', { name: 'Bottom' }).click();
+  await expect(page.locator('section.under').getByTestId('notes')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('section.under').getByTestId('notes')).toHaveText('Introduce yourself.');
+});
+
 test('a click in the presentation plays in the presenter, a reload catches up, and a second click plays it back', async ({ context }) => {
   const show = await context.newPage();
   await show.goto('/present#/1/2');
