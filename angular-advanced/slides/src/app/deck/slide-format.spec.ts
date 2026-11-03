@@ -103,6 +103,14 @@ describe('slide format', () => {
     expect(parseSlide(file(everyType.replace('<section data-auto-animate>', '<section data-auto-animate class="x">'))).dropsMarkup).toBe(true);
   });
 
+  it('keeps the slide template through a round trip', () => {
+    const html = everyType.replace('<section data-auto-animate>', '<section data-auto-animate data-template="claim-code">');
+    const slide = parseSlide(file(html));
+    expect(slide.template).toBe('claim-code');
+    expect(slide.dropsMarkup).toBeUndefined();
+    expect(serializeSlide(slide)).toContain('<section data-auto-animate data-template="claim-code">');
+  });
+
   it('keeps notes, auto-animate, path, hidden and etag', () => {
     const slide = parseSlide({ ...file(everyType), hidden: true });
     expect(slide).toMatchObject({ path: 'courses/rxjs/slides/demo.html', hidden: true, autoAnimate: true, etag: 'e' });

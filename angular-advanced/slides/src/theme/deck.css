@@ -67,7 +67,45 @@ body,
   text-transform: uppercase;
 }
 
+/* Typed slides: code names keep their case inside uppercase headings, and inline code never breaks mid-name. */
+.reveal section[data-template] .block :is(h1, h2, h3) code {
+  text-transform: none;
+}
+
+.reveal section[data-template] .block :not(pre) > code {
+  white-space: nowrap;
+}
+
 .reveal .block h1 { font-size: 1.75em; letter-spacing: 0.015em; }
+
+/* Typed slides (section[data-template]) use a fixed type scale instead of inline sizes:
+   title 32px (h2), stat 64px bold, body 24px, accent = orange at the surrounding size, code 22px. */
+.reveal section[data-template] .block[data-type='text']:not([data-name='title'], [data-name='subtitle']) {
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.reveal section[data-template] .block .accent {
+  color: #ff8c00;
+}
+
+/* A measured number: the before in white, the after in accent. */
+.reveal section[data-template] .block .stat {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+/* Reveal lists breathe between items instead of sitting at fixed heights. */
+.reveal section[data-template='reveal-list'] .block li:not(:last-child) {
+  margin-bottom: 0.6em;
+}
+
+.reveal section[data-template] .block[data-type='code'] pre {
+  font-size: 22px;
+  line-height: 30px;
+}
 .reveal .block h2 { font-size: 1.15em; letter-spacing: 0.03666em; }
 .reveal .block h3 { font-size: 1em; letter-spacing: 0.041em; }
 
