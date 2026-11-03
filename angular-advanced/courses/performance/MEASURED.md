@@ -72,8 +72,20 @@ Re-run: build sizes with `npx ng build` in the step folder (add `--stats-json` f
 
 - `ng.enableProfiling()` exists and fills the track | step-3 dev server | console `ng.enableProfiling()`, record a list click | `typeof ng.enableProfiling` = function; 1,561 `console.timeStamp` events on track "🅰️ Angular" in 2.5 s; Chromium 156 DevTools Performance panel (trace loaded) lists the 🅰️ Angular track. Colours Angular passes: primary-dark "Change detection N", primary-light component names, secondary/secondary-dark "*_Template (create/update)" and HostBindings, tertiary lifecycle hooks, tertiary-light listeners, tertiary-dark DI (Injector, DestroyRef). Colour names on screen not checked
 
+## Change detection demo (2026-11-03, headless Chromium 1155 via Playwright, fresh page per line)
+
+`demo`, `npm run start:no-hmr`, `/performance/change-detection` (zoneless) and `/performance/change-detection?zone` (zone.js). **All Eager** / **All OnPush** rebuild the tree, so counters start at 1; the numbers below are the increase per node. Both modes gave the same counts on every line unless it says otherwise.
+
+- All Eager, **click** on B1 | A, B, B1, B2, C, C1, C2 +1 each
+- All OnPush, **click** on B1 | A, B, B1 +1; B2, C, C1, C2 +0
+- All OnPush, **primitive +1** or **signal +1** on A | A, B, C +1; leaves +0
+- All OnPush, **start signal interval** on B1, 3.2 s | B1 +4 (the click + 3 ticks); A, B +1 (the click); B2, C, C1, C2 +0; B1 shows signal ticks 3
+- All Eager, **start signal interval** on B1, 3.2 s | every node +4
+- All OnPush, **start primitive interval** on B1, 3.2 s | A, B, B1 +1 (the click), the rest +0; B1 shows primitive ticks 0, after **stop primitive interval** 3. Same in both modes
+- All Eager, **start primitive interval** on B1, 3.2 s | zone.js: every node +4, B1 shows 3. Zoneless: every node +1 (the click), B1 shows 0, after **stop** 3. The only line where the modes differ
+
 ## Screenshots (2026-10-31, Chromium 156, DevTools frontend served from `--remote-debugging-port`)
 
 - Network chunks | step-4, `npm run start:no-hmr` (port 4304) | Network, JS, filter `/main\.js|component/`, load `/`, click the first row, **Detaljer** | 3 rows: main.js (initiator (index):14), leaflet.component-….js (main.js), playground-detail.component-….js (app.routes.ts:11); no footer chunk. slides/images/devtools-network-chunks.jpg
 - Retainers | step-4, `npm run start:no-hmr` | 5 rounds as in exercise 4, **Take snapshot**, class filter `Detached <leaflet>` | ×10; Retainers of one: [11] in Detached div.leaflet-container <- _container in NewClass (the map) <- context <- handler() <- resize… <- _leaflet_events in Window. slides/images/devtools-retainers-leaflet.jpg
-- CD tree | demo, `npm run start:no-hmr` (4201), `/performance/change-detection` | **All OnPush**, **Reset counters**, **click** on E twice, screenshot 150 ms after the second click | A, B, E flash, checks 2; D checks 0. slides/images/demo-cd-tree.jpg
+- CD tree | demo, `npm run start:no-hmr`, `/performance/change-detection`, viewport 766 wide | **All OnPush**, **click** on B1 twice, element screenshot of the tree 150 ms after the second click | A, B, B1 flash, checks 3; B2, C, C1, C2 checks 1. slides/images/demo-cd-tree.jpg (718×438)
