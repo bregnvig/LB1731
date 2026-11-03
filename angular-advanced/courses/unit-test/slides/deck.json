@@ -5,147 +5,91 @@
       "file": "unit-testing.html"
     },
     {
-      "file": "reasons-to-test-your-code.html"
+      "file": "why-unit-tests.html"
     },
     {
-      "file": "why-test-at-all.html"
+      "file": "a-unit-of-work.html"
     },
     {
-      "file": "you-are-already-testing.html"
+      "file": "unit-of-work-outcomes.html"
     },
     {
-      "file": "automated-testing.html"
+      "file": "tdd-red-green-refactor.html"
     },
     {
-      "file": "a-unit-test.html"
+      "file": "never-trust-a-test.html"
     },
     {
-      "file": "bad-tests.html"
+      "file": "vitest-anatomy.html"
     },
     {
-      "file": "a-unit.html"
+      "file": "vitest-running.html"
     },
     {
-      "file": "a-unit-2.html"
+      "file": "exercise-1-getting-started.html"
     },
     {
-      "file": "karma.html"
+      "file": "exercise-1-filter-playgrounds.html"
     },
     {
-      "file": "jasmine.html"
+      "file": "exercise-1-cycles.html"
     },
     {
-      "file": "vitest.html"
+      "file": "exercise-2-services-and-signals.html"
     },
     {
-      "file": "pros-cons.html"
+      "file": "exercise-2-favorites-service.html"
     },
     {
-      "file": "from-karma-jasmine-to-vitest.html"
+      "file": "exercise-2-bonus-the-second-toggle.html"
     },
     {
-      "file": "test-structure.html"
+      "file": "exercise-2-bonus-the-fix.html"
     },
     {
-      "file": "test-structure-2.html"
+      "file": "exercise-2-bonus-toggle-twice.html"
     },
     {
-      "file": "test-structure-3.html"
+      "file": "weak-oracle.html"
     },
     {
-      "file": "test-helpers.html"
+      "file": "exercise-oracle-delete-the-body.html"
     },
     {
-      "file": "test-helpers-2.html"
+      "file": "exercise-oracle-delete-the-body-continued.html"
     },
     {
-      "file": "test-helpers-3.html"
+      "file": "testing-httpclient.html"
     },
     {
-      "file": "test-helpers-4.html"
+      "file": "exercise-3-search-service.html"
     },
     {
-      "file": "test-doubles.html"
+      "file": "exercise-3-search-service-skeleton.html"
     },
     {
-      "file": "test-doubles-2.html"
+      "file": "exercise-3-bonus-server-error.html"
     },
     {
-      "file": "test-doubles-3.html"
+      "file": "demo-httpresource-test.html"
     },
     {
-      "file": "test-doubles-4.html"
+      "file": "component-test-theory.html"
     },
     {
-      "file": "test-doubles-5.html"
+      "file": "exercise-4-search-component.html"
     },
     {
-      "file": "test-driven-development-tdd.html"
+      "file": "exercise-4-search-component-skeleton.html"
     },
     {
-      "file": "exercise-1-authservice-test.html"
+      "file": "exercise-4-bonus-empty-state.html"
     },
     {
-      "file": "tobe-or-not-tobe.html"
+      "file": "wrap-named-not-installed.html"
     },
     {
-      "file": "you-can-speed-it-up.html"
-    },
-    {
-      "file": "a-suite-within-a-suite.html"
-    },
-    {
-      "file": "exercise-2-authservice-new-service-suite.html"
-    },
-    {
-      "file": "seperate-your-suites-as-you-do-your-test.html"
-    },
-    {
-      "file": "execution-order.html"
-    },
-    {
-      "file": "the-unhappy-path.html",
-      "hidden": true
-    },
-    {
-      "file": "exercise-3-authservice-the-unhappy-path.html",
-      "hidden": true
-    },
-    {
-      "file": "but-a-wait.html"
-    },
-    {
-      "file": "testing-asynchronous-code.html"
-    },
-    {
-      "file": "exercise-3-asynchronous-changes.html"
-    },
-    {
-      "file": "testing-a-component.html"
-    },
-    {
-      "file": "exercise-4-logincomponent.html"
-    },
-    {
-      "file": "test-management.html"
-    },
-    {
-      "file": "test-management-2.html"
-    },
-    {
-      "file": "test-management-3.html"
-    },
-    {
-      "file": "isolation.html"
-    },
-    {
-      "file": "what-not-to-test.html"
-    },
-    {
-      "file": "costs.html"
-    },
-    {
-      "file": "you-got-any-questions.html"
+      "file": "unit-test-questions.html"
     }
   ]
 }

@@ -1,0 +1,47 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1076px;height:auto;z-index:10;text-align:left">
+    <h2>Is the test any good? The oracle</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:480px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">The <b>oracle</b> is the part of a test that decides pass or fail: the <code><span style="color:#ff8c00">expect</span></code>.</span></p>
+
+<p><span style="font-size:19.6px">A <b>weak oracle</b> passes for almost any code:</span></p>
+
+<p><span style="font-size:19.6px">&bull; asserts the function's own output<br>&bull; <code><span style="color:#ff8c00">toBeTruthy()</span></code>, <code><span style="color:#ff8c00">length &gt; 0</span></code><br>&bull; <code><span style="color:#ff8c00">toHaveBeenCalled</span></code> and nothing else</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:540px;top:150px;width:700px;height:auto;z-index:12">
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">  it('should return a result', () =&gt; {
+    // Act
+    const result = filterPlaygrounds(playgrounds, 'christianshavn');
+    // Assert
+    expect(result).toBeTruthy();
+    expect(result.length).toBeGreaterThan(0);
+  });
+
+  it('should return the filtered playgrounds', () =&gt; {
+    // Act
+    const result = filterPlaygrounds(playgrounds, 'christianshavn');
+    // Assert
+    expect(result).toEqual(filterPlaygrounds(playgrounds, 'christianshavn'));
+  });
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:38px;top:470px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:32px;color:#ff8c00">Would this test fail if the code were deleted?</span></p>
+
+<p><span style="font-size:19.6px">If not, it is not testing anything. A green weak test is worse than no test: it looks like safety.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="source" style="left:38px;top:630px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:14px">Source: Banik, Chowdhury and Shamim, "All Smoke, No Alarm: Oracle Signals in Agent-Authored Test Code", arXiv:2606.18168, June 2026. 86,156 test-file patches from five coding agents: 80.2% had weak or no explicit oracle signals. (It counts oracle signals in patches, not bugs caught.)</span></p>
+  </div>
+  <aside class="notes">Oracle = the expect. Weak oracle = passes for almost any code.
+Three shapes: asserts its own output, truthy / length, toHaveBeenCalled only.
+The question: would this test fail if the code were deleted?
+Source: Banik et al. 2026, 80.2% weak or missing oracle. Signals in patches, not bugs caught.
+
+Before lunch you wrote tests and watched them fail first. Now the other half: how do you know a test someone else wrote is any good, say one an assistant generated?
+Look at the oracle: the expect, the part that decides pass or fail. On the right is a spec for filterPlaygrounds. The first test checks the result is truthy and not empty. The second compares the function to itself. Both would pass if filterPlaygrounds returned anything non-empty, and the second would pass even if it returned garbage.
+The question to ask of every test, yours or generated: would this test fail if the code were deleted?
+A recent study, Banik and colleagues, June 2026, looked at over 86 thousand test patches written by five coding agents. 80.2 percent had weak or no explicit oracle. Careful: it counts oracle signals in the patches, it does not measure bugs caught. But it is the failure mode this exercise is about.
+Next: you try it on this exact spec.</aside>
+</section>

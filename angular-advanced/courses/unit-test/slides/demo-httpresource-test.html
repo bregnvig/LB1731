@@ -1,0 +1,36 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Instructor demo - httpResource in a test</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">Same fake backend, same URL. Not an exercise: watch, then ask questions.</span></p>
+
+<p><span style="font-size:19.6px">&bull; <code><span style="color:#ff8c00">httpResource</span></code> starts the request <b>eagerly</b>, not on subscribe. It needs an <code><span style="color:#ff8c00">injector</span></code> in a test.</span></p>
+
+<p><span style="font-size:19.6px">&bull; <code><span style="color:#ff8c00">TestBed.tick()</span></code> runs the effect that sends the request. Then <code><span style="color:#ff8c00">expectOne</span></code> and <code><span style="color:#ff8c00">flush</span></code>.</span></p>
+
+<p><span style="font-size:19.6px">&bull; Wait for stability before reading. Check <code><span style="color:#ff8c00">hasValue()</span></code> before <code><span style="color:#ff8c00">value()</span></code>: reading it in the error state throws.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:420px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">// Arrange
+TestBed.configureTestingModule({ providers: [provideHttpClientTesting()] });
+const httpTesting = TestBed.inject(HttpTestingController);
+const playgrounds = httpResource&lt;Playground[]&gt;(() =&gt; 'assets/copenhagen.json', { injector: TestBed.inject(Injector) });
+// Act
+TestBed.tick();
+httpTesting.expectOne('assets/copenhagen.json').flush([havnegade]);
+await TestBed.inject(ApplicationRef).whenStable();
+// Assert
+expect(playgrounds.hasValue()).toBe(true);
+expect(playgrounds.value()).toEqual([havnegade]);
+</code></pre>
+  </div>
+  <aside class="notes">Optional demo, ~5 min. httpResource is not in the app; this is test-local.
+Differences from HttpClient: eager, needs injector, TestBed.tick(), whenStable, hasValue before value.
+Imports: httpResource from @angular/common/http; ApplicationRef, Injector from @angular/core.
+
+Signals world, same idea. httpResource wraps HttpClient, so the same testing controller works.
+Two differences. First, it is eager: the request is sent without anyone subscribing, once the effect runs. In a test we give it an injector and call TestBed.tick() to run that effect. Then expectOne and flush as before.
+Second, the value arrives through signals, so wait until the app is stable. Then check hasValue before value, because reading value while the resource is in the error state throws.
+Everything else you just learned carries over.</aside>
+</section>

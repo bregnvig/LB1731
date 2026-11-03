@@ -1,19 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, first, map, Observable, shareReplay, switchMap } from 'rxjs';
+import { inject, Service } from '@angular/core';
+import { BehaviorSubject, first, map, Observable, switchMap } from 'rxjs';
 import { AuthUser } from '../model/auth-user';
 import { isNullOrUndefined } from '../utils/object-utils';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class AuthService {
 
+  private readonly httpClient = inject(HttpClient);
   private readonly _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
-
-
-  constructor(private httpClient: HttpClient) { }
+  readonly isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
 
   login(email: string, password: string): Observable<boolean> {
     if ([email, password].some(isNullOrUndefined)) {
@@ -29,9 +25,9 @@ export class AuthService {
         if (isLoggedIn) {
           throw 'Already logged in';
         }
-        return this.httpClient.post<AuthUser>(`/api/login`, { email, password }).pipe(
+        return this.httpClient.post<AuthUser>('/api/login', { email, password }).pipe(
           map(authUser => {
-            this._isLoggedIn$.next(authUser.authenticated);
+            this._isLoggedIn$.next(!!authUser?.authenticated);
             return !!authUser?.authenticated;
           })
         );
@@ -42,5 +38,5 @@ export class AuthService {
   get isLoggedIn(): boolean {
     return this._isLoggedIn$.value;
   }
-  
+
 }
