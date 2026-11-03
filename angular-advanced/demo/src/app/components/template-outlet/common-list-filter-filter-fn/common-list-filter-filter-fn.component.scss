@@ -1,5 +1,26 @@
+@import "src/app/components/template-outlet/search-list";
+
 .list-group {
   max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+// The @defer placeholder: the spinning-hue logo stands in for a row
+.placeholder-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem 1rem;
+  color: $muted;
+  font-family: $font-family-monospace;
+
+  img {
+    height: 3.5rem;
+    width: auto;
+  }
+
+  p {
+    margin: 0;
+  }
 }

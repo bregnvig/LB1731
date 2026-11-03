@@ -4,11 +4,16 @@ import { Observable, interval, map } from 'rxjs';
 @Component({
   selector: 'loop-observable-events-default',
   template: `
-    <p>
-      Observable events default strategy: <span class="badge bg-success">{{no}}</span>
-      <button class="btn btn-sm btn-primary mx-3" type="button" (click)="start()">Start</button>
+    <p class="cd-card">
+      <span class="strategy">Eager</span>
+      <span class="name">Observable events default strategy</span>
+      <span class="badge bg-success">{{no}}</span>
+      <span class="actions">
+        <button class="btn btn-sm btn-primary" type="button" (click)="start()">Start</button>
+      </span>
     </p>
   `,
+  styles: `@import "src/app/components/change-detection/cd-card";`,
   changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ObservableEventsDefaultComponent {

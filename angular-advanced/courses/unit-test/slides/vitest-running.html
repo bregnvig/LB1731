@@ -1,0 +1,14 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:60px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Running the specs</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.7em"><code><span style="color:#ff8c00">npm test</span></code> starts watch mode. Save a file and the affected specs run again.</span></p>
+<p><span style="font-size:0.7em">The <code><span style="color:#ff8c00">NG0914</span></code> warning "zone.js is still loaded" on every run is expected: the app keeps zone.js, while <code><span style="color:#ff8c00">src/test-providers.ts</span></code> makes the tests zoneless.</span></p>
+  </div>
+  <aside class="notes">npm test = watch mode.
+NG0914 zone.js warning on every run: expected.
+
+npm test starts Vitest in watch mode. Leave it running in a terminal and every save reruns the affected specs.
+Behind the scenes src/test-providers.ts makes the tests zoneless. You do not need to touch it. That is also why every run prints the NG0914 warning that zone.js is still loaded: the app keeps zone.js, the tests do not use it. Ignore it.</aside>
+</section>

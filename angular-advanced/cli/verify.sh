@@ -15,19 +15,10 @@ verify_directory() {
   echo "" >&2
   echo "--- Verifying $dir ---" >&2
 
-  # Unit-test course: students only run `npm test`, and app-routes.ts imports the
-  # LoginComponent they create in exercise 4, so build/serve can't pass. Test instead.
-  if [[ "$dir" == */unit-test/* ]]; then
-    if (cd "$dir" && CI=true npx ng test --watch=false) >&2 2>&1; then
-      build_result="PASS"
-    elif [[ "$dir" == courses/unit-test/step-1 ]]; then
-      # Expected: lab 1 starts by creating service/auth.service (ng g s service/auth)
-      build_result="XFAIL"
-    else
-      build_result="FAIL"
-    fi
-    echo "$dir|$build_result|N/A"
-    return 0
+  # Unit-test course: the specs are the exercises, so they must pass before build and serve.
+  if [[ "$dir" == */unit-test/* ]] && ! (cd "$dir" && CI=true npx ng test --watch=false) >&2 2>&1; then
+    echo "$dir|FAIL|$serve_result"
+    return 1
   fi
 
   # Step 1: Build
@@ -98,7 +89,7 @@ verify_directories() {
   for result in "${results[@]}"; do
     IFS='|' read -r dir build serve <<< "$result"
     printf "%-45s %-10s %-10s\n" "$dir" "$build" "$serve"
-    if [[ ! "$build" =~ ^(PASS|XFAIL)$ || ! "$serve" =~ ^(PASS|N/A)$ ]]; then
+    if [[ "$build" != PASS || "$serve" != PASS ]]; then
       all_pass=false
     fi
   done

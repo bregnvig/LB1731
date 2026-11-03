@@ -10,38 +10,35 @@ import { timer } from 'rxjs';
   imports: [JsonPipe, RouterOutlet, RouterLink],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div>
+    <div class="url-demo">
       <h2>Change URL State</h2>
-      <div class="d-flex flex-column gap-2">
-        <div>
-          <a class="btn btn-primary" [routerLink]="[]" [queryParams]="{ a: randomString(), b: randomString() }" queryParamsHandling="merge">
-            Navigate with query params
-          </a>
-        </div>
-        <div>
-          <a class="btn btn-primary" [routerLink]="[{matrixKey: randomString()}]" queryParamsHandling="merge">
-            Navigate with placeholder and matrix params
-          </a>
-        </div>
-        <div>
-          <a class="btn btn-primary" [routerLink]="['child-route', randomNumber(), {matrixKey: randomString()}]" queryParamsHandling="merge">
-            Navigate with child-route placeholder and matrix params
-          </a>
-        </div>
-      </div>
+      <nav class="segmented" aria-label="Change URL state">
+        <a [routerLink]="[]" [queryParams]="{ a: randomString(), b: randomString() }" queryParamsHandling="merge">
+          Navigate with query params
+        </a>
+        <a [routerLink]="[{matrixKey: randomString()}]" queryParamsHandling="merge">
+          Navigate with placeholder and matrix params
+        </a>
+        <a [routerLink]="['child-route', randomNumber(), {matrixKey: randomString()}]" queryParamsHandling="merge">
+          Navigate with child-route placeholder and matrix params
+        </a>
+      </nav>
 
-      <hr>
-      <h2 class="mt-4">UrlStateComponent</h2>
-      <p>Route Params: {{ params() | json }}</p>
-      <p>Query Params: {{ queryParams() | json }}</p>
-      
-      <hr>
-      <h2 class="mt-4">UrlStateChildRouteComponent</h2>
-      <router-outlet></router-outlet>
+      <section class="route-panel">
+        <h2>UrlStateComponent</h2>
+        <dl class="readout">
+          <dt>Route Params</dt><dd>{{ params() | json }}</dd>
+          <dt>Query Params</dt><dd>{{ queryParams() | json }}</dd>
+        </dl>
 
-      
+        <section class="route-panel outlet">
+          <h2><code>&lt;router-outlet&gt;</code> UrlStateChildRouteComponent</h2>
+          <router-outlet></router-outlet>
+        </section>
+      </section>
     </div>
   `,
+  styleUrl: './url-state.component.scss',
 })
 export class UrlStateComponent {
   #activeRoute = inject(ActivatedRoute);
@@ -62,10 +59,10 @@ export class UrlStateComponent {
   imports: [JsonPipe],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div>
-      <p>Route Params: {{ params() | json }}</p>
-      <p>Query Params: {{ queryParams() | json }}</p>
-    </div>
+    <dl class="readout">
+      <dt>Route Params</dt><dd>{{ params() | json }}</dd>
+      <dt>Query Params</dt><dd>{{ queryParams() | json }}</dd>
+    </dl>
   `,
 })
 export class UrlStateChildRouteComponent {

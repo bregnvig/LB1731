@@ -1,4 +1,20 @@
-ul {
-  max-height: 60vh;
-  overflow-y: auto;
+@import "../../../rxjs/search-list";
+@import "../../outlet-panel";
+
+.params-title {
+  margin-bottom: .5rem;
+  font-size: .8125rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: $muted;
+}
+
+.params {
+  margin-bottom: 1rem;
+
+  dt {
+    font-family: $font-family-monospace;
+    font-size: .875rem;
+    color: $azure;
+  }
 }

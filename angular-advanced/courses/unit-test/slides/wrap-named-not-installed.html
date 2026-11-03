@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Wrap - Named, not installed</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:150px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:22px">&bull; <code><span style="color:#ff8c00">Vitest browser mode</span></code>: run the same specs in a real browser, with real layout and events.</span></p>
+
+<p><span style="font-size:22px">&bull; <code><span style="color:#ff8c00">MSW</span></code>: one fake API for the app and for tests, at the network level. Does not stack with <code><span style="color:#ff8c00">provideHttpClientTesting</span></code>.</span></p>
+
+<p><span style="font-size:22px">&bull; <code><span style="color:#ff8c00">Stryker</span></code>: mutation testing. It deletes and changes your code and checks that tests fail: the deletion question, automated.</span></p>
+
+<p><span style="font-size:22px">&bull; <code><span style="color:#ff8c00">vitest-axe</span></code>: accessibility checks (axe-core) on the rendered component.</span></p>
+
+<p><span style="font-size:22px">&bull; <code><span style="color:#ff8c00">coverage</span></code>: shows which lines ran, not whether anything was asserted. A weak oracle has 100% coverage.</span></p>
+  </div>
+  <aside class="notes">One line each. Nothing installed today.
+Browser mode: real browser. MSW: fake the network, not HttpClient. Stryker: automated "delete the code". vitest-axe: a11y. Coverage: ran, not checked.
+
+We do not install any of these today. Know the names for when you need them.
+Browser mode runs your specs in a real browser instead of a simulated DOM. MSW fakes the network itself, so one set of fake responses serves the app and the tests. Stryker is the oracle exercise, automated: it breaks your code on purpose and tells you which breakages no test noticed. vitest-axe adds accessibility checks to component tests. Coverage tells you which lines ran, not whether any test looked at the result.
+Use them as the next steps once the basics here feel natural.</aside>
+</section>

@@ -1,0 +1,63 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:40px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 3 - The spec skeleton</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:100px;width:1204px;height:auto;z-index:11">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { firstValueFrom } from 'rxjs';
+import { Playground } from '../model/playground';
+import { PlaygroundService } from './playground.service';
+
+// const havnegade ... const panterensBastion ...   (copy both from filter-playgrounds.spec.ts)</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:38px;top:300px;width:600px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">describe('PlaygroundService', () =&gt; {
+  let service: PlaygroundService;
+  let httpTesting: HttpTestingController;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+      providers: [provideHttpClientTesting()],
+    });
+    service = TestBed.inject(PlaygroundService);
+    httpTesting = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() =&gt; {
+    httpTesting.verify();
+  });</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-3" data-theme="dark" data-auto-height style="left:660px;top:300px;width:580px;height:auto;z-index:13">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">  it('should return only the playgrounds ...', async () =&gt; {
+    // Arrange
+    //   firstValueFrom(service.search('christianshavn'))
+    // Act
+    //   expectOne('assets/copenhagen.json').flush([...])
+    // Assert
+    //   expect(await result).toEqual([...])
+  });
+
+  it('should return an empty list ...', async () =&gt; {
+    // same, with 'århus'
+  });
+
+});</code></pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-5" data-theme="dark" data-auto-height style="left:660px;top:590px;width:580px;height:auto;z-index:15">
+    <pre style="font-size: 14px; line-height: 20px; tab-size: 4;"><code class="language-typescript">// playground.service.ts
+import { map, Observable } from 'rxjs';
+import { filterPlaygrounds } from '../model/filter-playgrounds';</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-4" style="left:660px;top:670px;width:580px;height:auto;z-index:14;text-align:left">
+    <p><span style="font-size:0.6em"><code><span style="color:#ff8c00">provideHttpClientTesting()</span></code> alone is enough.</span></p>
+  </div>
+  <aside class="notes">Skeleton for the spec: imports, fixtures copied from filter-playgrounds.spec.ts, beforeEach and afterEach.
+provideHttpClientTesting() alone is enough.
+
+These are the imports: describe, it, expect, beforeEach and afterEach from vitest, the testing controller and provider from @angular/common/http/testing, TestBed, firstValueFrom, and the Playground and PlaygroundService types. Copy the two fixtures from filter-playgrounds.spec.ts, do not retype them.
+For the service itself, import map from rxjs (next to Observable) and filterPlaygrounds from ../model/filter-playgrounds.
+The setup is the one from the previous slide. provideHttpClientTesting on its own is enough: you do not add provideHttpClient as well. afterEach calls verify, so a request nobody answered fails the test.
+Fill in the two cases yourself, section by section: Arrange by subscribing with firstValueFrom, Act with expectOne and flush, Assert by awaiting the result.</aside>
+</section>

@@ -3,22 +3,19 @@
   Showing {{(playgrounds$ | async)?.length}} playgrounds
 </div>
 </div> -->
-<article class="row w-100">
-  <div class="col">
-    <ul class="list-group mt-3">
-      <li class="list-group-item">
-        <div class="row">
-          <input type="text" placeholder="Filter playgrounds" class="col" autofocus [formControl]="filterControl">
-        </div>
-      </li>
-      @if (playgrounds$ | async; as playgrounds) {
-        @for (p of playgrounds; track p.id) {
-          <li class="list-group-item d-flex">
-            <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
-            <span class="ms-2 badge bg-primary">{{p | distance:(location$ | async)}}</span>
-          </li>
-        }
+<article class="search-list">
+  <label class="search-field">
+    <fa-icon [icon]="['fas', 'magnifying-glass']"/>
+    <input type="text" placeholder="Filter playgrounds" aria-label="Filter playgrounds" autofocus [formControl]="filterControl">
+  </label>
+  <ul class="results">
+    @if (playgrounds$ | async; as playgrounds) {
+      @for (p of playgrounds; track p.id) {
+        <li class="result">
+          <ngb-highlight [term]="filterControl.value" [result]="p.name"></ngb-highlight>
+          <span class="distance">{{p | distance:(location$ | async)}}</span>
+        </li>
       }
-    </ul>
-  </div>
+    }
+  </ul>
 </article>

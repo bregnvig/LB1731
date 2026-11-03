@@ -1,0 +1,65 @@
+@import "../level3";
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem;
+
+  a {
+    padding: .3125rem .875rem;
+    border-radius: 999px;
+    background: $canvas;
+    font-size: .875rem;
+    font-weight: 600;
+    color: $cobalt;
+
+    &:hover { background: $canvas-deep; text-decoration: none; }
+  }
+}
+
+.group-label {
+  margin-right: .375rem;
+  font: 500 .8125rem $font-family-monospace;
+  color: $muted;
+}
+
+// The rows sit on the gradient stage, so the transform is the loud thing
+.rows {
+  display: grid;
+  gap: .75rem;
+  margin: 0;
+  list-style: none;
+}
+
+.row-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: $border-radius-lg;
+  background: $white;
+  color: $navy;
+  font-size: 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px -12px rgba($navy, .6);
+}
+
+.no {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: $navy;
+  color: $white;
+  font: 600 1rem $font-family-monospace;
+}

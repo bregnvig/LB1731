@@ -17,6 +17,7 @@ const isValidZip = (service: DawaService): AsyncValidatorFn => (control: Abstrac
 @Component({
     selector: 'loop-validators',
     templateUrl: './validators.component.html',
+    styleUrl: './validators.component.scss',
     providers: [AsyncPipe],
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false

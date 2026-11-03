@@ -1,0 +1,37 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:1204px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 4 - Bonus: Ingen legepladser</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:144px;width:1204px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:19.6px">Same spec. A second case for the empty state.</span></p>
+
+<p><span style="font-size:19.6px">1. Add the test below. Type <code><span style="color:#ff8c00">århus</span></code>, expect the list to contain "Ingen legepladser".</span></p>
+
+<p><span style="font-size:19.6px"><b>Green on arrival, expected: it pins behavior that already exists</b> (the template has the <code><span style="color:#ff8c00">@empty</span></code> block).</span></p>
+
+<p><span style="font-size:19.6px">2. See it fail: temporarily delete the <code><span style="color:#ff8c00">@empty</span></code> block from the template. The test goes red. Restore it.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:38px;top:380px;width:1204px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">  async function search(query: string): Promise&lt;void&gt; {
+    const field = element.querySelector('input')!;
+    // Act
+    field.value = query;
+    field.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+  }
+
+  it(`should show 'Ingen legepladser' when no name matches`, async () =&gt; {
+    // Act
+    await search('århus');
+    // Assert
+    expect(element.querySelector('ul')!.textContent).toContain('Ingen legepladser');
+  });</code></pre>
+  </div>
+  <aside class="notes">Bonus. Green on arrival, expected: pins the existing @empty block.
+See it fail: delete @empty from the template, red, restore.
+Link back to the deletion question.
+
+Second case: a query that matches nothing. The template has an empty state that says Ingen legepladser.
+Add the search helper (on the slide) next to the tests, then the new case. It is green the moment you write it, because the template already has the empty state. That is expected: it pins behavior that already exists.
+To see it fail, break the code on purpose: delete the @empty block from the template and the test goes red. Restore it. If it had stayed green, your assertion would be too weak.</aside>
+</section>

@@ -1,54 +1,59 @@
-<form class="mb-3" [formGroup]="fg">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="name" class="form-control col-6" id="name" placeholder="Name" formControlName="name">
-  </div>
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input #emailFormControl placeholder="E-mail" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" type="email" class="form-control col-6" id="email" [formControl]="fg.controls.email">
-  </div>
-</form>
-<div class="row">
-  <hr class="w-100">
-  <div class="col-4">
-    <input class="form-control" placeholder="Name" type="text" #nameControl>
-  </div>
-  <div class="col-4">
-    <input class="form-control" placeholder="E-mail" type="email" #emailControl>
-  </div>
+<div class="playground">
+  <section class="editor">
+    <form [formGroup]="fg">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" id="name" placeholder="Name" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input #emailFormControl placeholder="E-mail" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" type="email" class="form-control" id="email" [formControl]="fg.controls.email">
+      </div>
+    </form>
 
-  <div class="col-auto">
-    <button class="btn btn-primary me-2" (click)="patch()">Patch</button>
-    <button class="btn btn-primary me-2" (click)="reset()">Reset</button>
-    <button class="btn btn-primary" (click)="disable()">{{fg.controls.email.enabled ? 'Disable' : 'Enable'}}</button>
-  </div>
-  <div class="col-auto my-auto">
-    <input class="form-check-input" [formControl]="emitEventControl" type="checkbox" id="emitEvent">
-    <label class="form-check-label ms-1" for="emitEvent">
-      Emit event
-    </label>
-  </div>
-</div>
-<hr>
-<div class="mt-3 row flex-wrap">
-  <h5 class="col-12">Form group state</h5>
-  <div class="col-4">Value</div>
-  <div class="col-8"> {{fg.value | json}}</div>
-  <div class="col-4">Valid</div>
-  <div class="col-8"> {{fg.valid}}</div>
-  <div class="col-4">Touched</div>
-  <div class="col-8"> {{fg.touched}}</div>
-  <div class="col-4">Dirty</div>
-  <div class="col-8"> {{fg.dirty}}</div>
-</div>
-<div class="mt-3 row flex-wrap">
-  <h5 class="col-12">E-mail state</h5>
-  <div class="col-4">Value</div>
-  <div class="col-8"> {{fg.value.email| json}}</div>
-  <div class="col-4">Valid</div>
-  <div class="col-8"> {{fg.controls.email.valid}}</div>
-  <div class="col-4">Invalid</div>
-  <div class="col-8"> {{fg.controls.email.invalid}}</div>
+    <div class="toolbar">
+      <h6>Set from code</h6>
+      <div class="toolbar-inputs">
+        <input class="form-control" placeholder="Name" type="text" #nameControl>
+        <input class="form-control" placeholder="E-mail" type="email" #emailControl>
+      </div>
+      <div class="toolbar-actions">
+        <button class="btn btn-primary" (click)="patch()">Patch</button>
+        <button class="btn btn-outline-primary" (click)="reset()">Reset</button>
+        <button class="btn btn-outline-primary" (click)="disable()">{{fg.controls.email.enabled ? 'Disable' : 'Enable'}}</button>
+        <div class="form-check form-switch ms-auto mb-0">
+          <input class="form-check-input" [formControl]="emitEventControl" type="checkbox" id="emitEvent">
+          <label class="form-check-label" for="emitEvent">
+            Emit event
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="inspector">
+    <h5>Form group state</h5>
+    <dl class="readout">
+      <dt>Value</dt>
+      <dd>{{fg.value | json}}</dd>
+      <dt>Valid</dt>
+      <dd><span class="flag good" [class.on]="fg.valid">{{fg.valid}}</span></dd>
+      <dt>Touched</dt>
+      <dd><span class="flag" [class.on]="fg.touched">{{fg.touched}}</span></dd>
+      <dt>Dirty</dt>
+      <dd><span class="flag" [class.on]="fg.dirty">{{fg.dirty}}</span></dd>
+    </dl>
+
+    <h5>E-mail state</h5>
+    <dl class="readout">
+      <dt>Value</dt>
+      <dd>{{fg.value.email| json}}</dd>
+      <dt>Valid</dt>
+      <dd><span class="flag good" [class.on]="fg.controls.email.valid">{{fg.controls.email.valid}}</span></dd>
+      <dt>Invalid</dt>
+      <dd><span class="flag bad" [class.on]="fg.controls.email.invalid">{{fg.controls.email.invalid}}</span></dd>
+    </dl>
+  </aside>
 </div>
 <ng-template #popContent>
   CSS classes: <strong>{{emailFormControl.className}}</strong>

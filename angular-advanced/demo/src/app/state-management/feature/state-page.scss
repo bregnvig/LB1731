@@ -1,0 +1,84 @@
+@import "src/scss/variables";
+
+// One service at the top, its subscribers hanging off a bus below it.
+// A subscriber that registered is wired in and lit; the rest stay dashed.
+.store {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem;
+  border-radius: $border-radius-xl;
+  background: $white;
+  box-shadow: $stage-shadow;
+
+  h1 {
+    font-size: 1.5rem;
+    font-stretch: 80%;
+  }
+
+  pre {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  // the trunk down to the bus
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 2px;
+    height: 2.5rem;
+    background: $azure;
+  }
+}
+
+.store-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: $border-radius-lg;
+  background: $canvas;
+
+  p {
+    font-family: $font-family-monospace;
+    font-size: .8125rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+.bus {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 1.75rem;
+
+  // the bus rail, from the first column's centre to the last
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: $gray-300;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .store,
+  .bus {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  // one column: no rail to hang the subscribers from
+  .bus::before {
+    display: none;
+  }
+}

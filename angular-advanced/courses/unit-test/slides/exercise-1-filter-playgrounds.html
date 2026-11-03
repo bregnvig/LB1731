@@ -1,0 +1,45 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:60px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>Exercise 1 - filterPlaygrounds</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:130px;width:520px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.65em">Create <code><span style="color:#ff8c00">src/app/model/filter-playgrounds.spec.ts</span></code></span></p>
+<p><span style="font-size:0.65em">and <code><span style="color:#ff8c00">src/app/model/filter-playgrounds.ts</span></code></span></p>
+<p><span style="font-size:0.65em">The function keeps the playgrounds whose name contains the query, ignoring case.</span></p>
+<p><span style="font-size:0.65em">Copy the two fixtures into the spec, above the <code><span style="color:#ff8c00">describe</span></code>.</span></p>
+<p><span style="font-size:0.65em">The first red is a compile error: <code><span style="color:#ff8c00">filterPlaygrounds</span></code> does not exist yet. That counts as red.</span></p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:580px;top:140px;width:670px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 22px; tab-size: 4;"><code class="language-typescript">// filter-playgrounds.ts
+export function filterPlaygrounds(
+  playgrounds: Playground[],
+  query: string,
+): Playground[]
+
+// filter-playgrounds.spec.ts
+const havnegade: Playground = {
+  id: 'legeplads.1',
+  name: 'Havnegades trampolinpromenade',
+  description: 'Hop i trampolin med havnekig.',
+  addressDescription: 'Havnegade',
+  position: { lat: 55.6767238736979, lng: 12.589685450548627 },
+};
+
+const panterensBastion: Playground = {
+  id: 'legeplads.2',
+  name: 'Legepladsen på Christianshavns Vold - Panterens Bastion',
+  description: 'Fredelig, grøn plet til leg og grill.',
+  addressDescription: 'på Panterens Bastion',
+  position: { lat: 55.669599877562, lng: 12.588571683898572 },
+};</code></pre>
+  </div>
+  <aside class="notes">Files: model/filter-playgrounds.spec.ts and filter-playgrounds.ts.
+Two fixtures, copy them exactly.
+Query christianshavn matches the second one only.
+First red = compile error, function missing. Counts as red.
+
+Create the spec first, in src/app/model. The function lives next to it, in filter-playgrounds.ts, and takes the list and the query and returns the matching playgrounds.
+Copy the two fixtures on the right into the top of the spec. Havnegades trampolinpromenade is legeplads.1, the Panterens Bastion playground is legeplads.2. Their names are what the query is matched against.
+Use the Playground type from ./playground.
+The first run fails because filterPlaygrounds does not exist yet, so the spec does not compile. That is a compile error, and it counts as red: the test failed for the right reason.</aside>
+</section>

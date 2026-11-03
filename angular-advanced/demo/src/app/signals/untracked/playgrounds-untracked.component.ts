@@ -12,26 +12,29 @@ const http = { post: console.log };
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="container">
-      <div class="row gx-5">
-        <div class="col">
-          <button type="button" class="btn btn-primary" (click)="updateLocation()">updateLocation</button>
-          <ngb-alert type="info" class="mt-3" [dismissible]="false">
+      <div class="demo-surface signals">
+        <div class="signal-tile">
+          <h6><code>location()</code> <span>tracked</span></h6>
+          <ngb-alert type="info" [dismissible]="false">
             {{location() | json}}
           </ngb-alert>
+          <button type="button" class="btn btn-light" (click)="updateLocation()">updateLocation</button>
         </div>
-        <div class="col">
-          <button type="button" class="btn btn-primary" (click)="updateUser()">updateUser</button>
+        <div class="signal-tile">
+          <h6><code>user()</code> <span>untracked</span></h6>
           <loop-playgrounds-untracked-user [user]="user()"/>
+          <button type="button" class="btn btn-light" (click)="updateUser()">updateUser</button>
         </div>
       </div>
-      <h6 class="mt-3">Posts</h6>
-      <ul class="mt-3 list-group">
+      <h6 class="mt-4">Posts</h6>
+      <ul class="list-group log">
         @for (post of posts(); track post) {
           <li class="list-group-item">{{post}}</li>
         }
       </ul>
     </div>
-  `
+  `,
+  styleUrl: './playgrounds-untracked.component.scss',
 })
 export class PlaygroundsUntrackedComponent {
   user = signal({ id: randSequence(), name: randFullName() });

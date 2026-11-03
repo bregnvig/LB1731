@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'loop-my-first',
   templateUrl: './my-first.component.html',
+  styleUrl: './my-first.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })

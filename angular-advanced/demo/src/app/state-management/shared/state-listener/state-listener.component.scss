@@ -1,0 +1,79 @@
+@import "src/scss/variables";
+
+:host {
+  position: relative;
+  display: block;
+
+  // the drop from the bus
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: calc(50% - 1px);
+    height: 1.75rem;
+    border-left: 2px dashed $gray-400;
+  }
+}
+
+.listener {
+  height: 100%;
+  padding: 1rem;
+  border: 2px dashed $gray-300;
+  border-radius: $border-radius-lg;
+  color: $muted;
+  transition: background .25s, border-color .25s, color .25s;
+
+  p {
+    margin-bottom: .5rem;
+  }
+
+  strong {
+    display: block;
+    color: $ink;
+    font-size: 1.0625rem;
+    font-stretch: 85%;
+  }
+
+  code {
+    display: block;
+    margin-top: .25rem;
+    padding: .375rem .5rem;
+    background: $canvas;
+    color: $muted;
+    overflow-wrap: anywhere;
+  }
+
+  .btn {
+    margin-top: .25rem;
+  }
+}
+
+// Registered: wired to the service, so it shows the shared state
+:host:has(button:disabled) {
+  &::before {
+    border-left: 2px solid $azure;
+  }
+
+  .listener {
+    border: 2px solid transparent;
+    background: $surface-bg;
+    color: rgba($white, .8);
+    box-shadow: 0 12px 28px -14px rgba($signal, .7);
+  }
+
+  strong {
+    color: $white;
+  }
+
+  code {
+    background: rgba($white, .18);
+    color: $white;
+  }
+
+  .btn:disabled {
+    border-color: rgba($white, .6);
+    background: transparent;
+    color: $white;
+    opacity: .8;
+  }
+}

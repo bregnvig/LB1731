@@ -6,6 +6,7 @@ import { Coordinate, LocationService, Playground, PlaygroundService } from 'src/
 @Component({
     selector: 'loop-with-injector-v14',
     templateUrl: '../without-di/without-di.component.html',
+    styleUrl: '../without-di/without-di.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })

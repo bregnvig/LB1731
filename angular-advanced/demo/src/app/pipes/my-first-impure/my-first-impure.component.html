@@ -1,24 +1,33 @@
 <article>
   <div class="row">
-    <div class="col">
+    <div class="col-md-5">
       <div class="mb-3">
         <label for="myFirst" class="form-label">My first impure</label>
         <input type="text" name="myFirst" [(ngModel)]="myFirst" class="form-control" id="myFirst">
       </div>
     </div>
   </div>
-  <div class="row g-3 align-items-center">
-    <div class="col-4 text-center p-3 fs-4" (mousemove)="noop()">
+  <div class="row g-3 align-items-stretch">
+    <div class="col-md-3 mouse-pad" (mousemove)="noop()">
       Mouse here🐁
     </div>
-    <div class="col-2">
-      {{myFirst | myFirst}}
+    <div class="col-md-3">
+      <div class="out">
+        <small>myFirst | myFirst</small>
+        {{myFirst | myFirst}}
+      </div>
     </div>
-    <div class="col-3">
-      {{myFirst | myFirstImpure}}
+    <div class="col-md-3">
+      <div class="out">
+        <small>myFirst | myFirstImpure</small>
+        {{myFirst | myFirstImpure}}
+      </div>
     </div>
-    <div class="col-3">
-      {{usingAMethod(myFirst)}}
+    <div class="col-md-3">
+      <div class="out">
+        <small>usingAMethod(myFirst)</small>
+        {{usingAMethod(myFirst)}}
+      </div>
     </div>
   </div>
 </article>

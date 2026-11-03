@@ -1,0 +1,44 @@
+@import "src/scss/variables";
+
+.card {
+  border: 0;
+  box-shadow: $stage-shadow;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .375rem;
+  border-radius: 999px;
+  background: $canvas;
+
+  .btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    color: $navy;
+
+    &:hover {
+      background: $white;
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: .5rem;
+
+  .form-control {
+    width: 5rem;
+    text-align: center;
+    font-family: $font-family-monospace;
+  }
+
+  small {
+    white-space: nowrap;
+  }
+}

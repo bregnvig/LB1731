@@ -1,0 +1,44 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:60px;width:1100px;height:auto;z-index:10;text-align:left">
+    <h2>A unit of work</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:140px;width:1200px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.75em">Roy Osherove: <em>the sum of actions between an entry point and one noticeable end result</em>.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:38px;top:260px;width:300px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.8em"><span style="color:#ff8c00">Entry point</span></span></p>
+<p><span style="font-size:0.8em">The function or method the test calls</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:350px;top:270px;width:70px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:1.6em">&rarr;</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-4" style="left:440px;top:200px;width:380px;height:auto;z-index:14;text-align:left">
+    <p><span style="font-size:0.8em"><span style="color:#ff8c00">1. Returns a value</span></span></p>
+<p><span style="font-size:0.8em">or throws</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-5" style="left:440px;top:320px;width:380px;height:auto;z-index:15;text-align:left">
+    <p><span style="font-size:0.8em"><span style="color:#ff8c00">2. Changes state</span></span></p>
+<p><span style="font-size:0.8em">that you can read back</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-6" style="left:440px;top:440px;width:500px;height:auto;z-index:16;text-align:left">
+    <p><span style="font-size:0.8em"><span style="color:#ff8c00">3. Calls a third party</span></span></p>
+<p><span style="font-size:0.8em">that you cannot run in a test</span></p>
+  </div>
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio style="left:980px;top:220px;width:240px;height:240px;z-index:18;border-style:solid;border-width:1px;border-radius:200px">
+    <img src="images/a-unit-1.jpg" alt="Roy Osherove">
+  </div>
+  <div class="block" data-type="text" data-name="text-8" style="left:920px;top:470px;width:360px;height:auto;z-index:19;text-align:center">
+    <p><span style="font-size:0.55em">Roy Osherove<br>Author of <em>The Art of Unit Testing</em><br>(3rd ed. 2024, examples in TypeScript)</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-7" style="left:38px;top:560px;width:1200px;height:auto;z-index:17;text-align:left">
+    <p><span style="font-size:0.75em">One test per entry point and outcome. You check the outcome, not the steps in between.</span></p>
+  </div>
+  <aside class="notes">Unit of work: entry point to one noticeable end result (Roy Osherove, The Art of Unit Testing; 3rd edition, Manning 2024, with JavaScript/TypeScript examples).
+Three outcomes: return value, state change, third-party call.
+Check the outcome, not the steps.
+
+A unit is not a class and not a file. It is everything that happens from the moment the test calls an entry point until something observable comes out.
+Osherove names three kinds of end result. The entry point returns a value or throws. It changes state that you can read back afterwards. Or it calls something you do not own, such as the network.
+How you test it depends on the kind, so the next slide gives you one playground example of each.
+You assert on the outcome and ignore the steps in between.</aside>
+</section>

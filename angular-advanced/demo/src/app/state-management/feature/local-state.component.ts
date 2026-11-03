@@ -7,19 +7,25 @@ import { LocalStateListenerService, StateListenerService } from "../shared/state
 @Component({
   selector: 'loop-local-state',
   template: `
-    <div>
-      <h1>Local State</h1>
-      <pre>{{ state() | json }}</pre>
+    <section class="store">
+      <div>
+        <h1>Local State</h1>
+        <pre>{{ state() | json }}</pre>
+      </div>
+
+      <div class="store-meta">
+        <p>Subscribers: {{ listeners() | json }}</p>
+        <button class="btn btn-primary" (click)="updateState()">Update State</button>
+      </div>
+    </section>
+
+    <div class="bus">
+      @for (name of names; track name) {
+        <loop-state-listener [name]="name"/>
+      }
     </div>
-
-    <p>Subscribers: {{ listeners() | json }}</p>
-    <button class="btn btn-primary" (click)="updateState()">Update State</button>
-
-    @for (name of names; track name) {
-      <hr>
-      <loop-state-listener [name]="name"/>
-    }
   `,
+  styleUrl: './state-page.scss',
   providers: [
     {
       provide: StateListenerService,

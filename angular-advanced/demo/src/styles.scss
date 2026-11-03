@@ -1,23 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
+/* Bootstrap with our variables before it and component polish after it. */
 @import "scss/variables";
 @import "bootstrap/scss/bootstrap";
-@import "scss/bootswatch";
+@import "scss/theme";
 
 @font-face {
-  font-family: "Lato";
-  src: url("assets/lato/Lato-Regular.ttf") format("truetype"), url("assets/lato/Lato-Black.ttf") format("truetype"),
-    url("assets/lato/Lato-BlackItalic.ttf") format("truetype"), url("assets/lato/Lato-Bold.ttf") format("truetype"),
-    url("assets/lato/Lato-BoldItalic.ttf") format("truetype"), url("assets/lato/Lato-Italic.ttf") format("truetype"),
-    url("assets/lato/Lato-Light.ttf") format("truetype"), url("assets/lato/Lato-LightItalic.ttf") format("truetype"),
-    url("assets/lato/Lato-Thin.ttf") format("truetype"), url("assets/lato/Lato-ThinItalic.ttf") format("truetype");
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  src: url("assets/fonts/instrument-sans-latin-wdth-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("assets/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+// Students read code character by character, so no ligatures (=== stays ===)
+code, pre, kbd, samp {
+  font-variant-ligatures: none;
 }
 
 body {
-  font-family: "Lato", "Times New Roman", Times, serif;
   min-height: 100vh;
-  min-width: 100vw;
+  background: $canvas;
+  -webkit-font-smoothing: antialiased;
 }
 
 .flex-item {
@@ -25,7 +36,9 @@ body {
 }
 
 h5 {
-  text-transform: uppercase;
+  font-size: 1.125rem;
+  font-weight: 650;
+  font-stretch: 85%;
 }
 
 .pointer, [role="button"] {
@@ -41,32 +54,20 @@ fa-icon[role="button"] {
 }
 
 input.ng-invalid.ng-touched {
-  border-left: 3px solid darkred;
+  border-color: $danger;
+  box-shadow: inset 3px 0 0 $danger;
 }
 
 img.rainbow-hover:hover, img.rainbow {
-  -webkit-animation: rainbow 1.5s steps(36) infinite;
   animation: rainbow 1.5s steps(36) infinite;
-}
-
-@-webkit-keyframes rainbow {
-  from {
-    -webkit-filter: hue-rotate(10deg);
-  }
-
-  to {
-    -webkit-filter: hue-rotate(360deg);
-  }
 }
 
 @keyframes rainbow {
   from {
-    -webkit-filter: hue-rotate(10deg);
     filter: hue-rotate(10deg);
   }
 
   to {
-    -webkit-filter: hue-rotate(360deg);
     filter: hue-rotate(360deg);
   }
 }

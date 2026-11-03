@@ -70,6 +70,10 @@ describe('renderSlide', () => {
     expect(el.getAttribute('data-visibility')).toBe('hidden');
     expect(el.querySelector('aside.notes')!.textContent).toBe('Say <hi>');
   });
+  it('passes the slide template on, so the theme can apply its type scale', () => {
+    const el = dom(renderSlide(slide('courses/rxjs/slides/x.html', [], { template: 'claim-code' }), '')).firstElementChild!;
+    expect(el.getAttribute('data-template')).toBe('claim-code');
+  });
 });
 
 describe('deckHtml', () => {

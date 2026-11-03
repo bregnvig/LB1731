@@ -1,9 +1,36 @@
-div.col-4 {
-  cursor: pointer;
-  background-color: orange;
+@import "src/scss/variables";
+
+// Moving the mouse here only triggers change detection; watch the console
+.mouse-pad {
+  display: grid;
+  place-items: center;
+  min-height: 9rem;
+  border-radius: $border-radius-xl;
+  background: $surface-bg;
+  color: $white;
+  font-size: 1.25rem;
+  font-weight: 650;
+  background-clip: content-box;
+  cursor: crosshair;
 
   &:hover {
-    background-color: orangered;
-    color: white;
+    filter: saturate(1.4) brightness(1.08);
+  }
+}
+
+.out {
+  display: grid;
+  align-content: start;
+  gap: .375rem;
+  height: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: $border-radius-lg;
+  background: $canvas;
+  font-size: 1.125rem;
+  font-weight: 600;
+
+  small {
+    font: 500 .8125rem $font-family-monospace;
+    color: $cobalt;
   }
 }

@@ -1,19 +1,133 @@
-.box {
-  &.red {
-    background-color: orangered;
-  }
-  &.blue {
-    background-color: lightskyblue;
-  }
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
+@import "src/scss/variables";
+
+.eyebrow {
+  margin-bottom: 1rem;
+  font-size: 1.375rem;
+  font-stretch: 75%;
+  font-weight: 700;
 }
-pre,
-span {
-  opacity: 0.5;
-  &.fw-bolder {
-    opacity: 1;
-    color: var(--bs-success);
+
+// Two dashed slots, one per branch. The element ngIf creates pops into
+// its slot, labelled with what it is; the other slot stays empty.
+
+.toggle {
+  position: sticky;
+  top: .75rem;
+  z-index: 5;
+  display: inline-flex;
+  gap: .625rem;
+  align-items: center;
+  padding: .5rem 1.125rem .5rem 3.25rem;
+  border-radius: 999px;
+  background: $white;
+  box-shadow: $box-shadow-sm, 0 0 0 1px $gray-300;
+  font-weight: 600;
+
+  .form-check-input {
+    width: 2.75rem;
+    height: 1.5rem;
+    margin-top: 0;
   }
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: repeat(2, 7.5rem);
+  justify-content: center;
+  align-content: center;
+  gap: 1.25rem;
+  height: 100%;
+  min-height: 15rem;
+  margin: 0;
+  padding: 1.5rem 1.5rem 3rem;
+
+  &::before,
+  &::after {
+    grid-row: 1;
+    display: grid;
+    place-items: end center;
+    height: 7.5rem;
+    padding-bottom: .5rem;
+    border: 2px dashed rgba($white, .4);
+    border-radius: 1.75rem;
+    color: rgba($white, .6);
+    font: .75rem var(--bs-font-monospace);
+    content: "empty";
+  }
+
+  &::before { grid-column: 1; }
+  &::after { grid-column: 2; }
+
+  > * {
+    grid-row: 1;
+    width: auto;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+  }
+
+  > :has(.red) { grid-column: 1; }
+  > :has(.blue) { grid-column: 2; }
+}
+
+.box {
+  position: relative;
+  width: 6.5rem;
+  height: 6.5rem;
+  animation: appear .4s cubic-bezier(.3, 1.5, .5, 1);
+
+  &.red {
+    border-radius: 1.25rem;
+    background: linear-gradient(145deg, #ff8a5c, #f0240b 60%, #b3001b);
+    box-shadow: inset 0 2px 0 rgba($white, .45), inset 0 -6px 12px rgba(#5a0010, .35), 0 18px 30px -10px rgba(#5a0010, .7);
+  }
+
+  &.blue {
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e6f6ff, #5cc8ff 35%, #1d6ff2 75%, #1238a8);
+    box-shadow: inset 0 -6px 14px rgba(#020814, .35), 0 18px 30px -10px rgba(#020814, .7);
+  }
+
+  // The DOM node it is, so "it exists" is spelled out
+  &::after {
+    position: absolute;
+    top: calc(100% + .875rem);
+    left: 50%;
+    translate: -50%;
+    padding: .125rem .625rem;
+    border-radius: 999px;
+    background: rgba($white, .95);
+    color: $navy;
+    font: 500 .8125rem var(--bs-font-monospace);
+    white-space: nowrap;
+  }
+
+  &.red::after { content: "div.box.red"; }
+  &.blue::after { content: "div.box.blue"; }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    scale: .6;
+  }
+}
+
+// Branches: the one that renders is lit, the others dim
+
+pre.branch {
+  margin-bottom: .75rem;
+  color: rgba(#cfe3f5, .4);
+  transition: .25s;
+
+  &.lit {
+    color: $white;
+    background: linear-gradient(rgba($signal, .12), rgba($signal, .12)), $navy;
+    box-shadow: inset 4px 0 0 $signal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .box { animation: none; }
 }
