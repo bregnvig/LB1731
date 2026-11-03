@@ -25,6 +25,14 @@ Re-run: build sizes with `npx ng build` in the step folder (add `--stats-json` f
 - second click, ':id' -> ':id' | step-3 | click row 2 after row 1, 3 s | 4, 4, 4 bars = 1 click bar (6 components, 2 rows) + 3 Footer-only
 - second click in state (a) | copy as above | same | 4, 4, 4 bars, all 6 / 133
 - polyfills after | step-3 | `npx ng build` | polyfills 494 bytes / 494 bytes; main 1.53 MB / 357.12 kB; Initial total 1.77 MB (1,772,519 B) / 383.17 kB
+- 2026-11-03, refreshed vs visited, how counted | step-2, state (a) copy, step-3; dev build `npm start`, Chromium 156 headless shell, setup as in the header | per ChangeDetectionStart..End: "refreshed" = component instances with `TemplateUpdateStart` (2), "visited" = instances with `ComponentEnd` (19), split into the sync pass (inside ChangeDetectionSyncStart..End) and the dev-mode `checkNoChanges` pass that `ApplicationRef.tick` runs after it, inside the same bar; rows = `SidebarListItem` template updates. 3 runs each, every run identical | (see the rows below)
+- 2026-11-03, quiet timer bar, step-2 (zone.js) | step-2 `/` | wait for the list, record 10 s | 10, 10, 10 bars; each: sync refreshes 6 components (App, Home, Leaflet, Sidebar, SidebarListItem, Footer) / 133 rows, visits the same 6 / 133; checkNoChanges pass runs the same 6 / 133 again
+- 2026-11-03, quiet timer bar, state (a) (zoneless + footer signal, Eager kept) | copy of step-2 as in the state (a) row | same | 10, 10, 10 bars; each: sync refreshes Footer only (1 component, 0 rows) and visits 5 (App, Home, Leaflet, Sidebar, Footer; no rows); checkNoChanges pass then runs all 6 templates / 133 rows (Eager views are checked in that pass). Total template runs in the bar = 6 components / 133 rows, the number the Angular DevTools Profiler shows in a dev build: not a visit count, but 5 of the 6 come from the dev-only check
+- 2026-11-03, quiet timer bar, step-3 | step-3 `/` | same | 10, 10, 10 bars; each: sync refreshes Footer only (1, 0 rows), visits 5 (App, Home, Leaflet, Sidebar, Footer); checkNoChanges pass runs no templates. Footer-only in DevTools
+- 2026-11-03, first click, state (a) and step-3 | state (a) copy, step-3 | click the first row, record 3 s | both: 5, 5, 5 bars = click bar 1 (sync 6 refreshed / 133 rows), click bar 2 ~15 ms later (sync 5 refreshed, no App / 133 rows; 6 visited) + 3 timer bars as above. state (a) also runs 6 / 133 in checkNoChanges in every bar; step-3 none
+- 2026-11-03, first click, step-2 | step-2 `/` | same | 47, 47, 46 bars; each 6 / 133 in sync and again in checkNoChanges
+- 2026-11-03, second click (row 2 after row 1) | step-2, state (a) copy, step-3 | click row 2, record 3 s | step-2: 50, 50, 50 bars, each 6 / 133 (both passes). state (a): 4, 4, 4 bars = 1 click bar (sync 6 refreshed / 133 rows, checkNoChanges 6 / 133) + 3 timer bars (sync Footer only, checkNoChanges 6 / 133). step-3: 4, 4, 4 bars = 1 click bar (sync 6 refreshed / 2 rows, 6 visited / 133 rows visited; checkNoChanges none) + 3 Footer-only
+- 2026-11-03, what Angular DevTools lists in a bar | angular/angular main @ 37563fc3, `devtools/projects/ng-devtools-backend/src/lib/profiling/profiler/native.ts` and `../capture.ts` | read | components come from `TemplateUpdateStart`/`End` only (`onChangeDetectionStart`/`End`); the `ComponentStart`/`ComponentEnd` handlers are `// todo: implement`. A frame is flushed in a microtask after the first template update, so the dev-mode checkNoChanges pass lands in the same frame, keyed by instance (a component run twice is listed once)
 
 ## Exercise 3: the first download (`npx ng build`; raw / estimated transfer)
 
@@ -64,8 +72,20 @@ Re-run: build sizes with `npx ng build` in the step folder (add `--stats-json` f
 
 - `ng.enableProfiling()` exists and fills the track | step-3 dev server | console `ng.enableProfiling()`, record a list click | `typeof ng.enableProfiling` = function; 1,561 `console.timeStamp` events on track "🅰️ Angular" in 2.5 s; Chromium 156 DevTools Performance panel (trace loaded) lists the 🅰️ Angular track. Colours Angular passes: primary-dark "Change detection N", primary-light component names, secondary/secondary-dark "*_Template (create/update)" and HostBindings, tertiary lifecycle hooks, tertiary-light listeners, tertiary-dark DI (Injector, DestroyRef). Colour names on screen not checked
 
+## Change detection demo (2026-11-03, headless Chromium 1155 via Playwright, fresh page per line)
+
+`demo`, `npm run start:no-hmr`, `/performance/change-detection` (zoneless) and `/performance/change-detection?zone` (zone.js). **All Eager** / **All OnPush** rebuild the tree, so counters start at 1; the numbers below are the increase per node. Both modes gave the same counts on every line unless it says otherwise.
+
+- All Eager, **click** on B1 | A, B, B1, B2, C, C1, C2 +1 each
+- All OnPush, **click** on B1 | A, B, B1 +1; B2, C, C1, C2 +0
+- All OnPush, **primitive +1** or **signal +1** on A | A, B, C +1; leaves +0
+- All OnPush, **start signal interval** on B1, 3.2 s | B1 +4 (the click + 3 ticks); A, B +1 (the click); B2, C, C1, C2 +0; B1 shows signal ticks 3
+- All Eager, **start signal interval** on B1, 3.2 s | every node +4
+- All OnPush, **start primitive interval** on B1, 3.2 s | A, B, B1 +1 (the click), the rest +0; B1 shows primitive ticks 0, after **stop primitive interval** 3. Same in both modes
+- All Eager, **start primitive interval** on B1, 3.2 s | zone.js: every node +4, B1 shows 3. Zoneless: every node +1 (the click), B1 shows 0, after **stop** 3. The only line where the modes differ
+
 ## Screenshots (2026-10-31, Chromium 156, DevTools frontend served from `--remote-debugging-port`)
 
 - Network chunks | step-4, `npm run start:no-hmr` (port 4304) | Network, JS, filter `/main\.js|component/`, load `/`, click the first row, **Detaljer** | 3 rows: main.js (initiator (index):14), leaflet.component-….js (main.js), playground-detail.component-….js (app.routes.ts:11); no footer chunk. slides/images/devtools-network-chunks.jpg
 - Retainers | step-4, `npm run start:no-hmr` | 5 rounds as in exercise 4, **Take snapshot**, class filter `Detached <leaflet>` | ×10; Retainers of one: [11] in Detached div.leaflet-container <- _container in NewClass (the map) <- context <- handler() <- resize… <- _leaflet_events in Window. slides/images/devtools-retainers-leaflet.jpg
-- CD tree | demo, `npm run start:no-hmr` (4201), `/performance/change-detection` | **All OnPush**, **Reset counters**, **click** on E twice, screenshot 150 ms after the second click | A, B, E flash, checks 2; D checks 0. slides/images/demo-cd-tree.jpg
+- CD tree | demo, `npm run start:no-hmr`, `/performance/change-detection`, viewport 766 wide | **All OnPush**, **click** on B1 twice, element screenshot of the tree 150 ms after the second click | A, B, B1 flash, checks 3; B2, C, C1, C2 checks 1. slides/images/demo-cd-tree.jpg (718×438)

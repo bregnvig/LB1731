@@ -151,28 +151,28 @@ Base URL: `http://localhost:4201/performance`
 
 Start with `npm run start:no-hmr` for this one: with HMR (the `ng serve` default) the dev server loads every `@defer` chunk up front.
 
-The route shell is `PerformanceComponent` (`performance.component.ts`), the same tab bar + `<router-outlet>` as state management. The demo app runs on zone.js and is not switched to zoneless, so the CD tree shows zone.js behaviour; the slides say what changes without it.
+The route shell is `PerformanceComponent` (`performance.component.ts`), the same tab bar + `<router-outlet>` as state management. The demo app runs zoneless. Add `?zone` to the URL to boot it with zone.js instead (`src/main.ts` loads zone.js before Angular); the change detection page has a button for it.
 
 Order to demo: **Change detection → @defer → Leaks**. Change detection goes with the intro and the theory of exercises 1–2, `@defer` with the theory of exercise 3, leaks with exercise 4. Show `/performance/images` only if someone asks about images.
 
 ### 1. Change detection tree — `/performance/change-detection`
 
-**Files:** `change-detection/cd-tree.component.ts`, `change-detection/cd-node.ts`
+**Files:** `change-detection-2/root.component.ts` (the page), `a.component.ts`, `branch.component.ts`, `leaf.component.ts`, `strategies.ts`, `check-counter.ts`
 
-**What it shows:** which components Angular checks for each kind of trigger, Eager vs OnPush, as a tree of seven nodes A–G (A on top, B and C below, D–G as leaves).
+**What it shows:** which components Angular checks after a click, a changed input or a signal, Eager vs OnPush, as a tree of seven nodes: A on top, B and C below, B1, B2, C1, C2 as leaves.
 
-A node flashes yellow and its **checks** counter goes up when Angular checks it (a template binding calls `checked()`, `cd-node.ts:148`, and flashes from outside the zone, so the flash never causes a cycle). The strategy button on a node rebuilds it as the other strategy and resets the counters. Every button on a node except **click** is wired with `addEventListener` outside the zone (`cd-node.ts:129`), so pressing it starts no cycle by itself: you only see what the trigger does. **Reset counters** is outside the zone too. The counters read 2 after a page load; press **Reset counters** first.
+A has no inputs. Every parent passes two values to both its children: `primitive` through `@Input()` and `signal` through `input()`; the **primitive +1** and **signal +1** buttons change them. A node flashes yellow and its **checks** counter goes up when Angular checks it (a template binding calls `checked()` from `check-counter.ts`, which draws from outside Angular, so the flash never causes a check). Every button is a plain `(click)`. The **Eager ⇄ / OnPush ⇄** button on a node, and **All Eager** / **All OnPush**, rebuild the nodes as the other strategy, so their counters start again at 1. **Zoneless ⇄** reloads the page with or without `?zone`; every step below gives the same counts in both modes.
 
 **Demo flow:**
-1. All Eager (the default). Click **click** on E — every node flashes, A–G all show `checks 1`.
-2. Reset, click **setTimeout** on B — a second later every node flashes, all show `checks 2` (one cycle for entering the zone, one for the timer). This is the bars-per-mouse-move problem of lab 1.
-3. Reset, click **outside zone** on B — nothing flashes, all stay at 0. The field went up, but B still shows the old value until the next cycle. That is `runOutsideAngular`, the fix of lab 1.
-4. Click **All OnPush**, then **click** on E — only E, B and A flash (`checks 1`); C, D, F, G stay at 0. An event marks the node and its ancestors.
-5. Reset, **signal** on B — only B flashes. A signal read in the template refreshes just that view.
-6. Reset, **markForCheck** on E — E, B, A, like the click. **input** on B — A and B (the parent re-renders and passes the new value down).
-7. Reset, **setTimeout** on B — nothing flashes, and B keeps `field 0`. Now click **click** on B: A and B flash and the field jumps to 1. Under OnPush a plain field changed in a timer is a stale UI; under zoneless the timer would not even start a cycle. That's why lab 2 turns the state into signals.
+1. **All Eager**, click **click** on B1 — every node flashes, every counter +1.
+2. **All OnPush**, click **click** on B1 — only B1, B and A flash. A listener marks its node and the path to the root.
+3. **primitive +1** on A — A, B and C flash, the leaves don't: B and C got a new input, their own outputs to the leaves didn't change.
+4. **start signal interval** on B1 — the click checks B1, B, A once, then only B1 flashes, once a second. The signal marks B1 alone; Angular walks down to it without checking A or B. **stop signal interval**.
+5. **start primitive interval** on B1, wait 3 s — nothing flashes, `ticks: primitive` stays 0. **stop primitive interval**: that click checks B1 and it shows 3. A plain field changed in a timer tells Angular nothing.
+6. **All Eager**, **start signal interval** on B1 — every node flashes every second. Eager nodes are checked whenever a check passes them, whatever started it.
+7. Still All Eager, **Zoneless ⇄** to zone.js, **start primitive interval** on B1 — every node flashes every second and the primitive counts up: zone.js runs a check after every timer. Zoneless, the same click gives no flash and a frozen 0. This is the only step where the two modes differ.
 
-**Talking point:** OnPush plus signals means Angular checks the path to what changed and nothing else. If a value only shows up after you click something else, you changed a plain field outside anything Angular tracks: make it a signal. Inspired by Matthieu Riegler's [Angular change detection demo](https://jeanmeche.github.io/angular-change-detection/).
+**Talking point:** OnPush plus signals means Angular checks the path to what changed and nothing else. Inspired by Matthieu Riegler's [Angular change detection demo](https://jeanmeche.github.io/angular-change-detection/).
 
 ### 2. `@defer` triggers — `/performance/defer`
 
@@ -226,7 +226,7 @@ Use the reload buttons, not the tabs: LCP is measured on a fresh page load only.
 
 | Path | Concept | Key takeaway |
 | --- | --- | --- |
-| `/change-detection` | Eager vs OnPush, zone triggers | Timers check the whole tree; signals check one node |
+| `/change-detection` | Eager vs OnPush, inputs, signals | A click checks the path to the root; a signal checks one node |
 | `/defer` | `@defer` triggers | One block, one chunk, loaded when the trigger fires |
 | `/images` | `NgOptimizedImage` | `priority` on the LCP image, the console tells you which |
 | `/leaks` | Cleanup with `DestroyRef` | Uncleaned intervals and subscriptions keep every instance alive |

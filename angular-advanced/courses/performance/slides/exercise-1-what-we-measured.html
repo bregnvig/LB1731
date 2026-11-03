@@ -21,5 +21,6 @@ Ask the room: what on this page needs to know where the mouse is? Nothing. Leafl
 Click. In milliseconds: with the CPU slowed down four times, like a mid-range phone, change detection took 229 ms of those five seconds before and 6 ms after. That's time the main thread didn't have for anything else.
 Click. And each of those 300 bars checked all six components and all 133 rows in the sidebar, because a mouse moved over a map. The five left are the footer's one-second timer.
 The footer bonus: who tried it? The bars went, and so did the counter. The field still changed every second, but nothing told Angular any more. zone.js was the only one telling Angular, and with no zone nobody does. That's exactly what happens to the whole app when we go zoneless, next.
+Be honest about the click. A list click is still about 46 bars and about 100 ms of change detection at CPU 4x, before and after this fix: the center$ subscriptions call setZoom and setView inside the zone, and we only wrapped createMap. Zoneless removes that burst, which is the next exercise.
 If someone asks: the zoom buttons are added after the wrapped call, so clicking them still runs a cycle. That's a click, not a stream.</aside>
 </section>

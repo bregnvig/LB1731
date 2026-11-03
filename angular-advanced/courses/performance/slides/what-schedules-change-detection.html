@@ -14,11 +14,12 @@
     <p>If the screen should change, <span class="accent">change a signal</span>.</p>
   </div>
   <aside class="notes">Clicks 1-3: the three that schedule a check, with or without zone.js. Click 4: the ones only zone.js schedules (setTimeout, setInterval, a promise or request finishing). Click: the rule.
-Demo: /performance/change-detection. All OnPush, signal on B: only B flashes. setTimeout on B: nothing flashes, B keeps field 0; click "click" on B: A and B flash, field jumps to 1.
+Demo: /performance/change-detection. All OnPush, start signal interval on B1: B1, B, A flash once for the click, then only B1, once a second. Stop it. Start primitive interval on B1: nothing flashes, primitive ticks stays 0; stop it: the click shows 3. Zoneless ⇄ reloads with zone.js: same.
 
 Here's the list to keep in your head. Click, click, click. These three schedule a check, with or without zone.js: a signal read in a template, a listener in a template, markForCheck, which the async pipe calls for you.
 Click. Only zone.js: timers, promises, requests. These used to work only because the zone ran a cycle after every timer and every finished request. Zoneless, they schedule nothing. And assigning a plain field never scheduled anything, the next cycle just happened to pick it up. The footer's setInterval writes a plain field, so ask the room: what happens to the footer counter in exercise 2? It freezes.
-Switch to the demo. All OnPush, Reset. Click signal on B: only B flashes. Click setTimeout on B: nothing flashes, B still shows field 0. Click "click" on B: A and B flash, and now the field jumps to 1. The value was there all along, nobody asked Angular to look.
-Be precise about what you just saw: the demo app still has zone.js. The timer did start a cycle, and OnPush skipped B because nothing marked it. Zoneless, there wouldn't even be a cycle.
+Switch to the demo. All OnPush, click start signal interval on B1. The click checks B1, B and A once: a listener marks the path to the root. Then watch: once a second the interval sets a signal, and only B1 flashes. A and B stay put. The signal marks B1 alone, and Angular walks down to it without checking the parents. Stop it.
+Now start primitive interval on B1: the same timer, but it adds one to a plain field. Nothing flashes, the number stays 0. Wait three seconds and stop it: the click checks B1, and it shows 3. The value was there all along, nobody told Angular. That's the footer in exercise 2.
+This demo runs zoneless. Click Zoneless ⇄, it reloads with zone.js, and do the same: the same nodes flash. Signals and listeners schedule a check either way, that's the first three items. And OnPush skips the plain field even with zone.js: nothing marked B1.
 Click. The rule of thumb: if the screen should change, change a signal.</aside>
 </section>

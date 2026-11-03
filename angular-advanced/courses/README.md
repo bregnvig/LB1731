@@ -233,7 +233,7 @@ Finding and fixing what makes the playground app slow, with one rule for every l
 Each exercise is theory, then the exercise (groups work alone; the last step sends them back to the room), then a debrief with the measured numbers and an "In your app" slide: what to measure and try in your own app.
 
 **Exercises:**
-1. **Measure and leave the zone** - Profile 5 s of mouse moves over the map; create the Leaflet map with `runOutsideAngular`; profile again; bonus: wrap the `center$` `setZoom`/`setView` calls (slides only), and run the footer interval outside the zone to see it freeze (try, then revert)
+1. **Measure and leave the zone** - Profile 5 s of mouse moves over the map; create the Leaflet map with `runOutsideAngular`; profile again; bonus: run the footer interval outside the zone to see it freeze (try, then revert)
 2. **Go zoneless and move to signals** - Measure the build and the Profiler; remove `zone.js` from the polyfills, use `provideZonelessChangeDetection()`; make the footer's seconds a signal and measure; drop `Eager` in all seven components and measure again
 3. **Load less up front** - Find what is in `main` with the esbuild analyzer; `loadComponent` for the detail route, `@defer (on idle)` around the map, try `@defer (on viewport)` on the footer, measure and revert, register only the used icon; compare Initial total after each change.
 4. **Memory and the DOM** - Heap snapshots before and after 5 rounds of home and detail; read the retainers; `map.remove()` and `clearInterval` in `DestroyRef.onDestroy`; bonus: `takeUntilDestroyed(this.destroyRef)` on the map's three subscriptions

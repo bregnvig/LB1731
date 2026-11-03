@@ -1,7 +1,7 @@
 import { IMAGE_CONFIG, registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import localeDa from '@angular/common/locales/da';
-import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -14,7 +14,6 @@ registerLocaleData(localeDa);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection(),
     provideRouter(
       routes,
       // withPreloading(QuicklinkStrategy)

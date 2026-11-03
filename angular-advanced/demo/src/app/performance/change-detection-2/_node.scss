@@ -1,0 +1,101 @@
+// A node in the change detection tree: a card with its strategy, its values and its buttons,
+// and the lines down to its children.
+:host {
+  display: block;
+}
+
+.node {
+  padding: .5rem;
+  border: 3px solid var(--bs-primary);
+  border-radius: .5rem;
+  background: #fff;
+
+  &.OnPush {
+    border-color: var(--bs-warning);
+  }
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  white-space: nowrap;
+}
+
+.name {
+  font-size: 1.75rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.strategy {
+  color: #fff;
+  background: var(--bs-primary);
+
+  .OnPush & {
+    color: #000;
+    background: var(--bs-warning);
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem;
+  margin-top: .25rem;
+
+  .btn {
+    font-size: .8rem;
+    padding: .1rem .4rem;
+  }
+}
+
+.kids {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  padding-top: 1.5rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: .75rem;
+    border-left: 3px solid #adb5bd;
+  }
+}
+
+.kid {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -.75rem;
+    left: 50%;
+    height: .75rem;
+    border-left: 3px solid #adb5bd;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -.75rem;
+    left: 0;
+    right: 0;
+    border-top: 3px solid #adb5bd;
+  }
+
+  &:first-child::after {
+    left: 50%;
+  }
+
+  &:last-child::after {
+    right: 50%;
+  }
+}
