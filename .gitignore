@@ -58,3 +58,4 @@ Thumbs.db
 # Slide decks - exported PDFs are build artifacts
 slides/*.pdf
 exercises-slides/*.pdf
+__pycache__/

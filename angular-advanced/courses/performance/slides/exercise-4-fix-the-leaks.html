@@ -4,7 +4,7 @@
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
     <ol>
-<li>Map: call <code>remove()</code> on destroy</li>
+<li>Map: after <code>createMap</code>, remove on destroy</li>
 <li>Footer: clear the <code>setInterval</code> on destroy</li>
 <li>Import <code>DestroyRef</code> from <code>@angular/core</code> in both files</li>
 </ol>
@@ -12,7 +12,7 @@
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
     <pre><code class="language-typescript" data-line-numbers="2,4-5,7-9">// src/app/leaflet/leaflet.component.ts
 private destroyRef = inject(DestroyRef);
-// …
+// in ngAfterViewInit, after createMap(...)
 this.destroyRef.onDestroy(
   () =&gt; _map.remove());
 // src/app/footer/footer.component.ts

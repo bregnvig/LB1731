@@ -16,6 +16,6 @@
 Click. Search the code for ChangeDetectionStrategy.Eager and Default. If you ran ng update to 22, every component has one: that's your to-do list.
 Click. Record one timer tick or one click and look at what a single bar checks. If it's the whole tree, you've found your lever.
 Click. Anything a timer, a promise or a request writes that the screen shows: make it a signal, like the footer.
-Click. Before you go zoneless, search for fakeAsync in the tests and onStable in the code: those depend on zone.js.
+Click. Before you go zoneless, search for fakeAsync in the tests and onStable in the code: those depend on zone.js. fakeAsync throws without zone-testing loaded, so a hit means that project keeps the zone for now.
 Click. And while you're in the templates, check your @for track expressions and any method calls in bindings.</aside>
 </section>
