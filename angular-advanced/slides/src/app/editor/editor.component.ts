@@ -1,10 +1,11 @@
-import { Location } from '@angular/common';
-import { Component, ViewEncapsulation, effect, inject, signal } from '@angular/core';
+import { Location, NgTemplateOutlet } from '@angular/common';
+import { Component, ViewEncapsulation, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlockToolsComponent } from './block-tools.component';
 import { CanvasComponent } from './canvas.component';
 import { EditorStore } from './editor.store';
 import { LayersComponent } from './layers.component';
+import { joinNotes, splitNotes } from './notes';
 import { CommonSettingsComponent } from './settings/common-settings.component';
 import { MediaSettingsComponent } from './settings/media-settings.component';
 import { MotionSettingsComponent } from './settings/motion-settings.component';
@@ -12,12 +13,14 @@ import { TypeSettingsComponent } from './settings/type-settings.component';
 import { SlideListComponent } from './slide-list.component';
 
 const fileOf = (path: string) => path.slice(path.lastIndexOf('/') + 1);
+const DOCK_KEY = 'slides.notesDock';
+const readDock = () => { try { return localStorage.getItem(DOCK_KEY) === 'bottom' ? 'bottom' : 'side'; } catch { return 'side'; } };
 const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea, select, [contenteditable="true"]') != null;
 
 /** The editor: slide list, canvas, inspector and notes. Routes: /edit and /edit/:course/:file (course "intro" for the intro). */
 @Component({
   selector: 'app-editor',
-  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, MotionSettingsComponent, SlideListComponent, TypeSettingsComponent],
+  imports: [BlockToolsComponent, CanvasComponent, CommonSettingsComponent, LayersComponent, MediaSettingsComponent, MotionSettingsComponent, NgTemplateOutlet, SlideListComponent, TypeSettingsComponent],
   host: { '(window:keydown)': 'key($event)', '(window:beforeunload)': 'leaving($event)' },
   // Not encapsulated: the inspector's building blocks (.group, .row, .seg, .sw, .field, .btn) are shared with its panels.
   encapsulation: ViewEncapsulation.None,
@@ -71,6 +74,7 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
         <app-canvas [slide]="s" />
         <div class="stagefoot"><kbd>↑</kbd><kbd>↓</kbd> move between slides · <kbd>Shift</kbd>+click to multi-select · <kbd>Alt</kbd> while dragging: no guides · <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo</div>
       }
+      @if (dock() === 'bottom') { <ng-container *ngTemplateOutlet="notesPanel" /> }
     </main>
 
     <aside>
@@ -109,11 +113,26 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
           </div>
         }
       </div>
-      <div class="notes">
-        <label class="row"><span class="label">Speaker notes</span><span class="hint">saved with the slide</span></label>
-        <textarea aria-label="Speaker notes" [value]="store.slide()?.notes ?? ''" (input)="store.setNotes($any($event.target).value)"></textarea>
-      </div>
+      @if (dock() === 'side') { <ng-container *ngTemplateOutlet="notesPanel" /> }
     </aside>
+
+    <ng-template #notesPanel>
+      <div class="notes" [class.bottom]="dock() === 'bottom'">
+        <div class="row">
+          <span class="label">Speaker notes</span>
+          <span class="seg" role="tablist">
+            <button type="button" role="tab" [class.on]="notesTab() === 'quick'" [attr.aria-selected]="notesTab() === 'quick'" (click)="notesTab.set('quick')">Quick</button>
+            <button type="button" role="tab" [class.on]="notesTab() === 'description'" [attr.aria-selected]="notesTab() === 'description'" (click)="notesTab.set('description')">Description</button>
+          </span>
+          <button type="button" class="ghost" [title]="dock() === 'side' ? 'Dock the notes under the slide' : 'Dock the notes in the side panel'" (click)="setDock(dock() === 'side' ? 'bottom' : 'side')">{{ dock() === 'side' ? '⬓ Bottom' : '◨ Side' }}</button>
+        </div>
+        @if (notesTab() === 'quick') {
+          <textarea aria-label="Speaker notes, quick" placeholder="Quick cues: what to click, the numbers" [value]="notes().quick" (input)="setNotes($any($event.target).value, notes().description)"></textarea>
+        } @else {
+          <textarea aria-label="Speaker notes, description" placeholder="The talk script" [value]="notes().description" (input)="setNotes(notes().quick, $any($event.target).value)"></textarea>
+        }
+      </div>
+    </ng-template>
   `,
   styles: `
     app-editor {
@@ -184,6 +203,10 @@ const typing = (e: Event) => (e.target as HTMLElement).closest('input, textarea,
       textarea.code { width: 100%; height: 140px; resize: vertical; font: 11.5px/1.4 'IBM Plex Mono', monospace; border: 1px solid var(--line); border-radius: var(--radius); padding: 6px; background: #fff; box-sizing: border-box; tab-size: 4; }
       .notes { border-top: 1px solid var(--line); padding: 10px 14px 14px; }
       .notes .row { margin: 0 0 6px; }
+      .notes .row .seg { margin-right: auto; }
+      .notes:not(.bottom) .row { flex-wrap: wrap; } .notes:not(.bottom) .row .label { flex-basis: 100%; }
+      .notes:not(.bottom) textarea { height: 220px; }
+      .notes.bottom { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); margin: 10px 24px 0; }
       .notes textarea { width: 100%; height: 140px; resize: vertical; border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; background: #fff; line-height: 1.45; box-sizing: border-box; }
     }
   `,
@@ -196,6 +219,9 @@ export class EditorComponent {
   readonly tab = signal<'block' | 'motion' | 'layers'>('block');
   readonly exporting = signal(false);
   readonly pdfMessage = signal('');
+  readonly notesTab = signal<'quick' | 'description'>('quick');
+  readonly dock = signal<'side' | 'bottom'>(readDock());
+  readonly notes = computed(() => splitNotes(this.store.slide()?.notes ?? ''));
 
   constructor() {
     const params = inject(ActivatedRoute).snapshot.paramMap;
@@ -210,6 +236,15 @@ export class EditorComponent {
       const s = this.store.slide();
       if (s) this.location.replaceState(`/edit/${this.store.courseId() ?? 'intro'}/${fileOf(s.path)}`);
     });
+  }
+
+  setNotes(quick: string, description: string) {
+    this.store.setNotes(joinNotes(quick, description));
+  }
+
+  setDock(dock: 'side' | 'bottom') {
+    this.dock.set(dock);
+    try { localStorage.setItem(DOCK_KEY, dock); } catch { /* storage blocked: the dock lasts for this tab */ }
   }
 
   selectedBlock() {

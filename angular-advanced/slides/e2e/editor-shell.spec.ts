@@ -13,6 +13,19 @@ test('notes are written to the slide file', async ({ page, editor, root }) => {
   await expect(page).toHaveURL(/\/edit\/demo\/demo\.html$/);
 });
 
+test('notes have a quick and a description tab, and dock under the slide', async ({ page, editor, root }) => {
+  await page.goto(`${editor}/edit/demo/demo.html`);
+  await page.getByLabel('Speaker notes, quick').fill('Click the button');
+  await page.getByRole('tab', { name: 'Description' }).click();
+  await page.getByLabel('Speaker notes, description').fill('Now tell them why.');
+  await expect.poll(() => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8'))
+    .toContain('<aside class="notes">Click the button\n\nNow tell them why.</aside>');
+  await page.getByRole('button', { name: 'Bottom' }).click();
+  await expect(page.locator('main').getByLabel('Speaker notes, description')).toHaveValue('Now tell them why.');
+  await page.reload();
+  await expect(page.locator('main').getByLabel('Speaker notes, quick')).toHaveValue('Click the button');
+});
+
 test('a file changed on disk is not overwritten', async ({ page, editor, root }) => {
   const file = join(root, 'courses/demo/slides/demo.html');
   await page.goto(`${editor}/edit/demo/demo.html`);
