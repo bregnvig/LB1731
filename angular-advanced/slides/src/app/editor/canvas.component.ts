@@ -8,6 +8,8 @@ import { Guide, Rect, snap } from './guides';
 import { Point, pointsToPath } from './media';
 
 const PEN = { color: '#ff0000', width: 6 };
+/** Text colors the decks use most, suggested in the text color picker. */
+const TEXT_COLORS = ['#ff8c00', '#e7ad52', '#ffffff', '#cccccc', '#afeeee', '#ff0000'];
 
 /**
  * Draws a slide the way the presentation does, every block in its end state: inside a 1280×720
@@ -49,7 +51,9 @@ const sideways = (h: Handle) => h === 'e' || h === 'w';
           @for (f of blocksFormats; track f.tag) { <button type="button" (click)="format('formatBlock', f.tag)">{{ f.label }}</button> }
           <button type="button" aria-label="Bold" (click)="format('bold')"><b>B</b></button>
           <button type="button" aria-label="Italic" (click)="format('italic')"><i>I</i></button>
-          <label class="pick" title="Text color">A<input type="color" aria-label="Selection color" value="#e7ad52" (input)="format('foreColor', $any($event.target).value)"></label>
+          <!-- Reset on open so picking the color it already shows still fires input. -->
+          <label class="pick" title="Text color">A<input type="color" aria-label="Selection color" list="text-colors" (pointerdown)="$any($event.target).value = '#010101'" (input)="format('foreColor', $any($event.target).value)"></label>
+          <datalist id="text-colors">@for (c of textColors; track c) { <option [value]="c"></option> }</datalist>
           <button type="button" (click)="link()">Link</button>
         </div>
       }
@@ -122,6 +126,7 @@ export class CanvasComponent {
   private gesture: Gesture | null = null;
   /** The text block being typed into, if any. */
   readonly editing = signal<string | null>(null);
+  readonly textColors = TEXT_COLORS;
   readonly blocksFormats = [{ tag: 'p', label: 'P' }, { tag: 'h1', label: 'H1' }, { tag: 'h2', label: 'H2' }, { tag: 'h3', label: 'H3' }];
   private range: Range | null = null;
 
