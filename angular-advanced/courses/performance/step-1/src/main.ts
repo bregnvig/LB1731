@@ -9,6 +9,7 @@ import { AppRoutes } from 'src/app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 
+console.log('hello from main')
 
 if (environment.production) {
   enableProdMode();

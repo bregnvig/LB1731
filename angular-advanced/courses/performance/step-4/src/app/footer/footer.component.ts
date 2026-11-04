@@ -9,9 +9,9 @@ import { Playground } from '../model';
       @if (playground) {
         <h3>{{ playground.name }}</h3>
         <p>{{ playground.addressDescription }}</p>
-        <p>{{ playground.description }} <a class="link-light" [routerLink]="['/legeplads', playground.id]">Detaljer</a></p>
+        <p>{{ playground.description }} <a class="link-light" [routerLink]="['/legeplads', playground.id]">Details</a></p>
       }
-      <p><small>Opdateret for {{ seconds() }} sekunder siden</small></p>
+      <p><small>Updated {{ seconds() }} seconds ago</small></p>
     </footer>
   `,
   imports: [RouterLink],
@@ -19,10 +19,9 @@ import { Playground } from '../model';
 export class FooterComponent {
 
   @Input() playground?: Playground;
-  @Input({ required: true }) loadedAt = 0;
   seconds = signal(0);
 
   constructor() {
-    setInterval(() => this.seconds.set(Math.round((Date.now() - this.loadedAt) / 1000)), 1000);
+    setInterval(() => this.seconds.update(s => s + 1), 1000);
   }
 }

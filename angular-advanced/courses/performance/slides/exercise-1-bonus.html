@@ -12,9 +12,7 @@
     <pre><code class="language-typescript">// src/app/footer/footer.component.ts
 constructor() {
   inject(NgZone).runOutsideAngular(() =&gt;
-    setInterval(() =&gt; this.seconds =
-      Math.round((Date.now() - this.loadedAt)
-        / 1000), 1000));
+    setInterval(() =&gt; this.seconds++, 1000));
 }
 </code></pre>
   </div>

@@ -26,7 +26,7 @@ import { shareLatest, withLength } from 'src/app/utils/rxjs-utils';
       [(selectedPlayground)]="playground"
       (selectedPlaygroundChange)="navigate($event)"
       [location]="location()"/>
-    <loop-footer [playground]="playground()" [loadedAt]="loadedAt()"/>
+    <loop-footer [playground]="playground()"/>
   `,
     imports: [
         LeafletComponent,
@@ -43,7 +43,6 @@ export class HomeComponent {
   center = signal<Center | undefined>(undefined);
   markers = signal<Marker[]>([]);
   location = signal<Coordinate | undefined>(undefined);
-  loadedAt = signal(Date.now());
 
   constructor(
     private router: Router,
@@ -80,7 +79,6 @@ export class HomeComponent {
       takeUntilDestroyed(),
     ).subscribe(playgrounds => {
       this.playgrounds.set(playgrounds);
-      this.loadedAt.set(Date.now());
     });
 
     combineLatest([

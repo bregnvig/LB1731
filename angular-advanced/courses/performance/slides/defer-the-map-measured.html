@@ -1,0 +1,24 @@
+<section data-template="reveal-list">
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:96px;width:1150px;height:auto;z-index:10;text-align:left">
+    <h2>The map with and without @defer</h2>
+  </div>
+  <div class="block" data-type="text" data-name="items" style="left:64px;top:200px;width:1150px;height:auto;z-index:11;text-align:left">
+    <table>
+	<thead>
+		<tr><th style="padding:6px 48px 6px 0"></th><th style="padding:6px 48px 6px 0"><code>@defer (on idle)</code></th><th style="padding:6px 0">No <code>@defer</code></th></tr>
+	</thead>
+	<tbody>
+		<tr><td style="padding:6px 48px 6px 0"><code>Initial total</code></td><td style="padding:6px 48px 6px 0"><span class="accent">615 kB</span></td><td style="padding:6px 0">760 kB</td></tr>
+		<tr><td style="padding:6px 48px 6px 0"><code>leaflet-component</code> chunk</td><td style="padding:6px 48px 6px 0">155 kB, lazy</td><td style="padding:6px 0">none</td></tr>
+		<tr><td style="padding:6px 48px 6px 0">Leaflet code is in</td><td style="padding:6px 48px 6px 0">the lazy chunk</td><td style="padding:6px 0"><code>main</code></td></tr>
+		<tr><td style="padding:6px 48px 6px 0"><code>main</code></td><td style="padding:6px 48px 6px 0">103 kB</td><td style="padding:6px 0">258 kB</td></tr>
+	</tbody>
+</table>
+  </div>
+  <aside class="notes">npx ng build of step-4, then the same build with the @defer and @placeholder around leaflet removed. Initial total 614.82 vs 760.44 kB, lazy leaflet-component 154.78 kB, main 103.27 vs 258.11 kB.
+
+This is what the defer buys in our app. Same step, built twice: once with the map in @defer on idle, once without.
+With the defer, Initial total is 615 kilobytes, and leaflet comes as its own 155 kilobyte chunk. main imports that chunk with a dynamic import, and the browser fetches it when it goes idle after the first render. It's a separate request in the Network tab.
+Without the defer, there's no chunk. Leaflet sits in main, and Initial total is 760 kilobytes, about 146 more. A little less than the chunk, because a lazy chunk carries some loading code of its own.
+Ask the room: why not on viewport for the map? The placeholder fills the screen, so it's in view from the first frame and the trigger fires right away. You'll build this yourselves in a moment.</aside>
+</section>

@@ -56,9 +56,6 @@
       "file": "exercise-2-fix-the-footer.html"
     },
     {
-      "file": "exercise-2-remove-eager.html"
-    },
-    {
       "file": "exercise-2-measure-after.html"
     },
     {
@@ -78,6 +75,9 @@
     },
     {
       "file": "defer-triggers.html"
+    },
+    {
+      "file": "defer-the-map-measured.html"
     },
     {
       "file": "exercise-3-getting-started.html"
