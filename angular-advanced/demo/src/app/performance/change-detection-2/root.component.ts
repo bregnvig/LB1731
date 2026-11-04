@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { noop } from 'rxjs';
 import { CdAComponent, CdAOnPushComponent } from './a.component';
 import { Strategies } from './strategies';
+
+class ThirdParty {
+
+  constructor() {
+    document.addEventListener('mousemove', noop);
+  }
+}
 
 @Component({
   selector: 'loop-cd-root',
@@ -11,6 +19,7 @@ import { Strategies } from './strategies';
   template: `
     <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
       <h2 class="mb-0 me-3">Change detection</h2>
+      <button type="button" class="btn btn-primary" (click)="thirdParty()">Third party</button>
       <button type="button" class="btn btn-primary" (click)="strategies.setAll('Eager')">All Eager</button>
       <button type="button" class="btn btn-warning" (click)="strategies.setAll('OnPush')">All OnPush</button>
       <button type="button" class="btn btn-dark" title="Reloads the page" (click)="toggleZone()">{{ zone ? 'zone.js' : 'Zoneless' }} ⇄</button>
@@ -33,5 +42,9 @@ export class CdRootComponent {
   protected toggleZone() {
     // Zone or zoneless is chosen when the app boots, so switching means reloading the page
     location.search = this.zone ? '' : '?zone';
+  }
+
+  thirdParty() {
+    new ThirdParty();
   }
 }
