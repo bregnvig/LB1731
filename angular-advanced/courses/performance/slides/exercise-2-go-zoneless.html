@@ -4,8 +4,8 @@
   </div>
   <div class="block" data-type="text" data-name="steps" style="left:64px;top:160px;width:540px;height:auto;z-index:11;text-align:left">
     <ol>
-<li>Delete <code>&quot;zone.js&quot;</code> from <code>polyfills</code></li>
-<li>Swap the provider for the one on the right, in the import too</li>
+<li>Delete <code>"zone.js"</code> from <code>polyfills</code></li>
+<li>Delete the provideZoneChangeDetection provider&nbsp;</li>
 </ol>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:630px;top:160px;width:630px;height:auto;z-index:12">
@@ -14,8 +14,8 @@
   "zone.js",
   "@angular/localize/init"
 ],
-// src/main.ts
-provideZonelessChangeDetection(),
+// src/main.ts DELETE
+provideZoneChangeDetection(),
 </code></pre>
   </div>
   <div class="block" data-type="text" data-name="callout" style="left:64px;top:338px;width:540px;height:auto;z-index:13;text-align:left">

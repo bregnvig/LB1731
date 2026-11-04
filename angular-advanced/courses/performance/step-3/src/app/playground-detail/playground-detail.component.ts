@@ -8,13 +8,13 @@ import { PlaygroundService } from '../service';
   selector: 'loop-playground-detail',
   template: `
     <main class="container py-4">
-      <a routerLink="/">Tilbage til kortet</a>
+      <a routerLink="/">Back to the map</a>
       @if (playground(); as playground) {
         <h1 class="mt-3">{{ playground.name }}</h1>
         <p class="text-muted">{{ playground.addressDescription }}</p>
-        <p>{{ playground.description || 'Ingen beskrivelse' }}</p>
+        <p>{{ playground.description || 'No description' }}</p>
       } @else {
-        <p class="mt-3">Henter legepladsen...</p>
+        <p class="mt-3">Loading playground...</p>
       }
     </main>
   `,
