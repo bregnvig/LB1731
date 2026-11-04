@@ -11,7 +11,7 @@
 <p>components each bar still shows</p>
   </div>
   <div class="block fragment" data-type="text" data-name="why" style="left:64px;top:470px;width:1150px;height:auto;z-index:13;text-align:left">
-    <p><code>Eager</code> still in? A click still renders all 133 sidebar items.</p>
+    <p><span style="color: rgb(255, 140, 0);"><code>Eager</code>&nbsp;</span>change detection still enabled? A click still renders all 133 sidebar items.</p>
   </div>
   <aside class="notes">Ask for their numbers first. Before (zone.js): one list click = 46 bars in 3 s (46, 47, 46). Zoneless + signal, Eager kept: 5 bars in 3 s = 2 from the click + 3 timer bars, every bar still shows 6 components / 133 rows in the Profiler. 10 quiet s: still 10 bars, each shows 6 / 133. Dev build: the timer bar's real pass refreshes only the footer; the other 5 are the dev-only checkNoChanges pass re-running every Eager template (MEASURED.md, 2026-11-03).
 
