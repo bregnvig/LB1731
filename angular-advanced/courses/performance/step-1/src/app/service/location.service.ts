@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { noop, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Coordinate } from '../model';
+
+// Used when the student blocks location (or none is available): Blågårds Plads, Copenhagen
+const FALLBACK = { coords: { latitude: 55.6866, longitude: 12.5586 } } as GeolocationPosition;
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +20,10 @@ export class LocationService {
         console.log('Looking for geolocation...');
         observer.next(position);
         console.log('Got geolocation...');
-      }, noop);
+      }, () => {
+        console.warn('No geolocation, using Blågårds Plads as location');
+        observer.next(FALLBACK);
+      });
       return () => window.navigator.geolocation.clearWatch(watchId);
     }).pipe(
       map((position: GeolocationPosition) => {
