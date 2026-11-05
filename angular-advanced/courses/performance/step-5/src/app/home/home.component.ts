@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -47,12 +47,12 @@ export class HomeComponent {
   markers = signal<Marker[]>([]);
   location = signal<Coordinate | undefined>(undefined);
 
-  constructor(
-    private router: Router,
-    route: ActivatedRoute,
-    service: PlaygroundService,
-    locationService: LocationService,
-  ) {
+  private router = inject(Router);
+
+  constructor() {
+    const route = inject(ActivatedRoute);
+    const service = inject(PlaygroundService);
+    const locationService = inject(LocationService);
 
     const playground$ = route.params.pipe(
       map(params => params.id),
