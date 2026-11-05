@@ -211,13 +211,13 @@ Use the reload buttons, not the tabs: LCP is measured on a fresh page load only.
 
 **Files:** `leaks/leaks.component.ts`, `leaks/leaky.component.ts`
 
-**What it shows:** a component that starts a `setInterval`, adds a `window` listener and subscribes to an app-wide subject, and never cleans up (`leaky.component.ts:41-57`). Every unmounted instance stays in memory. **Use the fix** switches it to `DestroyRef.onDestroy` + `takeUntilDestroyed()`. The counters use a `FinalizationRegistry`, so **Collected** moves only after a garbage collection: DevTools, Memory, **Collect garbage** (bin icon).
+**What it shows:** a component that starts a `setInterval`, adds a `window` listener and subscribes to an app-wide subject, and never cleans up (`leaky.component.ts:41-57`). Every destroyed instance stays in memory. **Use the fix** switches it to `DestroyRef.onDestroy` + `takeUntilDestroyed()`. The counters use a `FinalizationRegistry`, so **Collected** moves only after a garbage collection: DevTools, Memory, **Collect garbage** (bin icon).
 
 **Demo flow:**
-1. Click **Mount a playground card** — a red card ticks every second. Click **Send an update**: "last update: Havrebakkens Legeplads". **Created 1**.
-2. Click **Unmount a playground card**, then **Mount + unmount 10 times** — **Created 11, Still alive 11** (1 from step 1 plus 10).
-3. Collect garbage — **Collected 0, Still alive 11**. The interval, the listener and the subscription still point at every card.
-4. Reload. Tick **Use the fix**, **Mount + unmount 10 times**, collect garbage — **Created 10, Collected 10, Still alive 0**.
+1. Click **Create the playground card** — a red card ticks every second. Click **Send an update**: "last update: Havrebakkens Legeplads". **Created 1**.
+2. Click **Destroy the playground card**, then **Create** / **Destroy** twice more — **Created 3, Still alive 3**.
+3. Collect garbage — **Collected 0, Still alive 3**. The interval, the listener and the subscription still point at every card.
+4. Reload. Tick **Use the fix**, **Create** / **Destroy** three times, collect garbage — **Created 3, Collected 3, Still alive 0**.
 5. Optional, Map vs WeakMap: **Cache 1000 playgrounds in each**, **Drop the playgrounds**, collect garbage — WeakMap collected **1000**, Map collected **0** (size still 1000). **map.clear()**, collect garbage — Map collected **1000**.
 
 **Talking point:** anything you start in a component (interval, listener, subscription, third-party map) gets its cleanup in `DestroyRef.onDestroy` right next to it. The first thing you measure is whether the count of a component in a heap snapshot goes back down after you leave the page.
