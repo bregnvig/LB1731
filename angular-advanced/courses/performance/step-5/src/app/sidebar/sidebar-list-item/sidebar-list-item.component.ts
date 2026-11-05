@@ -1,4 +1,4 @@
-import { Component, computed, input, Signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Coordinate, Playground } from '../../model';
 import { LocationService } from '../../service';
 
@@ -17,7 +17,6 @@ import { LocationService } from '../../service';
       </div>
     </button>
   `,
-  standalone: true,
 })
 
 export class SidebarListItemComponent {
@@ -25,15 +24,13 @@ export class SidebarListItemComponent {
   active = input<boolean>(false);
   playground = input.required<Playground>();
   location = input<Coordinate | undefined>(undefined);
-  distance: Signal<string>;
   description = computed(() => this.playground().description || 'No description');
 
-  constructor({ getDistance }: LocationService) {
-    this.distance = computed(() => {
-      const location = this.location();
-      const position = this.playground().position;
-      return (location && position) ? `${getDistance(position, location)}m` : 'Unknown location';
-    });
-  }
+  private locationService = inject(LocationService);
+  distance = computed(() => {
+    const location = this.location();
+    const position = this.playground().position;
+    return (location && position) ? `${this.locationService.getDistance(position, location)}m` : 'Unknown location';
+  });
 
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Playground } from '../model';
 
@@ -7,7 +7,7 @@ import { Playground } from '../model';
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <footer>
-      @if (playground) {
+      @if (playground(); as playground) {
         <h3>{{ playground.name }}</h3>
         <p>{{ playground.addressDescription }}</p>
         <p>{{ playground.description }} <a class="link-light" [routerLink]="['/legeplads', playground.id]">Details</a></p>
@@ -19,7 +19,7 @@ import { Playground } from '../model';
 })
 export class FooterComponent {
 
-  @Input() playground?: Playground;
+  playground = input<Playground>();
   seconds = 0;
 
   constructor() {

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Playground } from '../model';
@@ -10,14 +10,12 @@ import { shareLatest } from '../utils/rxjs-utils';
 })
 export class PlaygroundService {
 
-  playgrounds$: Observable<Playground[]>;
+  private http = inject(HttpClient);
 
-  constructor(http: HttpClient) {
-    this.playgrounds$ = timer(3000).pipe(
-      switchMap(() => http.get<Playground[]>('/assets/copenhagen.json')),
-      shareLatest(),
-    );
-  }
+  playgrounds$: Observable<Playground[]> = timer(3000).pipe(
+    switchMap(() => this.http.get<Playground[]>('/assets/copenhagen.json')),
+    shareLatest(),
+  );
 
   getById(id: string): Observable<Playground | undefined> {
     return this.playgrounds$.pipe(
