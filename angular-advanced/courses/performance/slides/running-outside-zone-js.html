@@ -4,8 +4,8 @@
   </div>
   <div class="block" data-type="text" data-name="claims" style="left:64px;top:220px;width:480px;height:auto;z-index:11;text-align:left">
     <ul>
-<li><code style="color: rgb(255, 140, 0);">runOutsideAngular</code>: zone.js stops triggering change detection for it; signals and <span style="color: rgb(255, 140, 0);"><code>markForCheck</code> </span>still do</li>
-<li>For a map or chart: wrap where it adds listeners</li>
+<li><code style="color: rgb(255, 140, 0);">runOutsideAngular</code>: zone.js stops triggering change detection for it. <span style="color: rgb(255, 140, 0);">signal</span>s and <span style="color: rgb(255, 140, 0);"><code>markForCheck</code> </span>still does.</li>
+<li>For 3rd party libraries (like our leaflet map): wrap it, as it possibly adds listeners!</li>
 </ul>
   </div>
   <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:570px;top:220px;width:690px;height:auto;z-index:12">
