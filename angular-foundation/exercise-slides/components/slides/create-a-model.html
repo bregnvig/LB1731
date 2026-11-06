@@ -1,0 +1,34 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:550px;height:auto;z-index:10;text-align:left">
+    <h2>Create a model</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:11;text-align:left">
+    <p><span style="font-size:0.9em">Before we proceed, we need to define what makes a playground. Just like we do in Java or C#👍</span></p>
+
+<p><br>
+<span style="font-size:0.9em">So, let’s create an interface called <span style="color:#ff8c00"><code>Playground</code></span>. Use the Angular CLI to create the interface:</span></p>
+
+<pre><code><span style="color:#ff8c00"><span style="font-size:0.9em">ng g interface shared/playground</span></span></code></pre>
+
+<p><span style="font-size:0.9em">This creates the playground interface in the shared folder, which makes sense, since the playground interface will be used throughout the application.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:685px;top:160px;width:550px;height:auto;z-index:12;text-align:left">
+    <p><span>&nbsp;</span><span style="font-size:0.9em">Add the following properties to the interface.</span></p>
+
+<ul>
+	<li>
+<span style="font-size:0.9em">id – string - as read only </span><span>&nbsp;</span>
+</li>
+	<li><span style="font-size:0.9em">name – string</span></li>
+	<li><span style="font-size:0.9em">addressDescription – optional string</span></li>
+	<li><span style="font-size:0.9em">description – optional string</span></li>
+	<li><span style="font-size:0.9em">position: Coordinate - as read only </span></li>
+</ul>
+
+<p>The coordinate is already part of the solution and just needs to be imported into the playground.ts file using:</p>
+
+<p><span style="font-size:0.7em"><code><span style="color:#ff8c00">import { Coordinate } from './coordinate';</span></code></span></p>
+
+<p><span style="color:#a9a9a9"><span style="font-size:0.5em">Your IDE should be able to do it for you</span></span></p>
+  </div>
+</section>

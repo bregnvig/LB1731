@@ -1,0 +1,47 @@
+import { Component } from '@angular/core';
+import { InnerComponent } from '../inner/inner.component';
+import { NgIf } from '@angular/common';
+
+@Component({
+    selector: 'app-ngif',
+    template: `
+      <h2>&#64;if & *ngIf</h2>
+      <button class="btn btn-primary" (click)="toggle()">Toggle</button>
+      <article class="mt-3">
+        <div class="row g-5">
+          <div class="col-auto">
+            <code><pre>&#64;if - Up to 70% faster</pre></code>
+            @if(show) {
+              <p>
+                &#64;if works!
+                <app-inner/>
+              </p>
+            } @else  {
+              <div>The <code>else</code> template could go here</div>
+            }
+          </div>
+          <div class="col-auto">
+            <code><pre>*ngIf (Deprecated since v20)</pre></code>
+            <p *ngIf="show else myElse">
+              ngIf works!
+              <app-inner/>
+            </p>
+            <ng-template #myElse>
+              <div>The <code>else</code> template could go here</div>
+            </ng-template>
+          </div>
+        </div>
+
+      </article>
+    `,
+    imports: [NgIf, InnerComponent]
+})
+export class NgifComponent {
+
+  protected show = true;
+
+  protected toggle() {
+    this.show = !this.show;
+  }
+
+}

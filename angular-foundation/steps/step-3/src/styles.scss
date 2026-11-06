@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use "@fontsource/jetbrains-mono";
+@use "@fontsource/andika";
+
+$font-family-sans-serif: "Andika";
+$font-family-monospace: "JetBrains Mono";
+$font-weight-normal: 500;
+
+/* Importing Bootstrap SCSS file. */
+@use "bootstrap/scss/bootstrap";
+
+@use "styles/aside";
+@use "styles/footer";

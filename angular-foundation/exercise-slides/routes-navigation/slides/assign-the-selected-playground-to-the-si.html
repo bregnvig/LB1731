@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:550px;height:auto;z-index:10;text-align:left">
+    <h2><strong>Assign the selected playground to the sidebar</strong></h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:234px;width:550px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.7em">Back in the map component we need to find the selected playground based on the URL.</span></p>
+
+<p><span style="font-size:0.7em">So, let’s start by adding a <span style="color:#ff8c00"><code>find</code></span> method to the playground service. This method should take a single parameter <span style="color:#ff8c00"><code>id: string</code></span>, and return an <code><span style="color:#ff8c00">Observable&lt;Playground | undefined&gt;</span></code>. This should be doable using the map operator on the existing <span style="color:#ff8c00"><code>playgrounds$</code></span>. This should be a one-liner!</span></p>
+
+<p><span style="font-size:0.7em">Now we just need the <span style="color:#ff8c00"><code>id</code></span> from the URL! </span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:234px;width:550px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em">Inject <span style="color:#ff8c00"><code>ActivatedRoute</code></span>. Using the <span style="color:#ff8c00"><code>id</code></span>&nbsp;from the URL and the new <code><span style="color:#ff8c00">find</span></code>&nbsp;method in the playground service, we should convert <span style="color:#ff8c00"><code>playground</code></span>&nbsp;property to a Signal using <span style="color:#FF8C00"><code>toSignal</code></span>. We are going to need <code><span style="color:#ff8c00">switchMap</span></code>&nbsp;to do this.</span></p>
+
+<p><span style="font-size:0.7em">If you reload the page the footer should have started working again.</span></p>
+
+<p><span style="font-size:0.7em">This still didn’t mark the playground as selected in the sidebar. But all there is left to do, is to assign the <span style="color:#ff8c00"><code>selectedPlayground</code></span>&nbsp;property in the sidebar component using the property data binding syntax.</span></p>
+  </div>
+</section>

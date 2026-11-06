@@ -1,0 +1,17 @@
+{
+  "title": "Exercise 1",
+  "slides": [
+    {
+      "file": "exercise-1.html"
+    },
+    {
+      "file": "node-version.html"
+    },
+    {
+      "file": "pick-your-editor.html"
+    },
+    {
+      "file": "unzip-exercises.html"
+    }
+  ]
+}

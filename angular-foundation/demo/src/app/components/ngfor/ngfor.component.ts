@@ -1,0 +1,49 @@
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-ngfor',
+  template: `
+    <h2>&#64;for & *ngFor</h2>
+    <div class="row g-3">
+      <div class="col-12">
+        <input class="form-control" type="text" #i (keyup.enter)="addInput(i.value)" autofocus>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" (click)="reverse()">Sort</button>
+      </div>
+      <div class="col-auto">
+        <code><pre>&#64;for - Up to 70% faster</pre></code>
+
+        <ul class="mt-3 list-group">
+          @for (item of items; track item) {
+            <li class="list-group-item">{{item}}</li>
+          }
+        </ul>
+      </div>
+      <div class="col-auto">
+        <code><pre>*ngFor (Deprecated since v20)</pre></code>
+        <ul class="mt-3 list-group">
+          <li class="list-group-item" *ngFor="let item of items; trackBy:myTrack">{{item}}</li>
+        </ul>
+      </div>
+
+    </div>
+  `,
+  imports: [NgFor]
+})
+export class NgforComponent {
+
+  protected items: string[] = ['1. foo', '2. bar'];
+
+  protected myTrack = (index: number, text: string) => text;
+
+  protected addInput(input: string) {
+    this.items.push(`${this.items.length + 1}. ${input}`);
+  }
+
+  protected reverse() {
+    this.items = [...this.items.reverse()];
+  }
+
+}

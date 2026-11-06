@@ -1,0 +1,37 @@
+import { NgOptimizedImage } from '@angular/common';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+    selector: 'app-root',
+    template: `
+      <nav class="navbar bg-dark shadow">
+        <div class="container justify-content-between">
+          <a class="navbar-brand d-flex align-items-center text-white" routerLink="/menu">
+            <img class="me-2" src="angular.svg" alt="Angular" width="30" height="24">
+            Examples for Angular Foundation
+          </a>
+          <a href="https://github.com/bregnvig/LB1731" target="_blank">
+            <img class="rounded rounded-circle text-white" height="24" title="Goto repository" src="github.svg">
+          </a>
+        </div>
+      </nav>
+      <main class="container mt-4">
+        <router-outlet />
+      </main>
+      <img height="250" width="250" class="fixed-bottom d-none d-md-block " ngSrc="angular.png" routerLink="/menu" priority="1">
+    `,
+    styles: `
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      img.fixed-bottom {
+        left: auto;
+      }
+    `,
+    imports: [RouterLink, RouterOutlet, NgOptimizedImage]
+})
+export class AppComponent {
+}

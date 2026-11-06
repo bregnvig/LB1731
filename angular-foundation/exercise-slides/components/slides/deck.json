@@ -1,0 +1,29 @@
+{
+  "title": "Exercise 4",
+  "slides": [
+    {
+      "file": "exercise-4.html"
+    },
+    {
+      "file": "install-dependencies.html"
+    },
+    {
+      "file": "create-a-new-component.html"
+    },
+    {
+      "file": "add-some-html-to-the-component.html"
+    },
+    {
+      "file": "add-the-sidebar-component-to-angular-app.html"
+    },
+    {
+      "file": "create-a-model.html"
+    },
+    {
+      "file": "adding-mock-data.html"
+    },
+    {
+      "file": "make-the-sidebar-dynamic.html"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ examples/.vscode
 # compiled output
 /dist
 /angular-advanced/dist
+/angular-foundation/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -55,7 +56,4 @@ Thumbs.db
 
 # Angular Advanced workspace files
 
-# Slide decks - exported PDFs are build artifacts
-presentation/*.pdf
-exercises-slides/*.pdf
 __pycache__/
