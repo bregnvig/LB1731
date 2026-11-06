@@ -52,6 +52,27 @@
     },
     {
       "file": "exercise-4.html"
+    },
+    {
+      "file": "exercise-4-install-dependencies.html"
+    },
+    {
+      "file": "exercise-4-create-a-new-component.html"
+    },
+    {
+      "file": "exercise-4-add-some-html-to-the-component.html"
+    },
+    {
+      "file": "exercise-4-add-the-sidebar-component-to-angular.html"
+    },
+    {
+      "file": "exercise-4-create-a-model.html"
+    },
+    {
+      "file": "exercise-4-adding-mock-data.html"
+    },
+    {
+      "file": "exercise-4-make-the-sidebar-dynamic.html"
     }
   ]
 }

@@ -54,6 +54,24 @@
     },
     {
       "file": "exercise-2.html"
+    },
+    {
+      "file": "exercise-2-install-typescript.html"
+    },
+    {
+      "file": "exercise-2-start-compilation.html"
+    },
+    {
+      "file": "exercise-2-create-an-interface.html"
+    },
+    {
+      "file": "exercise-2-create-the-class.html"
+    },
+    {
+      "file": "exercise-2-console-log.html"
+    },
+    {
+      "file": "exercise-2-execute-your-code.html"
     }
   ]
 }

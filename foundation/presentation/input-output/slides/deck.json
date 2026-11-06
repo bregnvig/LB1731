@@ -66,6 +66,33 @@
     },
     {
       "file": "exercise-5.html"
+    },
+    {
+      "file": "exercise-5-where-to-start.html"
+    },
+    {
+      "file": "exercise-5-make-a-presentation-component-of-the.html"
+    },
+    {
+      "file": "exercise-5-mark-playground-as-selected.html"
+    },
+    {
+      "file": "exercise-5-create-output.html"
+    },
+    {
+      "file": "exercise-5-listen-to-the-event.html"
+    },
+    {
+      "file": "exercise-5-create-the-footer-component.html"
+    },
+    {
+      "file": "exercise-5-add-playground-input.html"
+    },
+    {
+      "file": "exercise-5-update-the-footer-template.html"
+    },
+    {
+      "file": "exercise-5-bind-playground-to-footer.html"
     }
   ]
 }

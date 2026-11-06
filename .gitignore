@@ -55,9 +55,6 @@ Thumbs.db
 
 # Angular Advanced workspace files
 
-# Slide decks - exported PDFs are build artifacts
-foundation/presentation/*.pdf
-foundation/slides-exercises/*.pdf
 __pycache__/
 
 # Claude Code worktrees

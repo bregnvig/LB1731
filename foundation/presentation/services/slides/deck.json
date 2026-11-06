@@ -33,6 +33,15 @@
     },
     {
       "file": "exercise-7.html"
+    },
+    {
+      "file": "exercise-7-where-to-start.html"
+    },
+    {
+      "file": "exercise-7-create-the-playground-service.html"
+    },
+    {
+      "file": "exercise-7-inject-the-service-into-the-app.html"
     }
   ]
 }

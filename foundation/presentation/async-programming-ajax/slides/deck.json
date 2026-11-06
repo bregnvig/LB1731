@@ -95,6 +95,32 @@
     },
     {
       "file": "exercise-8.html"
+    },
+    {
+      "file": "exercise-8-where-to-start.html"
+    },
+    {
+      "file": "exercise-8-provide-the-http-service.html"
+    },
+    {
+      "file": "exercise-8-update-the-playgroundservice.html"
+    },
+    {
+      "file": "exercise-8-update-the-app-component.html"
+    },
+    {
+      "file": "exercise-8-inject-the-location-service.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-8-inject-the-service.html"
+    },
+    {
+      "file": "exercise-8-show-your-position.html",
+      "hidden": true
+    },
+    {
+      "file": "exercise-8-add-your-current-position-to-the.html"
     }
   ]
 }

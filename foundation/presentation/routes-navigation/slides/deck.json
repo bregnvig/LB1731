@@ -54,6 +54,33 @@
     },
     {
       "file": "exercise-9.html"
+    },
+    {
+      "file": "exercise-9-where-to-start.html"
+    },
+    {
+      "file": "exercise-9-create-map-component.html"
+    },
+    {
+      "file": "exercise-9-define-the-routes.html"
+    },
+    {
+      "file": "exercise-9-import-the-module.html"
+    },
+    {
+      "file": "exercise-9-updating-the-map-component.html"
+    },
+    {
+      "file": "exercise-9-assign-the-selected-playground-to-the.html"
+    },
+    {
+      "file": "exercise-9-center-and-zoom.html"
+    },
+    {
+      "file": "exercise-9-add-markers.html"
+    },
+    {
+      "file": "exercise-9-congratulations.html"
     }
   ]
 }
