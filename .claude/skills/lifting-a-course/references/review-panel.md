@@ -4,7 +4,7 @@ Five reviewers read the same course at the same time, each in a fresh subagent. 
 
 ## Before you spawn
 
-1. Render: `bash scripts/render-course.sh <angular-advanced dir> <course> <scratchpad>/review/render`
+1. Render: `bash scripts/render-course.sh <advanced dir> <course> <scratchpad>/review/render`
 2. Slide check: `python3 scripts/check-slides.py <course dir>` and save the output to `<scratchpad>/review/words.txt`.
 3. List the visible slides in deck order with their image (`slide-01.jpg` is the first visible entry in `deck.json`) into `<scratchpad>/review/index.txt`.
 
@@ -22,7 +22,7 @@ Inputs:
 - Slide order and file names: <scratchpad>/review/index.txt
 - Slide source and speaker notes: <course dir>/slides/*.html (notes are in <aside class="notes">)
 - Labs: <course dir>/step-N is exercise N, step-(N+1) is its solution
-- Demo: <angular-advanced>/demo/README.md, section for this course
+- Demo: <advanced>/demo/README.md, section for this course
 - Word budget report: <scratchpad>/review/words.txt
 - House rules: <skill dir>/SKILL.md and references/house.md
 

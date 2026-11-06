@@ -3,7 +3,7 @@
 
 set -e  # Fail fast for module loading and arg parsing
 
-# Commands use paths relative to angular-advanced/ (courses/..., demo, cli/...)
+# Commands use paths relative to advanced/ (courses/..., demo, cli/...)
 ROOT="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../..")"
 SLIDES="$ROOT/../slides"  # the slides tool, shared with Angular Foundation
 DECK="$ROOT/courses"      # the deck folder: deck.json, intro/ and <course>/slides/
@@ -37,10 +37,10 @@ show_help() {
   echo "  [course]         Specific course (courses/[course]/step-*)"
   echo ""
   echo "Examples:"
-  echo "  adv install          # npm install in angular-advanced/"
+  echo "  adv install          # npm install in advanced/"
   echo "  adv verify all       # Verify all directories build and serve"
   echo "  adv verify di        # Verify courses/di/step-*"
-  echo "  adv dist             # Everything students get, in angular-advanced/dist"
+  echo "  adv dist             # Everything students get, in advanced/dist"
   echo "  adv test-zips        # Students still get the same zips?"
   echo "  adv upgrade          # Next Angular major: bump package.json, run migrations everywhere"
   echo "  adv upgrade 23 @ng-bootstrap/ng-bootstrap@24  # also upgrade a library that blocks it"

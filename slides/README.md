@@ -10,10 +10,10 @@ Every command takes the deck folder: the folder that holds `deck.json`. A relati
 npm start -- <deck>                  # builds and serves on http://localhost:4300
 npm run pdf -- <deck> [--out <file>] # writes the student PDF (default out/<deck title>.pdf)
 
-npm start -- ../angular-advanced/courses
+npm start -- ../advanced/courses
 ```
 
-In `angular-advanced/`, `adv slides` and `adv slides pdf [out]` run these with its deck.
+In `advanced/`, `adv slides` and `adv slides pdf [out]` run these with its deck.
 
 | Page | What it's for |
 |------|---------------|
@@ -38,7 +38,7 @@ intro/images/              images used by the intro slides
 <course>/slides/images/    images used by that course's slides
 ```
 
-For Angular Advanced the deck folder is `angular-advanced/courses/`, so each course's slides sit next to its exercises.
+For Angular Advanced the deck folder is `advanced/courses/`, so each course's slides sit next to its exercises.
 
 The intro slides come first, then each course as one vertical stack.
 

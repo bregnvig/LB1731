@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify_directories runs npm install in angular-advanced/ first; projects share its node_modules.
+# verify_directories runs npm install in advanced/ first; projects share its node_modules.
 
 verify_directory() {
   local dir="$1"

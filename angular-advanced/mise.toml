@@ -1,5 +1,0 @@
-[tools]
-node = "24"
-
-[env]
-_.path = ["{{config_root}}/cli/bin"]

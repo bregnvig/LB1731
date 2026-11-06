@@ -47,7 +47,7 @@ export async function loadDeck(root) {
  */
 export function deckRootArg(arg, usage) {
   if (!arg) {
-    console.error(`Usage: ${usage}\n<deck> is the folder that holds deck.json, e.g. ../angular-advanced/courses`);
+    console.error(`Usage: ${usage}\n<deck> is the folder that holds deck.json, e.g. ../advanced/courses`);
     process.exit(1);
   }
   const root = resolve(process.env.INIT_CWD ?? process.cwd(), arg);

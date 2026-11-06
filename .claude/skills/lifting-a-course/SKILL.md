@@ -97,7 +97,7 @@ How each number was measured, and the full Monday sentence, go in the notes.
 
 Over the type's word limit: cut to the claim and move the explanation to the notes, or split the slide. Never shrink the text. The room reads the slide instead of listening when there is more.
 
-**Theme changes respect the other courses.** Courses that are not lifted yet have no `data-template` and must render exactly as before. Scope every theme change to `section[data-template]`, and prove it: `bash scripts/compare-theme.sh <angular-advanced> <slides on master> <slides with your change> <scratch dir>` must end with `0 of N slides differ`.
+**Theme changes respect the other courses.** Courses that are not lifted yet have no `data-template` and must render exactly as before. Scope every theme change to `section[data-template]`, and prove it: `bash scripts/compare-theme.sh <advanced> <slides on master> <slides with your change> <scratch dir>` must end with `0 of N slides differ`.
 
 Text sizes and colours come from the type scale in slide-types.md: display, title, stat, body, accent, code. No inline sizes or colours. Accent (orange) on at most two things per slide plus the "Trap:" label. Paths and identifiers are white `<code>`, UI labels `<strong>`.
 

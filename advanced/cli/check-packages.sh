@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Dependencies belong in angular-advanced/package.json. npm install <pkg> inside a project saves to that
+# Dependencies belong in advanced/package.json. npm install <pkg> inside a project saves to that
 # project's package.json instead, so this fails (root postinstall and zip step) when a project has its own.
 cd "$(dirname "$(realpath "$0")")/.."
 
@@ -11,8 +11,8 @@ for dir in demo courses/*/{labs,solutions,step-*}; do
 done
 
 if [[ ${#bad[@]} -gt 0 ]]; then
-  echo "Dependencies belong in angular-advanced/package.json. Remove them from:"
+  echo "Dependencies belong in advanced/package.json. Remove them from:"
   printf '  %s/package.json\n' "${bad[@]}"
-  echo "and add them in angular-advanced/ instead: npm install <pkg>"
+  echo "and add them in advanced/ instead: npm install <pkg>"
   exit 1
 fi

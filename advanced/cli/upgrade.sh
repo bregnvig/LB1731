@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Depends on: utils.sh (get_all_directories)
-# Versions live in angular-advanced/package.json, so npm bumps them once there. Each project
+# Versions live in advanced/package.json, so npm bumps them once there. Each project
 # then runs the migrations (code and angular.json changes) ng update would have run in it.
 
 upgrade_angular() {
@@ -24,7 +24,7 @@ upgrade_angular() {
   fi
   # A clean tree makes git diff the review of the upgrade, and git restore its undo.
   if ! git diff --quiet HEAD -- . || [[ -n "$(git ls-files --others --exclude-standard .)" ]]; then
-    echo "Error: commit your changes in angular-advanced/ first, so git diff shows only the upgrade"
+    echo "Error: commit your changes in advanced/ first, so git diff shows only the upgrade"
     return 1
   fi
 
