@@ -1,0 +1,19 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:550px;height:auto;z-index:10;text-align:left">
+    <h2><strong>Make a presentation component of the sidebar</strong></h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:234px;width:550px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.7em">Right now, even though it is a bit simple, the sidebar knows how to get a reference to the playgrounds to display. This makes it a smart component. Again, currently this is kind of simple.</span></p>
+
+<p><span style="font-size:0.7em">Instead let’s make the </span><span style="color:#ff8c00; font-size:0.7em"><code>AppComponent</code></span><span style="font-size:0.7em"> the smart component. Copy the playgrounds property from the sidebar component to the app component and rename it to <span style="color:#ff8c00"><code>appPlaygrounds</code></span>.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:234px;width:550px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em">Next delete the assignment of the <span style="color:#ff8c00"><code>playgrounds</code></span>&nbsp;property in the sidebar component and prefix the property with <span style="color:#ff8c00"><code>input.</code>&nbsp;</span>Make it required</span></p>
+
+<p><span style="font-size:0.7em">Remember to import it from @angular/core module. If you save now, no playgrounds are shown😲</span></p>
+
+<p><span style="font-size:0.7em">Next step is to assign the sidebars <span style="color:#ff8c00"><code>playgrounds</code></span>&nbsp;property using the property data binding syntax, used in the <span style="color:#add8e6">parent → child</span>&nbsp;scenario.</span></p>
+
+<p><span style="font-size:0.7em">Now the sidebar has no knowledge of how the playgrounds were fetched👌</span></p>
+  </div>
+</section>

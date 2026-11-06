@@ -1,0 +1,14 @@
+{
+  "title": "Exercise 7",
+  "slides": [
+    {
+      "file": "exercise-7.html"
+    },
+    {
+      "file": "create-the-playground-service.html"
+    },
+    {
+      "file": "inject-the-service-into-the-app-componen.html"
+    }
+  ]
+}

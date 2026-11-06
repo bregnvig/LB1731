@@ -1,0 +1,32 @@
+{
+  "title": "Exercise 5",
+  "slides": [
+    {
+      "file": "exercise-5.html"
+    },
+    {
+      "file": "make-a-presentation-component-of-the-sid.html"
+    },
+    {
+      "file": "mark-playground-as-selected.html"
+    },
+    {
+      "file": "create-output.html"
+    },
+    {
+      "file": "listen-to-the-event.html"
+    },
+    {
+      "file": "create-the-footer-component.html"
+    },
+    {
+      "file": "add-playground-input.html"
+    },
+    {
+      "file": "update-the-footer-template.html"
+    },
+    {
+      "file": "bind-playground-to-footer.html"
+    }
+  ]
+}

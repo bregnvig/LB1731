@@ -1,6 +1,6 @@
 # Slides
 
-The tool to present, edit and export a slide deck, shared by the courses in this repo (Angular Advanced, and Angular Foundation once its deck is in this format). The slides are plain HTML files that live with each course, so they can be edited in the editor, by hand, or by an LLM, and git is their history.
+The tool to present, edit and export a slide deck, shared by the courses in this repo (Angular Advanced and Angular Foundation). The slides are plain HTML files that live with each course, so they can be edited in the editor, by hand, or by an LLM, and git is their history.
 
 ## Use it
 
@@ -13,7 +13,7 @@ npm run pdf -- <deck> [--out <file>] # writes the student PDF (default out/<deck
 npm start -- ../angular-advanced/courses
 ```
 
-In `angular-advanced/`, `adv slides` and `adv slides pdf [out]` run these with its deck.
+In `angular-advanced/` and `angular-foundation/`, `adv slides` and `afn slides` (and `slides pdf [out]`) run these with that course's deck: `courses/` in both.
 
 | Page | What it's for |
 |------|---------------|
@@ -38,7 +38,7 @@ intro/images/              images used by the intro slides
 <course>/slides/images/    images used by that course's slides
 ```
 
-For Angular Advanced the deck folder is `angular-advanced/courses/`, so each course's slides sit next to its exercises.
+For Angular Advanced the deck folder is `angular-advanced/courses/`, so each course's slides sit next to its exercises. For Angular Foundation it is `angular-foundation/courses/`, one folder per section, and the exercises are a second deck in `angular-foundation/exercise-slides/`.
 
 The intro slides come first, then each course as one vertical stack.
 

@@ -1,0 +1,24 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:550px;height:auto;z-index:10;text-align:left">
+    <h2>Update the footer template</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.7em">Let’s change the footer component template from “<span style="color:#add8e6">footer works</span>” to something more useful.</span></p>
+
+<p><span style="font-size:0.7em">The footer must show info about a playground. It should show the playground's <span style="color:#ff8c00">name</span>, <span style="color:#ff8c00">address description</span> and <span style="color:#ff8c00">description</span>.</span></p>
+
+<p><span style="font-size:0.7em">The root element of the template must be a <span style="color:#ff8c00"><code>&lt;footer&gt;</code></span> HTML5 element. Within the footer element place a <span style="color:#ff8c00"><code>&lt;h3&gt;</code></span> element and two <span style="color:#ff8c00"><code>&lt;p&gt;</code></span> elements. Place the playground name in the <span style="color:#ff8c00"><code>&lt;h3&gt;</code></span>, the address description in the first <span style="color:#ff8c00"><code>&lt;p&gt;</code></span> and the general description in the second <code><span style="color:#ff8c00">&lt;p&gt;</span></code>. All using interpolation.</span></p>
+
+<p><span style="font-size:0.7em">When we save our files now, the application still loads, but we should see a lot of errors in the developer tool.</span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:160px;width:640px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.7em">Why is that? Well, unless we used the Elvis notation, accessing the properties <span style="color:#ff8c00"><code>name</code></span>, <span style="color:#ff8c00"><code>addressDescription</code></span>&nbsp;and <code><span style="color:#ff8c00">description</span></code>&nbsp;will results in an error like this:<br>
+<span style="color:#ff0000"><code>Cannot read property '&lt;property-name&gt;' of undefined</code></span></span></p>
+
+<p><span style="font-size:0.7em">But even if we fixed this by adding the <span style="color:#ff8c00"><code>?</code></span>&nbsp;to all our interpolations, &nbsp;and thereby fixing these errors, we would still have the footer element in the view, even when no playground is selected. That’s not very pretty!</span></p>
+
+<p><span style="font-size:0.7em">So instead, let’s make the entire footer element disappear when no playground is selected. Remember a certain build-in conditional statement to achieve that? </span></p>
+
+<p><span style="font-size:0.7em">Update the template, save the files, and verify the errors have disappeared.</span></p>
+  </div>
+</section>
