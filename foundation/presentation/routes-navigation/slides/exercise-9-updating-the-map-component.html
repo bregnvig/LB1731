@@ -1,0 +1,23 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:38px;top:86px;width:550px;height:auto;z-index:10;text-align:left">
+    <h2>Updating the map component</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:38px;top:160px;width:550px;height:auto;z-index:12;text-align:left">
+    <p><span style="font-size:0.9em">It seems like the sidebar is working but notice that when we click a playground the URL does not change.</span></p>
+
+<p><span style="font-size:0.9em">So, update the <span style="color:#ff8c00">map</span> component to navigate to the correct URL, when the <span style="color:#ff8c00">sidebar</span> emits a playground.</span></p>
+
+<p><span style="font-size:0.9em">Start by injecting the <span style="color:#ff8c00"><code>Router</code></span> service. Next use its <span style="color:#ff8c00"><code>navigate</code></span> method</span></p>
+
+<p><span style="font-size:0.9em">Try to click on a few playgrounds. And then notice how the back and forward buttons work as expected! <span style="color:#a9a9a9"><span style="font-size:0.5em">(At least in the address bar)</span></span></span></p>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:640px;top:160px;width:550px;height:auto;z-index:13;text-align:left">
+    <p><span style="font-size:0.9em">But we are not done. Try to select a playground, now reload the page. Notice that the selected playground is no longer selected.</span></p>
+
+<p><span style="font-size:0.9em">This is because the <span style="color:#ff8c00"><code>selectedPlayground</code></span> in the sidebar component has not been initialized when we reloaded. Remember that the sidebar should not read from the URL, as it is a presentation component and should have no context.</span></p>
+
+<p><span style="font-size:0.9em">Make the <span style="color:#ff8c00"><code>selectedPlayground</code></span> property assignable from the parent. (Remember component communication?)</span></p>
+
+<p><span style="color:#a9a9a9"><span style="font-size:0.5em">It still don't work when you reload, but soon it will</span></span></p>
+  </div>
+</section>

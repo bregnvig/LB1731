@@ -1,0 +1,50 @@
+{
+  "title": "Angular CLI",
+  "slides": [
+    {
+      "file": "angular-cli.html"
+    },
+    {
+      "file": "angular-tooling.html"
+    },
+    {
+      "file": "angular-tooling-2.html"
+    },
+    {
+      "file": "use-the-cli-generator-v20.html"
+    },
+    {
+      "file": "use-the-cli-generator-prior-to-v20.html"
+    },
+    {
+      "file": "use-the-cli-generator.html"
+    },
+    {
+      "file": "use-the-cli-generator-2.html"
+    },
+    {
+      "file": "moving-to-next-version.html"
+    },
+    {
+      "file": "file-structure.html"
+    },
+    {
+      "file": "file-structure-2.html"
+    },
+    {
+      "file": "file-structure-3.html"
+    },
+    {
+      "file": "additional-libraries.html"
+    },
+    {
+      "file": "exercise-3.html"
+    },
+    {
+      "file": "exercise-3-install-the-angular-cli.html"
+    },
+    {
+      "file": "exercise-3-create-a-new-project.html"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Prove a slides-tool or theme change leaves untyped courses untouched: render every course except the
 # ones named in SKIP with two slides-tool checkouts and count slides that differ.
-# Usage: bash compare-theme.sh <angular-advanced dir> <slides tool before> <slides tool after> <out dir>
-#   e.g. bash compare-theme.sh ~/LB1731/angular-advanced ~/LB1731/angular-advanced/slides <worktree>/angular-advanced/slides /tmp/cmp
+# Usage: bash compare-theme.sh <advanced dir> <slides tool before> <slides tool after> <out dir>
+#   e.g. bash compare-theme.sh ~/LB1731/advanced ~/LB1731/slides <worktree>/slides /tmp/cmp
 # SKIP="performance" leaves out typed courses, where a change is meant to show. Both tools must be built (npx ng build).
 set -euo pipefail
 adv=$(realpath "$1"); before=$(realpath "$2"); after=$(realpath "$3"); out=$(realpath -m "$4")

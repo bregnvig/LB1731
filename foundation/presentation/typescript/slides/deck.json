@@ -1,0 +1,77 @@
+{
+  "title": "TypeScript",
+  "slides": [
+    {
+      "file": "typescript.html"
+    },
+    {
+      "file": "a-typescript-primer.html"
+    },
+    {
+      "file": "what-do-we-get.html"
+    },
+    {
+      "file": "simple-types.html"
+    },
+    {
+      "file": "simple-class-javascript.html"
+    },
+    {
+      "file": "simple-class-javascript-2.html"
+    },
+    {
+      "file": "simple-class-javascript-3.html"
+    },
+    {
+      "file": "simple-class-typescript.html"
+    },
+    {
+      "file": "interface.html"
+    },
+    {
+      "file": "interface-2.html"
+    },
+    {
+      "file": "generics.html"
+    },
+    {
+      "file": "when-compiled.html"
+    },
+    {
+      "file": "typescript-modules.html"
+    },
+    {
+      "file": "typescript-modules-2.html"
+    },
+    {
+      "file": "typescript-modules-3.html"
+    },
+    {
+      "file": "which-ecmascript-version.html"
+    },
+    {
+      "file": "which-ecmascript-version-2.html"
+    },
+    {
+      "file": "exercise-2.html"
+    },
+    {
+      "file": "exercise-2-install-typescript.html"
+    },
+    {
+      "file": "exercise-2-start-compilation.html"
+    },
+    {
+      "file": "exercise-2-create-an-interface.html"
+    },
+    {
+      "file": "exercise-2-create-the-class.html"
+    },
+    {
+      "file": "exercise-2-console-log.html"
+    },
+    {
+      "file": "exercise-2-execute-your-code.html"
+    }
+  ]
+}
