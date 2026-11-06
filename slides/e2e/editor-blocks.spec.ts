@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import type { Page } from '@playwright/test';
 import { expect, test } from './editor-fixture';
 
-const slideFile = (root: string) => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8');
+const slideFile = (root: string) => readFileSync(join(root, 'demo/slides/demo.html'), 'utf8');
 
 async function at(page: Page, x: number, y: number): Promise<[number, number]> {
   const box = (await page.getByTestId('canvas').boundingBox())!;

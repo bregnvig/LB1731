@@ -1,19 +1,27 @@
 // Exports the deck to PDF for students: one page per visible slide, every fragment and animation shown.
-// Usage: node scripts/pdf.mjs [--out <file>] [--root <angular-advanced dir>]
+// Usage: node scripts/pdf.mjs <deck folder> [--out <file>]  (default out/<deck title>.pdf)
 import { chromium } from '@playwright/test';
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { mkdir } from 'node:fs/promises';
-import { basename, dirname, join, resolve } from 'node:path';
+import { mkdir, readFile } from 'node:fs/promises';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { createServer } from '../server/server.mjs';
+import { deckRootArg } from '../server/files.mjs';
 
 const slidesDir = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(slidesDir, 'dist/slides/browser');
 
+/** "Angular Advanced" -> out/angular-advanced.pdf */
+async function defaultOut(root) {
+  const { title } = JSON.parse(await readFile(join(root, 'deck.json'), 'utf8'));
+  return join(slidesDir, 'out', `${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'slides'}.pdf`);
+}
+
 /** Writes the PDF and returns its path. Uses the server at `url`, or starts one on a free port. */
-export async function exportPdf({ root, out = join(slidesDir, 'out', `${basename(root)}.pdf`), url }) {
+export async function exportPdf({ root, out, url }) {
+  out ??= await defaultOut(root);
   if (!existsSync(dist)) spawnSync('npx', ['ng', 'build'], { cwd: slidesDir, stdio: 'inherit' });
   let server;
   if (!url) {
@@ -36,6 +44,7 @@ export async function exportPdf({ root, out = join(slidesDir, 'out', `${basename
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { values } = parseArgs({ options: { out: { type: 'string' }, root: { type: 'string', default: join(slidesDir, '..') } } });
-  console.log(await exportPdf({ root: resolve(values.root), out: values.out && resolve(values.out) }));
+  const { values, positionals } = parseArgs({ allowPositionals: true, options: { out: { type: 'string' } } });
+  const root = deckRootArg(positionals[0], 'npm run pdf -- <deck> [--out <file>]');
+  console.log(await exportPdf({ root, out: values.out && resolve(process.env.INIT_CWD ?? process.cwd(), values.out) }));
 }

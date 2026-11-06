@@ -11,7 +11,7 @@ const VISIBLE_FIXTURE_SLIDES = 6; // welcome + 5 demo slides; the draft is hidde
 test('the script exports every visible slide as one page', async ({}, info) => {
   test.setTimeout(120_000);
   const out = info.outputPath('deck.pdf');
-  await promisify(execFile)('node', ['scripts/pdf.mjs', '--root', 'e2e/fixture', '--out', out], { cwd: slidesDir });
+  await promisify(execFile)('node', ['scripts/pdf.mjs', join(__dirname, 'fixture'), '--out', out], { cwd: slidesDir });
   expect(pages(out)).toBe(VISIBLE_FIXTURE_SLIDES);
 });
 

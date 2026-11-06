@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { blockNames, parseSlide, serializeSlide } from './slide-format';
 
-const file = (html: string) => ({ path: 'courses/rxjs/slides/demo.html', hidden: false, html, etag: 'e' });
+const file = (html: string) => ({ path: 'rxjs/slides/demo.html', hidden: false, html, etag: 'e' });
 
 const everyType = `<section data-auto-animate>
   <div class="block" data-type="text" data-name="title" style="left:102px;top:43px;width:1076px;height:auto;z-index:10">
@@ -113,7 +113,7 @@ describe('slide format', () => {
 
   it('keeps notes, auto-animate, path, hidden and etag', () => {
     const slide = parseSlide({ ...file(everyType), hidden: true });
-    expect(slide).toMatchObject({ path: 'courses/rxjs/slides/demo.html', hidden: true, autoAnimate: true, etag: 'e' });
+    expect(slide).toMatchObject({ path: 'rxjs/slides/demo.html', hidden: true, autoAnimate: true, etag: 'e' });
     expect(slide.notes).toBe('Ask the room first.\nThen reveal <the answer>.');
   });
 });

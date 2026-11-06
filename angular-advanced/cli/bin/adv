@@ -5,6 +5,8 @@ set -e  # Fail fast for module loading and arg parsing
 
 # Commands use paths relative to angular-advanced/ (courses/..., demo, cli/...)
 ROOT="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../..")"
+SLIDES="$ROOT/../slides"  # the slides tool, shared with Angular Foundation
+DECK="$ROOT/courses"      # the deck folder: deck.json, intro/ and <course>/slides/
 CALLER_DIR="$PWD"  # for paths given on the command line
 cd "$ROOT"
 
@@ -43,7 +45,7 @@ show_help() {
   echo "  adv upgrade          # Next Angular major: bump package.json, run migrations everywhere"
   echo "  adv upgrade 23 @ng-bootstrap/ng-bootstrap@24  # also upgrade a library that blocks it"
   echo "  adv slides           # Present or edit the slides"
-  echo "  adv slides pdf       # Export the slides to slides/out/angular-advanced.pdf"
+  echo "  adv slides pdf       # Export the slides to ../slides/out/angular-advanced.pdf"
 }
 
 # Resolve target to list of directories
@@ -72,14 +74,14 @@ target="${2:-}"
 case "$command" in
   "install"|"i")
     npm install
-    (cd slides && npm install)
+    (cd "$SLIDES" && npm install)
     ;;
 
   "slides"|"s")
     if [[ "$target" == "pdf" ]]; then
-      (cd slides && npm run pdf -- ${3:+--out "$(cd "$CALLER_DIR" && realpath -m "$3")"})
+      (cd "$SLIDES" && npm run pdf -- "$DECK" ${3:+--out "$(cd "$CALLER_DIR" && realpath -m "$3")"})
     else
-      (cd slides && npm start)
+      (cd "$SLIDES" && npm start -- "$DECK")
     fi
     ;;
 
@@ -106,7 +108,7 @@ case "$command" in
   "dist"|"d")
     cli/zipit.sh dist
     # Build first: the PDF export reuses whatever build it finds
-    (cd slides && npm run build && npm run pdf -- --out ../dist/angular-advanced.pdf)
+    (cd "$SLIDES" && npm run build && npm run pdf -- "$DECK" --out "$ROOT/dist/angular-advanced.pdf")
     ;;
 
   "test-zips"|"tz")

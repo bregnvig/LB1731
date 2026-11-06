@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import type { Page } from '@playwright/test';
 import { expect, test } from './editor-fixture';
 
-const slideFile = (root: string) => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8');
+const slideFile = (root: string) => readFileSync(join(root, 'demo/slides/demo.html'), 'utf8');
 
 async function at(page: Page, x: number, y: number): Promise<[number, number]> {
   const box = (await page.getByTestId('canvas').boundingBox())!;
@@ -17,10 +17,10 @@ test.beforeEach(async ({ page, editor }) => {
 });
 
 test('an uploaded image gets a free name in the course folder and can be cropped', async ({ page, root }) => {
-  await page.getByTestId('image-picker').setInputFiles(join(__dirname, 'fixture/courses/demo/slides/images/dot.png'));
+  await page.getByTestId('image-picker').setInputFiles(join(__dirname, 'fixture/demo/slides/images/dot.png'));
   // dot.png is taken, so the upload is stored as dot-2.png.
   await expect.poll(() => slideFile(root)).toContain('src="images/dot-2.png"');
-  expect(existsSync(join(root, 'courses/demo/slides/images/dot-2.png'))).toBe(true);
+  expect(existsSync(join(root, 'demo/slides/images/dot-2.png'))).toBe(true);
   await expect(page.locator('app-canvas img[src$="images/dot-2.png"]')).toBeVisible();
 
   await page.getByLabel('Image X').fill('-10');

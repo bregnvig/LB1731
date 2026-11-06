@@ -45,8 +45,8 @@ export class DeckService {
   async saveOrder(deck: Deck, courseId: string | null, slides: Slide[]): Promise<string> {
     const entries = slides.map(s => (s.hidden ? { file: fileName(s.path), hidden: true } : { file: fileName(s.path) }));
     const [path, json] = courseId == null
-      ? ['slides/deck.json', { title: deck.title, slides: entries, courses: deck.courses.map(c => c.id) }]
-      : [`courses/${courseId}/slides/deck.json`, { title: deck.courses.find(c => c.id === courseId)?.title ?? courseId, slides: entries }];
+      ? ['deck.json', { title: deck.title, slides: entries, courses: deck.courses.map(c => c.id) }]
+      : [`${courseId}/slides/deck.json`, { title: deck.courses.find(c => c.id === courseId)?.title ?? courseId, slides: entries }];
     const etag = courseId == null ? deck.etag : deck.courses.find(c => c.id === courseId)?.etag;
     const res = await fetch(`/api/files/${path}`, { method: 'PUT', body: `${JSON.stringify(json, null, 2)}\n`, headers: etag ? { 'If-Match': etag } : {} });
     if (res.status === 409) throw new ConflictError(path);

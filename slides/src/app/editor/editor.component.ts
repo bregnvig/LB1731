@@ -298,7 +298,7 @@ export class EditorComponent {
   }
 
   conflictNames() {
-    return this.store.conflicts().map(p => p.replace(/^courses\//, '').replace('/slides/', '/')).join(', ');
+    return this.store.conflicts().map(p => p.replace('/slides/', '/')).join(', ');
   }
 
   async exportPdf() {

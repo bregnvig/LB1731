@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from './editor-fixture';
 
-const slideFile = (root: string) => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8');
+const slideFile = (root: string) => readFileSync(join(root, 'demo/slides/demo.html'), 'utf8');
 
 test('a block set to appear on a click stays hidden in the presentation until that click', async ({ page, editor, root }) => {
   await page.goto(`${editor}/edit/demo/demo.html`);

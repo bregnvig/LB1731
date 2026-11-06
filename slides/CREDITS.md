@@ -16,12 +16,12 @@ Third-party work in the slides tool and the deck, and the terms it comes under. 
 
 Build and test tools (Angular CLI, Vitest, Playwright and their dependencies) are development-only and are not part of what the tool serves.
 
-## In the slides
+## In the Angular Advanced slides
 
-Most images are our own screenshots and drawings (`working-with-signals-graph.svg` and `guards-shield.svg` were drawn for this deck). These come from others; the slides that show them carry a credit line, and the last slide (`courses/state-management/slides/credits.html`) lists them with the trademark notice:
+Most images are our own screenshots and drawings (`working-with-signals-graph.svg` and `guards-shield.svg` were drawn for this deck). These come from others; the slides that show them carry a credit line, and the last slide (`angular-advanced/courses/state-management/slides/credits.html`) lists them with the trademark notice:
 
 | What | Where | Terms |
 |------|-------|-------|
-| Architecture icon from onlinewebfonts.com | `courses/components/slides/images/angular-architecture-*.svg` | CC BY 3.0: credit "Icon from onlinewebfonts.com" |
-| Emoji from Twemoji, Twitter | `courses/signals/slides/images/signals-2.svg` | CC BY 4.0: credit "Twemoji by Twitter" |
+| Architecture icon from onlinewebfonts.com | `angular-advanced/courses/components/slides/images/angular-architecture-*.svg` | CC BY 3.0: credit "Icon from onlinewebfonts.com" |
+| Emoji from Twemoji, Twitter | `angular-advanced/courses/signals/slides/images/signals-2.svg` | CC BY 4.0: credit "Twemoji by Twitter" |
 | Logos of Angular, RxJS, NgRx, NGXS, Jasmine, Karma, Vitest | various `images/` | Trademarks of their owners, shown to name the tools |

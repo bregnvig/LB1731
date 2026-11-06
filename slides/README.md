@@ -1,13 +1,19 @@
 # Slides
 
-The Angular Advanced deck and the tool to present and edit it. The slides are plain HTML files in this repo, so they can be edited in the editor, by hand, or by an LLM, and git is their history.
+The tool to present, edit and export a slide deck, shared by the courses in this repo (Angular Advanced, and Angular Foundation once its deck is in this format). The slides are plain HTML files that live with each course, so they can be edited in the editor, by hand, or by an LLM, and git is their history.
 
 ## Use it
 
+Every command takes the deck folder: the folder that holds `deck.json`. A relative path is relative to where you type the command.
+
 ```bash
-adv slides            # builds and serves on http://localhost:4300
-adv slides pdf [out]  # writes the student PDF (default slides/out/angular-advanced.pdf)
+npm start -- <deck>                  # builds and serves on http://localhost:4300
+npm run pdf -- <deck> [--out <file>] # writes the student PDF (default out/<deck title>.pdf)
+
+npm start -- ../angular-advanced/courses
 ```
+
+In `angular-advanced/`, `adv slides` and `adv slides pdf [out]` run these with its deck.
 
 | Page | What it's for |
 |------|---------------|
@@ -21,13 +27,18 @@ The PDF has one page per slide, without hidden slides or notes, with every fragm
 
 ## Where the slides are
 
+Inside the deck folder:
+
 ```
-slides/deck.json                  deck title, intro slides, course order
-slides/intro/*.html               intro slides
-courses/<course>/slides/deck.json course title and slide order (a slide can be "hidden": true)
-courses/<course>/slides/*.html    one slide per file
-courses/<course>/slides/images/   images used by that course's slides
+deck.json                  deck title, intro slides, course order
+intro/*.html               intro slides
+intro/images/              images used by the intro slides
+<course>/slides/deck.json  course title and slide order (a slide can be "hidden": true)
+<course>/slides/*.html     one slide per file
+<course>/slides/images/    images used by that course's slides
 ```
+
+For Angular Advanced the deck folder is `angular-advanced/courses/`, so each course's slides sit next to its exercises.
 
 The intro slides come first, then each course as one vertical stack.
 
@@ -69,4 +80,4 @@ npm test      # unit tests (Vitest) and server tests
 npm run e2e   # Playwright: player, sync, PDF and editor, on the fixture deck in e2e/fixture
 ```
 
-`server/server.mjs` serves the app and a small file API (`/api/deck`, `/api/files/<path>`, `/content/<path>`) that only reaches the slide files, the deck files and their images.
+`server/server.mjs` serves the app and a small file API (`/api/deck`, `/api/files/<path>`, `/content/<path>`) that only reaches the slide files, the deck files and their images inside the deck folder.

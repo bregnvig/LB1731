@@ -43,8 +43,8 @@ describe('renderBlock', () => {
 
   it('points image sources at the slide folder on the content route', () => {
     const el = dom(renderBlock({ ...base, type: 'image', src: 'images/a.png', alt: 'A', inlineSvg: false, svgColor: null, imgStyle: '', keepRatio: true },
-      '/content/courses/rxjs/slides')).firstElementChild!;
-    expect(el.querySelector('img')!.getAttribute('src')).toBe('/content/courses/rxjs/slides/images/a.png');
+      '/content/rxjs/slides')).firstElementChild!;
+    expect(el.querySelector('img')!.getAttribute('src')).toBe('/content/rxjs/slides/images/a.png');
   });
 
   it('renders code for the highlighter with line numbers', () => {
@@ -66,19 +66,19 @@ describe('renderBlock', () => {
 
 describe('renderSlide', () => {
   it('marks hidden slides and keeps notes', () => {
-    const el = dom(renderSlide(slide('courses/rxjs/slides/x.html', [], { hidden: true, notes: 'Say <hi>' }), '/content/courses/rxjs/slides')).firstElementChild!;
+    const el = dom(renderSlide(slide('rxjs/slides/x.html', [], { hidden: true, notes: 'Say <hi>' }), '/content/rxjs/slides')).firstElementChild!;
     expect(el.getAttribute('data-visibility')).toBe('hidden');
     expect(el.querySelector('aside.notes')!.textContent).toBe('Say <hi>');
   });
   it('passes the slide template on, so the theme can apply its type scale', () => {
-    const el = dom(renderSlide(slide('courses/rxjs/slides/x.html', [], { template: 'claim-code' }), '')).firstElementChild!;
+    const el = dom(renderSlide(slide('rxjs/slides/x.html', [], { template: 'claim-code' }), '')).firstElementChild!;
     expect(el.getAttribute('data-template')).toBe('claim-code');
   });
 });
 
 describe('deckHtml', () => {
   it('puts intro slides at the top level and one stack per course', () => {
-    const course = (id: string): Course => ({ id, title: id, slides: [slide(`courses/${id}/slides/a.html`), slide(`courses/${id}/slides/b.html`)] });
+    const course = (id: string): Course => ({ id, title: id, slides: [slide(`${id}/slides/a.html`), slide(`${id}/slides/b.html`)] });
     const deck: Deck = { title: 'T', intro: [slide('slides/intro/a.html'), slide('slides/intro/b.html')], courses: [course('one'), course('two')] };
     const top = [...dom(deckHtml(deck)).children];
     expect(top.length).toBe(4);

@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import type { Page } from '@playwright/test';
 import { expect, test } from './editor-fixture';
 
-const file = (root: string) => join(root, 'courses/demo/slides/shapes.html');
+const file = (root: string) => join(root, 'demo/slides/shapes.html');
 const blockTag = (root: string, name: string) => readFileSync(file(root), 'utf8').split('\n').find(l => l.includes(`data-name="${name}"`)) ?? '';
 const styleNumber = (tag: string, prop: string) => Number(new RegExp(`${prop}:(-?[\\d.]+)px`).exec(tag)?.[1]);
 

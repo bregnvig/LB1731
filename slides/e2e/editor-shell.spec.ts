@@ -7,7 +7,7 @@ test('notes are written to the slide file', async ({ page, editor, root }) => {
   await page.getByLabel('Course').selectOption('demo');
   await page.getByLabel('Speaker notes').fill('Remember the demo');
   await expect(page.getByTestId('status')).toHaveText('Saved to disk');
-  await expect.poll(() => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8'))
+  await expect.poll(() => readFileSync(join(root, 'demo/slides/demo.html'), 'utf8'))
     .toContain('<aside class="notes">Remember the demo</aside>');
   // The address bar follows the slide, so a reload reopens it.
   await expect(page).toHaveURL(/\/edit\/demo\/demo\.html$/);
@@ -18,7 +18,7 @@ test('notes have a quick and a description tab, and dock under the slide', async
   await page.getByLabel('Speaker notes, quick').fill('Click the button');
   await page.getByRole('tab', { name: 'Description' }).click();
   await page.getByLabel('Speaker notes, description').fill('Now tell them why.');
-  await expect.poll(() => readFileSync(join(root, 'courses/demo/slides/demo.html'), 'utf8'))
+  await expect.poll(() => readFileSync(join(root, 'demo/slides/demo.html'), 'utf8'))
     .toContain('<aside class="notes">Click the button\n\nNow tell them why.</aside>');
   await page.getByRole('button', { name: 'Bottom' }).click();
   await expect(page.locator('main').getByLabel('Speaker notes, description')).toHaveValue('Now tell them why.');
@@ -27,7 +27,7 @@ test('notes have a quick and a description tab, and dock under the slide', async
 });
 
 test('a file changed on disk is not overwritten', async ({ page, editor, root }) => {
-  const file = join(root, 'courses/demo/slides/demo.html');
+  const file = join(root, 'demo/slides/demo.html');
   await page.goto(`${editor}/edit/demo/demo.html`);
   await expect(page.getByLabel('Speaker notes')).toBeVisible();
   const outside = readFileSync(file, 'utf8').replace('</section>', '  <aside class="notes">Edited elsewhere</aside>\n</section>');
@@ -41,7 +41,7 @@ test('a file changed on disk is not overwritten', async ({ page, editor, root })
 });
 
 test('markup the editor does not keep is announced, then dropped on save', async ({ page, editor, root }) => {
-  const file = join(root, 'courses/demo/slides/demo.html');
+  const file = join(root, 'demo/slides/demo.html');
   writeFileSync(file, readFileSync(file, 'utf8').replace('</section>', '  <p>hand-written</p>\n</section>'));
   await page.goto(`${editor}/edit/demo/demo.html`);
   await expect(page.getByTestId('drops-markup')).toBeVisible();
@@ -56,7 +56,7 @@ test('markup the editor does not keep is announced, then dropped on save', async
 });
 
 test('slides can be added, hidden and reordered', async ({ page, editor, root }) => {
-  const order = () => JSON.parse(readFileSync(join(root, 'courses/demo/slides/deck.json'), 'utf8')).slides;
+  const order = () => JSON.parse(readFileSync(join(root, 'demo/slides/deck.json'), 'utf8')).slides;
   await page.goto(`${editor}/edit/demo/demo.html`);
   await page.getByRole('button', { name: '+ Add slide' }).click();
   await expect.poll(() => order()[1]).toEqual({ file: 'slide-1.html' });
@@ -65,21 +65,21 @@ test('slides can be added, hidden and reordered', async ({ page, editor, root })
   await page.getByLabel('Hidden from the deck').check();
   await expect.poll(() => order()[1]).toEqual({ file: 'slide-1.html', hidden: true });
 
-  await page.locator('nav [data-slide="courses/demo/slides/slide-1.html"]').dragTo(page.locator('nav [data-slide="courses/demo/slides/demo.html"]'));
+  await page.locator('nav [data-slide="demo/slides/slide-1.html"]').dragTo(page.locator('nav [data-slide="demo/slides/demo.html"]'));
   await expect.poll(() => order().map((s: { file: string }) => s.file).slice(0, 2)).toEqual(['slide-1.html', 'demo.html']);
 });
 
 test('an order file changed on disk is not overwritten', async ({ page, editor, root }) => {
-  const orderFile = join(root, 'courses/demo/slides/deck.json');
+  const orderFile = join(root, 'demo/slides/deck.json');
   await page.goto(`${editor}/edit/demo/demo.html`);
   await expect(page.getByTestId('canvas')).toBeVisible();
   // Someone else (an LLM, a git pull) changes the order while the editor is open.
   const outside = readFileSync(orderFile, 'utf8').replace('"title": "Demo"', '"title": "Demo course"');
   writeFileSync(orderFile, outside);
-  await page.locator('nav [data-slide="courses/demo/slides/fragments.html"]').dragTo(page.locator('nav [data-slide="courses/demo/slides/demo.html"]'));
+  await page.locator('nav [data-slide="demo/slides/fragments.html"]').dragTo(page.locator('nav [data-slide="demo/slides/demo.html"]'));
   await expect(page.getByRole('alert')).toContainText('demo/deck.json');
   expect(readFileSync(orderFile, 'utf8')).toBe(outside);
   await page.getByRole('button', { name: 'Reload from disk' }).click();
   await expect(page.getByTestId('status')).toHaveText('Saved to disk');
-  await expect(page.locator('nav [data-slide]').first()).toHaveAttribute('data-slide', 'courses/demo/slides/demo.html');
+  await expect(page.locator('nav [data-slide]').first()).toHaveAttribute('data-slide', 'demo/slides/demo.html');
 });

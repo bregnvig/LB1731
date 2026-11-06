@@ -11,8 +11,8 @@ const slide = (path: string, extra: Partial<Slide> = {}): Slide =>
 function setup() {
   const deck: Deck = {
     title: 'T',
-    intro: [slide('slides/intro/welcome.html')],
-    courses: [{ id: 'demo', title: 'Demo', slides: [slide('courses/demo/slides/a.html'), slide('courses/demo/slides/b.html'), slide('courses/demo/slides/c.html')] }],
+    intro: [slide('intro/welcome.html')],
+    courses: [{ id: 'demo', title: 'Demo', slides: [slide('demo/slides/a.html'), slide('demo/slides/b.html'), slide('demo/slides/c.html')] }],
   };
   let n = 0;
   const service = {
@@ -85,17 +85,17 @@ describe('EditorStore', () => {
 
   it('stops saving a slide changed on disk until it is reloaded, and keeps saving the others', async () => {
     const { store, service } = await opened();
-    service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/a.html'));
+    service.saveSlide.mockRejectedValueOnce(new ConflictError('demo/slides/a.html'));
     store.updateSlide(s => ({ ...s, notes: 'a' }));
     await vi.advanceTimersByTimeAsync(500);
     expect(store.status()).toBe('conflict');
-    expect(store.conflicts()).toEqual(['courses/demo/slides/a.html']);
+    expect(store.conflicts()).toEqual(['demo/slides/a.html']);
     store.updateSlide(s => ({ ...s, notes: 'a2' }));
     store.openSlide(1);
     store.updateSlide(s => ({ ...s, notes: 'b' }));
     await vi.advanceTimersByTimeAsync(500);
     expect(service.saveSlide.mock.calls.map(c => [c[0].path, c[0].notes])).toEqual([
-      ['courses/demo/slides/a.html', 'a'], ['courses/demo/slides/b.html', 'b'],
+      ['demo/slides/a.html', 'a'], ['demo/slides/b.html', 'b'],
     ]);
     store.openSlide(0);
     await store.reloadConflicts();
@@ -105,13 +105,13 @@ describe('EditorStore', () => {
 
   it('reloading after a conflict first saves the edits waiting on other slides', async () => {
     const { store, service } = await opened();
-    service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/a.html'));
+    service.saveSlide.mockRejectedValueOnce(new ConflictError('demo/slides/a.html'));
     store.updateSlide(s => ({ ...s, notes: 'a' }));
     await vi.advanceTimersByTimeAsync(500);
     store.openSlide(1);
     store.updateSlide(s => ({ ...s, notes: 'b' }));
     await store.reloadConflicts();
-    expect(service.saveSlide).toHaveBeenLastCalledWith(expect.objectContaining({ path: 'courses/demo/slides/b.html', notes: 'b' }));
+    expect(service.saveSlide).toHaveBeenLastCalledWith(expect.objectContaining({ path: 'demo/slides/b.html', notes: 'b' }));
   });
 
   it('retries a failed save and stays in error until it works', async () => {
@@ -129,30 +129,30 @@ describe('EditorStore', () => {
 
   it('an order file changed on disk is a conflict too', async () => {
     const { store, service } = await opened();
-    service.saveOrder.mockRejectedValueOnce(new ConflictError('courses/demo/slides/deck.json'));
+    service.saveOrder.mockRejectedValueOnce(new ConflictError('demo/slides/deck.json'));
     await store.moveSlide(0, 1);
-    expect(store.conflicts()).toEqual(['courses/demo/slides/deck.json']);
+    expect(store.conflicts()).toEqual(['demo/slides/deck.json']);
     await store.reloadConflicts();
     expect(store.status()).toBe('saved');
-    expect(store.slides()[0].path).toBe('courses/demo/slides/a.html');
+    expect(store.slides()[0].path).toBe('demo/slides/a.html');
   });
 
   it('moves a slide and saves the new order', async () => {
     const { store, service } = await opened();
     await store.moveSlide(0, 2);
     expect(service.saveOrder).toHaveBeenCalledWith(expect.anything(), 'demo', [
-      expect.objectContaining({ path: 'courses/demo/slides/b.html' }),
-      expect.objectContaining({ path: 'courses/demo/slides/c.html' }),
-      expect.objectContaining({ path: 'courses/demo/slides/a.html' }),
+      expect.objectContaining({ path: 'demo/slides/b.html' }),
+      expect.objectContaining({ path: 'demo/slides/c.html' }),
+      expect.objectContaining({ path: 'demo/slides/a.html' }),
     ]);
-    expect(store.slide()!.path).toBe('courses/demo/slides/a.html');
+    expect(store.slide()!.path).toBe('demo/slides/a.html');
   });
 
   it('picks the next name when a new slide file already exists on disk', async () => {
     const { store, service } = await opened();
-    service.saveSlide.mockRejectedValueOnce(new ConflictError('courses/demo/slides/slide-1.html'));
+    service.saveSlide.mockRejectedValueOnce(new ConflictError('demo/slides/slide-1.html'));
     await store.addSlide();
-    expect(store.slide()!.path).toBe('courses/demo/slides/slide-2.html');
+    expect(store.slide()!.path).toBe('demo/slides/slide-2.html');
     expect(store.status()).toBe('saved');
   });
 
@@ -160,10 +160,10 @@ describe('EditorStore', () => {
     const { store, service } = await opened();
     await store.addSlide();
     expect(store.slides().map(s => s.path)).toEqual([
-      'courses/demo/slides/a.html', 'courses/demo/slides/slide-1.html', 'courses/demo/slides/b.html', 'courses/demo/slides/c.html',
+      'demo/slides/a.html', 'demo/slides/slide-1.html', 'demo/slides/b.html', 'demo/slides/c.html',
     ]);
     expect(store.slideIndex()).toBe(1);
-    expect(service.saveSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'courses/demo/slides/slide-1.html', etag: '' }));
+    expect(service.saveSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'demo/slides/slide-1.html', etag: '' }));
     expect(service.saveOrder).toHaveBeenCalled();
   });
 
@@ -179,9 +179,9 @@ describe('EditorStore', () => {
     const { store, service } = await opened();
     store.openSlide(2);
     await store.deleteSlide();
-    expect(service.deleteSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'courses/demo/slides/c.html' }));
+    expect(service.deleteSlide).toHaveBeenCalledWith(expect.objectContaining({ path: 'demo/slides/c.html' }));
     expect(service.saveOrder.mock.invocationCallOrder[0]).toBeLessThan(service.deleteSlide.mock.invocationCallOrder[0]);
-    expect(service.saveOrder.mock.calls[0][2].map((s: Slide) => s.path)).not.toContain('courses/demo/slides/c.html');
+    expect(service.saveOrder.mock.calls[0][2].map((s: Slide) => s.path)).not.toContain('demo/slides/c.html');
     expect(store.slides().length).toBe(2);
     expect(store.slideIndex()).toBe(1);
   });

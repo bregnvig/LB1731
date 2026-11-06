@@ -1,11 +1,11 @@
 // Serves the built slides app and a small file API over the slide content.
-// Usage: node server/server.mjs [--root <angular-advanced dir>] [--port 4300]
+// Usage: node server/server.mjs <deck folder> [--port 4300]
 import http from 'node:http';
 import { readFile, writeFile, unlink, mkdir } from 'node:fs/promises';
-import { dirname, extname, join, resolve } from 'node:path';
+import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { isAllowedPath, etagOf, loadDeck } from './files.mjs';
+import { isAllowedPath, etagOf, loadDeck, deckRootArg } from './files.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -79,8 +79,8 @@ export function createServer({ root, dist, routes = {} }) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { values } = parseArgs({ options: { root: { type: 'string', default: join(here, '../..') }, port: { type: 'string', default: '4300' } } });
-  const root = resolve(values.root);
+  const { values, positionals } = parseArgs({ allowPositionals: true, options: { port: { type: 'string', default: '4300' } } });
+  const root = deckRootArg(positionals[0], 'npm start -- <deck> [--port 4300]');
   const port = Number(values.port);
   const routes = {
     // The editor's Export PDF button.
