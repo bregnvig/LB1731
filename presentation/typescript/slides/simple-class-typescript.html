@@ -1,0 +1,21 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Simple class TypeScript</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:215px;width:809.503px;height:auto;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px;"><code class="language-typescript">class Vat {
+  private static VAT = 1.25;
+  calculate(amount: number) {
+    return amount * Vat.VAT;
+  }
+}
+
+const v = new Vat();
+console.log(v.calculate(100));
+// Compile error: 'VAT' is private and only accessible within class 'Vat'
+Vat.VAT = 1.30;</code></pre>
+  </div>
+  <div class="block" data-type="image" data-name="image-1" data-keep-ratio data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:182.4px;top:576px;width:1075.2px;height:116.604px;z-index:13">
+    <img src="images/simple-class-typescript-1.png" alt="">
+  </div>
+</section>

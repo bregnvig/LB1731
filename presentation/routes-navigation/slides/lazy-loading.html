@@ -1,0 +1,24 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Lazy loading</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:512px;height:auto;z-index:11;text-align:left">
+    <p>Loads the feature when needed - saves bandwidth and browser memory</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:311px;width:1152px;height:auto;z-index:12">
+    <pre style="font-size: 22px; line-height: 26px; tab-size: 4;"><code class="language-typescript" data-line-numbers="2-5">const routes: Routes = [
+  {
+    path: 'orders',
+    loadChildren: () =&gt; import('app/order/order.routes').then(m =&gt; m.OrderRoutes)
+  },
+  {
+    path: 'invoice',
+    component: InvoicesComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'orders'
+  }
+]</code></pre>
+  </div>
+</section>

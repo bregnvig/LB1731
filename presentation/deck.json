@@ -1,0 +1,22 @@
+{
+  "title": "Angular Foundation",
+  "slides": [
+    {
+      "file": "angular-foundation.html"
+    }
+  ],
+  "courses": [
+    "welcome",
+    "introduction",
+    "typescript",
+    "angular-cli",
+    "components",
+    "input-output",
+    "angular-modules",
+    "services",
+    "async-programming-ajax",
+    "forms",
+    "routes-navigation",
+    "thank-you"
+  ]
+}

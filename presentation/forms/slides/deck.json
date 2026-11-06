@@ -1,0 +1,80 @@
+{
+  "title": "Forms",
+  "slides": [
+    {
+      "file": "forms.html"
+    },
+    {
+      "file": "forms-in-angular.html"
+    },
+    {
+      "file": "template-driven.html"
+    },
+    {
+      "file": "ngform-directive.html"
+    },
+    {
+      "file": "ngform-directive-properties.html"
+    },
+    {
+      "file": "ngmodel-directive.html"
+    },
+    {
+      "file": "ngmodel-directive-2.html"
+    },
+    {
+      "file": "template-reference-variable-error-messag.html"
+    },
+    {
+      "file": "ngmodelgroup-directive.html"
+    },
+    {
+      "file": "ngmodelgroup-directive-2.html"
+    },
+    {
+      "file": "automatic-css-classes.html"
+    },
+    {
+      "file": "model-driven-forms.html"
+    },
+    {
+      "file": "model-driven-forms-2.html"
+    },
+    {
+      "file": "model-driven-templates.html"
+    },
+    {
+      "file": "model-driven-forms-3.html"
+    },
+    {
+      "file": "overview-of-content-and-validation.html"
+    },
+    {
+      "file": "why-reactive-forms.html"
+    },
+    {
+      "file": "reactive-example.html"
+    },
+    {
+      "file": "since-v22.html"
+    },
+    {
+      "file": "signal-forms.html"
+    },
+    {
+      "file": "the-model-the-form.html"
+    },
+    {
+      "file": "the-template.html"
+    },
+    {
+      "file": "field-state-is-signals-all-the-way-down.html"
+    },
+    {
+      "file": "which-should-i-choose-pre-v22.html"
+    },
+    {
+      "file": "which-should-i-choose-since-v22.html"
+    }
+  ]
+}

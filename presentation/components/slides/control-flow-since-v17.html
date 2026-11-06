@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:44px;width:843px;height:auto;z-index:11;text-align:left">
+    <h2>Control flow since v17</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:86px;width:843px;height:auto;z-index:12;text-align:left">
+    <h3>Adding or removing DOM elements</h3>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:122px;width:985.12px;height:auto;z-index:10">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7-9">@Component({
+  selector: 'app-ng-for',
+  template: `
+    &lt;div&gt;
+      &lt;input #input (keyup.enter)="addInput(input.value)"&gt;
+      &lt;ul&gt;
+		@for(item of items; track item) {
+          &lt;li&gt;{{item}}&lt;/li&gt;
+		}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  `,
+})
+export class NgforComponent {
+  items: string[] = ['foo', 'bar'];
+  addInput(input: string) {
+    this.items.push(input);
+  }
+}</code></pre>
+  </div>
+</section>

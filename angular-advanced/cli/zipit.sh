@@ -12,6 +12,7 @@ trap 'rm -rf "$stage"' EXIT
 
 for course in courses/*/; do
   course=$(basename "$course")
+  [[ -d "courses/$course/labs" || -d "courses/$course/step-1" ]] || continue  # courses/intro: slides only
   cli/stage-course.sh "$course" "$stage/labs/$course" "$stage/solutions/$course"
 done
 rsync -a --exclude node_modules --exclude dist --exclude .angular --exclude '*.sh' --exclude /README.md demo/ "$stage/demo/"

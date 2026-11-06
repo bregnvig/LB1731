@@ -1,0 +1,26 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>The parent component</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:80px;top:191px;width:1185px;height:auto;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="4-6">@Component({
+  selector: 'app-io-event',
+  template: `
+  &lt;app-io-event-child
+    (interval)="newsletterInterval = $event"&gt;
+  &lt;/app-io-event-child&gt;
+  &lt;p&gt;
+    Newsletter interval: {{newsletterInterval}}
+  &lt;/p&gt;
+  `,
+})
+export class IOEventComponent {
+  newsletterInterval?: string;
+}
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:480px;top:647px;width:762px;height:auto;z-index:12">
+    <p>The magic keyword <span style="color:#ff8c00">$event</span>&nbsp;- Use it to get the value being emitted. No matter what kind of output you used</p>
+  </div>
+  <div class="block" data-type="line" data-name="arrow-1" data-x1="129" data-y1="309" data-x2="0" data-y2="0" data-color="#ffffff" data-width="5" data-start="none" data-end="arrow" style="left:701px;top:338px;width:129px;height:309px;z-index:13"></div>
+</section>

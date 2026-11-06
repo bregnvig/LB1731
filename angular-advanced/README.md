@@ -4,9 +4,8 @@ Course material for Angular Advanced: the exercises, the demo app, the slides an
 
 | Folder | What's in it |
 |--------|--------------|
-| [`courses/`](courses/README.md) | One folder per course: its exercise steps and its slides. The README describes every course. |
+| [`courses/`](courses/README.md) | One folder per course: its exercise steps and its slides. Also the deck order (`deck.json`) and the intro slides (`intro/`). The README describes every course. |
 | [`demo/`](demo/README.md) | The demo app shown during the courses. The README is the presenter's walkthrough (not shipped in `demo.zip`). |
-| [`slides/`](slides/README.md) | Deck order, intro slides, and the tool to present, export and edit them. |
 | `cli/` | The `adv` CLI (`cli/bin/adv`) and the scripts it runs. |
 
 ## Workspace
@@ -21,4 +20,4 @@ All dependencies live in `angular-advanced/package.json`, with every project as 
 
 ## Slides
 
-The slides live next to the exercises: `courses/<course>/slides/` holds each course's slides, and `slides/` holds the deck order, the intro slides and the tool. `adv slides` starts the editor (`/edit`), the presentation (`/present`) and the presenter view (`/presenter`) on http://localhost:4300, and `adv slides pdf` writes the student PDF. `slides/README.md` describes the slide files and how to work on the tool, which has its own `package.json` in `slides/`.
+The slides live next to the exercises: `courses/` is the deck folder, with `courses/deck.json` (deck title and course order), `courses/intro/` (the intro slides) and `courses/<course>/slides/` (each course's slides). The tool that presents and edits them is shared with Angular Foundation and lives in [`../slides/`](../slides/README.md). `adv slides` starts it on `courses/`: the editor (`/edit`), the presentation (`/present`) and the presenter view (`/presenter`) on http://localhost:4300. `adv slides pdf` writes the student PDF. `../slides/README.md` describes the slide files and how to work on the tool, which has its own `package.json`.

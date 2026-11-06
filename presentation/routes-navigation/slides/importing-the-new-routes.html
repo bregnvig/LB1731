@@ -1,0 +1,17 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:710px;height:auto;z-index:10;text-align:left">
+    <h2>Importing the new routes</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:176px;width:962px;height:auto;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="3">bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(AppRouting),
+    provideHttpClient(),
+    importProvidersFrom(BrowserModule, NgbModule)]
+})
+  .catch(err =&gt; console.error(err));</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:398px;width:600px;height:auto;z-index:12">
+    <pre>main.ts</pre>
+  </div>
+</section>

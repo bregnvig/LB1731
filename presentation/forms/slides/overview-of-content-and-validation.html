@@ -1,0 +1,50 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:102px;width:800px;height:auto;z-index:10;text-align:left">
+    <h2>Overview of content and validation</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:70px;top:319px;width:1140px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px;"><code class="language-typescript" data-line-numbers="">export class ProfileComponent {
+
+  #model: Person = {
+    firstName: 'Flemming', lastName: 'Bregnvig',
+    favoriteColor: 'Blue', height: 182, shoeSize: 43
+  };
+  
+  fg: FormGroup&lt;PersonForm&gt; = new FormGroup({
+    firstName: new FormControl(this.#model.firstName, Validators.required),
+    lastName: new FormControl(this.#model.lastName, Validators.required),
+    favoriteColor: new FormControl(this.#model.favoriteColor),
+    height: new FormControl(this.#model.height, [Validators.min(100), Validators.max(220)]),
+  });
+}</code></pre>
+  </div>
+  <div class="block fragment" data-type="code" data-name="code-2" data-theme="dark" data-auto-height data-fragment-index="0" style="left:49.75px;top:199px;width:1180.5px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px;"><code class="language-xml" data-line-numbers="">&lt;div class="container"&gt;
+  &lt;h3&gt;Person form&lt;/h3&gt;
+  &lt;form #form="ngForm" (ngSubmit)="logValue(form.value)"&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="firstName"&gt;First name&lt;/label&gt;
+      &lt;input required type="text" class="form-control" [ngModel]="model.firstName" name="firstName"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="lastName"&gt;Last name&lt;/label&gt;
+      &lt;input type="text" class="form-control" required [ngModel]="model.lastName" name="lastName"&gt;&lt;br&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="favoriteColor"&gt;Favorite color&lt;/label&gt;
+      &lt;select class="form-control" [ngModel]="model.favoriteColor" name="favoriteColor"&gt;
+        @for (color of colors; track color) {
+          &lt;option [value]="color"&gt;{{color}}&lt;/option&gt;
+        }
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group mb-3"&gt;
+      &lt;label for="height"&gt;Height&lt;/label&gt;
+      &lt;input type="number" min=100 class="form-control" [ngModel]="model.height" name="eight" max=220&gt;
+    &lt;/div&gt;
+    &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+  <aside class="notes">Notice the spelling error in the height input</aside>
+</section>

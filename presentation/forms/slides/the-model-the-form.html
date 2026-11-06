@@ -1,0 +1,29 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:60px;width:900px;height:auto;z-index:10;text-align:left">
+    <h2>The model &amp; the form</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:150px;width:1050px;height:auto;z-index:11">
+    <pre style="font-size: 17px; line-height: 20px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1-7|11-13|15-20">export interface Person {
+  firstName: string;
+  lastName: string;
+  favoriteColor: string;
+  height: number | null;
+  shoeSize: number;
+}
+
+export class SignalFormComponent {
+
+  #model = signal&lt;Person&gt;({
+    firstName: 'Flemming', lastName: 'Bregnvig',
+    favoriteColor: 'Blue', height: 182, shoeSize: 43 });
+
+  protected form = form(this.#model, (person) =&gt; {
+    required(person.firstName);
+    required(person.lastName);
+    min(person.height, 100);
+    max(person.height, 220);
+  });
+
+}</code></pre>
+  </div>
+</section>
