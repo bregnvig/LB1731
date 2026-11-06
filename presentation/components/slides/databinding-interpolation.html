@@ -1,0 +1,22 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:843px;height:auto;z-index:10;text-align:left">
+    <h2>Databinding interpolation</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:150px;width:843px;height:auto;z-index:11;text-align:left">
+    <pre>Use <span style="color:#FF8C00">{{ VALUE }}</span>&nbsp;to write to the screen</pre>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:255px;width:1047.12px;height:auto;z-index:12">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-xml" data-line-numbers="">&lt;ul&gt;
+  &lt;li&gt;Property string: {{myString}}&lt;/li&gt;
+  &lt;li&gt;Property number: {{myNumber}}&lt;/li&gt;
+  &lt;li&gt;Property object: {{myObject.someProperty}}&lt;/li&gt;
+  &lt;li&gt;Property null: {{myNull}}&lt;/li&gt;
+  &lt;!--&lt;li&gt;Property null - will fail: {{myNull.someProperty}}&lt;/li&gt;--&gt;
+  &lt;li&gt;Property null - wont fail: {{myNull?.someProperty}}&lt;/li&gt;
+  &lt;li&gt;Simple method: {{simpleMethod()}}&lt;/li&gt;
+  &lt;li&gt;Parameter method: {{parameterMethod('world')}}&lt;/li&gt;
+  &lt;li&gt;Simple expressions: {{isCreating ? 'Create': 'Update'}}&lt;/li&gt;
+  &lt;!--&lt;li&gt;New object - will fail {{new Date()}}&lt;/li&gt;--&gt;
+&lt;/ul&gt;</code></pre>
+  </div>
+</section>

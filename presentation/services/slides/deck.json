@@ -1,0 +1,38 @@
+{
+  "title": "Services",
+  "slides": [
+    {
+      "file": "services.html"
+    },
+    {
+      "file": "what-is-a-angular-service.html"
+    },
+    {
+      "file": "what-is-a-angular-service-2.html"
+    },
+    {
+      "file": "service-class-example.html"
+    },
+    {
+      "file": "using-a-service.html"
+    },
+    {
+      "file": "injector-providers.html"
+    },
+    {
+      "file": "injector.html"
+    },
+    {
+      "file": "how-to-provide-a-dependency.html"
+    },
+    {
+      "file": "what-else-can-i-do.html"
+    },
+    {
+      "file": "injectable.html"
+    },
+    {
+      "file": "exercise-7.html"
+    }
+  ]
+}

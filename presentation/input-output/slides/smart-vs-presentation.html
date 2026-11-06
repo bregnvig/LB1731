@@ -1,0 +1,36 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Smart vs. presentation</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:216px;width:512px;height:auto;z-index:11;text-align:left">
+    <ul>
+	<li>
+	<p>Make the “main” component in a feature smart</p>
+
+	<ul>
+		<li>
+		<p>It knows how to fetch data</p>
+		</li>
+		<li>
+		<p>It knows what services this features depends on</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Make “internal” components presentation components</p>
+
+	<ul>
+		<li>
+		<p>They know nothing of context</p>
+		</li>
+		<li>
+		<p>They get their data from the smart parent</p>
+		</li>
+		<li>
+		<p>They communicate with their smart parent using EventEmitter</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+  </div>
+</section>

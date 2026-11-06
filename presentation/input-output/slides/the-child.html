@@ -1,0 +1,33 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:58.0476px;top:51px;width:1098px;height:auto;z-index:10;text-align:left">
+    <h2><strong>The child</strong></h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:14.145px;top:104px;width:1251.71px;height:auto;z-index:11">
+    <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="">@Component({
+  selector: 'app-stopwatch',
+  template: '{{seconds()}}',
+})
+export class StopwatchComponent {
+  seconds = signal&lt;number&gt;(0);
+  #intervalNo?: number;
+  start() {
+    this.#intervalNo = setInterval(() =&gt; this.seconds.update(value =&gt; value + 1), 1000);
+  }
+  stop() {
+    clearInterval(this.#intervalNo);
+  }
+  reset() {
+    this.stop();
+    this.seconds.set(0);
+  }
+}</code></pre>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="code-1" style="left:245.577px;top:275.915px;width:781.566px;height:392.857px;z-index:12">
+    <div class="block" data-type="text" data-name="text-1" style="left:181.566px;top:392.857px;width:600px;height:auto;z-index:13;text-align:left">
+      <p>Notice the new writeable signal</p>
+    </div>
+    <div class="block" data-type="line" data-name="arrow-1" data-x1="340.47499999999997" data-y1="392.857" data-x2="0" data-y2="0" data-color="#ffffff" data-width="5" data-start="none" data-end="arrow" style="left:104.762px;top:0px;width:340.475px;height:392.857px;z-index:14"></div>
+    <div class="block" data-type="line" data-name="arrow-2" data-x1="0" data-y1="298.81000000000006" data-x2="197.61900000000003" data-y2="0" data-color="#ffffff" data-width="5" data-start="none" data-end="arrow" style="left:445.237px;top:94.047px;width:197.619px;height:298.81px;z-index:15"></div>
+    <div class="block" data-type="line" data-name="arrow-3" data-x1="445.23699999999997" data-y1="96.42900000000009" data-x2="0" data-y2="0" data-color="#ffffff" data-width="5" data-start="none" data-end="arrow" style="left:0px;top:296.428px;width:445.237px;height:96.429px;z-index:16"></div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:512px;height:auto;z-index:10;text-align:left">
+    <h2>Using a service</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:40px;top:247px;width:520px;height:auto;z-index:11">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7">@Component({
+  selector: 'app-non-provided',
+  template: 'Will never work'
+})
+export class NonProvidedComponent {
+  
+  #service = inject(NonProvidedService);
+
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:80px;top:504px;width:600px;height:auto;z-index:12">
+    <p style="text-align: left;">But this fails 😲</p>
+
+<p style="text-align: left;">Why? Dependency injection (DI), injectors and providers!</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:584px;top:247px;width:683px;height:auto;z-index:13">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="7">@Component({
+  selector: 'app-non-provided',
+  template: 'Will never work'
+})
+export class NonProvidedComponent {
+  
+  constructor(private service: NonProvidedService) {
+    
+  }
+
+}</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-2" style="left:40px;top:211px;width:520px;height:auto;z-index:14">
+    <p style="text-align:left">Since v14 - and preferred</p>
+  </div>
+  <div class="block" data-type="text" data-name="text-3" style="left:584px;top:211px;width:520px;height:auto;z-index:15">
+    <p style="text-align:left">Prior to v14</p>
+  </div>
+</section>

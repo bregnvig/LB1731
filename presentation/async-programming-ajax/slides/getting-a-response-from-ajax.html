@@ -1,0 +1,16 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:685px;height:auto;z-index:10;text-align:left">
+    <h2>Getting a response from AJAX</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:179.5px;width:600px;height:auto;z-index:11">
+    <p style="text-align: left;">We need to <span style="color:#ff8c00">subscribe</span> to the Observable - kind alike <span style="color:#ff8c00">.then</span> with promises</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:70px;top:305.5px;width:1130px;height:auto;z-index:12">
+    <pre style="font-size: 20px; line-height: 24px; tab-size: 4;"><code class="language-typescript" data-line-numbers="1">this.#service.getDrivers().subscribe(response =&gt; this.drivers.set(response.map((driver: any) =&gt; ({
+  driverNumber: driver.driver_number.toString(),
+  firstName: driver.first_name,
+  photoURL: driver.headshot_url,
+  lastName: driver.last_name,
+}))));</code></pre>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:108px;width:1125px;height:auto;z-index:10;text-align:left">
+    <h2>Depending data sources - use computed</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:64px;top:161.5px;width:576px;height:auto;z-index:11;text-align:left">
+    <p>What if I have depending data source. E.g. I need my current geo location and the playground's position to calculate distance</p>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:288px;width:896px;height:auto;z-index:12">
+    <pre style="font-size: 16px; line-height: 19px; tab-size: 4;"><code class="language-typescript" data-line-numbers="11-19|4">@Component({
+  selector: 'app-playground',
+  template: `
+	{{ playground()?.name }} is {{ distance() }} away
+  ` 
+})
+export class PlaygroundComponent {
+  playground = input.required&lt;Playground&gt;();
+  location = input.required&lt;Coordinate&gt;();
+  
+  distance = computed(() =&gt; {
+    const playground = this.playground();
+    const location = this.location();
+    
+    if (playground &amp;&amp; location) {
+      return `${getDistance(location, playground.position)}m`;
+    }
+    return 'unknown distance'
+  });
+}</code></pre>
+  </div>
+  <aside class="notes">Every time either playground or location change this computed will be called again.</aside>
+</section>

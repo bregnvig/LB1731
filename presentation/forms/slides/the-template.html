@@ -1,0 +1,36 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:64px;top:60px;width:900px;height:auto;z-index:10;text-align:left">
+    <h2>The template</h2>
+  </div>
+  <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:64px;top:141px;width:1050px;height:auto;z-index:11">
+    <pre style="font-size: 17px; line-height: 20px; tab-size: 4;"><code class="language-xml" data-line-numbers="1|4,8,14-17,22|24">&lt;form [formRoot]="form" (submit)="onSubmit()"&gt;
+  &lt;fieldset&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="firstName"&gt;First name&lt;/label&gt;
+      &lt;input type="text" class="form-control" id="firstName" [formField]="form.firstName"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="lastName"&gt;Last name&lt;/label&gt;
+      &lt;input type="text" class="form-control" id="lastName" [formField]="form.lastName"&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;div class="form-group"&gt;
+    &lt;label for="favoriteColor"&gt;Favorite color&lt;/label&gt;
+    &lt;select class="form-control" id="favoriteColor" [formField]="form.favoriteColor"&gt;
+      @for (color of colors; track color) {
+      	&lt;option [value]="color"&gt;{{color}}&lt;/option&gt;
+      }
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group mb-3"&gt;
+    &lt;label for="height"&gt;Height&lt;/label&gt;
+    &lt;input type="number" class="form-control" id="height" [formField]="form.height"&gt;
+  &lt;/div&gt;
+  &lt;button type="submit" class="btn btn-primary" [disabled]="form().invalid()"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:70px;top:668.333px;width:1050px;height:auto;z-index:12;text-align:left">
+    <p><code>[formField]</code> binds one field - the field tree knows its own type</p>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+{
+  "title": "Introduction",
+  "slides": [
+    {
+      "file": "introduction.html"
+    },
+    {
+      "file": "what-is-angular.html"
+    },
+    {
+      "file": "why-angular.html"
+    },
+    {
+      "file": "angular-architecture.html"
+    },
+    {
+      "file": "components.html"
+    },
+    {
+      "file": "components-the-class.html"
+    },
+    {
+      "file": "components-the-template.html"
+    },
+    {
+      "file": "components-the-template-2.html"
+    },
+    {
+      "file": "components-the-metadata.html"
+    },
+    {
+      "file": "components-the-metadata-2.html"
+    },
+    {
+      "file": "without-data-binding.html"
+    },
+    {
+      "file": "data-binding.html"
+    },
+    {
+      "file": "data-binding-2.html"
+    },
+    {
+      "file": "services.html"
+    },
+    {
+      "file": "dependency-injection.html"
+    },
+    {
+      "file": "dependency-injection-2.html"
+    },
+    {
+      "file": "angular-modules.html"
+    },
+    {
+      "file": "angular-architecture-2.html"
+    }
+  ]
+}

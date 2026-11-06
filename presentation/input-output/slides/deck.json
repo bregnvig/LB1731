@@ -1,0 +1,71 @@
+{
+  "title": "Input & output",
+  "slides": [
+    {
+      "file": "input-output.html"
+    },
+    {
+      "file": "input-output-scenarios.html"
+    },
+    {
+      "file": "input-function.html"
+    },
+    {
+      "file": "before-moving-on.html"
+    },
+    {
+      "file": "create-and-manage-dynamic-data.html"
+    },
+    {
+      "file": "the-parent-component.html"
+    },
+    {
+      "file": "the-child-component-transforming-the-val.html"
+    },
+    {
+      "file": "input.html"
+    },
+    {
+      "file": "the-child-component.html"
+    },
+    {
+      "file": "the-child-component-transform-the-value.html"
+    },
+    {
+      "file": "output-function.html"
+    },
+    {
+      "file": "the-child-component-2.html"
+    },
+    {
+      "file": "output.html"
+    },
+    {
+      "file": "the-child-component-3.html"
+    },
+    {
+      "file": "the-parent-component-2.html"
+    },
+    {
+      "file": "parent-interact-using-template-reference.html"
+    },
+    {
+      "file": "parent-interact-using-template-reference-2.html"
+    },
+    {
+      "file": "the-child-component-4.html"
+    },
+    {
+      "file": "the-child.html"
+    },
+    {
+      "file": "smart-vs-presentation.html"
+    },
+    {
+      "file": "smart-vs-presentation-2.html"
+    },
+    {
+      "file": "exercise-5.html"
+    }
+  ]
+}

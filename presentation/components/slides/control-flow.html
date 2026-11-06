@@ -1,0 +1,62 @@
+<section>
+  <div class="block" data-type="text" data-name="title" style="left:60.22px;top:50px;width:843px;height:auto;z-index:10;text-align:left">
+    <h2>Control flow</h2>
+  </div>
+  <div class="block" data-type="text" data-name="text-1" style="left:60.22px;top:92px;width:843px;height:auto;z-index:11;text-align:left">
+    <h3>Adding or removing DOM elements</h3>
+  </div>
+  <div class="block" data-type="group" data-name="group-1" style="left:40px;top:162px;width:600px;height:37px;z-index:15">
+    <div class="block" data-type="code" data-name="code-1" data-theme="dark" data-auto-height style="left:6.88px;top:37px;width:593.12px;height:auto;z-index:16">
+      <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5-7">@Component({
+  selector: 'app-ng-if',
+  template: `
+    &lt;button (click)="toggle()"&gt;Toggle&lt;/button&gt;
+    @if(show) {
+      &lt;p&gt;@if works!&lt;/p&gt;
+    }
+  `
+})
+export class NgIfComponent {
+  show = true;
+  toggle() {
+    this.show = !this.show;
+  }
+}</code></pre>
+    </div>
+    <div class="block" data-type="text" data-name="text-2" style="left:0px;top:0px;width:600px;height:auto;z-index:17">
+      <p>Since v17</p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-2" style="left:660px;top:162px;width:600px;height:37px;z-index:12">
+    <div class="block" data-type="code" data-name="code-2" data-theme="dark" data-auto-height style="left:3.44px;top:37px;width:593.12px;height:auto;z-index:13">
+      <pre style="font-size: 24px; line-height: 29px; tab-size: 4;"><code class="language-typescript" data-line-numbers="5-7,9">@Component({
+  selector: 'app-ng-if',
+  template: `
+    &lt;button (click)="toggle()"&gt;Toggle&lt;/button&gt;
+    &lt;p *ngIf="show"&gt;
+      ngIf works!
+    &lt;/p&gt;
+  `,
+  imports: [NgIf]
+})
+export class NgIfComponent {
+  show = true;
+  toggle() {
+    this.show = !this.show;
+  }
+}</code></pre>
+    </div>
+    <div class="block" data-type="text" data-name="text-3" style="left:0px;top:0px;width:600px;height:auto;z-index:14">
+      <p>Pre v17</p>
+    </div>
+  </div>
+  <div class="block" data-type="group" data-name="group-3" data-animate="fade-in" data-animate-duration="0.6" data-animate-delay="0" data-animate-on="group-2" style="left:20px;top:350.5px;width:825px;height:316.5px;z-index:18">
+    <div class="block" data-type="text" data-name="text-4" style="left:0px;top:316.5px;width:600px;height:auto;z-index:19;text-align:center">
+      <p style="text-align:right"><strong><span style="color:#B22222">Deprecated since v20</span></strong></p>
+    </div>
+    <div class="block" data-type="line" data-name="arrow-1" data-x1="0" data-y1="314" data-x2="224" data-y2="0" data-color="#cc4125" data-width="6" data-start="none" data-end="arrow" style="left:601px;top:0px;width:224px;height:314px;z-index:20"></div>
+  </div>
+  <aside class="notes">Insert and remove if the statement is either truthy or falsy.
+
+These are also kind of deprecated. Do not use *ngIf if you are working with v17+</aside>
+</section>
