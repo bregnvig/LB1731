@@ -5,9 +5,9 @@
   <div class="block" data-type="text" data-name="text-1" style="left:38px;top:234px;width:550px;height:auto;z-index:12;text-align:left">
     <p><span style="font-size:0.7em">Let’s finish off by injecting the service into the app component.</span></p>
 
-<p><span style="font-size:0.7em">We do that by adding one parameter to the app components constructor. Like this:</span></p>
+<p><span style="font-size:0.7em">We do that with the <span style="color:#ff8c00"><code>inject</code></span> function in the app components constructor. Like this:</span></p>
 
-<p><span style="color:#ff8c00"><code><span style="font-size:0.7em">service: PlaygroundService</span></code></span></p>
+<p><span style="color:#ff8c00"><code><span style="font-size:0.7em">const service = inject(PlaygroundService);</span></code></span></p>
 
 <p><span style="font-size:0.7em">Remove any and all reference to the <span style="color:#ff8c00"><code>MOCK_PLAYGROUNDS</code></span> array in the app component.</span></p>
 

@@ -5,16 +5,16 @@ import { Playground } from '../shared';
   selector: 'app-footer',
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    @if(playground(); as playground) {
+    @if(playground(); as p) {
       <footer>
-        <h3>{{playground.name}}</h3>
-        <p>{{playground.description}}</p>
-        <p>{{playground.addressDescription}}</p>
+        <h3>{{p.name}}</h3>
+        <p>{{p.addressDescription}}</p>
+        <p>{{p.description}}</p>
       </footer>
-  }
+    }
   `,
 })
 export class FooterComponent {
 
-  playground = input.required<Playground>();
+  playground = input.required<Playground | undefined>();
 }

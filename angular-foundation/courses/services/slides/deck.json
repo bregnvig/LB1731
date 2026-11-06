@@ -11,7 +11,10 @@
       "file": "what-is-a-angular-service-2.html"
     },
     {
-      "file": "service-class-example.html"
+      "file": "service-class-example-since-v22.html"
+    },
+    {
+      "file": "service-class-example-pre-v22.html"
     },
     {
       "file": "using-a-service.html"
@@ -23,13 +26,19 @@
       "file": "injector.html"
     },
     {
-      "file": "how-to-provide-a-dependency.html"
+      "file": "how-to-provide-a-dependency-since-v22.html"
+    },
+    {
+      "file": "how-to-provide-a-dependency-pre-v22.html"
     },
     {
       "file": "what-else-can-i-do.html"
     },
     {
-      "file": "injectable.html"
+      "file": "service-since-v22.html"
+    },
+    {
+      "file": "injectable-pre-v22.html"
     },
     {
       "file": "exercise-7.html"

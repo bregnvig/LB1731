@@ -5,7 +5,36 @@ import { Person } from '../person';
 
 @Component({
   selector: 'app-typed-form',
-  templateUrl: './typed-form.component.html',
+  template: `
+    <h2>Person typed form</h2>
+    <div class="container">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" formControlName="lastName">
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label for="favoriteColor">Favorite color</label>
+          <select class="form-control" formControlName="favoriteColor">
+            @for (color of colors; track color) {
+              <option [value]="color">{{color}}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group mb-3">
+          <label for="height">Height</label>
+          <input type="number" class="form-control" id="height" formControlName="height">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="fg.invalid">Submit</button>
+      </form>
+    </div>
+  `,
   imports: [
     ReactiveFormsModule
   ]

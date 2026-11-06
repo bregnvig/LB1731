@@ -7,10 +7,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  imports: [LeafletModule, SidebarComponent, FooterComponent],
+  template: `
+    <main class="vh-100 d-flex justify-content-center align-items-center">
+      <leaflet [center]="center" />
+    </main>
+    <app-sidebar [playgrounds]="appPlaygrounds" (selected)="playgroundSelected($event)" />
+    <app-footer [playground]="playground" />
+  `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: true,
+  imports: [LeafletModule, SidebarComponent, FooterComponent]
 })
 export class AppComponent {
 

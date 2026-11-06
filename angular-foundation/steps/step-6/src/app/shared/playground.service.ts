@@ -1,24 +1,22 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { inject, Service } from "@angular/core";
 import { Observable, shareReplay } from "rxjs";
 import { Playground } from "./playground";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class PlaygroundService {
 
-  #playgrounds$: Observable<Playground[]>;
+  playgrounds$: Observable<Playground[]>;
 
   constructor() {
     const http = inject(HttpClient);
-    this.#playgrounds$ = http.get<Playground[]>(`copenhagen.json`).pipe(
+    this.playgrounds$ = http.get<Playground[]>(`copenhagen.json`).pipe(
       shareReplay(1)
     );
   }
 
   getPlaygrounds(): Observable<Playground[]> {
-    return this.#playgrounds$;
+    return this.playgrounds$;
   }
 
 }
