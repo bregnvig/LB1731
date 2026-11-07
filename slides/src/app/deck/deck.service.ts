@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Deck, Slide, SlideFile } from './model';
 import { parseSlide, serializeSlide } from './slide-format';
+import { staticExport } from './static-export';
 
 /** The file changed on disk since it was loaded (an LLM, git or another window edited it). */
 export class ConflictError extends Error {
@@ -9,7 +10,7 @@ export class ConflictError extends Error {
   }
 }
 
-interface DeckJson { title: string; etag: string; slides: SlideFile[]; courses: { id: string; title: string; etag: string; slides: SlideFile[] }[] }
+export interface DeckJson { title: string; etag: string; slides: SlideFile[]; courses: { id: string; title: string; etag: string; slides: SlideFile[] }[] }
 
 const fileName = (path: string) => path.slice(path.lastIndexOf('/') + 1);
 const folder = (path: string) => path.slice(0, path.lastIndexOf('/'));
@@ -17,15 +18,19 @@ const folder = (path: string) => path.slice(0, path.lastIndexOf('/'));
 @Injectable({ providedIn: 'root' })
 export class DeckService {
   async load(): Promise<Deck> {
-    const res = await fetch('/api/deck');
-    if (!res.ok) throw new Error(`Loading the deck failed: ${res.status} ${await res.text()}`);
-    const json: DeckJson = await res.json();
+    const json = staticExport?.deck ?? await this.fetchDeck();
     return {
       title: json.title,
       etag: json.etag,
       intro: json.slides.map(parseSlide),
       courses: json.courses.map(c => ({ id: c.id, title: c.title, etag: c.etag, slides: c.slides.map(parseSlide) })),
     };
+  }
+
+  private async fetchDeck(): Promise<DeckJson> {
+    const res = await fetch('/api/deck');
+    if (!res.ok) throw new Error(`Loading the deck failed: ${res.status} ${await res.text()}`);
+    return res.json();
   }
 
   async saveSlide(slide: Slide): Promise<Slide> {
