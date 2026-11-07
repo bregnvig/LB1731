@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test --watch=false && node --test server/*.test.mjs",
     "e2e": "playwright test -c e2e/playwright.config.ts",
-    "pdf": "node scripts/pdf.mjs"
+    "pdf": "node scripts/pdf.mjs",
+    "export": "node scripts/export.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

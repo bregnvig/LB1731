@@ -1,0 +1,26 @@
+{
+  "title": "Exercise 2",
+  "slides": [
+    {
+      "file": "exercise-2.html"
+    },
+    {
+      "file": "install-typescript.html"
+    },
+    {
+      "file": "start-compilation.html"
+    },
+    {
+      "file": "create-an-interface.html"
+    },
+    {
+      "file": "create-the-class.html"
+    },
+    {
+      "file": "console-log.html"
+    },
+    {
+      "file": "execute-your-code.html"
+    }
+  ]
+}

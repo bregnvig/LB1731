@@ -1,0 +1,19 @@
+{
+  "title": "Exercises Angular Foundation",
+  "slides": [
+    {
+      "file": "exercises.html"
+    }
+  ],
+  "courses": [
+    "welcome",
+    "typescript",
+    "angular-cli",
+    "components",
+    "input-output",
+    "angular-modules",
+    "services",
+    "async-programming-ajax",
+    "routes-navigation"
+  ]
+}

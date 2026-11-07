@@ -1,4 +1,4 @@
-import { Component, computed, Signal } from '@angular/core';
+import { Component, computed, effect, inject, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Center, LeafletModule, Marker } from '@loopme/leaflet';
@@ -12,13 +12,12 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   selector: 'app-map',
   template: `
     <main class="vh-100 d-flex justify-content-center align-items-center">
-      <leaflet [center]="center()" [markers]="markers()"></leaflet>
+      <leaflet [center]="center()" [markers]="markers()" />
     </main>
-    <app-sidebar [playgrounds]="appPlaygrounds()" [selectedPlayground]="playground()" (selected)="playgroundSelected($event)"/>
-    @if(playground(); as p) {
-      <app-footer [playground]="p"/>
-    }
+    <app-sidebar [playgrounds]="appPlaygrounds()" [selectedPlayground]="playground()" (selected)="playgroundSelected($event)" />
+    <app-footer [playground]="playground()" />
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     LeafletModule,
     SidebarComponent,
@@ -32,13 +31,20 @@ export class MapComponent {
   center: Signal<Center>;
   markers: Signal<Marker[]>;
 
-  constructor(
-    service: PlaygroundService,
-    locationService: LocationService,
-    route: ActivatedRoute,
-    private router: Router) {
+  private router = inject(Router);
+
+  constructor() {
+    const service = inject(PlaygroundService);
+    const locationService = inject(LocationService);
+    const route = inject(ActivatedRoute);
 
     this.appPlaygrounds = toSignal(service.getPlaygrounds(), { initialValue: [] });
+    effect(() => {
+      const current = locationService.current();
+      if (current) {
+        console.log('Got your location', current);
+      }
+    });
 
     this.playground = toSignal<Playground | undefined>(
       route.params.pipe(
@@ -55,7 +61,7 @@ export class MapComponent {
     });
     this.center = computed(() => {
       const playground = this.playground();
-      return playground?.position ? { ...playground.position, zoom: 12 } : { lat: 56.360029, lng: 10.746635, zoom: 7 };
+      return playground?.position ? { ...playground.position, zoom: 14 } : { lat: 56.360029, lng: 10.746635, zoom: 7 };
     });
   }
 

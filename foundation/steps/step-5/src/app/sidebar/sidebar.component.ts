@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MOCK_PLAYGROUNDS } from '../shared/mock-playgrounds';
 import { Playground } from '../shared/playground';
 
 @Component({
   selector: 'app-sidebar',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <aside class="shadow" tabindex="1">
       <nav>

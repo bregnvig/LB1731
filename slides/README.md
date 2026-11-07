@@ -9,11 +9,14 @@ Every command takes the deck folder: the folder that holds `deck.json`. A relati
 ```bash
 npm start -- <deck>                  # builds and serves on http://localhost:4300
 npm run pdf -- <deck> [--out <file>] # writes the student PDF (default out/<deck title>.pdf)
+npm run export -- <deck> --out <dir> # the presentation as a folder that opens from index.html, no server
 
 npm start -- ../advanced/courses
 ```
 
 In `advanced/`, `adv slides` and `adv slides pdf [out]` run these with its deck.
+
+The export is this same app in a single classic script (`app.js`, since a page opened from disk can't load modules), the deck in `deck.js` and its images in `content/`. It opens straight into the presentation: no editor and no presenter view. `afn dist` uses it for the Foundation slide zips students get.
 
 | Page | What it's for |
 |------|---------------|

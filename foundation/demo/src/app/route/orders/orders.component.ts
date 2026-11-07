@@ -17,7 +17,11 @@ import { Router, ActivatedRoute, RouterOutlet } from '@angular/router';
         </div>
       </div>
     `,
-    styleUrls: ['./orders.component.css'],
+    styles: `
+      button {
+          margin: 8px;
+      }
+    `,
     imports: [RouterOutlet]
 })
 export class OrdersComponent implements OnInit {

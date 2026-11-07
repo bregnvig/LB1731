@@ -21,7 +21,16 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       </main>
       <img height="250" width="250" class="fixed-bottom d-none d-md-block " ngSrc="angular.png" routerLink="/menu" priority="1">
     `,
-    styleUrls: ['./app.component.css'],
+    styles: `
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      img.fixed-bottom {
+        left: auto;
+      }
+    `,
     imports: [RouterLink, RouterOutlet, NgOptimizedImage]
 })
 export class AppComponent {

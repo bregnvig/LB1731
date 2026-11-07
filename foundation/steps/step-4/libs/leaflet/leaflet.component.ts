@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, input, signal } from '@angular/core';
+import { AfterViewInit, Component, effect, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { control, latLng, LayerGroup, layerGroup, Map, map as mapContructor, tileLayer } from 'leaflet';
 import { Center } from './center';
 import { Marker } from './marker';
@@ -11,6 +11,7 @@ const isMarker = (marker: Marker | undefined): marker is Marker => !!marker;
 @Component({
   selector: 'leaflet',
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<div class="vh-100 vw-100 overflow-hidden" [id]="mapId()"></div>',
 })
 export class LeafletComponent implements AfterViewInit {

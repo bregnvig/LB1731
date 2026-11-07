@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -28,7 +27,7 @@
     ],
     "paths": {
       "@loopme/leaflet": [
-        "libs/leaflet/index.ts"
+        "./libs/leaflet/index.ts"
       ]
     }
   },

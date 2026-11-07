@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+# Angular Foundation CLI. The root mise.toml puts cli/bin/ on PATH, so it runs from anywhere: afn help
+
+set -e  # Fail fast for module loading and arg parsing
+
+# Commands use paths relative to foundation/ (steps/..., demo, cli/...)
+ROOT="$(realpath "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/../..")"
+SLIDES="$ROOT/../slides"  # the slides tool, shared with Angular Advanced
+DECK="$ROOT/courses"                # the presentation: deck.json, intro/ and <section>/slides/
+EXERCISE_DECK="$ROOT/exercise-slides"  # the exercises, one column per section that has one
+CALLER_DIR="$PWD"  # for paths given on the command line
+cd "$ROOT"
+
+# Source modules
+for module in utils verify zips upgrade; do
+  if [[ ! -f "$ROOT/cli/$module.sh" ]]; then
+    echo "Error: Missing script module: cli/$module.sh"
+    exit 1
+  fi
+  source "$ROOT/cli/$module.sh"
+done
+
+show_help() {
+  echo "Usage: afn [command] [target]"
+  echo ""
+  echo "Commands:"
+  echo "  install, i       Install npm packages (one package.json for everything)"
+  echo "  verify, v        Verify directories build and serve"
+  echo "  dist, d          Student zips in dist/: exercises, solutions, demo, slides, slides-exercises"
+  echo "  test-zips, tz    Check student zips match cli/student-zips.manifest (--bless to update)"
+  echo "  upgrade, u       Upgrade every project to Angular [major] (default: latest) [extra packages]"
+  echo "  presentation-slides, ps, slides, s"
+  echo "                   Presentation: present, presenter view and editor on http://localhost:4300 (pdf [out]: export PDF)"
+  echo "  exercise-slides, es"
+  echo "                   Exercise slides, the same on http://localhost:4301 (pdf [out]: export PDF)"
+  echo "  help, h          Show this help"
+  echo ""
+  echo "Targets (verify):"
+  echo "  -a, all          Demo and every step"
+  echo "  demo             Demo directory only"
+  echo "  steps            Every step (steps/step-*)"
+  echo "  [N]              One step (steps/step-N, where exercise N starts)"
+  echo ""
+  echo "Examples:"
+  echo "  afn install          # npm install in foundation/ and ../slides"
+  echo "  afn verify all       # Verify all directories build and serve"
+  echo "  afn verify 4         # Verify steps/step-4"
+  echo "  afn dist             # Everything students get, in foundation/dist"
+  echo "  afn test-zips        # Students still get the same zips?"
+  echo "  afn upgrade          # Next Angular major: bump package.json, run migrations everywhere"
+  echo "  afn presentation-slides      # Present or edit the presentation on :4300"
+  echo "  afn exercise-slides          # Present or edit the exercise slides on :4301"
+  echo "  afn presentation-slides pdf  # Export to ../slides/out/angular-foundation.pdf"
+  echo "  afn exercise-slides pdf      # Export to ../slides/out/exercises-angular-foundation.pdf"
+}
+
+# Resolve target to list of directories
+resolve_target() {
+  local target="$1"
+  case "$target" in
+    "-a"|"all") get_all_directories ;;
+    "demo") echo "demo" ;;
+    "steps") get_step_directories ;;
+    "") echo "" ;;
+    *) [[ -f "steps/step-$target/package.json" ]] && echo "steps/step-$target" ;;
+  esac
+}
+
+# slides <deck> <port> [pdf [out]]: serve a deck, or export it to PDF
+slides() {
+  local deck="$1" port="$2"
+  if [[ "${3:-}" == "pdf" ]]; then
+    (cd "$SLIDES" && npm run pdf -- "$deck" ${4:+--out "$(cd "$CALLER_DIR" && realpath -m "$4")"})
+  else
+    (cd "$SLIDES" && npm start -- "$deck" --port "$port")
+  fi
+}
+
+# Parse arguments
+command="${1:-help}"
+target="${2:-}"
+
+case "$command" in
+  "install"|"i")
+    npm install
+    (cd "$SLIDES" && npm install)
+    ;;
+
+  "presentation-slides"|"ps"|"slides"|"s")
+    slides "$DECK" 4300 "$target" "${3:-}"
+    ;;
+
+  "exercise-slides"|"es")
+    slides "$EXERCISE_DECK" 4301 "$target" "${3:-}"
+    ;;
+
+  "verify"|"v")
+    set +e  # Directory-processing functions handle errors internally
+    if [[ -z "$target" ]]; then
+      echo "Error: Target required for verify command"
+      show_help
+      exit 1
+    fi
+    directories=($(resolve_target "$target"))
+    if [[ ${#directories[@]} -eq 0 ]]; then
+      echo "Error: Target '$target' not found"
+      exit 1
+    fi
+    verify_directories "${directories[@]}"
+    ;;
+
+  "upgrade"|"u")
+    shift
+    upgrade_angular "$@"
+    ;;
+
+  "dist"|"d")
+    # The five zips students have always got, nothing more
+    cli/zipit.sh dist
+    cli/slide-zips.sh dist
+    ;;
+
+  "test-zips"|"tz")
+    test_zips "$target"
+    ;;
+
+  "help"|"h"|"")
+    show_help
+    ;;
+
+  *)
+    echo "Error: Unknown command '$command'"
+    show_help
+    exit 1
+    ;;
+esac

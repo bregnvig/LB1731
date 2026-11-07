@@ -1,0 +1,17 @@
+{
+  "title": "Exercise 6",
+  "slides": [
+    {
+      "file": "exercise-6.html"
+    },
+    {
+      "file": "import-feature-module.html"
+    },
+    {
+      "file": "add-the-map.html"
+    },
+    {
+      "file": "center-the-map.html"
+    }
+  ]
+}

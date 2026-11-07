@@ -1,7 +1,9 @@
 import { Block, LineBlock, ShapeBlock, Slide } from '../deck/model';
+import { staticExport } from '../deck/static-export';
 
 // Display HTML for slides: the stored format plus what the browser needs to draw it
-// (SVG for shapes and lines, highlighter markup for code, image URLs on the content route).
+// (SVG for shapes and lines, highlighter markup for code, image URLs on the content route, or
+// relative to index.html in an exported deck).
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const num = (n: number) => String(Number(n.toFixed(3)));
@@ -104,7 +106,7 @@ export function renderBlock(b: Block, baseUrl: string): string {
 
 export const slideFolder = (path: string) => path.slice(0, path.lastIndexOf('/'));
 
-export function renderSlide(slide: Slide, baseUrl = `/content/${slideFolder(slide.path)}`): string {
+export function renderSlide(slide: Slide, baseUrl = `${staticExport ? 'content' : '/content'}/${slideFolder(slide.path)}`): string {
   const attrs = [`data-path="${esc(slide.path)}"`, ...(slide.template ? [`data-template="${esc(slide.template)}"`] : []), ...(slide.autoAnimate ? ['data-auto-animate'] : []), ...(slide.hidden ? ['data-visibility="hidden"'] : [])];
   const notes = slide.notes ? `<aside class="notes">${esc(slide.notes)}</aside>` : '';
   return `<section ${attrs.join(' ')}>${slide.blocks.map(b => renderBlock(b, baseUrl)).join('')}${notes}</section>`;

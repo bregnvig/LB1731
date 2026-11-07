@@ -1,10 +1,10 @@
-import { DestroyRef, inject, Injectable, signal } from '@angular/core';
-import { noop } from 'rxjs';
+import { DestroyRef, inject, Service, signal } from '@angular/core';
 import { Coordinate } from './coordinate';
 
-@Injectable({
-  providedIn: 'root'
-})
+// Used when the student blocks location (or none is available): Blågårds Plads, Copenhagen
+const FALLBACK: Coordinate = { lat: 55.6866, lng: 12.5586 };
+
+@Service()
 export class LocationService {
 
   #current = signal<Coordinate | undefined>(undefined);
@@ -13,7 +13,10 @@ export class LocationService {
   constructor() {
     const watchId = window.navigator.geolocation.watchPosition(
       position => this.#current.set({ lat: position.coords.latitude, lng: position.coords.longitude }),
-      error => noop,
+      () => {
+        console.warn('No geolocation, using Blågårds Plads as location');
+        this.#current.set(FALLBACK);
+      },
     );
     inject(DestroyRef).onDestroy(() => window.navigator.geolocation.clearWatch(watchId));
   }

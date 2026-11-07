@@ -1,0 +1,32 @@
+{
+  "title": "Exercise 9",
+  "slides": [
+    {
+      "file": "exercise-9.html"
+    },
+    {
+      "file": "create-map-component.html"
+    },
+    {
+      "file": "define-the-routes.html"
+    },
+    {
+      "file": "import-the-module.html"
+    },
+    {
+      "file": "updating-the-map-component.html"
+    },
+    {
+      "file": "assign-the-selected-playground-to-the-si.html"
+    },
+    {
+      "file": "center-and-zoom.html"
+    },
+    {
+      "file": "add-markers.html"
+    },
+    {
+      "file": "i-know-this-is-hard-so-congratulations-i.html"
+    }
+  ]
+}
