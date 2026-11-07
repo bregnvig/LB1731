@@ -1,0 +1,31 @@
+{
+  "title": "Exercise 8",
+  "slides": [
+    {
+      "file": "exercise-8.html"
+    },
+    {
+      "file": "provide-the-http-service.html"
+    },
+    {
+      "file": "update-the-playgroundservice.html"
+    },
+    {
+      "file": "update-the-app-component.html"
+    },
+    {
+      "file": "inject-the-location-service.html",
+      "hidden": true
+    },
+    {
+      "file": "inject-the-service.html"
+    },
+    {
+      "file": "show-your-position.html",
+      "hidden": true
+    },
+    {
+      "file": "add-your-current-position-to-the-map.html"
+    }
+  ]
+}

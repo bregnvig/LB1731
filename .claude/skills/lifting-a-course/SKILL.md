@@ -128,6 +128,8 @@ talk script, including the demo click and the question to the room
 
 Check the render, not only the checker: a step on a code slide that wraps to three lines, or leaves one word alone on a line, gets shorter or splits into two steps. The file goes in the code's first-line comment, never in the step.
 
+**Angular Foundation** works the same way with one difference: it is one course, so its app grows through every section. Lecture slides are in `foundation/courses/<section>/slides/`, the exercise slides are their own deck in `foundation/exercise-slides/<section>/slides/` (students get both decks, keep them separate), and lab N is `foundation/steps/step-N`, numbered across the whole course (exercise 4 starts at `step-4`). Render a section with `scripts/render-course.sh foundation/courses <section>` or `foundation/exercise-slides <section>`. What students get never changes: `afn test-zips` must pass, see `foundation/README.md`.
+
 **Exercise slides:** follow `courses/signals/slides/exercise-*.html` and house.md. Commands a student types are on the slide. "Ask for help if you get stuck" is allowed; "see if you can figure it out" needs a trap or a hint next to it.
 
 **Credit people.** A slide built on someone's idea, quote, or model names them on the slide (name, role, source). Notes carry the full citation (title, edition, publisher, year).

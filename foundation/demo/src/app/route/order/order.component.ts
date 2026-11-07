@@ -5,8 +5,34 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-order',
-    templateUrl: './order.component.html',
-    styleUrls: ['./order.component.css'],
+    template: `
+      <h3>
+        order works! This is #{{orderNo}}
+      </h3>
+      <nav>
+        <a routerLink=".." class="btn btn-link" routerLinkActive="btn-primary" [routerLinkActiveOptions]="{exact: exact}">Orders</a>
+        <a>About</a>
+        <a>Contact</a>
+      </nav>
+
+      <nav style="margin: 10px 0">
+        @for (orderId of [1,2,3]; track orderId) {
+          <a [routerLink]="['..', orderId, data]" routerLinkActive="active">Order {{orderId}}</a>
+        }
+      </nav>
+      <p>
+        This is order no {{orderNo}}
+      </p>
+
+      <p>
+        <button (click)="toggle()" class="btn btn-default">Toggle exact</button>
+      </p>
+    `,
+    styles: `
+      a {
+          margin: 8px;
+      }
+    `,
     imports: [RouterLink, RouterLinkActive]
 })
 export class OrderComponent implements OnInit, OnDestroy {

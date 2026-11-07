@@ -1,0 +1,14 @@
+{
+  "title": "Exercise 3",
+  "slides": [
+    {
+      "file": "exercise-3.html"
+    },
+    {
+      "file": "install-the-angular-cli.html"
+    },
+    {
+      "file": "create-a-new-project.html"
+    }
+  ]
+}

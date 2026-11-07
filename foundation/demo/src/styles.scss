@@ -1,5 +1,5 @@
 /* Importing Bootstrap SCSS file. */
-@use "node_modules/bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap";
 
 input.ng-invalid.ng-touched {
   border-left: 5px solid #a94442;

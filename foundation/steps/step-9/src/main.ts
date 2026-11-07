@@ -1,6 +1,6 @@
 
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
@@ -11,7 +11,7 @@ import { AppRouting } from './app/app.routing';
 bootstrapApplication(AppComponent, {
   providers: [
     provideZoneChangeDetection(),provideRouter(AppRouting),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     importProvidersFrom(
       BrowserModule,
       NgbModule

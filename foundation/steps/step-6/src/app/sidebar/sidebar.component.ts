@@ -1,8 +1,9 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Playground } from '../shared';
 
 @Component({
   selector: 'app-sidebar',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <aside class="shadow" tabindex="1">
       <nav>

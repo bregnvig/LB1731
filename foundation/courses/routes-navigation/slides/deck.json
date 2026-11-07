@@ -1,0 +1,59 @@
+{
+  "title": "Routes & navigation",
+  "slides": [
+    {
+      "file": "routes-navigation.html"
+    },
+    {
+      "file": "why-do-we-have-routing.html"
+    },
+    {
+      "file": "a-single-route.html"
+    },
+    {
+      "file": "several-routes.html"
+    },
+    {
+      "file": "url-matching.html"
+    },
+    {
+      "file": "creating-the-routes.html"
+    },
+    {
+      "file": "importing-the-new-routes.html"
+    },
+    {
+      "file": "navigating-in-the-component.html"
+    },
+    {
+      "file": "navigating-in-the-template.html"
+    },
+    {
+      "file": "link-parameter-array.html"
+    },
+    {
+      "file": "link-parameter-array-examples.html"
+    },
+    {
+      "file": "reading-parameters.html"
+    },
+    {
+      "file": "reading-parameters-2.html"
+    },
+    {
+      "file": "when-to-use-params-when-to-use-snapshot.html"
+    },
+    {
+      "file": "inserting-the-component.html"
+    },
+    {
+      "file": "inserting-the-component-2.html"
+    },
+    {
+      "file": "lazy-loading.html"
+    },
+    {
+      "file": "exercise-9.html"
+    }
+  ]
+}
