@@ -1,4 +1,5 @@
 /* Bootstrap with our variables before it and component polish after it. */
+@import "@fontsource-variable/instrument-sans/wdth.css";
 @import "@fontsource/andika/400.css";
 @import "@fontsource/andika/700.css";
 @import "@fontsource/jetbrains-mono/400.css";
@@ -8,15 +9,6 @@
 @import "scss/variables";
 @import "bootstrap/scss/bootstrap";
 @import "scss/theme";
-
-@font-face {
-  font-family: "Instrument Sans";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400 700;
-  font-stretch: 75% 100%;
-  src: url("/fonts/instrument-sans-latin-wdth-normal.woff2") format("woff2-variations");
-}
 
 // Students read code character by character, so no ligatures (=== stays ===)
 code, pre, kbd, samp {
