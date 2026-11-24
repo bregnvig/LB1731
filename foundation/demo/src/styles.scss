@@ -1,12 +1,55 @@
-/* Importing Bootstrap SCSS file. */
-@use "bootstrap/scss/bootstrap";
+/* Bootstrap with our variables before it and component polish after it. */
+@import "@fontsource-variable/instrument-sans/wdth.css";
+@import "@fontsource/andika/400.css";
+@import "@fontsource/andika/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "scss/variables";
+@import "bootstrap/scss/bootstrap";
+@import "scss/theme";
 
-input.ng-invalid.ng-touched {
-  border-left: 5px solid #a94442;
-  /* red */
+// Students read code character by character, so no ligatures (=== stays ===)
+code, pre, kbd, samp {
+  font-variant-ligatures: none;
 }
 
-h2 {
-  border-bottom: 3px solid var(--bs-light);
-  margin-bottom: 16px;
+body {
+  min-height: 100vh;
+  background: $canvas;
+  -webkit-font-smoothing: antialiased;
+}
+
+.flex-item {
+  flex: 1 1 auto;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 650;
+  font-stretch: 85%;
+}
+
+.pointer, [role="button"] {
+  cursor: pointer;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: $danger;
+  box-shadow: inset 3px 0 0 $danger;
+}
+
+img.rainbow-hover:hover, img.rainbow {
+  animation: rainbow 1.5s steps(36) infinite;
+}
+
+@keyframes rainbow {
+  from {
+    filter: hue-rotate(10deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
 }
