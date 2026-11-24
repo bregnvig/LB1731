@@ -11,7 +11,7 @@ ee2ab5a28700177f4373600aa8bf5c77c461e6dafc8624b89b3d9733d265ffc8  demo/public/gi
 c3870e8d1fa031eb143032e08ec52132346847080ad3d9103d767fe4932ef917  demo/public/user-regular.svg
 e596442ee79a5b83b4fc33dc91ba74a35c51629d893dd0723a5eb5bb65211e1f  demo/src/app/app-routing.ts
 e13e35de2e5d3e773e5f9527be9ce0e4f610a7409a07cfd9f0a9f3ce0b92c052  demo/src/app/app.component.scss
-fa2deffe347dd60e0c010dbd22b3a263b6a5d48dd5af950b7394a6e1360c59bb  demo/src/app/app.component.ts
+c6e8dff75d7a3b013778047be6e78960689305f0becb06b0ca0c06aae9ccbd50  demo/src/app/app.component.ts
 2b62b1ff4ccc48d898830a2262aff1419737191d0e3717b248e79ee3a38c8a55  demo/src/app/async/async.routing.ts
 b76fd5035174df2132381e503133c373059ce9377af2405f9f333b8400de14dc  demo/src/app/async/auto-refresh/auto-refresh.component.ts
 279eb956cc0baacaf89204bce3d3705ae0cb8d1578af3e990a3d8cf4056c73e2  demo/src/app/async/auto-refresh/index.ts

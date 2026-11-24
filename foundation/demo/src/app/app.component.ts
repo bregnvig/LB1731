@@ -18,8 +18,8 @@ interface Topic {
 }
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  template: `
       <header class="band">
         <div class="bar">
           <a class="brand" routerLink="/menu">
@@ -74,7 +74,7 @@ interface Topic {
       <main class="stage">
         @if (activeTopic(); as topic) {
           @if (topic.items.length > 1) {
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs d-none d-md-inline-flex">
               @for (item of topic.items; track item.routerLink) {
                 <li class="nav-item">
                   <a class="nav-link" [routerLink]="item.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -88,8 +88,8 @@ interface Topic {
         <router-outlet />
       </main>
     `,
-    styleUrl: './app.component.scss',
-    imports: [RouterLink, RouterLinkActive, RouterOutlet]
+  styleUrl: './app.component.scss',
+  imports: [RouterLink, RouterLinkActive, RouterOutlet]
 })
 export class AppComponent {
   private router = inject(Router);
