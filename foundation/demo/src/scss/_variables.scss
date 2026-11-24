@@ -1,0 +1,144 @@
+// Bootstrap variable overrides, loaded before bootstrap/scss/bootstrap.
+// Mission control: graphite navy and steel grays, with one cyan signal colour
+// for what is live or lit.
+
+$navy: #0b1220;
+$navy-2: #16213a;
+$canvas: #e8edf4;
+$canvas-deep: #d6deea;
+$ink: $navy;
+$muted: #596a82;
+$azure: #0b7fc4;
+$cobalt: #0a6aa6;
+$signal: #38e1ff;
+$signal-gradient: linear-gradient(90deg, #38e1ff, #3d7bff);
+// Demo panels: a faint cyan grid over a navy glow, like a HUD screen
+$surface-bg:
+  linear-gradient(rgba($signal, .07) 1px, transparent 1px) 0 0 / 24px 24px,
+  linear-gradient(90deg, rgba($signal, .07) 1px, transparent 1px) 0 0 / 24px 24px,
+  radial-gradient(120% 90% at 50% 0%, #17305a 0%, #0b1220 70%);
+$stage-shadow: 0 0 0 1px rgba($navy, .06), 0 2px 4px rgba($navy, .05), 0 24px 48px -16px rgba($navy, .25);
+$lift-shadow: 0 0 0 1px rgba($navy, .06), 0 1px 2px rgba($navy, .08), 0 4px 12px -4px rgba($navy, .12);
+
+// Steel grays
+
+$white: #fff;
+$gray-100: #f6f8fb;
+$gray-200: #e8edf4;
+$gray-300: #d3dbe6;
+$gray-400: #b6c2d3;
+$gray-500: #8796ab;
+$gray-600: #596a82;
+$gray-700: #3c4b61;
+$gray-800: #222f43;
+$gray-900: $navy;
+$black: #03070f;
+
+$blue: #3b5bfd;
+$indigo: #5b3df5;
+$red: #e5243b;
+$orange: #e8930c;
+$yellow: #ffb020;
+$green: #12a46b;
+$teal: #0ea5a0;
+$cyan: #1e9bd7;
+
+$primary: $azure;
+$secondary: $gray-700;
+$success: $green;
+$info: $cobalt;
+$warning: $orange;
+$danger: $red;
+$light: $gray-200;
+$dark: $navy;
+
+$min-contrast-ratio: 3.5;
+
+$body-color: $ink;
+$body-bg: $white;
+$body-secondary-color: $muted;
+$border-color: $gray-300;
+$link-color: $cobalt;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+// Type
+
+$font-family-sans-serif: "Instrument Sans", system-ui, sans-serif;
+$font-family-content: "Andika", system-ui, sans-serif;
+$font-family-monospace: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+$font-size-base: .9375rem;
+$headings-font-weight: 650;
+$headings-color: $ink;
+$h1-font-size: 2rem;
+$h2-font-size: 1.625rem;
+$h3-font-size: 1.375rem;
+$h4-font-size: 1.125rem;
+$h5-font-size: 1rem;
+$h6-font-size: .875rem;
+
+// Shape: pills for things you press, soft corners for things you read
+
+$border-radius: .625rem;
+$border-radius-sm: .5rem;
+$border-radius-lg: .5rem;
+$border-radius-xl: .75rem;
+$btn-border-radius: .375rem;
+$btn-border-radius-sm: .3rem;
+$btn-border-radius-lg: 999px;
+$box-shadow-sm: 0 1px 2px rgba($navy, .06);
+$box-shadow: $lift-shadow;
+$focus-ring-width: .1875rem;
+$focus-ring-opacity: .35;
+$focus-ring-color: rgba($cobalt, .35);
+
+// Components
+
+$btn-font-weight: 600;
+$btn-padding-x: 1.125rem;
+$btn-padding-x-sm: .875rem;
+$input-btn-padding-y: .5rem;
+$input-border-color: $gray-300;
+$input-focus-border-color: $cobalt;
+$input-placeholder-color: $gray-500;
+$form-label-font-weight: 600;
+$form-label-font-size: .875rem;
+$form-check-input-checked-bg-color: $cobalt;
+$form-check-input-checked-border-color: $cobalt;
+
+$card-border-color: $gray-300;
+$card-border-radius: $border-radius-lg;
+$card-cap-bg: $gray-100;
+$card-spacer-y: 1.25rem;
+$card-spacer-x: 1.25rem;
+
+$list-group-border-color: $gray-300;
+$list-group-border-radius: $border-radius-lg;
+$list-group-item-padding-y: .75rem;
+$list-group-item-padding-x: 1.125rem;
+$list-group-hover-bg: $gray-100;
+$list-group-active-bg: $navy;
+$list-group-active-border-color: $navy;
+$list-group-action-hover-color: $ink;
+
+$nav-link-color: $gray-700;
+$nav-link-hover-color: $ink;
+$nav-link-font-weight: 600;
+
+$badge-font-weight: 600;
+$badge-padding-y: .35em;
+$badge-padding-x: .7em;
+$badge-border-radius: .25rem;
+
+$alert-border-radius: $border-radius-lg;
+
+$table-cell-padding-y: .625rem;
+$table-cell-padding-x: .875rem;
+$table-th-font-weight: 600;
+
+$popover-border-color: $gray-300;
+$popover-border-radius: $border-radius-lg;
+$popover-box-shadow: $stage-shadow;
+$accordion-border-radius: $border-radius-lg;
+$accordion-button-active-bg: $canvas;
+$accordion-button-active-color: $ink;

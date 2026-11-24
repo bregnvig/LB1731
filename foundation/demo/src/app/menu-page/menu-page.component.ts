@@ -6,12 +6,10 @@ import { MenuComponent } from './menu/menu.component';
 @Component({
   selector: 'examples-menu-page',
   template: `
-    <div class="container">
-      <main class="row g-3 row-cols-12 row-cols-md-2 row-cols-lg-3">
-        @for (menu of menues; track menu) {
-          <examples-menu [menuss]="menu" />
-        }
-      </main>
+    <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+      @for (menu of menues; track menu) {
+        <examples-menu [menuss]="menu" />
+      }
     </div>
   `,
   imports: [MenuComponent]
