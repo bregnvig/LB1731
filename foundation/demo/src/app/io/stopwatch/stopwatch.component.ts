@@ -17,6 +17,7 @@ export class StopwatchComponent {
   }
 
   start() {
+    if (!this.#intervalNo) return;
     this.#intervalNo = window.setInterval(() => {
       console.log(this.seconds());
       this.seconds.update(s => s + 1);
@@ -25,6 +26,7 @@ export class StopwatchComponent {
 
   stop() {
     window.clearInterval(this.#intervalNo);
+    this.#intervalNo = undefined;
   }
 
   reset() {
